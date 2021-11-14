@@ -24,7 +24,7 @@ export default function MyAccount({ user }: { user: any }) {
 		const { data: profile } = await supabase
 			.from('userdata')
 			.select(
-				'email, status, role, plan, update_url, cancel_url, receipt_url, payment_method, currency, next_bill_date, next_payment_amount, unit_price, subscription_id, subscription_plan_id, registered_date, cancelled_date, paused_date'
+				'email, status, plan, update_url, cancel_url, receipt_url, payment_method, currency, next_bill_date, next_payment_amount, unit_price, registered_date, cancelled_date, paused_date'
 			)
 
 		if (profile) {

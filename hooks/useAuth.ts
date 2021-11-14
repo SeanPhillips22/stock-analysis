@@ -32,6 +32,7 @@ export function useAuth() {
 		return () => authListener?.unsubscribe()
 	}, [])
 
+	// TODO add checks if cancelled to compare to last payment date?
 	async function checkUser() {
 		const userCheck = supabase.auth.user()
 

@@ -1,5 +1,5 @@
-import { SEO } from 'components/SEO';
-import { UserLayout } from 'components/Layout/UserLayout';
+import { SEO } from 'components/SEO'
+import { UserLayout } from 'components/Layout/UserLayout'
 
 export default function FreeTrial() {
 	return (
@@ -19,12 +19,12 @@ export default function FreeTrial() {
 						Congrats, your free trial subscription has been activated!
 					</p>
 					<p className="text-lg sm:text-xl text-gray-900 leading-relaxed">
-						Please check your email now -- it contains a link to create
-						your password.
+						You are now logged in and can start using the site with
+						unlimited access to all of our features.
 					</p>
 					<p className="text-lg sm:text-xl text-gray-900 leading-relaxed">
-						After that, you can use your email and password to log in to
-						the site.
+						When you need to log in again, just enter your email on the
+						login page to receive a login link.
 					</p>
 					<p className="text-lg sm:text-xl text-gray-900 leading-relaxed">
 						If you have any problems, reply to the email or send a message
@@ -38,5 +38,5 @@ export default function FreeTrial() {
 				</div>
 			</UserLayout>
 		</>
-	);
+	)
 }
