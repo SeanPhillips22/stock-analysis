@@ -1,25 +1,25 @@
-import { Fragment } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { ExportItem } from './Export/ExportItem';
-import { ExportItemRestricted } from './Export/ExportItemRestricted';
-import { authState } from 'state/authState';
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ExportItem } from './Export/ExportItem'
+import { ExportItemRestricted } from './Export/ExportItemRestricted'
+import { useAuth } from 'hooks/useAuth'
 
 type Button = {
-	title: string;
-	type: 'csv' | 'xlsx';
-	restricted: boolean;
-	active?: boolean;
-};
+	title: string
+	type: 'csv' | 'xlsx'
+	restricted: boolean
+	active?: boolean
+}
 
 interface Props {
-	title: string;
-	buttons: Button[];
-	tableId: string;
+	title: string
+	buttons: Button[]
+	tableId: string
 }
 
 export function Export({ title, buttons, tableId }: Props) {
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuth()
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">
@@ -65,5 +65,5 @@ export function Export({ title, buttons, tableId }: Props) {
 				</Menu.Items>
 			</Transition>
 		</Menu>
-	);
+	)
 }

@@ -1,29 +1,29 @@
-import { LockClosedIcon } from '@heroicons/react/solid';
-import { screenerState } from 'components/StockScreener/screener.state';
-import { useUserInfo } from 'hooks/useUserInfo';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useSavedScreens } from './useSavedScreens';
+import { LockClosedIcon } from '@heroicons/react/solid'
+import { screenerState } from 'components/StockScreener/screener.state'
+import { useAuth } from 'hooks/useAuth'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useSavedScreens } from './useSavedScreens'
 
 export function SaveScreen({ type }: { type: 'stocks' | 'ipo' }) {
-	const { status, isPro } = useUserInfo();
-	const { add, msg, err, setErr, clearMessages } = useSavedScreens(type);
-	const router = useRouter();
-	const [name, setName] = useState('');
-	const filters = screenerState((state) => state.filters);
+	const { checked, isPro } = useAuth()
+	const { add, msg, err, setErr, clearMessages } = useSavedScreens(type)
+	const router = useRouter()
+	const [name, setName] = useState('')
+	const filters = screenerState((state) => state.filters)
 
 	async function handleSubmit(name: string) {
-		clearMessages();
-		if (status === 'completed' && !isPro) {
-			router.push('/pro/');
+		clearMessages()
+		if (checked && !isPro) {
+			router.push('/pro/')
 		} else {
 			if (!name) {
-				setErr('Please enter a name');
+				setErr('Please enter a name')
 			} else if (!filters || !filters.length) {
-				setErr('No filters have been set');
+				setErr('No filters have been set')
 			} else {
-				add.mutate(name);
-				setName('');
+				add.mutate(name)
+				setName('')
 			}
 		}
 	}
@@ -37,12 +37,12 @@ export function SaveScreen({ type }: { type: 'stocks' | 'ipo' }) {
 					className="border-gray-200 focus:ring-0 focus:border-blue-300 text-gray-700 text-sm flex-grow"
 					value={name}
 					onChange={(e) => {
-						setName(e.target.value);
-						clearMessages();
+						setName(e.target.value)
+						clearMessages()
 					}}
 					onKeyPress={(e) => {
 						if (e.key === 'Enter') {
-							handleSubmit(name);
+							handleSubmit(name)
 						}
 					}}
 				/>
@@ -70,5 +70,5 @@ export function SaveScreen({ type }: { type: 'stocks' | 'ipo' }) {
 				</div>
 			)}
 		</>
-	);
+	)
 }

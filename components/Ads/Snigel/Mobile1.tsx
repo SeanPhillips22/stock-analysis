@@ -1,14 +1,13 @@
-import { authState } from 'state/authState';
-import { navState } from 'state/navState';
-import { noAds } from 'components/Ads/noAds';
+import { useAuth } from 'hooks/useAuth'
+import { navState } from 'state/navState'
+import { noAds } from 'components/Ads/noAds'
 
 export function Mobile1() {
-	const path = navState((state) => state.path);
-	const status = authState((state) => state.status);
-	const isPro = authState((state) => state.isPro);
+	const path = navState((state) => state.path)
+	const { checked, isPro } = useAuth()
 
 	if (!noAds(path.one)) {
-		if (status !== 'completed' || (status === 'completed' && !isPro)) {
+		if (!checked || (checked && !isPro)) {
 			return (
 				<div
 					id="ad-banner"
@@ -19,9 +18,9 @@ export function Mobile1() {
 						className="block sm:hidden center-children"
 					></div>
 				</div>
-			);
+			)
 		}
 	}
 
-	return null;
+	return null
 }

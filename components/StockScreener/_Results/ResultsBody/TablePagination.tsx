@@ -1,18 +1,18 @@
-import { DropdownSelect } from 'components/StockScreener/_Results/ResultsBody/DropdownSelect';
-import { screenerState } from 'components/StockScreener/screener.state';
-import { ChevronLeftIcon } from '@heroicons/react/solid';
-import { ChevronRightIcon } from '@heroicons/react/solid';
-import { useUserInfo } from 'hooks/useUserInfo';
+import { DropdownSelect } from 'components/StockScreener/_Results/ResultsBody/DropdownSelect'
+import { screenerState } from 'components/StockScreener/screener.state'
+import { ChevronLeftIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/solid'
+import { useAuth } from 'hooks/useAuth'
 
 interface Props {
-	previousPage: () => void;
-	canPreviousPage: boolean;
-	pageIndex: number;
-	pageOptions: number[];
-	pageSize: number;
-	setPageSize: (pageSize: number) => void;
-	nextPage: () => void;
-	canNextPage: boolean;
+	previousPage: () => void
+	canPreviousPage: boolean
+	pageIndex: number
+	pageOptions: number[]
+	pageSize: number
+	setPageSize: (pageSize: number) => void
+	nextPage: () => void
+	canNextPage: boolean
 }
 
 export function TablePagination({
@@ -25,34 +25,34 @@ export function TablePagination({
 	nextPage,
 	canNextPage,
 }: Props) {
-	const { isPro } = useUserInfo();
-	const tablePage = screenerState((state) => state.tablePage);
-	const setTablePage = screenerState((state) => state.setTablePage);
-	const setTableSize = screenerState((state) => state.setTableSize);
+	const { isPro } = useAuth()
+	const tablePage = screenerState((state) => state.tablePage)
+	const setTablePage = screenerState((state) => state.setTablePage)
+	const setTableSize = screenerState((state) => state.setTableSize)
 
 	const selectOptions = [
 		{ value: 20, name: '20 Rows' },
 		{ value: 50, name: '50 Rows' },
 		{ value: 100, name: '100 Rows' },
 		{ value: 200, name: '200 Rows' },
-	];
+	]
 
 	if (isPro) {
-		selectOptions.push({ value: 10000, name: 'Show All' });
+		selectOptions.push({ value: 10000, name: 'Show All' })
 	}
 
 	function setSelected(value: number) {
-		setPageSize(value);
-		setTableSize(value);
-		setTablePage(0);
+		setPageSize(value)
+		setTableSize(value)
+		setTablePage(0)
 	}
 
 	return (
 		<nav className="mt-2.5 py-1 px-0.5 flex flex-row items-center justify-between space-x-1.5 sm:space-x-2 text-sm sm:text-base overflow-x-auto hide-scroll">
 			<button
 				onClick={() => {
-					previousPage();
-					setTablePage(tablePage - 2);
+					previousPage()
+					setTablePage(tablePage - 2)
 				}}
 				disabled={!canPreviousPage}
 				className={`flex items-center border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 py-2 pl-1.5 pr-2.5 sm:pr-3${
@@ -77,8 +77,8 @@ export function TablePagination({
 			</div>
 			<button
 				onClick={() => {
-					nextPage();
-					setTablePage(tablePage + 1);
+					nextPage()
+					setTablePage(tablePage + 1)
 				}}
 				disabled={!canNextPage}
 				className={`flex items-center border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 py-2 pr-1.5 pl-2.5 sm:pl-3${
@@ -91,5 +91,5 @@ export function TablePagination({
 				<ChevronRightIcon className="w-4 h-4 -mb-px" />
 			</button>
 		</nav>
-	);
+	)
 }

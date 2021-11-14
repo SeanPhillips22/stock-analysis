@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { useNavState } from 'hooks/useNavState';
-import { useUserInfo } from 'hooks/useUserInfo';
-import Link from 'next/link';
-import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd';
-import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter';
-import { noAdsRelaxed } from 'components/Ads/noAds';
-import { LoadAds } from 'components/Ads/Snigel/LoadAds';
+import { useNavState } from 'hooks/useNavState'
+import Link from 'next/link'
+import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd'
+import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter'
+import { noAdsRelaxed } from 'components/Ads/noAds'
+import { LoadAds } from 'components/Ads/Snigel/LoadAds'
+import { useAuth } from 'hooks/useAuth'
 
 const navigation = {
 	sections: [
@@ -23,18 +23,16 @@ const navigation = {
 		{ name: 'Terms of Use', href: '/terms-of-use/' },
 		{ name: 'Data Disclaimer', href: '/data-disclaimer/' },
 	],
-};
+}
 
 export const Footer = () => {
-	const { isLoggedIn, status, isPro } = useUserInfo();
-	const { path } = useNavState();
+	const { checked, isLoggedIn, isPro } = useAuth()
+	const { path } = useNavState()
 
 	return (
 		<>
 			<div className={isLoggedIn ? 'mt-14' : 'mt-9'}>
-				{status === 'completed' && !isPro && !noAdsRelaxed(path.one) && (
-					<LoadAds />
-				)}
+				{checked && !isPro && !noAdsRelaxed(path.one) && <LoadAds />}
 				<LazyLoadAd offset={400}>
 					<LoadFooter />
 				</LazyLoadAd>
@@ -271,5 +269,5 @@ export const Footer = () => {
 				</footer>
 			</div>
 		</>
-	);
-};
+	)
+}

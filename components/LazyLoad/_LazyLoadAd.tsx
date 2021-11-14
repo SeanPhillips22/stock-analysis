@@ -1,27 +1,25 @@
-import { authState } from 'state/authState';
-import { navState } from 'state/navState';
-import { noAds } from 'components/Ads/noAds';
-import { Observer } from 'components/LazyLoad/Observer';
+import { useAuth } from 'hooks/useAuth'
+import { navState } from 'state/navState'
+import { noAds } from 'components/Ads/noAds'
+import { Observer } from 'components/LazyLoad/Observer'
 
 type Props = {
-	children: React.ReactNode;
-	offset: number;
-};
+	children: React.ReactNode
+	offset: number
+}
 
 export function LazyLoadAd({ children, offset }: Props) {
-	// Fetch the auth state
-	const status = authState((state) => state.status);
-	const isPro = authState((state) => state.isPro);
+	const { checked, isPro } = useAuth()
 
 	// Check the nav state
-	const path = navState((state) => state.path);
+	const path = navState((state) => state.path)
 
 	// Only load the observer if: a) not pro user and b) not on an excluded page
 	return (
 		<>
-			{status === 'completed' && !isPro && !noAds(path.one) && (
+			{checked && !isPro && !noAds(path.one) && (
 				<Observer offset={offset}>{children}</Observer>
 			)}
 		</>
-	);
+	)
 }

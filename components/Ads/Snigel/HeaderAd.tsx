@@ -1,12 +1,11 @@
-import { authState } from 'state/authState';
-import { noAds } from 'components/Ads/noAds';
-import { useNavState } from 'hooks/useNavState';
+import { useAuth } from 'hooks/useAuth'
+import { noAds } from 'components/Ads/noAds'
+import { useNavState } from 'hooks/useNavState'
 // import { useEffect, useState } from 'react';
 
 export function HeaderAd() {
-	const status = authState((state) => state.status);
-	const isPro = authState((state) => state.isPro);
-	const { path } = useNavState();
+	const { checked, isPro } = useAuth()
+	const { path } = useNavState()
 	// const [show, setShow] = useState(true);
 	// const [stat, setStat] = useState(false);
 
@@ -37,7 +36,7 @@ export function HeaderAd() {
 	// }, [path]);
 
 	if (!noAds(path.one)) {
-		if (status !== 'completed' || (status === 'completed' && !isPro)) {
+		if (!checked || (checked && !isPro)) {
 			return (
 				<div
 					id="ad-banner"
@@ -52,9 +51,9 @@ export function HeaderAd() {
 						></div>
 					</div>
 				</div>
-			);
+			)
 		}
 	}
 
-	return null;
+	return null
 }

@@ -1,11 +1,11 @@
-import { authState } from 'state/authState';
-import { Button } from 'components/Button';
+import { useAuth } from 'hooks/useAuth'
+import { Button } from 'components/Button'
 
 export const HoldingsPaywall = ({ total }: { total: number }) => {
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuth()
 
 	if (isPro || total < 200) {
-		return null;
+		return null
 	}
 
 	return (
@@ -21,5 +21,5 @@ export const HoldingsPaywall = ({ total }: { total: number }) => {
 				id="tag-upgr-holdings-below"
 			/>
 		</div>
-	);
-};
+	)
+}

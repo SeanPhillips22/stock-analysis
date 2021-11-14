@@ -1,17 +1,17 @@
-import { Button } from 'components/Button';
-import { authState } from 'state/authState';
+import { Button } from 'components/Button'
+import { useAuth } from 'hooks/useAuth'
 
 interface Props {
-	count: number;
-	fullCount: number;
-	title: string;
+	count: number
+	fullCount: number
+	title: string
 }
 
 export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuth()
 
 	if (isPro || count === fullCount) {
-		return null;
+		return null
 	}
 
 	return (
@@ -27,5 +27,5 @@ export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
 				id="tag-upgr-actions-below"
 			/>
 		</div>
-	);
-};
+	)
+}

@@ -1,6 +1,6 @@
-import { authState } from 'state/authState';
-import { ArrowCTAIcon } from 'components/Icons/ArrowCTA';
-import Link from 'next/link';
+import { useAuth } from 'hooks/useAuth'
+import { ArrowCTAIcon } from 'components/Icons/ArrowCTA'
+import Link from 'next/link'
 
 const FeaturesMap = [
 	{
@@ -31,16 +31,16 @@ const FeaturesMap = [
 		url: '/news/',
 		tagId: 'tag-feat-nav-widget-news',
 	},
-];
+]
 
 export function Features() {
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuth()
 
 	return (
 		<div className="space-y-3">
 			{FeaturesMap.map((feature) => {
 				if (isPro && feature.tagId === 'tag-upgr-nav-widget') {
-					return null;
+					return null
 				}
 				return (
 					<div
@@ -66,8 +66,8 @@ export function Features() {
 							</a>
 						</Link>
 					</div>
-				);
+				)
 			})}
 		</div>
-	);
+	)
 }

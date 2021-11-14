@@ -1,23 +1,23 @@
-import { Fragment } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { MenuItem } from './MenuItem';
-import { MenuItemRestricted } from './MenuItemRestricted';
-import { authState } from 'state/authState';
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { MenuItem } from './MenuItem'
+import { MenuItemRestricted } from './MenuItemRestricted'
+import { useAuth } from 'hooks/useAuth'
 
 type Button = {
-	title: string;
-	restricted: boolean;
-	active?: boolean;
-};
+	title: string
+	restricted: boolean
+	active?: boolean
+}
 
 interface Props {
-	title: string;
-	buttons: Button[];
+	title: string
+	buttons: Button[]
 }
 
 export function DropDown({ title, buttons }: Props) {
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuth()
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">
@@ -62,5 +62,5 @@ export function DropDown({ title, buttons }: Props) {
 				</Menu.Items>
 			</Transition>
 		</Menu>
-	);
+	)
 }

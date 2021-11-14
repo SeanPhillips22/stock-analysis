@@ -1,9 +1,8 @@
-import Script from 'next/script';
-import { authState } from 'state/authState';
+import Script from 'next/script'
+import { useAuth } from 'hooks/useAuth'
 
 export const CrispChat = () => {
-	const email = authState((state) => state.email);
-	const isLoggedIn = authState((state) => state.isLoggedIn);
+	const { user, isLoggedIn } = useAuth()
 
 	return (
 		<>
@@ -15,8 +14,8 @@ export const CrispChat = () => {
 				<Script
 					strategy="lazyOnload"
 					id="crisp-chat-info"
-				>{`$crisp.push(["set", "user:email", "${email}"])`}</Script>
+				>{`$crisp.push(["set", "user:email", "${user?.email}"])`}</Script>
 			)}
 		</>
-	);
-};
+	)
+}

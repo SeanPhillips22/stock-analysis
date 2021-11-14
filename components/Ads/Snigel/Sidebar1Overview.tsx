@@ -1,15 +1,15 @@
-import { authState } from 'state/authState';
-import { navState } from 'state/navState';
-import { noAds } from 'components/Ads/noAds';
-import { News } from 'types/News';
+import { useAuth } from 'hooks/useAuth'
+import { navState } from 'state/navState'
+import { noAds } from 'components/Ads/noAds'
+import { News } from 'types/News'
 
 export function Sidebar1Overview({ news }: { news: News[] }) {
-	const path = navState((state) => state.path);
-	const status = authState((state) => state.status);
-	const isPro = authState((state) => state.isPro);
+	const path = navState((state) => state.path)
+
+	const { checked, isPro } = useAuth()
 
 	if (!noAds(path.one)) {
-		if (status !== 'completed' || (status === 'completed' && !isPro)) {
+		if (!checked || (checked && !isPro)) {
 			if (news.length > 5) {
 				return (
 					<div
@@ -25,7 +25,7 @@ export function Sidebar1Overview({ news }: { news: News[] }) {
 							className="block mt-1 sm:hidden center-children"
 						></div>
 					</div>
-				);
+				)
 			} else {
 				return (
 					<div
@@ -37,10 +37,10 @@ export function Sidebar1Overview({ news }: { news: News[] }) {
 							className="block mt-1 sm:hidden center-children"
 						></div>
 					</div>
-				);
+				)
 			}
 		}
 	}
 
-	return null;
+	return null
 }

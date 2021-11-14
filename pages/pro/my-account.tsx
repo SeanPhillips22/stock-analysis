@@ -1,52 +1,47 @@
-import { authState } from 'state/authState';
-import { SEO } from 'components/SEO';
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
-import { LoginPrompt } from 'components/LoginPrompt';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import Axios from 'axios';
-import { CrispChat } from 'components/Scripts/CrispChat';
-
-type StringOrNull = string | null | undefined;
+/* eslint-disable camelcase */
+import { SEO } from 'components/SEO'
+import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
+import { LoginPrompt } from 'components/LoginPrompt'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { CrispChat } from 'components/Scripts/CrispChat'
+import { useAuth } from 'hooks/useAuth'
+import { supabase } from 'functions/client'
+import { formatDateClean } from 'functions/formatDates'
 
 export default function MyAccount() {
-	const isLoggedIn = authState((state) => state.isLoggedIn);
-	const email = authState((state) => state.email);
-	const [registeredDate, setRegisteredDate] = useState<StringOrNull>(null);
-	const [status, setStatus] = useState<StringOrNull>(null);
-	const [nextPaymentDate, setNextPaymentDate] = useState<StringOrNull>(null);
-	const [nextPaymentAmount, setNextPaymentAmount] =
-		useState<StringOrNull>(null);
-	const [paymentCurrency, setPaymentCurrency] = useState<StringOrNull>(null);
-	const [paymentMethod, setPaymentMethod] = useState<StringOrNull>(null);
-	const [urlUpdate, setUrlUpdate] = useState<StringOrNull>(null);
-	const [urlCancel, setUrlCancel] = useState<StringOrNull>(null);
+	const { isLoggedIn } = useAuth()
+	const [userInfo, setUserInfo] = useState<any>()
 
 	useEffect(() => {
-		async function getUserDetails() {
-			try {
-				const res = await Axios.get(
-					`https://api.stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&f=true`
-				);
-				setRegisteredDate(res.data.registeredDate);
-				setStatus(res.data.status);
-				setNextPaymentDate(res.data.nextPaymentDate);
-				setNextPaymentAmount(res.data.nextPaymentAmount);
-				setPaymentCurrency(res.data.paymentCurrency);
-				setPaymentMethod(res.data.paymentMethod);
-				setUrlUpdate(res.data.urlUpdate);
-				setUrlCancel(res.data.urlCancel);
-			} catch (err) {
-				console.error(err);
-			}
-		}
+		getUserInfo()
+	}, [])
 
-		const token = localStorage.getItem('auth');
+	async function getUserInfo() {
+		const { data: profile } = await supabase
+			.from('userdata')
+			.select(
+				'email, status, role, plan, update_url, cancel_url, receipt_url, payment_method, currency, next_bill_date, next_payment_amount, unit_price, subscription_id, subscription_plan_id, registered_date, cancelled_date, paused_date'
+			)
 
-		if (token) {
-			getUserDetails();
+		if (profile) {
+			setUserInfo(profile[0])
 		}
-	}, [email]);
+	}
+
+	const {
+		email = undefined,
+		status = undefined,
+		update_url = undefined,
+		cancel_url = undefined,
+		payment_method = undefined,
+		currency = undefined,
+		next_bill_date = undefined,
+		next_payment_amount = undefined,
+		registered_date = undefined,
+	} = userInfo ? userInfo : {}
+
+	console.log(userInfo)
 
 	return (
 		<>
@@ -66,9 +61,10 @@ export default function MyAccount() {
 										<strong>Email Address:</strong> {email}
 									</div>
 								)}
-								{registeredDate && (
+								{registered_date && (
 									<div>
-										<strong>Registered Date:</strong> {registeredDate}
+										<strong>Registered Date:</strong>{' '}
+										{formatDateClean(registered_date)}
 									</div>
 								)}
 							</div>
@@ -79,26 +75,26 @@ export default function MyAccount() {
 										<strong>Status:</strong> {status}
 									</div>
 								)}
-								{nextPaymentDate && (
-									<div>Next Billing Date: {nextPaymentDate}</div>
+								{next_bill_date && (
+									<div>Next Payment Date: {next_bill_date}</div>
 								)}
-								{nextPaymentAmount && nextPaymentAmount !== '0' && (
+								{next_payment_amount && next_payment_amount !== '0' && (
 									<div>
-										Amount: {nextPaymentAmount}{' '}
-										{paymentCurrency && paymentCurrency}
+										Amount: {next_payment_amount}{' '}
+										{currency && currency}
 									</div>
 								)}
-								{paymentMethod && (
+								{payment_method && (
 									<div>
 										Payment Method:{' '}
-										{paymentMethod.charAt(0).toUpperCase() +
-											paymentMethod.slice(1)}
+										{payment_method.charAt(0).toUpperCase() +
+											payment_method.slice(1)}
 									</div>
 								)}
-								{urlUpdate && (
+								{update_url && (
 									<div>
 										<a
-											href={urlUpdate}
+											href={update_url}
 											target="_blank"
 											rel="nofollow noopener noreferrer"
 											className="bll"
@@ -107,10 +103,10 @@ export default function MyAccount() {
 										</a>
 									</div>
 								)}
-								{urlCancel && (
+								{cancel_url && (
 									<div className="mt-3">
 										<a
-											href={urlCancel}
+											href={cancel_url}
 											target="_blank"
 											rel="nofollow noopener noreferrer"
 											className="bll"
@@ -120,17 +116,7 @@ export default function MyAccount() {
 									</div>
 								)}
 							</div>
-							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
-								<h2 className="hh2">Manage Account</h2>
-								<div>
-									<a
-										href="https://api.stockanalysis.com/pro-login/?action=lostpassword"
-										className="bll"
-									>
-										Reset or Change Password
-									</a>
-								</div>
-							</div>
+
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">Get Support</h2>
 								<div className="mb-4">
@@ -161,5 +147,5 @@ export default function MyAccount() {
 				</div>
 			</LayoutFullWidth>
 		</>
-	);
+	)
 }
