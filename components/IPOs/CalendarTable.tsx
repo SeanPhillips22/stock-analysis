@@ -4,38 +4,38 @@ import {
 	useGlobalFilter,
 	useAsyncDebounce,
 	useSortBy,
-} from 'react-table';
-import { StockLink } from 'components/Links';
-import { IpoUpcoming } from 'types/Ipos';
-import 'regenerator-runtime/runtime';
-import { Export } from 'components/Controls/Export';
-import { Filter } from 'components/Controls//Filter';
-import { SortUpIcon } from 'components/Icons/SortUp';
-import { SortDownIcon } from 'components/Icons/SortDown';
+} from 'react-table'
+import { StockLink } from 'components/Links'
+import { IpoUpcoming } from 'types/Ipos'
+import 'regenerator-runtime/runtime'
+import { Export } from 'components/Controls/Export'
+import { Filter } from 'components/Controls//Filter'
+import { SortUpIcon } from 'components/Icons/SortUp'
+import { SortDownIcon } from 'components/Icons/SortDown'
 
 type CellString = {
 	cell: {
-		value: string;
-	};
-};
+		value: string
+	}
+}
 
 const columns: Column[] = [
 	{
 		Header: 'IPO Date',
 		accessor: 'date',
 		Cell: function DateCell({ cell: { value } }: CellString) {
-			return value || 'Pending';
+			return value || 'Pending'
 		},
 		sortType: (a, b) => {
-			const ad = new Date(a.values.date).getTime();
-			const bd = new Date(b.values.date).getTime();
+			const ad = new Date(a.values.date).getTime()
+			const bd = new Date(b.values.date).getTime()
 			if (ad < bd) {
-				return 1;
+				return 1
 			}
 			if (ad > bd) {
-				return -1;
+				return -1
 			} else {
-				return 0;
+				return 0
 			}
 		},
 		sortInverted: true,
@@ -44,22 +44,22 @@ const columns: Column[] = [
 		Header: 'Symbol',
 		accessor: 'symbol',
 		Cell: function DateCell({ cell: { value } }: CellString) {
-			return <StockLink symbol={value} />;
+			return <StockLink symbol={value} />
 		},
 	},
 	{
 		Header: 'Name',
 		accessor: 'name',
 		sortType: (a, b) => {
-			const ad = a.values.name.toUpperCase();
-			const bd = b.values.name.toUpperCase();
+			const ad = a.values.name.toUpperCase()
+			const bd = b.values.name.toUpperCase()
 			if (ad < bd) {
-				return 1;
+				return 1
 			}
 			if (ad > bd) {
-				return -1;
+				return -1
 			} else {
-				return 0;
+				return 0
 			}
 		},
 		sortInverted: true,
@@ -77,7 +77,7 @@ const columns: Column[] = [
 		Header: 'Shares',
 		accessor: 'shares',
 	},
-];
+]
 
 const NoIpos = ({ title }: { title: string }) => {
 	switch (title) {
@@ -89,7 +89,7 @@ const NoIpos = ({ title }: { title: string }) => {
 						There are no upcoming IPOs remaining for this week.
 					</p>
 				</div>
-			);
+			)
 		}
 
 		case 'Next Week': {
@@ -100,20 +100,20 @@ const NoIpos = ({ title }: { title: string }) => {
 						There are no upcoming IPOs scheduled for next week.
 					</p>
 				</div>
-			);
+			)
 		}
 
 		default:
-			return null;
+			return null
 	}
-};
+}
 
 interface Props {
-	title: string;
-	data: IpoUpcoming[];
-	tableId: string;
-	border?: boolean;
-	filter?: boolean;
+	title: string
+	data: IpoUpcoming[]
+	tableId: string
+	border?: boolean
+	filter?: boolean
 }
 
 export const CalendarTable = ({
@@ -123,25 +123,25 @@ export const CalendarTable = ({
 	border,
 	filter,
 }: Props) => {
-	const initialState = !data[0].date ? { hiddenColumns: ['date'] } : {};
+	const initialState = !data[0]?.date ? { hiddenColumns: ['date'] } : {}
 
 	const tableInstance = useTable(
 		{ columns, data, initialState },
 		useGlobalFilter,
 		useSortBy
-	);
+	)
 	const {
 		headerGroups,
 		rows,
 		prepareRow,
 		setGlobalFilter,
 		state: { globalFilter },
-	} = tableInstance;
+	} = tableInstance
 
-	const count = data.length;
+	const count = data.length
 
 	if (count === 0) {
-		return <NoIpos title={title} />;
+		return <NoIpos title={title} />
 	}
 
 	return (
@@ -214,18 +214,18 @@ export const CalendarTable = ({
 					</thead>
 					<tbody>
 						{rows.map((row, index) => {
-							prepareRow(row);
+							prepareRow(row)
 							return (
 								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return <td key={index}>{cell.render('Cell')}</td>;
+										return <td key={index}>{cell.render('Cell')}</td>
 									})}
 								</tr>
-							);
+							)
 						})}
 					</tbody>
 				</table>
 			</div>
 		</div>
-	);
-};
+	)
+}
