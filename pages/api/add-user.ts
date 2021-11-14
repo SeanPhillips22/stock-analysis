@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { supabase } from 'functions/client'
+import { supabase } from 'functions/supabase'
 import { userdata } from './wp_userdata'
 
 export default async function handler(

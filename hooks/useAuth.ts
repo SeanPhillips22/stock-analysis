@@ -1,5 +1,5 @@
 import { User } from '@supabase/gotrue-js'
-import { supabase } from 'functions/client'
+import { supabase } from 'functions/supabase'
 import { useEffect, useState } from 'react'
 
 export function useAuth() {
@@ -10,7 +10,7 @@ export function useAuth() {
 
 	useEffect(() => {
 		const { data: authListener } = supabase.auth.onAuthStateChange(
-			(event) => {
+			(event, session) => {
 				if (event === 'SIGNED_IN') {
 					setIsLoggedIn(true)
 				}
@@ -18,6 +18,12 @@ export function useAuth() {
 					setUser(undefined)
 					setIsLoggedIn(false)
 				}
+				fetch('/api/auth', {
+					method: 'POST',
+					headers: new Headers({ 'Content-Type': 'application/json' }),
+					credentials: 'same-origin',
+					body: JSON.stringify({ event, session }),
+				})
 			}
 		)
 
@@ -27,10 +33,9 @@ export function useAuth() {
 	}, [])
 
 	async function checkUser() {
-		const userCheck = await supabase.auth.user()
+		const userCheck = supabase.auth.user()
 
 		if (userCheck) {
-			console.log(userCheck)
 			setUser(userCheck)
 			setIsLoggedIn(true)
 			if (userCheck.user_metadata.status === 'active') {

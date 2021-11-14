@@ -6,16 +6,19 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { CrispChat } from 'components/Scripts/CrispChat'
 import { useAuth } from 'hooks/useAuth'
-import { supabase } from 'functions/client'
+import { supabase } from 'functions/supabase'
 import { formatDateClean } from 'functions/formatDates'
+import { GetServerSideProps } from 'next'
 
-export default function MyAccount() {
+export default function MyAccount({ user }: { user: any }) {
 	const { isLoggedIn } = useAuth()
 	const [userInfo, setUserInfo] = useState<any>()
 
 	useEffect(() => {
-		getUserInfo()
-	}, [])
+		if (isLoggedIn) {
+			getUserInfo()
+		}
+	}, [isLoggedIn])
 
 	async function getUserInfo() {
 		const { data: profile } = await supabase
@@ -30,7 +33,6 @@ export default function MyAccount() {
 	}
 
 	const {
-		email = undefined,
 		status = undefined,
 		update_url = undefined,
 		cancel_url = undefined,
@@ -40,8 +42,6 @@ export default function MyAccount() {
 		next_payment_amount = undefined,
 		registered_date = undefined,
 	} = userInfo ? userInfo : {}
-
-	console.log(userInfo)
 
 	return (
 		<>
@@ -56,9 +56,9 @@ export default function MyAccount() {
 							</h1>
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">User Information</h2>
-								{email && (
+								{user?.email && (
 									<div>
-										<strong>Email Address:</strong> {email}
+										<strong>Email Address:</strong> {user.email}
 									</div>
 								)}
 								{registered_date && (
@@ -148,4 +148,19 @@ export default function MyAccount() {
 			</LayoutFullWidth>
 		</>
 	)
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+	const { user } = await supabase.auth.api.getUserByCookie(req)
+
+	if (!user) {
+		// If no user, redirect to index.
+		return {
+			props: {},
+			redirect: { destination: '/login/', permanent: false },
+		}
+	}
+
+	// If there is a user, return it.
+	return { props: { user } }
 }
