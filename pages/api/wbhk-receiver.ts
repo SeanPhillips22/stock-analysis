@@ -17,38 +17,57 @@ export default async function handler(
 
 	const user = returned![0]
 
-	if (alert_name) {
-		const {
-			country,
-			currency,
-			update_url,
-			cancel_url,
-			receipt_url,
-			event_time,
-			payment_method,
-			next_payment_amount,
-			next_bill_date,
-			customer_name,
-			status,
-			cancellation_effective_date,
-			paused_from,
-		} = req.body
+	if (alert_name === 'subscription_created') {
+		setTimeout(() => {
+			const { update_url, cancel_url } = req.body
 
-		if (alert_name) user.alert_name = alert_name
-		if (event_time) user.event_time = event_time
-		if (status) user.status = status
-		if (customer_name) user.name = customer_name
-		if (country) user.country = country
-		if (currency) user.currency = currency
-		if (update_url) user.update_url = update_url
-		if (cancel_url) user.cancel_url = cancel_url
-		if (receipt_url) user.receipt_url = receipt_url
-		if (payment_method) user.payment_method = payment_method
-		if (next_payment_amount) user.next_payment_amount = next_payment_amount
-		if (next_bill_date) user.next_bill_date = next_bill_date
-		if (cancellation_effective_date)
-			user.cancelled_date = cancellation_effective_date
-		if (paused_from) user.paused_date = paused_from
+			if (update_url) user.update_url = update_url
+			if (cancel_url) user.cancel_url = cancel_url
+		}, 5000)
+	}
+
+	if (alert_name) {
+		// delay subscription_created to wait for subscription_payment_succeeded to finish
+		if (alert_name === 'subscription_created') {
+			setTimeout(() => {
+				const { update_url, cancel_url } = req.body
+
+				if (update_url) user.update_url = update_url
+				if (cancel_url) user.cancel_url = cancel_url
+			}, 5000)
+		} else {
+			const {
+				country,
+				currency,
+				update_url,
+				cancel_url,
+				receipt_url,
+				event_time,
+				payment_method,
+				next_payment_amount,
+				next_bill_date,
+				customer_name,
+				status,
+				cancellation_effective_date,
+				paused_from,
+			} = req.body
+
+			if (alert_name) user.alert_name = alert_name
+			if (event_time) user.event_time = event_time
+			if (status) user.status = status
+			if (customer_name) user.name = customer_name
+			if (country) user.country = country
+			if (currency) user.currency = currency
+			if (update_url) user.update_url = update_url
+			if (cancel_url) user.cancel_url = cancel_url
+			if (receipt_url) user.receipt_url = receipt_url
+			if (payment_method) user.payment_method = payment_method
+			if (next_payment_amount) user.next_payment_amount = next_payment_amount
+			if (next_bill_date) user.next_bill_date = next_bill_date
+			if (cancellation_effective_date)
+				user.cancelled_date = cancellation_effective_date
+			if (paused_from) user.paused_date = paused_from
+		}
 
 		const { data, error } = await supabaseAdmin
 			.from('userdata')
