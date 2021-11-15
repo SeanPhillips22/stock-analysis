@@ -49,7 +49,7 @@ export default function LandingPage() {
 				{
 					data: {
 						email: data?.user?.email,
-						status: 'active',
+						status: 'trialing',
 						plan: data?.product?.name,
 						currency:
 							data?.checkout?.recurring_prices?.customer?.currency,

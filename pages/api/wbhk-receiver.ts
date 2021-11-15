@@ -13,7 +13,7 @@ export default async function handler(
 		.select()
 		.eq('email', email)
 
-	if (!returned) res.status(400).json({ error: 'No data returned' })
+	if (!returned) return res.status(400).json({ error: 'No data returned' })
 
 	const user = returned![0]
 
@@ -59,5 +59,5 @@ export default async function handler(
 		if (data) res.status(200).json({ data })
 	}
 
-	res.status(400).json(req.body)
+	return res.status(400).json({ error: 'No alert_name found' })
 }
