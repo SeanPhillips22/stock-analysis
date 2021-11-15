@@ -5,7 +5,7 @@ import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd'
 import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter'
 import { noAdsRelaxed } from 'components/Ads/noAds'
 import { LoadAds } from 'components/Ads/Snigel/LoadAds'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 const navigation = {
 	sections: [
@@ -26,7 +26,7 @@ const navigation = {
 }
 
 export const Footer = () => {
-	const { checked, isLoggedIn, isPro } = useAuth()
+	const { checked, isLoggedIn, isPro } = useAuthState()
 	const { path } = useNavState()
 
 	return (

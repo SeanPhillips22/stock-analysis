@@ -8,7 +8,7 @@ import {
 import { useState, useEffect, useMemo } from 'react'
 import styles from './HoldingsTable.module.css'
 import { StockLink, ETFLink } from 'components/Links'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { getPageDataFull } from 'functions/callBackEnd'
 import { Controls } from 'components/Controls/_Controls'
 
@@ -27,7 +27,7 @@ interface Props {
 
 export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
 	const [dataRows, setdataRows] = useState(rawdata)
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	const count = rawdata.length
 

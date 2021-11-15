@@ -1,12 +1,12 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { screenerState } from 'components/StockScreener/screener.state'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useSavedScreens } from './useSavedScreens'
 
 export function SaveScreen({ type }: { type: 'stocks' | 'ipo' }) {
-	const { checked, isPro } = useAuth()
+	const { checked, isPro } = useAuthState()
 	const { add, msg, err, setErr, clearMessages } = useSavedScreens(type)
 	const router = useRouter()
 	const [name, setName] = useState('')

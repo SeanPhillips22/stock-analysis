@@ -1,5 +1,5 @@
 import { Button } from 'components/Button'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 interface Props {
 	count: number
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	if (isPro || count === fullCount) {
 		return null

@@ -1,4 +1,4 @@
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { navState } from 'state/navState'
 import { noAds } from 'components/Ads/noAds'
 import { Observer } from 'components/LazyLoad/Observer'
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export function LazyLoadAd({ children, offset }: Props) {
-	const { checked, isPro } = useAuth()
+	const { checked, isPro } = useAuthState()
 
 	// Check the nav state
 	const path = navState((state) => state.path)

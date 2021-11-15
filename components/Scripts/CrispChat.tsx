@@ -1,8 +1,8 @@
 import Script from 'next/script'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 export const CrispChat = () => {
-	const { user, isLoggedIn } = useAuth()
+	const { user, isLoggedIn } = useAuthState()
 
 	return (
 		<>

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { SiteSearch } from 'components/Search/SiteSearch'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 type Trending = {
 	s: string
@@ -9,7 +9,7 @@ type Trending = {
 }
 
 export function Hero({ trending }: { trending: Trending[] }) {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	return (
 		<>

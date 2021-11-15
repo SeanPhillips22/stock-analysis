@@ -28,7 +28,7 @@ import { TooltipChart } from './TooltipChart'
 import { Unavailable } from 'components/Unavailable'
 import { getStockFinancialsFull } from 'functions/callBackEnd'
 import { FinancialSource } from './FinancialSource'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false })
 
@@ -56,7 +56,7 @@ export const FinancialTable = ({
 	const leftRight = financialsState((state) => state.leftRight)
 	const reversed = financialsState((state) => state.reversed)
 	const setReversed = financialsState((state) => state.setReversed)
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
 	const [fullData, setFullData] = useState<FinancialsType>()
 	const [dataRows, setDataRows] = useState(

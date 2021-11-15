@@ -1,4 +1,4 @@
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { navState } from 'state/navState'
 import { noAds } from 'components/Ads/noAds'
 import { News } from 'types/News'
@@ -6,7 +6,7 @@ import { News } from 'types/News'
 export function Sidebar1Overview({ news }: { news: News[] }) {
 	const path = navState((state) => state.path)
 
-	const { checked, isPro } = useAuth()
+	const { checked, isPro } = useAuthState()
 
 	if (!noAds(path.one)) {
 		if (!checked || (checked && !isPro)) {

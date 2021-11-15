@@ -9,7 +9,7 @@ import {
 import { useState, useEffect, useMemo } from 'react'
 import { Controls } from 'components/Controls/_Controls'
 import styles from './ActionsTable.module.css'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { getActionsDataFull } from 'functions/callBackEnd'
 import { actionsState } from 'state/actionsState'
 
@@ -34,7 +34,7 @@ export const ActionsTable = ({
 	const filter = actionsState((state) => state.filter)
 	const setParamFilter = actionsState((state) => state.setFilter)
 	const isFiltered = actionsState((state) => state.isFiltered)
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	const count = rowdata.length
 

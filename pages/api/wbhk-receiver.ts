@@ -31,6 +31,8 @@ export default async function handler(
 			next_bill_date,
 			customer_name,
 			status,
+			cancellation_effective_date,
+			paused_from,
 		} = req.body
 
 		if (alert_name) user.alert_name = alert_name
@@ -45,6 +47,9 @@ export default async function handler(
 		if (payment_method) user.payment_method = payment_method
 		if (next_payment_amount) user.next_payment_amount = next_payment_amount
 		if (next_bill_date) user.next_bill_date = next_bill_date
+		if (cancellation_effective_date)
+			user.cancelled_date = cancellation_effective_date
+		if (paused_from) user.paused_date = paused_from
 
 		const { data, error } = await supabaseAdmin
 			.from('userdata')

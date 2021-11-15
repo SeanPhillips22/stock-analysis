@@ -1,4 +1,4 @@
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { getData } from 'functions/API'
 import { ButtonMore } from './ButtonMore'
 import { NewsPaywall } from './NewsPaywall'
@@ -40,7 +40,7 @@ export function LoadMore({
 	searched,
 	query,
 }: Props) {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	useEffect(() => {
 		if (loaded && data.length === 50 && !isPro) {

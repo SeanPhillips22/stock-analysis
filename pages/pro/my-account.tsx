@@ -5,13 +5,13 @@ import { LoginPrompt } from 'components/LoginPrompt'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { CrispChat } from 'components/Scripts/CrispChat'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { supabase } from 'functions/supabase'
 import { formatDateClean } from 'functions/formatDates'
 import { GetServerSideProps } from 'next'
 
 export default function MyAccount({ user }: { user: any }) {
-	const { isLoggedIn } = useAuth()
+	const { isLoggedIn } = useAuthState()
 	const [userInfo, setUserInfo] = useState<any>()
 
 	useEffect(() => {
@@ -43,6 +43,12 @@ export default function MyAccount({ user }: { user: any }) {
 		registered_date = undefined,
 	} = userInfo ? userInfo : {}
 
+	let showStatus = ''
+	if (status === 'active') showStatus = 'Subscription Active'
+	if (status === 'trialing') showStatus = 'Free Trial Active'
+	if (status === 'paused') showStatus = 'Subscription Paused'
+	if (status === 'cancelled') showStatus = 'Subscription Cancelled'
+
 	return (
 		<>
 			<SEO title="My Account" canonical="/pro/my-account/" noindex={true} />
@@ -70,9 +76,9 @@ export default function MyAccount({ user }: { user: any }) {
 							</div>
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">Manage Subscription</h2>
-								{status && (
+								{showStatus && (
 									<div className="mb-2">
-										<strong>Status:</strong> {status}
+										<strong>Status:</strong> {showStatus}
 									</div>
 								)}
 								{next_bill_date && (

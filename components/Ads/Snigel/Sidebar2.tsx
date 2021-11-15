@@ -1,11 +1,11 @@
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { navState } from 'state/navState'
 import { noAds } from 'components/Ads/noAds'
 
 export function Sidebar2() {
 	const path = navState((state) => state.path)
 
-	const { checked, isPro } = useAuth()
+	const { checked, isPro } = useAuthState()
 
 	if (!noAds(path.one)) {
 		if (!checked || (checked && !isPro)) {

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 const ExportButtons = dynamic(() => import('./ExportButtons'), {
 	ssr: false,
@@ -25,7 +25,7 @@ export const ExportMenu = ({
 	range,
 	setExportOpen,
 }: Props) => {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	return (
 		<div className="absolute right-0 flex flex-col w-full shadow-lg border border-gray-200 rounded-md dropdown-menu">

@@ -1,9 +1,9 @@
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 declare const adconsent: any
 
 export const ChangeConsent = () => {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	if (isPro) {
 		return null

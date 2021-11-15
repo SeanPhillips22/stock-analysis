@@ -3,7 +3,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { ExportItem } from './Export/ExportItem'
 import { ExportItemRestricted } from './Export/ExportItemRestricted'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 type Button = {
 	title: string
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export function Export({ title, buttons, tableId }: Props) {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">

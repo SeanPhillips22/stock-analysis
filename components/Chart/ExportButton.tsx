@@ -2,7 +2,7 @@ import { Fragment, useEffect } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ExportItem } from 'components/Controls/Export/ExportItem'
 import { ExportItemRestricted } from 'components/Controls/Export/ExportItemRestricted'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { useState } from 'react'
 
 type Button = {
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export function Export({ buttons, data, time }: Props) {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 	const [expData, setExpData] = useState<any[]>([
 		'Date',
 		'Open',

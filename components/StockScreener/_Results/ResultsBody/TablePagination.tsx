@@ -2,7 +2,7 @@ import { DropdownSelect } from 'components/StockScreener/_Results/ResultsBody/Dr
 import { screenerState } from 'components/StockScreener/screener.state'
 import { ChevronLeftIcon } from '@heroicons/react/solid'
 import { ChevronRightIcon } from '@heroicons/react/solid'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 interface Props {
 	previousPage: () => void
@@ -25,7 +25,7 @@ export function TablePagination({
 	nextPage,
 	canNextPage,
 }: Props) {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 	const tablePage = screenerState((state) => state.tablePage)
 	const setTablePage = screenerState((state) => state.setTablePage)
 	const setTableSize = screenerState((state) => state.setTableSize)

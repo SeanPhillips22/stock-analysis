@@ -1,10 +1,10 @@
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { noAds } from 'components/Ads/noAds'
 import { useNavState } from 'hooks/useNavState'
 // import { useEffect, useState } from 'react';
 
 export function HeaderAd() {
-	const { checked, isPro } = useAuth()
+	const { checked, isPro } = useAuthState()
 	const { path } = useNavState()
 	// const [show, setShow] = useState(true);
 	// const [stat, setStat] = useState(false);

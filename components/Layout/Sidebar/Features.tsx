@@ -1,4 +1,4 @@
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 import { ArrowCTAIcon } from 'components/Icons/ArrowCTA'
 import Link from 'next/link'
 
@@ -34,7 +34,7 @@ const FeaturesMap = [
 ]
 
 export function Features() {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	return (
 		<div className="space-y-3">

@@ -3,7 +3,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { MenuItem } from './MenuItem'
 import { MenuItemRestricted } from './MenuItemRestricted'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 type Button = {
 	title: string
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export function DropDown({ title, buttons }: Props) {
-	const { isPro } = useAuth()
+	const { isPro } = useAuthState()
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">

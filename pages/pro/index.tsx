@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { CrispChat } from 'components/Scripts/CrispChat'
 import { supabase } from 'functions/supabase'
+import { formatDateToString } from 'functions/datetime/formatDateToString'
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
@@ -10,6 +11,13 @@ declare global {
 		Paddle: any
 	}
 }
+
+var date = new Date()
+var dateString = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+	.toISOString()
+	.split('T')[0]
+
+console.log(dateString)
 
 export default function LandingPage() {
 	const router = useRouter()
@@ -47,6 +55,7 @@ export default function LandingPage() {
 							data?.checkout?.recurring_prices?.customer?.currency,
 						unit_price: data?.checkout?.recurring_prices?.customer?.unit,
 						country: data?.user?.country,
+						registered_date: formatDateToString(),
 					},
 				}
 			)
