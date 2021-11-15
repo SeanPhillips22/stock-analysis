@@ -19,12 +19,26 @@ export default async function handler(
 
 	if (!returned) return res.status(400).json({ error: 'No data returned' })
 
-	const user = returned![0]
+	let user = returned![0]
 
 	if (alert_name) {
 		// delay subscription_created to wait for subscription_payment_succeeded to finish
-		if (alert_name === 'subscription_created' && !user.receipt_url) {
-			await sleep(3000)
+		if (alert_name === 'subscription_created') {
+			let waited = 0
+			while (!user.receipt_url && waited < 10000) {
+				await sleep(1000)
+				waited += 1000
+
+				const { data: returned } = await supabaseAdmin
+					.from('userdata')
+					.select()
+					.eq('email', email)
+
+				if (!returned)
+					return res.status(400).json({ error: 'No data returned' })
+
+				user = returned![0]
+			}
 		}
 
 		const {
