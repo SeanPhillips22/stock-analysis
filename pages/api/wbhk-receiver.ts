@@ -55,8 +55,11 @@ export default async function handler(
 			.update(user)
 			.eq('id', user.id)
 
-		if (error) res.status(400).json({ error })
-		if (data) res.status(200).json({ data })
+		if (error) {
+			return res.status(400).json({ error })
+		} else if (data) {
+			return res.status(200).json({ success: data })
+		}
 	}
 
 	return res.status(400).json({ error: 'No alert_name found' })

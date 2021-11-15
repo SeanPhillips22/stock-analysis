@@ -12,13 +12,6 @@ declare global {
 	}
 }
 
-var date = new Date()
-var dateString = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-	.toISOString()
-	.split('T')[0]
-
-console.log(dateString)
-
 export default function LandingPage() {
 	const router = useRouter()
 
@@ -38,8 +31,6 @@ export default function LandingPage() {
 	}, [])
 
 	async function checkoutComplete(data: any) {
-		console.log('checkoutComplete', data)
-
 		if (data.user.email) {
 			await supabase.auth.signUp(
 				{
