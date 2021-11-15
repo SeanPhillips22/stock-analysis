@@ -50,19 +50,19 @@ export default async function handler(
 		// delay subscription_created to wait for subscription_payment_succeeded to finish
 		if (alert_name === 'subscription_created') {
 			let waited = 0
-			while (!user.receipt_url && waited < 10000) {
-				await sleep(1000)
-				waited += 1000
+			while (!user.receipt_url && waited < 8000) {
+				await sleep(2000)
+				waited += 2000
 
-				let { data: returned } = await supabaseAdmin
+				let { data: returnedAgain } = await supabaseAdmin
 					.from('userdata')
 					.select()
 					.eq('email', email)
 
-				if (!returned)
-					return res.status(400).json({ error: 'No data returned' })
+				if (!returnedAgain)
+					return res.status(406).json({ error: 'No data returned' })
 
-				user = returned![0]
+				user = returnedAgain![0]
 			}
 		}
 
@@ -106,7 +106,9 @@ export default async function handler(
 		if (error) {
 			return res.status(400).json({ error })
 		} else if (data) {
-			return res.status(200).json({ success: data })
+			return res
+				.status(200)
+				.json({ success: 'Webhook received and processed successfully' })
 		}
 	}
 

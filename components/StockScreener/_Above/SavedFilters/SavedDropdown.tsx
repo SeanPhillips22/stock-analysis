@@ -1,36 +1,40 @@
-import { useSavedScreens } from './useSavedScreens';
-import { FilterId } from 'components/StockScreener/screener.types';
-import { SavedItem } from './SavedItem';
-import { SaveScreen } from './SaveScreen';
+import { useSavedScreens } from './useSavedScreens'
+import { FilterId } from 'components/StockScreener/screener.types'
+import { SavedItem } from './SavedItem'
+import { SaveScreen } from './SaveScreen'
 
 type SavedFilter = {
-	id: FilterId;
-	name: string;
-	value: string;
-};
+	id: FilterId
+	name: string
+	value: string
+}
 
 type Screen = {
-	name: string;
-	id: number;
-	filters: SavedFilter[];
-};
+	name: string
+	id: number
+	filters: SavedFilter[]
+}
 
 type Props = {
-	type: 'stocks' | 'ipo';
-};
+	type: 'stocks' | 'ipo'
+}
 
 export function SavedDropdown({ type }: Props) {
-	const { data } = useSavedScreens(type);
+	const { data } = useSavedScreens(type)
+	const screeners = data && data.screeners[type]
 
 	return (
 		<div className="max-h-80 overflow-y-auto overscroll-contain thin-scroll text-smaller">
 			<SaveScreen type={type} />
-			{data && data.length > 0 ? (
+			{screeners && Object.keys(screeners).length > 0 ? (
 				<>
 					<div className="divide-y">
-						{data?.map((item: Screen) => (
-							<SavedItem key={item.id} name={item.name} type={type} />
-						))}
+						{Object.keys(screeners).map((key) => {
+							let screen = screeners[key] as Screen
+							return (
+								<SavedItem key={key} name={screen.name} type={type} />
+							)
+						})}
 					</div>
 				</>
 			) : (
@@ -40,5 +44,5 @@ export function SavedDropdown({ type }: Props) {
 				</div>
 			)}
 		</div>
-	);
+	)
 }

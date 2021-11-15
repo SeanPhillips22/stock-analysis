@@ -47,7 +47,10 @@ export default function MyAccount({ user }: { user: any }) {
 	if (status === 'active') showStatus = 'Subscription Active'
 	if (status === 'trialing') showStatus = 'Free Trial Active'
 	if (status === 'paused') showStatus = 'Subscription Paused'
-	if (status === 'cancelled') showStatus = 'Subscription Cancelled'
+	if (status === 'deleted') showStatus = 'Subscription Cancelled'
+
+	const isSubscribed =
+		status === 'active' || status === 'trialing' ? true : false
 
 	return (
 		<>
@@ -81,16 +84,18 @@ export default function MyAccount({ user }: { user: any }) {
 										<strong>Status:</strong> {showStatus}
 									</div>
 								)}
-								{next_bill_date && (
+								{isSubscribed && next_bill_date && (
 									<div>Next Payment Date: {next_bill_date}</div>
 								)}
-								{next_payment_amount && next_payment_amount !== '0' && (
-									<div>
-										Amount: {next_payment_amount}{' '}
-										{currency && currency}
-									</div>
-								)}
-								{payment_method && (
+								{isSubscribed &&
+									next_payment_amount &&
+									next_payment_amount !== '0' && (
+										<div>
+											Amount: {next_payment_amount}{' '}
+											{currency && currency}
+										</div>
+									)}
+								{isSubscribed && payment_method && (
 									<div>
 										Payment Method:{' '}
 										{payment_method.charAt(0).toUpperCase() +
@@ -109,7 +114,7 @@ export default function MyAccount({ user }: { user: any }) {
 										</a>
 									</div>
 								)}
-								{cancel_url && (
+								{isSubscribed && cancel_url && (
 									<div className="mt-3">
 										<a
 											href={cancel_url}
