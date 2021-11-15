@@ -17,7 +17,6 @@ export default async function handler(
 
 	const user = returned![0]
 
-	// TODO - add other webhook types
 	if (alert_name) {
 		const {
 			country,
