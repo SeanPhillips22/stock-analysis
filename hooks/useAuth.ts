@@ -14,8 +14,6 @@ export function useAuth() {
 	const setChecked = authState((state) => state.setChecked)
 
 	useEffect(() => {
-		console.log('hello from useeffect')
-
 		const { data: authListener } = supabase.auth.onAuthStateChange(
 			(event, session) => {
 				if (event === 'SIGNED_IN') {
@@ -50,10 +48,7 @@ export function useAuth() {
 			// if pro
 			let { data } = await supabase.from('userdata').select()
 			if (data) {
-				console.log(data)
-				console.log(data[0].status)
-
-				let status = data[0].status
+				let status = data[0]?.status
 
 				if (['trialing', 'active', 'past_due'].includes(status)) {
 					setIsPro(true)
