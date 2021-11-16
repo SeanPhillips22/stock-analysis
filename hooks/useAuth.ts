@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { supabase } from 'functions/supabase'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { authState } from 'state/authState'
 
 export function useAuth() {
@@ -14,17 +14,20 @@ export function useAuth() {
 	const setChecked = authState((state) => state.setChecked)
 
 	useEffect(() => {
+		// subscribe to login and logout events
+		// auth state is stored in localstorage
 		const { data: authListener } = supabase.auth.onAuthStateChange(
 			(event, session) => {
 				if (event === 'SIGNED_IN') {
 					setUser(session?.user)
 					setIsLoggedIn(true)
-					checkPro()
+					checkPro(session?.user)
 				}
 				if (event === 'SIGNED_OUT') {
 					setUser(undefined)
 					setIsLoggedIn(false)
 				}
+				// set a cookie in order to use server-side rendered features
 				fetch('/api/auth', {
 					method: 'POST',
 					headers: new Headers({ 'Content-Type': 'application/json' }),
@@ -46,29 +49,59 @@ export function useAuth() {
 		if (userCheck) {
 			setUser(userCheck)
 			setIsLoggedIn(true)
-			checkPro()
+			checkPro(userCheck)
 		}
 		setChecked(true)
 	}
 
-	async function checkPro() {
+	async function checkPro(user: any) {
+		const auth = user.user_metadata // auth for the auth.users table
+
+		// Set the pro status based on auth metadata (fast)
+		if (['trialing', 'active', 'past_due'].includes(auth.status)) {
+			setIsPro(true)
+		}
+
+		if (auth.status === 'deleted' || auth.status === 'paused') {
+			let stopDate = auth.cancelled_date ?? auth.paused_date ?? null
+
+			if (stopDate) {
+				if (new Date() < new Date(stopDate)) {
+					setIsPro(true)
+				}
+			}
+		}
+
+		// Check if stored pro status is different from auth metadata (slow).
+		// If it's different, update the meta data so the changes are reflected
+		// on next refresh.
 		const { data } = await supabase.from('userdata').select()
 
-		if (data) {
-			let status = data[0]?.status
+		if (data && data[0]) {
+			let userdata = data[0] // userdata for the public.userdata table
 
-			if (['trialing', 'active', 'past_due'].includes(status)) {
-				setIsPro(true)
+			if (userdata.status !== auth.status) {
+				await supabase.auth.update({
+					data: { status: userdata.status },
+				})
 			}
 
-			if (status === 'deleted' || status === 'paused') {
-				let stopDate = data[0].cancelled_date ?? data[0].paused_date ?? null
+			if (
+				userdata.status === 'deleted' &&
+				auth.cancelled_date !== userdata.cancelled_date
+			) {
+				await supabase.auth.update({
+					data: { cancelled_date: userdata.cancelled_date },
+				})
+			}
 
-				if (stopDate) {
-					if (new Date() < new Date(stopDate)) {
-						setIsPro(true)
-					}
-				}
+			if (
+				userdata.status === 'paused' &&
+				auth.paused_date !== userdata.paused_date
+			) {
+				await supabase.auth.update({
+					data: { paused_date: userdata.paused_date },
+				})
 			}
 		}
 	}
