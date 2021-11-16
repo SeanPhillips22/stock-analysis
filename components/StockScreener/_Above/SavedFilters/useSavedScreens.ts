@@ -60,6 +60,7 @@ export function useSavedScreens(type: 'stocks' | 'ipo') {
 
 		data.count = data.count + 1 // always increment by 1 to give screens a unique ID
 		data.screeners[type][name] = {
+			// add the new screen to the screener
 			id: data.count,
 			name: name,
 			filters: save,

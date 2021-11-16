@@ -1,12 +1,16 @@
 import { HeaderLogo } from 'components/Layout/Header/HeaderLogo'
 import Link from 'next/link'
 import { useState } from 'react'
+import { Error } from 'components/Alerts/Error'
+import { SpinnerIcon } from 'components/Icons/Spinner'
 
 type Props = {
 	signIn: (email: string) => void
+	loading: boolean
+	errorMsg: string
 }
 
-export function LogIn({ signIn }: Props) {
+export function LogIn({ signIn, loading, errorMsg }: Props) {
 	const [typed, setTyped] = useState('')
 
 	return (
@@ -31,6 +35,7 @@ export function LogIn({ signIn }: Props) {
 			</div>
 
 			<div className="mt-6 xs:mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+				{errorMsg && <Error message={errorMsg} />}
 				<div className="bg-white py-6 xs:py-8 px-4 sm:rounded-lg sm:px-10 border border-gray-300">
 					<div>
 						<label
@@ -57,11 +62,18 @@ export function LogIn({ signIn }: Props) {
 						<button
 							type="submit"
 							className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+							disabled={loading}
 							onClick={() => {
 								signIn(typed)
 							}}
 						>
-							Log in
+							{loading ? (
+								<>
+									<SpinnerIcon /> Logging in...
+								</>
+							) : (
+								'Log in'
+							)}
 						</button>
 					</div>
 				</div>

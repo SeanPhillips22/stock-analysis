@@ -1,21 +1,26 @@
-/* eslint-disable @next/next/no-img-element */
+import { useAuth } from 'hooks/useAuth'
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { useState } from 'react'
 import { LogIn } from 'components/Login/LogIn'
-import { useAuth } from 'hooks/useAuth'
 import { LogOut } from 'components/Login/LogOut'
 import { Submitted } from 'components/Login/Submitted'
 
 export default function Login() {
 	const { user, signIn, signOut } = useAuth()
+	const [loading, setLoading] = useState(false)
 	const [submitted, setSubmitted] = useState('')
+	const [errorMsg, setErrorMsg] = useState('')
 
 	async function logIn(email: string) {
-		const { error } = await signIn(email)
+		setErrorMsg('')
+
+		setLoading(true)
+		let { error } = await signIn(email)
+		setLoading(false)
 
 		if (error) {
-			console.log(error)
+			setErrorMsg(error.message)
 		} else {
 			setSubmitted(email)
 		}
@@ -25,9 +30,9 @@ export default function Login() {
 		return user ? (
 			<LogOut email={user.email} signOut={signOut} />
 		) : submitted ? (
-			<Submitted email={submitted} />
+			<Submitted />
 		) : (
-			<LogIn signIn={logIn} />
+			<LogIn signIn={logIn} loading={loading} errorMsg={errorMsg} />
 		)
 	}
 

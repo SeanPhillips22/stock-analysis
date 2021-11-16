@@ -17,7 +17,9 @@ export function useAuth() {
 		const { data: authListener } = supabase.auth.onAuthStateChange(
 			(event, session) => {
 				if (event === 'SIGNED_IN') {
+					setUser(session?.user)
 					setIsLoggedIn(true)
+					checkPro()
 				}
 				if (event === 'SIGNED_OUT') {
 					setUser(undefined)
@@ -38,38 +40,37 @@ export function useAuth() {
 	}, [])
 
 	async function checkUser() {
-		let userCheck = supabase.auth.user()
+		const userCheck = supabase.auth.user()
 
 		// if logged in
 		if (userCheck) {
 			setUser(userCheck)
 			setIsLoggedIn(true)
+			checkPro()
+		}
+		setChecked(true)
+	}
 
-			// if pro
-			let { data } = await supabase.from('userdata').select()
-			if (data) {
-				let status = data[0]?.status
+	async function checkPro() {
+		const { data } = await supabase.from('userdata').select()
 
-				if (['trialing', 'active', 'past_due'].includes(status)) {
-					setIsPro(true)
-				}
+		if (data) {
+			let status = data[0]?.status
 
-				if (status === 'deleted' || status === 'paused') {
-					let stopDate =
-						data[0].cancelled_date ?? data[0].paused_date ?? null
+			if (['trialing', 'active', 'past_due'].includes(status)) {
+				setIsPro(true)
+			}
 
-					if (stopDate) {
-						let today = new Date()
-						let stop = new Date(stopDate)
+			if (status === 'deleted' || status === 'paused') {
+				let stopDate = data[0].cancelled_date ?? data[0].paused_date ?? null
 
-						if (today < stop) {
-							setIsPro(true)
-						}
+				if (stopDate) {
+					if (new Date() < new Date(stopDate)) {
+						setIsPro(true)
 					}
 				}
 			}
 		}
-		setChecked(true)
 	}
 
 	async function signIn(email: string) {
