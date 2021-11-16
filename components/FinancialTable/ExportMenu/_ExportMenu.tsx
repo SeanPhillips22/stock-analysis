@@ -1,19 +1,22 @@
-import { authState } from 'state/authState';
-import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic'
+import { useAuthState } from 'hooks/useAuthState'
 
 const ExportButtons = dynamic(() => import('./ExportButtons'), {
 	ssr: false,
-});
+})
 
-const ExportButtonsRestricted = dynamic(() => import('./ExportButtonsRestricted'), {
-	ssr: false,
-});
+const ExportButtonsRestricted = dynamic(
+	() => import('./ExportButtonsRestricted'),
+	{
+		ssr: false,
+	}
+)
 
 interface Props {
-	symbol: string;
-	statement: string;
-	range: string;
-	setExportOpen: (arg: boolean) => void;
+	symbol: string
+	statement: string
+	range: string
+	setExportOpen: (arg: boolean) => void
 }
 
 export const ExportMenu = ({
@@ -22,7 +25,7 @@ export const ExportMenu = ({
 	range,
 	setExportOpen,
 }: Props) => {
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuthState()
 
 	return (
 		<div className="absolute right-0 flex flex-col w-full shadow-lg border border-gray-200 rounded-md dropdown-menu">
@@ -37,5 +40,5 @@ export const ExportMenu = ({
 				/>
 			)}
 		</div>
-	);
-};
+	)
+}

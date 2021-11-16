@@ -1,35 +1,60 @@
-import { SEO } from 'components/SEO';
-import { useEffect } from 'react';
-// import { useRouter } from 'next/router';
-import { CrispChat } from 'components/Scripts/CrispChat';
+import { SEO } from 'components/SEO'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { CrispChat } from 'components/Scripts/CrispChat'
+import { supabase } from 'functions/supabase'
+import { formatDateToString } from 'functions/datetime/formatDateToString'
+
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
 	interface Window {
-		Paddle: any;
+		Paddle: any
 	}
 }
 
 export default function LandingPage() {
-	// const router = useRouter();
+	const router = useRouter()
 
 	useEffect(() => {
-		const paddleJs = document.createElement('script');
-		paddleJs.src = 'https://cdn.paddle.com/paddle/paddle.js';
-		document.body.appendChild(paddleJs);
+		const paddleJs = document.createElement('script')
+		paddleJs.src = 'https://cdn.paddle.com/paddle/paddle.js'
+		document.body.appendChild(paddleJs)
 
 		paddleJs.onload = () => {
 			// eslint-disable-next-line no-undef
-			// window.Paddle.Environment.set('sandbox');
+			window.Paddle.Environment.set('sandbox')
 			// eslint-disable-next-line no-undef
 			// eslint-disable-next-line new-cap
-			window.Paddle.Setup({ vendor: 128917 });
-		};
-	}, []);
+			window.Paddle.Setup({ vendor: 2545 })
+			// window.Paddle.Setup({ vendor: 128917 });
+		}
+	}, [])
 
-	// function checkoutComplete() {
-	// 	router.push('/pro/confirmation/');
-	// }
+	async function checkoutComplete(data: any) {
+		if (data.user.email) {
+			await supabase.auth.signUp(
+				{
+					email: data.user.email,
+					password: Math.random().toString(36).substr(2, 10),
+				},
+				{
+					data: {
+						email: data?.user?.email,
+						status: 'trialing',
+						plan: data?.product?.name,
+						currency:
+							data?.checkout?.recurring_prices?.customer?.currency,
+						unit_price: data?.checkout?.recurring_prices?.customer?.unit,
+						country: data?.user?.country,
+						registered_date: formatDateToString(),
+					},
+				}
+			)
+
+			router.push('/pro/confirmation/')
+		}
+	}
 
 	return (
 		<>
@@ -110,7 +135,7 @@ export default function LandingPage() {
 											onClick={() => {
 												// eslint-disable-next-line no-undef
 												window.Paddle.Checkout.open({
-													product: 649892,
+													product: 13309,
 													successCallback: checkoutComplete,
 												});
 											}}
@@ -214,7 +239,8 @@ export default function LandingPage() {
 						<p className="text-lg mb-5">
 							Your card will not be charged until after 30 days. If you
 							cancel before the 30 days then you will not be charged at
-							all.
+							all. We will send you an email reminder a few days before
+							the trial ends.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
@@ -231,5 +257,5 @@ export default function LandingPage() {
 				</section>
 			</main>
 		</>
-	);
+	)
 }

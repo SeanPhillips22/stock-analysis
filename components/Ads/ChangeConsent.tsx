@@ -1,24 +1,23 @@
-import { authState } from 'state/authState';
+import { useAuthState } from 'hooks/useAuthState'
 
-declare const adconsent: any;
+declare const adconsent: any
 
 export const ChangeConsent = () => {
-	const status = authState((state) => state.status);
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuthState()
 
-	if (status === 'completed' && isPro) {
-		return null;
+	if (isPro) {
+		return null
 	}
 
 	if (
 		typeof window === 'undefined' ||
 		process.env.NODE_ENV === 'development'
 	) {
-		return null;
+		return null
 	}
 
 	function modifyConsent() {
-		adconsent('showGUI');
+		adconsent('showGUI')
 	}
 
 	return (
@@ -34,5 +33,5 @@ export const ChangeConsent = () => {
 				Change Consent
 			</button>
 		</>
-	);
-};
+	)
+}

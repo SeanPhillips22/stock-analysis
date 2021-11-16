@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import { SiteSearch } from 'components/Search/SiteSearch';
-import { authState } from 'state/authState';
+import Link from 'next/link'
+import { SiteSearch } from 'components/Search/SiteSearch'
+import { useAuthState } from 'hooks/useAuthState'
 
 type Trending = {
-	s: string;
-	n: string;
-	t: string;
-};
+	s: string
+	n: string
+	t: string
+}
 
 export function Hero({ trending }: { trending: Trending[] }) {
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuthState()
 
 	return (
 		<>
@@ -46,7 +46,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 											<a className="bll">{t.s}</a>
 										</Link>
 									</span>
-								);
+								)
 							}
 							return (
 								<span key={t.s}>
@@ -57,7 +57,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 										<a className="bll">{t.s}</a>
 									</Link>
 								</span>
-							);
+							)
 						})}
 						{` -- `}
 						<Link href="/trending/">
@@ -67,5 +67,5 @@ export function Hero({ trending }: { trending: Trending[] }) {
 				</div>
 			</section>
 		</>
-	);
+	)
 }

@@ -1,54 +1,54 @@
-import { Holding } from 'types/Holdings';
+import { Holding } from 'types/Holdings'
 import {
 	useTable,
 	useGlobalFilter,
 	useAsyncDebounce,
 	Column,
-} from 'react-table';
-import { useState, useEffect, useMemo } from 'react';
-import styles from './HoldingsTable.module.css';
-import { StockLink, ETFLink } from 'components/Links';
-import { authState } from 'state/authState';
-import { getPageDataFull } from 'functions/callBackEnd';
-import { Controls } from 'components/Controls/_Controls';
+} from 'react-table'
+import { useState, useEffect, useMemo } from 'react'
+import styles from './HoldingsTable.module.css'
+import { StockLink, ETFLink } from 'components/Links'
+import { useAuthState } from 'hooks/useAuthState'
+import { getPageDataFull } from 'functions/callBackEnd'
+import { Controls } from 'components/Controls/_Controls'
 
 type CellString = {
 	cell: {
-		value: string;
-	};
-};
+		value: string
+	}
+}
 
 interface Props {
-	symbol: string;
-	rawdata: Holding[];
-	fullCount: number;
-	id: number;
+	symbol: string
+	rawdata: Holding[]
+	fullCount: number
+	id: number
 }
 
 export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
-	const [dataRows, setdataRows] = useState(rawdata);
-	const isPro = authState((state) => state.isPro);
+	const [dataRows, setdataRows] = useState(rawdata)
+	const { isPro } = useAuthState()
 
-	const count = rawdata.length;
+	const count = rawdata.length
 
 	// If pro user and data is limited, fetch the full data
 	useEffect(() => {
 		async function fetchFullHoldings() {
-			const res = await getPageDataFull('holdings', id);
+			const res = await getPageDataFull('holdings', id)
 
 			if (res && res.data.list && res.data.list.length > count) {
-				setdataRows(res.data.list);
+				setdataRows(res.data.list)
 			} else {
 				throw new Error(
 					'Unable to fetch full data, response was invalid or empty array'
-				);
+				)
 			}
 		}
 
 		if (isPro && fullCount > count) {
-			fetchFullHoldings();
+			fetchFullHoldings()
 		}
-	}, [count, fullCount, isPro, id]);
+	}, [count, fullCount, isPro, id])
 
 	const columns: Column[] = useMemo(
 		() => [
@@ -61,11 +61,11 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
 				accessor: 'symbol',
 				Cell: function FormatCell({ cell: { value } }: CellString) {
 					if (value.startsWith('$')) {
-						return <StockLink symbol={value.slice(1)} />;
+						return <StockLink symbol={value.slice(1)} />
 					} else if (value.startsWith('#')) {
-						return <ETFLink symbol={value.slice(1)} />;
+						return <ETFLink symbol={value.slice(1)} />
 					}
-					return value;
+					return value
 				},
 			},
 			{
@@ -82,9 +82,9 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
 			},
 		],
 		[]
-	);
+	)
 
-	const data = useMemo(() => dataRows, [dataRows]);
+	const data = useMemo(() => dataRows, [dataRows])
 
 	const {
 		headerGroups,
@@ -98,7 +98,7 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
 			data,
 		},
 		useGlobalFilter
-	);
+	)
 
 	return (
 		<>
@@ -123,18 +123,18 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
 					</thead>
 					<tbody>
 						{rows.map((row, index) => {
-							prepareRow(row);
+							prepareRow(row)
 							return (
 								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return <td key={index}>{cell.render('Cell')}</td>;
+										return <td key={index}>{cell.render('Cell')}</td>
 									})}
 								</tr>
-							);
+							)
 						})}
 					</tbody>
 				</table>
 			</div>
 		</>
-	);
-};
+	)
+}

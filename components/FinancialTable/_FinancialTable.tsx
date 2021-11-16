@@ -4,11 +4,10 @@ import {
 	FinancialsMapType,
 	FinancialReport,
 	Statement,
-} from 'types/Financials';
-import { Info } from 'types/Info';
-import { useState, useEffect, forwardRef, useMemo } from 'react';
-import { financialsState } from 'state/financialsState';
-import { authState } from 'state/authState';
+} from 'types/Financials'
+import { Info } from 'types/Info'
+import { useState, useEffect, forwardRef, useMemo } from 'react'
+import { financialsState } from 'state/financialsState'
 import {
 	formatCell,
 	formatYear,
@@ -17,31 +16,32 @@ import {
 	getPeriodTooltip,
 	sliceData,
 	reverseData,
-} from './FinancialTable.functions';
-import { HoverChartIcon } from 'components/Icons/HoverChart';
-import styles from './FinancialTable.module.css';
-import { TableTitle } from './TableTitle';
-import { TableControls } from './TableControls';
-import Paywall from './Paywall';
-import dynamic from 'next/dynamic';
-import { Tooltip } from './Tooltip';
-import { TooltipChart } from './TooltipChart';
-import { Unavailable } from 'components/Unavailable';
-import { getStockFinancialsFull } from 'functions/callBackEnd';
-import { FinancialSource } from './FinancialSource';
+} from './FinancialTable.functions'
+import { HoverChartIcon } from 'components/Icons/HoverChart'
+import styles from './FinancialTable.module.css'
+import { TableTitle } from './TableTitle'
+import { TableControls } from './TableControls'
+import Paywall from './Paywall'
+import dynamic from 'next/dynamic'
+import { Tooltip } from './Tooltip'
+import { TooltipChart } from './TooltipChart'
+import { Unavailable } from 'components/Unavailable'
+import { getStockFinancialsFull } from 'functions/callBackEnd'
+import { FinancialSource } from './FinancialSource'
+import { useAuthState } from 'hooks/useAuthState'
 
-const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false });
+const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false })
 
 interface Props {
-	statement: Statement;
-	financials: FinancialsType;
-	info: Info;
-	map: FinancialsMapType[];
+	statement: Statement
+	financials: FinancialsType
+	info: Info
+	map: FinancialsMapType[]
 	counts: {
-		annual: number;
-		quarterly: number;
-		trailing: number;
-	};
+		annual: number
+		quarterly: number
+		trailing: number
+	}
 }
 
 export const FinancialTable = ({
@@ -51,61 +51,61 @@ export const FinancialTable = ({
 	map,
 	counts,
 }: Props) => {
-	const range = financialsState((state) => state.range);
-	const divider = financialsState((state) => state.divider);
-	const leftRight = financialsState((state) => state.leftRight);
-	const reversed = financialsState((state) => state.reversed);
-	const setReversed = financialsState((state) => state.setReversed);
-	const isPro = authState((state) => state.isPro);
-	const [hover, setHover] = useState(false);
-	const [fullData, setFullData] = useState<FinancialsType>();
+	const range = financialsState((state) => state.range)
+	const divider = financialsState((state) => state.divider)
+	const leftRight = financialsState((state) => state.leftRight)
+	const reversed = financialsState((state) => state.reversed)
+	const setReversed = financialsState((state) => state.setReversed)
+	const { isPro } = useAuthState()
+	const [hover, setHover] = useState(false)
+	const [fullData, setFullData] = useState<FinancialsType>()
 	const [dataRows, setDataRows] = useState(
 		financials[range as keyof FinancialsType]
-	);
+	)
 
 	// Check if financial data is paywalled
-	const paywall = range === 'annual' ? 10 : 40;
-	const fullcount = counts[range]; // The total number of years/quarters available
-	const showcount = !isPro && fullcount > paywall ? paywall : fullcount; // How many years/quarter to show
-	const paywalled = showcount < fullcount ? 'true' : false;
+	const paywall = range === 'annual' ? 10 : 40
+	const fullcount = counts[range] // The total number of years/quarters available
+	const showcount = !isPro && fullcount > paywall ? paywall : fullcount // How many years/quarter to show
+	const paywalled = showcount < fullcount ? 'true' : false
 
 	useEffect(() => {
-		setDataRows(financials[range as keyof FinancialsType]);
-	}, [financials, range]);
+		setDataRows(financials[range as keyof FinancialsType])
+	}, [financials, range])
 
 	// If pro user and data is limited, fetch the full data
 	useEffect(() => {
 		async function fetchFullFinancials() {
 			const res = fullData
 				? fullData
-				: await getStockFinancialsFull(statement, info.id);
+				: await getStockFinancialsFull(statement, info.id)
 			if (res && res[range]?.datekey?.length > paywall) {
-				setFullData(res);
-				setDataRows(res[range]);
+				setFullData(res)
+				setDataRows(res[range])
 			} else {
 				throw new Error(
 					'Unable to fetch full data, response was invalid or empty array'
-				);
+				)
 			}
 		}
 
 		if (isPro && fullcount > paywall) {
-			fetchFullFinancials();
+			fetchFullFinancials()
 		}
-	}, [info.id, isPro, fullcount, paywall, statement, range, fullData]);
+	}, [info.id, isPro, fullcount, paywall, statement, range, fullData])
 
 	let data = useMemo(
 		() => sliceData(dataRows, showcount),
 		[dataRows, showcount]
-	);
+	)
 
 	// Switch data left/right if applicable
 	if (
 		(leftRight === 'right' && !reversed) ||
 		(leftRight === 'left' && reversed)
 	) {
-		data = reverseData(data);
-		setReversed(!reversed);
+		data = reverseData(data)
+		setReversed(!reversed)
 	}
 
 	// If count is empty, show message
@@ -126,42 +126,42 @@ export const FinancialTable = ({
 					/>
 				</div>
 			</>
-		);
+		)
 	}
 
-	const DATA_MAP = map;
+	const DATA_MAP = map
 
 	if (!data) {
-		return <p>Loading...</p>;
+		return <p>Loading...</p>
 	}
 
 	const headerRow = () => {
-		const headerdata = data.datekey;
+		const headerdata = data.datekey
 
 		return headerdata.map((cell, index) => {
 			return (
 				<th key={index} title={cell}>
 					{range === 'annual' ? formatYear(cell) : cell}
 				</th>
-			);
-		});
-	};
+			)
+		})
+	}
 
 	interface RowTitleProps {
-		title: string;
-		indent?: boolean;
+		title: string
+		indent?: boolean
 	}
 
 	const RowTitle = forwardRef<HTMLSpanElement, RowTitleProps>((props, ref) => {
-		const { title, indent } = props;
-		const margin = indent ? ' ml-3' : '';
+		const { title, indent } = props
+		const margin = indent ? ' ml-3' : ''
 
 		return (
 			<span ref={ref} className={margin}>
 				{title}
 			</span>
-		);
-	});
+		)
+	})
 
 	const IndicatorTooltip = ({ row }: { row: FinancialsMapType }) => {
 		return (
@@ -176,55 +176,55 @@ export const FinancialTable = ({
 					</div>
 				)}
 			</div>
-		);
-	};
+		)
+	}
 
 	const ChartIcon = forwardRef<HTMLDivElement>((props, ref) => {
 		return (
 			<div ref={ref} className={styles.iconcelldiv}>
 				<HoverChartIcon />
 			</div>
-		);
-	});
+		)
+	})
 
 	const BodyRow = ({ row }: { row: FinancialsMapType }) => {
 		// Exception: If recent IPO and only 6 quarters, use 3 quarter offset to calculate growth
-		let offs = 4;
+		let offs = 4
 		if (
 			row.format === 'growth' &&
 			(range === 'quarterly' || range === 'trailing') &&
 			showcount === 6
 		) {
 			if (data?.datekey?.length === 6) {
-				const firstDate = data.datekey[0];
-				const compareDate = data.datekey[3];
+				const firstDate = data.datekey[0]
+				const compareDate = data.datekey[3]
 
 				if (firstDate.split('-')[1] === compareDate.split('-')[1]) {
-					offs = 3;
+					offs = 3
 				}
 			}
 		}
 
-		const id = row.id;
-		const dataid = row.data || row.id;
-		const format = row.format || 'standard';
-		let offset = range === 'quarterly' || range === 'trailing' ? offs : 1;
-		let total = 0;
+		const id = row.id
+		const dataid = row.data || row.id
+		const format = row.format || 'standard'
+		let offset = range === 'quarterly' || range === 'trailing' ? offs : 1
+		let total = 0
 
-		const rowdata = data[dataid as keyof FinancialReport];
+		const rowdata = data[dataid as keyof FinancialReport]
 		if (!rowdata) {
-			return null;
+			return null
 		}
-		const revenuedata = data.revenue;
+		const revenuedata = data.revenue
 
 		if (leftRight === 'right') {
-			offset = -offset;
+			offset = -offset
 		}
 
 		const dataRows = rowdata.map((cell, index) => {
 			if (typeof cell === 'number') {
-				const prev = format === 'growth' ? rowdata[index + offset] : null;
-				const rev = format === 'margin' ? revenuedata[index] : null;
+				const prev = format === 'growth' ? rowdata[index + offset] : null
+				const rev = format === 'margin' ? revenuedata[index] : null
 
 				const titleTag = formatCell({
 					type: row.format || 'standard',
@@ -232,7 +232,7 @@ export const FinancialTable = ({
 					previous: prev,
 					revenue: rev,
 					divider: 'raw',
-				});
+				})
 
 				const cellContent = formatCell({
 					type: row.format || 'standard',
@@ -240,17 +240,17 @@ export const FinancialTable = ({
 					previous: prev,
 					revenue: rev,
 					divider,
-				});
+				})
 
 				const cellClass = () => {
 					if (format === 'growth' && cellContent) {
-						return redOrGreen(cellContent, id);
+						return redOrGreen(cellContent, id)
 					}
-					return '';
-				};
+					return ''
+				}
 
 				if (cell != 0 && cellContent != '-') {
-					total++;
+					total++
 				}
 
 				return (
@@ -261,31 +261,31 @@ export const FinancialTable = ({
 							'-'
 						)}
 					</td>
-				);
+				)
 			} else {
-				return <td key={index}>-</td>;
+				return <td key={index}>-</td>
 			}
-		});
+		})
 
 		const getRowStyles = () => {
-			const styles = [];
+			const styles = []
 			if (row.format === 'growth' || row.border) {
 				styles.push(
 					'border-b-2 border-gray-300 text-[0.85rem] sm:text-[0.95rem]'
-				);
+				)
 			}
 			if (row.bold) {
-				styles.push('font-semibold text-gray-800');
+				styles.push('font-semibold text-gray-800')
 			}
 			if (row.extrabold) {
-				styles.push('font-bold text-gray-700');
+				styles.push('font-bold text-gray-700')
 			}
 
-			return styles.join(' ');
-		};
+			return styles.join(' ')
+		}
 
 		if (total == 0) {
-			return null;
+			return null
 		}
 		return (
 			<>
@@ -342,8 +342,8 @@ export const FinancialTable = ({
 					{dataRows}
 				</tr>
 			</>
-		);
-	};
+		)
+	}
 
 	return (
 		<div>
@@ -390,7 +390,7 @@ export const FinancialTable = ({
 					</thead>
 					<tbody>
 						{DATA_MAP.map((row, index) => {
-							return <BodyRow row={row} key={index} />;
+							return <BodyRow row={row} key={index} />
 						})}
 					</tbody>
 				</table>
@@ -404,5 +404,5 @@ export const FinancialTable = ({
 			</div>
 			<FinancialSource info={info} />
 		</div>
-	);
-};
+	)
+}
