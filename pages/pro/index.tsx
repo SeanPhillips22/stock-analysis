@@ -127,21 +127,7 @@ export default function LandingPage() {
 								</tr>
 								<tr className="border-b border-gray-200">
 									<td className="p-0">
-										{/* <button
-											onClick={() => {
-												// eslint-disable-next-line no-undef
-												window.Paddle.Checkout.open({
-													product: 649892,
-													successCallback: checkoutComplete,
-												});
-											}}
-											id="start-trial"
-											className="block w-full p-4 text-2xl bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-										>
-											Start Free Trial
-										</button> */}
-										<div
-											className="block w-full py-4 px-3 text-lg bg-gray-600 text-white text-center"
+										<button
 											onClick={() => {
 												// eslint-disable-next-line no-undef
 												window.Paddle.Checkout.open({
@@ -149,10 +135,11 @@ export default function LandingPage() {
 													successCallback: checkoutComplete,
 												})
 											}}
+											id="start-trial"
+											className="block w-full p-4 text-2xl bg-blue-brand_light hover:bg-blue-brand_sharp text-white text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
 										>
-											New sign ups are temporarily disabled, please
-											check back in a few hours
-										</div>
+											Start Free Trial
+										</button>
 									</td>
 								</tr>
 							</tbody>
