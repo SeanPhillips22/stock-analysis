@@ -5,6 +5,7 @@ import { CrispChat } from 'components/Scripts/CrispChat'
 import { supabase } from 'functions/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
 
+
 declare global {
 	// eslint-disable-next-line no-unused-vars
 	interface Window {
