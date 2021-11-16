@@ -1,11 +1,12 @@
 /* eslint-disable camelcase */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { supabase } from 'functions/supabase'
-import { userdata } from './wp_userdata'
+// import { userdata } from './wp_userdata'
 
 export default async function handler(
 	req: NextApiRequest,
-	res: NextApiResponse
+	res: NextApiResponse,
+	userdata: any
 ) {
 	const email = userdata[3].email
 	const name = userdata[3].name
