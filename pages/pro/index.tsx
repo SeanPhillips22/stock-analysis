@@ -5,7 +5,6 @@ import { CrispChat } from 'components/Scripts/CrispChat'
 import { supabase } from 'functions/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
 
-
 declare global {
 	// eslint-disable-next-line no-unused-vars
 	interface Window {
@@ -23,11 +22,8 @@ export default function LandingPage() {
 
 		paddleJs.onload = () => {
 			// eslint-disable-next-line no-undef
-			window.Paddle.Environment.set('sandbox')
-			// eslint-disable-next-line no-undef
 			// eslint-disable-next-line new-cap
-			window.Paddle.Setup({ vendor: 2545 })
-			// window.Paddle.Setup({ vendor: 128917 });
+			window.Paddle.Setup({ vendor: 128917 })
 		}
 	}, [])
 
@@ -135,7 +131,7 @@ export default function LandingPage() {
 											onClick={() => {
 												// eslint-disable-next-line no-undef
 												window.Paddle.Checkout.open({
-													product: 13309,
+													product: 649892,
 													successCallback: checkoutComplete,
 												});
 											}}
@@ -144,7 +140,16 @@ export default function LandingPage() {
 										>
 											Start Free Trial
 										</button> */}
-										<div className="block w-full py-4 px-3 text-lg bg-gray-600 text-white text-center">
+										<div
+											className="block w-full py-4 px-3 text-lg bg-gray-600 text-white text-center"
+											onClick={() => {
+												// eslint-disable-next-line no-undef
+												window.Paddle.Checkout.open({
+													product: 649892,
+													successCallback: checkoutComplete,
+												})
+											}}
+										>
 											New sign ups are temporarily disabled, please
 											check back in a few hours
 										</div>
