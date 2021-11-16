@@ -42,7 +42,7 @@ export function useAuth() {
 	async function checkUser() {
 		const userCheck = supabase.auth.user()
 
-		// if logged in
+		// if user is logged in
 		if (userCheck) {
 			setUser(userCheck)
 			setIsLoggedIn(true)
