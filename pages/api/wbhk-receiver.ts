@@ -34,6 +34,9 @@ export default async function handler(
 		})
 	}
 
+	// Check if req.body is undefined
+	if (!req.body) return res.status(401).json({ error: 'No req body' })
+
 	// Get the user email and webhook type from the request body
 	const { alert_name, email } = req.body
 
@@ -126,5 +129,5 @@ export default async function handler(
 		}
 	}
 
-	return res.status(400).json({ error: 'No alert_name found' })
+	return res.status(408).json({ error: 'No alert_name found' })
 }

@@ -10,8 +10,10 @@ export default async function handler(
 	const email = userdata[3].email
 	const name = userdata[3].name
 	const status = userdata[3].status
-	const role = userdata[4].role
 	const plan = userdata[4].plan
+	const registered_date = userdata[4].registered_date
+	const cancelled_date = userdata[4].cancelled_date
+	const paused_date = userdata[4].paused_date
 	const update_url = userdata[4].update_url
 	const cancel_url = userdata[4].cancel_url
 	const receipt_url = userdata[4].receipt_url
@@ -20,11 +22,6 @@ export default async function handler(
 	const next_bill_date = userdata[4].next_bill_date
 	const next_payment_amount = userdata[4].next_payment_amount
 	const unit_price = userdata[4].unit_price
-	const subscription_id = userdata[4].subscription_id
-	const subscription_plan_id = userdata[4].subscription_plan_id
-	const registered_date = userdata[4].registered_date
-	const cancelled_date = userdata[4].cancelled_date
-	const paused_date = userdata[4].paused_date
 	const alert_name = userdata[4].alert_name
 	const event_time = userdata[4].event_time
 
@@ -37,8 +34,10 @@ export default async function handler(
 			data: {
 				name,
 				status,
-				role,
 				plan,
+				registered_date,
+				cancelled_date,
+				paused_date,
 				update_url,
 				cancel_url,
 				receipt_url,
@@ -47,11 +46,6 @@ export default async function handler(
 				next_bill_date,
 				next_payment_amount,
 				unit_price,
-				subscription_id,
-				subscription_plan_id,
-				registered_date,
-				cancelled_date,
-				paused_date,
 				alert_name,
 				event_time,
 			},
