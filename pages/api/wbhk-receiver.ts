@@ -42,7 +42,7 @@ export default async function handler(
 		.eq('email', email)
 
 	if (!returned || !returned[0])
-		return res.status(400).json({ error: 'No data returned' })
+		return res.status(404).json({ error: 'No data returned' })
 
 	let user = returned![0]
 
@@ -104,7 +104,7 @@ export default async function handler(
 			.eq('id', user.id)
 
 		if (error) {
-			return res.status(400).json({ error })
+			return res.status(407).json({ error })
 		} else if (data) {
 			return res
 				.status(200)
