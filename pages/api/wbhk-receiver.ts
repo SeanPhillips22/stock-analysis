@@ -34,16 +34,30 @@ export default async function handler(
 		})
 	}
 
+	// Get the user email and webhook type from the request body
 	const { alert_name, email } = req.body
 
+	// Find the user from the email
 	let { data: returned } = await supabaseAdmin
 		.from('userdata')
 		.select()
 		.eq('email', email)
 
-	if (!returned || !returned[0])
-		return res.status(404).json({ error: 'No data returned' })
+	// If not found, try again in a few seconds
+	if (!returned || !returned[0]) {
+		let wait = alert_name === 'subscription_created' ? 4000 : 2000
+		await sleep(wait)
 
+		let { data: returned } = await supabaseAdmin
+			.from('userdata')
+			.select()
+			.eq('email', email)
+
+		if (!returned || !returned[0])
+			return res.status(404).json({ error: 'No data returned' })
+	}
+
+	// User was found -- proceed to update the user's details
 	let user = returned![0]
 
 	if (alert_name) {
