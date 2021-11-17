@@ -154,50 +154,52 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 							dataset: { data: any[]; label: string },
 							i: any
 						) {
-							const meta = chartInstance.getDatasetMeta(i)
+							if (dataset.label == 'Stock Price') {
+								const meta = chartInstance.getDatasetMeta(i)
 
-							const last = meta.data.length - 1 // The last index of the array, so that the latest stock price is shown
+								const last = meta.data.length - 1 // The last index of the array, so that the latest stock price is shown
 
-							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
-							const x = meta.data[last].x + 32.5
-							const y = meta.data[last].y - 10
+								// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
+								const x = meta.data[last].x + 32.5
+								const y = meta.data[last].y - 10
 
-							// retrieve the stock price, data.
-							const raw = parseFloat(dataset.data[last])
-							// const str = dataset.data[last];
-							const str = raw.toFixed(2)
+								// retrieve the stock price, data.
+								const raw = parseFloat(dataset.data[last])
+								// const str = dataset.data[last];
+								const str = raw.toFixed(2)
 
-							// begin drawing and styling
+								// begin drawing and styling
 
-							ctx.save()
+								ctx.save()
 
-							ctx.strokeStyle = lineColor
-							ctx.fillStyle = lineColor
-							ctx.lineWidth = '3.5'
-							ctx.lineJoin = 'round'
+								ctx.strokeStyle = lineColor
+								ctx.fillStyle = lineColor
+								ctx.lineWidth = '3.5'
+								ctx.lineJoin = 'round'
 
-							// calculate the width of the box and height is based on fontsize.
-							const width = ctx.measureText(str).width + 0.4
-							const xPos = x - 23
-							const height = fontSize + 2.8
-							const yPos = y + 1.5
+								// calculate the width of the box and height is based on fontsize.
+								const width = ctx.measureText(str).width + 0.4
+								const xPos = x - 23
+								const height = fontSize + 2.8
+								const yPos = y + 1.5
 
-							// draw triangle to form a pointer.
-							ctx.beginPath()
-							ctx.moveTo(xPos - 7.7, yPos + 1.5 + height / 2)
-							ctx.lineTo(xPos + 0.7, yPos + 2.5 + height)
-							ctx.lineTo(xPos + 0.7, yPos + 0.5)
-							ctx.fill()
-							ctx.closePath()
+								// draw triangle to form a pointer.
+								ctx.beginPath()
+								ctx.moveTo(xPos - 7.7, yPos + 1.5 + height / 2)
+								ctx.lineTo(xPos + 0.7, yPos + 2.5 + height)
+								ctx.lineTo(xPos + 0.7, yPos + 0.5)
+								ctx.fill()
+								ctx.closePath()
 
-							// draw the box
-							ctx.strokeRect(xPos + 2, yPos + 1.5, width, height)
-							ctx.fillRect(xPos + 2, yPos + 1.5, width, height)
+								// draw the box
+								ctx.strokeRect(xPos + 2, yPos + 1.5, width, height)
+								ctx.fillRect(xPos + 2, yPos + 1.5, width, height)
 
-							// draw the text
-							ctx.fillStyle = '#ffffff'
-							ctx.fillText(str, x - 22, meta.data[last].y + 7.4)
-							ctx.restore()
+								// draw the text
+								ctx.fillStyle = '#ffffff'
+								ctx.fillText(str, x - 22, meta.data[last].y + 7.4)
+								ctx.restore()
+							}
 						})
 					},
 				},
