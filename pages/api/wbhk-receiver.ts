@@ -39,12 +39,13 @@ export default async function handler(
 
 	// Get the user email and webhook type from the request body
 	const { alert_name, email } = req.body
+	const emailLookup: string = email.toLowerCase()
 
 	// Find the user from the email
 	let { data: returned } = await supabaseAdmin
 		.from('userdata')
 		.select()
-		.eq('email', email)
+		.eq('email', emailLookup)
 
 	// If not found, try again in a few seconds
 	if (!returned || !returned[0]) {
@@ -54,7 +55,7 @@ export default async function handler(
 		let { data: returned } = await supabaseAdmin
 			.from('userdata')
 			.select()
-			.eq('email', email)
+			.eq('email', emailLookup)
 
 		if (!returned || !returned[0])
 			return res.status(404).json({ error: 'No data returned' })
@@ -74,7 +75,7 @@ export default async function handler(
 				let { data: returnedAgain } = await supabaseAdmin
 					.from('userdata')
 					.select()
-					.eq('email', email)
+					.eq('email', emailLookup)
 
 				if (!returnedAgain)
 					return res.status(406).json({ error: 'No data returned' })
