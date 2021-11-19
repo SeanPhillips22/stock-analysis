@@ -1,23 +1,23 @@
-import { GetStaticProps } from 'next';
-import { CalendarData, IpoRecent, FilingMin } from 'types/Ipos';
-import { SEO } from 'components/SEO';
-import { getIpoData } from 'functions/callBackEnd';
-import { CalendarStats } from 'components/IPOs/CalendarStats';
-import { CalendarTable } from 'components/IPOs/CalendarTable';
-import { LaterExplanation } from 'components/IPOs/LaterExplanation';
-import { IPOSources } from 'components/IPOs/IPOSources';
-import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { RecentTableMin } from 'components/IPOs/RecentTableMin';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
-import { FilingTableMin } from 'components/IPOs/FilingTableMin';
-import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation';
+import { GetStaticProps } from 'next'
+import { CalendarData, IpoRecent, FilingMin } from 'types/Ipos'
+import { SEO } from 'components/SEO'
+import { getIpoData } from 'functions/callBackEnd'
+import { CalendarStats } from 'components/IPOs/CalendarStats'
+import { CalendarTable } from 'components/IPOs/CalendarTable'
+import { LaterExplanation } from 'components/IPOs/LaterExplanation'
+import { IPOSources } from 'components/IPOs/IPOSources'
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { RecentTableMin } from 'components/IPOs/RecentTableMin'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
+import { FilingTableMin } from 'components/IPOs/FilingTableMin'
+import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
 
 interface Props {
-	data: CalendarData;
-	recent: IpoRecent[];
-	filings: FilingMin[];
+	data: CalendarData
+	recent: IpoRecent[]
+	filings: FilingMin[]
 }
 
 export const IpoCalendar = ({ data, recent, filings }: Props) => {
@@ -43,7 +43,7 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 									tableId="this-week"
 									border={true}
 								/>
-								<Mobile1 />
+								{data.thisweek.length >= 7 && <Mobile1 />}
 								<CalendarTable
 									title="Next Week"
 									data={data.nextweek}
@@ -58,6 +58,7 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 								) : (
 									<LaterExplanation />
 								)}
+								{data.thisweek.length < 7 && <Mobile1 />}
 								<IPOSources />
 							</div>
 						</div>
@@ -76,13 +77,13 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 				</main>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default IpoCalendar;
+export default IpoCalendar
 
 export const getStaticProps: GetStaticProps = async () => {
-	const { data, recent, filings } = await getIpoData('calendar');
+	const { data, recent, filings } = await getIpoData('calendar')
 
 	return {
 		props: {
@@ -91,5 +92,5 @@ export const getStaticProps: GetStaticProps = async () => {
 			filings,
 		},
 		revalidate: 5 * 60,
-	};
-};
+	}
+}
