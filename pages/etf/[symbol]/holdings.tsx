@@ -1,21 +1,21 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { HoldingsType } from 'types/Holdings';
-import { News } from 'types/News';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { getPageData } from 'functions/callBackEnd';
-import { HoldingsTable } from 'components/Holdings/_HoldingsTable';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import { Info } from 'types/Info'
+import { HoldingsType } from 'types/Holdings'
+import { News } from 'types/News'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { getPageData } from 'functions/callBackEnd'
+import { HoldingsTable } from 'components/Holdings/_HoldingsTable'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 
 interface Props {
-	info: Info;
-	data: HoldingsType;
-	news: News[];
+	info: Info
+	data: HoldingsType
+	news: News[]
 }
 
 const Holdings = ({ info, data, news }: Props) => {
@@ -36,7 +36,6 @@ const Holdings = ({ info, data, news }: Props) => {
 									symbol={info.symbol}
 									rawdata={data.list}
 									fullCount={data.count}
-									id={info.id}
 								/>
 								<div className="text-gray-700 text-small mt-1">
 									As of {data.updated}
@@ -70,19 +69,19 @@ const Holdings = ({ info, data, news }: Props) => {
 				</div>
 			</div>
 		</Stock>
-	);
-};
-export default Holdings;
+	)
+}
+export default Holdings
 
 interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	symbol: string
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getPageData('holdings', symbol, 3600);
-};
+	const { symbol } = params as IParams
+	return await getPageData('holdings', symbol, 3600)
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	return { paths: [], fallback: 'blocking' }
+}
