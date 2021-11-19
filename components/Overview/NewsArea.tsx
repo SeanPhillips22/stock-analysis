@@ -1,85 +1,87 @@
-import { useState, useEffect } from 'react';
-import { NewsFeed } from 'components/News/_NewsFeed';
-import { loadStockTwits } from 'functions/loadStockTwits';
-import { News } from 'types/News';
-import { Info } from 'types/Info';
-import { getData } from 'functions/API';
-import { NewsMenu } from 'components/News/NewsMenu/_NewsMenu';
-import { LoadMore } from 'components/News/LoadMore/_LoadMore';
-import { Information } from 'components/Alerts/Information';
+import { useState, useEffect } from 'react'
+import { NewsFeed } from 'components/News/_NewsFeed'
+import { loadStockTwits } from 'functions/loadStockTwits'
+import { News } from 'types/News'
+import { Info } from 'types/Info'
+import { getData } from 'functions/API'
+import { NewsMenu } from 'components/News/NewsMenu/_NewsMenu'
+import { LoadMore } from 'components/News/LoadMore/_LoadMore'
+import { Information } from 'components/Alerts/Information'
 
 interface Props {
-	info: Info;
-	news: News[];
-	updated: number;
+	info: Info
+	news: News[]
+	updated: number
 }
 
 export const NewsArea = ({ info, news, updated }: Props) => {
-	const [data, setData] = useState(news);
-	const [timestamp, setTimestamp] = useState(updated);
-	const [show, setShow] = useState('all');
-	const [firstRender, setFirstRender] = useState(true);
-	const [loadedMore, setLoadedMore] = useState(false); // If already fetched items 25-50
-	const [loading, setLoading] = useState(false); // If fetching new data
-	const [end, setEnd] = useState(false); // If no more data to fetch
-	const [paywalled, setPaywalled] = useState(false); // If paywall has been triggered
-	const [dataPage, setDataPage] = useState(2);
-	const [error, setError] = useState('');
-	const [searched, setSearched] = useState(false); // If a search has been performed
-	const [query, setQuery] = useState('');
+	const [data, setData] = useState(news)
+	const [timestamp, setTimestamp] = useState(updated)
+	const [show, setShow] = useState('all')
+	const [firstRender, setFirstRender] = useState(true)
+	const [loadedMore, setLoadedMore] = useState(false) // If already fetched items 25-50
+	const [loading, setLoading] = useState(false) // If fetching new data
+	const [end, setEnd] = useState(false) // If no more data to fetch
+	const [paywalled, setPaywalled] = useState(false) // If paywall has been triggered
+	const [dataPage, setDataPage] = useState(2)
+	const [error, setError] = useState('')
+	const [searched, setSearched] = useState(false) // If a search has been performed
+	const [query, setQuery] = useState('')
 
-	const updatedTime = new Date(timestamp * 1000);
-	const currentTime = new Date();
+	const updatedTime = new Date(timestamp * 1000)
+	const currentTime = new Date()
 
 	const minutesBetween =
-		(currentTime.getTime() - updatedTime.getTime()) / 1000 / 60;
+		(currentTime.getTime() - updatedTime.getTime()) / 1000 / 60
 
 	// Check for fresh news if it's been more than 60 minutes
 	useEffect(() => {
 		async function fetchData() {
-			const fresh = await getData(`news-fresh?i=${info.id}`);
+			const fresh = await getData(`news-fresh?s=${info.symbol}`)
 			if (news[0] && fresh[0] && news[0].title !== fresh[0].title) {
-				setData(fresh);
+				setData(fresh)
 			}
 		}
 
 		if (minutesBetween > 60) {
-			setTimestamp(currentTime.getTime());
-			fetchData();
+			setTimestamp(currentTime.getTime())
+			fetchData()
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [])
 
 	// Fetch data if a menu item has been clicked (videos, press releases, conversation)
 	useEffect(() => {
 		async function fetchData() {
-			const fresh = await getData(`news?i=${info.id}&f=${show}`);
+			const fresh = await getData(
+				`news?s=${info.symbol}&t=${info.type}&f=${show}`
+			)
 			if (fresh.length) {
-				setData(fresh);
+				setData(fresh)
 			} else {
 				if (show === 'v') {
-					setError('No videos found for this stock.');
+					setError('No videos found for this stock.')
 				} else if (show === 'pr') {
-					setError('No additional press releases found for this stock.');
+					setError('No additional press releases found for this stock.')
 				}
 			}
 		}
 
 		if (firstRender) {
-			setFirstRender(false);
+			setFirstRender(false)
 		} else {
 			if (show === 'chat') {
-				loadStockTwits(info.ticker);
+				loadStockTwits(info.ticker)
 			} else {
-				setEnd(false);
-				setLoadedMore(false);
-				setPaywalled(false);
-				fetchData();
+				setEnd(false)
+				setLoadedMore(false)
+				setPaywalled(false)
+				fetchData()
 			}
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [show]);
+	}, [show])
 
 	if (!news || news.length === 0) {
 		return (
@@ -87,7 +89,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 				<h2 className="hh2 mb-2">News</h2>
 				<span className="text-xl">There is no news available yet.</span>
 			</div>
-		);
+		)
 	}
 
 	return (
@@ -98,7 +100,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 					show={show}
 					setShow={setShow}
 					pageType={info.type}
-					id={info.id}
+					symbol={info.symbol}
 					setData={setData}
 					news={news}
 					setError={setError}
@@ -144,5 +146,5 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 				<div id="altwrap" className="pt-2 overflow-x-auto"></div>
 			)}
 		</>
-	);
-};
+	)
+}

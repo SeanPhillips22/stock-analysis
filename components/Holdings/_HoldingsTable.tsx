@@ -22,10 +22,9 @@ interface Props {
 	symbol: string
 	rawdata: Holding[]
 	fullCount: number
-	id: number
 }
 
-export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
+export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 	const [dataRows, setdataRows] = useState(rawdata)
 	const { isPro } = useAuthState()
 
@@ -34,7 +33,7 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
 	// If pro user and data is limited, fetch the full data
 	useEffect(() => {
 		async function fetchFullHoldings() {
-			const res = await getPageDataFull('holdings', id)
+			const res = await getPageDataFull('holdings', symbol)
 
 			if (res && res.data.list && res.data.list.length > count) {
 				setdataRows(res.data.list)
@@ -48,7 +47,7 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount, id }: Props) => {
 		if (isPro && fullCount > count) {
 			fetchFullHoldings()
 		}
-	}, [count, fullCount, isPro, id])
+	}, [count, fullCount, isPro, symbol])
 
 	const columns: Column[] = useMemo(
 		() => [
