@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import { financialsState } from 'state/financialsState';
-import { Info } from 'types/Info';
+import Link from 'next/link'
+import { financialsState } from 'state/financialsState'
+import { Info } from 'types/Info'
 
 interface Props {
-	info: Info;
-	statement: string;
+	info: Info
+	statement: string
 }
 
 export const SubNavigation = ({ info, statement }: Props) => {
@@ -13,8 +13,8 @@ export const SubNavigation = ({ info, statement }: Props) => {
 			<Statement info={info} statement={statement} />
 			<Period />
 		</div>
-	);
-};
+	)
+}
 
 function Statement({ info, statement }: Props) {
 	return (
@@ -24,7 +24,6 @@ function Statement({ info, statement }: Props) {
 					<Link
 						href={`/stocks/${info.symbol}/financials/`}
 						prefetch={false}
-						scroll={false}
 					>
 						<a
 							className={
@@ -40,7 +39,6 @@ function Statement({ info, statement }: Props) {
 					<Link
 						href={`/stocks/${info.symbol}/financials/balance-sheet`}
 						prefetch={false}
-						scroll={false}
 					>
 						<a
 							className={
@@ -56,7 +54,6 @@ function Statement({ info, statement }: Props) {
 					<Link
 						href={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
 						prefetch={false}
-						scroll={false}
 					>
 						<a
 							className={
@@ -74,7 +71,6 @@ function Statement({ info, statement }: Props) {
 					<Link
 						href={`/stocks/${info.symbol}/financials/ratios/`}
 						prefetch={false}
-						scroll={false}
 					>
 						<a
 							className={statement == 'ratios' ? 'active' : 'inactive'}
@@ -86,12 +82,12 @@ function Statement({ info, statement }: Props) {
 				</li>
 			</ul>
 		</nav>
-	);
+	)
 }
 
 function Period() {
-	const range = financialsState((state) => state.range);
-	const setRange = financialsState((state) => state.setRange);
+	const range = financialsState((state) => state.range)
+	const setRange = financialsState((state) => state.setRange)
 
 	return (
 		<nav>
@@ -100,7 +96,7 @@ function Period() {
 					<span
 						className={range == 'annual' ? 'active' : 'inactive'}
 						onClick={function () {
-							setRange('annual');
+							setRange('annual')
 						}}
 						data-title="Annual"
 					>
@@ -112,7 +108,7 @@ function Period() {
 						className={range == 'quarterly' ? 'active' : 'inactive'}
 						onClick={function () {
 							if (range !== 'quarterly') {
-								setRange('quarterly');
+								setRange('quarterly')
 							}
 						}}
 						data-title="Quarterly"
@@ -124,7 +120,7 @@ function Period() {
 					<span
 						className={range == 'trailing' ? 'active' : 'inactive'}
 						onClick={function () {
-							setRange('trailing');
+							setRange('trailing')
 						}}
 						data-title="Trailing"
 					>
@@ -133,5 +129,5 @@ function Period() {
 				</li>
 			</ul>
 		</nav>
-	);
+	)
 }

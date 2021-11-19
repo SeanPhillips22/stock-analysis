@@ -31,7 +31,6 @@ interface StockChartProps {
 	readonly type: string
 	readonly period: string
 	readonly time: string
-	readonly stockId: number
 	readonly stockSymbol: string
 	readonly stockType: string
 	readonly setLoading: (arg: boolean) => void

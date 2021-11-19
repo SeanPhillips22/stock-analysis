@@ -65,7 +65,6 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 								{loading && <Loading />}
 
 								<StockChart
-									stockId={info.id}
 									stockSymbol={info.ticker}
 									stockType={info.type}
 									period={period}

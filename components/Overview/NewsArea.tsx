@@ -125,7 +125,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 						paywalled={paywalled}
 					/>
 					<LoadMore
-						id={info.id}
+						info={info}
 						show={show}
 						data={data}
 						setData={setData}

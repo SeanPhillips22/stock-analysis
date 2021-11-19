@@ -76,7 +76,6 @@ interface WithOHLCDataProps {
 	readonly period: string
 	readonly time: string
 	readonly type: string
-	readonly stockId: number
 	readonly stockSymbol: string
 	readonly stockType: string
 	readonly loading: boolean
@@ -89,7 +88,6 @@ interface WithOHLCState {
 	period: string
 	time: string
 	type: string
-	stockId: number
 	stockSymbol: string
 	stockType: string
 	saveData?: IOHLCData[]
@@ -108,7 +106,6 @@ export function withOHLCData(dataSet = 'DAILY') {
 				this.state = {
 					period: props.period,
 					time: props.time,
-					stockId: props.stockId,
 					stockSymbol: props.stockSymbol,
 					stockType: props.stockType,
 					type: props.type,
@@ -137,18 +134,14 @@ export function withOHLCData(dataSet = 'DAILY') {
 			}
 
 			public componentDidUpdate() {
-				let {
-					data,
-					period,
-					stockId,
-					stockSymbol,
-					stockType,
-					time,
-					saveData,
-				} = this.state
+				let { data, period, stockSymbol, stockType, time, saveData } =
+					this.state
 				const newState: WithOHLCState = this.props
 
-				if (period != newState.period || stockId != newState.stockId) {
+				if (
+					period != newState.period ||
+					stockSymbol != newState.stockSymbol
+				) {
 					this.props.setLoading(true)
 					if (time == '1D' || time == '5D') {
 						Axios.get(
@@ -165,8 +158,8 @@ export function withOHLCData(dataSet = 'DAILY') {
 									saveData = []
 									this.setState({ saveData })
 								} else {
-									stockId = newState.stockId
-									this.setState({ stockId })
+									stockSymbol = newState.stockSymbol
+									this.setState({ stockSymbol })
 									this.setState({ data })
 									saveData = []
 									this.setState({ saveData })
@@ -196,8 +189,8 @@ export function withOHLCData(dataSet = 'DAILY') {
 									this.setState({ period })
 									this.setState({ data })
 								} else {
-									stockId = newState.stockId
-									this.setState({ stockId })
+									stockSymbol = newState.stockSymbol
+									this.setState({ stockSymbol })
 									this.setState({ data })
 								}
 								this.props.setLoading(false)
