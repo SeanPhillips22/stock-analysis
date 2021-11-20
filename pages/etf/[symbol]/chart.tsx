@@ -93,7 +93,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams
-	return await getPageData('chartpage', symbol, 3600)
+	return await getPageData('chartpage', symbol, 3600, 'etf')
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
