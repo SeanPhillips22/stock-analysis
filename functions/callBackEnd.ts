@@ -18,8 +18,15 @@ export function respond(response: Response, revalidate: number) {
 	}
 }
 
-export async function getPageData(page: string, symbol: string, reval: number) {
-	const response = await getData(`${page}?symbol=${symbol}`)
+export async function getPageData(
+	page: string,
+	symbol: string,
+	reval: number,
+	type?: 'stocks' | 'etf'
+) {
+	const response = type
+		? await getData(`${page}?symbol=${symbol}&t=${type}`)
+		: await getData(`${page}?symbol=${symbol}`)
 	return respond(response, reval)
 }
 
