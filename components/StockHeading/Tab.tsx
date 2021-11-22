@@ -1,14 +1,14 @@
-import Link from 'next/link';
-import { navState } from 'state/navState';
+import Link from 'next/link'
+import { navState } from 'state/navState'
 
 interface TabI {
-	symbol: string;
-	title: string;
-	append: string;
+	symbol: string
+	title: string
+	append: string
 }
 
 export function Tab({ symbol, title, append }: TabI) {
-	const path = navState((state) => state.path);
+	const path = navState((state) => state.path)
 
 	return (
 		<li>
@@ -29,5 +29,5 @@ export function Tab({ symbol, title, append }: TabI) {
 				</a>
 			</Link>
 		</li>
-	);
+	)
 }

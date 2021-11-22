@@ -1,10 +1,10 @@
-import { getData } from 'functions/API';
+import { getData } from 'functions/API'
 
-const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null;
+const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null
 
 interface Response {
-	status: number;
-	data: any;
+	status: number
+	data: any
 }
 
 export function respond(response: Response, revalidate: number) {
@@ -12,25 +12,32 @@ export function respond(response: Response, revalidate: number) {
 		return {
 			props: response.data,
 			revalidate: revalidate,
-		};
+		}
 	} else {
-		return response.data;
+		return response.data
 	}
 }
 
-export async function getPageData(page: string, symbol: string, reval: number) {
-	const response = await getData(`${page}?symbol=${symbol}`);
-	return respond(response, reval);
+export async function getPageData(
+	page: string,
+	symbol: string,
+	reval: number,
+	type?: 'stocks' | 'etf'
+) {
+	const response = type
+		? await getData(`${page}?symbol=${symbol}&t=${type}`)
+		: await getData(`${page}?symbol=${symbol}`)
+	return respond(response, reval)
 }
 
-export async function getPageDataFull(page: string, id: number) {
-	const url = `${page}?i=${id}&f=${PRO_KEY}`;
-	const response = await getData(url);
+export async function getPageDataFull(page: string, symbol: string) {
+	const url = `${page}?s=${symbol}&f=${PRO_KEY}`
+	const response = await getData(url)
 
 	if (response.status === 200) {
-		return response.data;
+		return response.data
 	}
-	return [];
+	return []
 }
 
 export async function getStockFinancials(
@@ -38,47 +45,45 @@ export async function getStockFinancials(
 	symbol: string,
 	reval: number
 ) {
-	const response = await getData(`financials?type=${page}&symbol=${symbol}`);
-	return respond(response, reval);
+	const response = await getData(`financials?type=${page}&symbol=${symbol}`)
+	return respond(response, reval)
 }
 
-export async function getStockFinancialsFull(statement: string, id: number) {
+export async function getStockFinancialsFull(
+	statement: string,
+	symbol: string
+) {
 	const response = await getData(
-		`financials?type=${statement}&i=${id}&f=${PRO_KEY}`
-	);
+		`financials?type=${statement}&s=${symbol}&f=${PRO_KEY}`
+	)
 	if (response.status === 200) {
-		return response.data;
+		return response.data
 	}
-	return [];
-}
-
-export async function getNewsData(id: number) {
-	const response = await getData(`news?i=${id}`);
-	return response;
+	return []
 }
 
 export async function getMarketNews(type: string) {
-	const response = await getData(`news?type=${type}`);
-	return response;
+	const response = await getData(`news?type=${type}`)
+	return response
 }
 
 export async function getHomePageData() {
-	const response = await getData('homepage');
-	return response;
+	const response = await getData('homepage')
+	return response
 }
 
 export async function getIpoData(query: string) {
-	const response = await getData(`ipos?q=${query}`);
-	return response;
+	const response = await getData(`ipos?q=${query}`)
+	return response
 }
 
 export async function getActionsData(query: string, year?: string) {
-	const url = year ? `actions?q=${query}&y=${year}` : `actions?q=${query}`;
-	const response = await getData(url);
-	return response;
+	const url = year ? `actions?q=${query}&y=${year}` : `actions?q=${query}`
+	const response = await getData(url)
+	return response
 }
 
 export async function getActionsDataFull(query: string, year?: string) {
-	const response = await getData(`actions?q=${query}&y=${year}&f=${PRO_KEY}`);
-	return response;
+	const response = await getData(`actions?q=${query}&y=${year}&f=${PRO_KEY}`)
+	return response
 }

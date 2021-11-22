@@ -1,22 +1,22 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { Company } from 'types/Company';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { getPageData } from 'functions/callBackEnd';
-import { ProfileDescription } from 'components/ProfilePage/ProfileDescription';
-import { ProfileInfo } from 'components/ProfilePage/ProfileInfo';
-import { ProfileContact } from 'components/ProfilePage/ProfileContact';
-import { ProfileDetails } from 'components/ProfilePage/ProfileDetails';
-import { ProfileExecutives } from 'components/ProfilePage/ProfileExecutives';
-import { ProfileSECfilings } from 'components/ProfilePage/ProfileSECfilings';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import { Info } from 'types/Info'
+import { Company } from 'types/Company'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { getPageData } from 'functions/callBackEnd'
+import { ProfileDescription } from 'components/ProfilePage/ProfileDescription'
+import { ProfileInfo } from 'components/ProfilePage/ProfileInfo'
+import { ProfileContact } from 'components/ProfilePage/ProfileContact'
+import { ProfileDetails } from 'components/ProfilePage/ProfileDetails'
+import { ProfileExecutives } from 'components/ProfilePage/ProfileExecutives'
+import { ProfileSECfilings } from 'components/ProfilePage/ProfileSECfilings'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 
 interface Props {
-	info: Info;
-	data: Company;
+	info: Info
+	data: Company
 }
 
 const SymbolStatistics = ({ info, data }: Props) => {
@@ -47,7 +47,7 @@ const SymbolStatistics = ({ info, data }: Props) => {
 				<div className="float-none lg:float-left lg:profilewrap mb-2">
 					<ProfileExecutives executives={data.executives} />
 					<ProfileSECfilings
-						id={info.id}
+						info={info}
 						filings={data.secFilings}
 						cik={data.stockDetails.cik}
 					/>
@@ -55,19 +55,19 @@ const SymbolStatistics = ({ info, data }: Props) => {
 			</div>
 			<div className="clear-both min-h-5"></div>
 		</Stock>
-	);
-};
-export default SymbolStatistics;
+	)
+}
+export default SymbolStatistics
 
 interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	symbol: string
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getPageData('profile', symbol, 3600);
-};
+	const { symbol } = params as IParams
+	return await getPageData('profile', symbol, 3600)
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	return { paths: [], fallback: 'blocking' }
+}

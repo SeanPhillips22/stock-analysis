@@ -1,32 +1,32 @@
 /* eslint-disable no-unused-vars */
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { Info } from 'types/Info';
-import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI';
-import { getPageData } from 'functions/callBackEnd';
-import { useState } from 'react';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { Loading } from 'components/Loading';
-import { IOHLCData } from 'components/Chart/iOHLCData';
-import { Export } from 'components/Chart/ExportButton';
-import { ParsedUrlQuery } from 'querystring';
-import dynamic from 'next/dynamic';
-import { Unavailable } from 'components/Unavailable';
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { Info } from 'types/Info'
+import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI'
+import { getPageData } from 'functions/callBackEnd'
+import { useState } from 'react'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { Loading } from 'components/Loading'
+import { IOHLCData } from 'components/Chart/iOHLCData'
+import { Export } from 'components/Chart/ExportButton'
+import { ParsedUrlQuery } from 'querystring'
+import dynamic from 'next/dynamic'
+import { Unavailable } from 'components/Unavailable'
 
 const StockChart = dynamic(() => import('components/Chart/StockChart'), {
 	ssr: false,
-});
+})
 
 interface ChartProps {
-	info: Info;
+	info: Info
 }
 
 const CandleStickStockChart = ({ info }: ChartProps) => {
-	const [period, setPeriod] = useState<string>('d');
-	const [time, setTime] = useState<string>('1Y');
-	const [type, setType] = useState<string>('candlestick');
-	const [loading, setLoading] = useState<boolean>(true);
-	const [data, setData] = useState<IOHLCData[]>();
+	const [period, setPeriod] = useState<string>('d')
+	const [time, setTime] = useState<string>('1Y')
+	const [type, setType] = useState<string>('candlestick')
+	const [loading, setLoading] = useState<boolean>(true)
+	const [data, setData] = useState<IOHLCData[]>()
 
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/chart/`}>
@@ -65,7 +65,8 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 								{loading && <Loading />}
 
 								<StockChart
-									stockId={info.id}
+									stockSymbol={info.ticker}
+									stockType={info.type}
 									period={period}
 									time={time}
 									type={type}
@@ -81,20 +82,20 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				</div>
 			</div>
 		</Stock>
-	);
-};
+	)
+}
 
-export default CandleStickStockChart;
+export default CandleStickStockChart
 
 interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	symbol: string
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getPageData('chartpage', symbol, 3600);
-};
+	const { symbol } = params as IParams
+	return await getPageData('chartpage', symbol, 3600, 'etf')
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	return { paths: [], fallback: 'blocking' }
+}

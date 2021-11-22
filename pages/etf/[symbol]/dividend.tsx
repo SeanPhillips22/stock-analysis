@@ -1,23 +1,23 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { DividendI } from 'types/Dividend';
-import { News } from 'types/News';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { getPageData } from 'functions/callBackEnd';
-import { InfoBox } from 'components/InfoBox';
-import { InfoTable } from 'components/Dividend/InfoTable';
-import { HistoryTable } from 'components/Dividend/HistoryTable';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { DividendChart } from 'components/Dividend/DividendChart';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import { Info } from 'types/Info'
+import { DividendI } from 'types/Dividend'
+import { News } from 'types/News'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { getPageData } from 'functions/callBackEnd'
+import { InfoBox } from 'components/InfoBox'
+import { InfoTable } from 'components/Dividend/InfoTable'
+import { HistoryTable } from 'components/Dividend/HistoryTable'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { DividendChart } from 'components/Dividend/DividendChart'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 
 interface Props {
-	info: Info;
-	data: DividendI;
-	news: News[];
+	info: Info
+	data: DividendI
+	news: News[]
 }
 
 const Dividend = ({ info, data, news }: Props) => {
@@ -64,19 +64,19 @@ const Dividend = ({ info, data, news }: Props) => {
 				</div>
 			</div>
 		</Stock>
-	);
-};
-export default Dividend;
+	)
+}
+export default Dividend
 
 interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	symbol: string
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getPageData('dividend', symbol, 3600);
-};
+	const { symbol } = params as IParams
+	return await getPageData('dividend', symbol, 3600, 'etf')
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	return { paths: [], fallback: 'blocking' }
+}

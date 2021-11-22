@@ -44,6 +44,7 @@ export function useSavedScreens(type: 'stocks' | 'ipo') {
 
 	const { data } = useQuery(['screener', type], () => fetchScreener(), {
 		refetchOnWindowFocus: true,
+		enabled: user ? true : false,
 	})
 
 	function clearMessages() {

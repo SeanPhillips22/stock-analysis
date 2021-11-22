@@ -1,52 +1,56 @@
-import { Info } from 'types/Info';
+import { Info } from 'types/Info'
 
 // Make API url
-export function getChartUrl(id: number, time: string, override: boolean) {
-	const params = `i=${id}&r=${time}&m=1`;
+export function getChartUrl(
+	symbol: string,
+	type: string,
+	time: string,
+	override: boolean
+) {
+	const params = `s=${symbol}&t=${type}&r=${time}&m=1`
 
-	let apiurl;
+	let apiurl
 	if (time === '5Y' || time === 'MAX') {
-		apiurl = `chart?${params}&p=w`;
+		apiurl = `chart?${params}&p=w`
 	} else {
-		apiurl = `chart?${params}`;
+		apiurl = `chart?${params}`
 	}
 
-	return apiurl;
+	return apiurl
 }
 
 // Turn the 1D/5D into a human-friendly string
 export function translateTime(time: string): string {
 	switch (time) {
 		case '1D':
-			return '1-day';
+			return '1-day'
 		case '5D':
-			return '5-day';
+			return '5-day'
 		case '1M':
-			return '1-month';
+			return '1-month'
 		case 'YTD':
-			return 'year-to-date';
+			return 'year-to-date'
 		case '1Y':
-			return '1-year';
+			return '1-year'
 		case '5Y':
-			return '5-year';
+			return '5-year'
 		case 'MAX':
-			return 'all-time';
+			return 'all-time'
 	}
-	return '';
+	return ''
 }
 
 export function UnavailableIpo({ info }: { info: Info }) {
-	let chartMsg = 'Data will show when the stock starts trading.';
-	const ipoDate = info?.ipoInfo?.ipoDate;
+	let chartMsg = 'Data will show when the stock starts trading.'
+	const ipoDate = info?.ipoInfo?.ipoDate
 	if (ipoDate) {
 		if (ipoDate === 'thisweek')
-			chartMsg = 'Data will show when the stock starts trading this week.';
+			chartMsg = 'Data will show when the stock starts trading this week.'
 		else if (ipoDate === 'nextweek')
-			chartMsg = 'Data will show when the stock starts trading next week.';
-		else if (ipoDate === 'postponed' || ipoDate === 'withdrawn')
-			chartMsg = '';
+			chartMsg = 'Data will show when the stock starts trading next week.'
+		else if (ipoDate === 'postponed' || ipoDate === 'withdrawn') chartMsg = ''
 		else if (ipoDate !== 'unknown' && info?.ipoInfo?.ipoDateFormatted)
-			chartMsg = `Data will show when the stock starts trading on ${info.ipoInfo.ipoDateFormatted}.`;
+			chartMsg = `Data will show when the stock starts trading on ${info.ipoInfo.ipoDateFormatted}.`
 	}
 
 	return (
@@ -62,5 +66,5 @@ export function UnavailableIpo({ info }: { info: Info }) {
 				)}
 			</div>
 		</div>
-	);
+	)
 }

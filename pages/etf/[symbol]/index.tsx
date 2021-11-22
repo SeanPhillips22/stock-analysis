@@ -1,23 +1,23 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { Overview } from 'types/Overview';
-import { News } from 'types/News';
-import { getPageData } from 'functions/callBackEnd';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF';
-import { PriceChart } from 'components/PriceChart/_PriceChart';
-import { Profile } from 'components/Overview/ProfileWidget';
-import { NewsArea } from 'components/Overview/NewsArea';
-import { HoldingsWidget } from 'components/Overview/HoldingsWidget';
-import { DividendWidget } from 'components/Overview/DividendWidget';
-import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import { Info } from 'types/Info'
+import { Overview } from 'types/Overview'
+import { News } from 'types/News'
+import { getPageData } from 'functions/callBackEnd'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { InfoTable, QuoteTable } from 'components/Overview/TopTablesETF'
+import { PriceChart } from 'components/PriceChart/_PriceChart'
+import { Profile } from 'components/Overview/ProfileWidget'
+import { NewsArea } from 'components/Overview/NewsArea'
+import { HoldingsWidget } from 'components/Overview/HoldingsWidget'
+import { DividendWidget } from 'components/Overview/DividendWidget'
+import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
 
 interface Props {
-	info: Info;
-	data: Overview;
-	news: { data: News[]; updated: number };
+	info: Info
+	data: Overview
+	news: { data: News[]; updated: number }
 }
 
 const EtfOverview = ({ info, data, news }: Props) => {
@@ -59,19 +59,19 @@ const EtfOverview = ({ info, data, news }: Props) => {
 				</div>
 			</div>
 		</Stock>
-	);
-};
-export default EtfOverview;
+	)
+}
+export default EtfOverview
 
 interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	symbol: string
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getPageData('overview', symbol, 300);
-};
+	const { symbol } = params as IParams
+	return await getPageData('overview', symbol, 300, 'etf')
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	return { paths: [], fallback: 'blocking' }
+}

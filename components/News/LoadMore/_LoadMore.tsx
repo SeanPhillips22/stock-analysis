@@ -4,9 +4,10 @@ import { ButtonMore } from './ButtonMore'
 import { NewsPaywall } from './NewsPaywall'
 import { News } from 'types/News'
 import { useEffect } from 'react'
+import { Info } from 'types/Info'
 
 type Props = {
-	id: number
+	info: Info
 	show: string
 	data: News[]
 	setData: (data: any) => void
@@ -24,7 +25,7 @@ type Props = {
 }
 
 export function LoadMore({
-	id,
+	info,
 	show,
 	data,
 	setData,
@@ -50,7 +51,9 @@ export function LoadMore({
 
 	async function fetchData() {
 		setLoading(true)
-		const fresh = await getData(`news?i=${id}&f=${show}&full=true`)
+		const fresh = await getData(
+			`news?s=${info.symbol}&t=${info.type}&f=${show}&full=true`
+		)
 		setLoading(false)
 		setData(fresh)
 		setLoaded(true)
@@ -66,10 +69,10 @@ export function LoadMore({
 		let infinite =
 			searched && query.length > 0
 				? await getData(
-						`news-search?i=${id}&q=${query}&p=${dataPage}&t=${PRO_KEY}`
+						`news-search?s=${info.symbol}&t=${info.type}&q=${query}&p=${dataPage}&k=${PRO_KEY}`
 				  )
 				: await getData(
-						`news-infinite?i=${id}&f=${show}&p=${dataPage}&t=${PRO_KEY}`
+						`news-infinite?s=${info.symbol}&t=${info.type}&f=${show}&p=${dataPage}&k=${PRO_KEY}`
 				  )
 
 		if (infinite.data) {

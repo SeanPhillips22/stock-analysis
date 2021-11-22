@@ -1,19 +1,18 @@
-import * as React from 'react';
-import { IOHLCData } from '../iOHLCData';
+import * as React from 'react'
+import { IOHLCData } from '../iOHLCData'
 
 export interface WithRatioProps {
-	readonly ratio: number;
-	readonly width: number;
-	readonly height: number;
-	readonly period: string;
-	readonly time: string;
-	readonly type: string;
-	readonly stockId: number;
-	readonly data: IOHLCData[];
+	readonly ratio: number
+	readonly width: number
+	readonly height: number
+	readonly period: string
+	readonly time: string
+	readonly type: string
+	readonly data: IOHLCData[]
 }
 
 export interface WithRatioState {
-	ratio: number;
+	ratio: number
 }
 
 export const withDeviceRatio = () => {
@@ -24,21 +23,21 @@ export const withDeviceRatio = () => {
 			Omit<TProps, 'ratio'>,
 			WithRatioState
 		> {
-			public readonly ref = React.createRef<HTMLCanvasElement>();
+			public readonly ref = React.createRef<HTMLCanvasElement>()
 
 			public componentDidMount() {
-				const { current } = this.ref;
+				const { current } = this.ref
 				if (current === null) {
 					this.setState({
 						ratio: 1,
-					});
+					})
 
-					return;
+					return
 				}
 
-				const context: any = current.getContext('2d');
+				const context: any = current.getContext('2d')
 
-				const { devicePixelRatio } = window;
+				const { devicePixelRatio } = window
 
 				const backingStoreRatio =
 					context.webkitBackingStorePixelRatio ??
@@ -46,26 +45,26 @@ export const withDeviceRatio = () => {
 					context.msBackingStorePixelRatio ??
 					context.oBackingStorePixelRatio ??
 					context.backingStorePixelRatio ??
-					1;
+					1
 
 				this.setState({
 					ratio: devicePixelRatio / backingStoreRatio,
-				});
+				})
 			}
 
 			public render() {
-				const state = this.state;
+				const state = this.state
 				if (state !== null) {
 					return (
 						<OriginalComponent
 							{...(this.props as TProps)}
 							ratio={state.ratio}
 						/>
-					);
+					)
 				}
 
-				return <canvas ref={this.ref} />;
+				return <canvas ref={this.ref} />
 			}
-		};
-	};
-};
+		}
+	}
+}

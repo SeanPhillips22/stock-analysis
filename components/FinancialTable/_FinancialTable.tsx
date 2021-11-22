@@ -78,7 +78,7 @@ export const FinancialTable = ({
 		async function fetchFullFinancials() {
 			const res = fullData
 				? fullData
-				: await getStockFinancialsFull(statement, info.id)
+				: await getStockFinancialsFull(statement, info.symbol)
 			if (res && res[range]?.datekey?.length > paywall) {
 				setFullData(res)
 				setDataRows(res[range])
@@ -92,7 +92,7 @@ export const FinancialTable = ({
 		if (isPro && fullcount > paywall) {
 			fetchFullFinancials()
 		}
-	}, [info.id, isPro, fullcount, paywall, statement, range, fullData])
+	}, [info.symbol, isPro, fullcount, paywall, statement, range, fullData])
 
 	let data = useMemo(
 		() => sliceData(dataRows, showcount),

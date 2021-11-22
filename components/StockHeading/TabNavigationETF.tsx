@@ -1,18 +1,18 @@
-import Link from 'next/link';
-import { navState } from 'state/navState';
+import Link from 'next/link'
+import { navState } from 'state/navState'
 
 interface Symbol {
-	symbol: string;
+	symbol: string
 }
 
 export const TabNavigationETF = ({ symbol }: Symbol) => {
-	const path = navState((state) => state.path);
+	const path = navState((state) => state.path)
 
 	return (
 		<nav className="border-b-2 border-blue-brand_sharp w-full">
 			<ul className="w-full navmenu">
 				<li>
-					<Link href={`/etf/${symbol}/`} prefetch={false}>
+					<Link href={`/etf/${symbol}/`} prefetch={false} scroll={false}>
 						<a
 							className={!path.three ? 'active' : 'inactive'}
 							data-title="Overview"
@@ -69,5 +69,5 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 				</li>
 			</ul>
 		</nav>
-	);
-};
+	)
+}
