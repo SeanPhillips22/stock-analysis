@@ -12,7 +12,7 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 		<nav className="border-b-2 border-blue-brand_sharp w-full">
 			<ul className="w-full navmenu">
 				<li>
-					<Link href={`/etf/${symbol}/`} prefetch={false}>
+					<Link href={`/etf/${symbol}/`} prefetch={false} scroll={false}>
 						<a
 							className={!path.three ? 'active' : 'inactive'}
 							data-title="Overview"
@@ -22,7 +22,11 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/etf/${symbol}/holdings/`} prefetch={false}>
+					<Link
+						href={`/etf/${symbol}/holdings/`}
+						prefetch={false}
+						scroll={false}
+					>
 						<a
 							className={
 								path.three == 'holdings' ? 'active' : 'inactive'
@@ -34,7 +38,11 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/etf/${symbol}/dividend/`} prefetch={false}>
+					<Link
+						href={`/etf/${symbol}/dividend/`}
+						prefetch={false}
+						scroll={false}
+					>
 						<a
 							className={
 								path.three == 'dividend' ? 'active' : 'inactive'
@@ -46,7 +54,11 @@ export const TabNavigationETF = ({ symbol }: Symbol) => {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/etf/${symbol}/chart/`} prefetch={false}>
+					<Link
+						href={`/etf/${symbol}/chart/`}
+						prefetch={false}
+						scroll={false}
+					>
 						<a
 							className={path.three == 'chart' ? 'active' : 'inactive'}
 							data-title="Chart"
