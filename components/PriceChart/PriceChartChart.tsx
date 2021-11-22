@@ -94,49 +94,55 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		return changeWithoutComma
 	})
 
+	let data = [
+		{
+			label: 'Stock Price',
+			data: priceAxis,
+			borderColor: lineColor,
+			pointHitRadius: 5,
+			pointRadius: 0,
+			tension: 0.01,
+			borderWidth: 2.5,
+			spanGaps: true,
+			fill: true,
+			backgroundColor: (dataset: any) => {
+				const ctx = dataset.chart.ctx
+				const gradient = ctx.createLinearGradient(0, 0, 0, 300)
+				if (change < 0) {
+					gradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)')
+					gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
+				} else {
+					gradient.addColorStop(0, 'rgba(4, 120, 87, 1)')
+					gradient.addColorStop(1, 'rgba(255,255,255,0)')
+				}
+
+				return gradient
+			},
+		},
+		{
+			label: 'Previous Close',
+			data: prevCloseLine,
+			borderColor: 'rgb(51, 51, 51)',
+			pointHitRadius: 0,
+			pointRadius: 0,
+			borderDash: [2, 10],
+			tension: 0.01,
+			borderWidth: 1,
+			spanGaps: true,
+		},
+	]
+
+	if (chartTime != '1D') {
+		data.pop()
+	}
+
 	return (
 		<ReactChart
 			id={info.id.toString()}
 			type="line"
 			data={{
 				labels: timeAxis,
-				datasets: [
-					{
-						label: 'Stock Price',
-						data: priceAxis,
-						borderColor: lineColor,
-						pointHitRadius: 5,
-						pointRadius: 0,
-						tension: 0.01,
-						borderWidth: 2.5,
-						spanGaps: true,
-						fill: true,
-						backgroundColor: (dataset: any) => {
-							const ctx = dataset.chart.ctx
-							const gradient = ctx.createLinearGradient(0, 0, 0, 300)
-							if (change < 0) {
-								gradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)')
-								gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
-							} else {
-								gradient.addColorStop(0, 'rgba(4, 120, 87, 1)')
-								gradient.addColorStop(1, 'rgba(255,255,255,0)')
-							}
-
-							return gradient
-						},
-					},
-					{
-						label: 'Previous Close',
-						data: prevCloseLine,
-						borderColor: 'rgb(51, 51, 51)',
-						pointHitRadius: 0,
-						pointRadius: 0,
-						borderDash: [2, 10],
-						tension: 0.01,
-						borderWidth: 1,
-						spanGaps: true,
-					},
-				],
+				datasets: data,
 			}}
 			plugins={[
 				{
