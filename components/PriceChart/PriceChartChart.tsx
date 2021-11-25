@@ -176,7 +176,6 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 
 								// begin drawing and styling
 
-<<<<<<< HEAD
 								ctx.save()
 
 								ctx.strokeStyle = lineColor
@@ -207,37 +206,6 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 								ctx.fillText(str, x - 22, meta.data[last].y + 7.4)
 								ctx.restore()
 							}
-=======
-							ctx.save()
-
-							ctx.strokeStyle = lineColor
-							ctx.fillStyle = lineColor
-							ctx.lineWidth = '3.5'
-							ctx.lineJoin = 'round'
-
-							// calculate the width of the box and height is based on fontsize.
-							const width = ctx.measureText(str).width + 0.4
-							const xPos = x - 23
-							const height = fontSize + 2.8
-							const yPos = y + 1.5
-
-							// draw triangle to form a pointer.
-							ctx.beginPath()
-							ctx.moveTo(xPos - 7.7, yPos + 1.5 + height / 2)
-							ctx.lineTo(xPos + 0.7, yPos + 2.5 + height)
-							ctx.lineTo(xPos + 0.7, yPos + 0.5)
-							ctx.fill()
-							ctx.closePath()
-
-							// draw the box
-							ctx.strokeRect(xPos + 2, yPos + 1.5, width, height)
-							ctx.fillRect(xPos + 2, yPos + 1.5, width, height)
-
-							// draw the text
-							ctx.fillStyle = '#ffffff'
-							ctx.fillText(str, x - 22, meta.data[last].y + 7.4)
-							ctx.restore()
->>>>>>> origin/main
 						})
 					},
 				},
