@@ -48,8 +48,8 @@ const SymbolStatistics = ({ info, data }: Props) => {
 					<ProfileExecutives executives={data.executives} />
 					<ProfileSECfilings
 						info={info}
-						filings={data.secFilings}
 						cik={data.stockDetails.cik}
+						filings={data.secFilings}
 					/>
 				</div>
 			</div>
