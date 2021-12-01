@@ -1,13 +1,13 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react'
 
 interface ButtonUIProps {
-	state: string;
-	dispatch: Dispatch<SetStateAction<string>>;
+	state: string | null
+	dispatch: Dispatch<SetStateAction<string | null>>
 }
 
 interface SelectProps {
-	time?: string;
-	dispatcher: Dispatch<SetStateAction<string>>;
+	time?: string | null
+	dispatcher: Dispatch<SetStateAction<string | null>>
 }
 
 export const SelectPeriod = (props: SelectProps) => {
@@ -16,7 +16,7 @@ export const SelectPeriod = (props: SelectProps) => {
 			<select
 				disabled={props.time === '1D' || props.time === '5D' ? true : false}
 				onChange={(e) => {
-					props.dispatcher(e.target.value);
+					props.dispatcher(e.target.value)
 				}}
 				id="period"
 				name="period"
@@ -28,8 +28,8 @@ export const SelectPeriod = (props: SelectProps) => {
 				<option value="m">Month</option>
 			</select>
 		</div>
-	);
-};
+	)
+}
 
 export const SelectType = (props: SelectProps) => {
 	return (
@@ -45,14 +45,14 @@ export const SelectType = (props: SelectProps) => {
 				<option value="line">Line</option>
 			</select>
 		</div>
-	);
-};
+	)
+}
 
 export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
-	const common = 'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md';
-	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold';
+	const common = 'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md'
+	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold'
 	const inactive =
-		common + ' text-gray-900 hover:text-gray-900 hover:text-shadow';
+		common + ' text-gray-900 hover:text-gray-900 hover:text-shadow'
 	return (
 		<>
 			<select
@@ -77,7 +77,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('1D');
+							dispatch('1D')
 						}}
 						type="button"
 						className={state === '1D' ? active : inactive}
@@ -88,7 +88,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('5D');
+							dispatch('5D')
 						}}
 						type="button"
 						className={state === '5D' ? active : inactive}
@@ -100,7 +100,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('1M');
+							dispatch('1M')
 						}}
 						type="button"
 						className={state === '1M' ? active : inactive}
@@ -111,7 +111,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('6M');
+							dispatch('6M')
 						}}
 						type="button"
 						className={state === '6M' ? active : inactive}
@@ -123,7 +123,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('YTD');
+							dispatch('YTD')
 						}}
 						type="button"
 						className={state === 'YTD' ? active : inactive}
@@ -134,7 +134,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('1Y');
+							dispatch('1Y')
 						}}
 						type="button"
 						className={state === '1Y' ? active : inactive}
@@ -145,7 +145,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('3Y');
+							dispatch('3Y')
 						}}
 						type="button"
 						className={state === '3Y' ? active : inactive}
@@ -156,7 +156,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('5Y');
+							dispatch('5Y')
 						}}
 						type="button"
 						className={state === '5Y' ? active : inactive}
@@ -167,7 +167,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('MAX');
+							dispatch('MAX')
 						}}
 						type="button"
 						className={state === 'MAX' ? active : inactive}
@@ -177,5 +177,5 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 			</ul>
 		</>
-	);
-};
+	)
+}
