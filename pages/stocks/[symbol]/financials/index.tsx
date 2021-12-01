@@ -1,22 +1,22 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { FinancialsType } from 'types/Financials';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { SubNavigation } from 'components/FinancialTable/SubNavigation';
-import { FinancialTable } from 'components/FinancialTable/_FinancialTable';
-import { getStockFinancials } from 'functions/callBackEnd';
-import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import { Info } from 'types/Info'
+import { FinancialsType } from 'types/Financials'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { SubNavigation } from 'components/FinancialTable/SubNavigation'
+import { FinancialTable } from 'components/FinancialTable/_FinancialTable'
+import { getStockFinancials } from 'functions/callBackEnd'
+import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement'
 
 interface Props {
-	info: Info;
-	data: FinancialsType;
+	info: Info
+	data: FinancialsType
 	counts: {
-		annual: number;
-		quarterly: number;
-		trailing: number;
-	};
+		annual: number
+		quarterly: number
+		trailing: number
+	}
 }
 
 export default function IncomeStatement({ info, data, counts }: Props) {
@@ -38,18 +38,18 @@ export default function IncomeStatement({ info, data, counts }: Props) {
 				/>
 			</div>
 		</Stock>
-	);
+	)
 }
 
 interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	symbol: string
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getStockFinancials('income_statement', symbol, 3600);
-};
+	const { symbol } = params as IParams
+	return await getStockFinancials('income_statement', symbol, 2 * 60 * 60)
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	return { paths: [], fallback: 'blocking' }
+}

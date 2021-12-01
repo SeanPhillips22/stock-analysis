@@ -1,23 +1,23 @@
-import { GetStaticProps } from 'next';
-import { TrendingAll } from 'types/Trending';
-import { SEO } from 'components/SEO';
-import { SymbolTableSimple } from 'components/Tables/SymbolTableSimple';
-import { getData } from 'functions/API';
-import { Column } from 'react-table';
-import { StockLink } from 'components/Links';
-import { abbreviate } from 'components/StockScreener/functions/abbreviate';
+import { GetStaticProps } from 'next'
+import { TrendingAll } from 'types/Trending'
+import { SEO } from 'components/SEO'
+import { SymbolTableSimple } from 'components/Tables/SymbolTableSimple'
+import { getData } from 'functions/API'
+import { Column } from 'react-table'
+import { StockLink } from 'components/Links'
+import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 // import { useRouter } from 'next/router';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Features } from 'components/Layout/Sidebar/Features';
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Features } from 'components/Layout/Sidebar/Features'
 
 interface Props {
-	timestamp: string;
-	data: TrendingAll[];
+	timestamp: string
+	data: TrendingAll[]
 }
 
 const IPO = () => {
-	return <span title="Upcoming IPO">IPO</span>;
+	return <span title="Upcoming IPO">IPO</span>
 	// const router = useRouter();
 	// return (
 	// 	<div
@@ -28,18 +28,18 @@ const IPO = () => {
 	// 		IPO
 	// 	</div>
 	// );
-};
+}
 
 export default function Trending({ timestamp, data }: Props) {
 	const format0dec = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 0,
-	});
+	})
 
 	const format2dec = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 2,
 		maximumFractionDigits: 2,
-	});
+	})
 
 	const columns: Column[] = [
 		{
@@ -51,26 +51,26 @@ export default function Trending({ timestamp, data }: Props) {
 			accessor: 'symbol',
 			Cell: function DateCell({ cell: { value } }: any) {
 				if (value.startsWith('=')) {
-					return value.slice(1);
+					return value.slice(1)
 				}
-				return <StockLink symbol={value} />;
+				return <StockLink symbol={value} />
 			},
 			sortType: (a, b) => {
-				let ad = a.values.symbol;
-				let bd = b.values.symbol;
+				let ad = a.values.symbol
+				let bd = b.values.symbol
 				if (ad.startsWith('=')) {
-					ad = ad.slice(1);
+					ad = ad.slice(1)
 				}
 				if (bd.startsWith('=')) {
-					bd = bd.slice(1);
+					bd = bd.slice(1)
 				}
 				if (ad < bd) {
-					return 1;
+					return 1
 				}
 				if (ad > bd) {
-					return -1;
+					return -1
 				} else {
-					return 0;
+					return 0
 				}
 			},
 			sortInverted: true,
@@ -79,15 +79,15 @@ export default function Trending({ timestamp, data }: Props) {
 			Header: 'Name',
 			accessor: 'name',
 			sortType: (a, b) => {
-				const ad = a.values.name.toUpperCase();
-				const bd = b.values.name.toUpperCase();
+				const ad = a.values.name.toUpperCase()
+				const bd = b.values.name.toUpperCase()
 				if (ad < bd) {
-					return 1;
+					return 1
 				}
 				if (ad > bd) {
-					return -1;
+					return -1
 				} else {
-					return 0;
+					return 0
 				}
 			},
 			sortInverted: true,
@@ -96,7 +96,7 @@ export default function Trending({ timestamp, data }: Props) {
 			Header: 'Views',
 			accessor: 'pageviews',
 			Cell: function FormatCell({ cell: { value } }: any) {
-				return format0dec.format(value);
+				return format0dec.format(value)
 			},
 			sortInverted: true,
 		},
@@ -105,9 +105,9 @@ export default function Trending({ timestamp, data }: Props) {
 			accessor: 'marketCap',
 			Cell: function FormatCell({ cell: { value } }: any) {
 				if (!value) {
-					return 'n/a';
+					return 'n/a'
 				}
-				return abbreviate(value, format2dec);
+				return abbreviate(value, format2dec)
 			},
 			sortInverted: true,
 		},
@@ -116,9 +116,9 @@ export default function Trending({ timestamp, data }: Props) {
 			accessor: 'price',
 			Cell: ({ cell: { value } }: any) => {
 				if (!value) {
-					return 'n/a';
+					return 'n/a'
 				}
-				return '$' + Number(value).toFixed(2);
+				return '$' + Number(value).toFixed(2)
 			},
 			sortInverted: true,
 		},
@@ -128,16 +128,16 @@ export default function Trending({ timestamp, data }: Props) {
 			sortType: 'alphanumeric',
 			Cell: function FormatCell({ cell: { value } }: any) {
 				if (value === 'IPO') {
-					return <IPO />;
+					return <IPO />
 				}
-				const fixed = value ? value + '%' : 'n/a';
+				const fixed = value ? value + '%' : 'n/a'
 
 				if (value > 0) {
-					return <span className="text-[green]">{fixed}</span>;
+					return <span className="text-[green]">{fixed}</span>
 				} else if (value < 0) {
-					return <span className="text-[red]">{fixed}</span>;
+					return <span className="text-[red]">{fixed}</span>
 				} else {
-					return <span className="text-gray-800">{fixed}</span>;
+					return <span className="text-gray-800">{fixed}</span>
 				}
 			},
 			sortInverted: true,
@@ -147,13 +147,13 @@ export default function Trending({ timestamp, data }: Props) {
 			accessor: 'volume',
 			Cell: function FormatCell({ cell: { value } }: any) {
 				if (value === 'IPO') {
-					return <IPO />;
+					return <IPO />
 				}
-				return format0dec.format(value);
+				return format0dec.format(value)
 			},
 			sortInverted: true,
 		},
-	];
+	]
 
 	return (
 		<>
@@ -192,22 +192,22 @@ export default function Trending({ timestamp, data }: Props) {
 				</main>
 			</div>
 		</>
-	);
+	)
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const raw = await getData('trending?q=trendingAll');
+	const raw = await getData('trending?q=trendingAll')
 
-	const { timestamp, data } = raw;
+	const { timestamp, data } = raw
 
 	if (data.length > 19) {
-		data.splice(20, data.length - 20);
+		data.splice(20, data.length - 20)
 	}
 	return {
 		props: {
 			timestamp,
 			data,
 		},
-		revalidate: 30 * 60,
-	};
-};
+		revalidate: 60 * 60,
+	}
+}

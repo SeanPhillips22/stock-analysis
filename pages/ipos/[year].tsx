@@ -1,39 +1,39 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { IpoRecent, IpoUpcoming } from 'types/Ipos';
-import { News } from 'types/News';
-import { SEO } from 'components/SEO';
-import { getIpoData } from 'functions/callBackEnd';
-import { RecentTable } from 'components/IPOs/RecentTable';
-import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
-import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { InfoBox } from 'components/InfoBox';
-import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import { IpoRecent, IpoUpcoming } from 'types/Ipos'
+import { News } from 'types/News'
+import { SEO } from 'components/SEO'
+import { getIpoData } from 'functions/callBackEnd'
+import { RecentTable } from 'components/IPOs/RecentTable'
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
+import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { InfoBox } from 'components/InfoBox'
+import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 
 interface Props {
-	year: string;
+	year: string
 	data: {
-		info: string;
-		data: IpoRecent[];
-	};
-	news: News[];
-	upcoming: IpoUpcoming[];
+		info: string
+		data: IpoRecent[]
+	}
+	news: News[]
+	upcoming: IpoUpcoming[]
 }
 
 export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 	const title =
 		year === '2021'
 			? 'All 2021 IPOs (so far)'
-			: `All ${year} IPOs - A Complete List`;
+			: `All ${year} IPOs - A Complete List`
 
 	const description =
 		year === '2021'
 			? 'A list of all the stocks that have gone public with an IPO on the US stock market in the year 2021, so far.'
-			: `A list of all the initial public offerings (IPOs) on the US stock market in the year ${year}. Includes detailed information about each stock.`;
+			: `A list of all the initial public offerings (IPOs) on the US stock market in the year ${year}. Includes detailed information about each stock.`
 
 	return (
 		<>
@@ -72,18 +72,18 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 				</main>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default IpoYear;
+export default IpoYear
 
 interface IParams extends ParsedUrlQuery {
-	year: string;
+	year: string
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { year } = params as IParams;
-	const { data, news, upcoming } = await getIpoData(year);
+	const { year } = params as IParams
+	const { data, news, upcoming } = await getIpoData(year)
 
 	return {
 		props: {
@@ -92,9 +92,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			news,
 			upcoming,
 		},
-		revalidate: 2 * 60 * 60,
-	};
-};
+		revalidate: 4 * 60 * 60,
+	}
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	return {
@@ -104,5 +104,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
 			{ params: { year: '2019' } },
 		],
 		fallback: false,
-	};
-};
+	}
+}
