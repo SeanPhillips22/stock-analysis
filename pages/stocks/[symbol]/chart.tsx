@@ -58,21 +58,19 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	useEffect(() => {
 		localStorage.setItem('time', time || '')
 		console.log('time useEffect stock')
-	}, [time])
+		let periodVar
+		if (time == '1D' || time == '5D') {
+			periodVar = 'd'
+		} else {
+			periodVar = period
+		}
+		localStorage.setItem('period', periodVar || '')
+	}, [time, period])
 
-	useEffect(() => {
+	/* useEffect(() => {
 		localStorage.setItem('period', period || '')
 		console.log('period useEffect stock')
-	}, [period])
-
-	if (typeof window !== 'undefined') {
-		console.log(localStorage.getItem('type'))
-		console.log(type)
-		console.log(localStorage.getItem('time'))
-		console.log(time)
-		console.log(localStorage.getItem('period'))
-		console.log(period)
-	}
+	}, [period]) */
 
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>

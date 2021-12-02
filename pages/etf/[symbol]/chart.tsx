@@ -55,13 +55,20 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 
 	useEffect(() => {
 		localStorage.setItem('time', time || '')
-		console.log('time useEffect etf')
-	}, [time])
-
+		console.log('time useEffect stock')
+		let periodVar
+		if (time == '1D' || time == '5D') {
+			periodVar = 'd'
+		} else {
+			periodVar = period
+		}
+		localStorage.setItem('period', periodVar || '')
+	}, [time, period])
+	/*
 	useEffect(() => {
 		localStorage.setItem('period', period || '')
 		console.log('period useEffect etf')
-	}, [period])
+	}, [period]) */
 
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/chart/`}>
