@@ -9,6 +9,7 @@ import { GetStaticProps, GetStaticPaths } from 'next'
 import { Loading } from 'components/Loading'
 import { IOHLCData } from 'components/Chart/iOHLCData'
 import { Export } from 'components/Chart/ExportButton'
+import { useEffect } from 'react'
 import { ParsedUrlQuery } from 'querystring'
 import dynamic from 'next/dynamic'
 import { Unavailable } from 'components/Unavailable'
@@ -22,11 +23,45 @@ interface ChartProps {
 }
 
 const CandleStickStockChart = ({ info }: ChartProps) => {
-	const [period, setPeriod] = useState<string>('d')
-	const [time, setTime] = useState<string>('1Y')
-	const [type, setType] = useState<string>('candlestick')
+	const [period, setPeriod] = useState<string | null>(null)
+	const [time, setTime] = useState<string | null>(null)
+	const [type, setType] = useState<string | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
 	const [data, setData] = useState<IOHLCData[]>()
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			if (!localStorage.getItem('time')) {
+				localStorage.setItem('time', '1Y')
+			}
+			setTime(localStorage.getItem('time'))
+			if (!localStorage.getItem('period')) {
+				localStorage.setItem('period', 'd')
+			}
+			setPeriod(localStorage.getItem('period'))
+
+			if (!localStorage.getItem('type')) {
+				localStorage.setItem('type', 'candlestick')
+			}
+			setType(localStorage.getItem('type'))
+			console.log('one load etf')
+		}
+	}, [])
+
+	useEffect(() => {
+		localStorage.setItem('type', type || '')
+		console.log('type useEffect etf')
+	}, [type])
+
+	useEffect(() => {
+		localStorage.setItem('time', time || '')
+		console.log('time useEffect etf')
+	}, [time])
+
+	useEffect(() => {
+		localStorage.setItem('period', period || '')
+		console.log('period useEffect etf')
+	}, [period])
 
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/chart/`}>
@@ -39,7 +74,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				<div className="py-2">
 					<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
 						<Buttons state={time} dispatch={setTime} />
-						<SelectPeriod dispatcher={setPeriod} />
+						<SelectPeriod time={time} dispatcher={setPeriod} />
 						<SelectType dispatcher={setType} />
 						<Export
 							buttons={[

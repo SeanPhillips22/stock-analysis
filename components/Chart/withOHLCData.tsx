@@ -26,7 +26,7 @@ const parseData = () => {
 	}
 }
 
-const parseData1D5D = (time: string) => {
+const parseData1D5D = (time: string | null) => {
 	return (d: any) => {
 		const date = parseDate1D5D(d.date)
 
@@ -73,9 +73,9 @@ function fixDataHeaders1D5D(obj: any) {
 
 interface WithOHLCDataProps {
 	readonly data: IOHLCData[]
-	readonly period: string
-	readonly time: string
-	readonly type: string
+	readonly period: string | null
+	readonly time: string | null
+	readonly type: string | null
 	readonly stockSymbol: string
 	readonly stockType: string
 	readonly loading: boolean
@@ -85,9 +85,9 @@ interface WithOHLCDataProps {
 
 interface WithOHLCState {
 	data?: IOHLCData[]
-	period: string
-	time: string
-	type: string
+	period: string | null
+	time: string | null
+	type: string | null
 	stockSymbol: string
 	stockType: string
 	saveData?: IOHLCData[]
@@ -111,45 +111,129 @@ export function withOHLCData(dataSet = 'DAILY') {
 					type: props.type,
 					data: undefined,
 				}
-				Axios.get(
-					`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${props.stockSymbol}&t=${props.stockType}&p=${props.period}&r=MAX`
-				)
-					.then((res) => {
-						const forDateParse = res.data.map(fixDataHeaders)
-						const data = forDateParse.map(parseData())
-						this.setState({ data })
-						props.setLoading(false)
-						props.setData(data)
-					})
-					.catch((error) => {
-						console.error(
-							'Error: There was an error loading the data for the chart |',
-							error
-						)
-						props.setLoading(false)
-						return (
-							<Unavailable message="Unable to load the data for this chart." />
-						)
-					})
+				if (props.time == '1D' || props.time == '5D') {
+					Axios.get(
+						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${props.stockSymbol}&t=${props.stockType}&r=${props.time}`
+					)
+						.then((res) => {
+							const forDateParse = res.data.map(fixDataHeaders1D5D)
+							const data = forDateParse.map(parseData1D5D(props.time))
+							this.setState({ data })
+							props.setLoading(false)
+							props.setData(data)
+							// props.setData(data)
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							)
+							this.props.setLoading(false)
+							return (
+								<Unavailable message="Unable to load the data for this chart." />
+							)
+						})
+				} else {
+					Axios.get(
+						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${props.stockSymbol}&t=${props.stockType}&p=${props.period}&r=MAX`
+					)
+						.then((res) => {
+							const forDateParse = res.data.map(fixDataHeaders)
+							const data = forDateParse.map(parseData())
+							this.setState({ data })
+							props.setLoading(false)
+							props.setData(data)
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							)
+							props.setLoading(false)
+							return (
+								<Unavailable message="Unable to load the data for this chart." />
+							)
+						})
+				}
 			}
 
-			public componentDidUpdate() {
-				let { data, period, stockSymbol, stockType, time, saveData } =
-					this.state
-				const newState: WithOHLCState = this.props
+			public componentDidUpdate(prevProps: any, prevState: any) {
+				let { data } = this.state
+
+				const newProps: WithOHLCState = this.props
+
+				if (
+					(prevProps.time == '1D' || prevProps.time == '5D') &&
+					newProps.time != '1D' &&
+					newProps.time != '5D'
+				) {
+					this.props.setLoading(true)
+					Axios.get(
+						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
+					)
+						.then((res) => {
+							const forDateParse = res.data.map(fixDataHeaders)
+							data = forDateParse.map(parseData())
+							this.props.setLoading(false)
+							this.setState({ data })
+							if (typeof data != 'undefined') {
+								this.props.setData(data)
+							}
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							)
+							this.props.setLoading(false)
+							return (
+								<Unavailable message="Unable to load the data for this chart." />
+							)
+						})
+				} else if (
+					prevProps.time != '1D' &&
+					prevProps.time != '5D' &&
+					(newProps.time == '1D' || newProps.time == '5D')
+				) {
+					Axios.get(
+						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
+					)
+						.then((res) => {
+							const forDateParse = res.data.map(fixDataHeaders1D5D)
+							data = forDateParse.map(parseData1D5D(newProps.time))
+							this.setState({ data })
+							this.props.setLoading(false)
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							)
+							this.props.setLoading(false)
+							return (
+								<Unavailable message="Unable to load the data for this chart." />
+							)
+						})
+				}
+				/*
+				console.log(prevState)
+				if (time == null && period == null) {
+					console.log('yes')
+				}
 
 				if (
 					period != newState.period ||
 					stockSymbol != newState.stockSymbol
 				) {
 					this.props.setLoading(true)
-					if (time == '1D' || time == '5D') {
+
+					if (newState.time == '1D' || newState.time == '5D') {
 						Axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newState.stockSymbol}&t=${newState.stockType}&r=${time}`
+							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newState.stockSymbol}&t=${newState.stockType}&r=${newState.time}`
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D)
-								data = forDateParse.map(parseData1D5D(time))
+								data = forDateParse.map(parseData1D5D(newState.time))
 
 								if (period != newState.period) {
 									period = newState.period
@@ -287,7 +371,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 								)
 							})
 					}
-				}
+				} */
 			}
 
 			public render() {

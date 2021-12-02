@@ -13,6 +13,8 @@ import { Export } from 'components/Chart/ExportButton'
 import { IOHLCData } from 'components/Chart/iOHLCData'
 import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import { isFunction } from 'util'
+import { local } from 'd3-selection'
 
 const StockChart = dynamic(() => import('components/Chart/StockChart'), {
 	ssr: false,
@@ -23,10 +25,10 @@ interface ChartProps {
 }
 
 const CandleStickStockChart = ({ info }: ChartProps) => {
-	const [period, setPeriod] = useState<string | null>('d')
+	const [period, setPeriod] = useState<string | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
-	const [time, setTime] = useState<string | null>('1Y')
-	const [type, setType] = useState<string | null>('candlestick')
+	const [time, setTime] = useState<string | null>(null)
+	const [type, setType] = useState<string | null>(null)
 	const [data, setData] = useState<IOHLCData[]>()
 
 	useEffect(() => {
@@ -44,20 +46,33 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				localStorage.setItem('type', 'candlestick')
 			}
 			setType(localStorage.getItem('type'))
+			console.log('period useEffect stock')
 		}
 	}, [])
 
 	useEffect(() => {
 		localStorage.setItem('type', type || '')
+		console.log('type useEffect stock')
 	}, [type])
 
 	useEffect(() => {
-		localStorage.setItem('type', time || '')
+		localStorage.setItem('time', time || '')
+		console.log('time useEffect stock')
 	}, [time])
 
 	useEffect(() => {
-		localStorage.setItem('type', period || '')
+		localStorage.setItem('period', period || '')
+		console.log('period useEffect stock')
 	}, [period])
+
+	if (typeof window !== 'undefined') {
+		console.log(localStorage.getItem('type'))
+		console.log(type)
+		console.log(localStorage.getItem('time'))
+		console.log(time)
+		console.log(localStorage.getItem('period'))
+		console.log(period)
+	}
 
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>
