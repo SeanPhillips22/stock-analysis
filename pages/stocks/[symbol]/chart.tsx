@@ -83,8 +83,12 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				<div className="py-2">
 					<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
 						<Buttons state={time} dispatch={setTime} />
-						<SelectPeriod time={time} dispatcher={setPeriod} />
-						<SelectType dispatcher={setType} />
+						<SelectPeriod
+							time={time}
+							dispatcher={setPeriod}
+							period={period}
+						/>
+						<SelectType type={type} dispatcher={setType} />
 						<Export
 							buttons={[
 								{

@@ -1,3 +1,4 @@
+import { StringNullableChain } from 'lodash'
 import { Dispatch, SetStateAction } from 'react'
 
 interface ButtonUIProps {
@@ -10,7 +11,29 @@ interface SelectProps {
 	dispatcher: Dispatch<SetStateAction<string | null>>
 }
 
-export const SelectPeriod = (props: SelectProps) => {
+interface SelectPeriodProps {
+	period?: string | null
+	time?: string | null
+	dispatcher: Dispatch<SetStateAction<string | null>>
+}
+
+interface SelectTypeProps {
+	type?: string | null
+	time?: string | null
+	dispatcher: Dispatch<SetStateAction<string | null>>
+}
+
+export const SelectPeriod = (props: SelectPeriodProps) => {
+	let defaultValue: string
+	if (props.period == 'd') {
+		defaultValue = 'd'
+	}
+	if (props.period == 'w') {
+		defaultValue = 'w'
+	} else {
+		defaultValue = 'm'
+	}
+
 	return (
 		<div>
 			<select
@@ -21,7 +44,7 @@ export const SelectPeriod = (props: SelectProps) => {
 				id="period"
 				name="period"
 				className="block pl-2 tiny:pl-3 border-0 border-r sm:border-r-0 sm:border-l border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
-				defaultValue="Day"
+				value={defaultValue}
 			>
 				<option value="d">Day</option>
 				<option value="w">Week</option>
@@ -31,7 +54,15 @@ export const SelectPeriod = (props: SelectProps) => {
 	)
 }
 
-export const SelectType = (props: SelectProps) => {
+export const SelectType = (props: SelectTypeProps) => {
+	let defaultValue: string
+
+	if (props.type == 'candlestick') {
+		defaultValue = 'candlestick'
+	} else {
+		defaultValue = 'line'
+	}
+
 	return (
 		<div>
 			<select
@@ -39,7 +70,7 @@ export const SelectType = (props: SelectProps) => {
 				id="type"
 				name="type"
 				className="block pl-2 tiny:pl-3 border-0 sm:border-l border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
-				defaultValue="Day"
+				value={defaultValue}
 			>
 				<option value="candlestick">Candles</option>
 				<option value="line">Line</option>
@@ -53,6 +84,15 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold'
 	const inactive =
 		common + ' text-gray-900 hover:text-gray-900 hover:text-shadow'
+
+	let defaultValue
+
+	if (!state) {
+		defaultValue = undefined
+	} else {
+		defaultValue = state
+	}
+
 	return (
 		<>
 			<select
@@ -60,7 +100,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				id="range"
 				name="range"
 				className="block lg:hidden pl-2 tiny:pl-3 border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
-				defaultValue="1Y"
+				value={defaultValue}
 			>
 				<option value="1D">1 Day</option>
 				<option value="5D">5 Day</option>
