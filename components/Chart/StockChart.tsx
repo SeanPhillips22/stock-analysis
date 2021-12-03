@@ -188,6 +188,14 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		const yEdgeIndicator = (data: IOHLCData) => {
 			return data.close
 		}
+		const volumeColor = (data: IOHLCData) => {
+			return data.close > data.open
+				? 'rgba(38, 166, 154, 0.9)'
+				: 'rgba(239, 83, 80, 0.9)'
+		}
+		const volumeSeries = (data: IOHLCData) => {
+			return data.volume
+		}
 
 		const toolTipPosition = () => {
 			if (time == '1D' || time == '5D') {
@@ -341,6 +349,19 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 										? 'rgba(38, 166, 154, 0.8)'
 										: 'rgba(239, 83, 80, 0.8)'
 								}
+							/>
+							<EdgeIndicator
+								itemType="last"
+								rectWidth={margin.right - 1.05}
+								rectHeight={15}
+								fill={volumeColor}
+								orient="right"
+								edgeAt="right"
+								fontSize={11}
+								lineStroke={openCloseColor}
+								displayFormat={format('.4~s')}
+								yAccessor={volumeSeries}
+								yAxisPad={0}
 							/>
 						</Chart>
 						<Chart
