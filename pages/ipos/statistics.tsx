@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { IpoRecent } from 'types/Ipos'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
@@ -133,8 +133,13 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 
 export default IpoStatistics
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, news, recent } = await getIpoData('statistics')
+
+	res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
 	return {
 		props: {
@@ -142,6 +147,5 @@ export const getStaticProps: GetStaticProps = async () => {
 			news,
 			recent,
 		},
-		revalidate: 2 * 60 * 60,
 	}
 }

@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetServerSideProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { News } from 'types/News'
@@ -81,9 +81,21 @@ interface IParams extends ParsedUrlQuery {
 	year: string
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { year } = params as IParams
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const year = context?.params?.year as string
+
+	if (year != '2021' && year != '2020' && year != '2019') {
+		return {
+			notFound: true,
+		}
+	}
+
 	const { data, news, upcoming } = await getIpoData(year)
+
+	context.res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
 	return {
 		props: {
@@ -92,17 +104,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			news,
 			upcoming,
 		},
-		revalidate: 60 * 60,
-	}
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
-	return {
-		paths: [
-			{ params: { year: '2021' } },
-			{ params: { year: '2020' } },
-			{ params: { year: '2019' } },
-		],
-		fallback: false,
 	}
 }
