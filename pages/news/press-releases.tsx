@@ -55,8 +55,13 @@ export const AllPressReleases = ({ data, other }: Props) => {
 
 export default AllPressReleases
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, other } = await getMarketNews('stocks')
+
+	res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
 	return {
 		props: {
