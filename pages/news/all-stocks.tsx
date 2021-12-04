@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { getMarketNews } from 'functions/callBackEnd'
@@ -54,18 +54,6 @@ export const AllStockNews = ({ data, other }: Props) => {
 }
 
 export default AllStockNews
-
-// export const getStaticProps: GetStaticProps = async () => {
-// 	const { data, other } = await getMarketNews('stocks');
-
-// 	return {
-// 		props: {
-// 			data,
-// 			other,
-// 		},
-// 		revalidate: 5 * 60,
-// 	};
-// };
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	const { data, other } = await getMarketNews('stocks')

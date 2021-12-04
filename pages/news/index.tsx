@@ -1,17 +1,17 @@
-import { GetStaticProps } from 'next';
-import { News } from 'types/News';
-import { SEO } from 'components/SEO';
-import { getMarketNews } from 'functions/callBackEnd';
-import { NewsNavigation } from 'components/News/NewsNavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { NewsFeed } from 'components/News/_NewsFeed';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { GetServerSideProps } from 'next'
+import { News } from 'types/News'
+import { SEO } from 'components/SEO'
+import { getMarketNews } from 'functions/callBackEnd'
+import { NewsNavigation } from 'components/News/NewsNavigation'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { NewsFeed } from 'components/News/_NewsFeed'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 
 interface Props {
-	data: News[];
-	other: News[];
+	data: News[]
+	other: News[]
 }
 
 export const MarketNews = ({ data, other }: Props) => {
@@ -50,19 +50,18 @@ export const MarketNews = ({ data, other }: Props) => {
 				</main>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default MarketNews;
+export default MarketNews
 
-export const getStaticProps: GetStaticProps = async () => {
-	const { data, other } = await getMarketNews('market');
+export const getServerSideProps: GetServerSideProps = async () => {
+	const { data, other } = await getMarketNews('stocks')
 
 	return {
 		props: {
 			data,
 			other,
 		},
-		revalidate: 5 * 60,
-	};
-};
+	}
+}
