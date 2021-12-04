@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			news,
 			upcoming,
 		},
-		revalidate: 4 * 60 * 60,
+		revalidate: 60 * 60,
 	}
 }
 

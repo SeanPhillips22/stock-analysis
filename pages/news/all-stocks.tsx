@@ -55,7 +55,7 @@ export const AllStockNews = ({ data, other }: Props) => {
 
 export default AllStockNews
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, other } = await getMarketNews('stocks')
 
 	return {
