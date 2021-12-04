@@ -56,7 +56,7 @@ export const AllPressReleases = ({ data, other }: Props) => {
 export default AllPressReleases
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-	const { data, other } = await getMarketNews('stocks')
+	const { data, other } = await getMarketNews('press')
 
 	res.setHeader(
 		'Cache-Control',

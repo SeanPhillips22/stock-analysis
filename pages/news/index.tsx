@@ -56,7 +56,7 @@ export const MarketNews = ({ data, other }: Props) => {
 export default MarketNews
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-	const { data, other } = await getMarketNews('stocks')
+	const { data, other } = await getMarketNews('market')
 
 	res.setHeader(
 		'Cache-Control',
