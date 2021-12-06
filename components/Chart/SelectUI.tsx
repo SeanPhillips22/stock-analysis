@@ -24,16 +24,13 @@ interface SelectTypeProps {
 }
 
 export const SelectPeriod = (props: SelectPeriodProps) => {
-	let defaultValue: string
-	if (props.period == 'd') {
-		defaultValue = 'd'
-	}
-	if (props.period == 'w') {
-		defaultValue = 'w'
-	} else {
-		defaultValue = 'm'
-	}
+	let defaultValue
 
+	if (!props.period) {
+		defaultValue = undefined
+	} else {
+		defaultValue = props.period
+	}
 	return (
 		<div>
 			<select
