@@ -106,7 +106,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 				console.log('ERROR')
 			}
 
-			public componentDidMount() {
+			/* public componentDidMount() {
 				if (this.props.time == '1D' || this.props.time == '5D') {
 					Axios.get(
 						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${this.props.stockSymbol}&t=${this.props.stockType}&r=${this.props.time}`
@@ -153,6 +153,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 						})
 				}
 			}
+			*/
 
 			public componentDidUpdate(prevProps: any, prevState: any) {
 				let { data } = this.state
