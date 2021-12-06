@@ -102,58 +102,6 @@ export function withOHLCData(dataSet = 'DAILY') {
 					data: undefined,
 				}
 			}
-			public componentDidCatch() {
-				console.log('ERROR')
-			}
-
-			/* public componentDidMount() {
-				if (this.props.time == '1D' || this.props.time == '5D') {
-					Axios.get(
-						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${this.props.stockSymbol}&t=${this.props.stockType}&r=${this.props.time}`
-					)
-						.then((res) => {
-							const forDateParse = res.data.map(fixDataHeaders1D5D)
-							const data = forDateParse.map(
-								parseData1D5D(this.props.time)
-							)
-							this.setState({ data })
-							this.props.setLoading(false)
-							this.props.setData(data)
-						})
-						.catch((error) => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-							this.props.setLoading(false)
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
-						})
-				} else if (this != undefined) {
-					Axios.get(
-						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${this.props.stockSymbol}&t=${this.props.stockType}&p=${this.props.period}&r=MAX`
-					)
-						.then((res) => {
-							const forDateParse = res.data.map(fixDataHeaders)
-							const data = forDateParse.map(parseData())
-							this.setState({ data })
-							this.props.setLoading(false)
-							this.props.setData(data)
-						})
-						.catch((error) => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-							this.props.setLoading(false)
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
-						})
-				}
-			}
-			*/
 
 			public componentDidUpdate(prevProps: any, prevState: any) {
 				let { data } = this.state
