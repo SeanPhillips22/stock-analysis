@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { Hero } from 'components/HomePage/Hero'
@@ -62,8 +62,8 @@ export default function FrontPage({ data }: FrontPageProps) {
 					sameAs: [
 						'https://www.facebook.com/stockanalysisoff/',
 						'https://twitter.com/stock_analysisx',
-						'https://www.linkedin.com/company/stock-analysis/',
-					],
+						'https://www.linkedin.com/company/stock-analysis/'
+					]
 				}}
 			/>
 			<LayoutFullWidth>
@@ -86,13 +86,17 @@ export default function FrontPage({ data }: FrontPageProps) {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const data = await getHomePageData()
+
+	res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
 	return {
 		props: {
-			data,
-		},
-		revalidate: 6 * 60,
+			data
+		}
 	}
 }
