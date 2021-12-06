@@ -67,11 +67,6 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 		localStorage.setItem('period', periodVar || '')
 	}, [time, period])
 
-	/* useEffect(() => {
-		localStorage.setItem('period', period || '')
-		console.log('period useEffect stock')
-	}, [period]) */
-
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>
 			<SEO
