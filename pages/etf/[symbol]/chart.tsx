@@ -13,10 +13,11 @@ import { useEffect } from 'react'
 import { ParsedUrlQuery } from 'querystring'
 import dynamic from 'next/dynamic'
 import { Unavailable } from 'components/Unavailable'
+import StockChart from 'components/Chart/StockChart'
 
-const StockChart = dynamic(() => import('components/Chart/StockChart'), {
+/* const StockChart = dynamic(() => import('components/Chart/StockChart'), {
 	ssr: false,
-})
+}) */
 
 interface ChartProps {
 	info: Info
@@ -44,18 +45,16 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				localStorage.setItem('type', 'candlestick')
 			}
 			setType(localStorage.getItem('type'))
-			console.log('one load etf')
 		}
 	}, [])
 
 	useEffect(() => {
 		localStorage.setItem('type', type || '')
-		console.log('type useEffect etf')
 	}, [type])
 
 	useEffect(() => {
 		localStorage.setItem('time', time || '')
-		console.log('time useEffect stock')
+
 		let periodVar
 		if (time == '1D' || time == '5D') {
 			periodVar = 'd'
@@ -64,12 +63,6 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 		}
 		localStorage.setItem('period', periodVar || '')
 	}, [time, period])
-	/*
-	useEffect(() => {
-		localStorage.setItem('period', period || '')
-		console.log('period useEffect etf')
-	}, [period]) */
-
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/chart/`}>
 			<SEO

@@ -102,6 +102,9 @@ export function withOHLCData(dataSet = 'DAILY') {
 					data: undefined,
 				}
 			}
+			public componentDidCatch() {
+				console.log('ERROR')
+			}
 
 			public componentDidMount() {
 				if (this.props.time == '1D' || this.props.time == '5D') {
@@ -127,7 +130,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 								<Unavailable message="Unable to load the data for this chart." />
 							)
 						})
-				} else {
+				} else if (this != undefined) {
 					Axios.get(
 						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${this.props.stockSymbol}&t=${this.props.stockType}&p=${this.props.period}&r=MAX`
 					)
@@ -263,6 +266,59 @@ export function withOHLCData(dataSet = 'DAILY') {
 					prevProps.stockSymbol != newProps.stockSymbol ||
 					prevProps.stockType != newProps.stockType
 				) {
+					if (newProps.time == '1D' || newProps.time == '5D') {
+						loading(true)
+						Axios.get(
+							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders1D5D)
+								data = forDateParse.map(parseData1D5D(newProps.time))
+								this.setState({ data })
+
+								setTimeout(function () {
+									loading(false)
+								}, 0)
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								)
+								this.props.setLoading(false)
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								)
+							})
+					} else {
+						loading(true)
+						Axios.get(
+							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders)
+								data = forDateParse.map(parseData())
+								this.setState({ data })
+
+								setTimeout(function () {
+									loading(false)
+								}, 0)
+								if (typeof data != 'undefined') {
+									this.props.setData(data)
+								}
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								)
+								this.props.setLoading(false)
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								)
+							})
+					}
+				} else if (data == undefined) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
 						Axios.get(

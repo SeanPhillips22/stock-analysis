@@ -15,10 +15,11 @@ import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { isFunction } from 'util'
 import { local } from 'd3-selection'
+import StockChart from 'components/Chart/StockChart'
 
-const StockChart = dynamic(() => import('components/Chart/StockChart'), {
+/* const StockChart = dynamic(() => import('components/Chart/StockChart'), {
 	ssr: false,
-})
+}) */
 
 interface ChartProps {
 	info: Info
@@ -46,18 +47,15 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				localStorage.setItem('type', 'candlestick')
 			}
 			setType(localStorage.getItem('type'))
-			console.log('period useEffect stock')
 		}
 	}, [])
 
 	useEffect(() => {
 		localStorage.setItem('type', type || '')
-		console.log('type useEffect stock')
 	}, [type])
 
 	useEffect(() => {
 		localStorage.setItem('time', time || '')
-		console.log('time useEffect stock')
 		let periodVar
 		if (time == '1D' || time == '5D') {
 			periodVar = 'd'
