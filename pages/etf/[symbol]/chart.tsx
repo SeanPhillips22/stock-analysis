@@ -32,37 +32,40 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			if (!localStorage.getItem('time')) {
-				localStorage.setItem('time', '1Y')
+			if (!localStorage.getItem('chart')) {
+				const chartObj = {
+					time: '1Y',
+					period: 'd',
+					type: 'candlestick',
+				}
+				localStorage.setItem('chart', JSON.stringify(chartObj))
 			}
-			setTime(localStorage.getItem('time'))
-			if (!localStorage.getItem('period')) {
-				localStorage.setItem('period', 'd')
-			}
-			setPeriod(localStorage.getItem('period'))
 
-			if (!localStorage.getItem('type')) {
-				localStorage.setItem('type', 'candlestick')
-			}
-			setType(localStorage.getItem('type'))
+			const chartObj = JSON.parse(localStorage.getItem('chart') || '{}')
+
+			setTime(chartObj.time)
+			setPeriod(chartObj.period)
+			setType(chartObj.type)
 		}
 	}, [])
 
 	useEffect(() => {
-		localStorage.setItem('type', type || '')
-	}, [type])
-
-	useEffect(() => {
-		localStorage.setItem('time', time || '')
-
 		let periodVar
+
 		if (time == '1D' || time == '5D') {
 			periodVar = 'd'
 		} else {
 			periodVar = period
 		}
-		localStorage.setItem('period', periodVar || '')
-	}, [time, period])
+
+		const chartObj = {
+			time: time || null,
+			period: periodVar || null,
+			type: type || null,
+		}
+
+		localStorage.setItem('chart', JSON.stringify(chartObj))
+	}, [time, period, type])
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/chart/`}>
 			<SEO
