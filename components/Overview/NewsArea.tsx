@@ -37,7 +37,9 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	// Check for fresh news if it's been more than 60 minutes
 	useEffect(() => {
 		async function fetchData() {
-			const fresh = await getData(`news-fresh?s=${info.symbol}`)
+			const fresh = await getData(
+				`news-fresh?s=${info.symbol}&t=${info.type}`
+			)
 			if (news[0] && fresh[0] && news[0].title !== fresh[0].title) {
 				setData(fresh)
 			}

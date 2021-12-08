@@ -1,20 +1,20 @@
-import { GetStaticProps } from 'next';
-import { News } from 'types/News';
-import { IpoUpcoming, IpoRecent } from 'types/Ipos';
-import { SEO } from 'components/SEO';
-import { getIpoData } from 'functions/callBackEnd';
-import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { NewsFeed } from 'components/News/_NewsFeed';
-import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
-import { RecentTableMin } from 'components/IPOs/RecentTableMin';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { GetServerSideProps } from 'next'
+import { News } from 'types/News'
+import { IpoUpcoming, IpoRecent } from 'types/Ipos'
+import { SEO } from 'components/SEO'
+import { getIpoData } from 'functions/callBackEnd'
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { NewsFeed } from 'components/News/_NewsFeed'
+import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
+import { RecentTableMin } from 'components/IPOs/RecentTableMin'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 
 interface Props {
-	data: News[];
-	upcoming: IpoUpcoming[];
-	recent: IpoRecent[];
+	data: News[]
+	upcoming: IpoUpcoming[]
+	recent: IpoRecent[]
 }
 
 export const IpoNews = ({ data, upcoming, recent }: Props) => {
@@ -47,13 +47,18 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 				</main>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default IpoNews;
+export default IpoNews
 
-export const getStaticProps: GetStaticProps = async () => {
-	const { data, upcoming, recent } = await getIpoData('news');
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+	const { data, upcoming, recent } = await getIpoData('news')
+
+	res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
 	return {
 		props: {
@@ -61,6 +66,5 @@ export const getStaticProps: GetStaticProps = async () => {
 			upcoming,
 			recent,
 		},
-		revalidate: 10 * 60,
-	};
-};
+	}
+}

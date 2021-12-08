@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { CalendarData, IpoRecent, FilingMin } from 'types/Ipos'
 import { SEO } from 'components/SEO'
 import { getIpoData } from 'functions/callBackEnd'
@@ -82,8 +82,13 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 
 export default IpoCalendar
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, recent, filings } = await getIpoData('calendar')
+
+	res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
 	return {
 		props: {
@@ -91,6 +96,5 @@ export const getStaticProps: GetStaticProps = async () => {
 			recent,
 			filings,
 		},
-		revalidate: 5 * 60,
 	}
 }

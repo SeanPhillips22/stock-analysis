@@ -1,22 +1,21 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { FinancialsType } from 'types/Financials';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { SubNavigation } from 'components/FinancialTable/SubNavigation';
-import { FinancialTable } from 'components/FinancialTable/_FinancialTable';
-import { getStockFinancials } from 'functions/callBackEnd';
-import { MAP_RATIOS } from 'data/financials/map_ratios';
+import { GetServerSideProps } from 'next'
+import { Info } from 'types/Info'
+import { FinancialsType } from 'types/Financials'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { SubNavigation } from 'components/FinancialTable/SubNavigation'
+import { FinancialTable } from 'components/FinancialTable/_FinancialTable'
+import { getStockFinancialsSSR } from 'functions/callBackEnd'
+import { MAP_RATIOS } from 'data/financials/map_ratios'
 
 interface Props {
-	info: Info;
-	data: FinancialsType;
+	info: Info
+	data: FinancialsType
 	counts: {
-		annual: number;
-		quarterly: number;
-		trailing: number;
-	};
+		annual: number
+		quarterly: number
+		trailing: number
+	}
 }
 
 export default function Ratios({ info, data, counts }: Props) {
@@ -38,18 +37,17 @@ export default function Ratios({ info, data, counts }: Props) {
 				/>
 			</div>
 		</Stock>
-	);
+	)
 }
 
-interface IParams extends ParsedUrlQuery {
-	symbol: string;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getStockFinancialsSSR('ratios', symbol)
+
+	context.res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
+
+	return data
 }
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getStockFinancials('ratios', symbol, 3600);
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};

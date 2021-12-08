@@ -1,29 +1,29 @@
-import { screenerDataState } from 'components/StockScreener/screenerdata.state';
-import { screenerState } from 'components/StockScreener/screener.state';
-import { GetStaticProps } from 'next';
-import { ScreenerData } from 'components/StockScreener/screener.types';
-import { getData } from 'functions/API';
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
-import { SEO } from 'components/SEO';
-import { StockScreener } from 'components/StockScreener/_StockScreener';
+import { screenerDataState } from 'components/StockScreener/screenerdata.state'
+import { screenerState } from 'components/StockScreener/screener.state'
+import { GetStaticProps } from 'next'
+import { ScreenerData } from 'components/StockScreener/screener.types'
+import { getData } from 'functions/API'
+import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
+import { SEO } from 'components/SEO'
+import { StockScreener } from 'components/StockScreener/_StockScreener'
 
 export default function StockScreenerPage({ stocks }: ScreenerData) {
-	const fullCount = screenerDataState((state) => state.fullCount);
-	const setFullCount = screenerDataState((state) => state.setFullCount);
-	const type = screenerDataState((state) => state.type);
-	const setType = screenerDataState((state) => state.setType);
-	const clearFilters = screenerState((state) => state.clearFilters);
-	const setResultsMenu = screenerState((state) => state.setResultsMenu);
+	const fullCount = screenerDataState((state) => state.fullCount)
+	const setFullCount = screenerDataState((state) => state.setFullCount)
+	const type = screenerDataState((state) => state.type)
+	const setType = screenerDataState((state) => state.setType)
+	const clearFilters = screenerState((state) => state.clearFilters)
+	const setResultsMenu = screenerState((state) => state.setResultsMenu)
 
 	if (!fullCount) {
-		setFullCount(stocks.count);
+		setFullCount(stocks.count)
 	}
 
 	if (type !== 'stocks') {
-		setFullCount(stocks.count);
-		clearFilters();
-		setResultsMenu('General');
-		setType('stocks');
+		setFullCount(stocks.count)
+		clearFilters()
+		setResultsMenu('General')
+		setType('stocks')
 	}
 
 	return (
@@ -39,16 +39,16 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 				</div>
 			</LayoutFullWidth>
 		</>
-	);
+	)
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const stocks = await getData('screener?type=initial');
+	const stocks = await getData('screener?type=initial')
 
 	return {
 		props: {
 			stocks,
 		},
-		revalidate: 4 * 60 * 60,
-	};
-};
+		revalidate: 6 * 60 * 60,
+	}
+}
