@@ -1,14 +1,8 @@
-import { StringNullableChain } from 'lodash'
 import { Dispatch, SetStateAction } from 'react'
 
 interface ButtonUIProps {
 	state: string | null
 	dispatch: Dispatch<SetStateAction<string | null>>
-}
-
-interface SelectProps {
-	time?: string | null
-	dispatcher: Dispatch<SetStateAction<string | null>>
 }
 
 interface SelectPeriodProps {
@@ -24,13 +18,8 @@ interface SelectTypeProps {
 }
 
 export const SelectPeriod = (props: SelectPeriodProps) => {
-	let defaultValue
+	let defaultValue = !props.period ? undefined : props.period
 
-	if (!props.period) {
-		defaultValue = undefined
-	} else {
-		defaultValue = props.period
-	}
 	return (
 		<div>
 			<select
@@ -52,13 +41,7 @@ export const SelectPeriod = (props: SelectPeriodProps) => {
 }
 
 export const SelectType = (props: SelectTypeProps) => {
-	let defaultValue: string
-
-	if (props.type == 'candlestick') {
-		defaultValue = 'candlestick'
-	} else {
-		defaultValue = 'line'
-	}
+	let defaultValue = props.type === 'candlestick' ? 'candlestick' : 'line'
 
 	return (
 		<div>
@@ -82,13 +65,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 	const inactive =
 		common + ' text-gray-900 hover:text-gray-900 hover:text-shadow'
 
-	let defaultValue
-
-	if (!state) {
-		defaultValue = undefined
-	} else {
-		defaultValue = state
-	}
+	let defaultValue = !state ? undefined : state
 
 	return (
 		<>
