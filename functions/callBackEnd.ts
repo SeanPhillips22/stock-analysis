@@ -7,11 +7,32 @@ interface Response {
 	data: any
 }
 
+export function respondSSR(response: Response) {
+	if (response.status === 200) {
+		return {
+			props: response.data
+		}
+	} else {
+		return response.data
+	}
+}
+
+export async function getPageDataSSR(
+	page: string,
+	symbol: string,
+	type?: 'stocks' | 'etf'
+) {
+	const response = type
+		? await getData(`${page}?symbol=${symbol}&t=${type}`)
+		: await getData(`${page}?symbol=${symbol}`)
+	return respondSSR(response)
+}
+
 export function respond(response: Response, revalidate: number) {
 	if (response.status === 200) {
 		return {
 			props: response.data,
-			revalidate: revalidate,
+			revalidate: revalidate
 		}
 	} else {
 		return response.data
