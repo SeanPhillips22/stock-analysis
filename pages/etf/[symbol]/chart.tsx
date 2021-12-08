@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
 import { Info } from 'types/Info'
@@ -11,13 +11,8 @@ import { IOHLCData } from 'components/Chart/iOHLCData'
 import { Export } from 'components/Chart/ExportButton'
 import { useEffect } from 'react'
 import { ParsedUrlQuery } from 'querystring'
-import dynamic from 'next/dynamic'
 import { Unavailable } from 'components/Unavailable'
 import StockChart from 'components/Chart/StockChart'
-
-/* const StockChart = dynamic(() => import('components/Chart/StockChart'), {
-	ssr: false,
-}) */
 
 interface ChartProps {
 	info: Info
@@ -29,20 +24,21 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	const [type, setType] = useState<string | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
 	const [data, setData] = useState<IOHLCData[]>()
+	const [stored, setStored] = useState<string | null>(null)
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			if (!localStorage.getItem('chart')) {
-				const chartObj = {
-					time: '1Y',
-					period: 'd',
-					type: 'candlestick',
-				}
-				localStorage.setItem('chart', JSON.stringify(chartObj))
-			}
+			let stor = localStorage.getItem('chart')
 
-			const chartObj = JSON.parse(localStorage.getItem('chart') || '{}')
+			const chartObj = stor
+				? JSON.parse(stor)
+				: {
+						time: '1Y',
+						period: 'd',
+						type: 'candlestick',
+				  }
 
+			setStored(stor)
 			setTime(chartObj.time)
 			setPeriod(chartObj.period)
 			setType(chartObj.type)
@@ -50,22 +46,34 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	}, [])
 
 	useEffect(() => {
-		let periodVar
+		if (typeof window !== 'undefined') {
+			let periodVar
 
-		if (time == '1D' || time == '5D') {
-			periodVar = 'd'
-		} else {
-			periodVar = period
+			if (time == '1D' || time == '5D') {
+				periodVar = 'd'
+			} else {
+				periodVar = period
+			}
+
+			const chartObj = {
+				time: time || null,
+				period: periodVar || null,
+				type: type || null,
+			}
+
+			if (time && period && type) {
+				if (time === '1Y' && period === 'd' && type === 'candlestick') {
+					if (stored) {
+						localStorage.removeItem('chart')
+					}
+				} else {
+					localStorage.setItem('chart', JSON.stringify(chartObj))
+					setStored(JSON.stringify(chartObj))
+				}
+			}
 		}
-
-		const chartObj = {
-			time: time || null,
-			period: periodVar || null,
-			type: type || null,
-		}
-
-		localStorage.setItem('chart', JSON.stringify(chartObj))
 	}, [time, period, type])
+
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/chart/`}>
 			<SEO
