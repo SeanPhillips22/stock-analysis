@@ -26,7 +26,7 @@ const parseData = () => {
 	}
 }
 
-const parseData1D5D = (time: string) => {
+const parseData1D5D = (time: string | null) => {
 	return (d: any) => {
 		const date = parseDate1D5D(d.date)
 
@@ -73,9 +73,9 @@ function fixDataHeaders1D5D(obj: any) {
 
 interface WithOHLCDataProps {
 	readonly data: IOHLCData[]
-	readonly period: string
-	readonly time: string
-	readonly type: string
+	readonly period: string | null
+	readonly time: string | null
+	readonly type: string | null
 	readonly stockSymbol: string
 	readonly stockType: string
 	readonly loading: boolean
@@ -85,12 +85,6 @@ interface WithOHLCDataProps {
 
 interface WithOHLCState {
 	data?: IOHLCData[]
-	period: string
-	time: string
-	type: string
-	stockSymbol: string
-	stockType: string
-	saveData?: IOHLCData[]
 }
 
 export function withOHLCData(dataSet = 'DAILY') {
@@ -103,68 +97,137 @@ export function withOHLCData(dataSet = 'DAILY') {
 		> {
 			public constructor(props: Omit<TProps, 'data'>) {
 				super(props)
+
 				this.state = {
-					period: props.period,
-					time: props.time,
-					stockSymbol: props.stockSymbol,
-					stockType: props.stockType,
-					type: props.type,
 					data: undefined,
 				}
-				Axios.get(
-					`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${props.stockSymbol}&t=${props.stockType}&p=${props.period}&r=MAX`
-				)
-					.then((res) => {
-						const forDateParse = res.data.map(fixDataHeaders)
-						const data = forDateParse.map(parseData())
-						this.setState({ data })
-						props.setLoading(false)
-						props.setData(data)
-					})
-					.catch((error) => {
-						console.error(
-							'Error: There was an error loading the data for the chart |',
-							error
-						)
-						props.setLoading(false)
-						return (
-							<Unavailable message="Unable to load the data for this chart." />
-						)
-					})
 			}
 
-			public componentDidUpdate() {
-				let { data, period, stockSymbol, stockType, time, saveData } =
-					this.state
-				const newState: WithOHLCState = this.props
+			public componentDidUpdate(prevProps: any, prevState: any) {
+				let { data } = this.state
+				let loading = this.props.setLoading
 
+				const newProps: any = this.props
+
+				// Case where data is undefined because a component is already loaded.
+
+				// Case where user is switching from MAX to 1D/5D
 				if (
-					period != newState.period ||
-					stockSymbol != newState.stockSymbol
+					(prevProps.time == '1D' || prevProps.time == '5D') &&
+					newProps.time != '1D' &&
+					newProps.time != '5D'
 				) {
-					this.props.setLoading(true)
-					if (time == '1D' || time == '5D') {
+					loading(true)
+					Axios.get(
+						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
+					)
+						.then((res) => {
+							const forDateParse = res.data.map(fixDataHeaders)
+							data = forDateParse.map(parseData())
+
+							this.setState({ data })
+							setTimeout(function () {
+								loading(false)
+							}, 0)
+
+							if (typeof data != 'undefined') {
+								this.props.setData(data)
+							}
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							)
+							return (
+								<Unavailable message="Unable to load the data for this chart." />
+							)
+						})
+					// Case where user is switching from 1D/5D to MAX
+				} else if (
+					prevProps.time != '1D' &&
+					prevProps.time != '5D' &&
+					(newProps.time == '1D' || newProps.time == '5D') &&
+					data != undefined
+				) {
+					loading(true)
+					Axios.get(
+						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
+					)
+						.then((res) => {
+							const forDateParse = res.data.map(fixDataHeaders1D5D)
+							data = forDateParse.map(parseData1D5D(newProps.time))
+							this.setState({ data })
+
+							setTimeout(function () {
+								loading(false)
+							}, 0)
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							)
+
+							return (
+								<Unavailable message="Unable to load the data for this chart." />
+							)
+						})
+				}
+				// Case where using is switching between 1D and 5D
+				else if (
+					(newProps.time == '1D' &&
+						prevProps.time != '1D' &&
+						data != undefined) ||
+					(newProps.time == '5D' &&
+						prevProps.time != '5D' &&
+						data != undefined)
+				) {
+					loading(true)
+					Axios.get(
+						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}&f=candles`
+					)
+						.then((res) => {
+							setTimeout(function () {
+								loading(false)
+							}, 0)
+							const forDateParse = res.data.map(fixDataHeaders1D5D)
+							data = forDateParse.map(parseData1D5D(newProps.time))
+							this.setState({ data })
+							if (typeof data != 'undefined') {
+								this.props.setData(data)
+							}
+						})
+						.catch((error) => {
+							console.error(
+								'Error: There was an error loading the data for the chart |',
+								error
+							)
+							this.props.setLoading(false)
+							return (
+								<Unavailable message="Unable to load the data for this chart." />
+							)
+						})
+				}
+				//Case where Symbol or period or type has changed.
+				else if (
+					prevProps.period != newProps.period ||
+					prevProps.stockSymbol != newProps.stockSymbol ||
+					prevProps.stockType != newProps.stockType
+				) {
+					if (newProps.time == '1D' || newProps.time == '5D') {
+						loading(true)
 						Axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newState.stockSymbol}&t=${newState.stockType}&r=${time}`
+							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D)
-								data = forDateParse.map(parseData1D5D(time))
+								data = forDateParse.map(parseData1D5D(newProps.time))
+								this.setState({ data })
 
-								if (period != newState.period) {
-									period = newState.period
-									this.setState({ period })
-									this.setState({ data })
-									saveData = []
-									this.setState({ saveData })
-								} else {
-									stockSymbol = newState.stockSymbol
-									this.setState({ stockSymbol })
-									this.setState({ data })
-									saveData = []
-									this.setState({ saveData })
-								}
-								this.props.setLoading(false)
+								setTimeout(function () {
+									loading(false)
+								}, 0)
 							})
 							.catch((error) => {
 								console.error(
@@ -177,23 +240,18 @@ export function withOHLCData(dataSet = 'DAILY') {
 								)
 							})
 					} else {
+						loading(true)
 						Axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newState.stockSymbol}&t=${newState.stockType}&p=${newState.period}&r=MAX`
+							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
+								this.setState({ data })
 
-								if (period != newState.period) {
-									period = newState.period
-									this.setState({ period })
-									this.setState({ data })
-								} else {
-									stockSymbol = newState.stockSymbol
-									this.setState({ stockSymbol })
-									this.setState({ data })
-								}
-								this.props.setLoading(false)
+								setTimeout(function () {
+									loading(false)
+								}, 0)
 								if (typeof data != 'undefined') {
 									this.props.setData(data)
 								}
@@ -209,72 +267,47 @@ export function withOHLCData(dataSet = 'DAILY') {
 								)
 							})
 					}
-					// Case where someone is clicking '1D' or '5D'
-				} else if (
-					(newState.time == '1D' && time != '1D') ||
-					(newState.time == '5D' && time != '5D')
-				) {
-					const time = newState.time
-					this.setState({ time })
-					this.props.setLoading(true)
-					Axios.get(
-						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${this.props.stockSymbol}&t=${this.props.stockType}&r=${newState.time}&f=candles`
-					)
-						.then((res) => {
-							this.props.setLoading(true)
-							const forDateParse = res.data.map(fixDataHeaders1D5D)
-							if (!saveData) {
-								saveData = data
-								this.setState({ saveData })
-							}
-							data = forDateParse.map(parseData1D5D(newState.time))
-							this.setState({ data })
-							this.props.setLoading(false)
-							if (typeof data != 'undefined') {
-								this.props.setData(data)
-							}
-						})
-						.catch((error) => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-							this.props.setLoading(false)
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
-						})
-					// Case where someone is already at '1D' or '5D' and is now clicking the other values.
-				} else if (
-					(time == '5D' || time == '1D') &&
-					newState.time != '1D' &&
-					newState.time != '5D'
-				) {
-					if (typeof saveData != 'undefined' && saveData.length > 0) {
-						data = saveData
-						time = newState.time
-						this.setState({ time })
-						this.setState({ data })
-						if (typeof data != 'undefined') {
-							this.props.setData(data)
-						}
-					} else {
-						this.props.setLoading(true)
-						time = newState.time
-						this.setState({ time })
+				} else if (data == undefined) {
+					if (newProps.time == '1D' || newProps.time == '5D') {
+						loading(true)
 						Axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${stockSymbol}&t=${stockType}&p=${period}&r=MAX`
+							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
+						)
+							.then((res) => {
+								const forDateParse = res.data.map(fixDataHeaders1D5D)
+								data = forDateParse.map(parseData1D5D(newProps.time))
+								this.setState({ data })
+
+								setTimeout(function () {
+									loading(false)
+								}, 0)
+							})
+							.catch((error) => {
+								console.error(
+									'Error: There was an error loading the data for the chart |',
+									error
+								)
+								this.props.setLoading(false)
+								return (
+									<Unavailable message="Unable to load the data for this chart." />
+								)
+							})
+					} else {
+						loading(true)
+						Axios.get(
+							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
-								this.props.setLoading(false)
 								this.setState({ data })
+
+								setTimeout(function () {
+									loading(false)
+								}, 0)
 								if (typeof data != 'undefined') {
 									this.props.setData(data)
 								}
-								saveData = data
-								this.setState({ saveData })
 							})
 							.catch((error) => {
 								console.error(

@@ -1,37 +1,48 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react'
 
 interface ButtonUIProps {
-	state: string;
-	dispatch: Dispatch<SetStateAction<string>>;
+	state: string | null
+	dispatch: Dispatch<SetStateAction<string | null>>
 }
 
-interface SelectProps {
-	time?: string;
-	dispatcher: Dispatch<SetStateAction<string>>;
+interface SelectPeriodProps {
+	period?: string | null
+	time?: string | null
+	dispatcher: Dispatch<SetStateAction<string | null>>
 }
 
-export const SelectPeriod = (props: SelectProps) => {
+interface SelectTypeProps {
+	type?: string | null
+	time?: string | null
+	dispatcher: Dispatch<SetStateAction<string | null>>
+}
+
+export const SelectPeriod = (props: SelectPeriodProps) => {
+	let defaultValue = !props.period ? undefined : props.period
+
 	return (
 		<div>
 			<select
 				disabled={props.time === '1D' || props.time === '5D' ? true : false}
 				onChange={(e) => {
-					props.dispatcher(e.target.value);
+					props.dispatcher(e.target.value)
 				}}
 				id="period"
 				name="period"
 				className="block pl-2 tiny:pl-3 border-0 border-r sm:border-r-0 sm:border-l border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
-				defaultValue="Day"
+				value={defaultValue}
 			>
 				<option value="d">Day</option>
 				<option value="w">Week</option>
 				<option value="m">Month</option>
 			</select>
 		</div>
-	);
-};
+	)
+}
 
-export const SelectType = (props: SelectProps) => {
+export const SelectType = (props: SelectTypeProps) => {
+	let defaultValue = props.type === 'candlestick' ? 'candlestick' : 'line'
+
 	return (
 		<div>
 			<select
@@ -39,20 +50,23 @@ export const SelectType = (props: SelectProps) => {
 				id="type"
 				name="type"
 				className="block pl-2 tiny:pl-3 border-0 sm:border-l border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
-				defaultValue="Day"
+				value={defaultValue}
 			>
 				<option value="candlestick">Candles</option>
 				<option value="line">Line</option>
 			</select>
 		</div>
-	);
-};
+	)
+}
 
 export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
-	const common = 'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md';
-	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold';
+	const common = 'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md'
+	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold'
 	const inactive =
-		common + ' text-gray-900 hover:text-gray-900 hover:text-shadow';
+		common + ' text-gray-900 hover:text-gray-900 hover:text-shadow'
+
+	let defaultValue = !state ? undefined : state
+
 	return (
 		<>
 			<select
@@ -60,7 +74,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				id="range"
 				name="range"
 				className="block lg:hidden pl-2 tiny:pl-3 border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
-				defaultValue="1Y"
+				value={defaultValue}
 			>
 				<option value="1D">1 Day</option>
 				<option value="5D">5 Day</option>
@@ -77,7 +91,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('1D');
+							dispatch('1D')
 						}}
 						type="button"
 						className={state === '1D' ? active : inactive}
@@ -88,7 +102,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('5D');
+							dispatch('5D')
 						}}
 						type="button"
 						className={state === '5D' ? active : inactive}
@@ -100,7 +114,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('1M');
+							dispatch('1M')
 						}}
 						type="button"
 						className={state === '1M' ? active : inactive}
@@ -111,7 +125,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('6M');
+							dispatch('6M')
 						}}
 						type="button"
 						className={state === '6M' ? active : inactive}
@@ -123,7 +137,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('YTD');
+							dispatch('YTD')
 						}}
 						type="button"
 						className={state === 'YTD' ? active : inactive}
@@ -134,7 +148,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('1Y');
+							dispatch('1Y')
 						}}
 						type="button"
 						className={state === '1Y' ? active : inactive}
@@ -145,7 +159,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('3Y');
+							dispatch('3Y')
 						}}
 						type="button"
 						className={state === '3Y' ? active : inactive}
@@ -156,7 +170,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('5Y');
+							dispatch('5Y')
 						}}
 						type="button"
 						className={state === '5Y' ? active : inactive}
@@ -167,7 +181,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<li>
 					<button
 						onClick={() => {
-							dispatch('MAX');
+							dispatch('MAX')
 						}}
 						type="button"
 						className={state === 'MAX' ? active : inactive}
@@ -177,5 +191,5 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				</li>
 			</ul>
 		</>
-	);
-};
+	)
+}

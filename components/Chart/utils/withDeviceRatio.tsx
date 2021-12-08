@@ -5,9 +5,9 @@ export interface WithRatioProps {
 	readonly ratio: number
 	readonly width: number
 	readonly height: number
-	readonly period: string
-	readonly time: string
-	readonly type: string
+	readonly period: string | null
+	readonly time: string | null
+	readonly type: string | null
 	readonly data: IOHLCData[]
 }
 
