@@ -1,12 +1,11 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
-import { ParsedUrlQuery } from 'querystring'
+import { GetServerSideProps } from 'next'
 import { Info } from 'types/Info'
 import { FinancialsType } from 'types/Financials'
 import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
 import { SubNavigation } from 'components/FinancialTable/SubNavigation'
 import { FinancialTable } from 'components/FinancialTable/_FinancialTable'
-import { getStockFinancials } from 'functions/callBackEnd'
+import { getStockFinancialsSSR } from 'functions/callBackEnd'
 import { MAP_CASH_FLOW_STATEMENT } from 'data/financials/map_cash_flow_statement'
 
 interface Props {
@@ -44,15 +43,14 @@ export default function CashFlowStatement({ info, data, counts }: Props) {
 	)
 }
 
-interface IParams extends ParsedUrlQuery {
-	symbol: string
-}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getStockFinancialsSSR('cash_flow_statement', symbol)
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams
-	return await getStockFinancials('cash_flow_statement', symbol, 2 * 60 * 60)
-}
+	context.res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' }
+	return data
 }

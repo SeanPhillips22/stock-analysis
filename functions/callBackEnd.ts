@@ -28,6 +28,11 @@ export async function getPageDataSSR(
 	return respondSSR(response)
 }
 
+export async function getStockFinancialsSSR(page: string, symbol: string) {
+	const response = await getData(`financials?type=${page}&symbol=${symbol}`)
+	return respondSSR(response)
+}
+
 export function respond(response: Response, revalidate: number) {
 	if (response.status === 200) {
 		return {
