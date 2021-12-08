@@ -28,9 +28,9 @@ interface StockChartProps {
 	readonly dateTimeFormat?: string
 	readonly width: number
 	readonly ratio: number
-	readonly type: string
-	readonly period: string
-	readonly time: string
+	readonly type: string | null
+	readonly period: string | null
+	readonly time: string | null
 	readonly stockSymbol: string
 	readonly stockType: string
 	readonly setLoading: (arg: boolean) => void
@@ -92,14 +92,14 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 	}
 
 	public render() {
-		const sma50LabelNumber = (label: string) => {
+		const sma50LabelNumber = (label: string | null) => {
 			if (label == 'd') {
 				return 50
 			} else {
 				return 10
 			}
 		}
-		const sma200LabelNumber = (label: string) => {
+		const sma200LabelNumber = (label: string | null) => {
 			if (label == 'd') {
 				return 200
 			} else if (label == 'w') {
@@ -335,6 +335,36 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 						zoomAnchor={lastVisibleItemBasedZoomAnchor}
 					>
 						<Chart
+							id={2}
+							height={100}
+							origin={(w, h) => [0, h - 100]}
+							yExtents={volChartExtents}
+						>
+							<BarSeries
+								widthRatio={0.5}
+								clip={true}
+								yAccessor={(d) => d.volume}
+								fillStyle={(d) =>
+									d.close > d.open
+										? 'rgba(38, 166, 154, 0.8)'
+										: 'rgba(239, 83, 80, 0.8)'
+								}
+							/>
+							<EdgeIndicator
+								itemType="last"
+								rectWidth={margin.right - 1.05}
+								rectHeight={15}
+								fill={volumeColor}
+								orient="right"
+								edgeAt="right"
+								fontSize={11}
+								lineStroke={openCloseColor}
+								displayFormat={format('.4~s')}
+								yAccessor={volumeSeries}
+								yAxisPad={0}
+							/>
+						</Chart>
+						<Chart
 							id={3}
 							height={chartHeight}
 							yExtents={candleChartExtents}
@@ -491,36 +521,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							) : (
 								<> </>
 							)}
-						</Chart>
-						<Chart
-							id={2}
-							height={100}
-							origin={(w, h) => [0, h - 100]}
-							yExtents={volChartExtents}
-						>
-							<BarSeries
-								widthRatio={0.5}
-								clip={true}
-								yAccessor={(d) => d.volume}
-								fillStyle={(d) =>
-									d.close > d.open
-										? 'rgba(38, 166, 154, 0.8)'
-										: 'rgba(239, 83, 80, 0.8)'
-								}
-							/>
-							<EdgeIndicator
-								itemType="last"
-								rectWidth={margin.right - 1.05}
-								rectHeight={15}
-								fill={volumeColor}
-								orient="right"
-								edgeAt="right"
-								fontSize={11}
-								lineStroke={openCloseColor}
-								displayFormat={format('.4~s')}
-								yAccessor={volumeSeries}
-								yAxisPad={0}
-							/>
 						</Chart>
 
 						{isBrowser == true ? <CrossHairCursor /> : <> </>}
