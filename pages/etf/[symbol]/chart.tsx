@@ -3,14 +3,13 @@ import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
 import { Info } from 'types/Info'
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI'
-import { getPageData } from 'functions/callBackEnd'
+import { getPageDataSSR } from 'functions/callBackEnd'
 import { useState } from 'react'
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetServerSideProps } from 'next'
 import { Loading } from 'components/Loading'
 import { IOHLCData } from 'components/Chart/iOHLCData'
 import { Export } from 'components/Chart/ExportButton'
 import { useEffect } from 'react'
-import { ParsedUrlQuery } from 'querystring'
 import { Unavailable } from 'components/Unavailable'
 import StockChart from 'components/Chart/StockChart'
 
@@ -35,7 +34,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				: {
 						time: '1Y',
 						period: 'd',
-						type: 'candlestick',
+						type: 'candlestick'
 				  }
 
 			setStored(stor)
@@ -58,7 +57,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 			const chartObj = {
 				time: time || null,
 				period: periodVar || null,
-				type: type || null,
+				type: type || null
 			}
 
 			if (time && period && type) {
@@ -96,13 +95,13 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 								{
 									title: 'Export to Excel',
 									type: 'xlsx',
-									restricted: true,
+									restricted: true
 								},
 								{
 									title: 'Export to CSV',
 									type: 'csv',
-									restricted: true,
-								},
+									restricted: true
+								}
 							]}
 							data={data}
 							setData={setData}
@@ -137,15 +136,14 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 
 export default CandleStickStockChart
 
-interface IParams extends ParsedUrlQuery {
-	symbol: string
-}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getPageDataSSR('chartpage', symbol, 'etf')
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams
-	return await getPageData('chartpage', symbol, 2 * 60 * 60, 'etf')
-}
+	context.res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' }
+	return data
 }

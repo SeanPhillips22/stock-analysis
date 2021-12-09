@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { TrendingAll } from 'types/Trending'
 import { SEO } from 'components/SEO'
 import { SymbolTableSimple } from 'components/Tables/SymbolTableSimple'
@@ -33,18 +33,18 @@ const IPO = () => {
 export default function Trending({ timestamp, data }: Props) {
 	const format0dec = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 0,
-		maximumFractionDigits: 0,
+		maximumFractionDigits: 0
 	})
 
 	const format2dec = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 2,
-		maximumFractionDigits: 2,
+		maximumFractionDigits: 2
 	})
 
 	const columns: Column[] = [
 		{
 			Header: 'No.',
-			accessor: 'no',
+			accessor: 'no'
 		},
 		{
 			Header: 'Symbol',
@@ -73,7 +73,7 @@ export default function Trending({ timestamp, data }: Props) {
 					return 0
 				}
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Name',
@@ -90,7 +90,7 @@ export default function Trending({ timestamp, data }: Props) {
 					return 0
 				}
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Views',
@@ -98,7 +98,7 @@ export default function Trending({ timestamp, data }: Props) {
 			Cell: function FormatCell({ cell: { value } }: any) {
 				return format0dec.format(value)
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Market Cap',
@@ -109,7 +109,7 @@ export default function Trending({ timestamp, data }: Props) {
 				}
 				return abbreviate(value, format2dec)
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Price',
@@ -120,7 +120,7 @@ export default function Trending({ timestamp, data }: Props) {
 				}
 				return '$' + Number(value).toFixed(2)
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Change',
@@ -140,7 +140,7 @@ export default function Trending({ timestamp, data }: Props) {
 					return <span className="text-gray-800">{fixed}</span>
 				}
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Volume',
@@ -151,8 +151,8 @@ export default function Trending({ timestamp, data }: Props) {
 				}
 				return format0dec.format(value)
 			},
-			sortInverted: true,
-		},
+			sortInverted: true
+		}
 	]
 
 	return (
@@ -195,19 +195,19 @@ export default function Trending({ timestamp, data }: Props) {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const raw = await getData('trending?q=trendingAll')
-
 	const { timestamp, data } = raw
 
-	if (data.length > 19) {
-		data.splice(20, data.length - 20)
-	}
+	res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
+
 	return {
 		props: {
 			timestamp,
-			data,
-		},
-		revalidate: 60 * 60,
+			data
+		}
 	}
 }

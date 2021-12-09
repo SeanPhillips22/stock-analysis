@@ -1,11 +1,10 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
-import { ParsedUrlQuery } from 'querystring'
+import { GetServerSideProps } from 'next'
 import { Info } from 'types/Info'
 import { DividendI } from 'types/Dividend'
 import { News } from 'types/News'
 import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
-import { getPageData } from 'functions/callBackEnd'
+import { getPageDataSSR } from 'functions/callBackEnd'
 import { InfoBox } from 'components/InfoBox'
 import { InfoTable } from 'components/Dividend/InfoTable'
 import { HistoryTable } from 'components/Dividend/HistoryTable'
@@ -56,7 +55,7 @@ const Dividend = ({ info, data, news }: Props) => {
 							news={news}
 							button={{
 								text: 'More News',
-								url: `/etf/${info.symbol}/`,
+								url: `/etf/${info.symbol}/`
 							}}
 						/>
 						{data.history.length > 15 && news?.length > 4 && <Sidebar2 />}
@@ -68,15 +67,14 @@ const Dividend = ({ info, data, news }: Props) => {
 }
 export default Dividend
 
-interface IParams extends ParsedUrlQuery {
-	symbol: string
-}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getPageDataSSR('dividend', symbol, 'etf')
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams
-	return await getPageData('dividend', symbol, 2 * 60 * 60, 'etf')
-}
+	context.res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' }
+	return data
 }

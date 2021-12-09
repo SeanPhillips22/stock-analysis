@@ -1,11 +1,10 @@
 import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { screenerState } from 'components/StockScreener/screener.state'
-import { ScreenerData } from 'components/StockScreener/screener.types'
 import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { StockScreener } from 'components/StockScreener/_StockScreener'
 
-export default function StockScreenerPage({ stocks }: ScreenerData) {
+export default function StockScreenerPage() {
 	const type = screenerDataState((state) => state.type)
 	const setType = screenerDataState((state) => state.setType)
 	const clearFilters = screenerState((state) => state.clearFilters)

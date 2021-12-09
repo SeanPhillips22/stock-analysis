@@ -1,11 +1,10 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
-import { ParsedUrlQuery } from 'querystring'
+import { GetServerSideProps } from 'next'
 import { Info } from 'types/Info'
 import { HoldingsType } from 'types/Holdings'
 import { News } from 'types/News'
 import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
-import { getPageData } from 'functions/callBackEnd'
+import { getPageDataSSR } from 'functions/callBackEnd'
 import { HoldingsTable } from 'components/Holdings/_HoldingsTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall'
@@ -61,7 +60,7 @@ const Holdings = ({ info, data, news }: Props) => {
 							news={news}
 							button={{
 								text: 'More News',
-								url: `/etf/${info.symbol}/`,
+								url: `/etf/${info.symbol}/`
 							}}
 						/>
 						{data && data.count > 35 && news?.length > 4 && <Sidebar2 />}
@@ -73,15 +72,14 @@ const Holdings = ({ info, data, news }: Props) => {
 }
 export default Holdings
 
-interface IParams extends ParsedUrlQuery {
-	symbol: string
-}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getPageDataSSR('holdings', symbol)
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams
-	return await getPageData('holdings', symbol, 2 * 60 * 60)
-}
+	context.res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' }
+	return data
 }

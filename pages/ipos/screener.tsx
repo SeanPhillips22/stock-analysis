@@ -1,12 +1,11 @@
 import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { screenerState } from 'components/StockScreener/screener.state'
-import { IPOScreenerData } from 'components/StockScreener/screener.types'
 import { SEO } from 'components/SEO'
 import { StockScreener } from 'components/StockScreener/_StockScreener'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 
-export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
+export default function IpoScreenerPage() {
 	const type = screenerDataState((state) => state.type)
 	const setType = screenerDataState((state) => state.setType)
 	const clearFilters = screenerState((state) => state.clearFilters)
