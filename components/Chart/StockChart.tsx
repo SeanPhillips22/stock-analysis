@@ -73,13 +73,13 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			maxValue: 0,
 			margin: { left: 0, right: 62, top: 70, bottom: 24 },
 			counter: 0,
-			screenWidth: window.innerWidth,
+			screenWidth: window.innerWidth
 		}
 	}
 	handleWindowSizeChange = () => {
 		// eslint-disable-next-line no-invalid-this
 		this.setState({
-			screenWidth: window.innerWidth,
+			screenWidth: window.innerWidth
 		})
 	}
 
@@ -118,31 +118,31 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 					this.setState({
 						maxValue: data,
 						margin: { left: 0, right: 47, top: 7, bottom: 24 },
-						counter: this.state.counter + 1,
+						counter: this.state.counter + 1
 					})
 				} else if (data < 100 && data >= 10) {
 					this.setState({
 						maxValue: data,
 						margin: { left: 0, right: 40, top: 7, bottom: 24 },
-						counter: this.state.counter + 1,
+						counter: this.state.counter + 1
 					})
 				} else if (data >= 1000 && data < 10000) {
 					this.setState({
 						maxValue: data,
 						margin: { left: 0, right: 100, top: 7, bottom: 24 },
-						counter: this.state.counter + 1,
+						counter: this.state.counter + 1
 					})
 				} else if (data >= 10000) {
 					this.setState({
 						maxValue: data,
 						margin: { left: 0, right: 64, top: 7, bottom: 24 },
-						counter: this.state.counter + 1,
+						counter: this.state.counter + 1
 					})
 				} else if (data >= 1 && data < 10) {
 					this.setState({
 						maxValue: data,
 						margin: { left: 0, right: 40, top: 7, bottom: 24 },
-						counter: this.state.counter + 1,
+						counter: this.state.counter + 1
 					})
 				}
 			}
@@ -156,7 +156,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			},
 			clip: true,
 			candleStrokeWidth: 0.5,
-			widthRatio: 0.8,
+			widthRatio: 0.8
 		}
 
 		const priceFormatDecider = (data: number) => {
@@ -229,14 +229,14 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 				yAccessor: (d: IOHLCData) => d.ma1,
 				type: 'SMA',
 				stroke: ma1color,
-				windowSize: sma50LabelNumber(this.props.period),
+				windowSize: sma50LabelNumber(this.props.period)
 			},
 			{
 				yAccessor: (d: IOHLCData) => d.ma2,
 				type: 'SMA',
 				stroke: ma2color,
-				windowSize: sma200LabelNumber(this.props.period),
-			},
+				windowSize: sma200LabelNumber(this.props.period)
+			}
 		]
 
 		const calculatedData = sma200(sma50(initialData))
@@ -257,7 +257,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		let min = 0
 		let days = 0
 
-		const date: any = new Date(data[data.length - 1].date)
+		const date: any = new Date(data[data.length - 1]?.date)
 
 		if (this.props.time == '1Y') {
 			max = max + 2
@@ -480,7 +480,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 														currentItem.open &&
 														this.pricesDisplayFormat(
 															currentItem.open
-														),
+														)
 												},
 												{
 													label: 'High',
@@ -488,7 +488,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 														currentItem.high &&
 														this.pricesDisplayFormat(
 															currentItem.high
-														),
+														)
 												},
 												{
 													label: 'Low',
@@ -496,7 +496,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 														currentItem.low &&
 														this.pricesDisplayFormat(
 															currentItem.low
-														),
+														)
 												},
 												{
 													label: 'Close',
@@ -504,7 +504,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 														currentItem.close &&
 														this.pricesDisplayFormat(
 															currentItem.close
-														),
+														)
 												},
 												{
 													label: 'Volume',
@@ -512,10 +512,10 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 														currentItem.volume &&
 														this.volumeDisplayFormat(
 															currentItem.volume
-														),
-												},
-											],
-										}),
+														)
+												}
+											]
+										})
 									}}
 								/>
 							) : (
