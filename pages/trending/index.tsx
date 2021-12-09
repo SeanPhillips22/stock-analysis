@@ -199,10 +199,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const raw = await getData('trending?q=trendingAll')
 	const { timestamp, data } = raw
 
-	res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {

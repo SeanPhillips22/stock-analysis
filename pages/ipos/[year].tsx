@@ -63,7 +63,7 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 								news={news}
 								button={{
 									text: 'More IPO News',
-									url: '/ipos/news/',
+									url: '/ipos/news/'
 								}}
 							/>
 							<Sidebar2 />
@@ -86,23 +86,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	if (year != '2021' && year != '2020' && year != '2019') {
 		return {
-			notFound: true,
+			notFound: true
 		}
 	}
 
 	const { data, news, upcoming } = await getIpoData(year)
 
-	context.res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {
 			year,
 			data,
 			news,
-			upcoming,
-		},
+			upcoming
+		}
 	}
 }

@@ -41,7 +41,7 @@ export const AllStockNews = ({ data, other }: Props) => {
 								news={other}
 								button={{
 									text: 'All Press Releases',
-									url: '/news/press-releases/',
+									url: '/news/press-releases/'
 								}}
 							/>
 							<Sidebar2 />
@@ -58,15 +58,12 @@ export default AllStockNews
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, other } = await getMarketNews('stocks')
 
-	res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {
 			data,
-			other,
-		},
+			other
+		}
 	}
 }

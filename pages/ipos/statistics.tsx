@@ -120,7 +120,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								news={news}
 								button={{
 									text: 'More IPO News',
-									url: '/ipos/news/',
+									url: '/ipos/news/'
 								}}
 							/>
 						</aside>
@@ -136,16 +136,13 @@ export default IpoStatistics
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, news, recent } = await getIpoData('statistics')
 
-	res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {
 			data,
 			news,
-			recent,
-		},
+			recent
+		}
 	}
 }
