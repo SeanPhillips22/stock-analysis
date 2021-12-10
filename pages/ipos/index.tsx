@@ -1,21 +1,21 @@
-import { GetStaticProps } from 'next';
-import { IpoRecent, IpoUpcoming } from 'types/Ipos';
-import { News } from 'types/News';
-import { getIpoData } from 'functions/callBackEnd';
-import { SEO } from 'components/SEO';
-import { RecentTable } from 'components/IPOs/RecentTable';
-import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
-import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { GetServerSideProps } from 'next'
+import { IpoRecent, IpoUpcoming } from 'types/Ipos'
+import { News } from 'types/News'
+import { getIpoData } from 'functions/callBackEnd'
+import { SEO } from 'components/SEO'
+import { RecentTable } from 'components/IPOs/RecentTable'
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
+import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 
 interface Props {
-	data: IpoRecent[];
-	news: News[];
-	upcoming: IpoUpcoming[];
+	data: IpoRecent[]
+	news: News[]
+	upcoming: IpoUpcoming[]
 }
 
 export const RecentIpos = ({ data, news, upcoming }: Props) => {
@@ -54,13 +54,18 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 				</main>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default RecentIpos;
+export default RecentIpos
 
-export const getStaticProps: GetStaticProps = async () => {
-	const { data, news, upcoming } = await getIpoData('recent');
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+	const { data, news, upcoming } = await getIpoData('recent')
+
+	res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
 	return {
 		props: {
@@ -68,6 +73,5 @@ export const getStaticProps: GetStaticProps = async () => {
 			news,
 			upcoming,
 		},
-		revalidate: 10 * 60,
-	};
-};
+	}
+}

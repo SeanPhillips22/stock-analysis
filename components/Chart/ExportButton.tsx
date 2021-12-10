@@ -16,7 +16,7 @@ interface Props {
 	buttons: Button[]
 	data: any
 	setData: any
-	time: string
+	time: string | null
 }
 
 export function Export({ buttons, data, time }: Props) {

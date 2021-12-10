@@ -1,49 +1,49 @@
-import { GetStaticProps } from 'next';
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
-import { SEO } from 'components/SEO';
-import { Hero } from 'components/HomePage/Hero';
-import { Movers } from 'components/HomePage/Movers';
-import { LatestNews } from 'components/HomePage/LatestNews';
-import { IPOwidgets } from 'components/HomePage/IPOwidgets';
-import { getHomePageData } from 'functions/callBackEnd';
+import { GetServerSideProps } from 'next'
+import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
+import { SEO } from 'components/SEO'
+import { Hero } from 'components/HomePage/Hero'
+import { Movers } from 'components/HomePage/Movers'
+import { LatestNews } from 'components/HomePage/LatestNews'
+import { IPOwidgets } from 'components/HomePage/IPOwidgets'
+import { getHomePageData } from 'functions/callBackEnd'
 
 type Trending = {
-	s: string;
-	n: string;
-	t: string;
-};
+	s: string
+	n: string
+	t: string
+}
 
 type IposMin = {
-	d: string;
-	s: string;
-	n: string;
-};
+	date: string
+	symbol: string
+	name: string
+}
 
 type NewsMin = {
-	t: string;
-	u: string;
-	n: string;
-	d: string;
-};
+	t: string
+	u: string
+	n: string
+	d: string
+}
 
 type Mover = {
-	s: string;
-	n: string;
-	p: string;
-	c: string;
-};
+	s: string
+	n: string
+	p: string
+	c: string
+}
 
 interface FrontPageProps {
 	data: {
-		date: string;
-		marketStatus: string;
-		gainers: Mover[];
-		losers: Mover[];
-		ipoCalendar: IposMin[];
-		recentIpos: IposMin[];
-		news: NewsMin[];
-		trending: Trending[];
-	};
+		date: string
+		marketStatus: string
+		gainers: Mover[]
+		losers: Mover[]
+		ipoCalendar: IposMin[]
+		recentIpos: IposMin[]
+		news: NewsMin[]
+		trending: Trending[]
+	}
 }
 
 export default function FrontPage({ data }: FrontPageProps) {
@@ -62,8 +62,8 @@ export default function FrontPage({ data }: FrontPageProps) {
 					sameAs: [
 						'https://www.facebook.com/stockanalysisoff/',
 						'https://twitter.com/stock_analysisx',
-						'https://www.linkedin.com/company/stock-analysis/',
-					],
+						'https://www.linkedin.com/company/stock-analysis/'
+					]
 				}}
 			/>
 			<LayoutFullWidth>
@@ -83,16 +83,20 @@ export default function FrontPage({ data }: FrontPageProps) {
 				</div>
 			</LayoutFullWidth>
 		</>
-	);
+	)
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-	const data = await getHomePageData();
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+	const data = await getHomePageData()
+
+	res.setHeader(
+		'Cache-Control',
+		'no-cache, no-store, max-age=0, must-revalidate'
+	)
 
 	return {
 		props: {
-			data,
-		},
-		revalidate: 5 * 60,
-	};
-};
+			data
+		}
+	}
+}

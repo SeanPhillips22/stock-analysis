@@ -1,19 +1,19 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { Statistics } from 'types/Statistics';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { getPageData } from 'functions/callBackEnd';
-import { StatsWidget } from 'components/StatsWidget/_StatsWidget';
-import { Button } from 'components/Button';
-import { MAP_STATISTICS } from 'data/financials/map_statistics';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import { Info } from 'types/Info'
+import { Statistics } from 'types/Statistics'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { getPageData } from 'functions/callBackEnd'
+import { StatsWidget } from 'components/StatsWidget/_StatsWidget'
+import { Button } from 'components/Button'
+import { MAP_STATISTICS } from 'data/financials/map_statistics'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 
 interface Props {
-	info: Info;
-	data: Statistics;
+	info: Info
+	data: Statistics
 }
 
 const StatisticsPage = ({ info, data }: Props) => {
@@ -184,19 +184,19 @@ const StatisticsPage = ({ info, data }: Props) => {
 				</div>
 			</div>
 		</Stock>
-	);
-};
-export default StatisticsPage;
+	)
+}
+export default StatisticsPage
 
 interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	symbol: string
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getPageData('statistics', symbol, 3600);
-};
+	const { symbol } = params as IParams
+	return await getPageData('statistics', symbol, 2 * 60 * 60)
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	return { paths: [], fallback: 'blocking' }
+}
