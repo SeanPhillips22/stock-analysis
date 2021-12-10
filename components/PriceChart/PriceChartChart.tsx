@@ -245,6 +245,13 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 									if (count > 180 && lbl.split(':')[0] === '9') {
 										return null
 									}
+									if (count > 60 && lbl.split(':')[0] == '9') {
+										let lblB = lbl.split(':')[1]
+										let lblC = lblB.split(' ')[0]
+										if (Number(lblC) < 36) {
+											return null
+										}
+									}
 									return formatDateMinute(timeAxis[index])
 								} else if (chartTime === '5D') {
 									return formatDateDay(timeAxis[index])
