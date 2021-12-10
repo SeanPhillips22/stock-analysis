@@ -48,8 +48,8 @@ const SymbolStatistics = ({ info, data }: Props) => {
 					<ProfileExecutives executives={data.executives} />
 					<ProfileSECfilings
 						info={info}
-						filings={data.secFilings}
 						cik={data.stockDetails.cik}
+						filings={data.secFilings}
 					/>
 				</div>
 			</div>
@@ -65,7 +65,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams
-	return await getPageData('profile', symbol, 3600)
+	return await getPageData('profile', symbol, 2 * 60 * 60)
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

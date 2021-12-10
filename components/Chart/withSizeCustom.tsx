@@ -1,16 +1,16 @@
-import * as React from 'react';
-import AutoSizer, { AutoSizerProps } from 'react-virtualized-auto-sizer';
-import { IOHLCData } from './iOHLCData';
+import * as React from 'react'
+import AutoSizer, { AutoSizerProps } from 'react-virtualized-auto-sizer'
+import { IOHLCData } from './iOHLCData'
 
 export interface WithSizeProps {
-	readonly width: number;
-	readonly height: number;
-	readonly period: string;
-	readonly time: string;
-	readonly loading: boolean;
-	readonly message: string;
-	readonly stockId: number;
-	readonly data: IOHLCData[];
+	readonly width: number
+	readonly height: number
+	readonly period: string | null
+	readonly time: string | null
+	readonly loading: boolean
+	readonly message: string
+	readonly stockId: number
+	readonly data: IOHLCData[]
 }
 
 export const withSize = (props?: Omit<AutoSizerProps, 'children'>) => {
@@ -30,11 +30,11 @@ export const withSize = (props?: Omit<AutoSizerProps, 'children'>) => {
 									height={height}
 									width={width}
 								/>
-							);
+							)
 						}}
 					</AutoSizer>
-				);
+				)
 			}
-		};
-	};
-};
+		}
+	}
+}

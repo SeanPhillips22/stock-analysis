@@ -43,11 +43,10 @@ export function translateTime(time: string): string {
 export function UnavailableIpo({ info }: { info: Info }) {
 	let chartMsg = 'Data will show when the stock starts trading.'
 	const ipoDate = info?.ipoInfo?.ipoDate
+	const ipoDateType = info?.ipoInfo?.ipoDateType
 	if (ipoDate) {
-		if (ipoDate === 'thisweek')
-			chartMsg = 'Data will show when the stock starts trading this week.'
-		else if (ipoDate === 'nextweek')
-			chartMsg = 'Data will show when the stock starts trading next week.'
+		if (ipoDateType)
+			chartMsg = 'Data will show when the stock starts trading.'
 		else if (ipoDate === 'postponed' || ipoDate === 'withdrawn') chartMsg = ''
 		else if (ipoDate !== 'unknown' && info?.ipoInfo?.ipoDateFormatted)
 			chartMsg = `Data will show when the stock starts trading on ${info.ipoInfo.ipoDateFormatted}.`

@@ -1,20 +1,20 @@
-import Link from 'next/link';
-import { navState } from 'state/navState';
+import Link from 'next/link'
+import { navState } from 'state/navState'
 
 export const NewsNavigation = () => {
-	const path = navState((state) => state.path);
+	const path = navState((state) => state.path)
 
 	const active =
-		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bg-[#eee] font-semibold text-gray-900 whitespace-nowrap';
+		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bg-[#eee] font-semibold text-gray-900 whitespace-nowrap'
 	const inactive =
-		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bll hover:text-gray-900 hover:bg-[#eee] transition duration-100 whitespace-nowrap';
+		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bll hover:text-gray-900 hover:bg-[#eee] transition duration-100 whitespace-nowrap'
 
 	return (
 		<div>
 			<nav className="border-b-[3px] border-blue-brand_sharp mb-0.5">
 				<ul className="navmenu">
 					<li>
-						<Link href="/news/">
+						<Link href="/news/" prefetch={false}>
 							<a
 								data-title="Markets"
 								className={
@@ -29,7 +29,7 @@ export const NewsNavigation = () => {
 						</Link>
 					</li>
 					<li>
-						<Link href="/news/all-stocks/">
+						<Link href="/news/all-stocks/" prefetch={false}>
 							<a
 								data-title="All Stocks"
 								className={
@@ -41,7 +41,7 @@ export const NewsNavigation = () => {
 						</Link>
 					</li>
 					<li>
-						<Link href="/news/press-releases/">
+						<Link href="/news/press-releases/" prefetch={false}>
 							<a
 								data-title="Press Releases"
 								className={
@@ -55,5 +55,5 @@ export const NewsNavigation = () => {
 				</ul>
 			</nav>
 		</div>
-	);
-};
+	)
+}

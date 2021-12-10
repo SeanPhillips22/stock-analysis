@@ -3,60 +3,39 @@ import { External } from 'components/CustomLink'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Info } from 'types/Info'
+import { getData } from 'functions/API'
 
 interface Props {
 	info: Info
 	cik: string
-	filings: SecFilings | null
+	filings: SecFilings
 }
 
 export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
-	const [entries, setEntries] = useState<Filing[]>([])
-	const [updated, setUpdated] = useState<string>('')
-	const [loaded, setLoaded] = useState(false)
+	const [entries, setEntries] = useState<Filing[]>(filings.filings)
+	const [updated, setUpdated] = useState<string>(filings.updated)
 	const [fetched, setFetched] = useState(false)
-
-	useEffect(() => {
-		if (filings) {
-			setEntries(filings.filings)
-			setUpdated(filings.updated)
-			setLoaded(true)
-		} else if (filings === null) {
-			setUpdated('')
-			setLoaded(true)
-		}
-	}, [filings])
 
 	useEffect(() => {
 		const source = Axios.CancelToken.source()
 
-		if (loaded && !fetched) {
-			const fetchSec = async () => {
-				const url = `${
-					process.env.NEXT_PUBLIC_API_URL ||
-					'https://api.stockanalysis.com/wp-json/sa'
-				}/sec?cik=${cik}&c=10&s=${info.symbol}&t=${info.type}&json=1`
+		if (!fetched) {
+			const fetchSecData = async () => {
+				const url = `sec?cik=${cik}&c=10&s=${info.symbol}&t=${info.type}&json=1`
 
-				try {
-					setFetched(true)
-					const res = await Axios.get(url, {
-						cancelToken: source.token,
-						timeout: 5000,
-					})
-					const newSec = res.data
+				const newData = await getData(url)
 
+				if (newData) {
 					if (
 						!entries.length ||
-						(newSec && newSec.filings[0].time !== entries[0].time)
+						newData.filings[0].time !== entries[0].time
 					) {
-						setEntries(newSec.filings)
-						setUpdated(newSec.updated)
-					}
-				} catch (err) {
-					if (!Axios.isCancel(err)) {
-						console.error(err)
+						setEntries(newData.filings)
+						setUpdated(newData.updated)
 					}
 				}
+
+				setFetched(true)
 			}
 
 			const now = new Date().getTime()
@@ -66,9 +45,10 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 			if (
 				(entries && !entries.length) ||
 				diff > 12 * 60 * 60 ||
-				isNaN(diff)
+				isNaN(diff) ||
+				!updated
 			) {
-				fetchSec()
+				fetchSecData()
 			}
 		}
 
@@ -76,7 +56,7 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 			source.cancel('Unmounted')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [updated])
+	}, [])
 
 	if (!entries || !entries.length) {
 		return null

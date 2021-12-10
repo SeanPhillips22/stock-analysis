@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
-import { SEO } from 'components/SEO';
-import Link from 'next/link';
+import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
+import { SEO } from 'components/SEO'
+import Link from 'next/link'
 
 const ExampleJSON = {
 	symbol: 'GFS',
@@ -25,7 +25,7 @@ const ExampleJSON = {
 	epsTTM: -2.085,
 	peRatio: null,
 	psRatio: 4.841,
-};
+}
 
 const faqs = [
 	{
@@ -44,7 +44,7 @@ const faqs = [
 			"This API is currently offered through RapidAPI, the world's biggest API marketplace. They provide the API keys and handle billing, invoicing and everything related to that.",
 	},
 	// More questions...
-];
+]
 
 export default function ApisPage() {
 	return (
@@ -133,9 +133,9 @@ export default function ApisPage() {
 				<div className="bg-white">
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
 						<div className="text-center">
-							<h1 className="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl">
+							<h2 className="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl">
 								How to get started
-							</h1>
+							</h2>
 							<div className="text-left max-w-xl mt-6 mx-auto text-lg bp:text-xl text-gray-700 space-y-3">
 								<div>
 									1. Go to the{' '}
@@ -161,5 +161,5 @@ export default function ApisPage() {
 				</div>
 			</LayoutFullWidth>
 		</>
-	);
+	)
 }

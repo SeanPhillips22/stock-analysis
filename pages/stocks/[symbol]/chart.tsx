@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
 import { Loading } from 'components/Loading'
@@ -11,22 +11,68 @@ import { useState } from 'react'
 import { Unavailable } from 'components/Unavailable'
 import { Export } from 'components/Chart/ExportButton'
 import { IOHLCData } from 'components/Chart/iOHLCData'
-import dynamic from 'next/dynamic'
-
-const StockChart = dynamic(() => import('components/Chart/StockChart'), {
-	ssr: false,
-})
+import { useEffect } from 'react'
+import StockChart from 'components/Chart/StockChart'
 
 interface ChartProps {
 	info: Info
 }
 
 const CandleStickStockChart = ({ info }: ChartProps) => {
-	const [period, setPeriod] = useState<string>('d')
+	const [period, setPeriod] = useState<string | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
-	const [time, setTime] = useState<string>('1Y')
-	const [type, setType] = useState<string>('candlestick')
+	const [time, setTime] = useState<string | null>(null)
+	const [type, setType] = useState<string | null>(null)
 	const [data, setData] = useState<IOHLCData[]>()
+	const [stored, setStored] = useState<string | null>(null)
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			let stor = localStorage.getItem('chart')
+
+			const chartObj = stor
+				? JSON.parse(stor)
+				: {
+						time: '1Y',
+						period: 'd',
+						type: 'candlestick',
+				  }
+
+			setStored(stor)
+			setTime(chartObj.time)
+			setPeriod(chartObj.period)
+			setType(chartObj.type)
+		}
+	}, [])
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			let periodVar
+
+			if (time == '1D' || time == '5D') {
+				periodVar = 'd'
+			} else {
+				periodVar = period
+			}
+
+			const chartObj = {
+				time: time || null,
+				period: periodVar || null,
+				type: type || null,
+			}
+
+			if (time && period && type) {
+				if (time === '1Y' && period === 'd' && type === 'candlestick') {
+					if (stored) {
+						localStorage.removeItem('chart')
+					}
+				} else {
+					localStorage.setItem('chart', JSON.stringify(chartObj))
+					setStored(JSON.stringify(chartObj))
+				}
+			}
+		}
+	}, [time, period, type])
 
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/chart/`}>
@@ -39,8 +85,12 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				<div className="py-2">
 					<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
 						<Buttons state={time} dispatch={setTime} />
-						<SelectPeriod time={time} dispatcher={setPeriod} />
-						<SelectType dispatcher={setType} />
+						<SelectPeriod
+							time={time}
+							dispatcher={setPeriod}
+							period={period}
+						/>
+						<SelectType type={type} dispatcher={setType} />
 						<Export
 							buttons={[
 								{
@@ -93,7 +143,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { symbol } = params as IParams
-	return await getPageData('chartpage', symbol, 3600, 'stocks')
+	return await getPageData('chartpage', symbol, 2 * 60 * 60, 'stocks')
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

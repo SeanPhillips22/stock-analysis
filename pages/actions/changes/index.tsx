@@ -1,10 +1,10 @@
-import { GetStaticProps } from 'next';
-import { SEO } from 'components/SEO';
-import { getActionsData } from 'functions/callBackEnd';
-import { ActionsLayout } from 'components/Actions/ActionsLayout';
-import { ActionsTable } from 'components/Actions/ActionsTable';
-import { StockLink } from 'components/Links';
-import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { GetStaticProps } from 'next'
+import { SEO } from 'components/SEO'
+import { getActionsData } from 'functions/callBackEnd'
+import { ActionsLayout } from 'components/Actions/ActionsLayout'
+import { ActionsTable } from 'components/Actions/ActionsTable'
+import { StockLink } from 'components/Links'
+import { CellString, ActionProps } from 'components/Actions/actions.types'
 
 export const ActionsChanges = ({ data }: ActionProps) => {
 	const columns = [
@@ -17,9 +17,9 @@ export const ActionsChanges = ({ data }: ActionProps) => {
 			accessor: 'oldsymbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
+					return <StockLink symbol={value.slice(1)} />
 				}
-				return value;
+				return value
 			},
 		},
 		{
@@ -27,16 +27,16 @@ export const ActionsChanges = ({ data }: ActionProps) => {
 			accessor: 'newsymbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
+					return <StockLink symbol={value.slice(1)} />
 				}
-				return value;
+				return value
 			},
 		},
 		{
 			Header: 'New Company Name',
 			accessor: 'name',
 		},
-	];
+	]
 
 	return (
 		<>
@@ -56,17 +56,17 @@ export const ActionsChanges = ({ data }: ActionProps) => {
 				/>
 			</ActionsLayout>
 		</>
-	);
-};
-export default ActionsChanges;
+	)
+}
+export default ActionsChanges
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('changes');
+	const data = await getActionsData('changes')
 
 	return {
 		props: {
 			data,
 		},
-		revalidate: 7200,
-	};
-};
+		revalidate: 2 * 60 * 60,
+	}
+}

@@ -39,7 +39,13 @@ export default async function handler(
 
 	// Get the user email and webhook type from the request body
 	const { alert_name, email } = req.body
-	const emailLookup: string = email.toLowerCase()
+
+	const emailLookup: string = email
+		? email.toLowerCase()
+		: req.body.customer_email_address?.toLowerCase()
+
+	// If no email, return 404
+	if (!emailLookup) return res.status(402).json({ error: 'No email' })
 
 	// Find the user from the email
 	let { data: returned } = await supabaseAdmin
