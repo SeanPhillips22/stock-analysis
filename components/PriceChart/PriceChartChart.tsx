@@ -94,12 +94,12 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		return changeWithoutComma
 	})
 
-	let data = [
+	let data: any[] = [
 		{
 			label: 'Stock Price',
 			data: priceAxis,
 			borderColor: lineColor,
-			pointHitRadius: 5,
+			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
 			borderWidth: 2.5,
@@ -119,21 +119,24 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 				return gradient
 			},
 		},
-		{
-			label: 'Previous Close',
-			data: prevCloseLine,
-			borderColor: 'rgb(51, 51, 51)',
-			pointHitRadius: 0,
-			pointRadius: 0,
-			borderDash: [2, 10],
-			tension: 0.01,
-			borderWidth: 1,
-			spanGaps: true,
-		},
 	]
 
-	if (chartTime != '1D') {
-		data.pop()
+	// Add previous close label to 1D charts
+	if (chartTime === '1D') {
+		data = [
+			...data,
+			{
+				label: 'Previous Close',
+				data: prevCloseLine,
+				borderColor: 'rgb(100, 100, 100)',
+				pointHitRadius: 0,
+				pointRadius: 0,
+				borderDash: [1.5, 8],
+				tension: 0.01,
+				borderWidth: 1,
+				spanGaps: true,
+			},
+		]
 	}
 
 	return (
