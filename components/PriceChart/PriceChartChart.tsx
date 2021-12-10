@@ -5,7 +5,7 @@ import {
 	Tooltip,
 	LinearScale,
 	CategoryScale,
-	Filler,
+	Filler
 } from 'chart.js'
 
 import {
@@ -14,7 +14,7 @@ import {
 	formatDateMinute,
 	formatDateDay,
 	formatDateMonth,
-	formatDateYear,
+	formatDateYear
 } from 'functions/formatDates'
 import { Unavailable } from 'components/Unavailable'
 import { ReactChart } from 'components/ReactChart'
@@ -117,8 +117,8 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 				}
 
 				return gradient
-			},
-		},
+			}
+		}
 	]
 
 	// Add previous close label to 1D charts
@@ -134,8 +134,8 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 				borderDash: [1.5, 8],
 				tension: 0.01,
 				borderWidth: 1,
-				spanGaps: true,
-			},
+				spanGaps: true
+			}
 		]
 	}
 
@@ -145,7 +145,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 			type="line"
 			data={{
 				labels: timeAxis,
-				datasets: data,
+				datasets: data
 			}}
 			plugins={[
 				{
@@ -210,8 +210,8 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 								ctx.restore()
 							}
 						})
-					},
-				},
+					}
+				}
 			]}
 			options={{
 				maintainAspectRatio: false,
@@ -219,7 +219,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 				scales: {
 					x: {
 						grid: {
-							display: false,
+							display: false
 						},
 						ticks: {
 							callback: function (index: number | string) {
@@ -258,7 +258,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 							},
 							color: '#323232',
 							font: {
-								size: 13,
+								size: 13
 							},
 							autoSkip: true,
 							autoSkipPadding: 20,
@@ -266,49 +266,49 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 							minRotation: 0,
 							maxTicksLimit: ['5D', '5Y', 'MAX'].includes(chartTime)
 								? 5
-								: undefined,
-						},
+								: undefined
+						}
 					},
 					y: {
 						position: 'right',
 						ticks: {
 							color: '#555555',
 							font: {
-								size: 12.5,
+								size: 12.5
 							},
-							padding: 5,
+							padding: 5
 						},
 						grid: {
 							drawBorder: false,
-							color: '#efefef',
-						},
-					},
+							color: '#efefef'
+						}
+					}
 				},
 				layout: {
 					padding: {
 						left: 5,
-						right: 11,
-					},
+						right: 11
+					}
 				},
 				plugins: {
 					legend: {
-						display: false,
+						display: false
 					},
 					tooltip: {
 						enabled: true,
 						titleFont: {
 							size: 16,
-							weight: '600',
+							weight: '600'
 						},
 						bodyFont: {
 							size: 14,
-							weight: '400',
+							weight: '400'
 						},
 						padding: {
 							top: 12,
 							right: 15,
 							bottom: 12,
-							left: 15,
+							left: 15
 						},
 						displayColors: false,
 						callbacks: {
@@ -341,10 +341,10 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 									}
 								}
 								return currlabel
-							},
-						},
-					},
-				},
+							}
+						}
+					}
+				}
 			}}
 		/>
 	)
