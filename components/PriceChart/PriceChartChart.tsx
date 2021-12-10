@@ -235,9 +235,14 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 									return formatDateMonth(timeAxis[index])
 								} else if (chartTime === '1D') {
 									const lbl = formatDateMinute(timeAxis[index])
-									// Remove leftmost ticks to prevent chart being pushed to the left
-									// But only after 3+ hours of trading
-									if (count > 180 && lbl.split(':')[0] === '09') {
+									// Remove leftmost ticks to prevent chart being pushed from the left
+									if (
+										lbl.split(':')[0] == '9' &&
+										lbl.split(':')[1] == '30 AM'
+									) {
+										return null
+									}
+									if (count > 180 && lbl.split(':')[0] === '9') {
 										return null
 									}
 									return formatDateMinute(timeAxis[index])
@@ -265,7 +270,6 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 						},
 					},
 					y: {
-						grace: '0.2%',
 						position: 'right',
 						ticks: {
 							color: '#555555',
