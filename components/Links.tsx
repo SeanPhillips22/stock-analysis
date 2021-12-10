@@ -8,6 +8,7 @@ interface ILinks {
 
 export const StockLink = ({ symbol, className, prefetch = false }: ILinks) => {
 	if (!symbol) return null
+
 	const classes = className || 'bll'
 
 	const symb = symbol.includes('.') ? symbol : `${symbol}/`
@@ -20,6 +21,8 @@ export const StockLink = ({ symbol, className, prefetch = false }: ILinks) => {
 }
 
 export const ETFLink = ({ symbol, className, prefetch = false }: ILinks) => {
+	if (!symbol) return null
+
 	const classes = className || 'bll'
 
 	return (
