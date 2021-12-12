@@ -1,30 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
 import {
-	BellIcon,
-	CalendarIcon,
-	ChartBarIcon,
-	FolderIcon,
 	HomeIcon,
-	InboxIcon,
-	MenuAlt2Icon,
-	UsersIcon,
-	XIcon
+	ChartBarIcon,
+	CalendarIcon,
+	CollectionIcon,
+	AdjustmentsIcon,
+	TrendingUpIcon,
+	NewspaperIcon,
+	ArchiveIcon
 } from '@heroicons/react/outline'
 
 const navigation = [
-	{ name: 'Home', href: '#', icon: HomeIcon, current: true },
-	{ name: 'Stocks', href: '#', icon: ChartBarIcon, current: false },
-	{ name: 'IPOs', href: '#', icon: UsersIcon, current: false },
-	{ name: 'ETFs', href: '#', icon: FolderIcon, current: false },
-	{ name: 'Screeners', href: '#', icon: CalendarIcon, current: false },
-	{ name: 'Trending', href: '#', icon: InboxIcon, current: false },
-	{ name: 'News', href: '#', icon: ChartBarIcon, current: false },
-	{ name: 'Corporate Actions', href: '#', icon: ChartBarIcon, current: false }
+	{ name: 'Home', href: '/', icon: HomeIcon, current: true },
+	{ name: 'Stocks', href: '/stocks/', icon: ChartBarIcon, current: false },
+	{ name: 'IPOs', href: '/ipos/', icon: CalendarIcon, current: false },
+	{ name: 'ETFs', href: '/etf/', icon: CollectionIcon, current: false },
+	{ name: 'Screener', href: '/stock-screener/', icon: AdjustmentsIcon, current: false },
+	{ name: 'Trending', href: '/trending/', icon: TrendingUpIcon, current: false },
+	{ name: 'News', href: '/news/', icon: NewspaperIcon, current: false },
+	{ name: 'Corporate Actions', href: '/actions/', icon: ArchiveIcon, current: false }
 ]
-
-function classNames(...classes: any) {
-	return classes.filter(Boolean).join(' ')
-}
 
 export function MainNav() {
 	return (
@@ -37,7 +32,7 @@ export function MainNav() {
 								key={item.name}
 								href={item.href}
 								className={
-									item.current ? 'nav-item current' : 'nav-item'
+									item.current ? 'nav-item current group' : 'nav-item group'
 								}
 							>
 								<item.icon className="text-gray-500 mr-3 flex-shrink-0 h-6 w-6" />

@@ -7,6 +7,8 @@
 		@apply text-gray-900 bg-white;
 	}
 
+	/* MASTER LAYOUT */
+
 	/* SIDE NAV */
 	.nav-item {
 		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-base font-medium;
@@ -14,6 +16,14 @@
 
 	.nav-item.current {
 		@apply bg-gray-100 text-gray-900;
+	}
+
+	.nav-icon {
+		@apply ext-gray-400 group-hover:text-gray-500 h-6 w-6;
+	}
+
+	.nav-icon-current {
+		@apply text-gray-500 mr-3 flex-shrink-0 h-6 w-6;
 	}
 
 	.touch-auto {

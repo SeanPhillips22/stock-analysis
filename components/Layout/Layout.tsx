@@ -1,6 +1,6 @@
-import { Footer } from '../Footer/_Footer'
-import { Header } from '../Header/_Header'
-import { MainNav } from './MainNav'
+import { Footer } from './Footer/_Footer'
+import { Header } from './Header/_Header'
+import { MainNav } from './New/MainNav'
 
 type Props = {
 	children: React.ReactNode
@@ -8,7 +8,7 @@ type Props = {
 
 export function Layout({ children }: Props) {
 	return (
-		<div>
+		<>
 			<Header />
 			<div className="lg:grid lg:grid-cols-leftnav">
 				<aside className="hidden lg:block">
@@ -21,6 +21,6 @@ export function Layout({ children }: Props) {
 					<Footer />
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }
