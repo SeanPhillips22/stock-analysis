@@ -63,7 +63,7 @@ export const Header = () => {
 					<div className="flex-grow max-w-screen-md">
 						<HeaderSearch />
 					</div>
-					<div className="lg:hidden">
+					<div className="xxl:hidden">
 						<button
 							type="button"
 							id="menu-toggle"
@@ -83,11 +83,11 @@ export const Header = () => {
 					{/* <div className="hidden lg:flex">
 						<HeaderNavigation device="desktop" setOpen={setOpen} />
 					</div> */}
-					<div className="hidden lg:flex">
+					<div className="hidden xxl:flex">
 						<HeaderLogin setOpen={setOpen} />
 					</div>
 				</div>
-				<div className="relative lg:hidden">
+				<div className="relative xxl:hidden">
 					<div ref={noderef} className={menu}>
 						{open && (
 							<>

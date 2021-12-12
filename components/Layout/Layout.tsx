@@ -1,6 +1,6 @@
 import { Footer } from './Footer/_Footer'
 import { Header } from './Header/_Header'
-import { MainNav } from './New/MainNav'
+import { LeftNav } from './New/LeftNav'
 
 type Props = {
 	children: React.ReactNode
@@ -10,14 +10,12 @@ export function Layout({ children }: Props) {
 	return (
 		<>
 			<Header />
-			<div className="lg:grid lg:grid-cols-leftnav">
-				<aside className="hidden lg:block">
-					<MainNav />
+			<div className="xxl:grid xxl:grid-cols-leftnav">
+				<aside className="hidden xxl:block">
+					<LeftNav />
 				</aside>
 				<div>
-					<main id="main" className="">
-						{children}
-					</main>
+					<main id="main">{children}</main>
 					<Footer />
 				</div>
 			</div>
