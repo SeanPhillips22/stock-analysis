@@ -11,7 +11,7 @@
 
 	/* SIDE NAV */
 	.nav-item {
-		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-base font-medium;
+		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-base font-medium whitespace-nowrap;
 	}
 
 	.nav-item.current {
@@ -194,6 +194,7 @@
 
 	.contain {
 		/* Container for the main content, but not if full-width on mobile */
+		/* @apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl; */
 		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
 	}
 

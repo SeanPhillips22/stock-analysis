@@ -2,12 +2,8 @@ import { MainNav } from './MainNav'
 
 export function LeftNav() {
 	return (
-		<div className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0">
-			<div className="border-r border-gray-200 pt-16 flex flex-col flex-grow">
-				<div className="flex-grow mt-5 flex flex-col px-4">
-					<MainNav />
-				</div>
-			</div>
+		<div className="hidden lg:flex lg:flex-col lg:sticky lg:top-20 px-4">
+			<MainNav />
 		</div>
 	)
 }

@@ -11,18 +11,18 @@ const navigation = {
 	sections: [
 		{ name: 'Stocks', href: '/stocks/' },
 		{ name: 'IPOs', href: '/ipos/' },
-		{ name: 'ETFs', href: '/etf/' },
+		{ name: 'ETFs', href: '/etf/' }
 	],
 	company: [
 		{ name: 'About', href: '/about/' },
 		{ name: 'Sitemap', href: '/sitemap/' },
-		{ name: 'APIs & Data', href: '/apis/' },
+		{ name: 'APIs & Data', href: '/apis/' }
 	],
 	legal: [
 		{ name: 'Privacy Policy', href: '/privacy-policy/' },
 		{ name: 'Terms of Use', href: '/terms-of-use/' },
-		{ name: 'Data Disclaimer', href: '/data-disclaimer/' },
-	],
+		{ name: 'Data Disclaimer', href: '/data-disclaimer/' }
+	]
 }
 
 export const Footer = () => {
