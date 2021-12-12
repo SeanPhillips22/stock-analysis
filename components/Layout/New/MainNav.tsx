@@ -67,7 +67,7 @@ export function MainNav() {
 					key={item.name}
 					href={item.href}
 					className={
-						item.path === path.one
+						item.path === path.one && !path.two
 							? 'nav-item current group'
 							: 'nav-item group'
 					}
