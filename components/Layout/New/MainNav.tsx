@@ -61,7 +61,7 @@ export function MainNav() {
 	const path = navState((state) => state.path)
 
 	return (
-		<nav className="flex-1 px-4 pb-4 space-y-1">
+		<nav className="flex-1 pb-4 space-y-1">
 			{navigation.map((item) => (
 				<a
 					key={item.name}

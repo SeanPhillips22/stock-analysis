@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import Router from 'next/router'
 import NProgress from 'nprogress'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { Layout } from 'components/Layout/Layout'
+import { Layout } from 'components/Layout/_Layout'
 
 const queryClient = new QueryClient()
 

@@ -1,5 +1,4 @@
 import { useAuth } from 'hooks/useAuth'
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { useState } from 'react'
 import { LogIn } from 'components/Login/LogIn'
@@ -43,11 +42,9 @@ export default function Login() {
 				description="Log in to your Stock Analysis Pro account using your email and password."
 				canonical="/login/"
 			/>
-			<LayoutFullWidth>
-				<div className="flex flex-col justify-center py-5 xs:py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-					<Display />
-				</div>
-			</LayoutFullWidth>
+			<div className="flex flex-col justify-center py-5 xs:py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+				<Display />
+			</div>
 		</>
 	)
 }

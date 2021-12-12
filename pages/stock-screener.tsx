@@ -3,7 +3,6 @@ import { screenerState } from 'components/StockScreener/screener.state'
 import { GetStaticProps } from 'next'
 import { ScreenerData } from 'components/StockScreener/screener.types'
 import { getData } from 'functions/API'
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { StockScreener } from 'components/StockScreener/_StockScreener'
 
@@ -33,11 +32,9 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
 				canonical="/stock-screener/"
 			/>
-			<LayoutFullWidth>
-				<div className="contain pt-5 xs:pt-6">
-					<StockScreener />
-				</div>
-			</LayoutFullWidth>
+			<div className="contain pt-5 xs:pt-6">
+				<StockScreener />
+			</div>
 		</>
 	)
 }
@@ -47,8 +44,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	return {
 		props: {
-			stocks,
+			stocks
 		},
-		revalidate: 6 * 60 * 60,
+		revalidate: 6 * 60 * 60
 	}
 }

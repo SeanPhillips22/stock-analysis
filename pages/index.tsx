@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next'
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { Hero } from 'components/HomePage/Hero'
 import { Movers } from 'components/HomePage/Movers'
@@ -66,22 +65,17 @@ export default function FrontPage({ data }: FrontPageProps) {
 					]
 				}}
 			/>
-			<LayoutFullWidth>
-				<Hero trending={data.trending} />
-				<Movers
-					date={data.date}
-					marketStatus={data.marketStatus}
-					gainers={data.gainers}
-					losers={data.losers}
-				/>
-				<div className="mx-auto flex flex-col space-y-6 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:px-5 lg:max-w-[1200px]">
-					<LatestNews news={data.news} />
-					<IPOwidgets
-						recent={data.recentIpos}
-						upcoming={data.ipoCalendar}
-					/>
-				</div>
-			</LayoutFullWidth>
+			<Hero trending={data.trending} />
+			<Movers
+				date={data.date}
+				marketStatus={data.marketStatus}
+				gainers={data.gainers}
+				losers={data.losers}
+			/>
+			<div className="mx-auto flex flex-col space-y-6 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:px-5 lg:max-w-[1200px]">
+				<LatestNews news={data.news} />
+				<IPOwidgets recent={data.recentIpos} upcoming={data.ipoCalendar} />
+			</div>
 		</>
 	)
 }
