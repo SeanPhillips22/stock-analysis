@@ -93,10 +93,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	const { data, news, upcoming } = await getIpoData(year)
 
-	context.res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {

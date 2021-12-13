@@ -515,7 +515,7 @@
 	}
 
 	#screener-table tr > * {
-		max-width: 220px;
+		max-width: 210px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;

@@ -47,10 +47,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const symbol = context?.params?.symbol as string
 	const data = await getStockFinancialsSSR('cash_flow_statement', symbol)
 
-	context.res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return data
 }

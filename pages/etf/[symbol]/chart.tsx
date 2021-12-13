@@ -3,14 +3,13 @@ import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
 import { Info } from 'types/Info'
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI'
-import { getPageData } from 'functions/callBackEnd'
+import { getPageDataSSR } from 'functions/callBackEnd'
 import { useState } from 'react'
-import { GetStaticProps, GetStaticPaths } from 'next'
+import { GetServerSideProps } from 'next'
 import { Loading } from 'components/Loading'
 import { IOHLCData } from 'components/Chart/iOHLCData'
 import { Export } from 'components/Chart/ExportButton'
 import { useEffect } from 'react'
-import { ParsedUrlQuery } from 'querystring'
 import { Unavailable } from 'components/Unavailable'
 import StockChart from 'components/Chart/StockChart'
 
@@ -137,15 +136,11 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 
 export default CandleStickStockChart
 
-interface IParams extends ParsedUrlQuery {
-	symbol: string
-}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getPageDataSSR('chartpage', symbol, 'etf')
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams
-	return await getPageData('chartpage', symbol, 2 * 60 * 60, 'etf')
-}
+	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' }
+	return data
 }

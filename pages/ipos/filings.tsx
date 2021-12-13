@@ -74,10 +74,7 @@ export default IpoFilings
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, news, recent } = await getIpoData('filings')
 
-	res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {
