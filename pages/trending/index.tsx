@@ -10,6 +10,7 @@ import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Features } from 'components/Layout/Sidebar/Features'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	timestamp: string
@@ -33,18 +34,18 @@ const IPO = () => {
 export default function Trending({ timestamp, data }: Props) {
 	const format0dec = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 0,
-		maximumFractionDigits: 0,
+		maximumFractionDigits: 0
 	})
 
 	const format2dec = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 2,
-		maximumFractionDigits: 2,
+		maximumFractionDigits: 2
 	})
 
 	const columns: Column[] = [
 		{
 			Header: 'No.',
-			accessor: 'no',
+			accessor: 'no'
 		},
 		{
 			Header: 'Symbol',
@@ -73,7 +74,7 @@ export default function Trending({ timestamp, data }: Props) {
 					return 0
 				}
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Name',
@@ -90,7 +91,7 @@ export default function Trending({ timestamp, data }: Props) {
 					return 0
 				}
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Views',
@@ -98,7 +99,7 @@ export default function Trending({ timestamp, data }: Props) {
 			Cell: function FormatCell({ cell: { value } }: any) {
 				return format0dec.format(value)
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Market Cap',
@@ -109,7 +110,7 @@ export default function Trending({ timestamp, data }: Props) {
 				}
 				return abbreviate(value, format2dec)
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Price',
@@ -120,7 +121,7 @@ export default function Trending({ timestamp, data }: Props) {
 				}
 				return '$' + Number(value).toFixed(2)
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Change',
@@ -140,7 +141,7 @@ export default function Trending({ timestamp, data }: Props) {
 					return <span className="text-gray-800">{fixed}</span>
 				}
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Volume',
@@ -151,8 +152,8 @@ export default function Trending({ timestamp, data }: Props) {
 				}
 				return format0dec.format(value)
 			},
-			sortInverted: true,
-		},
+			sortInverted: true
+		}
 	]
 
 	return (
@@ -162,8 +163,8 @@ export default function Trending({ timestamp, data }: Props) {
 				description="A list of the top 20 most popular stocks today based on pageviews. The list is updated multiple times per day."
 				canonical="/trending/"
 			/>
-			<div className="contain">
-				<main id="main" className="w-full py-5 xs:py-6">
+			<Layout>
+				<div className="contain py-5 xs:py-6">
 					<Breadcrumbs url="/trending/" />
 					<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-0">
 						Trending Today
@@ -189,8 +190,8 @@ export default function Trending({ timestamp, data }: Props) {
 							<Features />
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }
@@ -206,8 +207,8 @@ export const getStaticProps: GetStaticProps = async () => {
 	return {
 		props: {
 			timestamp,
-			data,
+			data
 		},
-		revalidate: 60 * 60,
+		revalidate: 60 * 60
 	}
 }

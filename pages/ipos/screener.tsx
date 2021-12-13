@@ -7,6 +7,7 @@ import { SEO } from 'components/SEO'
 import { StockScreener } from 'components/StockScreener/_StockScreener'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
+import { Layout } from 'components/Layout/_Layout'
 
 export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 	const fullCount = screenerDataState((state) => state.fullCount)
@@ -34,16 +35,16 @@ export default function IpoScreenerPage({ ipos }: IPOScreenerData) {
 				description="An IPO screening tool to search, filter and compare all upcoming IPOs on the US stock market."
 				canonical="/ipos/screener/"
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url="/ipos/screener/" />
 					<h1 className="hh1">IPO Screener</h1>
 					<IPONavigation path="screener" />
 					<div className="mt-4">
 						<StockScreener />
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }
@@ -53,8 +54,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	return {
 		props: {
-			ipos,
+			ipos
 		},
-		revalidate: 6 * 60 * 60,
+		revalidate: 6 * 60 * 60
 	}
 }

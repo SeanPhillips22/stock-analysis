@@ -43,7 +43,7 @@ module.exports = {
 			gridTemplateColumns: {
 				sidebar: 'minmax(0, 1fr) 336px',
 				sidebar_wide: 'minmax(0, 1fr) 336px',
-				leftnav: '220px minmax(0, 1fr)',
+				leftnav: '210px minmax(0, 1fr)',
 				overview: '1fr 1fr 3fr',
 				news: '1fr 2fr'
 			},

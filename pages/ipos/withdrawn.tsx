@@ -11,6 +11,7 @@ import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	data: IpoUpcoming[]
@@ -28,8 +29,8 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 				description="A list of companies that have withdrawn their U.S. stock market IPO within the last year."
 				canonical="/ipos/withdrawn/"
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url="/ipos/withdrawn/" />
 					<h1 className="hh1">Withdrawn IPOs</h1>
 					<IPONavigation path="calendar" />
@@ -55,15 +56,15 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 									news={news}
 									button={{
 										text: 'More IPO News',
-										url: '/ipos/news/',
+										url: '/ipos/news/'
 									}}
 								/>
 								<Sidebar2 />
 							</aside>
 						</div>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }
@@ -82,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		props: {
 			data,
 			news,
-			recent,
-		},
+			recent
+		}
 	}
 }

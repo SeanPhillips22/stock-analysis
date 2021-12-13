@@ -5,6 +5,7 @@ import { ScreenerData } from 'components/StockScreener/screener.types'
 import { getData } from 'functions/API'
 import { SEO } from 'components/SEO'
 import { StockScreener } from 'components/StockScreener/_StockScreener'
+import { Layout } from 'components/Layout/_Layout'
 
 export default function StockScreenerPage({ stocks }: ScreenerData) {
 	const fullCount = screenerDataState((state) => state.fullCount)
@@ -32,9 +33,11 @@ export default function StockScreenerPage({ stocks }: ScreenerData) {
 				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
 				canonical="/stock-screener/"
 			/>
-			<div className="contain pt-5 xs:pt-6">
-				<StockScreener />
-			</div>
+			<Layout>
+				<div className="contain pt-5 xs:pt-6">
+					<StockScreener />
+				</div>
+			</Layout>
 		</>
 	)
 }

@@ -1,18 +1,19 @@
-import { ReactNode } from 'react';
-import { Sidebar } from './Sidebar/_Sidebar';
-import { Byline } from './Article/Byline';
+import { ReactNode } from 'react'
+import { Sidebar } from './Sidebar/_Sidebar'
+import { Byline } from './Article/Byline'
+import { Layout } from './_Layout'
 
 interface Meta {
-	title: string;
-	heading?: string;
-	description?: string;
-	image?: string;
-	date?: string;
+	title: string
+	heading?: string
+	description?: string
+	image?: string
+	date?: string
 }
 
 interface Props {
-	meta: Meta;
-	children: ReactNode;
+	meta: Meta
+	children: ReactNode
 }
 
 /**
@@ -24,9 +25,9 @@ interface Props {
 
 export const ArticleLayout = ({ meta, children }: Props) => {
 	return (
-		<>
-			<div className="mx-auto lg:max-w-[1150px] pt-7 md:pt-10 px-4 lg:px-6 lg:grid lg:grid-cols-sidebar lg:gap-12">
-				<main id="main">
+		<Layout>
+			<div className="contain lg:max-w-[1150px] mt-2">
+				<div className="lg:grid lg:grid-cols-sidebar lg:gap-12">
 					<article className="text-page md:px-6">
 						<header className="article-header">
 							<h1>{meta.heading || meta.title}</h1>
@@ -34,11 +35,11 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 						</header>
 						{children}
 					</article>
-				</main>
-				<aside className="space-y-8 lg:pt-4">
-					<Sidebar />
-				</aside>
+					<aside className="space-y-8 lg:pt-4">
+						<Sidebar />
+					</aside>
+				</div>
 			</div>
-		</>
-	);
-};
+		</Layout>
+	)
+}

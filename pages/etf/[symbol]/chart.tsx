@@ -35,7 +35,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				: {
 						time: '1Y',
 						period: 'd',
-						type: 'candlestick',
+						type: 'candlestick'
 				  }
 
 			setStored(stor)
@@ -58,7 +58,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 			const chartObj = {
 				time: time || null,
 				period: periodVar || null,
-				type: type || null,
+				type: type || null
 			}
 
 			if (time && period && type) {
@@ -81,7 +81,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
 				canonical={`/etf/${info.symbol}/chart/`}
 			/>
-			<div className="px-2.5 sm:contain">
+			<div className="px-2.5 sm:contain-content">
 				<div className="py-2">
 					<div className="flex flex-row justify-between items-center border border-gray-200 mb-2 text-sm bp:text-base">
 						<Buttons state={time} dispatch={setTime} />
@@ -96,13 +96,13 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 								{
 									title: 'Export to Excel',
 									type: 'xlsx',
-									restricted: true,
+									restricted: true
 								},
 								{
 									title: 'Export to CSV',
 									type: 'csv',
-									restricted: true,
-								},
+									restricted: true
+								}
 							]}
 							data={data}
 							setData={setData}

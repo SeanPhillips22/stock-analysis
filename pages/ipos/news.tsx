@@ -10,6 +10,7 @@ import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	data: News[]
@@ -25,13 +26,11 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 				description="The latest news about initial public offerings (IPOs) on the stock market, including both recent and upcoming IPOs."
 				canonical="/ipos/news/"
 			/>
-			<div className="">
-				<main className="w-full pt-5 xs:pt-6">
-					<div className="contain">
-						<Breadcrumbs url="/ipos/news/" />
-						<h1 className="hh1">IPO News</h1>
-						<IPONavigation path="news" />
-					</div>
+			<Layout>
+				<div className="contain">
+					<Breadcrumbs url="/ipos/news/" />
+					<h1 className="hh1">IPO News</h1>
+					<IPONavigation path="news" />
 
 					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1">
@@ -44,8 +43,8 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 							<Sidebar2 />
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }
@@ -64,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		props: {
 			data,
 			upcoming,
-			recent,
-		},
+			recent
+		}
 	}
 }

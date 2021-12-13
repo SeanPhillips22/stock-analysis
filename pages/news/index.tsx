@@ -8,6 +8,7 @@ import { NewsFeed } from 'components/News/_NewsFeed'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	data: News[]
@@ -22,13 +23,11 @@ export const MarketNews = ({ data, other }: Props) => {
 				description="Get the latest stock market news and breaking stories from the world's best finance and investing websites."
 				canonical="/news/"
 			/>
-			<div className="">
-				<main className="w-full py-5 xs:py-6">
-					<div className="contain">
-						<Breadcrumbs url="/news/" />
-						<h1 className="hh1">Stock Market News</h1>
-						<NewsNavigation />
-					</div>
+			<Layout>
+				<div className="contain py-5 xs:py-6">
+					<Breadcrumbs url="/news/" />
+					<h1 className="hh1">Stock Market News</h1>
+					<NewsNavigation />
 
 					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1 sm:pt-0 sm:pb-3">
@@ -41,14 +40,14 @@ export const MarketNews = ({ data, other }: Props) => {
 								news={other}
 								button={{
 									text: 'All Stock News',
-									url: '/news/all-stocks/',
+									url: '/news/all-stocks/'
 								}}
 							/>
 							<Sidebar2 />
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }
@@ -66,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	return {
 		props: {
 			data,
-			other,
-		},
+			other
+		}
 	}
 }

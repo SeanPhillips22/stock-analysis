@@ -13,6 +13,7 @@ import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	year: string
@@ -42,8 +43,8 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 				description={description}
 				canonical={`/ipos/${year}/`}
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url={`/ipos/${year}/`} />
 					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation path="" />
@@ -63,14 +64,14 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 								news={news}
 								button={{
 									text: 'More IPO News',
-									url: '/ipos/news/',
+									url: '/ipos/news/'
 								}}
 							/>
 							<Sidebar2 />
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }
@@ -86,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	if (year != '2021' && year != '2020' && year != '2019') {
 		return {
-			notFound: true,
+			notFound: true
 		}
 	}
 
@@ -102,7 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 			year,
 			data,
 			news,
-			upcoming,
-		},
+			upcoming
+		}
 	}
 }

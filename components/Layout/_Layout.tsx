@@ -1,6 +1,5 @@
-import { Footer } from './Footer/_Footer'
-import { Header } from './Header/_Header'
-import { LeftNav } from './New/LeftNav'
+import { LeftNav } from './Navigation/LeftNav'
+import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 
 type Props = {
 	children: React.ReactNode
@@ -9,19 +8,15 @@ type Props = {
 export function Layout({ children }: Props) {
 	return (
 		<>
-			<Header />
-			<div className="xxl:grid xxl:grid-cols-leftnav">
-				<aside className="hidden xxl:block border-r border-gray-200">
+			<div className="mainbody">
+				<aside className="leftcol">
 					<LeftNav />
 				</aside>
-				<div>
-					<main id="main">{children}</main>
-				</div>
-				{/* <aside className="flex flex-col border-l border-gray-200">
-					Side 2
-				</aside> */}
+				<main id="main" className="maincol">
+					{children}
+					<DisplayFooterAd />
+				</main>
 			</div>
-			<Footer />
 		</>
 	)
 }

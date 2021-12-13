@@ -15,11 +15,13 @@ export default function FrontPage() {
 				description="Welcome to Stock Analysis — a site that aims to be the internet’s best source of free stock data and information for regular investors."
 				canonical="/about/"
 			/>
-			<AboutHero />
-			<AboutFeatures />
-			<AboutTeam />
-			<AboutActions />
-			<AboutDetails />
+			<main id="main">
+				<AboutHero />
+				<AboutFeatures />
+				<AboutTeam />
+				<AboutActions />
+				<AboutDetails />
+			</main>
 		</>
 	)
 }

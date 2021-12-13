@@ -4,6 +4,8 @@ import Router from 'next/router'
 import NProgress from 'nprogress'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Layout } from 'components/Layout/_Layout'
+import { Header } from 'components/Layout/Header/_Header'
+import { Footer } from 'components/Layout/Footer/_Footer'
 
 const queryClient = new QueryClient()
 
@@ -20,9 +22,9 @@ Router.events.on('routeChangeError', () => NProgress.done())
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<Layout>
-				<Component {...pageProps} />
-			</Layout>
+			<Header />
+			<Component {...pageProps} />
+			<Footer />
 		</QueryClientProvider>
 	)
 }

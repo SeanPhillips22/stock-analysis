@@ -1,20 +1,21 @@
-import { ReactNode } from 'react';
-import { ActionsNavigation } from 'components/Actions/ActionsNavigation';
-import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { Sidebar } from 'components/Layout/Sidebar/_Sidebar';
+import { ReactNode } from 'react'
+import { ActionsNavigation } from 'components/Actions/ActionsNavigation'
+import { ActionsNavigationSub } from 'components/Actions/ActionsNavigationSub'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { Sidebar } from 'components/Layout/Sidebar/_Sidebar'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
-	title: string;
-	children: ReactNode;
-	url: string;
+	title: string
+	children: ReactNode
+	url: string
 }
 
 export const ActionsLayout = ({ title, children, url }: Props) => {
 	return (
 		<>
-			<div className="contain">
-				<main className="w-full py-5 xs:py-6">
+			<Layout>
+				<div className="contain py-5 xs:py-6">
 					<Breadcrumbs url={url} />
 					<h1 className="hh1">{title}</h1>
 					<ActionsNavigation />
@@ -28,8 +29,8 @@ export const ActionsLayout = ({ title, children, url }: Props) => {
 							<Sidebar />
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
-	);
-};
+	)
+}

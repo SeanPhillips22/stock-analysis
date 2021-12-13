@@ -98,7 +98,7 @@ export const Header = () => {
 					</div>
 				</div>
 			</header>
-			{/* <HeaderAd /> */}
+			<HeaderAd />
 		</>
 	)
 }

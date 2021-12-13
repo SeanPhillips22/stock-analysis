@@ -72,7 +72,7 @@ export function MainNav() {
 							: 'nav-item group'
 					}
 				>
-					<item.icon className="text-gray-500 mr-3 flex-shrink-0 h-6 w-6" />
+					<item.icon className="nav-icon" />
 					{item.name}
 				</a>
 			))}
