@@ -9,7 +9,7 @@
 
 	/* MASTER LAYOUT */
 	.mainbody {
-		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-2 xxl:max-w-[1390px];
+		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-2 xxl:max-w-[1420px];
 	}
 
 	.leftcol {
