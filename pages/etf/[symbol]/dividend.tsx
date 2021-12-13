@@ -27,7 +27,7 @@ const Dividend = ({ info, data, news }: Props) => {
 				description={`Get the latest dividend data for ${info.ticker} (${info.name}), including dividend history, yield, key dates, growth and other metrics.`}
 				canonical={`/etf/${info.symbol}/dividend/`}
 			/>
-			<div className="contain mt-3 sm:mt-4">
+			<div className="contain-content mt-3 sm:mt-4">
 				<div className="lg:grid grid-cols-sidebar_wide py-1 gap-8">
 					<div>
 						<h2 className="text-xl bp:text-2xl font-bold">

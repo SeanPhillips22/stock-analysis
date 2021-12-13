@@ -10,6 +10,7 @@ import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Features } from 'components/Layout/Sidebar/Features'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	timestamp: string
@@ -162,8 +163,8 @@ export default function Trending({ timestamp, data }: Props) {
 				description="A list of the top 20 most popular stocks today based on pageviews. The list is updated multiple times per day."
 				canonical="/trending/"
 			/>
-			<div className="contain">
-				<main id="main" className="w-full py-5 xs:py-6">
+			<Layout>
+				<div className="contain py-5 xs:py-6">
 					<Breadcrumbs url="/trending/" />
 					<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-0">
 						Trending Today
@@ -189,8 +190,8 @@ export default function Trending({ timestamp, data }: Props) {
 							<Features />
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }

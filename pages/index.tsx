@@ -1,11 +1,12 @@
 import { GetServerSideProps } from 'next'
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { Hero } from 'components/HomePage/Hero'
 import { Movers } from 'components/HomePage/Movers'
 import { LatestNews } from 'components/HomePage/LatestNews'
 import { IPOwidgets } from 'components/HomePage/IPOwidgets'
 import { getHomePageData } from 'functions/callBackEnd'
+import { LeftNav } from 'components/Layout/Navigation/LeftNav'
+import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 
 type Trending = {
 	s: string
@@ -66,22 +67,30 @@ export default function FrontPage({ data }: FrontPageProps) {
 					]
 				}}
 			/>
-			<LayoutFullWidth>
+			<main id="main">
 				<Hero trending={data.trending} />
-				<Movers
-					date={data.date}
-					marketStatus={data.marketStatus}
-					gainers={data.gainers}
-					losers={data.losers}
-				/>
-				<div className="mx-auto flex flex-col space-y-6 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:px-5 lg:max-w-[1200px]">
-					<LatestNews news={data.news} />
-					<IPOwidgets
-						recent={data.recentIpos}
-						upcoming={data.ipoCalendar}
-					/>
+				<div className="xxl:grid xxl:grid-cols-leftnav max-w-screen-2xl mx-auto">
+					<aside className="hidden xxl:block border-r border-gray-200">
+						<LeftNav />
+					</aside>
+					<div>
+						<Movers
+							date={data.date}
+							marketStatus={data.marketStatus}
+							gainers={data.gainers}
+							losers={data.losers}
+						/>
+						<div className="mx-auto flex flex-col space-y-6 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:px-5 lg:max-w-[1200px]">
+							<LatestNews news={data.news} />
+							<IPOwidgets
+								recent={data.recentIpos}
+								upcoming={data.ipoCalendar}
+							/>
+						</div>
+						<DisplayFooterAd />
+					</div>
 				</div>
-			</LayoutFullWidth>
+			</main>
 		</>
 	)
 }

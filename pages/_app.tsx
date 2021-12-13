@@ -2,9 +2,10 @@ import 'styles/globals.css'
 import type { AppProps } from 'next/app'
 import Router from 'next/router'
 import NProgress from 'nprogress'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { Layout } from 'components/Layout/_Layout'
 import { Header } from 'components/Layout/Header/_Header'
 import { Footer } from 'components/Layout/Footer/_Footer'
-import { QueryClient, QueryClientProvider } from 'react-query'
 
 const queryClient = new QueryClient()
 

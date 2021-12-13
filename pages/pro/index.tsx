@@ -32,7 +32,7 @@ export default function LandingPage() {
 			await supabase.auth.signUp(
 				{
 					email: data.user.email,
-					password: Math.random().toString(36).substr(2, 10),
+					password: Math.random().toString(36).substr(2, 10)
 				},
 				{
 					data: {
@@ -43,8 +43,8 @@ export default function LandingPage() {
 							data?.checkout?.recurring_prices?.customer?.currency,
 						unit_price: data?.checkout?.recurring_prices?.customer?.unit,
 						country: data?.user?.country,
-						registered_date: formatDateToString(),
-					},
+						registered_date: formatDateToString()
+					}
 				}
 			)
 
@@ -60,7 +60,7 @@ export default function LandingPage() {
 				canonical="/pro/"
 			/>
 			<CrispChat />
-			<main>
+			<div>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
 						<h1 className="text-3xl xs:text-4xl sm:text-[60px] font-bold mb-5 text-gray-800">
@@ -132,7 +132,7 @@ export default function LandingPage() {
 												// eslint-disable-next-line no-undef
 												window.Paddle.Checkout.open({
 													product: 649892,
-													successCallback: checkoutComplete,
+													successCallback: checkoutComplete
 												})
 											}}
 											id="start-trial"
@@ -247,7 +247,7 @@ export default function LandingPage() {
 						</p>
 					</div>
 				</section>
-			</main>
+			</div>
 		</>
 	)
 }

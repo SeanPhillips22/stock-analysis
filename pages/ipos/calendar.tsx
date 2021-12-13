@@ -13,6 +13,7 @@ import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 import { FilingTableMin } from 'components/IPOs/FilingTableMin'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	data: CalendarData
@@ -28,8 +29,8 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 				description="An IPO calendar with all upcoming initial public offerings (IPOs) on the stock market. Includes IPO dates, prices, how many shares are offered and more."
 				canonical="/ipos/calendar/"
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url="/ipos/calendar/" />
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation path="calendar" />
@@ -74,8 +75,8 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 							</aside>
 						</div>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }

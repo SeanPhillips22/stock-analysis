@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	data: {
@@ -32,8 +33,8 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 				description="Statistics and charts for initial public offerings (IPOs) on the US stock market. Annual data is available from 2000-2021 and monthly data for 2019-2021."
 				canonical="/ipos/statistics/"
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url="/ipos/statistics/" />
 					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation path="statistics" />
@@ -125,8 +126,8 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 							/>
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }

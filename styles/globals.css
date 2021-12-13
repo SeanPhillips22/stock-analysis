@@ -6,6 +6,45 @@
 	body {
 		@apply text-gray-900 bg-white;
 	}
+
+	/* MASTER LAYOUT */
+	.mainbody {
+		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-2 xxl:max-w-[1420px];
+	}
+
+	.leftcol {
+		@apply hidden xxl:block border-r border-gray-100;
+	}
+
+	.leftnav {
+		@apply hidden lg:flex lg:flex-col lg:sticky lg:top-16 pl-5 pr-2 pt-5;
+	}
+
+	.maincol {
+		@apply w-full mx-auto xxl:mx-0 xl:max-w-screen-xl;
+	}
+
+	.contain {
+		@apply px-3 xs:px-4 lg:px-6 py-5 xs:py-6 w-full xl:max-w-screen-xl;
+	}
+
+	.contain-content {
+		@apply px-3 xs:px-4 lg:px-6 w-full xl:max-w-screen-xl;
+	}
+
+	/* SIDE NAV */
+	.nav-item {
+		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-sm font-medium whitespace-nowrap;
+	}
+
+	.nav-item.current {
+		@apply bg-gray-100 text-gray-900;
+	}
+
+	.nav-icon {
+		@apply text-gray-500 mr-3 flex-shrink-0 h-6 w-6;
+	}
+
 	.touch-auto {
 		touch-action: auto;
 	}
@@ -170,11 +209,6 @@
 		.navmenu li span.inactive {
 			@apply hover:bg-transparent hover:text-blue-link;
 		}
-	}
-
-	.contain {
-		/* Container for the main content, but not if full-width on mobile */
-		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
 	}
 
 	.uncontain {

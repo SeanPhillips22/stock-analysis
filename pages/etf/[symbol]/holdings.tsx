@@ -25,7 +25,7 @@ const Holdings = ({ info, data, news }: Props) => {
 				description={`A long list of holdings for ${info.ticker} (${info.name}) with details about each stock and its percentage weighting in the ETF.`}
 				canonical={`/etf/${info.symbol}/holdings/`}
 			/>
-			<div className="contain mt-3 sm:mt-4 lg:mt-5">
+			<div className="contain-content mt-3 sm:mt-4 lg:mt-5">
 				<div className="lg:grid grid-cols-sidebar_wide gap-10">
 					<div>
 						{data.count ? (

@@ -13,7 +13,7 @@ export const HeaderLogin = ({ setOpen }: Props) => {
 			return (
 				<Link href="/login/" prefetch={false}>
 					<a
-						className="block lg:inline py-2 px-3 flex-1 text-white bg-gray-500 lg:flex-none lg:bg-white lg:text-black lg:font-normal hover:text-blue-700"
+						className="block xxl:inline py-2 px-3 flex-1 text-white bg-gray-500 xxl:flex-none xxl:bg-white xxl:text-black xxl:font-normal hover:text-blue-700"
 						onClick={() => setOpen(false)}
 					>
 						Log In
@@ -23,7 +23,7 @@ export const HeaderLogin = ({ setOpen }: Props) => {
 		} else {
 			return (
 				<span
-					className="block lg:inline py-2 px-3 flex-1 text-white bg-gray-500 lg:flex-none lg:bg-white lg:text-black lg:font-normal hover:text-blue-700 cursor-pointer"
+					className="block xxl:inline py-2 px-3 flex-1 text-white bg-gray-500 xxl:flex-none xxl:bg-white xxl:text-black xxl:font-normal hover:text-blue-700 cursor-pointer"
 					onClick={() => {
 						signOut()
 					}}
@@ -39,7 +39,7 @@ export const HeaderLogin = ({ setOpen }: Props) => {
 			return (
 				<Link href="/pro/" prefetch={false}>
 					<a
-						className="block lg:inline-block py-2 px-4 lg:py-1 lg:px-3 flex-1 bg-blue-brand_light lg:flex-none text-white lg:rounded-sm lg:font-normal hover:bg-blue-brand_sharp transition duration-200"
+						className="block xxl:inline-block py-2 px-4 xxl:py-1 xxl:px-3 flex-1 bg-blue-brand_light xxl:flex-none text-white xxl:rounded-sm xxl:font-normal hover:bg-blue-brand_sharp transition duration-200"
 						onClick={() => setOpen(false)}
 						id="tag-upgr-header"
 					>
@@ -51,7 +51,7 @@ export const HeaderLogin = ({ setOpen }: Props) => {
 			return (
 				<Link href="/pro/my-account/" prefetch={false}>
 					<a
-						className="block lg:inline-block py-2 px-4 lg:py-1 lg:px-3 flex-1 bg-blue-brand_light lg:flex-none text-white lg:rounded-sm lg:font-normal hover:bg-blue-brand_sharp transition duration-200"
+						className="block xxl:inline-block py-2 px-4 xxl:py-1 xxl:px-3 flex-1 bg-blue-brand_light xxl:flex-none text-white xxl:rounded-sm xxl:font-normal hover:bg-blue-brand_sharp transition duration-200"
 						onClick={() => setOpen(false)}
 					>
 						My Account
@@ -62,7 +62,7 @@ export const HeaderLogin = ({ setOpen }: Props) => {
 	}
 
 	return (
-		<div className="flex flex-row text-center lg:block lg:space-x-1 text-lg">
+		<div className="flex flex-row text-center xxl:block xxl:space-x-1 text-lg">
 			<LogInOut />
 			<TrialOrAccount />
 		</div>

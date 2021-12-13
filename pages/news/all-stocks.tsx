@@ -8,6 +8,7 @@ import { NewsFeed } from 'components/News/_NewsFeed'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	data: News[]
@@ -22,13 +23,11 @@ export const AllStockNews = ({ data, other }: Props) => {
 				description="The latest news on individual stocks on the US stock market, gathered from trusted finance and investing websites."
 				canonical="/news/all-stocks/"
 			/>
-			<div className="">
-				<main className="w-full py-5 xs:py-6">
-					<div className="contain">
-						<Breadcrumbs url="/news/all-stocks/" />
-						<h1 className="hh1">All Stock News</h1>
-						<NewsNavigation />
-					</div>
+			<Layout>
+				<div className="contain py-5 xs:py-6">
+					<Breadcrumbs url="/news/all-stocks/" />
+					<h1 className="hh1">All Stock News</h1>
+					<NewsNavigation />
 
 					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
 						<div className="py-1 sm:pt-0 sm:pb-3">
@@ -47,8 +46,8 @@ export const AllStockNews = ({ data, other }: Props) => {
 							<Sidebar2 />
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }

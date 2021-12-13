@@ -1,8 +1,8 @@
 import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { screenerState } from 'components/StockScreener/screener.state'
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { StockScreener } from 'components/StockScreener/_StockScreener'
+import { Layout } from 'components/Layout/_Layout'
 
 export default function StockScreenerPage() {
 	const type = screenerDataState((state) => state.type)
@@ -23,11 +23,11 @@ export default function StockScreenerPage() {
 				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
 				canonical="/stock-screener/"
 			/>
-			<LayoutFullWidth>
+			<Layout>
 				<div className="contain pt-5 xs:pt-6">
 					<StockScreener />
 				</div>
-			</LayoutFullWidth>
+			</Layout>
 		</>
 	)
 }
