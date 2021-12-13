@@ -9,7 +9,7 @@
 
 	/* MASTER LAYOUT */
 	.mainbody {
-		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-2 xxl:max-w-screen-2xl xxl:mx-auto;
+		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-2 xxl:max-w-[1390px];
 	}
 
 	.leftcol {
@@ -17,7 +17,7 @@
 	}
 
 	.leftnav {
-		@apply hidden lg:flex lg:flex-col lg:sticky lg:top-16 px-4 pt-5;
+		@apply hidden lg:flex lg:flex-col lg:sticky lg:top-16 pl-5 pr-2 pt-5;
 	}
 
 	.maincol {
