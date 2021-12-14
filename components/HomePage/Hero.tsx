@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { SiteSearch } from 'components/Search/SiteSearch'
-import { useAuthState } from 'hooks/useAuthState'
 
 type Trending = {
 	s: string
@@ -9,15 +8,9 @@ type Trending = {
 }
 
 export function Hero({ trending }: { trending: Trending[] }) {
-	const { isPro } = useAuthState()
-
 	return (
 		<>
-			<section
-				className={`bg-gray-100 py-12 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0 ${
-					isPro ? 'md:py-24 lg:py-40' : 'md:py-10 lg:py-24'
-				}`}
-			>
+			<section className="bg-gray-100 py-12 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0 md:py-24 lg:py-40">
 				<div className="mx-auto max-w-[850px] text-center">
 					<h1 className="text-2xl xs:text-3xl md:text-4xl lg:text-[42px] font-bold mb-5 lg:mb-7">
 						Search for a stock to start your analysis

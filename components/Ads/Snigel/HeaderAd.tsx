@@ -6,7 +6,7 @@ export function HeaderAd() {
 	const { checked, isPro } = useAuthState()
 	const { path } = useNavState()
 
-	if (!noAds(path.one)) {
+	if (!noAds(path.one) && path.one !== null) {
 		if (!checked || (checked && !isPro)) {
 			return (
 				<div id="ad-banner">
