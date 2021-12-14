@@ -9,8 +9,8 @@ export function TooltipInfo(props: JSX.IntrinsicAttributes & TippyProps) {
 			<p>
 				The total number of outstanding shares. If the company has many
 				different types of shares, then this number assumes that all of the
-				company's stock is converted into the current share class. This
-				number is used for calculating the company's market cap.
+				company&apos;s stock is converted into the current share class. This
+				number is used for calculating the company&apos;s market cap.
 			</p>
 		</div>
 	)
