@@ -3,12 +3,13 @@ import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 
 type Props = {
 	children: React.ReactNode
+	fullWidth?: boolean
 }
 
-export function Layout({ children }: Props) {
+export function Layout({ children, fullWidth }: Props) {
 	return (
 		<>
-			<div className="mainbody">
+			<div className={fullWidth ? 'mainbody fullwidth' : 'mainbody'}>
 				<aside className="leftcol">
 					<LeftNav />
 				</aside>

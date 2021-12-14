@@ -12,6 +12,10 @@
 		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-2 xxl:max-w-[1420px];
 	}
 
+	.mainbody.fullwidth {
+		@apply gap-x-0 max-w-none;
+	}
+
 	.leftcol {
 		@apply hidden xxl:block border-r border-gray-100;
 	}
@@ -22,6 +26,10 @@
 
 	.maincol {
 		@apply w-full mx-auto xxl:mx-0 xl:max-w-screen-xl;
+	}
+
+	.fullwidth .maincol {
+		@apply max-w-none;
 	}
 
 	.contain {

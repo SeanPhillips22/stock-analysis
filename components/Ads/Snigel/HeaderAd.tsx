@@ -35,7 +35,7 @@ export function HeaderAd() {
 	// 	};
 	// }, [path]);
 
-	if (!noAds(path.one)) {
+	if (!noAds(path.one) && path.one !== null) {
 		if (!checked || (checked && !isPro)) {
 			return (
 				<div
