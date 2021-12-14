@@ -1,15 +1,14 @@
-/* eslint-disable camelcase */
 import { SEO } from 'components/SEO'
-import { LoginPrompt } from 'components/LoginPrompt'
+import { LoginPrompt } from 'components/Pro/LoginPrompt'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { CrispChat } from 'components/Scripts/CrispChat'
 import { useAuthState } from 'hooks/useAuthState'
 import { supabase } from 'functions/supabase'
 import { formatDateClean } from 'functions/formatDates'
-import { GetServerSideProps } from 'next'
+import { ReActivate } from 'components/Pro/MyAccount/Reactivate'
 
-export default function MyAccount({ user }: { user: any }) {
+export default function MyAccount() {
 	const { isLoggedIn } = useAuthState()
 	const [userInfo, setUserInfo] = useState<any>()
 
@@ -32,6 +31,7 @@ export default function MyAccount({ user }: { user: any }) {
 	}
 
 	const {
+		email = undefined,
 		status = undefined,
 		update_url = undefined,
 		cancel_url = undefined,
@@ -63,9 +63,9 @@ export default function MyAccount({ user }: { user: any }) {
 						</h1>
 						<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 							<h2 className="hh2">User Information</h2>
-							{user?.email && (
+							{email && (
 								<div>
-									<strong>Email Address:</strong> {user.email}
+									<strong>Email Address:</strong> {email}
 								</div>
 							)}
 							{registered_date && (
@@ -100,7 +100,7 @@ export default function MyAccount({ user }: { user: any }) {
 										payment_method.slice(1)}
 								</div>
 							)}
-							{update_url && (
+							{isSubscribed && update_url && (
 								<div>
 									<a
 										href={update_url}
@@ -123,6 +123,9 @@ export default function MyAccount({ user }: { user: any }) {
 										Cancel Subscription
 									</a>
 								</div>
+							)}
+							{!isSubscribed && (
+								<ReActivate email={email} status={status} />
 							)}
 						</div>
 
@@ -156,19 +159,4 @@ export default function MyAccount({ user }: { user: any }) {
 			</div>
 		</>
 	)
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-	const { user } = await supabase.auth.api.getUserByCookie(req)
-
-	if (!user) {
-		// If no user, redirect to index.
-		return {
-			props: {},
-			redirect: { destination: '/login/', permanent: false }
-		}
-	}
-
-	// If there is a user, return it.
-	return { props: { user } }
 }
