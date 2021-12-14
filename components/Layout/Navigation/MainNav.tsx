@@ -72,7 +72,7 @@ export function MainNav() {
 							: 'nav-item group'
 					}
 				>
-					<item.icon className="nav-icon" />
+					<item.icon className="nav-icon" style={{ maxWidth: '50px' }} />
 					{item.name}
 				</a>
 			))}
