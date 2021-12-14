@@ -32,7 +32,7 @@ export function useAuth() {
 					method: 'POST',
 					headers: new Headers({ 'Content-Type': 'application/json' }),
 					credentials: 'same-origin',
-					body: JSON.stringify({ event, session }),
+					body: JSON.stringify({ event, session })
 				})
 			}
 		)
@@ -82,7 +82,7 @@ export function useAuth() {
 
 			if (userdata.status !== auth.status) {
 				await supabase.auth.update({
-					data: { status: userdata.status },
+					data: { status: userdata.status }
 				})
 			}
 
@@ -91,7 +91,7 @@ export function useAuth() {
 				auth.cancelled_date !== userdata.cancelled_date
 			) {
 				await supabase.auth.update({
-					data: { cancelled_date: userdata.cancelled_date },
+					data: { cancelled_date: userdata.cancelled_date }
 				})
 			}
 
@@ -100,7 +100,7 @@ export function useAuth() {
 				auth.paused_date !== userdata.paused_date
 			) {
 				await supabase.auth.update({
-					data: { paused_date: userdata.paused_date },
+					data: { paused_date: userdata.paused_date }
 				})
 			}
 		}
