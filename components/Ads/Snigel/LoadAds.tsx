@@ -19,12 +19,7 @@ function getPageAds(path: PathType) {
 	// IPO pages
 	if (path.one === 'ipos') {
 		if (path.two === 'calendar') {
-			return [
-				'top_leaderboard',
-				'sidebar_1',
-				'sidebar_2',
-				'in-content_1_mobile'
-			]
+			return ['top_leaderboard', 'in-content_1_mobile']
 		}
 		if (path.two === 'statistics') {
 			return ['top_leaderboard', 'sidebar_1']

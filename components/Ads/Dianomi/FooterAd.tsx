@@ -23,7 +23,7 @@ export default function FooterAd() {
 		<>
 			<div
 				id="ad-banner"
-				className="dianomi_context max-w-[970px] min-h-[310px] pb-4 mx-auto px-3 xs:px-4 lg:px-0 mt-10 mb-6"
+				className="dianomi_context max-w-[970px] min-h-[310px] pb-4 mx-auto px-3 xs:px-4 lg:px-0 mt-10"
 				data-dianomi-context-id="443"
 			></div>
 			<Script

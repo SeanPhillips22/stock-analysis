@@ -9,7 +9,6 @@ import { IPOSources } from 'components/IPOs/IPOSources'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 import { FilingTableMin } from 'components/IPOs/FilingTableMin'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
@@ -67,7 +66,6 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 							<aside className="space-y-8 lg:space-y-10">
 								<CalendarStats counts={data.counts} />
 								<RecentTableMin recent={recent} />
-								<Sidebar1 />
 								<FilingTableMin
 									filings={filings}
 									count={data.counts.unscheduled}
