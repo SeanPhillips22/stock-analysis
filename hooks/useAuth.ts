@@ -49,7 +49,7 @@ export function useAuth() {
 		if (userCheck) {
 			setUser(userCheck)
 			setIsLoggedIn(true)
-			checkPro(userCheck)
+			await checkPro(userCheck)
 		}
 		setChecked(true)
 	}
@@ -115,5 +115,13 @@ export function useAuth() {
 		await supabase.auth.signOut()
 	}
 
-	return { user, signIn, signOut, checked, isLoggedIn, isPro }
+	return {
+		user,
+		signIn,
+		signOut,
+		checked,
+		isLoggedIn,
+		isPro,
+		setIsPro
+	}
 }

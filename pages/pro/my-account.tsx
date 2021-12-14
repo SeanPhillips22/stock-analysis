@@ -1,11 +1,12 @@
 import { SEO } from 'components/SEO'
-import { LoginPrompt } from 'components/LoginPrompt'
+import { LoginPrompt } from 'components/Pro/LoginPrompt'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { CrispChat } from 'components/Scripts/CrispChat'
 import { useAuthState } from 'hooks/useAuthState'
 import { supabase } from 'functions/supabase'
 import { formatDateClean } from 'functions/formatDates'
+import { ReActivate } from 'components/Pro/MyAccount/Reactivate'
 
 export default function MyAccount() {
 	const { isLoggedIn } = useAuthState()
@@ -99,7 +100,7 @@ export default function MyAccount() {
 										payment_method.slice(1)}
 								</div>
 							)}
-							{update_url && (
+							{isSubscribed && update_url && (
 								<div>
 									<a
 										href={update_url}
@@ -122,6 +123,9 @@ export default function MyAccount() {
 										Cancel Subscription
 									</a>
 								</div>
+							)}
+							{!isSubscribed && (
+								<ReActivate email={email} status={status} />
 							)}
 						</div>
 

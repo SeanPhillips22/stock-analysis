@@ -3,11 +3,11 @@ import { noAds } from 'components/Ads/noAds'
 import { useNavState } from 'hooks/useNavState'
 
 export function HeaderAd() {
-	const { checked, isPro } = useAuthState()
+	const { isLoggedIn } = useAuthState()
 	const { path } = useNavState()
 
 	if (!noAds(path.one) && path.one !== null) {
-		if (!checked || (checked && !isPro)) {
+		if (!isLoggedIn) {
 			return (
 				<div id="ad-banner">
 					<div className="bg-gray-100 pt-1 pb-1 md:pb-2 mx-auto text-center">
