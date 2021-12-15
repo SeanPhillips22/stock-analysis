@@ -1,8 +1,7 @@
 import { useQuote } from 'hooks/useQuote'
 import { Info } from 'types/Info'
 import { Overview } from 'types/Overview'
-import { Tooltip } from 'components/Tooltip'
-import { TooltipInfo } from 'components/TooltipInfo'
+import { Definition } from 'components/Tooltips/Definition'
 
 export const InfoTable = ({ data }: { data: Overview }) => {
 	return (
@@ -22,10 +21,8 @@ export const InfoTable = ({ data }: { data: Overview }) => {
 				</tr>
 				<tr>
 					<td>
-						<span className="relative">
-							Shares Out
-							<TooltipInfo />
-						</span>
+						Shares Out
+						<Definition id="sharesout" />
 					</td>
 					<td>{data.sharesOut}</td>
 				</tr>

@@ -3,11 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+	/*
+	* GLOBAL STYLES
+	* Styles that are are applied globally as defaults
+	*/
 	body {
 		@apply text-gray-900 bg-white;
 	}
 
-	/* MASTER LAYOUT */
+	/* 
+	* MASTER LAYOUT 
+	* The overall grid layout of the site
+	*/
 	.mainbody {
 		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-2 xxl:max-w-[1420px];
 	}
@@ -40,7 +47,13 @@
 		@apply px-3 xs:px-4 lg:px-6 w-full xl:max-w-screen-xl;
 	}
 
-	/* SIDE NAV */
+	/* 
+	* SIDE NAV
+	* The navigation bar to the left side
+	TODO - make this visible on 1280px
+	TODO - make this a flyout menu on mobile, on the left side
+	TODO - remove the old mobile menu instead, have just one menu
+	*/
 	.nav-item {
 		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-sm font-medium whitespace-nowrap;
 	}
@@ -51,6 +64,35 @@
 
 	.nav-icon {
 		@apply text-gray-500 mr-3 flex-shrink-0 h-6 w-6;
+	}
+
+	/*
+	* TOOLTIPS & POPOVERS
+	* Stuff that shows up on hover or click to provide additional information
+	*/
+
+	.def-icon {
+		@apply text-gray-500 absolute -right-3 -top-0.5 p-1 cursor-pointer;
+	}
+
+	.def-icon svg:hover {
+		@apply text-gray-900;
+	}
+
+	.def {
+		@apply p-1.5 whitespace-pre-wrap;
+	}
+
+	.def h4 {
+		@apply text-lg font-semibold mb-2;
+	}
+
+	.def div.def-text {
+		@apply text-sm border-t border-gray-300 pt-2;
+	}
+
+	.def div.def-formula {
+		@apply text-sm border-t border-gray-300 mt-3 pt-2;
 	}
 
 	.touch-auto {
@@ -81,10 +123,6 @@
 		top: 10px;
 		width: auto;
 		z-index: 1001;
-	}
-
-	#main {
-		scroll-margin-top: 68px;
 	}
 
 	.navmenu a::before,
