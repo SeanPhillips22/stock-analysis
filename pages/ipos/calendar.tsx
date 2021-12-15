@@ -33,7 +33,7 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 					<Breadcrumbs url="/ipos/calendar/" />
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation path="calendar" />
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="lg:responsive-sidebar lg:gap-x-10">
 						<div>
 							<CalendarNavigation path="calendar" />
 							<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7 py-2 lg:py-4">

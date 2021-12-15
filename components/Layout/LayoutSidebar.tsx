@@ -18,7 +18,7 @@ export const LayoutSidebar = ({ heading, children, url }: Props) => {
 					{heading}
 				</h1>
 
-				<div className="lg:grid lg:grid-cols-sidebar gap-10 mt-3 sm:mt-4 lg:mt-5">
+				<div className="lg:responsive-sidebar gap-10 mt-3 sm:mt-4 lg:mt-5">
 					<div className="">{children}</div>
 					<aside className="py-0 space-y-8">
 						<Sidebar />

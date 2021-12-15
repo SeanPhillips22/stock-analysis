@@ -34,7 +34,7 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 					<Breadcrumbs url="/ipos/withdrawn/" />
 					<h1 className="hh1">Withdrawn IPOs</h1>
 					<IPONavigation path="calendar" />
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="lg:responsive-sidebar lg:gap-x-10">
 						<div>
 							<CalendarNavigation path="withdrawn" />
 							<div className="py-2 lg:py-4">

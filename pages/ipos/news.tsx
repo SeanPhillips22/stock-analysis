@@ -27,22 +27,22 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 				canonical="/ipos/news/"
 			/>
 			<Layout>
-				<div className="contain">
+				<div className="contain pb-0">
 					<Breadcrumbs url="/ipos/news/" />
 					<h1 className="hh1">IPO News</h1>
 					<IPONavigation path="news" />
+				</div>
 
-					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1">
-							<NewsFeed data={data} related="Stocks" />
-						</div>
-						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 pt-6">
-							<CalendarTableMin upcoming={upcoming} />
-							<Sidebar1 />
-							<RecentTableMin recent={recent} />
-							<Sidebar2 />
-						</aside>
+				<div className="sm:contain-content lg:responsive-sidebar lg:gap-x-10">
+					<div className="py-1">
+						<NewsFeed data={data} related="Stocks" />
 					</div>
+					<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 pt-6">
+						<CalendarTableMin upcoming={upcoming} />
+						<Sidebar1 />
+						<RecentTableMin recent={recent} />
+						<Sidebar2 />
+					</aside>
 				</div>
 			</Layout>
 		</>

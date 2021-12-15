@@ -39,7 +39,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation path="statistics" />
 
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="lg:responsive-sidebar lg:gap-x-10">
 						<div className="flex flex-col space-y-3 py-3 sm:py-4">
 							<div>
 								<p className="text-base sm:text-lg text-gray-900">
