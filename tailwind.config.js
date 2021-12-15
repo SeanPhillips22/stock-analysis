@@ -35,15 +35,16 @@ module.exports = {
 			md: '768px',
 			lg: '1024px',
 			xl: '1200px',
-			xxl: '1300px',
-			'2xl': '1536px',
+			xxl: '1280px',
+			xxxl: '1440px',
 			landscape: { raw: '(orientation: landscape)' }
 		},
 		extend: {
 			gridTemplateColumns: {
 				sidebar: 'minmax(0, 1fr) 336px',
+				sidebar_narrow: 'minmax(0, 1fr) 300px',
 				sidebar_wide: 'minmax(0, 1fr) 336px',
-				leftnav: '205px minmax(0, 1fr)',
+				leftnav: 'auto minmax(0, 1fr)',
 				overview: '1fr 1fr 3fr',
 				news: '1fr 2fr'
 			},

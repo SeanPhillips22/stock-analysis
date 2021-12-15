@@ -30,7 +30,7 @@ export const AllPressReleases = ({ data, other }: Props) => {
 					<NewsNavigation />
 				</div>
 
-				<div className="sm:contain-content lg:grid lg:grid-cols-sidebar gap-x-10">
+				<div className="sm:contain-content lg:responsive-sidebar gap-x-10">
 					<div className="py-1 sm:pt-0 sm:pb-3">
 						<NewsFeed data={data} related="Stocks" />
 					</div>

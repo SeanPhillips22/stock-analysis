@@ -16,7 +16,7 @@
 	* The overall grid layout of the site
 	*/
 	.mainbody {
-		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-2 xxl:max-w-[1420px];
+		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-1 xxxl:gap-x-2 xxl:max-w-[1420px];
 	}
 
 	.mainbody.fullwidth {
@@ -25,10 +25,6 @@
 
 	.leftcol {
 		@apply hidden xxl:block border-r border-gray-100;
-	}
-
-	.leftnav {
-		@apply hidden lg:flex lg:flex-col lg:sticky lg:top-16 pl-5 pr-2 pt-5;
 	}
 
 	.maincol {
@@ -47,6 +43,10 @@
 		@apply px-3 xs:px-4 lg:px-6 w-full xl:max-w-screen-xl;
 	}
 
+	.responsive-sidebar {
+		@apply lg:grid lg:grid-cols-sidebar_narrow xxxl:grid-cols-sidebar_wide;
+	}
+
 	/* 
 	* SIDE NAV
 	* The navigation bar to the left side
@@ -54,6 +54,11 @@
 	TODO - make this a flyout menu on mobile, on the left side
 	TODO - remove the old mobile menu instead, have just one menu
 	*/
+
+	.leftnav {
+		@apply hidden xxl:flex xxl:flex-col xxl:sticky xxl:top-16 pl-2 xxxl:pl-5 pr-2 xxxl:pr-5 pt-5;
+	}
+
 	.nav-item {
 		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-sm font-medium whitespace-nowrap;
 	}
@@ -63,7 +68,7 @@
 	}
 
 	.nav-icon {
-		@apply text-gray-500 mr-3 flex-shrink-0 h-6 w-6;
+		@apply text-gray-500 mr-2.5 xxxl:mr-3 flex-shrink-0 h-5 w-5 xxxl:h-6 xxxl:w-6;
 	}
 
 	/*
@@ -679,7 +684,22 @@
 		text-overflow: ellipsis;
 	}
 
-	@media screen and (max-width: 1200px) {
+	@media screen and (max-width: 1350px) {
+		.ipotable tr > * {
+			padding: 0.5em 0.4em;
+		}
+		.ipotable tr > *:first-child {
+			padding-left: 0.6rem;
+		}
+		.ipotable tr > *:last-child {
+			padding-right: 0.6rem;
+		}
+		.ipotable tr > *:nth-child(3) {
+			max-width: 200px;
+		}
+	}
+
+	@media screen and (max-width: 1279px) {
 		.ipotable tr > * {
 			padding: 0.6em 0.3em;
 		}
