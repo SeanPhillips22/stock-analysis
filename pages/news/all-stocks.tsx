@@ -24,28 +24,28 @@ export const AllStockNews = ({ data, other }: Props) => {
 				canonical="/news/all-stocks/"
 			/>
 			<Layout>
-				<div className="contain py-5 xs:py-6">
+				<div className="contain pb-0">
 					<Breadcrumbs url="/news/all-stocks/" />
 					<h1 className="hh1">All Stock News</h1>
 					<NewsNavigation />
+				</div>
 
-					<div className="sm:contain lg:grid lg:grid-cols-sidebar gap-x-10">
-						<div className="py-1 sm:pt-0 sm:pb-3">
-							<NewsFeed data={data} related="Stocks" />
-						</div>
-						<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
-							<Sidebar1 />
-							<NewsWidget
-								title="Press Releases"
-								news={other}
-								button={{
-									text: 'All Press Releases',
-									url: '/news/press-releases/'
-								}}
-							/>
-							<Sidebar2 />
-						</aside>
+				<div className="sm:contain-content lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="py-1 sm:pt-0 sm:pb-3">
+						<NewsFeed data={data} related="Stocks" />
 					</div>
+					<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
+						<Sidebar1 />
+						<NewsWidget
+							title="Press Releases"
+							news={other}
+							button={{
+								text: 'All Press Releases',
+								url: '/news/press-releases/'
+							}}
+						/>
+						<Sidebar2 />
+					</aside>
 				</div>
 			</Layout>
 		</>
