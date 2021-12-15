@@ -170,7 +170,7 @@ export default function Trending({ timestamp, data }: Props) {
 						Trending Today
 					</h1>
 
-					<div className="lg:responsive-sidebar gap-10 mt-3 sm:mt-4 lg:mt-5">
+					<div className="lg:responsive-sidebar gap-x-10 mt-3 sm:mt-4 lg:mt-5">
 						<div>
 							<SymbolTableSimple
 								title="Stocks"

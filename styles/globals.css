@@ -69,7 +69,6 @@
 
 	.nav-icon {
 		@apply text-gray-500 mr-2.5 xxxl:mr-3 flex-shrink-0 h-5 w-5 xxxl:h-6 xxxl:w-6;
-		/* @apply text-gray-500 mr-3 flex-shrink-0 h-6 w-6; */
 	}
 
 	/*
