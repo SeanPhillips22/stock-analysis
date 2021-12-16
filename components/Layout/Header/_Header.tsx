@@ -56,7 +56,7 @@ export const Header = () => {
 						<Link href="/" prefetch={false}>
 							<a className="flex" aria-label="Stock Analysis home page">
 								<HeaderLogo className="h-7 w-7 xs:h-8 xs:w-8 lg:hidden" />
-								<HeaderLogoFull className="hidden lg:flex lg:h-12 lg:w-28 xl:w-32" />
+								{/* <HeaderLogoFull className="hidden lg:flex lg:h-12 lg:w-28 xl:w-32" /> */}
 							</a>
 						</Link>
 					</div>
