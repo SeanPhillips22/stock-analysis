@@ -1,0 +1,10 @@
+/*
+* GLOBAL STYLES
+* Styles that are are applied globally as defaults
+*/
+
+@layer base {
+	body {
+		@apply text-gray-900 bg-white;
+	}
+}

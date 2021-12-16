@@ -1,0 +1,26 @@
+/*
+* HEADER
+* The site header, contains the logo, search bar and (on mobile/tablet) the menu button
+*/
+
+@layer base {
+	.hd-wrap {
+		@apply bg-white shadow-md sticky landscape:static landscape:lg:sticky top-0 z-50;
+	}
+
+	.hd-inner {
+		@apply flex flex-row items-center py-1 px-6 gap-x-4;
+	}
+
+	.menu-icon {
+		@apply h-8 w-8 text-gray-700 cursor-pointer;
+	}
+
+	.hd-logo {
+		@apply hidden lg:flex lg:h-12 lg:w-28 xl:w-32;
+	}
+
+	.hd-search {
+		@apply flex-grow max-w-screen-sm pl-6;
+	}
+}

@@ -1,6 +1,7 @@
 import { LeftNav } from './Navigation/LeftNav'
 import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 import { Header } from 'components/Layout/Header/_Header'
+import { HeaderNew } from 'components/Layout/Header/_HeaderNew'
 import { Footer } from 'components/Layout/Footer/_Footer'
 
 type Props = {
@@ -11,11 +12,9 @@ type Props = {
 export function Layout({ children, fullWidth }: Props) {
 	return (
 		<>
-			<Header />
+			<HeaderNew />
 			<div className={fullWidth ? 'mainbody fullwidth' : 'mainbody'}>
-				<aside className="leftcol">
-					<LeftNav />
-				</aside>
+				<LeftNav />
 				<main id="main" className="maincol">
 					{children}
 					<DisplayFooterAd />

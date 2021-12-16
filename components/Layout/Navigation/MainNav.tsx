@@ -73,7 +73,7 @@ export function MainNav() {
 					}
 				>
 					<item.icon className="nav-icon" style={{ maxWidth: '50px' }} />
-					{item.name}
+					<span className="nav-label">{item.name}</span>
 				</a>
 			))}
 		</nav>
