@@ -14,7 +14,7 @@ TODO - remove the old mobile menu instead, have just one menu
 	} */
 
 	.leftcol {
-		@apply h-full scale-x-75 origin-left opacity-0 fixed xxl:static xxl:block xxl:opacity-100 xxl:scale-x-100 border-r border-gray-100 transition-all xxl:transition-none;
+		@apply h-full scale-x-75 origin-left opacity-0 fixed xxl:static xxl:block xxl:opacity-100 xxl:scale-x-100 border-r border-gray-100 transition-all duration-300 xxl:transition-none;
 	}
 
 	.leftcol.showmenu {
