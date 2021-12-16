@@ -14,15 +14,15 @@ TODO - remove the old mobile menu instead, have just one menu
 	} */
 
 	.leftcol {
-		@apply hidden xxl:block border-r border-gray-100;
+		@apply h-full scale-x-75 origin-left opacity-0 fixed xxl:static xxl:block xxl:opacity-100 xxl:scale-x-100 border-r border-gray-100 transition-all xxl:transition-none;
 	}
 
 	.leftcol.showmenu {
-		@apply block absolute xxl:static bg-white xxl:bg-transparent h-full z-40 border-r border-gray-100;
+		@apply scale-x-100 opacity-100 bg-white xxl:bg-transparent z-40 border-r border-gray-100;
 	}
 
 	.leftnav {
-		@apply flex flex-col sticky top-16 pl-2 xxxl:pl-5 pr-2 xxxl:pr-5 pt-5;
+		@apply flex flex-col xxl:sticky top-16 pl-2 xxxl:pl-5 pr-2 xxxl:pr-5 pt-3 xxl:pt-5;
 	}
 
 	.nav-item {

@@ -9,18 +9,26 @@
 	}
 
 	.hd-inner {
-		@apply flex flex-row items-center py-1 px-6 gap-x-4;
+		@apply flex flex-row items-center py-1 px-3 xxl:px-6 gap-x-3 xxl:gap-x-4;
+	}
+
+	.hd-menu {
+		@apply xxl:hidden;
 	}
 
 	.menu-icon {
 		@apply h-8 w-8 text-gray-700 cursor-pointer;
 	}
 
+	.hd-logo-wrap {
+		@apply h-8 lg:h-auto max-w-[32px] sm:max-w-none overflow-hidden;
+	}
+
 	.hd-logo {
-		@apply hidden lg:flex lg:h-12 lg:w-28 xl:w-32;
+		@apply lg:flex h-8 overflow-hidden lg:h-12 lg:w-28 xl:w-32;
 	}
 
 	.hd-search {
-		@apply flex-grow max-w-screen-sm pl-6;
+		@apply flex-grow max-w-screen-sm xxl:pl-6;
 	}
 }

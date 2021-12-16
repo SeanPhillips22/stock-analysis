@@ -9,7 +9,7 @@ export function HeaderMenuToggle() {
 	const toggle = navMenuState((state) => state.toggle)
 
 	return (
-		<div className="xxl:hidden" onClick={() => toggle()}>
+		<div className="hd-menu" onClick={() => toggle()}>
 			<HamburgerIcon classes="menu-icon" />
 		</div>
 	)
