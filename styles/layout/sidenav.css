@@ -9,16 +9,12 @@ TODO - remove the old mobile menu instead, have just one menu
 */
 
 @layer base {
-	/* .leftnav {
-		@apply hidden xxl:flex xxl:flex-col xxl:sticky xxl:top-16 pl-2 xxxl:pl-5 pr-2 xxxl:pr-5 pt-5;
-	} */
-
 	.leftcol {
-		@apply h-full scale-x-75 origin-left opacity-0 fixed xxl:static xxl:block xxl:opacity-100 xxl:scale-x-100 border-r border-gray-100 transition-all duration-300 xxl:transition-none;
+		@apply hidden xxl:block xxl:border-r xxl:border-gray-100;
 	}
 
-	.leftcol.showmenu {
-		@apply scale-x-100 opacity-100 bg-white xxl:bg-transparent z-40 border-r border-gray-100;
+	.mobilemenu {
+		@apply fixed z-40 bg-white h-full border-r border-gray-100;
 	}
 
 	.leftnav {
@@ -36,8 +32,4 @@ TODO - remove the old mobile menu instead, have just one menu
 	.nav-icon {
 		@apply text-gray-500 mr-2.5 xxxl:mr-3 flex-shrink-0 h-5 w-5 xxxl:h-6 xxxl:w-6;
 	}
-
-	/* .nav-label {
-		@apply xxl:block;
-	} */
 }
