@@ -9,12 +9,12 @@ export function LeftNav() {
 		<>
 			<Transition
 				show={visible}
-				enter="transition ease-in-out duration-300 transform"
-				enterFrom="-translate-x-full"
-				enterTo="translate-x-0"
-				leave="transition ease-in-out duration-300 transform"
-				leaveFrom="translate-x-0"
-				leaveTo="-translate-x-full"
+				enter="transition duration-150"
+				enterFrom="opacity-0"
+				enterTo="opacity-100"
+				leave="transition duration-150"
+				leaveFrom="opacity-100"
+				leaveTo="opacity-0"
 			>
 				<aside className="mobilemenu">
 					<div className="leftnav">

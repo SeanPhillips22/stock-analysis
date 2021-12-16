@@ -14,11 +14,14 @@ TODO - remove the old mobile menu instead, have just one menu
 	}
 
 	.mobilemenu {
-		@apply fixed z-40 bg-white h-full border-r border-gray-100;
+		@apply fixed z-40 h-full border-r bg-white border-gray-200 shadow-2xl;
 	}
 
 	.leftnav {
-		@apply flex flex-col xxl:sticky top-16 pl-2 xxxl:pl-5 pr-2 xxxl:pr-5 pt-3 xxl:pt-5;
+		@apply xxl:sticky top-16
+		pl-3 xxl:pl-2 xxxl:pl-5
+		pr-3 xxl:pr-2 xxxl:pr-5
+		pt-3 xxl:pt-5;
 	}
 
 	.nav-item {
