@@ -22,7 +22,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 					</p>
 					<form action="/search/" method="get" role="search">
 						<div className="flex items-center relative mx-auto text-left mb-5 max-w-[95%] md:max-w-[75%] lg:max-w-lg">
-							<SiteSearch nav={false} />
+							<SiteSearch classes="border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-7 tiny:pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm lg:text-[17px]" />
 						</div>
 					</form>
 					<div className="text-sm xs:text-base md:text-lg lg:text-[19px]">

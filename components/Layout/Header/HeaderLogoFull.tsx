@@ -3,7 +3,7 @@ import Link from 'next/link'
 export const HeaderLogoFull = () => {
 	return (
 		<Link href="/" prefetch={false}>
-			<a className="flex" aria-label="Stock Analysis home page">
+			<a aria-label="Stock Analysis home page">
 				<div className="hd-logo-wrap">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

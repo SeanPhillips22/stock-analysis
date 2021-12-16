@@ -5,7 +5,7 @@ export const HeaderSearch = () => {
 		<div className="hd-search">
 			<form action="/search/" method="get" role="search">
 				<div className="flex items-center relative">
-					<SiteSearch nav={true} />
+					<SiteSearch classes="border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-1.5 pl-7 tiny:pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm bg-gray-50 focus:bg-white" />
 				</div>
 			</form>
 		</div>

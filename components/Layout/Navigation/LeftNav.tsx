@@ -7,21 +7,23 @@ export function LeftNav() {
 
 	return (
 		<>
-			<Transition
-				show={visible}
-				enter="transition duration-150"
-				enterFrom="opacity-0"
-				enterTo="opacity-100"
-				leave="transition duration-150"
-				leaveFrom="opacity-100"
-				leaveTo="opacity-0"
-			>
-				<aside className="mobilemenu">
-					<div className="leftnav">
-						<MainNav />
-					</div>
-				</aside>
-			</Transition>
+			<div className="xxl:hidden">
+				<Transition
+					show={visible}
+					enter="transition duration-150"
+					enterFrom="opacity-0"
+					enterTo="opacity-100"
+					leave="transition duration-150"
+					leaveFrom="opacity-100"
+					leaveTo="opacity-0"
+				>
+					<aside className="mobilemenu">
+						<div className="leftnav">
+							<MainNav />
+						</div>
+					</aside>
+				</Transition>
+			</div>
 			<aside className="leftcol">
 				<div className="leftnav">
 					<MainNav />

@@ -1,3 +1,4 @@
+import { CloseIcon } from 'components/Icons/Close'
 import { HamburgerIcon } from 'components/Icons/Hamburger'
 import { navMenuState } from 'state/navMenuState'
 
@@ -6,11 +7,16 @@ import { navMenuState } from 'state/navMenuState'
  * @returns {JSX.Element}
  */
 export function HeaderMenuToggle() {
+	const visible = navMenuState((state) => state.visible)
 	const toggle = navMenuState((state) => state.toggle)
 
 	return (
 		<div className="hd-menu" onClick={() => toggle()}>
-			<HamburgerIcon classes="menu-icon" />
+			{visible ? (
+				<CloseIcon classes="menu-icon" />
+			) : (
+				<HamburgerIcon classes="menu-icon" />
+			)}
 		</div>
 	)
 }
