@@ -19,7 +19,7 @@
 	}
 
 	.nav-item {
-		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-sm font-medium whitespace-nowrap;
+		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-sm font-semibold whitespace-nowrap;
 	}
 
 	.nav-item.current {
@@ -33,10 +33,6 @@
 	}
 
 	.nav-login {
-		@apply px-3;
-	}
-
-	.nav-login.logged-in {
-		@apply mb-4;
+		@apply px-3 mb-4;
 	}
 }

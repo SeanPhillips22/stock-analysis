@@ -7,7 +7,7 @@ export function NavLogin() {
 
 	if (isLoggedIn) {
 		return (
-			<div className="nav-login logged-in">
+			<div className="nav-login">
 				<ButtonWhite
 					text="Log Out"
 					onClick={signOut}
@@ -25,7 +25,7 @@ export function NavLogin() {
 	return (
 		<div className="nav-login">
 			<Button text="Free Trial" url="/pro/" className="text-base" />
-			<ButtonWhite text="Login" url="/login/" className="mt-3 text-base" />
+			<ButtonWhite text="Log In" url="/login/" className="mt-3 text-base" />
 		</div>
 	)
 }

@@ -25,9 +25,9 @@ export function HeaderLogin() {
 	return (
 		<div className="hd-login">
 			<ButtonWhite
-				text="Login"
+				text="Log In"
 				url="/login/"
-				className="mt-0 py-1 border-0 shadow-none"
+				className="mt-0 py-1 border-0 shadow-none text-gray-700"
 			/>
 			<Button text="Free Trial" url="/pro/" className="mt-0 py-1" />
 		</div>
