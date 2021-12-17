@@ -33,6 +33,6 @@
 	}
 
 	.nav-login {
-		@apply px-3 mb-4;
+		@apply px-3 mb-6;
 	}
 }
