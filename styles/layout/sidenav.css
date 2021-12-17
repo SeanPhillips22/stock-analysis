@@ -9,7 +9,7 @@
 	}
 
 	.mobilemenu {
-		@apply fixed z-40 border-r bg-white h-[calc(100%-44px)] md:h-[calc(100%-54px)] border-gray-200 shadow-2xl flex flex-col;
+		@apply fixed z-40 border-r bg-white h-[calc(100%-50px)] md:h-[calc(100%-58px)] border-gray-200 shadow-2xl flex flex-col;
 	}
 
 	.leftnav {
