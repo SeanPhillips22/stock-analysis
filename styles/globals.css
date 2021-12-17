@@ -9,35 +9,15 @@
 
 @import 'tailwindcss/utilities';
 
+/* TODO - Move everything into separate files */
+/* TODO - Move all CSS modules into this */
+
 @layer base {
 	.touch-auto {
 		touch-action: auto;
 	}
 	.touch-none {
 		touch-action: none;
-	}
-
-	.skip-nav {
-		border: 0;
-		clip: rect(0 0 0 0);
-		height: 1px;
-		margin: -1px;
-		overflow: hidden;
-		padding: 0;
-		position: absolute;
-		width: 1px;
-	}
-
-	.skip-nav:focus {
-		background: white;
-		clip: auto;
-		height: auto;
-		left: 10px;
-		padding: 0.65rem 0.8rem;
-		position: fixed;
-		top: 10px;
-		width: auto;
-		z-index: 1001;
 	}
 
 	.navmenu a::before,
