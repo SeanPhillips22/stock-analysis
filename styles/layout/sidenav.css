@@ -9,13 +9,13 @@
 	}
 
 	.mobilemenu {
-		@apply fixed z-40 h-full border-r bg-white border-gray-200 shadow-2xl;
+		@apply fixed z-40 border-r bg-white h-[calc(100%-44px)] md:h-[calc(100%-54px)] border-gray-200 shadow-2xl flex flex-col;
 	}
 
 	.leftnav {
 		@apply xxl:sticky top-16
 		px-3 xxl:px-2 xxxl:px-5
-		pt-4 xxl:pt-5;
+		pt-4 flex-grow;
 	}
 
 	.nav-item {
@@ -34,5 +34,9 @@
 
 	.nav-login {
 		@apply px-3;
+	}
+
+	.nav-login.logged-in {
+		@apply mb-4;
 	}
 }

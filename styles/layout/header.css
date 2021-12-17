@@ -9,7 +9,10 @@
 	}
 
 	.hd-inner {
-		@apply flex flex-row items-center py-1.5 sm:py-2 px-3 xxl:px-4 xxxl:px-6 gap-x-4 xxl:gap-x-4;
+		@apply flex flex-row items-center
+		py-1.5 sm:py-2
+		px-1 tiny:px-2 xs:px-3 xxl:px-4 xxxl:px-6
+		gap-x-1 tiny:gap-x-2 xs:gap-x-4;
 	}
 
 	.skip-nav {
@@ -25,11 +28,11 @@
 	}
 
 	.hd-logo-wrap {
-		@apply h-8 lg:h-auto max-w-[32px] sm:max-w-none overflow-hidden;
+		@apply h-8 md:h-auto max-w-[32px] md:max-w-none overflow-hidden;
 	}
 
 	.hd-logo {
-		@apply h-8 lg:h-9 overflow-hidden;
+		@apply h-8 md:h-9 overflow-hidden;
 	}
 
 	.hd-search {
@@ -38,5 +41,13 @@
 
 	.hd-login {
 		@apply hidden xxl:flex flex-row items-center gap-x-2 whitespace-nowrap ml-auto;
+	}
+
+	.hd-login.logged-in {
+		@apply gap-x-1;
+	}
+
+	.hd-login.logged-in * {
+		@apply text-base text-gray-800;
 	}
 }

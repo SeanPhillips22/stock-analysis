@@ -12,6 +12,7 @@ import { FocusedLayout } from 'components/Layout/FocusedLayout'
 export default function MyAccount() {
 	const { isLoggedIn } = useAuthState()
 	const [userInfo, setUserInfo] = useState<any>()
+	const [loaded, setLoaded] = useState(false)
 
 	useEffect(() => {
 		if (isLoggedIn) {
@@ -29,6 +30,8 @@ export default function MyAccount() {
 		if (profile) {
 			setUserInfo(profile[0])
 		}
+
+		setLoaded(true)
 	}
 
 	const {
@@ -126,7 +129,7 @@ export default function MyAccount() {
 										</a>
 									</div>
 								)}
-								{!isSubscribed && (
+								{loaded && !isSubscribed && (
 									<ReActivate email={email} status={status} />
 								)}
 							</div>

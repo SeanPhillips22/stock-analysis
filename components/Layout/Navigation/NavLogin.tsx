@@ -8,16 +8,24 @@ export function NavLogin() {
 	if (isLoggedIn) {
 		return (
 			<div className="nav-login logged-in">
-				<ButtonWhite text="Log Out" onClick={signOut} />
-				<ButtonWhite text="My Account" url="/pro/my-account/" />
+				<ButtonWhite
+					text="Log Out"
+					onClick={signOut}
+					className="text-base px-0"
+				/>
+				<ButtonWhite
+					text="My Account"
+					url="/pro/my-account/"
+					className="mt-3 text-base px-0"
+				/>
 			</div>
 		)
 	}
 
 	return (
 		<div className="nav-login">
-			<Button text="Free Trial" url="/pro/" />
-			<ButtonWhite text="Login" url="/login/" className="mt-3" />
+			<Button text="Free Trial" url="/pro/" className="text-base" />
+			<ButtonWhite text="Login" url="/login/" className="mt-3 text-base" />
 		</div>
 	)
 }
