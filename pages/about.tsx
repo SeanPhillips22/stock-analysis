@@ -6,6 +6,7 @@ import { AboutFeatures } from 'components/About/Features'
 import { AboutTeam } from 'components/About/Team'
 import { AboutActions } from 'components/About/Actions'
 import { AboutDetails } from 'components/About/Details'
+import { FocusedLayout } from 'components/Layout/FocusedLayout'
 
 export default function FrontPage() {
 	return (
@@ -15,13 +16,13 @@ export default function FrontPage() {
 				description="Welcome to Stock Analysis — a site that aims to be the internet’s best source of free stock data and information for regular investors."
 				canonical="/about/"
 			/>
-			<main id="main">
+			<FocusedLayout>
 				<AboutHero />
 				<AboutFeatures />
 				<AboutTeam />
 				<AboutActions />
 				<AboutDetails />
-			</main>
+			</FocusedLayout>
 		</>
 	)
 }
