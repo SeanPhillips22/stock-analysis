@@ -29,6 +29,6 @@
 	}
 
 	.hd-search {
-		@apply flex-grow max-w-screen-sm ml-1 md:ml-2 xxl:ml-6 xxxl:ml-12;
+		@apply flex-grow max-w-screen-xsm ml-1 md:ml-2 xxl:ml-6 xxxl:ml-12;
 	}
 }

@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import { navMenuState } from 'state/navMenuState'
 import { MainNav } from './MainNav'
+import { MobileNav } from './MobileNav'
 
 export function LeftNav() {
 	const visible = navMenuState((state) => state.visible)
@@ -17,11 +18,7 @@ export function LeftNav() {
 					leaveFrom="opacity-100"
 					leaveTo="opacity-0"
 				>
-					<aside className="mobilemenu">
-						<div className="leftnav">
-							<MainNav />
-						</div>
-					</aside>
+					<MobileNav />
 				</Transition>
 			</div>
 			<aside className="leftcol">
