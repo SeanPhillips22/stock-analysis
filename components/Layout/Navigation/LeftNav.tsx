@@ -22,9 +22,7 @@ export function LeftNav() {
 				</Transition>
 			</div>
 			<aside className="leftcol">
-				<div className="leftnav">
-					<MainNav />
-				</div>
+				<MainNav />
 			</aside>
 		</>
 	)

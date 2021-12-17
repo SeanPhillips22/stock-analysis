@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { CrispChat } from 'components/Scripts/CrispChat'
 import { supabase } from 'functions/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
+import { FocusedLayout } from 'components/Layout/FocusedLayout'
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
@@ -60,7 +61,7 @@ export default function LandingPage() {
 				canonical="/pro/"
 			/>
 			<CrispChat />
-			<div>
+			<FocusedLayout>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
 						<h1 className="text-3xl xs:text-4xl sm:text-[60px] font-bold mb-5 text-gray-800">
@@ -247,7 +248,7 @@ export default function LandingPage() {
 						</p>
 					</div>
 				</section>
-			</div>
+			</FocusedLayout>
 		</>
 	)
 }

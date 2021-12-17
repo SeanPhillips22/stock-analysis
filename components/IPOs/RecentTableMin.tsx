@@ -1,9 +1,9 @@
-import { IpoRecent } from 'types/Ipos';
-import { StockLink } from 'components/Links';
-import { Button } from 'components/Button';
+import { IpoRecent } from 'types/Ipos'
+import { StockLink } from 'components/Links'
+import { Button } from 'components/Buttons/Button'
 
 interface Props {
-	recent: IpoRecent[];
+	recent: IpoRecent[]
 }
 
 export const RecentTableMin = ({ recent }: Props) => {
@@ -45,5 +45,5 @@ export const RecentTableMin = ({ recent }: Props) => {
 			</div>
 			<Button text="All Recent IPOs" url="/ipos/" />
 		</div>
-	);
-};
+	)
+}

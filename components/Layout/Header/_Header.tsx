@@ -4,7 +4,11 @@ import { HeaderMenuToggle } from './HeaderMenuToggle'
 import { HeaderSearch } from './HeaderSearch'
 import { HeaderSkipLink } from './HeaderSkipLink'
 
-export function Header() {
+type Props = {
+	hideNav?: boolean
+}
+
+export function Header({ hideNav }: Props) {
 	return (
 		<header className="hd-wrap">
 			<div className="hd-inner">
@@ -12,7 +16,7 @@ export function Header() {
 				<HeaderSkipLink />
 
 				{/* Menu Button */}
-				<HeaderMenuToggle />
+				{!hideNav && <HeaderMenuToggle />}
 
 				{/* Logo */}
 				<HeaderLogoFull />

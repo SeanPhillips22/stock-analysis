@@ -20,9 +20,8 @@ TODO - increase the icon size on mobile/tablet
 
 	.leftnav {
 		@apply xxl:sticky top-16
-		pl-3 xxl:pl-2 xxxl:pl-5
-		pr-3 xxl:pr-2 xxxl:pr-5
-		pt-3 xxl:pt-5;
+		px-3 xxl:px-2 xxxl:px-5
+		pt-4 xxl:pt-5;
 	}
 
 	.nav-item {
@@ -34,6 +33,12 @@ TODO - increase the icon size on mobile/tablet
 	}
 
 	.nav-icon {
-		@apply text-gray-500 mr-2.5 xxxl:mr-3 flex-shrink-0 h-5 w-5 xxxl:h-6 xxxl:w-6;
+		@apply text-gray-500
+		mr-3 xxl:mr-2.5 xxxl:mr-3
+		h-6 w-6 xxl:h-5 xxl:w-5 xxxl:h-6 xxxl:w-6;
+	}
+
+	.nav-login {
+		@apply px-3;
 	}
 }

@@ -61,21 +61,26 @@ export function MainNav() {
 	const path = navState((state) => state.path)
 
 	return (
-		<nav className="flex flex-col space-y-1">
-			{navigation.map((item) => (
-				<a
-					key={item.name}
-					href={item.href}
-					className={
-						item.path === path.one && !path.two
-							? 'nav-item current group'
-							: 'nav-item group'
-					}
-				>
-					<item.icon className="nav-icon" style={{ maxWidth: '50px' }} />
-					<span className="nav-label">{item.name}</span>
-				</a>
-			))}
-		</nav>
+		<div className="leftnav">
+			<nav className="flex flex-col space-y-1">
+				{navigation.map((item) => (
+					<a
+						key={item.name}
+						href={item.href}
+						className={
+							item.path === path.one && !path.two
+								? 'nav-item current group'
+								: 'nav-item group'
+						}
+					>
+						<item.icon
+							className="nav-icon"
+							style={{ maxWidth: '50px' }}
+						/>
+						<span className="nav-label">{item.name}</span>
+					</a>
+				))}
+			</nav>
+		</div>
 	)
 }
