@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { LogIn } from 'components/Login/LogIn'
 import { LogOut } from 'components/Login/LogOut'
 import { Submitted } from 'components/Login/Submitted'
+import { UserLayout } from 'components/Layout/UserLayout'
 
 export default function Login() {
 	const { user, signIn, signOut } = useAuth()
@@ -42,9 +43,9 @@ export default function Login() {
 				description="Log in to your Stock Analysis Pro account using your email and password."
 				canonical="/login/"
 			/>
-			<div className="flex flex-col justify-center py-5 xs:py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+			<UserLayout>
 				<Display />
-			</div>
+			</UserLayout>
 		</>
 	)
 }

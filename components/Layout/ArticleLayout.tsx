@@ -1,7 +1,8 @@
 import { ReactNode } from 'react'
 import { Sidebar } from './Sidebar/_Sidebar'
 import { Byline } from './Article/Byline'
-import { Layout } from './_Layout'
+import { Header } from 'components/Layout/Header/_Header'
+import { Footer } from 'components/Layout/Footer/_Footer'
 import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 
 interface Meta {
@@ -26,22 +27,26 @@ interface Props {
 
 export const ArticleLayout = ({ meta, children }: Props) => {
 	return (
-		<main id="main">
-			<div className="contain lg:max-w-[1150px] mt-2 mx-auto">
-				<div className="lg:grid lg:grid-cols-sidebar lg:gap-12">
-					<article className="text-page md:px-6">
-						<header className="article-header">
-							<h1>{meta.heading || meta.title}</h1>
-							{meta.date && <Byline date={meta.date} />}
-						</header>
-						{children}
-						<DisplayFooterAd />
-					</article>
-					<aside className="space-y-8 lg:pt-4">
-						<Sidebar />
-					</aside>
+		<>
+			<Header />
+			<main id="main">
+				<div className="contain lg:max-w-[1150px] mt-2 mx-auto">
+					<div className="lg:grid lg:grid-cols-sidebar lg:gap-12">
+						<article className="text-page md:px-6">
+							<header className="article-header">
+								<h1>{meta.heading || meta.title}</h1>
+								{meta.date && <Byline date={meta.date} />}
+							</header>
+							{children}
+							<DisplayFooterAd />
+						</article>
+						<aside className="space-y-8 lg:pt-4">
+							<Sidebar />
+						</aside>
+					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+			<Footer />
+		</>
 	)
 }

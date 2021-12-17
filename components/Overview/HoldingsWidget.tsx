@@ -1,15 +1,15 @@
-import { HoldingsType } from 'types/Holdings';
-import { SymbolLink } from 'components/Links';
-import { Button } from 'components/Button';
+import { HoldingsType } from 'types/Holdings'
+import { SymbolLink } from 'components/Links'
+import { Button } from 'components/Buttons/Button'
 
 interface Props {
-	ticker: string;
-	data: HoldingsType;
+	ticker: string
+	data: HoldingsType
 }
 
 export const HoldingsWidget = ({ ticker, data }: Props) => {
 	if (!data.list || data.list.length < 10) {
-		return null;
+		return null
 	}
 
 	return (
@@ -61,5 +61,5 @@ export const HoldingsWidget = ({ ticker, data }: Props) => {
 				className="text-lg bp:text-xl"
 			/>
 		</div>
-	);
-};
+	)
+}

@@ -1,133 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import './sitewide';
+@import './layout/layout';
+@import './layout/header';
+@import './layout/sidenav';
+
+@import 'tailwindcss/components';
+@import './features/definitions';
+
+@import 'tailwindcss/utilities';
+
+/* TODO - Move everything into separate files */
+/* TODO - Move all CSS modules into this */
 
 @layer base {
-	/*
-	* GLOBAL STYLES
-	* Styles that are are applied globally as defaults
-	*/
-	body {
-		@apply text-gray-900 bg-white;
-	}
-
-	/* 
-	* MASTER LAYOUT 
-	* The overall grid layout of the site
-	*/
-	.mainbody {
-		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-1 xxxl:gap-x-2 xxl:max-w-[1420px];
-	}
-
-	.mainbody.fullwidth {
-		@apply gap-x-0 max-w-none;
-	}
-
-	.leftcol {
-		@apply hidden xxl:block border-r border-gray-100;
-	}
-
-	.maincol {
-		@apply w-full mx-auto xxl:mx-0 xl:max-w-screen-xl mb-6;
-	}
-
-	.fullwidth .maincol {
-		@apply max-w-none;
-	}
-
-	.contain {
-		@apply px-3 xs:px-4 lg:px-6 py-5 xs:py-6 w-full xl:max-w-screen-xl;
-	}
-
-	.contain-content {
-		@apply px-3 xs:px-4 lg:px-6 w-full xl:max-w-screen-xl;
-	}
-
-	.responsive-sidebar {
-		@apply lg:grid lg:grid-cols-sidebar_narrow xxxl:grid-cols-sidebar_wide;
-	}
-
-	/* 
-	* SIDE NAV
-	* The navigation bar to the left side
-	TODO - make this visible on 1280px
-	TODO - make this a flyout menu on mobile, on the left side
-	TODO - remove the old mobile menu instead, have just one menu
-	*/
-
-	.leftnav {
-		@apply hidden xxl:flex xxl:flex-col xxl:sticky xxl:top-16 pl-2 xxxl:pl-5 pr-2 xxxl:pr-5 pt-5;
-	}
-
-	.nav-item {
-		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-sm font-medium whitespace-nowrap;
-	}
-
-	.nav-item.current {
-		@apply bg-gray-100 text-gray-900;
-	}
-
-	.nav-icon {
-		@apply text-gray-500 mr-2.5 xxxl:mr-3 flex-shrink-0 h-5 w-5 xxxl:h-6 xxxl:w-6;
-	}
-
-	/*
-	* TOOLTIPS & POPOVERS
-	* Stuff that shows up on hover or click to provide additional information
-	*/
-
-	.def-icon {
-		@apply text-gray-400 absolute -right-3 -top-0.5 p-1 cursor-pointer;
-	}
-
-	.def-icon svg:hover {
-		@apply text-gray-900;
-	}
-
-	.def {
-		@apply p-1.5 whitespace-pre-wrap;
-	}
-
-	.def h4 {
-		@apply text-lg font-semibold mb-2;
-	}
-
-	.def div.def-text {
-		@apply text-sm border-t border-gray-300 pt-2;
-	}
-
-	.def div.def-formula {
-		@apply text-sm border-t border-gray-300 mt-3 pt-2;
-	}
-
 	.touch-auto {
 		touch-action: auto;
 	}
 	.touch-none {
 		touch-action: none;
-	}
-
-	.skip-nav {
-		border: 0;
-		clip: rect(0 0 0 0);
-		height: 1px;
-		margin: -1px;
-		overflow: hidden;
-		padding: 0;
-		position: absolute;
-		width: 1px;
-	}
-
-	.skip-nav:focus {
-		background: white;
-		clip: auto;
-		height: auto;
-		left: 10px;
-		padding: 0.65rem 0.8rem;
-		position: fixed;
-		top: 10px;
-		width: auto;
-		z-index: 1001;
 	}
 
 	.navmenu a::before,
@@ -496,11 +386,15 @@
 	}
 
 	.dropd {
-		@apply max-h-[265px] w-full bg-white absolute top-9 xs:top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
+		@apply max-h-[265px] w-full bg-white absolute top-9 md:top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
 	}
 
 	.dropd.active {
 		@apply opacity-100;
+	}
+
+	.dropd .activeresult {
+		background-color: #f3f4f6;
 	}
 
 	.m-menu {

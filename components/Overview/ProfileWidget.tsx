@@ -1,15 +1,15 @@
-import { Info } from 'types/Info';
-import Link from 'next/link';
-import { Button } from 'components/Button';
+import { Info } from 'types/Info'
+import Link from 'next/link'
+import { Button } from 'components/Buttons/Button'
 
 interface Props {
-	info: Info;
+	info: Info
 	data: {
-		description: string;
+		description: string
 		infoTable: {
-			[key: string]: string[];
-		};
-	};
+			[key: string]: string[]
+		}
+	}
 }
 
 export const Profile = ({ info, data }: Props) => {
@@ -45,7 +45,7 @@ export const Profile = ({ info, data }: Props) => {
 								</span>
 								<span>{data.infoTable[number][1]}</span>
 							</div>
-						);
+						)
 					})}
 			</div>
 
@@ -56,5 +56,5 @@ export const Profile = ({ info, data }: Props) => {
 				/>
 			)}
 		</div>
-	);
-};
+	)
+}

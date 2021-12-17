@@ -1,5 +1,5 @@
-import { Button } from 'components/Button';
-import { ButtonWhite } from 'components/ButtonWhite';
+import { Button } from 'components/Buttons/Button'
+import { ButtonWhite } from 'components/Buttons/ButtonWhite'
 
 export function NewsPaywall() {
 	return (
@@ -27,5 +27,5 @@ export function NewsPaywall() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

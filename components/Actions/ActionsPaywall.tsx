@@ -1,4 +1,4 @@
-import { Button } from 'components/Button'
+import { Button } from 'components/Buttons/Button'
 import { useAuthState } from 'hooks/useAuthState'
 
 interface Props {

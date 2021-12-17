@@ -1,0 +1,53 @@
+/*
+* HEADER
+* The site header, contains the logo, search bar and (on mobile/tablet) the menu button
+*/
+
+@layer base {
+	.hd-wrap {
+		@apply bg-white shadow-md sticky landscape:static landscape:lg:sticky top-0 z-50;
+	}
+
+	.hd-inner {
+		@apply flex flex-row items-center
+		py-1.5 sm:py-2
+		px-1 tiny:px-2 xs:px-3 xxl:px-4 xxxl:px-6
+		gap-x-1 tiny:gap-x-2 xs:gap-x-4;
+	}
+
+	.skip-nav {
+		@apply sr-only focus:not-sr-only;
+	}
+
+	.hd-menu {
+		@apply xxl:hidden;
+	}
+
+	.menu-icon {
+		@apply h-8 w-8 text-gray-700 cursor-pointer;
+	}
+
+	.hd-logo-wrap {
+		@apply h-8 md:h-auto max-w-[32px] md:max-w-none overflow-hidden;
+	}
+
+	.hd-logo {
+		@apply h-8 md:h-9 overflow-hidden;
+	}
+
+	.hd-search {
+		@apply flex-grow max-w-screen-xsm ml-0.5 md:ml-2 xxl:ml-6 xxxl:ml-12;
+	}
+
+	.hd-login {
+		@apply hidden xxl:flex flex-row items-center gap-x-2 whitespace-nowrap ml-auto;
+	}
+
+	.hd-login.logged-in {
+		@apply gap-x-1;
+	}
+
+	.hd-login.logged-in * {
+		@apply text-base text-gray-800;
+	}
+}

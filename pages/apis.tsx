@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import { FocusedLayout } from 'components/Layout/FocusedLayout'
 import { SEO } from 'components/SEO'
 import Link from 'next/link'
 
@@ -53,7 +54,7 @@ export default function ApisPage() {
 				description="We have partnered with Rapid API to offer our comprehensive upcoming IPO calendar as an API. There are both free and paid plans available."
 				canonical="/apis/"
 			/>
-			<main id="main">
+			<FocusedLayout>
 				<div className="bg-gray-100 border-b border-gray-200 shadow-sm">
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
 						<div className="text-center">
@@ -158,7 +159,7 @@ export default function ApisPage() {
 						</div>
 					</div>
 				</div>
-			</main>
+			</FocusedLayout>
 		</>
 	)
 }

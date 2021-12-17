@@ -1,0 +1,34 @@
+/* 
+* MASTER LAYOUT 
+* The overall grid layout of the site
+*/
+
+@layer base {
+	.mainbody {
+		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-1 xxxl:gap-x-2 xxl:max-w-[1420px];
+	}
+
+	.mainbody.fullwidth {
+		@apply gap-x-0 max-w-none;
+	}
+
+	.maincol {
+		@apply w-full mx-auto xxl:mx-0 xl:max-w-screen-xl mb-6;
+	}
+
+	.fullwidth .maincol {
+		@apply max-w-none;
+	}
+
+	.contain {
+		@apply px-3 xs:px-4 lg:px-6 py-5 xs:py-6 w-full xl:max-w-screen-xl;
+	}
+
+	.contain-content {
+		@apply px-3 xs:px-4 lg:px-6 w-full xl:max-w-screen-xl;
+	}
+
+	.responsive-sidebar {
+		@apply lg:grid lg:grid-cols-sidebar_narrow xxxl:grid-cols-sidebar_wide;
+	}
+}

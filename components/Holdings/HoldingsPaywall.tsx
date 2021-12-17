@@ -1,5 +1,5 @@
 import { useAuthState } from 'hooks/useAuthState'
-import { Button } from 'components/Button'
+import { Button } from 'components/Buttons/Button'
 
 export const HoldingsPaywall = ({ total }: { total: number }) => {
 	const { isPro } = useAuthState()
