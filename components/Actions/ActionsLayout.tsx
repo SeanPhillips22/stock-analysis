@@ -20,7 +20,7 @@ export const ActionsLayout = ({ title, children, url }: Props) => {
 					<h1 className="hh1">{title}</h1>
 					<ActionsNavigation />
 
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="lg:right-sidebar">
 						<div className="py-1.5">
 							<ActionsNavigationSub />
 							{children}

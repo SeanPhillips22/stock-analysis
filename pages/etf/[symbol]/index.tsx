@@ -36,7 +36,7 @@ const EtfOverview = ({ info, data, news }: Props) => {
 					<QuoteTable data={data} info={info} />
 				</div>
 			</div>
-			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide gap-10">
+			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10">
 				<div className="px-4 md:px-0 lg:order-2 space-y-7">
 					<Sidebar1Overview news={news.data} />
 					<Profile info={info} data={data} />

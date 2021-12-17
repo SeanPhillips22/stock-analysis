@@ -28,7 +28,7 @@
 		@apply px-3 xs:px-4 lg:px-6 w-full xl:max-w-screen-xl;
 	}
 
-	.responsive-sidebar {
-		@apply lg:grid lg:grid-cols-sidebar_narrow xxxl:grid-cols-sidebar_wide;
+	.right-sidebar {
+		@apply lg:grid lg:grid-cols-sidebar lg:gap-x-10;
 	}
 }

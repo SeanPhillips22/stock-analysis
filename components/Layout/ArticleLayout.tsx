@@ -31,7 +31,7 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 			<Header />
 			<main id="main">
 				<div className="contain lg:max-w-[1150px] mt-2 mx-auto">
-					<div className="lg:grid lg:grid-cols-sidebar lg:gap-12">
+					<div className="lg:right-sidebar">
 						<article className="text-page md:px-6">
 							<header className="article-header">
 								<h1>{meta.heading || meta.title}</h1>

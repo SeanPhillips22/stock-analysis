@@ -33,7 +33,7 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 					<h1 className="hh1">Recent IPOs</h1>
 					<IPONavigation path="" />
 
-					<div className="lg:responsive-sidebar lg:gap-x-10">
+					<div className="lg:right-sidebar">
 						<div>
 							<RecentNavigation path="" />
 							<RecentTable rawdata={data} />

@@ -28,7 +28,7 @@ const Dividend = ({ info, data, news }: Props) => {
 				canonical={`/etf/${info.symbol}/dividend/`}
 			/>
 			<div className="contain-content mt-3 sm:mt-4">
-				<div className="lg:grid grid-cols-sidebar_wide py-1 gap-8">
+				<div className="lg:right-sidebar py-1">
 					<div>
 						<h2 className="text-xl bp:text-2xl font-bold">
 							{info.ticker} Dividend Information

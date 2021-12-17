@@ -33,7 +33,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 					<IPONavigation path="news" />
 				</div>
 
-				<div className="sm:contain-content lg:responsive-sidebar lg:gap-x-10">
+				<div className="sm:contain-content lg:right-sidebar">
 					<div className="py-1">
 						<NewsFeed data={data} related="Stocks" />
 					</div>

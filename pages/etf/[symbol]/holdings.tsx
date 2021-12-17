@@ -26,7 +26,7 @@ const Holdings = ({ info, data, news }: Props) => {
 				canonical={`/etf/${info.symbol}/holdings/`}
 			/>
 			<div className="contain-content mt-3 sm:mt-4 lg:mt-5">
-				<div className="lg:grid grid-cols-sidebar_wide gap-10">
+				<div className="lg:right-sidebar">
 					<div>
 						{data.count ? (
 							<>

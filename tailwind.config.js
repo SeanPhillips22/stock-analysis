@@ -41,7 +41,7 @@ module.exports = {
 		},
 		extend: {
 			gridTemplateColumns: {
-				sidebar: 'minmax(0, 1fr) 336px',
+				sidebar: 'minmax(0, 1fr) 300px',
 				sidebar_narrow: 'minmax(0, 1fr) 300px',
 				sidebar_wide: 'minmax(0, 1fr) 336px',
 				leftnav: 'auto minmax(0, 1fr)',

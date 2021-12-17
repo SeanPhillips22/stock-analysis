@@ -48,7 +48,7 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 					<Breadcrumbs url={`/ipos/${year}/`} />
 					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation path="" />
-					<div className="lg:responsive-sidebar gap-x-10">
+					<div className="lg:right-sidebar">
 						<div>
 							<RecentNavigation path={year} />
 							<div className="mt-4 mb-2 lg:mb-3">
