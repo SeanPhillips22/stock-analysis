@@ -35,4 +35,8 @@
 	.hd-search {
 		@apply flex-grow max-w-screen-xsm ml-1 md:ml-2 xxl:ml-6 xxxl:ml-12;
 	}
+
+	.hd-login {
+		@apply hidden xxl:flex flex-row items-center gap-x-2 whitespace-nowrap ml-auto;
+	}
 }

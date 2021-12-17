@@ -1,4 +1,3 @@
-import { HeaderLogo } from 'components/Layout/Header/HeaderLogo'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Error } from 'components/Alerts/Error'

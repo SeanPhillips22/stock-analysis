@@ -1,8 +1,8 @@
-import { HeaderLoginNew } from './HeaderLoginNew'
-import { HeaderLogoFull } from './HeaderLogoFull'
-import { HeaderMenuToggle } from './HeaderMenuToggle'
-import { HeaderSearch } from './HeaderSearch'
 import { HeaderSkipLink } from './HeaderSkipLink'
+import { HeaderMenuToggle } from './HeaderMenuToggle'
+import { HeaderLogo } from './HeaderLogo'
+import { HeaderLogin } from './HeaderLogin'
+import { HeaderSearch } from './HeaderSearch'
 
 type Props = {
 	hideNav?: boolean
@@ -19,13 +19,13 @@ export function Header({ hideNav }: Props) {
 				{!hideNav && <HeaderMenuToggle />}
 
 				{/* Logo */}
-				<HeaderLogoFull />
+				<HeaderLogo />
 
 				{/* Search */}
 				<HeaderSearch />
 
 				{/* Login */}
-				<HeaderLoginNew />
+				<HeaderLogin />
 			</div>
 		</header>
 	)
