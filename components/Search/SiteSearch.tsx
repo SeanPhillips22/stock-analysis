@@ -32,7 +32,7 @@ export const SiteSearch = ({ classes }: Props) => {
 		if (!loading) {
 			try {
 				setLoading(true)
-				const trendingData = await getData('search?q=trending')
+				const trendingData = await getData('trending?q=top')
 				setTrending(trendingData)
 			} catch (error) {
 				setError(true)
