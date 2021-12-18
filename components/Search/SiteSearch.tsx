@@ -4,7 +4,7 @@ import { SingleResult } from './SingleResult'
 import { useRouter } from 'next/router'
 import { getData, getCloudflareData } from 'functions/API'
 import { CloseIcon } from 'components/Icons/Close'
-import { useDebounce } from 'usehooks-ts'
+import { useDebounce } from 'hooks/useDebounce'
 
 type Props = {
 	classes: string
