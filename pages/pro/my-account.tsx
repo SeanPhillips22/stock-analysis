@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { CrispChat } from 'components/Scripts/CrispChat'
 import { useAuthState } from 'hooks/useAuthState'
 import { supabase } from 'functions/supabase'
-import { formatDateClean } from 'functions/formatDates'
+import { formatDateClean } from 'functions/datetime/formatDates'
 import { ReActivate } from 'components/Pro/MyAccount/Reactivate'
 import { FocusedLayout } from 'components/Layout/FocusedLayout'
 

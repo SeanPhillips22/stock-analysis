@@ -1,4 +1,4 @@
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
 import { GetServerSideProps } from 'next'
 
 const Sitemap = () => {}

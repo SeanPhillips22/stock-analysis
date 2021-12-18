@@ -19,8 +19,8 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 	const name = result.n
 	const type = result.t
 
-	let url
-	let tag
+	let url: string | undefined
+	let tag: string | undefined
 
 	switch (type) {
 		case 's':
@@ -92,8 +92,6 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 					url = `${url}dividend/`
 					break
 			}
-		}
-		if (path.four) {
 		}
 	}
 

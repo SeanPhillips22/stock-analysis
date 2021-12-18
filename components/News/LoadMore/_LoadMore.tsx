@@ -1,5 +1,5 @@
 import { useAuthState } from 'hooks/useAuthState'
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
 import { ButtonMore } from './ButtonMore'
 import { NewsPaywall } from './NewsPaywall'
 import { News } from 'types/News'
@@ -39,7 +39,7 @@ export function LoadMore({
 	dataPage,
 	setDataPage,
 	searched,
-	query,
+	query
 }: Props) {
 	const { isPro } = useAuthState()
 

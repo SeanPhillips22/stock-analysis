@@ -2,14 +2,10 @@ import { useState, useEffect, useRef } from 'react'
 import { SearchIcon } from 'components/Icons/Search'
 import { SingleResult } from './SingleResult'
 import { useRouter } from 'next/router'
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
+import { getSearchResults } from 'functions/apis/search'
 import { CloseIcon } from 'components/Icons/Close'
-
-interface SearchItem {
-	s: string
-	n: string
-	t: string
-}
+import { useDebounce } from 'hooks/useDebounce'
 
 type Props = {
 	classes: string
@@ -19,10 +15,10 @@ export const SiteSearch = ({ classes }: Props) => {
 	const router = useRouter()
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [query, setQuery] = useState('')
+	const debouncedQuery = useDebounce<string>(query, 150)
 	const [fetched, setFetched] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [filtering, setFiltering] = useState(false)
-	const [index, setIndex] = useState([])
 	const [results, setResults] = useState([])
 	const [open, setOpen] = useState(false)
 	const [trending, setTrending] = useState([])
@@ -33,13 +29,11 @@ export const SiteSearch = ({ classes }: Props) => {
 	async function fetchIndex() {
 		setError(false)
 		setFetched(true)
-		if (!loading && !index.length) {
+		if (!loading) {
 			try {
 				setLoading(true)
 				const trendingData = await getData('trending?q=top')
 				setTrending(trendingData)
-				const indexData = await getData('index?type=search')
-				setIndex(indexData)
 			} catch (error) {
 				setError(true)
 				return console.error(error)
@@ -49,62 +43,22 @@ export const SiteSearch = ({ classes }: Props) => {
 		}
 	}
 
-	// When the search query changes, perform a search
+	async function queryCFWorker(search: string) {
+		return await getSearchResults('search?q=' + search)
+	}
+
 	useEffect(() => {
 		setFiltering(true)
-		const stopTimeout = () => {
-			if (waiting) {
-				clearTimeout(waiting)
-			}
-		}
-		stopTimeout()
 
-		let waiting: ReturnType<typeof setTimeout>
-		if (query.length) {
-			waiting = setTimeout(() => {
-				const keyword = query.toString().toUpperCase()
-
-				const exact = index.filter((item: SearchItem) => {
-					if (item.s && item.s === keyword) {
-						return item.s
-					}
-					if (item.n) {
-						const name = item.n.toUpperCase()
-						if (name === keyword) {
-							return name
-						}
-					}
-					return
-				})
-
-				const matches = index.filter((item: SearchItem) => {
-					if (item.s && item.s.startsWith(keyword)) {
-						if (item.s !== keyword) {
-							return item.s.startsWith(keyword)
-						}
-					}
-					if (item.n) {
-						const name = item.n.toUpperCase()
-						if (item.s !== keyword && name !== keyword) {
-							return name.startsWith(keyword)
-						}
-					}
-					return
-				})
-
-				const allResults = exact.concat(matches)
-				setResults(allResults)
+		if (debouncedQuery.length) {
+			queryCFWorker(debouncedQuery).then((data) => {
+				setResults(data)
 				setFiltering(false)
-			}, 150)
-		} else if (fetched) {
+			})
+		} else if (trending.length) {
 			setResults(trending)
 		}
-
-		return () => {
-			clearTimeout(waiting)
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, index])
+	}, [debouncedQuery, trending])
 
 	function keyClick(e: KeyboardEvent) {
 		const active = document.querySelector('.activeresult')

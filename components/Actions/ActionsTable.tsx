@@ -4,13 +4,13 @@ import {
 	useGlobalFilter,
 	useAsyncDebounce,
 	Column,
-	useFilters,
+	useFilters
 } from 'react-table'
 import { useState, useEffect, useMemo } from 'react'
 import { Controls } from 'components/Controls/_Controls'
 import styles from './ActionsTable.module.css'
 import { useAuthState } from 'hooks/useAuthState'
-import { getActionsDataFull } from 'functions/callBackEnd'
+import { getActionsDataFull } from 'functions/apis/callBackEnd'
 import { actionsState } from 'state/actionsState'
 
 interface Props {
@@ -28,7 +28,7 @@ export const ActionsTable = ({
 	rowdata,
 	fullCount,
 	type,
-	year,
+	year
 }: Props) => {
 	const [dataRows, setDataRows] = useState(rowdata)
 	const filter = actionsState((state) => state.filter)
@@ -67,7 +67,7 @@ export const ActionsTable = ({
 		useTable(
 			{
 				columns,
-				data,
+				data
 			},
 			useFilters,
 			useGlobalFilter

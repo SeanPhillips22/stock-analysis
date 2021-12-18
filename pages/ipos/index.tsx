@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { News } from 'types/News'
-import { getIpoData } from 'functions/callBackEnd'
+import { getIpoData } from 'functions/apis/callBackEnd'
 import { SEO } from 'components/SEO'
 import { RecentTable } from 'components/IPOs/RecentTable'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'

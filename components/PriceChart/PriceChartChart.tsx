@@ -15,7 +15,7 @@ import {
 	formatDateDay,
 	formatDateMonth,
 	formatDateYear
-} from 'functions/formatDates'
+} from 'functions/datetime/formatDates'
 import { Unavailable } from 'components/Unavailable'
 import { ReactChart } from 'components/ReactChart'
 import { Info } from 'types/Info'
