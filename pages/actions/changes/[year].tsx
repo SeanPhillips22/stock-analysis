@@ -12,7 +12,7 @@ export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
-			accessor: 'date',
+			accessor: 'date'
 		},
 		{
 			Header: 'Old',
@@ -22,7 +22,7 @@ export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 					return <StockLink symbol={value.slice(1)} />
 				}
 				return value
-			},
+			}
 		},
 		{
 			Header: 'New',
@@ -32,12 +32,12 @@ export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 					return <StockLink symbol={value.slice(1)} />
 				}
 				return value
-			},
+			}
 		},
 		{
 			Header: 'New Company Name',
-			accessor: 'name',
-		},
+			accessor: 'name'
+		}
 	]
 
 	return (
@@ -82,16 +82,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	return {
 		props: {
 			year,
-			data,
-		},
-		revalidate:
-			Number(year) === new Date().getFullYear() ? 4 * 60 * 60 : false,
+			data
+		}
 	}
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	// Generate paths for all the years with existing data
-	const current = new Date().getFullYear()
+	const current = 2021
 	const last = 1998
 	const diff = current - last
 
@@ -102,6 +100,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 	return {
 		paths: params,
-		fallback: false,
+		fallback: false
 	}
 }

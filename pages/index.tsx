@@ -1,11 +1,13 @@
 import { GetServerSideProps } from 'next'
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
 import { SEO } from 'components/SEO'
 import { Hero } from 'components/HomePage/Hero'
 import { Movers } from 'components/HomePage/Movers'
 import { LatestNews } from 'components/HomePage/LatestNews'
 import { IPOwidgets } from 'components/HomePage/IPOwidgets'
 import { getHomePageData } from 'functions/callBackEnd'
+import { LeftNav } from 'components/Layout/Navigation/LeftNav'
+import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
+import { Layout } from 'components/Layout/_Layout'
 
 type Trending = {
 	s: string
@@ -66,7 +68,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 					]
 				}}
 			/>
-			<LayoutFullWidth>
+			<Layout fullWidth={true}>
 				<Hero trending={data.trending} />
 				<Movers
 					date={data.date}
@@ -81,7 +83,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 						upcoming={data.ipoCalendar}
 					/>
 				</div>
-			</LayoutFullWidth>
+			</Layout>
 		</>
 	)
 }
@@ -89,10 +91,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const data = await getHomePageData()
 
-	res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {

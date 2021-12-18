@@ -1,18 +1,18 @@
-/* eslint-disable camelcase */
 import { SEO } from 'components/SEO'
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth'
-import { LoginPrompt } from 'components/LoginPrompt'
+import { LoginPrompt } from 'components/Pro/LoginPrompt'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { CrispChat } from 'components/Scripts/CrispChat'
 import { useAuthState } from 'hooks/useAuthState'
 import { supabase } from 'functions/supabase'
 import { formatDateClean } from 'functions/formatDates'
-import { GetServerSideProps } from 'next'
+import { ReActivate } from 'components/Pro/MyAccount/Reactivate'
+import { FocusedLayout } from 'components/Layout/FocusedLayout'
 
-export default function MyAccount({ user }: { user: any }) {
+export default function MyAccount() {
 	const { isLoggedIn } = useAuthState()
 	const [userInfo, setUserInfo] = useState<any>()
+	const [loaded, setLoaded] = useState(false)
 
 	useEffect(() => {
 		if (isLoggedIn) {
@@ -30,9 +30,12 @@ export default function MyAccount({ user }: { user: any }) {
 		if (profile) {
 			setUserInfo(profile[0])
 		}
+
+		setLoaded(true)
 	}
 
 	const {
+		email = undefined,
 		status = undefined,
 		update_url = undefined,
 		cancel_url = undefined,
@@ -40,7 +43,7 @@ export default function MyAccount({ user }: { user: any }) {
 		currency = undefined,
 		next_bill_date = undefined,
 		next_payment_amount = undefined,
-		registered_date = undefined,
+		registered_date = undefined
 	} = userInfo ? userInfo : {}
 
 	let showStatus = ''
@@ -56,7 +59,7 @@ export default function MyAccount({ user }: { user: any }) {
 		<>
 			<SEO title="My Account" canonical="/pro/my-account/" noindex={true} />
 			<CrispChat />
-			<LayoutFullWidth>
+			<FocusedLayout>
 				<div className="max-w-3xl mx-auto px-4 xs:px-6 py-8 xs:py-12 space-y-6 xs:space-y-8">
 					{isLoggedIn ? (
 						<>
@@ -65,9 +68,9 @@ export default function MyAccount({ user }: { user: any }) {
 							</h1>
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">User Information</h2>
-								{user?.email && (
+								{email && (
 									<div>
-										<strong>Email Address:</strong> {user.email}
+										<strong>Email Address:</strong> {email}
 									</div>
 								)}
 								{registered_date && (
@@ -102,7 +105,7 @@ export default function MyAccount({ user }: { user: any }) {
 											payment_method.slice(1)}
 									</div>
 								)}
-								{update_url && (
+								{isSubscribed && update_url && (
 									<div>
 										<a
 											href={update_url}
@@ -125,6 +128,9 @@ export default function MyAccount({ user }: { user: any }) {
 											Cancel Subscription
 										</a>
 									</div>
+								)}
+								{loaded && !isSubscribed && (
+									<ReActivate email={email} status={status} />
 								)}
 							</div>
 
@@ -156,22 +162,7 @@ export default function MyAccount({ user }: { user: any }) {
 						<LoginPrompt />
 					)}
 				</div>
-			</LayoutFullWidth>
+			</FocusedLayout>
 		</>
 	)
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-	const { user } = await supabase.auth.api.getUserByCookie(req)
-
-	if (!user) {
-		// If no user, redirect to index.
-		return {
-			props: {},
-			redirect: { destination: '/login/', permanent: false },
-		}
-	}
-
-	// If there is a user, return it.
-	return { props: { user } }
 }

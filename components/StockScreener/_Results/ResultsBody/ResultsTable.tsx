@@ -1,86 +1,76 @@
-import { screenerDataState } from 'components/StockScreener/screenerdata.state';
-import { screenerState } from 'components/StockScreener/screener.state';
-import { useEffect, useMemo } from 'react';
+import { screenerDataState } from 'components/StockScreener/screenerdata.state'
+import { screenerState } from 'components/StockScreener/screener.state'
+import { useEffect, useMemo } from 'react'
 import {
 	useTable,
 	useSortBy,
 	usePagination,
 	useGlobalFilter,
-	useAsyncDebounce,
-} from 'react-table';
-import { SortUpIcon } from 'components/Icons/SortUp';
-import { SortDownIcon } from 'components/Icons/SortDown';
-import { ResultsMenu } from '../ResultsMenu/ResultsMenu';
-import { TablePagination } from './TablePagination';
+	useAsyncDebounce
+} from 'react-table'
+import { SortUpIcon } from 'components/Icons/SortUp'
+import { SortDownIcon } from 'components/Icons/SortDown'
+import { ResultsMenu } from '../ResultsMenu/ResultsMenu'
+import { TablePagination } from './TablePagination'
 
-import { filterItems } from 'components/StockScreener/functions/filterItems';
-import { FilterId } from 'components/StockScreener/screener.types';
+import { filterItems } from 'components/StockScreener/functions/filterItems'
+import { FilterId } from 'components/StockScreener/screener.types'
 import {
 	useFetchFullData,
-	useFetchFullIPOData,
-} from 'components/StockScreener/functions/useFetchFullData';
-import { Loading } from 'components/Loading';
+	useFetchFullIPOData
+} from 'components/StockScreener/functions/useFetchFullData'
+import { Loading } from 'components/Loading'
 
 interface Props {
-	cols: any;
+	cols: any
 }
 
 export function ResultsTable({ cols }: Props) {
-	const type = screenerDataState((state) => state.type);
-	const rows = screenerDataState((state) => state.data);
-	const fullyLoaded = screenerDataState((state) => state.fullyLoaded);
-	const fetchFullData = useFetchFullData();
-	const fetchFullIPOData = useFetchFullIPOData();
-	const filters = screenerState((state) => state.filters);
-	const tablePage = screenerState((state) => state.tablePage);
-	const tableSize = screenerState((state) => state.tableSize);
-	const showColumns = screenerState((state) => state.showColumns);
-	const setShowColumns = screenerState((state) => state.setShowColumns);
-	const setFetchedColumns = screenerState((state) => state.setFetchedColumns);
+	const type = screenerDataState((state) => state.type)
+	const rows = screenerDataState((state) => state.data)
+	const fullyLoaded = screenerDataState((state) => state.fullyLoaded)
+	const fetchFullData = useFetchFullData()
+	const fetchFullIPOData = useFetchFullIPOData()
+	const filters = screenerState((state) => state.filters)
+	const tablePage = screenerState((state) => state.tablePage)
+	const tableSize = screenerState((state) => state.tableSize)
+	const showColumns = screenerState((state) => state.showColumns)
+	const setShowColumns = screenerState((state) => state.setShowColumns)
+	const setFetchedColumns = screenerState((state) => state.setFetchedColumns)
 
 	useEffect(() => {
 		if (type == 'stocks') {
-			fetchFullData();
-			setShowColumns([
-				's',
-				'n',
-				'm',
-				'p',
-				'c',
-				'se',
-				'v',
-				'pe',
-			] as FilterId[]);
-			setFetchedColumns(['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe']);
-
+			fetchFullData()
+			setShowColumns(['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'] as FilterId[])
+			setFetchedColumns(['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'])
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		} else {
-			fetchFullIPOData();
+			fetchFullIPOData()
 			setShowColumns([
 				's',
 				'n',
 				'm',
-				'se',
+				'i',
 				'ipoPriceRange',
 				'ipoDate',
-				'revenue',
-			] as FilterId[]);
+				'revenue'
+			] as FilterId[])
 			setFetchedColumns([
 				's',
 				'n',
 				'm',
-				'se',
+				'i',
 				'ipoPriceRange',
 				'ipoDate',
-				'revenue',
-			]);
+				'revenue'
+			])
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [])
 
-	const data = useMemo(() => filterItems(rows, filters), [rows, filters]);
-	const columns = useMemo(() => cols, [cols]);
+	const data = useMemo(() => filterItems(rows, filters), [rows, filters])
+	const columns = useMemo(() => cols, [cols])
 
 	const {
 		headerGroups,
@@ -93,7 +83,7 @@ export function ResultsTable({ cols }: Props) {
 		previousPage,
 		setPageSize,
 		setGlobalFilter,
-		state: { pageIndex, pageSize, globalFilter },
+		state: { pageIndex, pageSize, globalFilter }
 	} = useTable(
 		{
 			columns,
@@ -103,21 +93,21 @@ export function ResultsTable({ cols }: Props) {
 				pageSize: tableSize,
 				hiddenColumns: columns
 					.filter((col: any) => !showColumns.includes(col.accessor))
-					.map((col: any) => col.accessor),
+					.map((col: any) => col.accessor)
 			},
-			autoResetSortBy: false,
+			autoResetSortBy: false
 		},
 		useGlobalFilter,
 		useSortBy,
 		usePagination
-	);
+	)
 
 	if (!fullyLoaded) {
 		return (
 			<div className="h-[600px] mt-6">
 				<Loading />
 			</div>
-		);
+		)
 	}
 
 	return (
@@ -141,7 +131,7 @@ export function ResultsTable({ cols }: Props) {
 										{...column.getSortByToggleProps({
 											title: `Sort by: ${
 												column.name || column.Header
-											}`,
+											}`
 										})}
 										key={index}
 									>
@@ -164,14 +154,14 @@ export function ResultsTable({ cols }: Props) {
 					</thead>
 					<tbody>
 						{page.map((row, index) => {
-							prepareRow(row);
+							prepareRow(row)
 							return (
 								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return <td key={index}>{cell.render('Cell')}</td>;
+										return <td key={index}>{cell.render('Cell')}</td>
 									})}
 								</tr>
-							);
+							)
 						})}
 					</tbody>
 				</table>
@@ -187,5 +177,5 @@ export function ResultsTable({ cols }: Props) {
 				canNextPage={canNextPage}
 			/>
 		</>
-	);
+	)
 }

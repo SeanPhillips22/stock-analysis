@@ -13,7 +13,7 @@ export function Sidebar1() {
 				<div id="ad-banner" className="mx-auto text-center hidden lg:block">
 					<div
 						id="adngin-sidebar_1-0"
-						className="hidden lg:block lg:min-h-[301px] mx-auto center-children"
+						className="hidden lg:block lg:min-h-[271px] mx-auto center-children"
 					></div>
 				</div>
 			)

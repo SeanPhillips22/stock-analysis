@@ -5,7 +5,7 @@ import {
 	Tooltip,
 	LinearScale,
 	CategoryScale,
-	Filler,
+	Filler
 } from 'chart.js'
 
 import {
@@ -14,7 +14,7 @@ import {
 	formatDateMinute,
 	formatDateDay,
 	formatDateMonth,
-	formatDateYear,
+	formatDateYear
 } from 'functions/formatDates'
 import { Unavailable } from 'components/Unavailable'
 import { ReactChart } from 'components/ReactChart'
@@ -88,38 +88,64 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		lineColor = 'rgba(220, 38, 38, 1)'
 	}
 
+	const changeWithoutComma = Number(quote.cl.replace(',', ''))
+
+	const prevCloseLine = chartData.map(() => {
+		return changeWithoutComma
+	})
+
+	let data: any[] = [
+		{
+			label: 'Stock Price',
+			data: priceAxis,
+			borderColor: lineColor,
+			pointHitRadius: 10,
+			pointRadius: 0,
+			tension: 0.01,
+			borderWidth: 2.5,
+			spanGaps: true,
+			fill: true,
+			backgroundColor: (dataset: any) => {
+				const ctx = dataset.chart.ctx
+				const gradient = ctx.createLinearGradient(0, 0, 0, 300)
+				if (change < 0) {
+					gradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)')
+					gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
+				} else {
+					gradient.addColorStop(0, 'rgba(4, 120, 87, 1)')
+					gradient.addColorStop(1, 'rgba(255,255,255,0)')
+				}
+
+				return gradient
+			}
+		}
+	]
+
+	// Add previous close label to 1D charts
+	if (chartTime === '1D') {
+		data = [
+			...data,
+			{
+				label: 'Previous Close',
+				data: prevCloseLine,
+				borderColor: 'rgb(100, 100, 100)',
+				pointHitRadius: 0,
+				pointRadius: 0,
+				borderDash: [1.5, 8],
+				tension: 0.01,
+				borderWidth: 1,
+				spanGaps: true
+			}
+		]
+	}
+
 	return (
 		<ReactChart
 			id={info.symbol}
 			type="line"
 			data={{
 				labels: timeAxis,
-				datasets: [
-					{
-						label: 'Stock Price',
-						data: priceAxis,
-						borderColor: lineColor,
-						pointHitRadius: 5,
-						pointRadius: 0,
-						tension: 0.01,
-						borderWidth: 2.5,
-						spanGaps: true,
-						fill: true,
-						backgroundColor: (dataset: any) => {
-							const ctx = dataset.chart.ctx
-							const gradient = ctx.createLinearGradient(0, 0, 0, 300)
-							if (change < 0) {
-								gradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)')
-								gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
-							} else {
-								gradient.addColorStop(0, 'rgba(4, 120, 87, 1)')
-								gradient.addColorStop(1, 'rgba(255,255,255,0)')
-							}
-
-							return gradient
-						},
-					},
-				],
+				datasets: data
 			}}
 			plugins={[
 				{
@@ -134,56 +160,58 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 						ctx.textBaseline = 'bottom'
 
 						chartInstance.data.datasets.forEach(function (
-							dataset: { data: any[] },
+							dataset: { data: any[]; label: string },
 							i: any
 						) {
-							const meta = chartInstance.getDatasetMeta(i)
+							if (dataset.label == 'Stock Price') {
+								const meta = chartInstance.getDatasetMeta(i)
 
-							const last = meta.data.length - 1 // The last index of the array, so that the latest stock price is shown
+								const last = meta.data.length - 1 // The last index of the array, so that the latest stock price is shown
 
-							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
-							const x = meta.data[last].x + 32.5
-							const y = meta.data[last].y - 10
+								// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
+								const x = meta.data[last].x + 32.5
+								const y = meta.data[last].y - 10
 
-							// retrieve the stock price, data.
-							const raw = parseFloat(dataset.data[last])
-							// const str = dataset.data[last];
-							const str = raw.toFixed(2)
+								// retrieve the stock price, data.
+								const raw = parseFloat(dataset.data[last])
+								// const str = dataset.data[last];
+								const str = raw.toFixed(2)
 
-							// begin drawing and styling
+								// begin drawing and styling
 
-							ctx.save()
+								ctx.save()
 
-							ctx.strokeStyle = lineColor
-							ctx.fillStyle = lineColor
-							ctx.lineWidth = '3.5'
-							ctx.lineJoin = 'round'
+								ctx.strokeStyle = lineColor
+								ctx.fillStyle = lineColor
+								ctx.lineWidth = '3.5'
+								ctx.lineJoin = 'round'
 
-							// calculate the width of the box and height is based on fontsize.
-							const width = ctx.measureText(str).width + 0.4
-							const xPos = x - 23
-							const height = fontSize + 2.8
-							const yPos = y + 1.5
+								// calculate the width of the box and height is based on fontsize.
+								const width = ctx.measureText(str).width + 0.4
+								const xPos = x - 23
+								const height = fontSize + 2.8
+								const yPos = y + 1.5
 
-							// draw triangle to form a pointer.
-							ctx.beginPath()
-							ctx.moveTo(xPos - 7.7, yPos + 1.5 + height / 2)
-							ctx.lineTo(xPos + 0.7, yPos + 2.5 + height)
-							ctx.lineTo(xPos + 0.7, yPos + 0.5)
-							ctx.fill()
-							ctx.closePath()
+								// draw triangle to form a pointer.
+								ctx.beginPath()
+								ctx.moveTo(xPos - 7.7, yPos + 1.5 + height / 2)
+								ctx.lineTo(xPos + 0.7, yPos + 2.5 + height)
+								ctx.lineTo(xPos + 0.7, yPos + 0.5)
+								ctx.fill()
+								ctx.closePath()
 
-							// draw the box
-							ctx.strokeRect(xPos + 2, yPos + 1.5, width, height)
-							ctx.fillRect(xPos + 2, yPos + 1.5, width, height)
+								// draw the box
+								ctx.strokeRect(xPos + 2, yPos + 1.5, width, height)
+								ctx.fillRect(xPos + 2, yPos + 1.5, width, height)
 
-							// draw the text
-							ctx.fillStyle = '#ffffff'
-							ctx.fillText(str, x - 22, meta.data[last].y + 7.4)
-							ctx.restore()
+								// draw the text
+								ctx.fillStyle = '#ffffff'
+								ctx.fillText(str, x - 22, meta.data[last].y + 7.4)
+								ctx.restore()
+							}
 						})
-					},
-				},
+					}
+				}
 			]}
 			options={{
 				maintainAspectRatio: false,
@@ -191,7 +219,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 				scales: {
 					x: {
 						grid: {
-							display: false,
+							display: false
 						},
 						ticks: {
 							callback: function (index: number | string) {
@@ -207,10 +235,22 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 									return formatDateMonth(timeAxis[index])
 								} else if (chartTime === '1D') {
 									const lbl = formatDateMinute(timeAxis[index])
-									// Remove leftmost ticks to prevent chart being pushed to the left
-									// But only after 3+ hours of trading
-									if (count > 180 && lbl.split(':')[0] === '09') {
+									// Remove leftmost ticks to prevent chart being pushed from the left
+									if (
+										lbl.split(':')[0] == '9' &&
+										lbl.split(':')[1] == '30 AM'
+									) {
 										return null
+									}
+									if (count > 180 && lbl.split(':')[0] === '9') {
+										return null
+									}
+									if (count > 60 && lbl.split(':')[0] == '9') {
+										let lblB = lbl.split(':')[1]
+										let lblC = lblB.split(' ')[0]
+										if (Number(lblC) < 36) {
+											return null
+										}
 									}
 									return formatDateMinute(timeAxis[index])
 								} else if (chartTime === '5D') {
@@ -225,7 +265,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 							},
 							color: '#323232',
 							font: {
-								size: 13,
+								size: 13
 							},
 							autoSkip: true,
 							autoSkipPadding: 20,
@@ -233,49 +273,49 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 							minRotation: 0,
 							maxTicksLimit: ['5D', '5Y', 'MAX'].includes(chartTime)
 								? 5
-								: undefined,
-						},
+								: undefined
+						}
 					},
 					y: {
 						position: 'right',
 						ticks: {
 							color: '#555555',
 							font: {
-								size: 12.5,
+								size: 12.5
 							},
-							padding: 5,
+							padding: 5
 						},
 						grid: {
 							drawBorder: false,
-							color: '#efefef',
-						},
-					},
+							color: '#efefef'
+						}
+					}
 				},
 				layout: {
 					padding: {
 						left: 5,
-						right: 11,
-					},
+						right: 11
+					}
 				},
 				plugins: {
 					legend: {
-						display: false,
+						display: false
 					},
 					tooltip: {
 						enabled: true,
 						titleFont: {
 							size: 16,
-							weight: '600',
+							weight: '600'
 						},
 						bodyFont: {
 							size: 14,
-							weight: '400',
+							weight: '400'
 						},
 						padding: {
 							top: 12,
 							right: 15,
 							bottom: 12,
-							left: 15,
+							left: 15
 						},
 						displayColors: false,
 						callbacks: {
@@ -308,10 +348,10 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 									}
 								}
 								return currlabel
-							},
-						},
-					},
-				},
+							}
+						}
+					}
+				}
 			}}
 		/>
 	)

@@ -1,9 +1,9 @@
-import { IpoUpcoming } from 'types/Ipos';
-import { StockLink } from 'components/Links';
-import { Button } from 'components/Button';
+import { IpoUpcoming } from 'types/Ipos'
+import { StockLink } from 'components/Links'
+import { Button } from 'components/Buttons/Button'
 
 interface Props {
-	upcoming: IpoUpcoming[];
+	upcoming: IpoUpcoming[]
 }
 
 export const CalendarTableMin = ({ upcoming }: Props) => {
@@ -45,5 +45,5 @@ export const CalendarTableMin = ({ upcoming }: Props) => {
 			</div>
 			<Button text="Full IPO Calendar" url="/ipos/calendar/" />
 		</div>
-	);
-};
+	)
+}

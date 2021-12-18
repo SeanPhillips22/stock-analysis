@@ -1,7 +1,7 @@
-import { WarningIcon } from 'components/Icons/Warning';
+import { WarningIcon } from 'components/Icons/Warning'
 
 interface Props {
-	message: string;
+	message: string
 }
 
 export const Warning = ({ message }: Props) => (
@@ -15,4 +15,4 @@ export const Warning = ({ message }: Props) => (
 			</div>
 		</div>
 	</div>
-);
+)

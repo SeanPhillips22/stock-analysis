@@ -11,6 +11,7 @@ import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	data: IpoUpcoming[]
@@ -28,12 +29,12 @@ export const IpoFilings = ({ data, news, recent }: Props) => {
 				description="A list of all stocks that have filed for an initial public offering (IPO) on the US stock market, but have not set an estimated IPO date yet."
 				canonical="/ipos/filings/"
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url="/ipos/filings/" />
 					<h1 className="hh1">IPO Filings</h1>
 					<IPONavigation path="calendar" />
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="lg:right-sidebar">
 						<div>
 							<CalendarNavigation path="filings" />
 							<div className="py-2 lg:py-4">
@@ -55,15 +56,15 @@ export const IpoFilings = ({ data, news, recent }: Props) => {
 									news={news}
 									button={{
 										text: 'More IPO News',
-										url: '/ipos/news/',
+										url: '/ipos/news/'
 									}}
 								/>
 								<Sidebar2 />
 							</aside>
 						</div>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
 	)
 }
@@ -73,16 +74,13 @@ export default IpoFilings
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, news, recent } = await getIpoData('filings')
 
-	res.setHeader(
-		'Cache-Control',
-		'no-cache, no-store, max-age=0, must-revalidate'
-	)
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {
 			data,
 			news,
-			recent,
-		},
+			recent
+		}
 	}
 }

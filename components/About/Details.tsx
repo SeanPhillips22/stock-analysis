@@ -1,7 +1,7 @@
 export function AboutDetails() {
 	return (
 		<section className="bg-gray-100">
-			<div className="max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8 -mb-14">
+			<div className="max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
 				<div>
 					<h2 className="text-3xl font-bold text-gray-900">
 						More details
@@ -39,5 +39,5 @@ export function AboutDetails() {
 				</div>
 			</div>
 		</section>
-	);
+	)
 }

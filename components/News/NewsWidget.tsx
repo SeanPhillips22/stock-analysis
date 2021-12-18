@@ -1,18 +1,18 @@
-import { News } from 'types/News';
-import { Button } from 'components/Button';
+import { News } from 'types/News'
+import { Button } from 'components/Buttons/Button'
 
 interface Props {
-	title: string;
-	news: News[];
+	title: string
+	news: News[]
 	button: {
-		text: string;
-		url: string;
-	};
+		text: string
+		url: string
+	}
 }
 
 export const NewsWidget = ({ title, news, button }: Props) => {
 	if (news.length === 0) {
-		return null;
+		return null
 	}
 
 	return (
@@ -38,5 +38,5 @@ export const NewsWidget = ({ title, news, button }: Props) => {
 			</ul>
 			<Button text={button.text} url={button.url} />
 		</div>
-	);
-};
+	)
+}

@@ -1,12 +1,11 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
-import { ParsedUrlQuery } from 'querystring'
+import { GetServerSideProps } from 'next'
 import { Info } from 'types/Info'
 import { Statistics } from 'types/Statistics'
 import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
-import { getPageData } from 'functions/callBackEnd'
+import { getPageDataSSR } from 'functions/callBackEnd'
 import { StatsWidget } from 'components/StatsWidget/_StatsWidget'
-import { Button } from 'components/Button'
+import { Button } from 'components/Buttons/Button'
 import { MAP_STATISTICS } from 'data/financials/map_statistics'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
@@ -188,15 +187,11 @@ const StatisticsPage = ({ info, data }: Props) => {
 }
 export default StatisticsPage
 
-interface IParams extends ParsedUrlQuery {
-	symbol: string
-}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getPageDataSSR('statistics', symbol)
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams
-	return await getPageData('statistics', symbol, 2 * 60 * 60)
-}
+	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' }
+	return data
 }

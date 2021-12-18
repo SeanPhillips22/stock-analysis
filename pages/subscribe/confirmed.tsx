@@ -1,5 +1,5 @@
-import { SEO } from 'components/SEO';
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
+import { FocusedLayout } from 'components/Layout/FocusedLayout'
+import { SEO } from 'components/SEO'
 
 export default function ThankYou() {
 	return (
@@ -9,7 +9,7 @@ export default function ThankYou() {
 				canonical="/subscribe/confirmed/"
 				noindex={true}
 			/>
-			<LayoutFullWidth>
+			<FocusedLayout>
 				<div className="py-20 max-w-screen-md mx-auto px-6">
 					<h1 className="hh1 text-4xl mb-5">Confirmed!</h1>
 					<p className="text-base md:text-xl mb-5">
@@ -30,7 +30,7 @@ export default function ThankYou() {
 						{`Keep in mind that you can cancel at any time by clicking the unsubscribe link at the bottom of each email.`}
 					</p>
 				</div>
-			</LayoutFullWidth>
+			</FocusedLayout>
 		</>
-	);
+	)
 }

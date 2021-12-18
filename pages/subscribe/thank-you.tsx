@@ -1,5 +1,5 @@
-import { SEO } from 'components/SEO';
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
+import { FocusedLayout } from 'components/Layout/FocusedLayout'
+import { SEO } from 'components/SEO'
 
 export default function ThankYou() {
 	return (
@@ -9,7 +9,7 @@ export default function ThankYou() {
 				canonical="/subscribe/thank-you/"
 				noindex={true}
 			/>
-			<LayoutFullWidth>
+			<FocusedLayout>
 				<div className="py-20 max-w-screen-md mx-auto px-5 xs:px-6">
 					<h1 className="hh1 text-4xl">Thank you!</h1>
 					<p className="text-base md:text-xl mb-5">
@@ -26,7 +26,7 @@ export default function ThankYou() {
 						us.
 					</p>
 				</div>
-			</LayoutFullWidth>
+			</FocusedLayout>
 		</>
-	);
+	)
 }

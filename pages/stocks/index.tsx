@@ -1,47 +1,47 @@
-import { GetStaticProps } from 'next';
-import { getData } from 'functions/API';
-import { Column } from 'react-table';
-import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
-import { SEO } from 'components/SEO';
-import { SymbolTable } from 'components/Tables/SymbolTable';
-import Link from 'next/link';
+import { GetStaticProps } from 'next'
+import { getData } from 'functions/API'
+import { Column } from 'react-table'
+import { LayoutSidebar } from 'components/Layout/LayoutSidebar'
+import { SEO } from 'components/SEO'
+import { SymbolTable } from 'components/Tables/SymbolTable'
+import Link from 'next/link'
 
 const formatter = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
-	maximumFractionDigits: 2,
-});
+	maximumFractionDigits: 2
+})
 
 const abbreviate = (num: number) => {
 	if (num > 1000000000) {
-		return formatter.format(num / 1000000000) + 'B';
+		return formatter.format(num / 1000000000) + 'B'
 	} else if (num > 1000000) {
-		return formatter.format(num / 1000000) + 'M';
+		return formatter.format(num / 1000000) + 'M'
 	} else {
-		return formatter.format(num);
+		return formatter.format(num)
 	}
-};
+}
 
 interface IStock {
-	s: string;
-	n: string;
-	ind: string;
-	mcap: number;
+	s: string
+	n: string
+	ind: string
+	mcap: number
 }
 
 interface IStocks {
-	stocks: IStock[];
+	stocks: IStock[]
 }
 
 interface ICellString {
 	cell: {
-		value: string;
-	};
+		value: string
+	}
 }
 
 interface ICellNumber {
 	cell: {
-		value: number;
-	};
+		value: number
+	}
 }
 
 export default function StocksIndexPage({ stocks }: IStocks) {
@@ -50,33 +50,33 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 			Header: 'Symbol',
 			accessor: 's',
 			Cell: function FormatCell({ cell: { value } }: ICellString) {
-				const symb = value.includes('.') ? value : `${value}/`;
+				const symb = value.includes('.') ? value : `${value}/`
 				return (
 					<Link href={`/stocks/${symb.toLowerCase()}`} prefetch={false}>
 						<a>{value}</a>
 					</Link>
-				);
+				)
 			},
-			sortInverted: true,
+			sortInverted: true
 		},
 		{
 			Header: 'Company Name',
 			accessor: 'n',
-			sortType: 'string',
+			sortType: 'string'
 		},
 		{
 			Header: 'Industry',
-			accessor: 'i',
+			accessor: 'i'
 		},
 		{
 			Header: 'Market Cap',
 			accessor: 'm',
 			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
-				return abbreviate(value);
+				return abbreviate(value)
 			},
-			sortInverted: true,
-		},
-	];
+			sortInverted: true
+		}
+	]
 
 	return (
 		<LayoutSidebar heading="All Stock Symbols" url="/stocks/">
@@ -87,16 +87,16 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 			/>
 			<SymbolTable title="Stocks" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>
-	);
+	)
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const stocks = await getData('index?type=stockspage');
+	const stocks = await getData('index?type=stockspage')
 
 	return {
 		props: {
-			stocks,
+			stocks
 		},
-		revalidate: 6 * 60 * 60,
-	};
-};
+		revalidate: 1 * 60 * 60
+	}
+}

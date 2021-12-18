@@ -6,13 +6,11 @@ import { getData, getCloudflareData } from 'functions/API'
 import { CloseIcon } from 'components/Icons/Close'
 import { useDebounce } from 'usehooks-ts'
 
-interface SearchItem {
-	s: string
-	n: string
-	t: string
+type Props = {
+	classes: string
 }
 
-export const SiteSearch = ({ nav }: { nav: boolean }) => {
+export const SiteSearch = ({ classes }: Props) => {
 	const router = useRouter()
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [query, setQuery] = useState('')
@@ -188,9 +186,7 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 		<>
 			<SearchIcon />
 			<input
-				className={`border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-2 pl-7 tiny:pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none hover:bg-white focus:bg-white focus:shadow-lg rounded-sm ${
-					nav ? 'bg-gray-50 focus:bg-white' : 'lg:text-[17px]'
-				}`}
+				className={classes}
 				type="text"
 				aria-label="Search"
 				role="combobox"
@@ -261,11 +257,6 @@ export const SiteSearch = ({ nav }: { nav: boolean }) => {
 								)
 							)}
 						</div>
-						<style global jsx>{`
-							.activeresult {
-								background-color: #f3f4f6;
-							}
-						`}</style>
 					</>
 				)}
 			</div>

@@ -10,7 +10,7 @@ export const ActionsSplits = ({ data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
-			accessor: 'date',
+			accessor: 'date'
 		},
 		{
 			Header: 'Symbol',
@@ -20,26 +20,26 @@ export const ActionsSplits = ({ data }: ActionProps) => {
 					return <StockLink symbol={value.slice(1)} />
 				}
 				return value
-			},
+			}
 		},
 		{
 			Header: 'Type',
-			accessor: 'splitType',
+			accessor: 'splitType'
 		},
 		{
 			Header: 'Split Ratio',
-			accessor: 'splitRatio',
+			accessor: 'splitRatio'
 		},
 		{
 			Header: 'Company Name',
-			accessor: 'name',
-		},
+			accessor: 'name'
+		}
 	]
 
 	return (
 		<>
 			<SEO
-				title="All Recent Stock Splits - A Complete List"
+				title={`Recent Stock Splits: 1998-${new Date().getFullYear()}`}
 				description="The most recent stock splits on the US stock market, including both regular (forward) splits and reverse splits."
 				canonical="/actions/splits/"
 			/>
@@ -64,8 +64,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	return {
 		props: {
-			data,
+			data
 		},
-		revalidate: 2 * 60 * 60,
+		revalidate: 2 * 60 * 60
 	}
 }

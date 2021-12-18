@@ -1,43 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import './sitewide';
+@import './layout/layout';
+@import './layout/header';
+@import './layout/sidenav';
+
+@import 'tailwindcss/components';
+@import './features/definitions';
+
+@import 'tailwindcss/utilities';
+
+/* TODO - Move everything into separate files */
+/* TODO - Move all CSS modules into this */
 
 @layer base {
-	body {
-		@apply text-gray-900 bg-white;
-	}
 	.touch-auto {
 		touch-action: auto;
 	}
 	.touch-none {
 		touch-action: none;
-	}
-
-	.skip-nav {
-		border: 0;
-		clip: rect(0 0 0 0);
-		height: 1px;
-		margin: -1px;
-		overflow: hidden;
-		padding: 0;
-		position: absolute;
-		width: 1px;
-	}
-
-	.skip-nav:focus {
-		background: white;
-		clip: auto;
-		height: auto;
-		left: 10px;
-		padding: 0.65rem 0.8rem;
-		position: fixed;
-		top: 10px;
-		width: auto;
-		z-index: 1001;
-	}
-
-	#main {
-		scroll-margin-top: 68px;
 	}
 
 	.navmenu a::before,
@@ -170,11 +150,6 @@
 		.navmenu li span.inactive {
 			@apply hover:bg-transparent hover:text-blue-link;
 		}
-	}
-
-	.contain {
-		/* Container for the main content, but not if full-width on mobile */
-		@apply px-3 xs:px-4 lg:px-6 mx-auto w-full xl:max-w-screen-xl;
 	}
 
 	.uncontain {
@@ -411,11 +386,15 @@
 	}
 
 	.dropd {
-		@apply max-h-[265px] w-full bg-white absolute top-9 xs:top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
+		@apply max-h-[265px] w-full bg-white absolute top-9 md:top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
 	}
 
 	.dropd.active {
 		@apply opacity-100;
+	}
+
+	.dropd .activeresult {
+		background-color: #f3f4f6;
 	}
 
 	.m-menu {
@@ -481,7 +460,7 @@
 	}
 
 	#screener-table tr > * {
-		max-width: 220px;
+		max-width: 210px;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -599,7 +578,22 @@
 		text-overflow: ellipsis;
 	}
 
-	@media screen and (max-width: 1200px) {
+	@media screen and (max-width: 1350px) {
+		.ipotable tr > * {
+			padding: 0.5em 0.4em;
+		}
+		.ipotable tr > *:first-child {
+			padding-left: 0.6rem;
+		}
+		.ipotable tr > *:last-child {
+			padding-right: 0.6rem;
+		}
+		.ipotable tr > *:nth-child(3) {
+			max-width: 200px;
+		}
+	}
+
+	@media screen and (max-width: 1279px) {
 		.ipotable tr > * {
 			padding: 0.6em 0.3em;
 		}
