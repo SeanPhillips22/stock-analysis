@@ -15,7 +15,7 @@ export const SiteSearch = ({ classes }: Props) => {
 	const router = useRouter()
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [query, setQuery] = useState('')
-	const debouncedQuery = useDebounce<string>(query, 200)
+	const debouncedQuery = useDebounce<string>(query, 150)
 	const [fetched, setFetched] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [filtering, setFiltering] = useState(false)
