@@ -35,4 +35,20 @@
 	.nav-login {
 		@apply px-3 mb-6;
 	}
+
+	.nav-menu-wrap {
+		@apply flex flex-row items-center w-full;
+	}
+
+	.nav-arrow {
+		@apply ml-auto flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150;
+	}
+
+	.nav-arrow.closed {
+		@apply text-gray-300;
+	}
+
+	.nav-arrow.open {
+		@apply text-gray-400 rotate-90;
+	}
 }
