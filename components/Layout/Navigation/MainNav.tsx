@@ -8,6 +8,7 @@ import {
 	NewspaperIcon,
 	ArchiveIcon
 } from '@heroicons/react/outline'
+import Link from 'next/link'
 import { navState } from 'state/navState'
 
 const navigation = [
@@ -64,21 +65,21 @@ export function MainNav() {
 		<div className="leftnav">
 			<nav className="flex flex-col space-y-1">
 				{navigation.map((item) => (
-					<a
-						key={item.name}
-						href={item.href}
-						className={
-							item.path === path.one && !path.two
-								? 'nav-item current group'
-								: 'nav-item group'
-						}
-					>
-						<item.icon
-							className="nav-icon"
-							style={{ maxWidth: '50px' }}
-						/>
-						<span className="nav-label">{item.name}</span>
-					</a>
+					<Link key={item.name} href={item.href} prefetch={false}>
+						<a
+							className={
+								item.path === path.one && !path.two
+									? 'nav-item current group'
+									: 'nav-item group'
+							}
+						>
+							<item.icon
+								className="nav-icon"
+								style={{ maxWidth: '50px' }}
+							/>
+							<span className="nav-label">{item.name}</span>
+						</a>
+					</Link>
 				))}
 			</nav>
 		</div>
