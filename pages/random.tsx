@@ -1,7 +1,7 @@
-import { getData } from 'functions/API';
-import { GetServerSideProps } from 'next';
+import { getData } from 'functions/apis/API'
+import { GetServerSideProps } from 'next'
 
-const Sitemap = () => {};
+const Sitemap = () => {}
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const pages = [
@@ -269,27 +269,27 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'term/free-cash-flow/',
 		'term/eps-earnings-per-share/',
 		'term/market-to-book-ratio/',
-		'term/yoy-year-over-year/',
-	];
+		'term/yoy-year-over-year/'
+	]
 
-	const symbols = await getData('index?type=sitemap');
-	const allPages = pages.concat(symbols);
+	const symbols = await getData('index?type=sitemap')
+	const allPages = pages.concat(symbols)
 
 	// Choose a random page to start with
-	const startPage = allPages[Math.floor(Math.random() * allPages.length)];
+	const startPage = allPages[Math.floor(Math.random() * allPages.length)]
 
 	if (startPage) {
 		return {
 			redirect: {
 				destination: '/' + startPage,
-				permanent: false,
-			},
-		};
+				permanent: false
+			}
+		}
 	}
 
 	return {
-		props: {},
-	};
-};
+		props: {}
+	}
+}
 
-export default Sitemap;
+export default Sitemap

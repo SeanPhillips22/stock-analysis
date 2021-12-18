@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
-import { getMarketNews } from 'functions/callBackEnd'
+import { getMarketNews } from 'functions/apis/callBackEnd'
 import { NewsNavigation } from 'components/News/NewsNavigation'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { NewsFeed } from 'components/News/_NewsFeed'

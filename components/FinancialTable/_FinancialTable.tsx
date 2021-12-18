@@ -3,7 +3,7 @@ import {
 	FinancialsType,
 	FinancialsMapType,
 	FinancialReport,
-	Statement,
+	Statement
 } from 'types/Financials'
 import { Info } from 'types/Info'
 import { useState, useEffect, forwardRef, useMemo } from 'react'
@@ -15,7 +15,7 @@ import {
 	getPeriodLabel,
 	getPeriodTooltip,
 	sliceData,
-	reverseData,
+	reverseData
 } from './FinancialTable.functions'
 import { HoverChartIcon } from 'components/Icons/HoverChart'
 import styles from './FinancialTable.module.css'
@@ -26,7 +26,7 @@ import dynamic from 'next/dynamic'
 import { Tooltip } from './Tooltip'
 import { TooltipChart } from './TooltipChart'
 import { Unavailable } from 'components/Unavailable'
-import { getStockFinancialsFull } from 'functions/callBackEnd'
+import { getStockFinancialsFull } from 'functions/apis/callBackEnd'
 import { FinancialSource } from './FinancialSource'
 import { useAuthState } from 'hooks/useAuthState'
 
@@ -49,7 +49,7 @@ export const FinancialTable = ({
 	financials,
 	info,
 	map,
-	counts,
+	counts
 }: Props) => {
 	const range = financialsState((state) => state.range)
 	const divider = financialsState((state) => state.divider)
@@ -231,7 +231,7 @@ export const FinancialTable = ({
 					current: cell,
 					previous: prev,
 					revenue: rev,
-					divider: 'raw',
+					divider: 'raw'
 				})
 
 				const cellContent = formatCell({
@@ -239,7 +239,7 @@ export const FinancialTable = ({
 					current: cell,
 					previous: prev,
 					revenue: rev,
-					divider,
+					divider
 				})
 
 				const cellClass = () => {
@@ -331,7 +331,7 @@ export const FinancialTable = ({
 							interactive={true}
 							offset={[150, -1]}
 							popperOptions={{
-								modifiers: [{ name: 'flip', enabled: false }],
+								modifiers: [{ name: 'flip', enabled: false }]
 							}}
 							trigger="mouseenter focus click"
 							zIndex={30}

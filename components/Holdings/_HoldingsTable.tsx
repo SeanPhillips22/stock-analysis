@@ -3,13 +3,13 @@ import {
 	useTable,
 	useGlobalFilter,
 	useAsyncDebounce,
-	Column,
+	Column
 } from 'react-table'
 import { useState, useEffect, useMemo } from 'react'
 import styles from './HoldingsTable.module.css'
 import { StockLink, ETFLink } from 'components/Links'
 import { useAuthState } from 'hooks/useAuthState'
-import { getPageDataFull } from 'functions/callBackEnd'
+import { getPageDataFull } from 'functions/apis/callBackEnd'
 import { Controls } from 'components/Controls/_Controls'
 
 type CellString = {
@@ -53,7 +53,7 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 		() => [
 			{
 				Header: 'No.',
-				accessor: 'no',
+				accessor: 'no'
 			},
 			{
 				Header: 'Symbol',
@@ -65,20 +65,20 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 						return <ETFLink symbol={value.slice(1)} />
 					}
 					return value
-				},
+				}
 			},
 			{
 				Header: 'Company Name',
-				accessor: 'name',
+				accessor: 'name'
 			},
 			{
 				Header: '% Assets',
-				accessor: 'assets',
+				accessor: 'assets'
 			},
 			{
 				Header: 'Shares',
-				accessor: 'shares',
-			},
+				accessor: 'shares'
+			}
 		],
 		[]
 	)
@@ -90,11 +90,11 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 		rows,
 		prepareRow,
 		setGlobalFilter,
-		state: { globalFilter },
+		state: { globalFilter }
 	} = useTable(
 		{
 			columns,
-			data,
+			data
 		},
 		useGlobalFilter
 	)

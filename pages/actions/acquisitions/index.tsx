@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import { SEO } from 'components/SEO'
-import { getActionsData } from 'functions/callBackEnd'
+import { getActionsData } from 'functions/apis/callBackEnd'
 import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import Link from 'next/link'
@@ -11,7 +11,7 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
-			accessor: 'date',
+			accessor: 'date'
 		},
 		{
 			Header: 'Symbol',
@@ -21,14 +21,14 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 					return <StockLink symbol={value.slice(1)} />
 				}
 				return value
-			},
+			}
 		},
 		{
 			Header: 'Company Name',
 			accessor: 'oldname',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				return <span title={value}>{value}</span>
-			},
+			}
 		},
 		{
 			Header: 'Acquired By',
@@ -50,8 +50,8 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 					)
 				}
 				return value
-			},
-		},
+			}
+		}
 	]
 
 	return (
@@ -85,8 +85,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	return {
 		props: {
-			data,
+			data
 		},
-		revalidate: 2 * 60 * 60,
+		revalidate: 2 * 60 * 60
 	}
 }

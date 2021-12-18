@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next'
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
 import { Column } from 'react-table'
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar'
 import { SEO } from 'components/SEO'

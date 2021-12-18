@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { SearchIcon } from 'components/Icons/Search'
 import { SingleResult } from './SingleResult'
 import { useRouter } from 'next/router'
-import { getData, getCloudflareData } from 'functions/API'
+import { getData } from 'functions/apis/API'
+import { getSearchResults } from 'functions/apis/search'
 import { CloseIcon } from 'components/Icons/Close'
 import { useDebounce } from 'hooks/useDebounce'
 
@@ -14,7 +15,7 @@ export const SiteSearch = ({ classes }: Props) => {
 	const router = useRouter()
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [query, setQuery] = useState('')
-	const debouncedQuery = useDebounce<string>(query, 150)
+	const debouncedQuery = useDebounce<string>(query, 200)
 	const [fetched, setFetched] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [filtering, setFiltering] = useState(false)
@@ -32,7 +33,6 @@ export const SiteSearch = ({ classes }: Props) => {
 			try {
 				setLoading(true)
 				const trendingData = await getData('search?q=trending')
-				console.log(trendingData)
 				setTrending(trendingData)
 			} catch (error) {
 				setError(true)
@@ -44,23 +44,20 @@ export const SiteSearch = ({ classes }: Props) => {
 	}
 
 	async function queryCFWorker(search: string) {
-		return await getCloudflareData('search?q=' + search)
+		return await getSearchResults('search?q=' + search)
 	}
 
 	useEffect(() => {
 		setFiltering(true)
 
 		if (debouncedQuery.length) {
-			const keyword = query.toString()
-			queryCFWorker(keyword).then((data) => {
+			queryCFWorker(debouncedQuery).then((data) => {
 				setResults(data)
 				setFiltering(false)
 			})
 		} else if (trending.length) {
 			setResults(trending)
 		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [debouncedQuery, trending])
 
 	function keyClick(e: KeyboardEvent) {

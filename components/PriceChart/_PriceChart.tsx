@@ -3,11 +3,11 @@ import { Controls } from './PriceChartControls'
 import { PriceChange } from './PriceChange'
 import { Chart } from './PriceChartChart'
 import { Info } from 'types/Info'
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
 import {
 	getChartUrl,
 	translateTime,
-	UnavailableIpo,
+	UnavailableIpo
 } from './PriceChart.functions'
 import { Unavailable } from 'components/Unavailable'
 
@@ -58,7 +58,7 @@ export const PriceChart = ({ info }: { info: Info }) => {
 		info.exceptions.overrideChart,
 		info.symbol,
 		info.type,
-		info.state,
+		info.state
 	])
 
 	if (info.state === 'upcomingipo') {

@@ -1,6 +1,6 @@
 import { SearchIcon } from '@heroicons/react/solid'
 import { SpinnerIcon } from 'components/Icons/Spinner'
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
 import { useRef, useState } from 'react'
 import { News } from 'types/News'
 
@@ -29,7 +29,7 @@ export function NewsMenuSearch({
 	setQuery,
 	searched,
 	setSearched,
-	setEnd,
+	setEnd
 }: Props) {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [searching, setSearching] = useState(false) // If a search is in progress

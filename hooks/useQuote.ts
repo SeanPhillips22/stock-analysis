@@ -1,4 +1,4 @@
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
 import { isTradingHours } from 'functions/datetime/isTradingHours'
 import { useQuery } from 'react-query'
 import { Info } from 'types/Info'
@@ -22,7 +22,7 @@ export function useQuote(info: Info) {
 		refetchOnWindowFocus: tradingHours ? true : false,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
-		enabled: info.state !== 'upcomingipo' && !info.archived,
+		enabled: info.state !== 'upcomingipo' && !info.archived
 	})
 
 	return data as Quote

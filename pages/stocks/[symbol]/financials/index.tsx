@@ -5,7 +5,7 @@ import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
 import { SubNavigation } from 'components/FinancialTable/SubNavigation'
 import { FinancialTable } from 'components/FinancialTable/_FinancialTable'
-import { getStockFinancialsSSR } from 'functions/callBackEnd'
+import { getStockFinancialsSSR } from 'functions/apis/callBackEnd'
 import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement'
 
 interface Props {

@@ -3,7 +3,7 @@ import { External } from 'components/CustomLink'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Info } from 'types/Info'
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
 
 interface Props {
 	info: Info

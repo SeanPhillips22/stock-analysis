@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { CalendarData, IpoRecent, FilingMin } from 'types/Ipos'
 import { SEO } from 'components/SEO'
-import { getIpoData } from 'functions/callBackEnd'
+import { getIpoData } from 'functions/apis/callBackEnd'
 import { CalendarStats } from 'components/IPOs/CalendarStats'
 import { CalendarTable } from 'components/IPOs/CalendarTable'
 import { LaterExplanation } from 'components/IPOs/LaterExplanation'

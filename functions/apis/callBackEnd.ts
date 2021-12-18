@@ -1,4 +1,4 @@
-import { getData } from 'functions/API'
+import { getData } from 'functions/apis/API'
 
 const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null
 
