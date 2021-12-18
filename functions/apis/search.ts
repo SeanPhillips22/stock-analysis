@@ -1,5 +1,5 @@
 export async function getSearchResults(params: string) {
-	const url = 'https://api.stockanalysis.com/'
+	const url = 'https://api.stockanalysis.com'
 
 	const response = await fetch(`${url}/${encodeURI(params)}`)
 
