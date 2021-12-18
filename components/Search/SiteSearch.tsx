@@ -36,9 +36,9 @@ export const SiteSearch = ({ classes }: Props) => {
 		if (!loading && !index.length) {
 			try {
 				setLoading(true)
-				const trendingData = await getData('search?q=trending')
+				const trendingData = await getData('trending?q=top')
 				setTrending(trendingData)
-				const indexData = await getData('search?q=index')
+				const indexData = await getData('index?type=search')
 				setIndex(indexData)
 			} catch (error) {
 				setError(true)

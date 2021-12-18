@@ -1,96 +1,96 @@
-import { navState } from 'state/navState';
-import Link from 'next/link';
+import { navState } from 'state/navState'
+import Link from 'next/link'
 
 interface SearchItem {
-	s: string;
-	n: string;
-	t: string;
+	s: string
+	n: string
+	t: string
 }
 
 interface Props {
-	index: number;
-	result: SearchItem;
-	setOpen: (open: boolean) => void;
+	index: number
+	result: SearchItem
+	setOpen: (open: boolean) => void
 }
 
 export const SingleResult = ({ index, result, setOpen }: Props) => {
-	const path = navState((state) => state.path);
-	const symbol = result.s;
-	const name = result.n;
-	const type = result.t;
+	const path = navState((state) => state.path)
+	const symbol = result.s
+	const name = result.n
+	const type = result.t
 
-	let url;
-	let tag;
+	let url
+	let tag
 
 	switch (type) {
 		case 's':
 			url = symbol.includes('.')
 				? `/stocks/${symbol.toLowerCase()}`
-				: `/stocks/${symbol.toLowerCase()}/`;
-			tag = 'Stock';
-			break;
+				: `/stocks/${symbol.toLowerCase()}/`
+			tag = 'Stock'
+			break
 
 		case 'e':
-			url = `/etf/${symbol.toLowerCase()}/`;
-			tag = 'Stock';
-			break;
+			url = `/etf/${symbol.toLowerCase()}/`
+			tag = 'ETF'
+			break
 	}
 
 	if (!url) {
-		return <></>;
+		return <></>
 	} else {
 		if (path.three) {
-			url = url.includes('.') ? url + '/' : url;
+			url = url.includes('.') ? url + '/' : url
 			switch (path.three) {
 				case 'chart':
-					url = `${url}chart/`;
-					break;
+					url = `${url}chart/`
+					break
 
 				case 'financials':
 					{
 						if (type === 's') {
 							switch (path.four) {
 								case 'balance-sheet':
-									url = `${url}financials/balance-sheet/`;
-									break;
+									url = `${url}financials/balance-sheet/`
+									break
 
 								case 'cash-flow-statement':
-									url = `${url}financials/cash-flow-statement/`;
-									break;
+									url = `${url}financials/cash-flow-statement/`
+									break
 
 								case 'ratios':
-									url = `${url}financials/ratios/`;
-									break;
+									url = `${url}financials/ratios/`
+									break
 
 								default:
-									url = `${url}financials/`;
-									break;
+									url = `${url}financials/`
+									break
 							}
 						}
 					}
-					break;
+					break
 
 				case 'company':
 					if (type === 's') {
-						url = `${url}company/`;
+						url = `${url}company/`
 					}
-					break;
+					break
 
 				case 'statistics':
 					if (type === 's') {
-						url = `${url}statistics/`;
+						url = `${url}statistics/`
 					}
-					break;
+					break
 
 				case 'holdings':
 					if (type === 'e') {
-						url = `${url}holdings/`;
+						url = `${url}holdings/`
 					}
-					break;
+					break
 
 				case 'dividend':
-					url = `${url}dividend/`;
-					break;
+					url = `${url}dividend/`
+					break
 			}
 		}
 		if (path.four) {
@@ -98,9 +98,9 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 	}
 
 	let searchResultStyles =
-		'flex flex-row items-center gap-x-1 sm:gap-x-2 py-1.5 px-2 sm:px-3 hover:bg-gray-100 transition duration-100';
+		'flex flex-row items-center gap-x-1 sm:gap-x-2 py-1.5 px-2 sm:px-3 hover:bg-gray-100 transition duration-100'
 	if (index === 0) {
-		searchResultStyles += ' activeresult';
+		searchResultStyles += ' activeresult'
 	}
 
 	return (
@@ -117,5 +117,5 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 				</a>
 			</Link>
 		</li>
-	);
-};
+	)
+}
