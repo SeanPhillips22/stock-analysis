@@ -1,65 +1,65 @@
 import { NavArrowIcon } from 'components/Icons/NavArrow'
 import Link from 'next/link'
-import { SVGProps, useState } from 'react'
-import { PathObject } from 'state/navState'
+import { NavItemProps } from './NavItems.types'
+import { navMenuState } from 'state/navMenuState'
+import { matchPath } from 'functions/helpers/matchPath'
 
-type NavChild = {
-	name: string
-	href: string
-	path: string | null
-}
+/**
+ * A single nav item that has children, so when toggled it displays a dropdown
+ * @param item the navigation item with a name, href, path, icon and children
+ * @param path the current page path
+ * @returns
+ */
+export function MenuNavItem({ item, path }: NavItemProps) {
+	const isOpen = navMenuState((state) => state.isOpen)
+	const setIsOpen = navMenuState((state) => state.setIsOpen)
 
-type Props = {
-	item: {
-		name: string
-		href: string
-		path: string | null
-		icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
-		children: NavChild[]
+	function openClose() {
+		let openClosed = isOpen[item.name] ? true : false
+		setIsOpen({ ...isOpen, [item.name]: !openClosed })
 	}
-	path: PathObject
-}
-
-// TODO - make the open/close state persistent after navigating
-export function MenuNavItem({ item, path }: Props) {
-	const [open, setOpen] = useState(false)
 
 	return (
 		<>
-			<Link href={item.href} prefetch={false}>
-				<a
-					className={
-						item.path === path.one && !path.two
-							? 'nav-item current group'
-							: 'nav-item group'
-					}
-				>
-					<div className="nav-menu-wrap" onClick={() => setOpen(!open)}>
+			<div
+				className={
+					matchPath(path, item.href)
+						? 'nav-menu-wrap current group'
+						: 'nav-menu-wrap group'
+				}
+				onClick={openClose}
+			>
+				<Link href={item.href} prefetch={false}>
+					<a
+						className={
+							matchPath(path, item.href)
+								? 'nav-item current'
+								: 'nav-item'
+						}
+					>
 						<item.icon
 							className="nav-icon"
 							style={{ maxWidth: '50px' }}
 						/>
 						<span className="nav-label">{item.name}</span>
-						<div
-							className="nav-arrow-wrap"
-							onClick={(e) => {
-								e.preventDefault()
-							}}
-						>
-							<NavArrowIcon
-								classes={open ? 'nav-arrow open' : 'nav-arrow closed'}
-							/>
-						</div>
-					</div>
-				</a>
-			</Link>
-			{open && (
-				<div className="space-y-1">
+					</a>
+				</Link>
+				<div className="nav-arrow-wrap" onClick={openClose}>
+					<NavArrowIcon
+						classes={
+							isOpen[item.name] ? 'nav-arrow open' : 'nav-arrow closed'
+						}
+					/>
+				</div>
+			</div>
+
+			{item.children && isOpen[item.name] && (
+				<div className="space-y-0.5">
 					{item.children.map((subItem) => (
-						<Link href={subItem.href} prefetch={false}>
+						<Link key={subItem.name} href={subItem.href} prefetch={false}>
 							<a
 								className={
-									subItem.path === path.two
+									matchPath(path, subItem.href)
 										? 'nav-subitem current group'
 										: 'nav-subitem group'
 								}

@@ -13,61 +13,62 @@ import { MenuNavItem } from './NavItems/Menu'
 import { SingleNavItem } from './NavItems/Single'
 
 const navigation = [
-	{ name: 'Home', href: '/', path: null, icon: HomeIcon, current: true },
+	{ name: 'Home', href: '/', icon: HomeIcon, current: true },
 	{
 		name: 'Stocks',
 		href: '/stocks/',
-		path: 'stocks',
 		icon: ChartBarIcon
 	},
 	{
 		name: 'IPOs',
 		href: '/ipos/',
-		path: 'ipos',
 		icon: CalendarIcon,
 		children: [
-			{ name: 'Recent IPOs', href: '/ipos/', path: null },
+			{ name: 'Recent IPOs', href: '/ipos/' },
 			{
 				name: 'IPO Calendar',
-				href: '/ipos/calendar/',
-				path: 'calendar'
+				href: '/ipos/calendar/'
 			},
 			{
 				name: 'IPO Statistics',
-				href: '/ipos/statistics/',
-				path: 'statistics'
+				href: '/ipos/statistics/'
 			},
 			{
 				name: 'IPO Screener',
-				href: '/ipos/screener/',
-				path: 'screener'
+				href: '/ipos/screener/'
 			},
-			{ name: 'IPO News', href: '/ipos/news/', path: 'news' }
+			{ name: 'IPO News', href: '/ipos/news/' }
 		]
 	},
 	{
 		name: 'ETFs',
 		href: '/etf/',
-		path: 'etf',
 		icon: CollectionIcon
+	},
+	{ name: 'News', href: '/news/', path: 'news', icon: NewspaperIcon },
+	{
+		name: 'Trending',
+		href: '/trending/',
+		icon: TrendingUpIcon
 	},
 	{
 		name: 'Screener',
 		href: '/stock-screener/',
-		path: 'stock-screener',
-		icon: AdjustmentsIcon
+		icon: AdjustmentsIcon,
+		children: [
+			{
+				name: 'Stock Screener',
+				href: '/stock-screener/'
+			},
+			{
+				name: 'IPO Screener',
+				href: '/ipos/screener/'
+			}
+		]
 	},
-	{
-		name: 'Trending',
-		href: '/trending/',
-		path: 'trending',
-		icon: TrendingUpIcon
-	},
-	{ name: 'News', href: '/news/', path: 'news', icon: NewspaperIcon },
 	{
 		name: 'Corporate Actions',
 		href: '/actions/',
-		path: 'actions',
 		icon: ArchiveIcon
 	}
 ]
@@ -77,7 +78,7 @@ export function MainNav() {
 
 	return (
 		<div className="leftnav">
-			<nav className="flex flex-col space-y-1">
+			<nav className="nav-col">
 				{navigation.map((item) =>
 					!item.children ? (
 						<SingleNavItem key={item.name} item={item} path={path} />

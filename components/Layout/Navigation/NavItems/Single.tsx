@@ -1,30 +1,13 @@
 import Link from 'next/link'
-import { SVGProps } from 'react'
-import { PathObject } from 'state/navState'
+import { NavItemProps } from './NavItems.types'
+import { matchPath } from 'functions/helpers/matchPath'
 
-type NavChild = {
-	name: string
-	href: string
-	path: string
-}
-
-type Props = {
-	item: {
-		name: string
-		href: string
-		path: string | null
-		icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
-		children?: NavChild[]
-	}
-	path: PathObject
-}
-
-export function SingleNavItem({ item, path }: Props) {
+export function SingleNavItem({ item, path }: NavItemProps) {
 	return (
 		<Link href={item.href} prefetch={false}>
 			<a
 				className={
-					item.path === path.one && !path.two
+					matchPath(path, item.href)
 						? 'nav-item current group'
 						: 'nav-item group'
 				}
