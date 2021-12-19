@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
-import { SEO } from 'components/SEO';
-import Link from 'next/link';
+import { FocusedLayout } from 'components/Layout/FocusedLayout'
+import { SEO } from 'components/SEO'
+import Link from 'next/link'
 
 const ExampleJSON = {
 	symbol: 'GFS',
@@ -24,27 +24,27 @@ const ExampleJSON = {
 	netIncomeTTM: -1114729000,
 	epsTTM: -2.085,
 	peRatio: null,
-	psRatio: 4.841,
-};
+	psRatio: 4.841
+}
 
 const faqs = [
 	{
 		question: "What's the difference between the free and paid plan?",
 		answer:
-			"The free plan only shows the current week's IPOs. It also shows fewer data points and the data is delayed by 1-2 hours.",
+			"The free plan only shows the current week's IPOs. It also shows fewer data points and the data is delayed by 1-2 hours."
 	},
 	{
 		question: 'How often is the data updated?',
 		answer:
-			'The data is updated multiple times throughout the day. The free version updates in 1-2 hours while the paid plan updates in near real-time (within 10 minutes).',
+			'The data is updated multiple times throughout the day. The free version updates in 1-2 hours while the paid plan updates in near real-time (within 10 minutes).'
 	},
 	{
 		question: 'How to subscribe',
 		answer:
-			"This API is currently offered through RapidAPI, the world's biggest API marketplace. They provide the API keys and handle billing, invoicing and everything related to that.",
-	},
+			"This API is currently offered through RapidAPI, the world's biggest API marketplace. They provide the API keys and handle billing, invoicing and everything related to that."
+	}
 	// More questions...
-];
+]
 
 export default function ApisPage() {
 	return (
@@ -54,7 +54,7 @@ export default function ApisPage() {
 				description="We have partnered with Rapid API to offer our comprehensive upcoming IPO calendar as an API. There are both free and paid plans available."
 				canonical="/apis/"
 			/>
-			<LayoutFullWidth>
+			<FocusedLayout>
 				<div className="bg-gray-100 border-b border-gray-200 shadow-sm">
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
 						<div className="text-center">
@@ -133,9 +133,9 @@ export default function ApisPage() {
 				<div className="bg-white">
 					<div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
 						<div className="text-center">
-							<h1 className="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl">
+							<h2 className="mt-1 text-4xl font-bold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-5xl">
 								How to get started
-							</h1>
+							</h2>
 							<div className="text-left max-w-xl mt-6 mx-auto text-lg bp:text-xl text-gray-700 space-y-3">
 								<div>
 									1. Go to the{' '}
@@ -159,7 +159,7 @@ export default function ApisPage() {
 						</div>
 					</div>
 				</div>
-			</LayoutFullWidth>
+			</FocusedLayout>
 		</>
-	);
+	)
 }

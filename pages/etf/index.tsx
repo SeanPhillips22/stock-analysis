@@ -1,47 +1,47 @@
-import { GetStaticProps } from 'next';
-import { getData } from 'functions/API';
-import { Column } from 'react-table';
-import { LayoutSidebar } from 'components/Layout/LayoutSidebar';
-import { SEO } from 'components/SEO';
-import { SymbolTable } from 'components/Tables/SymbolTable';
-import Link from 'next/link';
+import { GetStaticProps } from 'next'
+import { getData } from 'functions/apis/API'
+import { Column } from 'react-table'
+import { LayoutSidebar } from 'components/Layout/LayoutSidebar'
+import { SEO } from 'components/SEO'
+import { SymbolTable } from 'components/Tables/SymbolTable'
+import Link from 'next/link'
 
 const formatter = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
-	maximumFractionDigits: 2,
-});
+	maximumFractionDigits: 2
+})
 
 const abbreviate = (num: number) => {
 	if (num > 1000000000) {
-		return formatter.format(num / 1000000000) + 'B';
+		return formatter.format(num / 1000000000) + 'B'
 	} else if (num > 1000000) {
-		return formatter.format(num / 1000000) + 'M';
+		return formatter.format(num / 1000000) + 'M'
 	} else {
-		return formatter.format(num);
+		return formatter.format(num)
 	}
-};
+}
 
 interface IStock {
-	s: string;
-	n: string;
-	cls: string;
-	aum: number;
+	s: string
+	n: string
+	cls: string
+	aum: number
 }
 
 interface IEtfs {
-	stocks: IStock[];
+	stocks: IStock[]
 }
 
 interface ICellString {
 	cell: {
-		value: string;
-	};
+		value: string
+	}
 }
 
 interface ICellNumber {
 	cell: {
-		value: number;
-	};
+		value: number
+	}
 }
 
 export default function StocksIndexPage({ stocks }: IEtfs) {
@@ -54,25 +54,25 @@ export default function StocksIndexPage({ stocks }: IEtfs) {
 					<Link href={`/etf/${value.toLowerCase()}/`} prefetch={false}>
 						<a>{value}</a>
 					</Link>
-				);
-			},
+				)
+			}
 		},
 		{
 			Header: 'Fund Name',
-			accessor: 'n',
+			accessor: 'n'
 		},
 		{
 			Header: 'Asset Class',
-			accessor: 'c',
+			accessor: 'c'
 		},
 		{
 			Header: 'Assets',
 			accessor: 'a',
 			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
-				return abbreviate(value * 1000);
-			},
-		},
-	];
+				return abbreviate(value * 1000)
+			}
+		}
+	]
 
 	return (
 		<LayoutSidebar heading="All ETFs" url="/etf/">
@@ -83,16 +83,16 @@ export default function StocksIndexPage({ stocks }: IEtfs) {
 			/>
 			<SymbolTable title="ETFs" columndata={columns} rowdata={stocks} />
 		</LayoutSidebar>
-	);
+	)
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-	const etfs = await getData('index?type=etfspage');
+	const etfs = await getData('index?type=etfspage')
 
 	return {
 		props: {
-			stocks: etfs,
+			stocks: etfs
 		},
-		revalidate: 24 * 60 * 60,
-	};
-};
+		revalidate: 6 * 60 * 60
+	}
+}

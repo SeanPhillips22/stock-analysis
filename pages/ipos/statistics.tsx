@@ -1,27 +1,28 @@
-import { GetStaticProps } from 'next';
-import { IpoRecent } from 'types/Ipos';
-import { News } from 'types/News';
-import { SEO } from 'components/SEO';
-import { getIpoData } from 'functions/callBackEnd';
-import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { StatsChartAnnual } from 'components/IPOs/StatsChartAnnual';
-import { StatsChartMonthly } from 'components/IPOs/StatsChartMonthly';
-import Link from 'next/link';
-import { RecentTableMin } from 'components/IPOs/RecentTableMin';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
+import { GetServerSideProps } from 'next'
+import { IpoRecent } from 'types/Ipos'
+import { News } from 'types/News'
+import { SEO } from 'components/SEO'
+import { getIpoData } from 'functions/apis/callBackEnd'
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { StatsChartAnnual } from 'components/IPOs/StatsChartAnnual'
+import { StatsChartMonthly } from 'components/IPOs/StatsChartMonthly'
+import Link from 'next/link'
+import { RecentTableMin } from 'components/IPOs/RecentTableMin'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
 	data: {
-		total: number;
-		year2021: number;
-		months2019: [string, number][];
-		months2020: [string, number][];
-		months2021: [string, number][];
-	};
-	news: News[];
-	recent: IpoRecent[];
+		total: number
+		year2021: number
+		months2019: [string, number][]
+		months2020: [string, number][]
+		months2021: [string, number][]
+	}
+	news: News[]
+	recent: IpoRecent[]
 }
 
 export const IpoStatistics = ({ data, news, recent }: Props) => {
@@ -32,13 +33,13 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 				description="Statistics and charts for initial public offerings (IPOs) on the US stock market. Annual data is available from 2000-2021 and monthly data for 2019-2021."
 				canonical="/ipos/statistics/"
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url="/ipos/statistics/" />
 					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation path="statistics" />
 
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="lg:right-sidebar">
 						<div className="flex flex-col space-y-3 py-3 sm:py-4">
 							<div>
 								<p className="text-base sm:text-lg text-gray-900">
@@ -120,28 +121,29 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								news={news}
 								button={{
 									text: 'More IPO News',
-									url: '/ipos/news/',
+									url: '/ipos/news/'
 								}}
 							/>
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
-	);
-};
+	)
+}
 
-export default IpoStatistics;
+export default IpoStatistics
 
-export const getStaticProps: GetStaticProps = async () => {
-	const { data, news, recent } = await getIpoData('statistics');
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+	const { data, news, recent } = await getIpoData('statistics')
+
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {
 			data,
 			news,
-			recent,
-		},
-		revalidate: 2 * 60 * 60,
-	};
-};
+			recent
+		}
+	}
+}

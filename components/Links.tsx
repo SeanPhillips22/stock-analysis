@@ -1,32 +1,36 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 interface ILinks {
-	symbol: string;
-	className?: string;
-	prefetch?: boolean;
+	symbol: string
+	className?: string
+	prefetch?: boolean
 }
 
 export const StockLink = ({ symbol, className, prefetch = false }: ILinks) => {
-	const classes = className || 'bll';
+	if (!symbol) return null
 
-	const symb = symbol.includes('.') ? symbol : `${symbol}/`;
+	const classes = className || 'bll'
+
+	const symb = symbol.includes('.') ? symbol : `${symbol}/`
 
 	return (
 		<Link href={`/stocks/${symb.toLowerCase()}`} prefetch={prefetch}>
 			<a className={classes}>{symbol.toUpperCase()}</a>
 		</Link>
-	);
-};
+	)
+}
 
 export const ETFLink = ({ symbol, className, prefetch = false }: ILinks) => {
-	const classes = className || 'bll';
+	if (!symbol) return null
+
+	const classes = className || 'bll'
 
 	return (
 		<Link href={`/etf/${symbol.toLowerCase()}/`} prefetch={prefetch}>
 			<a className={classes}>{symbol.toUpperCase()}</a>
 		</Link>
-	);
-};
+	)
+}
 
 export const SymbolLink = ({ symbol, className, prefetch = false }: ILinks) => {
 	if (symbol.startsWith('$')) {
@@ -36,7 +40,7 @@ export const SymbolLink = ({ symbol, className, prefetch = false }: ILinks) => {
 				className={className}
 				prefetch={prefetch}
 			/>
-		);
+		)
 	} else if (symbol.startsWith('#')) {
 		return (
 			<ETFLink
@@ -44,8 +48,8 @@ export const SymbolLink = ({ symbol, className, prefetch = false }: ILinks) => {
 				className={className}
 				prefetch={prefetch}
 			/>
-		);
+		)
 	} else {
-		return <>{symbol.toUpperCase()}</>;
+		return <>{symbol.toUpperCase()}</>
 	}
-};
+}

@@ -1,8 +1,8 @@
-import { ColumnsMap } from 'components/StockScreener/screener.types';
+import { ColumnsMap } from 'components/StockScreener/screener.types'
 
 export const resultColumns: ColumnsMap = {
 	Filtered: [],
-	General: ['s', 'n', 'm', 'se', 'p', 'c', 'v', 'pe'],
+	General: ['s', 'n', 'm', 'i', 'p', 'c', 'v', 'pe'],
 	Company: [],
 	Performance: [
 		's',
@@ -15,7 +15,7 @@ export const resultColumns: ColumnsMap = {
 		'chYTD',
 		'ch1y',
 		'ch3y',
-		'ch5y',
+		'ch5y'
 	],
 	Financials: [
 		's',
@@ -25,7 +25,7 @@ export const resultColumns: ColumnsMap = {
 		'operatingIncome',
 		'netIncome',
 		'fcf',
-		'eps',
+		'eps'
 	],
 	Valuation: ['s', 'n', 'm', 'ev', 'pe', 'fpe', 'ps', 'pb', 'pfcf'],
 	Dividends: ['s', 'n', 'm', 'dps', 'dy', 'pr', 'dg'],
@@ -40,26 +40,26 @@ export const resultColumns: ColumnsMap = {
 		'netIncome',
 		'eps',
 		'ebit',
-		'ebitda',
+		'ebitda'
 	],
 	'Balance Sheet': ['s', 'n', 'cash', 'liabilities', 'debt', 'equity'],
-	'Cash Flow': ['s', 'n', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf', 'fcfps'],
-};
+	'Cash Flow': ['s', 'n', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf', 'fcfps']
+}
 
 export function returnResultColumns(type: string) {
 	if (type == 'stocks') {
-		return resultColumns;
+		return resultColumns
 	} else if (type == 'ipo') {
 		// Change to IPO columns
 		resultColumns['General'] = [
 			's',
 			'n',
 			'm',
-			'se',
+			'i',
 			'ipoPriceRange',
 			'ipoDate',
-			'revenue',
-		];
+			'revenue'
+		]
 		resultColumns['Company'] = [
 			's',
 			'n',
@@ -68,9 +68,9 @@ export function returnResultColumns(type: string) {
 			'country',
 			'exchange',
 			'employees',
-			'founded',
-		];
-		return resultColumns;
+			'founded'
+		]
+		return resultColumns
 	} else {
 		// Change to ETF columns
 		resultColumns['General'] = [
@@ -80,8 +80,8 @@ export function returnResultColumns(type: string) {
 			'assets',
 			'p',
 			'c',
-			'v',
-		];
+			'v'
+		]
 		resultColumns['Performance'] = [
 			's',
 			'n',
@@ -92,15 +92,15 @@ export function returnResultColumns(type: string) {
 			'chYTD',
 			'ch1y',
 			'ch3y',
-			'ch5y',
-		];
+			'ch5y'
+		]
 		resultColumns['Dividends'] = [
 			's',
 			'n',
 			'etfHoldings',
 			'etfExDividendDate',
-			'etfDividendYield',
-		];
-		return resultColumns;
+			'etfDividendYield'
+		]
+		return resultColumns
 	}
 }

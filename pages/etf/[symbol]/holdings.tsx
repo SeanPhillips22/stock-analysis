@@ -1,21 +1,20 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { HoldingsType } from 'types/Holdings';
-import { News } from 'types/News';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { getPageData } from 'functions/callBackEnd';
-import { HoldingsTable } from 'components/Holdings/_HoldingsTable';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { GetServerSideProps } from 'next'
+import { Info } from 'types/Info'
+import { HoldingsType } from 'types/Holdings'
+import { News } from 'types/News'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { getPageDataSSR } from 'functions/apis/callBackEnd'
+import { HoldingsTable } from 'components/Holdings/_HoldingsTable'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 
 interface Props {
-	info: Info;
-	data: HoldingsType;
-	news: News[];
+	info: Info
+	data: HoldingsType
+	news: News[]
 }
 
 const Holdings = ({ info, data, news }: Props) => {
@@ -26,8 +25,8 @@ const Holdings = ({ info, data, news }: Props) => {
 				description={`A long list of holdings for ${info.ticker} (${info.name}) with details about each stock and its percentage weighting in the ETF.`}
 				canonical={`/etf/${info.symbol}/holdings/`}
 			/>
-			<div className="contain mt-3 sm:mt-4 lg:mt-5">
-				<div className="lg:grid grid-cols-sidebar_wide gap-10">
+			<div className="contain-content mt-3 sm:mt-4 lg:mt-5">
+				<div className="lg:right-sidebar">
 					<div>
 						{data.count ? (
 							<>
@@ -36,7 +35,6 @@ const Holdings = ({ info, data, news }: Props) => {
 									symbol={info.symbol}
 									rawdata={data.list}
 									fullCount={data.count}
-									id={info.id}
 								/>
 								<div className="text-gray-700 text-small mt-1">
 									As of {data.updated}
@@ -62,7 +60,7 @@ const Holdings = ({ info, data, news }: Props) => {
 							news={news}
 							button={{
 								text: 'More News',
-								url: `/etf/${info.symbol}/`,
+								url: `/etf/${info.symbol}/`
 							}}
 						/>
 						{data && data.count > 35 && news?.length > 4 && <Sidebar2 />}
@@ -70,19 +68,15 @@ const Holdings = ({ info, data, news }: Props) => {
 				</div>
 			</div>
 		</Stock>
-	);
-};
-export default Holdings;
-
-interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	)
 }
+export default Holdings
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getPageData('holdings', symbol, 3600);
-};
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getPageDataSSR('holdings', symbol)
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+
+	return data
+}

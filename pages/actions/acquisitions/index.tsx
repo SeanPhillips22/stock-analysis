@@ -1,43 +1,43 @@
-import { GetStaticProps } from 'next';
-import { SEO } from 'components/SEO';
-import { getActionsData } from 'functions/callBackEnd';
-import { ActionsLayout } from 'components/Actions/ActionsLayout';
-import { ActionsTable } from 'components/Actions/ActionsTable';
-import Link from 'next/link';
-import { StockLink } from 'components/Links';
-import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { GetStaticProps } from 'next'
+import { SEO } from 'components/SEO'
+import { getActionsData } from 'functions/apis/callBackEnd'
+import { ActionsLayout } from 'components/Actions/ActionsLayout'
+import { ActionsTable } from 'components/Actions/ActionsTable'
+import Link from 'next/link'
+import { StockLink } from 'components/Links'
+import { CellString, ActionProps } from 'components/Actions/actions.types'
 
 export const ActionsAcquisitions = ({ data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
-			accessor: 'date',
+			accessor: 'date'
 		},
 		{
 			Header: 'Symbol',
 			accessor: 'symbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
+					return <StockLink symbol={value.slice(1)} />
 				}
-				return value;
-			},
+				return value
+			}
 		},
 		{
 			Header: 'Company Name',
 			accessor: 'oldname',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
-				return <span title={value}>{value}</span>;
-			},
+				return <span title={value}>{value}</span>
+			}
 		},
 		{
 			Header: 'Acquired By',
 			accessor: 'newname',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.includes('$')) {
-					const sliced = value.split('$');
-					const symbol = sliced[0];
-					const name = sliced[1];
+					const sliced = value.split('$')
+					const symbol = sliced[0]
+					const name = sliced[1]
 					return (
 						<Link
 							href={`/stocks/${symbol.toLowerCase()}/`}
@@ -47,12 +47,12 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 								{name}
 							</a>
 						</Link>
-					);
+					)
 				}
-				return value;
-			},
-		},
-	];
+				return value
+			}
+		}
+	]
 
 	return (
 		<>
@@ -75,18 +75,18 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 				/>
 			</ActionsLayout>
 		</>
-	);
-};
+	)
+}
 
-export default ActionsAcquisitions;
+export default ActionsAcquisitions
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('acquisitions');
+	const data = await getActionsData('acquisitions')
 
 	return {
 		props: {
-			data,
+			data
 		},
-		revalidate: 7200,
-	};
-};
+		revalidate: 2 * 60 * 60
+	}
+}

@@ -1,0 +1,30 @@
+/*
+* DEFINITIONS
+* An "i" icon with a popover that defines or explains something
+*/
+
+@layer components {
+	.def-icon {
+		@apply text-gray-400 absolute -right-3 -top-0.5 p-1 cursor-pointer;
+	}
+
+	.def-icon svg:hover {
+		@apply text-gray-900;
+	}
+
+	.def {
+		@apply p-1.5 whitespace-pre-wrap;
+	}
+
+	.def h4 {
+		@apply text-lg font-semibold mb-2;
+	}
+
+	.def div.def-text {
+		@apply text-sm border-t border-gray-300 pt-2;
+	}
+
+	.def div.def-formula {
+		@apply text-sm border-t border-gray-300 mt-3 pt-2;
+	}
+}

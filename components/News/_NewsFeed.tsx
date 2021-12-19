@@ -1,15 +1,15 @@
-import { News } from 'types/News';
-import { NewsArticle } from './NewsArticle';
-import { NewsVideo } from './NewsVideo';
+import { News } from 'types/News'
+import { NewsArticle } from './NewsArticle'
+import { NewsVideo } from './NewsVideo'
 
 interface Props {
-	data: News[];
-	related?: string;
-	paywalled?: boolean;
+	data: News[]
+	related?: string
+	paywalled?: boolean
 }
 
 export const NewsFeed = ({ data, related, paywalled }: Props) => {
-	const count = data.length;
+	const count = data.length
 
 	return (
 		<div
@@ -21,25 +21,25 @@ export const NewsFeed = ({ data, related, paywalled }: Props) => {
 				if (item.type === 'Video') {
 					return (
 						<NewsVideo
-							key={index}
+							key={item.title}
 							index={index}
 							item={item}
 							related={related}
 							count={count}
 						/>
-					);
+					)
 				} else {
 					return (
 						<NewsArticle
-							key={index}
+							key={item.title}
 							index={index}
 							item={item}
 							related={related}
 							count={count}
 						/>
-					);
+					)
 				}
 			})}
 		</div>
-	);
-};
+	)
+}

@@ -1,22 +1,21 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { Company } from 'types/Company';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { getPageData } from 'functions/callBackEnd';
-import { ProfileDescription } from 'components/ProfilePage/ProfileDescription';
-import { ProfileInfo } from 'components/ProfilePage/ProfileInfo';
-import { ProfileContact } from 'components/ProfilePage/ProfileContact';
-import { ProfileDetails } from 'components/ProfilePage/ProfileDetails';
-import { ProfileExecutives } from 'components/ProfilePage/ProfileExecutives';
-import { ProfileSECfilings } from 'components/ProfilePage/ProfileSECfilings';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
+import { GetServerSideProps } from 'next'
+import { Info } from 'types/Info'
+import { Company } from 'types/Company'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { getPageDataSSR } from 'functions/apis/callBackEnd'
+import { ProfileDescription } from 'components/ProfilePage/ProfileDescription'
+import { ProfileInfo } from 'components/ProfilePage/ProfileInfo'
+import { ProfileContact } from 'components/ProfilePage/ProfileContact'
+import { ProfileDetails } from 'components/ProfilePage/ProfileDetails'
+import { ProfileExecutives } from 'components/ProfilePage/ProfileExecutives'
+import { ProfileSECfilings } from 'components/ProfilePage/ProfileSECfilings'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 
 interface Props {
-	info: Info;
-	data: Company;
+	info: Info
+	data: Company
 }
 
 const SymbolStatistics = ({ info, data }: Props) => {
@@ -27,7 +26,7 @@ const SymbolStatistics = ({ info, data }: Props) => {
 				description={`Company profile for ${info.nameFull} (${info.ticker}) with a description, list of executives, contact details and other key facts.`}
 				canonical={`/stocks/${info.symbol}/company/`}
 			/>
-			<div className="contain mt-4 sm:mt-5 lg:mt-6">
+			<div className="contain-content mt-4 sm:mt-5 lg:mt-6">
 				<div className="float-none lg:float-left lg:profilewrap">
 					<ProfileDescription text={data.description} />
 				</div>
@@ -47,27 +46,23 @@ const SymbolStatistics = ({ info, data }: Props) => {
 				<div className="float-none lg:float-left lg:profilewrap mb-2">
 					<ProfileExecutives executives={data.executives} />
 					<ProfileSECfilings
-						id={info.id}
-						filings={data.secFilings}
+						info={info}
 						cik={data.stockDetails.cik}
+						filings={data.secFilings}
 					/>
 				</div>
 			</div>
 			<div className="clear-both min-h-5"></div>
 		</Stock>
-	);
-};
-export default SymbolStatistics;
-
-interface IParams extends ParsedUrlQuery {
-	symbol: string;
+	)
 }
+export default SymbolStatistics
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getPageData('profile', symbol, 3600);
-};
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getPageDataSSR('profile', symbol)
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};
+	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+
+	return data
+}

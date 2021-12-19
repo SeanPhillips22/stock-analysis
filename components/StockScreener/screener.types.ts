@@ -1,6 +1,7 @@
+export type ScreenerTypes = 'stocks' | 'ipo' | 'etf'
+
 // All possible filters
 // The IDs are shortened to minimize data payload size
-
 export type FilterId =
 	| 's' // Symbol
 	| 'n' // Name
@@ -121,7 +122,7 @@ export type FilterId =
 	| 'etfExDividendDate'
 	| 'etfSector'
 	| 'etfRegion'
-	| 'etfExchange';
+	| 'etfExchange'
 
 // Results columns
 export type ColumnName =
@@ -136,91 +137,91 @@ export type ColumnName =
 	| 'Custom'
 	| 'Income'
 	| 'Balance Sheet'
-	| 'Cash Flow';
+	| 'Cash Flow'
 
 export type ColumnsMap = {
 	// eslint-disable-next-line no-unused-vars
-	[key in ColumnName]: FilterId[];
-};
+	[key in ColumnName]: FilterId[]
+}
 
 export type SingleStock = {
 	// eslint-disable-next-line no-unused-vars
-	[key in FilterId]: string;
-};
+	[key in FilterId]: string
+}
 
 export type SingleIPO = {
 	// eslint-disable-next-line no-unused-vars
-	[key in FilterId]: string;
-};
+	[key in FilterId]: string
+}
 
 export type SingleETF = {
 	// eslint-disable-next-line no-unused-vars
-	[key in FilterId]: string;
-};
+	[key in FilterId]: string
+}
 
-export type SingleDataPoint = string[];
+export type SingleDataPoint = string[]
 
 export type ScreenerData = {
 	stocks: {
-		count: number;
-		data: SingleStock[];
-	};
-};
+		count: number
+		data: SingleStock[]
+	}
+}
 
 export type IPOScreenerData = {
 	ipos: {
-		count: number;
-		data: SingleIPO[];
-	};
-};
+		count: number
+		data: SingleIPO[]
+	}
+}
 
 export type ETFScreenerData = {
 	etfs: {
-		count: number;
-		data: SingleETF[];
-	};
-};
+		count: number
+		data: SingleETF[]
+	}
+}
 
 export type CellString = {
 	cell: {
-		value: string;
-	};
-};
+		value: string
+	}
+}
 
 export type CellNumber = {
 	cell: {
-		value: number;
-	};
-};
+		value: number
+	}
+}
 
 export type FilterProps = {
-	name: string;
-	id: FilterId;
-	category: string[];
-	options: FilterOption[];
-	filterType: FilterType;
-	numberType?: NumberType;
-};
+	name: string
+	id: FilterId
+	category: string[]
+	options: FilterOption[]
+	filterType: FilterType
+	numberType?: NumberType
+}
 
 export type FilterOption = {
-	name: string;
-	value: string;
-	div?: boolean; // Set true to add a divider in the dropdown
-};
+	name: string
+	value: string
+	div?: boolean // Set true to add a divider in the dropdown
+}
 
 export type FilterValue = {
-	id: FilterId;
-	name: string;
-	value: string;
-	filterType: FilterType;
-	numberType?: 'percentage';
-};
+	id: FilterId
+	name: string
+	value: string
+	filterType: FilterType
+	numberType?: 'percentage'
+}
 
 export type FilterObject = {
-	compare: ComparisonOption;
-	first: string;
-	second: string;
-};
+	compare: ComparisonOption
+	first: string
+	second: string
+}
 
 export type FilterType =
 	| 'numeric'
@@ -228,12 +229,12 @@ export type FilterType =
 	| 'date'
 	| 'dateYear'
 	| 'numericRange'
-	| 'spac';
+	| 'spac'
 
-export type NumberType = 'percentage';
+export type NumberType = 'percentage'
 export type ComparisonOption =
 	| 'over'
 	| 'under'
 	| 'between'
 	| 'exactly'
-	| 'notzero';
+	| 'notzero'

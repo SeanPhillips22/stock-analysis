@@ -1,11 +1,11 @@
-import { FilingMin } from 'types/Ipos';
-import { StockLink } from 'components/Links';
-import { Button } from 'components/Button';
+import { FilingMin } from 'types/Ipos'
+import { StockLink } from 'components/Links'
+import { Button } from 'components/Buttons/Button'
 
 type Props = {
-	filings: FilingMin[];
-	count: number;
-};
+	filings: FilingMin[]
+	count: number
+}
 
 export const FilingTableMin = ({ filings, count }: Props) => {
 	return (
@@ -40,5 +40,5 @@ export const FilingTableMin = ({ filings, count }: Props) => {
 			</div>
 			<Button text="All IPO Filings" url="/ipos/filings/" />
 		</div>
-	);
-};
+	)
+}

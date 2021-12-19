@@ -1,40 +1,45 @@
-import { FiltersMap } from 'components/StockScreener/maps/filters.map';
-import { useModifyFilters } from '../../functions/useModifyFilters';
-import { useModifyColumns } from '../../functions/useModifyColumns';
-import { screenerState } from '../../screener.state';
-import { useSavedScreens } from './useSavedScreens';
-import { FilterId } from 'components/StockScreener/screener.types';
-import { XIcon } from '@heroicons/react/solid';
+import { FiltersMap } from 'components/StockScreener/maps/filters.map'
+import { useModifyFilters } from '../../functions/useModifyFilters'
+import { useModifyColumns } from '../../functions/useModifyColumns'
+import { screenerState } from '../../screener.state'
+import { useSavedScreens } from './useSavedScreens'
+import {
+	FilterId,
+	ScreenerTypes
+} from 'components/StockScreener/screener.types'
+import { XIcon } from '@heroicons/react/solid'
 
 type SavedFilter = {
-	id: FilterId;
-	name: string;
-	value: string;
-};
+	id: FilterId
+	name: string
+	value: string
+}
 
 type Screen = {
-	name: string;
-	id: number;
-	filters: SavedFilter[];
-};
+	name: string
+	id: number
+	filters: SavedFilter[]
+}
 
 type Props = {
-	name: string;
-	type: 'stocks' | 'ipo' | 'etfs';
-};
+	name: string
+	type: ScreenerTypes
+}
 
 export function SavedItem({ name, type }: Props) {
-	const { data, del } = useSavedScreens(type);
-	const setFilterMenu = screenerState((state) => state.setFilterMenu);
-	const { add, clear } = useModifyFilters();
-	const { fetchColumn } = useModifyColumns();
+	const { data, del } = useSavedScreens(type)
+	const setFilterMenu = screenerState((state) => state.setFilterMenu)
+	const { add, clear } = useModifyFilters()
+	const { fetchColumn } = useModifyColumns()
 
 	function renderPresetFilters(value: string) {
-		clear();
-		setFilterMenu('Active');
-		data.map((item: Screen) => {
-			if (item.name === value) {
-				item.filters.map((filter) => {
+		clear()
+		setFilterMenu('Active')
+
+		let screens = data.screeners[type]
+		Object.keys(screens).forEach((key) => {
+			if (screens[key].name === value) {
+				screens[key].filters.map((filter: any) => {
 					FiltersMap.map((mapItem) => {
 						if (mapItem.id === filter.id) {
 							add(
@@ -43,17 +48,17 @@ export function SavedItem({ name, type }: Props) {
 								filter.value,
 								mapItem.filterType,
 								mapItem.numberType
-							);
-							fetchColumn(filter.id, type);
+							)
+							fetchColumn(filter.id, type)
 						}
-					});
-				});
+					})
+				})
 			}
-		});
+		})
 	}
 
 	async function handleDelete(name: string) {
-		del.mutate(name);
+		del.mutate(name)
 	}
 
 	return (
@@ -63,7 +68,7 @@ export function SavedItem({ name, type }: Props) {
 				onClick={() => renderPresetFilters(name)}
 				onKeyPress={(e) => {
 					if (e.key === 'Enter') {
-						renderPresetFilters(name);
+						renderPresetFilters(name)
 					}
 				}}
 				tabIndex={0}
@@ -78,5 +83,5 @@ export function SavedItem({ name, type }: Props) {
 				<XIcon className="w-4 h-4" />
 			</div>
 		</div>
-	);
+	)
 }

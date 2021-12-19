@@ -1,9 +1,9 @@
 /* eslint-disable no-invalid-this */
-import { functor, GenericChartComponent, last } from './core';
-import { format } from 'd3-format';
-import * as React from 'react';
-import { ToolTipText } from './ToolTipText';
-import { timeFormat } from 'd3-time-format';
+import { functor, GenericChartComponent, last } from './core'
+import { format } from 'd3-format'
+import * as React from 'react'
+import { ToolTipText } from './ToolTipText'
+import { timeFormat } from 'd3-time-format'
 
 const displayTextsDefault = {
 	o: 'O: ',
@@ -11,35 +11,33 @@ const displayTextsDefault = {
 	l: ' L: ',
 	c: ' C: ',
 	na: 'n/a',
-};
+}
 
 export interface OHLCTooltipProps {
-	readonly accessor?: (data: any) => any;
-	readonly className?: string;
-	readonly changeFormat?: (n: number | { valueOf(): number }) => string;
+	readonly accessor?: (data: any) => any
+	readonly className?: string
+	readonly changeFormat?: (n: number | { valueOf(): number }) => string
 	readonly displayTexts?: {
-		o: string;
-		h: string;
-		l: string;
-		c: string;
-		na: string;
-	};
-	readonly displayValuesFor?: (props: OHLCTooltipProps, moreProps: any) => any;
-	readonly fontFamily?: string;
-	readonly fontSize?: number;
-	readonly fontWeight?: number;
-	readonly labelFill?: string;
-	readonly labelFontWeight?: number;
-	readonly ohlcFormat?: (n: number | { valueOf(): number }) => string;
-	readonly onClick?: (
-		event: React.MouseEvent<SVGGElement, MouseEvent>
-	) => void;
+		o: string
+		h: string
+		l: string
+		c: string
+		na: string
+	}
+	readonly displayValuesFor?: (props: OHLCTooltipProps, moreProps: any) => any
+	readonly fontFamily?: string
+	readonly fontSize?: number
+	readonly fontWeight?: number
+	readonly labelFill?: string
+	readonly labelFontWeight?: number
+	readonly ohlcFormat?: (n: number | { valueOf(): number }) => string
+	readonly onClick?: (event: React.MouseEvent<SVGGElement, MouseEvent>) => void
 	readonly origin?:
 		| [number, number]
-		| ((width: number, height: number) => [number, number]);
-	readonly percentFormat?: (n: number | { valueOf(): number }) => string;
-	readonly textFill?: string | ((item: any) => string);
-	readonly time?: string;
+		| ((width: number, height: number) => [number, number])
+	readonly percentFormat?: (n: number | { valueOf(): number }) => string
+	readonly textFill?: string | ((item: any) => string)
+	readonly time?: string | null
 }
 
 export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
@@ -54,7 +52,7 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 		ohlcFormat: format('.2f'),
 		origin: [0, 0],
 		percentFormat: format('.2%'),
-	};
+	}
 
 	public render() {
 		return (
@@ -63,7 +61,7 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 				svgDraw={this.renderSVG}
 				drawOn={['mousemove']}
 			/>
-		);
+		)
 	}
 
 	private readonly renderSVG = (moreProps: any) => {
@@ -80,32 +78,32 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			percentFormat = OHLCTooltipCustom.defaultProps.percentFormat,
 			textFill,
 			time,
-		} = this.props;
+		} = this.props
 
 		const {
 			chartConfig: { width, height },
 			fullData,
-		} = moreProps;
+		} = moreProps
 
 		const currentItem =
-			displayValuesFor(this.props, moreProps) ?? last(fullData);
+			displayValuesFor(this.props, moreProps) ?? last(fullData)
 
-		let change: string = displayTexts.na;
-		let date: Date = new Date('August 19, 1975 23:15:30 GMT+11:00');
+		let change: string = displayTexts.na
+		let date: Date = new Date('August 19, 1975 23:15:30 GMT+11:00')
 
 		if (currentItem !== undefined && accessor !== undefined) {
-			const item = accessor(currentItem);
+			const item = accessor(currentItem)
 			if (item !== undefined) {
-				date = item.date;
+				date = item.date
 				change = `${changeFormat(item.close - item.open)} (${percentFormat(
 					(item.close - item.open) / item.open
-				)})`;
+				)})`
 			}
 		}
 
-		const { origin: originProp } = this.props;
-		const [x, y] = functor(originProp)(width, height);
-		const valueFill = functor(textFill)(currentItem);
+		const { origin: originProp } = this.props
+		const [x, y] = functor(originProp)(width, height)
+		const valueFill = functor(textFill)(currentItem)
 
 		return (
 			<g
@@ -133,6 +131,6 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 					)}
 				</ToolTipText>
 			</g>
-		);
-	};
+		)
+	}
 }

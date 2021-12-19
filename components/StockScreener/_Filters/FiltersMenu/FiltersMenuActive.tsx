@@ -1,27 +1,27 @@
-import { screenerState } from 'components/StockScreener/screener.state';
-import { screenerDataState } from 'components/StockScreener//screenerdata.state';
-import { CloseCircleIcon } from 'components/Icons/CloseCircle';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { screenerState } from 'components/StockScreener/screener.state'
+import { screenerDataState } from 'components/StockScreener//screenerdata.state'
+import { CloseCircleIcon } from 'components/Icons/CloseCircle'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 export function FiltersMenuActive() {
-	const filters = screenerState((state) => state.filters);
-	const filterMenu = screenerState((state) => state.filterMenu);
-	const resultsMenu = screenerState((state) => state.resultsMenu);
-	const setFilterMenu = screenerState((state) => state.setFilterMenu);
-	const clearFilters = screenerState((state) => state.clearFilters);
-	const filtersShown = screenerState((state) => state.filtersShown);
-	const setFiltersShown = screenerState((state) => state.setFiltersShown);
-	const setShowColumns = screenerState((state) => state.setShowColumns);
+	const filters = screenerState((state) => state.filters)
+	const filterMenu = screenerState((state) => state.filterMenu)
+	const resultsMenu = screenerState((state) => state.resultsMenu)
+	const setFilterMenu = screenerState((state) => state.setFilterMenu)
+	const clearFilters = screenerState((state) => state.clearFilters)
+	const filtersShown = screenerState((state) => state.filtersShown)
+	const setFiltersShown = screenerState((state) => state.setFiltersShown)
+	const setShowColumns = screenerState((state) => state.setShowColumns)
 
-	const count = filters.length;
+	const count = filters.length
 
 	let classes =
-		'text-lg font-semibold ml-0.5 lg:ml-1 cursor-pointer flex focus:outline-none focus:font-bold';
+		'text-lg font-semibold ml-0.5 lg:ml-1 cursor-pointer flex focus:outline-none focus:font-bold'
 	if (filterMenu !== 'Active') {
-		classes += ' bll';
+		classes += ' bll'
 	}
-	const type = screenerDataState((state) => state.type);
+	const type = screenerDataState((state) => state.type)
 
 	return (
 		<>
@@ -60,20 +60,20 @@ export function FiltersMenuActive() {
 						className="text-gray-600 hover:text-red-500 cursor-pointer flex items-center font-semibold text-small"
 						title="Clear All Filters"
 						onClick={() => {
-							clearFilters();
-							if (resultsMenu === 'Filtered' && type != 'etfs') {
-								setShowColumns(['s', 'n', 'm']);
+							clearFilters()
+							if (resultsMenu === 'Filtered' && type != 'etf') {
+								setShowColumns(['s', 'n', 'm'])
 							} else {
-								setShowColumns(['s', 'n']);
+								setShowColumns(['s', 'n'])
 							}
 						}}
 						onKeyPress={(e) => {
 							if (e.key === 'Enter') {
-								clearFilters();
-								if (resultsMenu === 'Filtered' && type != 'etfs') {
-									setShowColumns(['s', 'n', 'm']);
+								clearFilters()
+								if (resultsMenu === 'Filtered' && type != 'etf') {
+									setShowColumns(['s', 'n', 'm'])
 								} else {
-									setShowColumns(['s', 'n']);
+									setShowColumns(['s', 'n'])
 								}
 							}
 						}}
@@ -85,5 +85,5 @@ export function FiltersMenuActive() {
 				)}
 			</div>
 		</>
-	);
+	)
 }

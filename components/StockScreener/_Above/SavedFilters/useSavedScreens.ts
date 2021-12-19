@@ -1,105 +1,128 @@
-import axios from 'axios';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { useUserInfo } from 'hooks/useUserInfo';
-import { getData } from 'functions/API';
-import { screenerState } from 'components/StockScreener/screener.state';
-import { useEffect, useState } from 'react';
-import { FilterId } from 'components/StockScreener/screener.types';
-
-// Fetch saved screens
-async function fs(
-	email: string | null,
-	token: string | null,
-	type: 'stocks' | 'ipo' | 'etfs'
-) {
-	if (!email || !token) return null;
-	return await getData(
-		`screener-settings?uid=${email}&t=${token}&type=${type}&action=list`
-	);
-}
+import { useQuery, useMutation, useQueryClient } from 'react-query'
+import { screenerState } from 'components/StockScreener/screener.state'
+import { useEffect, useState } from 'react'
+import {
+	FilterId,
+	ScreenerTypes
+} from 'components/StockScreener/screener.types'
+import { supabase } from 'functions/supabase'
+import { useAuthState } from 'hooks/useAuthState'
 
 type SavedFilter = {
-	id: FilterId;
-	value: string;
-};
+	id: FilterId
+	value: string
+}
 
-export function useSavedScreens(type: 'stocks' | 'ipo' | 'etfs') {
-	const filters = screenerState((state) => state.filters);
-	const [save, setSave] = useState<SavedFilter[]>([]);
-	const [msg, setMsg] = useState('');
-	const [err, setErr] = useState('');
-	const { email, token } = useUserInfo();
-	const queryClient = useQueryClient();
+// if there are no saved screens, return this initial state
+const initialState = {
+	count: 0,
+	screeners: {
+		stocks: {},
+		ipo: {},
+		etf: {}
+	}
+}
 
-	const api = process.env.NEXT_PUBLIC_API_URL;
+/**
+ * These functions handle the logic of fetching, adding and deleting saved screens
+ * @param type What the screener is for (stock, ipo, etf)
+ * @returns
+ */
+export function useSavedScreens(type: ScreenerTypes) {
+	const { user } = useAuthState()
+	const filters = screenerState((state) => state.filters)
+	const [msg, setMsg] = useState('')
+	const [err, setErr] = useState('')
+	const queryClient = useQueryClient()
 
-	useEffect(() => {
-		const newF = filters.map((filter) => {
-			return { id: filter.id, value: filter.value };
-		});
+	// Fetch all the saved screens
+	async function fetchScreener() {
+		let { data: fetchedData } = await supabase
+			.from('userdata')
+			.select('screener')
 
-		setSave(newF);
-	}, [filters]);
+		let screener = fetchedData![0].screener
+		return screener ?? initialState
+	}
+
+	const { data } = useQuery(['screener', type], () => fetchScreener(), {
+		refetchOnWindowFocus: true,
+		enabled: user ? true : false
+	})
 
 	function clearMessages() {
-		setMsg('');
-		setErr('');
+		setMsg('')
+		setErr('')
 	}
 
-	async function post(action: string, name: string) {
-		clearMessages();
+	async function addScreen(name: string) {
+		clearMessages()
 
-		try {
-			const res = await axios.post(api + '/screener-settings', {
-				email,
-				token,
-				type,
-				action,
-				name,
-				filters: save,
-			});
+		let save = filters.map((filter) => {
+			return { id: filter.id, value: filter.value }
+		})
 
-			if (res.status === 200) {
-				setMsg('Success: ' + res?.data?.message);
-				setTimeout(() => {
-					clearMessages();
-				}, 5000);
-			}
-		} catch (error: any) {
-			setErr('Error: ' + error?.response?.data?.message);
+		data.count = data.count + 1 // always increment by 1 to give screens a unique ID
+		data.screeners[type][name] = {
+			// add the new screen to the screener
+			id: data.count,
+			name: name,
+			filters: save
+		}
+
+		let { error } = await supabase
+			.from('userdata')
+			.update({ screener: data })
+			.eq('id', user?.id)
+
+		if (error) {
+			setErr(
+				'There was an error, try again or email support@stockanalysis.com'
+			)
+		} else {
+			setMsg('Successfully saved new screen: ' + name)
+			setTimeout(() => {
+				clearMessages()
+			}, 5000)
 		}
 	}
 
-	const { status, data, error } = useQuery(
-		['screener', email, type],
-		() => fs(email, token, type),
-		{
-			refetchOnWindowFocus: true,
+	async function deleteScreen(name: string) {
+		clearMessages()
+
+		delete data.screeners[type][name]
+		let { error } = await supabase
+			.from('userdata')
+			.update({ screener: data })
+			.eq('id', user?.id)
+
+		if (error) {
+			setErr(
+				'There was an error, try again or email support@stockanalysis.com'
+			)
 		}
-	);
+	}
 
-	const add = useMutation((name: string) => post('add', name), {
+	const add = useMutation((name: string) => addScreen(name), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('screener');
-		},
-	});
+			queryClient.invalidateQueries('screener')
+		}
+	})
 
-	const del = useMutation((name: string) => post('remove', name), {
+	const del = useMutation((name: string) => deleteScreen(name), {
 		onSuccess: () => {
-			queryClient.invalidateQueries('screener');
-		},
-	});
+			queryClient.invalidateQueries('screener')
+		}
+	})
 
 	return {
-		status,
 		data,
-		error,
 		add,
 		del,
 		msg,
 		setMsg,
 		err,
 		setErr,
-		clearMessages,
-	};
+		clearMessages
+	}
 }

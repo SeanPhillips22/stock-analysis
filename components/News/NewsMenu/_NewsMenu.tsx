@@ -1,28 +1,28 @@
-import { NewsMenuNav } from './NewsMenuNav';
-import { NewsMenuSearch } from './NewsMenuSearch';
-import { News } from 'types/News';
+import { NewsMenuNav } from './NewsMenuNav'
+import { NewsMenuSearch } from './NewsMenuSearch'
+import { News } from 'types/News'
 
 type Props = {
-	show: string;
-	setShow: (value: string) => void;
-	pageType: string;
-	id: number;
-	setData: (value: News[]) => void;
-	news: News[];
-	setError: (error: string) => void;
-	setLoaded: (loaded: boolean) => void;
-	query: string;
-	setQuery: (query: string) => void;
-	searched: boolean;
-	setSearched: (searched: boolean) => void;
-	setEnd: (end: boolean) => void;
-};
+	show: string
+	setShow: (value: string) => void
+	pageType: string
+	symbol: string
+	setData: (value: News[]) => void
+	news: News[]
+	setError: (error: string) => void
+	setLoaded: (loaded: boolean) => void
+	query: string
+	setQuery: (query: string) => void
+	searched: boolean
+	setSearched: (searched: boolean) => void
+	setEnd: (end: boolean) => void
+}
 
 export function NewsMenu({
 	show,
 	setShow,
 	pageType,
-	id,
+	symbol,
 	setData,
 	news,
 	setError,
@@ -42,7 +42,8 @@ export function NewsMenu({
 				pageType={pageType}
 			/>
 			<NewsMenuSearch
-				id={id}
+				symbol={symbol}
+				type={pageType}
 				setData={setData}
 				news={news}
 				setError={setError}
@@ -54,5 +55,5 @@ export function NewsMenu({
 				setEnd={setEnd}
 			/>
 		</div>
-	);
+	)
 }

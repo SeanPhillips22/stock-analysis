@@ -1,58 +1,65 @@
-import { authState } from 'state/authState';
-import { SEO } from 'components/SEO';
-import { LayoutFullWidth } from 'components/Layout/LayoutFullWidth';
-import { LoginPrompt } from 'components/LoginPrompt';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import Axios from 'axios';
-import { CrispChat } from 'components/Scripts/CrispChat';
-
-type StringOrNull = string | null | undefined;
+import { SEO } from 'components/SEO'
+import { LoginPrompt } from 'components/Pro/LoginPrompt'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { CrispChat } from 'components/Scripts/CrispChat'
+import { useAuthState } from 'hooks/useAuthState'
+import { supabase } from 'functions/supabase'
+import { formatDateClean } from 'functions/datetime/formatDates'
+import { ReActivate } from 'components/Pro/MyAccount/Reactivate'
+import { FocusedLayout } from 'components/Layout/FocusedLayout'
 
 export default function MyAccount() {
-	const isLoggedIn = authState((state) => state.isLoggedIn);
-	const email = authState((state) => state.email);
-	const [registeredDate, setRegisteredDate] = useState<StringOrNull>(null);
-	const [status, setStatus] = useState<StringOrNull>(null);
-	const [nextPaymentDate, setNextPaymentDate] = useState<StringOrNull>(null);
-	const [nextPaymentAmount, setNextPaymentAmount] =
-		useState<StringOrNull>(null);
-	const [paymentCurrency, setPaymentCurrency] = useState<StringOrNull>(null);
-	const [paymentMethod, setPaymentMethod] = useState<StringOrNull>(null);
-	const [urlUpdate, setUrlUpdate] = useState<StringOrNull>(null);
-	const [urlCancel, setUrlCancel] = useState<StringOrNull>(null);
+	const { isLoggedIn } = useAuthState()
+	const [userInfo, setUserInfo] = useState<any>()
+	const [loaded, setLoaded] = useState(false)
 
 	useEffect(() => {
-		async function getUserDetails() {
-			try {
-				const res = await Axios.get(
-					`https://api.stockanalysis.com/wp-json/authorize/v1/autologin?JWT=${token}&e=${email}&f=true`
-				);
-				setRegisteredDate(res.data.registeredDate);
-				setStatus(res.data.status);
-				setNextPaymentDate(res.data.nextPaymentDate);
-				setNextPaymentAmount(res.data.nextPaymentAmount);
-				setPaymentCurrency(res.data.paymentCurrency);
-				setPaymentMethod(res.data.paymentMethod);
-				setUrlUpdate(res.data.urlUpdate);
-				setUrlCancel(res.data.urlCancel);
-			} catch (err) {
-				console.error(err);
-			}
+		if (isLoggedIn) {
+			getUserInfo()
+		}
+	}, [isLoggedIn])
+
+	async function getUserInfo() {
+		const { data: profile } = await supabase
+			.from('userdata')
+			.select(
+				'email, status, plan, update_url, cancel_url, receipt_url, payment_method, currency, next_bill_date, next_payment_amount, unit_price, registered_date, cancelled_date, paused_date'
+			)
+
+		if (profile) {
+			setUserInfo(profile[0])
 		}
 
-		const token = localStorage.getItem('auth');
+		setLoaded(true)
+	}
 
-		if (token) {
-			getUserDetails();
-		}
-	}, [email]);
+	const {
+		email = undefined,
+		status = undefined,
+		update_url = undefined,
+		cancel_url = undefined,
+		payment_method = undefined,
+		currency = undefined,
+		next_bill_date = undefined,
+		next_payment_amount = undefined,
+		registered_date = undefined
+	} = userInfo ? userInfo : {}
+
+	let showStatus = ''
+	if (status === 'active') showStatus = 'Subscription Active'
+	if (status === 'trialing') showStatus = 'Free Trial Active'
+	if (status === 'paused') showStatus = 'Subscription Paused'
+	if (status === 'deleted') showStatus = 'Subscription Cancelled'
+
+	const isSubscribed =
+		status === 'active' || status === 'trialing' ? true : false
 
 	return (
 		<>
 			<SEO title="My Account" canonical="/pro/my-account/" noindex={true} />
 			<CrispChat />
-			<LayoutFullWidth>
+			<FocusedLayout>
 				<div className="max-w-3xl mx-auto px-4 xs:px-6 py-8 xs:py-12 space-y-6 xs:space-y-8">
 					{isLoggedIn ? (
 						<>
@@ -66,39 +73,42 @@ export default function MyAccount() {
 										<strong>Email Address:</strong> {email}
 									</div>
 								)}
-								{registeredDate && (
+								{registered_date && (
 									<div>
-										<strong>Registered Date:</strong> {registeredDate}
+										<strong>Registered Date:</strong>{' '}
+										{formatDateClean(registered_date)}
 									</div>
 								)}
 							</div>
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">Manage Subscription</h2>
-								{status && (
+								{showStatus && (
 									<div className="mb-2">
-										<strong>Status:</strong> {status}
+										<strong>Status:</strong> {showStatus}
 									</div>
 								)}
-								{nextPaymentDate && (
-									<div>Next Billing Date: {nextPaymentDate}</div>
+								{isSubscribed && next_bill_date && (
+									<div>Next Payment Date: {next_bill_date}</div>
 								)}
-								{nextPaymentAmount && nextPaymentAmount !== '0' && (
-									<div>
-										Amount: {nextPaymentAmount}{' '}
-										{paymentCurrency && paymentCurrency}
-									</div>
-								)}
-								{paymentMethod && (
+								{isSubscribed &&
+									next_payment_amount &&
+									next_payment_amount !== '0' && (
+										<div>
+											Amount: {next_payment_amount}{' '}
+											{currency && currency}
+										</div>
+									)}
+								{isSubscribed && payment_method && (
 									<div>
 										Payment Method:{' '}
-										{paymentMethod.charAt(0).toUpperCase() +
-											paymentMethod.slice(1)}
+										{payment_method.charAt(0).toUpperCase() +
+											payment_method.slice(1)}
 									</div>
 								)}
-								{urlUpdate && (
+								{isSubscribed && update_url && (
 									<div>
 										<a
-											href={urlUpdate}
+											href={update_url}
 											target="_blank"
 											rel="nofollow noopener noreferrer"
 											className="bll"
@@ -107,10 +117,10 @@ export default function MyAccount() {
 										</a>
 									</div>
 								)}
-								{urlCancel && (
+								{isSubscribed && cancel_url && (
 									<div className="mt-3">
 										<a
-											href={urlCancel}
+											href={cancel_url}
 											target="_blank"
 											rel="nofollow noopener noreferrer"
 											className="bll"
@@ -119,18 +129,11 @@ export default function MyAccount() {
 										</a>
 									</div>
 								)}
+								{loaded && !isSubscribed && (
+									<ReActivate email={email} status={status} />
+								)}
 							</div>
-							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
-								<h2 className="hh2">Manage Account</h2>
-								<div>
-									<a
-										href="https://api.stockanalysis.com/pro-login/?action=lostpassword"
-										className="bll"
-									>
-										Reset or Change Password
-									</a>
-								</div>
-							</div>
+
 							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
 								<h2 className="hh2">Get Support</h2>
 								<div className="mb-4">
@@ -159,7 +162,7 @@ export default function MyAccount() {
 						<LoginPrompt />
 					)}
 				</div>
-			</LayoutFullWidth>
+			</FocusedLayout>
 		</>
-	);
+	)
 }

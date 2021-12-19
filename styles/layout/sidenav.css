@@ -1,0 +1,77 @@
+/* 
+* SIDE NAV
+* The navigation bar to the left side
+*/
+
+@layer base {
+	.leftcol {
+		@apply hidden xxl:block xxl:border-r xxl:border-gray-100;
+	}
+
+	.mobilemenu {
+		@apply fixed flex flex-col z-40
+		border-r border-gray-200 bg-white shadow-2xl
+		h-[calc(100%-46px)] xs:h-[calc(100%-50px)] md:h-[calc(100%-58px)];
+	}
+
+	.leftnav {
+		@apply xxl:sticky top-16
+		px-3 xxl:px-2 xxxl:px-5
+		pt-4 flex-grow overflow-y-auto;
+	}
+
+	.nav-col {
+		@apply flex flex-col space-y-1;
+	}
+
+	.nav-menu-wrap {
+		@apply flex flex-row items-center w-full
+		text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md;
+	}
+
+	.nav-menu-wrap.current {
+		@apply bg-gray-100;
+	}
+
+	.nav-item {
+		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-sm font-semibold whitespace-nowrap flex-grow;
+	}
+
+	.nav-item.current {
+		@apply bg-gray-100 text-gray-900;
+	}
+
+	.nav-icon {
+		@apply text-gray-500
+		mr-3 xxl:mr-2.5 xxxl:mr-3
+		h-6 w-6 xxl:h-5 xxl:w-5 xxxl:h-6 xxxl:w-6;
+	}
+
+	.nav-arrow-wrap {
+		@apply h-full ml-auto border-l px-1 border-gray-300;
+	}
+
+	.nav-arrow {
+		@apply ml-auto flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150;
+	}
+
+	.nav-arrow.closed {
+		@apply text-gray-300;
+	}
+
+	.nav-arrow.open {
+		@apply text-gray-400 rotate-90;
+	}
+
+	.nav-subitem {
+		@apply w-full flex items-center pl-11 pr-2 py-1.5 text-sm font-semibold text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50;
+	}
+
+	.nav-subitem.current {
+		@apply bg-gray-100 text-gray-900;
+	}
+
+	.nav-login {
+		@apply px-3 mb-6;
+	}
+}

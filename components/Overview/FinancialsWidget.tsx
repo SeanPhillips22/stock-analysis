@@ -1,56 +1,56 @@
-import { Button } from 'components/Button';
-import { Info } from 'types/Info';
-import { Overview } from 'types/Overview';
-import { FinancialsWidgetChart } from './FinancialsWidgetChart';
+import { Button } from 'components/Buttons/Button'
+import { Info } from 'types/Info'
+import { Overview } from 'types/Overview'
+import { FinancialsWidgetChart } from './FinancialsWidgetChart'
 
 interface Props {
-	info: Info;
-	data: Overview;
+	info: Info
+	data: Overview
 }
 
 export const FinancialsWidget = ({ info, data }: Props) => {
 	if (!data || !data.financialChart) {
-		return null;
+		return null
 	}
 
-	const earnings: number[] = data.financialChart[2];
-	const colors: string[] = [];
+	const earnings: number[] = data.financialChart[2]
+	const colors: string[] = []
 
 	earnings.map(function (item) {
 		if (item < 0) {
-			colors.push('#CD5C5C');
+			colors.push('#CD5C5C')
 		} else {
-			colors.push('#00853E');
+			colors.push('#00853E')
 		}
-	});
+	})
 
 	// https://stackoverflow.com/questions/42585861/chart-js-increase-spacing-between-legend-and-chart/67723827#67723827?newreg=566b25835b7d46818559b7301d5ead2f
 	const padLegend = {
 		id: 'padLegend',
 
 		beforeInit: (chart: { legend: { fit: () => void; height: number } }) => {
-			const originalFit = chart.legend.fit;
+			const originalFit = chart.legend.fit
 
 			chart.legend.fit = function fit() {
-				originalFit.bind(chart.legend)();
-				chart.legend.height += 6;
-			};
-		},
-	};
+				originalFit.bind(chart.legend)()
+				chart.legend.height += 6
+			}
+		}
+	}
 
 	const colorEarnings = {
 		id: 'colorEarnings',
 
 		beforeDraw: function (chart: { legend: { legendItems: any } }) {
 			if (earnings[earnings.length - 1] > 0) {
-				const legends = chart.legend.legendItems;
-				legends[legends.length - 1].fillStyle = '#00853E';
+				const legends = chart.legend.legendItems
+				legends[legends.length - 1].fillStyle = '#00853E'
 			} else {
-				const legends = chart.legend.legendItems;
-				legends[legends.length - 1].fillStyle = '#CD5C5C';
+				const legends = chart.legend.legendItems
+				legends[legends.length - 1].fillStyle = '#CD5C5C'
 			}
-		},
-	};
+		}
+	}
 
 	return (
 		<div>
@@ -77,5 +77,5 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 				text="Financial Statements"
 			/>
 		</div>
-	);
-};
+	)
+}

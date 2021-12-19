@@ -1,19 +1,19 @@
-import { DividendType } from 'types/Dividend';
-import { Button } from 'components/Button';
+import { DividendType } from 'types/Dividend'
+import { Button } from 'components/Buttons/Button'
 
 interface Props {
-	ticker: string;
-	data: DividendType[];
+	ticker: string
+	data: DividendType[]
 }
 
 const formatter = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 3,
-	maximumFractionDigits: 5,
-});
+	maximumFractionDigits: 5
+})
 
 export const DividendWidget = ({ ticker, data }: Props) => {
 	if (data.length === 0) {
-		return null;
+		return null
 	}
 
 	return (
@@ -60,5 +60,5 @@ export const DividendWidget = ({ ticker, data }: Props) => {
 				className="text-lg bp:text-xl"
 			/>
 		</div>
-	);
-};
+	)
+}

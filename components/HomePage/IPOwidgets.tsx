@@ -1,15 +1,15 @@
-import Link from 'next/link';
-import { StockLink } from 'components/Links';
+import Link from 'next/link'
+import { StockLink } from 'components/Links'
 
 type IposMin = {
-	d: string;
-	s: string;
-	n: string;
-};
+	date: string
+	symbol: string
+	name: string
+}
 
 interface Props {
-	recent: IposMin[];
-	upcoming: IposMin[];
+	recent: IposMin[]
+	upcoming: IposMin[]
 }
 
 export const IPOwidgets = ({ recent, upcoming }: Props) => {
@@ -35,19 +35,19 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 								className="border-b border-gray-200 hover:bg-gray-50"
 							>
 								<td className="py-1.5 px-2 border-r border-gray-200 whitespace-nowrap">
-									{item.d}
+									{item.date}
 								</td>
 								<td className="py-1.5 px-2 border-r border-gray-200">
-									<StockLink symbol={item.s} className="bll" />
+									<StockLink symbol={item.symbol} className="bll" />
 								</td>
-								<td className="py-1.5 px-2">{item.n}</td>
+								<td className="py-1.5 px-2">{item.name}</td>
 							</tr>
-						);
+						)
 					})}
 				</tbody>
 			</table>
-		);
-	};
+		)
+	}
 
 	return (
 		<>
@@ -76,5 +76,5 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 				</section>
 			</div>
 		</>
-	);
-};
+	)
+}

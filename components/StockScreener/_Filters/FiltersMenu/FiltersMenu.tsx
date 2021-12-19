@@ -1,15 +1,15 @@
-import { screenerDataState } from 'components/StockScreener/screenerdata.state';
-import { screenerState } from 'components/StockScreener/screener.state';
-import { FiltersMenuItem } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuItem';
-import { FiltersMenuActive } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuActive';
-import { FilterSearch } from './FilterSearch';
+import { screenerDataState } from 'components/StockScreener/screenerdata.state'
+import { screenerState } from 'components/StockScreener/screener.state'
+import { FiltersMenuItem } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuItem'
+import { FiltersMenuActive } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuActive'
+import { FilterSearch } from './FilterSearch'
 
 export function FiltersMenu() {
-	const type = screenerDataState((state) => state.type);
-	const filtersShown = screenerState((state) => state.filtersShown);
+	const type = screenerDataState((state) => state.type)
+	const filtersShown = screenerState((state) => state.filtersShown)
 
-	const showHideBorder = filtersShown ? ' border-b border-gray-300' : '';
-	const showHideFilters = !filtersShown ? ' hidden lg:block' : '';
+	const showHideBorder = filtersShown ? ' border-b border-gray-300' : ''
+	const showHideFilters = !filtersShown ? ' hidden lg:block' : ''
 
 	return (
 		<>
@@ -47,7 +47,7 @@ export function FiltersMenu() {
 										<FiltersMenuItem name="All" />
 									</>
 								)) ||
-								(type == 'etfs' && (
+								(type == 'etf' && (
 									<>
 										<FiltersMenuItem name="Popular" />
 										<FiltersMenuItem name="Dividends" />
@@ -60,5 +60,5 @@ export function FiltersMenu() {
 				</div>
 			</div>
 		</>
-	);
+	)
 }

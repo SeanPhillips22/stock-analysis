@@ -1,25 +1,26 @@
-import { GetStaticProps } from 'next';
-import { News } from 'types/News';
-import { IpoRecent, IpoUpcoming } from 'types/Ipos';
-import { SEO } from 'components/SEO';
-import { getIpoData } from 'functions/callBackEnd';
-import { CalendarTable } from 'components/IPOs/CalendarTable';
-import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { RecentTableMin } from 'components/IPOs/RecentTableMin';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
-import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation';
+import { GetServerSideProps } from 'next'
+import { News } from 'types/News'
+import { IpoRecent, IpoUpcoming } from 'types/Ipos'
+import { SEO } from 'components/SEO'
+import { getIpoData } from 'functions/apis/callBackEnd'
+import { CalendarTable } from 'components/IPOs/CalendarTable'
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { RecentTableMin } from 'components/IPOs/RecentTableMin'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
-	data: IpoUpcoming[];
-	news: News[];
-	recent: IpoRecent[];
+	data: IpoUpcoming[]
+	news: News[]
+	recent: IpoRecent[]
 }
 
 export const IposWithdrawn = ({ data, news, recent }: Props) => {
-	const count = data.length;
+	const count = data.length
 
 	return (
 		<>
@@ -28,12 +29,12 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 				description="A list of companies that have withdrawn their U.S. stock market IPO within the last year."
 				canonical="/ipos/withdrawn/"
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url="/ipos/withdrawn/" />
 					<h1 className="hh1">Withdrawn IPOs</h1>
 					<IPONavigation path="calendar" />
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="lg:right-sidebar">
 						<div>
 							<CalendarNavigation path="withdrawn" />
 							<div className="py-2 lg:py-4">
@@ -55,30 +56,31 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 									news={news}
 									button={{
 										text: 'More IPO News',
-										url: '/ipos/news/',
+										url: '/ipos/news/'
 									}}
 								/>
 								<Sidebar2 />
 							</aside>
 						</div>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
-	);
-};
+	)
+}
 
-export default IposWithdrawn;
+export default IposWithdrawn
 
-export const getStaticProps: GetStaticProps = async () => {
-	const { data, news, recent } = await getIpoData('withdrawn');
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+	const { data, news, recent } = await getIpoData('withdrawn')
+
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {
 			data,
 			news,
-			recent,
-		},
-		revalidate: 5 * 60,
-	};
-};
+			recent
+		}
+	}
+}

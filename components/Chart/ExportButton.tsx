@@ -1,26 +1,26 @@
-import { Fragment, useEffect } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { ExportItem } from 'components/Controls/Export/ExportItem';
-import { ExportItemRestricted } from 'components/Controls/Export/ExportItemRestricted';
-import { authState } from 'state/authState';
-import { useState } from 'react';
+import { Fragment, useEffect } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ExportItem } from 'components/Controls/Export/ExportItem'
+import { ExportItemRestricted } from 'components/Controls/Export/ExportItemRestricted'
+import { useAuthState } from 'hooks/useAuthState'
+import { useState } from 'react'
 
 type Button = {
-	title: string;
-	type: 'csv' | 'xlsx';
-	restricted: boolean;
-	active?: boolean;
-};
+	title: string
+	type: 'csv' | 'xlsx'
+	restricted: boolean
+	active?: boolean
+}
 
 interface Props {
-	buttons: Button[];
-	data: any;
-	setData: any;
-	time: string;
+	buttons: Button[]
+	data: any
+	setData: any
+	time: string | null
 }
 
 export function Export({ buttons, data, time }: Props) {
-	const isPro = authState((state) => state.isPro);
+	const { isPro } = useAuthState()
 	const [expData, setExpData] = useState<any[]>([
 		'Date',
 		'Open',
@@ -28,13 +28,13 @@ export function Export({ buttons, data, time }: Props) {
 		'High',
 		'Low',
 		'Volume',
-	]);
+	])
 
 	useEffect(() => {
-		const result: any[] = [];
+		const result: any[] = []
 		if (typeof data !== 'undefined' && !Array.isArray(data[0])) {
 			if (time == '1D' || time == '5D') {
-				result.push(['Date', 'Open', 'Close', 'High', 'Low', 'Volume']);
+				result.push(['Date', 'Open', 'Close', 'High', 'Low', 'Volume'])
 			} else {
 				result.push([
 					'Date',
@@ -45,11 +45,11 @@ export function Export({ buttons, data, time }: Props) {
 					'Volume',
 					'MA1',
 					'MA2',
-				]);
+				])
 			}
 
 			for (let i = 0; i < data.length; i++) {
-				let arr = [];
+				let arr = []
 				if (time == '1D' || time == '5D') {
 					const dateString =
 						data[i].date.getMonth() +
@@ -61,7 +61,7 @@ export function Export({ buttons, data, time }: Props) {
 						' ' +
 						data[i].date.getHours() +
 						':' +
-						data[i].date.getMinutes();
+						data[i].date.getMinutes()
 					arr = [
 						dateString,
 						data[i].open,
@@ -69,7 +69,7 @@ export function Export({ buttons, data, time }: Props) {
 						data[i].high,
 						data[i].low,
 						data[i].volume,
-					];
+					]
 				} else {
 					arr = [
 						data[i].date,
@@ -80,13 +80,13 @@ export function Export({ buttons, data, time }: Props) {
 						data[i].volume,
 						data[i].ma1,
 						data[i].ma2,
-					];
+					]
 				}
-				result.push(arr);
+				result.push(arr)
 			}
-			setExpData(result);
+			setExpData(result)
 		}
-	}, [data, setExpData, time]);
+	}, [data, setExpData, time])
 
 	return (
 		<Menu as="div" className="relative text-left hidden sm:inline-block z-10">
@@ -142,5 +142,5 @@ export function Export({ buttons, data, time }: Props) {
 				</Menu.Items>
 			</Transition>
 		</Menu>
-	);
+	)
 }

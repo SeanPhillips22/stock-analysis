@@ -1,31 +1,32 @@
-import create from 'zustand';
+import create from 'zustand'
 import {
 	SingleStock,
 	SingleDataPoint,
 	FilterId,
-} from 'components/StockScreener/screener.types';
-import { mergeColumns } from 'components/StockScreener/functions/mergeColumns';
+	ScreenerTypes
+} from 'components/StockScreener/screener.types'
+import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
 
 interface ScreenerDataState {
 	// Type
-	type: 'stocks' | 'ipo' | 'etfs';
-	setType: (type: 'stocks' | 'ipo' | 'etfs') => void;
+	type: ScreenerTypes
+	setType: (type: ScreenerTypes) => void
 
-	data: SingleStock[];
-	setData: (data: SingleStock[]) => void;
-	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) => void;
-	loaded: boolean;
-	setLoaded: (loaded: boolean) => void;
-	fullyLoaded: boolean;
-	setFullyLoaded: (fullyLoaded: boolean) => void;
-	fullCount: number;
-	setFullCount: (fullCount: number) => void;
+	data: SingleStock[]
+	setData: (data: SingleStock[]) => void
+	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) => void
+	loaded: boolean
+	setLoaded: (loaded: boolean) => void
+	fullyLoaded: boolean
+	setFullyLoaded: (fullyLoaded: boolean) => void
+	fullCount: number
+	setFullCount: (fullCount: number) => void
 }
 
 export const screenerDataState = create<ScreenerDataState>((set) => ({
 	// Type
 	type: 'stocks',
-	setType: (newType: 'stocks' | 'ipo' | 'etfs') =>
+	setType: (newType: ScreenerTypes) =>
 		set((state) => ({ ...state, type: newType })),
 
 	// Data
@@ -34,7 +35,7 @@ export const screenerDataState = create<ScreenerDataState>((set) => ({
 		set((state) => ({ ...state, data: newData })),
 	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) =>
 		set((state) => ({
-			data: mergeColumns(state.data, newColumn, id),
+			data: mergeColumns(state.data, newColumn, id)
 		})),
 	loaded: false,
 	setLoaded: (newLoaded: boolean) => set({ loaded: newLoaded }),
@@ -42,5 +43,5 @@ export const screenerDataState = create<ScreenerDataState>((set) => ({
 	setFullyLoaded: (newFullyLoaded: boolean) =>
 		set({ fullyLoaded: newFullyLoaded }),
 	fullCount: 0,
-	setFullCount: (newFullCount: number) => set({ fullCount: newFullCount }),
-}));
+	setFullCount: (newFullCount: number) => set({ fullCount: newFullCount })
+}))

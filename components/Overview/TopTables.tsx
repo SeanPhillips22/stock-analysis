@@ -1,6 +1,7 @@
-import { useQuote } from 'hooks/useQuote';
-import { Info } from 'types/Info';
-import { Overview } from 'types/Overview';
+import { useQuote } from 'hooks/useQuote'
+import { Info } from 'types/Info'
+import { Overview } from 'types/Overview'
+import { Definition } from 'components/Tooltips/Definition'
 
 export const InfoTable = ({ data }: { data: Overview }) => {
 	return (
@@ -19,7 +20,10 @@ export const InfoTable = ({ data }: { data: Overview }) => {
 					<td>{data.netIncome}</td>
 				</tr>
 				<tr>
-					<td>Shares Out</td>
+					<td>
+						Shares Out
+						<Definition id="sharesout" />
+					</td>
 					<td>{data.sharesOut}</td>
 				</tr>
 				<tr>
@@ -44,14 +48,14 @@ export const InfoTable = ({ data }: { data: Overview }) => {
 				</tr>
 			</tbody>
 		</table>
-	);
-};
+	)
+}
 
 export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
-	const q = useQuote(info);
+	const q = useQuote(info)
 
-	let previous = 'Previous Close';
-	if (info.ipoDate && q.td === info.ipoDate) previous = 'IPO Price';
+	let previous = 'Previous Close'
+	if (info.ipoDate && q.td === info.ipoDate) previous = 'IPO Price'
 
 	return (
 		<table className="top-table">
@@ -102,5 +106,5 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 				</tr>
 			</tbody>
 		</table>
-	);
-};
+	)
+}

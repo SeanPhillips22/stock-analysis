@@ -1,45 +1,45 @@
-import { GetStaticProps } from 'next';
-import { SEO } from 'components/SEO';
-import { getActionsData } from 'functions/callBackEnd';
-import { ActionsLayout } from 'components/Actions/ActionsLayout';
-import { ActionsTable } from 'components/Actions/ActionsTable';
-import { StockLink } from 'components/Links';
-import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { GetStaticProps } from 'next'
+import { SEO } from 'components/SEO'
+import { getActionsData } from 'functions/apis/callBackEnd'
+import { ActionsLayout } from 'components/Actions/ActionsLayout'
+import { ActionsTable } from 'components/Actions/ActionsTable'
+import { StockLink } from 'components/Links'
+import { CellString, ActionProps } from 'components/Actions/actions.types'
 
 export const ActionsSplits = ({ data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
-			accessor: 'date',
+			accessor: 'date'
 		},
 		{
 			Header: 'Symbol',
 			accessor: 'symbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
+					return <StockLink symbol={value.slice(1)} />
 				}
-				return value;
-			},
+				return value
+			}
 		},
 		{
 			Header: 'Type',
-			accessor: 'splitType',
+			accessor: 'splitType'
 		},
 		{
 			Header: 'Split Ratio',
-			accessor: 'splitRatio',
+			accessor: 'splitRatio'
 		},
 		{
 			Header: 'Company Name',
-			accessor: 'name',
-		},
-	];
+			accessor: 'name'
+		}
+	]
 
 	return (
 		<>
 			<SEO
-				title="All Recent Stock Splits - A Complete List"
+				title={`Recent Stock Splits: 1998-${new Date().getFullYear()}`}
 				description="The most recent stock splits on the US stock market, including both regular (forward) splits and reverse splits."
 				canonical="/actions/splits/"
 			/>
@@ -54,18 +54,18 @@ export const ActionsSplits = ({ data }: ActionProps) => {
 				/>
 			</ActionsLayout>
 		</>
-	);
-};
+	)
+}
 
-export default ActionsSplits;
+export default ActionsSplits
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('splits');
+	const data = await getActionsData('splits')
 
 	return {
 		props: {
-			data,
+			data
 		},
-		revalidate: 7200,
-	};
-};
+		revalidate: 2 * 60 * 60
+	}
+}

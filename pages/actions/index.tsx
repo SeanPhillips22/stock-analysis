@@ -1,36 +1,36 @@
-import { GetStaticProps } from 'next';
-import { SEO } from 'components/SEO';
-import { getActionsData } from 'functions/callBackEnd';
-import { ActionsLayout } from 'components/Actions/ActionsLayout';
-import { ActionsTable } from 'components/Actions/ActionsTable';
-import { StockLink } from 'components/Links';
-import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { GetStaticProps } from 'next'
+import { SEO } from 'components/SEO'
+import { getActionsData } from 'functions/apis/callBackEnd'
+import { ActionsLayout } from 'components/Actions/ActionsLayout'
+import { ActionsTable } from 'components/Actions/ActionsTable'
+import { StockLink } from 'components/Links'
+import { CellString, ActionProps } from 'components/Actions/actions.types'
 
 export const ActionsAll = ({ data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
-			accessor: 'date',
+			accessor: 'date'
 		},
 		{
 			Header: 'Symbol',
 			accessor: 'symbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
+					return <StockLink symbol={value.slice(1)} />
 				}
-				return value;
-			},
+				return value
+			}
 		},
 		{
 			Header: 'Type',
-			accessor: 'type',
+			accessor: 'type'
 		},
 		{
 			Header: 'Action',
-			accessor: 'text',
-		},
-	];
+			accessor: 'text'
+		}
+	]
 
 	return (
 		<>
@@ -50,17 +50,17 @@ export const ActionsAll = ({ data }: ActionProps) => {
 				/>
 			</ActionsLayout>
 		</>
-	);
-};
-export default ActionsAll;
+	)
+}
+export default ActionsAll
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('all');
+	const data = await getActionsData('all')
 
 	return {
 		props: {
-			data,
+			data
 		},
-		revalidate: 3600,
-	};
-};
+		revalidate: 2 * 60 * 60
+	}
+}

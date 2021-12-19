@@ -1,24 +1,26 @@
-import { SearchIcon } from '@heroicons/react/solid';
-import { SpinnerIcon } from 'components/Icons/Spinner';
-import { getData } from 'functions/API';
-import { useRef, useState } from 'react';
-import { News } from 'types/News';
+import { SearchIcon } from '@heroicons/react/solid'
+import { SpinnerIcon } from 'components/Icons/Spinner'
+import { getData } from 'functions/apis/API'
+import { useRef, useState } from 'react'
+import { News } from 'types/News'
 
 type Props = {
-	id: number;
-	setData: (data: News[]) => void;
-	news: News[];
-	setError: (error: string) => void;
-	setLoaded: (loaded: boolean) => void;
-	query: string;
-	setQuery: (query: string) => void;
-	searched: boolean;
-	setSearched: (searched: boolean) => void;
-	setEnd: (end: boolean) => void;
-};
+	symbol: string
+	type: string
+	setData: (data: News[]) => void
+	news: News[]
+	setError: (error: string) => void
+	setLoaded: (loaded: boolean) => void
+	query: string
+	setQuery: (query: string) => void
+	searched: boolean
+	setSearched: (searched: boolean) => void
+	setEnd: (end: boolean) => void
+}
 
 export function NewsMenuSearch({
-	id,
+	symbol,
+	type,
 	setData,
 	news,
 	setError,
@@ -27,27 +29,29 @@ export function NewsMenuSearch({
 	setQuery,
 	searched,
 	setSearched,
-	setEnd,
+	setEnd
 }: Props) {
-	const inputRef = useRef<HTMLInputElement>(null);
-	const [searching, setSearching] = useState(false); // If a search is in progress
+	const inputRef = useRef<HTMLInputElement>(null)
+	const [searching, setSearching] = useState(false) // If a search is in progress
 
 	async function doSearch() {
-		setSearched(false);
-		setSearching(true);
-		const keyref = inputRef.current ?? null;
-		if (keyref) keyref.blur();
-		const results = await getData(`news-search?i=${id}&q=${query}`);
-		setSearching(false);
-		setSearched(true);
-		setLoaded(true);
-		setEnd(false);
+		setSearched(false)
+		setSearching(true)
+		const keyref = inputRef.current ?? null
+		if (keyref) keyref.blur()
+		const results = await getData(
+			`news-search?s=${symbol}&t=${type}&q=${query}`
+		)
+		setSearching(false)
+		setSearched(true)
+		setLoaded(true)
+		setEnd(false)
 		if (results.status === 'success') {
-			setData(results.data);
+			setData(results.data)
 		} else if (results.status === 'notfound') {
-			setError(`No results found for "${query}"`);
+			setError(`No results found for "${query}"`)
 		} else if (results.status === 'error') {
-			setError(`There was an error.`);
+			setError(`There was an error.`)
 		}
 	}
 
@@ -62,8 +66,8 @@ export function NewsMenuSearch({
 				placeholder="Search news..."
 				value={query}
 				onChange={(e) => {
-					setError('');
-					setQuery(e.target.value);
+					setError('')
+					setQuery(e.target.value)
 				}}
 				onKeyDown={(e) => e.key === 'Enter' && !searching && doSearch()}
 			/>
@@ -78,5 +82,5 @@ export function NewsMenuSearch({
 				)}
 			</div>
 		</div>
-	);
+	)
 }

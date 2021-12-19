@@ -1,20 +1,20 @@
-import Link from 'next/link';
-import { formatDateClean } from 'functions/formatDates';
+import Link from 'next/link'
+import { formatDateClean } from 'functions/datetime/formatDates'
 
 export const Byline = ({ date }: { date?: string }) => {
 	const AboutLink = () => (
 		<Link href="/about/" prefetch={false}>
 			<a>Kris Gunnars, BSc</a>
 		</Link>
-	);
+	)
 
 	const Date = () => {
 		if (date) {
-			const formatted = formatDateClean(date);
-			return <> | {formatted}</>;
+			const formatted = formatDateClean(date)
+			return <> | {formatted}</>
 		}
-		return <></>;
-	};
+		return <></>
+	}
 
 	return (
 		<div>
@@ -23,5 +23,5 @@ export const Byline = ({ date }: { date?: string }) => {
 				<Date />
 			</div>
 		</div>
-	);
-};
+	)
+}

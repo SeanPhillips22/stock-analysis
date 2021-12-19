@@ -1,84 +1,65 @@
-import { SecFilings, Filing } from 'types/Company';
-import { External } from 'components/CustomLink';
-import { useState, useEffect } from 'react';
-import Axios from 'axios';
+import { SecFilings, Filing } from 'types/Company'
+import { External } from 'components/CustomLink'
+import { useState, useEffect } from 'react'
+import Axios from 'axios'
+import { Info } from 'types/Info'
+import { getData } from 'functions/apis/API'
 
 interface Props {
-	id: number;
-	cik: string;
-	filings: SecFilings | null;
+	info: Info
+	cik: string
+	filings: SecFilings
 }
 
-export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
-	const [entries, setEntries] = useState<Filing[]>([]);
-	const [updated, setUpdated] = useState<string>('');
-	const [loaded, setLoaded] = useState(false);
-	const [fetched, setFetched] = useState(false);
+export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
+	const [entries, setEntries] = useState<Filing[]>(filings.filings)
+	const [updated, setUpdated] = useState<string>(filings.updated)
+	const [fetched, setFetched] = useState(false)
 
 	useEffect(() => {
-		if (filings) {
-			setEntries(filings.filings);
-			setUpdated(filings.updated);
-			setLoaded(true);
-		} else if (filings === null) {
-			setUpdated('');
-			setLoaded(true);
-		}
-	}, [filings]);
+		const source = Axios.CancelToken.source()
 
-	useEffect(() => {
-		const source = Axios.CancelToken.source();
+		if (!fetched) {
+			const fetchSecData = async () => {
+				const url = `sec?cik=${cik}&c=10&s=${info.symbol}&t=${info.type}&json=1`
 
-		if (loaded && !fetched) {
-			const fetchSec = async () => {
-				const url = `${
-					process.env.NEXT_PUBLIC_API_URL ||
-					'https://api.stockanalysis.com/wp-json/sa'
-				}/sec?cik=${cik}&c=10&i=${id}&json=1`;
+				const newData = await getData(url)
 
-				try {
-					setFetched(true);
-					const res = await Axios.get(url, {
-						cancelToken: source.token,
-						timeout: 5000,
-					});
-					const newSec = res.data;
-
+				if (newData) {
 					if (
 						!entries.length ||
-						(newSec && newSec.filings[0].time !== entries[0].time)
+						newData.filings[0].time !== entries[0].time
 					) {
-						setEntries(newSec.filings);
-						setUpdated(newSec.updated);
-					}
-				} catch (err) {
-					if (!Axios.isCancel(err)) {
-						console.error(err);
+						setEntries(newData.filings)
+						setUpdated(newData.updated)
 					}
 				}
-			};
 
-			const now = new Date().getTime();
-			const timestamp = Date.parse(updated);
-			const diff = (now - timestamp) / 1000;
+				setFetched(true)
+			}
+
+			const now = new Date().getTime()
+			const timestamp = Date.parse(updated)
+			const diff = (now - timestamp) / 1000
 
 			if (
 				(entries && !entries.length) ||
 				diff > 12 * 60 * 60 ||
-				isNaN(diff)
+				isNaN(diff) ||
+				!updated
 			) {
-				fetchSec();
+				fetchSecData()
 			}
 		}
 
 		return () => {
-			source.cancel('Unmounted');
-		};
+			source.cancel('Unmounted')
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [updated]);
+	}, [])
 
 	if (!entries || !entries.length) {
-		return null;
+		return null
 	} else {
 		return (
 			<>
@@ -125,7 +106,7 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 										/>
 									</td>
 								</tr>
-							);
+							)
 						})}
 						<tr className="border-b border-gray-200">
 							<td colSpan={3} className="py-3 px-4 text-xl font-medium">
@@ -138,6 +119,6 @@ export const ProfileSECfilings = ({ id, cik, filings }: Props) => {
 					</tbody>
 				</table>
 			</>
-		);
+		)
 	}
-};
+}

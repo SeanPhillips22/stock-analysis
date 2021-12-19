@@ -1,42 +1,42 @@
-import { GetStaticProps } from 'next';
-import { SEO } from 'components/SEO';
-import { getActionsData } from 'functions/callBackEnd';
-import { ActionsLayout } from 'components/Actions/ActionsLayout';
-import { ActionsTable } from 'components/Actions/ActionsTable';
-import { StockLink } from 'components/Links';
-import { CellString, ActionProps } from 'components/Actions/actions.types';
+import { GetStaticProps } from 'next'
+import { SEO } from 'components/SEO'
+import { getActionsData } from 'functions/apis/callBackEnd'
+import { ActionsLayout } from 'components/Actions/ActionsLayout'
+import { ActionsTable } from 'components/Actions/ActionsTable'
+import { StockLink } from 'components/Links'
+import { CellString, ActionProps } from 'components/Actions/actions.types'
 
 export const ActionsChanges = ({ data }: ActionProps) => {
 	const columns = [
 		{
 			Header: 'Date',
-			accessor: 'date',
+			accessor: 'date'
 		},
 		{
 			Header: 'Old',
 			accessor: 'oldsymbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
+					return <StockLink symbol={value.slice(1)} />
 				}
-				return value;
-			},
+				return value
+			}
 		},
 		{
 			Header: 'New',
 			accessor: 'newsymbol',
 			Cell: function FormatCell({ cell: { value } }: CellString) {
 				if (value.startsWith('$')) {
-					return <StockLink symbol={value.slice(1)} />;
+					return <StockLink symbol={value.slice(1)} />
 				}
-				return value;
-			},
+				return value
+			}
 		},
 		{
 			Header: 'New Company Name',
-			accessor: 'name',
-		},
-	];
+			accessor: 'name'
+		}
+	]
 
 	return (
 		<>
@@ -56,17 +56,17 @@ export const ActionsChanges = ({ data }: ActionProps) => {
 				/>
 			</ActionsLayout>
 		</>
-	);
-};
-export default ActionsChanges;
+	)
+}
+export default ActionsChanges
 
 export const getStaticProps: GetStaticProps = async () => {
-	const data = await getActionsData('changes');
+	const data = await getActionsData('changes')
 
 	return {
 		props: {
-			data,
+			data
 		},
-		revalidate: 7200,
-	};
-};
+		revalidate: 2 * 60 * 60
+	}
+}

@@ -1,22 +1,21 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
-import { Info } from 'types/Info';
-import { FinancialsType } from 'types/Financials';
-import { Stock } from 'components/Layout/StockLayout';
-import { SEO } from 'components/SEO';
-import { SubNavigation } from 'components/FinancialTable/SubNavigation';
-import { FinancialTable } from 'components/FinancialTable/_FinancialTable';
-import { getStockFinancials } from 'functions/callBackEnd';
-import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement';
+import { GetServerSideProps } from 'next'
+import { Info } from 'types/Info'
+import { FinancialsType } from 'types/Financials'
+import { Stock } from 'components/Layout/StockLayout'
+import { SEO } from 'components/SEO'
+import { SubNavigation } from 'components/FinancialTable/SubNavigation'
+import { FinancialTable } from 'components/FinancialTable/_FinancialTable'
+import { getStockFinancialsSSR } from 'functions/apis/callBackEnd'
+import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement'
 
 interface Props {
-	info: Info;
-	data: FinancialsType;
+	info: Info
+	data: FinancialsType
 	counts: {
-		annual: number;
-		quarterly: number;
-		trailing: number;
-	};
+		annual: number
+		quarterly: number
+		trailing: number
+	}
 }
 
 export default function IncomeStatement({ info, data, counts }: Props) {
@@ -38,18 +37,14 @@ export default function IncomeStatement({ info, data, counts }: Props) {
 				/>
 			</div>
 		</Stock>
-	);
+	)
 }
 
-interface IParams extends ParsedUrlQuery {
-	symbol: string;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const symbol = context?.params?.symbol as string
+	const data = await getStockFinancialsSSR('income_statement', symbol)
+
+	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+
+	return data
 }
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { symbol } = params as IParams;
-	return await getStockFinancials('income_statement', symbol, 3600);
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-	return { paths: [], fallback: 'blocking' };
-};

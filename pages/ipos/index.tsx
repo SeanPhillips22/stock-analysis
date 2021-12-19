@@ -1,21 +1,22 @@
-import { GetStaticProps } from 'next';
-import { IpoRecent, IpoUpcoming } from 'types/Ipos';
-import { News } from 'types/News';
-import { getIpoData } from 'functions/callBackEnd';
-import { SEO } from 'components/SEO';
-import { RecentTable } from 'components/IPOs/RecentTable';
-import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation';
-import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation';
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs';
-import { CalendarTableMin } from 'components/IPOs/CalendarTableMin';
-import { NewsWidget } from 'components/News/NewsWidget';
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1';
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2';
+import { GetServerSideProps } from 'next'
+import { IpoRecent, IpoUpcoming } from 'types/Ipos'
+import { News } from 'types/News'
+import { getIpoData } from 'functions/apis/callBackEnd'
+import { SEO } from 'components/SEO'
+import { RecentTable } from 'components/IPOs/RecentTable'
+import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
+import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation'
+import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
+import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
+import { NewsWidget } from 'components/News/NewsWidget'
+import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
-	data: IpoRecent[];
-	news: News[];
-	upcoming: IpoUpcoming[];
+	data: IpoRecent[]
+	news: News[]
+	upcoming: IpoUpcoming[]
 }
 
 export const RecentIpos = ({ data, news, upcoming }: Props) => {
@@ -26,13 +27,13 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 				description="Detailed information the last 200 IPOs (initial public offerings) on the stock market. Includes IPO prices, dates, total returns and more."
 				canonical="/ipos/"
 			/>
-			<div className="contain">
-				<main className="w-full pt-5 xs:pt-6">
+			<Layout>
+				<div className="contain">
 					<Breadcrumbs url="/ipos/" />
 					<h1 className="hh1">Recent IPOs</h1>
 					<IPONavigation path="" />
 
-					<div className="lg:grid lg:grid-cols-sidebar gap-x-10">
+					<div className="lg:right-sidebar">
 						<div>
 							<RecentNavigation path="" />
 							<RecentTable rawdata={data} />
@@ -45,29 +46,30 @@ export const RecentIpos = ({ data, news, upcoming }: Props) => {
 								news={news}
 								button={{
 									text: 'More IPO News',
-									url: '/ipos/news/',
+									url: '/ipos/news/'
 								}}
 							/>
 							<Sidebar2 />
 						</aside>
 					</div>
-				</main>
-			</div>
+				</div>
+			</Layout>
 		</>
-	);
-};
+	)
+}
 
-export default RecentIpos;
+export default RecentIpos
 
-export const getStaticProps: GetStaticProps = async () => {
-	const { data, news, upcoming } = await getIpoData('recent');
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+	const { data, news, upcoming } = await getIpoData('recent')
+
+	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
 	return {
 		props: {
 			data,
 			news,
-			upcoming,
-		},
-		revalidate: 10 * 60,
-	};
-};
+			upcoming
+		}
+	}
+}
