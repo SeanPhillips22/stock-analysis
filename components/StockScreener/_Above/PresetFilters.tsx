@@ -1,43 +1,23 @@
-import { screenerDataState } from '../screenerdata.state';
-import { FiltersMap } from 'components/StockScreener/maps/filters.map';
-import {
-	PresetFilter,
-	PresetFiltersStocks,
-	PresetFiltersIpos,
-} from '../maps/presetFilters.map';
-import { useModifyFilters } from '../functions/useModifyFilters';
-import { useModifyColumns } from '../functions/useModifyColumns';
-import { screenerState } from '../screener.state';
-import { useEffect, useState } from 'react';
+import { screenerDataState } from '../screenerdata.state'
+import { FiltersMap } from 'components/StockScreener/maps/filters.map'
+import { useModifyFilters } from '../functions/useModifyFilters'
+import { useModifyColumns } from '../functions/useModifyColumns'
+import { screenerState } from '../screener.state'
+import { useState } from 'react'
 
 export function PresetFilters() {
-	const [usePreset, setUsePreset] = useState<PresetFilter[]>();
-	const [selected, setSelected] = useState('');
-	const type = screenerDataState((state) => state.type);
-	const filters = screenerState((state) => state.filters);
-	const setFilterMenu = screenerState((state) => state.setFilterMenu);
-	const { add, clear } = useModifyFilters();
-	const { fetchColumn } = useModifyColumns();
-
-	useEffect(() => {
-		if (type === 'stocks') {
-			setUsePreset(PresetFiltersStocks);
-		} else if (type === 'ipo') {
-			setUsePreset(PresetFiltersIpos);
-		}
-	}, [type]);
-
-	useEffect(() => {
-		if (!filters || !filters.length) {
-			setSelected('');
-		}
-	}, [filters]);
+	const [selected, setSelected] = useState('')
+	const type = screenerDataState((state) => state.type)
+	const presets = screenerState((state) => state.presets)
+	const setFilterMenu = screenerState((state) => state.setFilterMenu)
+	const { add, clear } = useModifyFilters()
+	const { fetchColumn } = useModifyColumns()
 
 	function renderPresetFilters(value: string) {
-		clear();
-		setFilterMenu('Active');
-		setSelected(value);
-		usePreset?.map((item) => {
+		clear()
+		setFilterMenu('Active')
+		setSelected(value)
+		presets?.map((item) => {
 			if (item.name === value) {
 				item.filters.map((filter) => {
 					FiltersMap.map((mapItem) => {
@@ -48,13 +28,13 @@ export function PresetFilters() {
 								filter.value,
 								mapItem.filterType,
 								mapItem.numberType
-							);
-							fetchColumn(filter.id, type);
+							)
+							fetchColumn(filter.id, type)
 						}
-					});
-				});
+					})
+				})
 			}
-		});
+		})
 	}
 
 	return (
@@ -73,12 +53,12 @@ export function PresetFilters() {
 				onChange={(e) => renderPresetFilters(e.target.value)}
 			>
 				<option value="Select preset">Select preset</option>
-				{usePreset?.map((item) => (
+				{presets?.map((item) => (
 					<option key={item.name} value={item.name}>
 						{item.name}
 					</option>
 				))}
 			</select>
 		</div>
-	);
+	)
 }

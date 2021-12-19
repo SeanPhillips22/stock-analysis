@@ -2,15 +2,15 @@ import { screenerDataState } from '../screenerdata.state'
 import { getData } from 'functions/apis/API'
 
 export function useFetchFullData() {
+	const setLoaded = screenerDataState((state) => state.setLoaded)
 	const data = screenerDataState((state) => state.data)
 	const setData = screenerDataState((state) => state.setData)
-	const setFullyLoaded = screenerDataState((state) => state.setFullyLoaded)
 
 	async function fetchFullData() {
 		if (!data || data.length < 1000) {
 			const data = await getData('screener?type=f')
 			setData(data.data)
-			setFullyLoaded(true)
+			setLoaded(true)
 		}
 	}
 
@@ -18,15 +18,15 @@ export function useFetchFullData() {
 }
 
 export function useFetchFullIPOData() {
+	const setLoaded = screenerDataState((state) => state.setLoaded)
 	const data = screenerDataState((state) => state.data)
 	const setData = screenerDataState((state) => state.setData)
-	const setFullyLoaded = screenerDataState((state) => state.setFullyLoaded)
 
 	async function fetchFullData() {
 		if (!data || data.length < 100 || data.length > 1000) {
 			const data = await getData('iposcreener?type=f')
 			setData(data.data)
-			setFullyLoaded(true)
+			setLoaded(true)
 		}
 	}
 
@@ -34,17 +34,17 @@ export function useFetchFullIPOData() {
 }
 
 export function useFetchFullETFData() {
-	const data = screenerDataState((state) => state.data);
-	const setData = screenerDataState((state) => state.setData);
-	const setFullyLoaded = screenerDataState((state) => state.setFullyLoaded);
+	const setLoaded = screenerDataState((state) => state.setLoaded)
+	const data = screenerDataState((state) => state.data)
+	const setData = screenerDataState((state) => state.setData)
 
 	async function fetchFullData() {
 		if (!data || data.length < 100 || data.length > 1000) {
-			const data = await getData('etfscreener?type=f');
-			setData(data.data);
-			setFullyLoaded(true);
+			const data = await getData('etfscreener?type=f')
+			setData(data.data)
+			setLoaded(true)
 		}
 	}
 
-	return fetchFullData;
+	return fetchFullData
 }

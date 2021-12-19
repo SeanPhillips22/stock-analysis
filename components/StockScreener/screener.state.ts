@@ -1,5 +1,6 @@
 import create from 'zustand'
 import { FilterId, FilterValue } from 'components/StockScreener/screener.types'
+import { PresetFilter } from './maps/presetFilters.map'
 
 interface ScreenerState {
 	// Filters
@@ -27,17 +28,21 @@ interface ScreenerState {
 	filteredColumns: FilterId[]
 	addFetchedColumn: (newColumn: FilterId) => void
 	setFetchedColumns: (newArray: any[]) => void
-
 	addFilteredColumn: (newColumn: FilterId) => void
 	removeFilteredColumn: (columns: FilterId) => void
 	setShowColumns: (newColumns: FilterId[]) => void
 	columnDropdownOpen: boolean
 	setColumnDropdownOpen: (open: boolean) => void
 
+	// Pagination
 	tablePage: number
 	setTablePage: (newTablePage: number) => void
 	tableSize: number
 	setTableSize: (tableSize: number) => void
+
+	// Preset filters
+	presets: PresetFilter[]
+	setPresets: (presets: PresetFilter[]) => void
 }
 
 export const screenerState = create<ScreenerState>((set) => ({
@@ -54,12 +59,11 @@ export const screenerState = create<ScreenerState>((set) => ({
 			filters: state.filters.filter((f) => f.id !== filter)
 		})),
 	clearFilters: () =>
-		set((state) => ({
-			...state,
+		set({
 			filters: [],
 			filterMenu: 'Active',
 			filteredColumns: ['s', 'n', 'm']
-		})),
+		}),
 	filtersShown: true,
 	setFiltersShown: (show: boolean) =>
 		set({ filtersShown: show, filterMenu: 'Active' }),
@@ -107,5 +111,10 @@ export const screenerState = create<ScreenerState>((set) => ({
 	tablePage: 0,
 	setTablePage: (newTablePage) => set({ tablePage: newTablePage }),
 	tableSize: 20,
-	setTableSize: (newTableSize) => set({ tableSize: newTableSize })
+	setTableSize: (newTableSize) => set({ tableSize: newTableSize }),
+
+	// Preset filters
+	presets: [],
+	setPresets: (newPresets) =>
+		set((state) => ({ ...state, presets: newPresets }))
 }))

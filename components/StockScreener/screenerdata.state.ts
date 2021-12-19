@@ -9,25 +9,25 @@ import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
 
 interface ScreenerDataState {
 	// Type
-	type: ScreenerTypes
+	type: ScreenerTypes | ''
 	setType: (type: ScreenerTypes) => void
 
+	// Data
 	data: SingleStock[]
 	setData: (data: SingleStock[]) => void
 	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) => void
-	loaded: boolean
-	setLoaded: (loaded: boolean) => void
-	fullyLoaded: boolean
-	setFullyLoaded: (fullyLoaded: boolean) => void
 	fullCount: number
 	setFullCount: (fullCount: number) => void
+
+	// Loading
+	loaded: boolean
+	setLoaded: (loaded: boolean) => void
 }
 
 export const screenerDataState = create<ScreenerDataState>((set) => ({
 	// Type
-	type: 'stocks',
-	setType: (newType: ScreenerTypes) =>
-		set((state) => ({ ...state, type: newType })),
+	type: '',
+	setType: (newType: ScreenerTypes) => set({ type: newType }),
 
 	// Data
 	data: [],
@@ -37,11 +37,10 @@ export const screenerDataState = create<ScreenerDataState>((set) => ({
 		set((state) => ({
 			data: mergeColumns(state.data, newColumn, id)
 		})),
-	loaded: false,
-	setLoaded: (newLoaded: boolean) => set({ loaded: newLoaded }),
-	fullyLoaded: false,
-	setFullyLoaded: (newFullyLoaded: boolean) =>
-		set({ fullyLoaded: newFullyLoaded }),
 	fullCount: 0,
-	setFullCount: (newFullCount: number) => set({ fullCount: newFullCount })
+	setFullCount: (newFullCount: number) => set({ fullCount: newFullCount }),
+
+	// Loading
+	loaded: false,
+	setLoaded: (newLoaded: boolean) => set({ loaded: newLoaded })
 }))

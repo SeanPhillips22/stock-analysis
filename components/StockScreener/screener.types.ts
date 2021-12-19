@@ -1,4 +1,4 @@
-export type ScreenerTypes = 'stocks' | 'ipo' | 'etf'
+export type ScreenerTypes = 'stocks' | 'ipo' | 'etf' | ''
 
 // All possible filters
 // The IDs are shortened to minimize data payload size

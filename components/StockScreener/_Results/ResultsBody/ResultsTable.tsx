@@ -29,7 +29,7 @@ interface Props {
 export function ResultsTable({ cols }: Props) {
 	const type = screenerDataState((state) => state.type)
 	const rows = screenerDataState((state) => state.data)
-	const fullyLoaded = screenerDataState((state) => state.fullyLoaded)
+	const loaded = screenerDataState((state) => state.loaded)
 	const fetchFullData = useFetchFullData()
 	const fetchFullIPOData = useFetchFullIPOData()
 	const fetchFullETFData = useFetchFullETFData()
@@ -119,7 +119,7 @@ export function ResultsTable({ cols }: Props) {
 		usePagination
 	)
 
-	if (!fullyLoaded) {
+	if (!loaded) {
 		return (
 			<div className="h-[600px] mt-6">
 				<Loading />
