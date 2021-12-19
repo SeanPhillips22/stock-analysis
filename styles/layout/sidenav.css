@@ -40,6 +40,10 @@
 		@apply flex flex-row items-center w-full;
 	}
 
+	.nav-arrow-wrap {
+		@apply h-full ml-auto border-l border-gray-300;
+	}
+
 	.nav-arrow {
 		@apply ml-auto flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150;
 	}
@@ -50,5 +54,13 @@
 
 	.nav-arrow.open {
 		@apply text-gray-400 rotate-90;
+	}
+
+	.nav-subitem {
+		@apply w-full flex items-center pl-11 pr-2 py-1.5 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50;
+	}
+
+	.nav-subitem.current {
+		@apply bg-gray-100 text-gray-900;
 	}
 }

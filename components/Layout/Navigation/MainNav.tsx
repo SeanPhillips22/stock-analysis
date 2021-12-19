@@ -26,23 +26,23 @@ const navigation = [
 		path: 'ipos',
 		icon: CalendarIcon,
 		children: [
-			{ name: 'Recent IPOs', href: '/ipos/', path: 'ipos' },
+			{ name: 'Recent IPOs', href: '/ipos/', path: null },
 			{
 				name: 'IPO Calendar',
 				href: '/ipos/calendar/',
-				path: 'ipos/calendar'
+				path: 'calendar'
 			},
 			{
 				name: 'IPO Statistics',
 				href: '/ipos/statistics/',
-				path: 'ipos/statistics'
+				path: 'statistics'
 			},
 			{
 				name: 'IPO Screener',
 				href: '/ipos/screener/',
-				path: 'ipos/screener'
+				path: 'screener'
 			},
-			{ name: 'IPO News', href: '/ipos/news/', path: 'ipos/news' }
+			{ name: 'IPO News', href: '/ipos/news/', path: 'news' }
 		]
 	},
 	{
@@ -71,10 +71,6 @@ const navigation = [
 		icon: ArchiveIcon
 	}
 ]
-
-function classNames(...classes: any) {
-	return classes.filter(Boolean).join(' ')
-}
 
 export function MainNav() {
 	const path = navState((state) => state.path)
