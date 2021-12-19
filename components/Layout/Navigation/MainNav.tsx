@@ -8,53 +8,68 @@ import {
 	NewspaperIcon,
 	ArchiveIcon
 } from '@heroicons/react/outline'
-import Link from 'next/link'
 import { navState } from 'state/navState'
+import { MenuNavItem } from './NavItems/Menu'
+import { SingleNavItem } from './NavItems/Single'
 
 const navigation = [
-	{ name: 'Home', href: '/', path: null, icon: HomeIcon, current: true },
+	{ name: 'Home', href: '/', icon: HomeIcon, current: true },
 	{
 		name: 'Stocks',
 		href: '/stocks/',
-		path: 'stocks',
-		icon: ChartBarIcon,
-		current: false
+		icon: ChartBarIcon
 	},
 	{
 		name: 'IPOs',
 		href: '/ipos/',
-		path: 'ipos',
 		icon: CalendarIcon,
-		current: false
+		children: [
+			{ name: 'Recent IPOs', href: '/ipos/' },
+			{
+				name: 'IPO Calendar',
+				href: '/ipos/calendar/'
+			},
+			{
+				name: 'IPO Statistics',
+				href: '/ipos/statistics/'
+			},
+			{
+				name: 'IPO Screener',
+				href: '/ipos/screener/'
+			},
+			{ name: 'IPO News', href: '/ipos/news/' }
+		]
 	},
 	{
 		name: 'ETFs',
 		href: '/etf/',
-		path: 'etf',
-		icon: CollectionIcon,
-		current: false
+		icon: CollectionIcon
+	},
+	{ name: 'News', href: '/news/', path: 'news', icon: NewspaperIcon },
+	{
+		name: 'Trending',
+		href: '/trending/',
+		icon: TrendingUpIcon
 	},
 	{
 		name: 'Screener',
 		href: '/stock-screener/',
-		path: 'stock-screener',
 		icon: AdjustmentsIcon,
-		current: false
+		children: [
+			{
+				name: 'Stock Screener',
+				href: '/stock-screener/'
+			},
+			{
+				name: 'IPO Screener',
+				href: '/ipos/screener/'
+			}
+		]
 	},
-	{
-		name: 'Trending',
-		href: '/trending/',
-		path: 'trending',
-		icon: TrendingUpIcon,
-		current: false
-	},
-	{ name: 'News', href: '/news/', icon: NewspaperIcon, current: false },
 	{
 		name: 'Corporate Actions',
 		href: '/actions/',
-		path: 'actions',
-		icon: ArchiveIcon,
-		current: false
+		icon: ArchiveIcon
 	}
 ]
 
@@ -63,24 +78,14 @@ export function MainNav() {
 
 	return (
 		<div className="leftnav">
-			<nav className="flex flex-col space-y-1">
-				{navigation.map((item) => (
-					<Link key={item.name} href={item.href} prefetch={false}>
-						<a
-							className={
-								item.path === path.one && !path.two
-									? 'nav-item current group'
-									: 'nav-item group'
-							}
-						>
-							<item.icon
-								className="nav-icon"
-								style={{ maxWidth: '50px' }}
-							/>
-							<span className="nav-label">{item.name}</span>
-						</a>
-					</Link>
-				))}
+			<nav className="nav-col">
+				{navigation.map((item) =>
+					!item.children ? (
+						<SingleNavItem key={item.name} item={item} path={path} />
+					) : (
+						<MenuNavItem key={item.name} item={item} path={path} />
+					)
+				)}
 			</nav>
 		</div>
 	)
