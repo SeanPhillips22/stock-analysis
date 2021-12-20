@@ -1,7 +1,41 @@
-import { ColumnName, ColumnsMap } from 'components/StockScreener/screener.types'
+import {
+	ColumnName,
+	ColumnsMap,
+	FilterId
+} from 'components/StockScreener/screener.types'
+
+export const defaultColumnsStocks: FilterId[] = [
+	's',
+	'n',
+	'm',
+	'p',
+	'c',
+	'i',
+	'v',
+	'pe'
+]
+export const defaultColumnsIPOs: FilterId[] = [
+	's',
+	'n',
+	'm',
+	'i',
+	'ipoPriceRange',
+	'ipoDate',
+	'revenue'
+]
+export const defaultColumnsETFs: FilterId[] = [
+	's',
+	'n',
+	'assetClass',
+	'assets',
+	'p',
+	'c',
+	'v',
+	'holdings'
+]
 
 const resultColumnsStocks: ColumnsMap = {
-	General: ['s', 'n', 'm', 'i', 'p', 'c', 'v', 'pe'],
+	General: defaultColumnsStocks,
 	Filtered: [],
 	Company: [],
 	Performance: [
@@ -46,7 +80,7 @@ const resultColumnsStocks: ColumnsMap = {
 }
 
 const resultColumnsIPOs: ColumnsMap = {
-	General: ['s', 'n', 'm', 'i', 'p', 'c', 'v', 'pe'],
+	General: defaultColumnsIPOs,
 	Filtered: [],
 	Company: [
 		's',
@@ -74,7 +108,7 @@ const resultColumnsIPOs: ColumnsMap = {
 }
 
 const resultColumnsETFs: ColumnsMap = {
-	General: ['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v', 'holdings'],
+	General: defaultColumnsETFs,
 	Filtered: [],
 	Performance: [
 		's',
@@ -88,7 +122,7 @@ const resultColumnsETFs: ColumnsMap = {
 		'ch3y',
 		'ch5y'
 	],
-	Dividends: ['s', 'n', 'etfExDividendDate', 'etfDividendYield']
+	Dividends: ['s', 'n', 'exDivDate', 'dy']
 }
 
 export function returnResultColumns(type: string, name: ColumnName) {

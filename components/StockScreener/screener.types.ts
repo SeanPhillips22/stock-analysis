@@ -113,16 +113,12 @@ export type FilterId =
 	| 'assets' // ETF assets
 	| 'etfPeRatio' // ETF PE Ratio
 	| 'assetClass' // ETF Asset Class
-	| 'etfExpenseRatio' // ETF Expense Ratio
+	| 'expenseRatio' // ETF Expense Ratio
 	| 'etfSharesOut' // ETF Shares Outstanding
-	| 'etfDividendYield' // ETF Dividend Yield
-	| 'etfBeta' // ETF Beta
 	| 'holdings' // ETF Holdings
 	| 'inceptionDate' // ETF Inception Date
-	| 'etfExDividendDate' // ETF Ex-Dividend Date
 	| 'etfSector' // ETF Sector
 	| 'etfRegion' // ETF Geographic Region
-	| 'etfExchange' // ETF Exchange
 
 // Results columns
 export type ColumnName =

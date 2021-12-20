@@ -569,71 +569,46 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Beta',
-		accessor: 'etfBeta',
+		accessor: 'beta',
 		format: 'format2dec'
 	},
 	{
 		Header: 'Exchange',
-		accessor: 'etfExchange',
+		accessor: 'exchange',
 		format: 'string'
 	},
-
-	{
-		Header: 'Ex Div. Date',
-		accessor: 'etfExDividendDate',
-		format: 'date',
-		sortType: dateSort
-	},
-
 	{
 		Header: 'Expense Ratio',
-		accessor: 'etfExpenseRatio',
+		accessor: 'expenseRatio',
 		format: 'format2dec'
 	},
-
 	{
 		Header: 'Holdings',
 		accessor: 'holdings',
 		format: 'format0dec',
 		sortInverted: true
 	},
-
 	{
 		Header: 'Inception Date',
 		accessor: 'inceptionDate',
 		format: 'date'
 	},
-
 	{
 		Header: 'PE Ratio',
 		accessor: 'etfPeRatio',
 		format: 'format2dec',
 		sortType: numberNullFix
 	},
-
 	{
 		Header: 'Region',
 		accessor: 'etfRegion',
 		format: 'string',
 		sortType: stringNullFix
 	},
-
 	{
 		Header: 'Sector',
 		accessor: 'etfSector',
 		format: 'padleft',
 		sortType: stringNullFix
-	},
-
-	{
-		Header: 'Shares Out',
-		accessor: 'etfSharesOut',
-		format: 'abbreviate'
-	},
-
-	{
-		Header: 'Dividend Yield (%)',
-		accessor: 'etfDividendYield',
-		format: 'percentage'
 	}
 ]

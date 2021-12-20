@@ -13,9 +13,13 @@ import { ResultsMenu } from '../ResultsMenu/ResultsMenu'
 import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
-import { FilterId } from 'components/StockScreener/screener.types'
 import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData'
 import { Loading } from 'components/Loading'
+import {
+	defaultColumnsStocks,
+	defaultColumnsIPOs,
+	defaultColumnsETFs
+} from 'components/StockScreener/maps/resultColumns.map'
 
 export function ResultsTable({ cols }: { cols: any }) {
 	const type = screenerState((state) => state.type)
@@ -35,41 +39,16 @@ export function ResultsTable({ cols }: { cols: any }) {
 	useEffect(() => {
 		if (type == 'stocks') {
 			fetchFullData(type)
-			setShowColumns(['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'] as FilterId[])
-			setFetchedColumns(['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'])
+			setShowColumns(defaultColumnsStocks)
+			setFetchedColumns(defaultColumnsStocks)
 		} else if (type == 'ipo') {
 			fetchFullData(type)
-			setShowColumns([
-				's',
-				'n',
-				'm',
-				'i',
-				'ipoPriceRange',
-				'ipoDate',
-				'revenue'
-			] as FilterId[])
-			setFetchedColumns([
-				's',
-				'n',
-				'm',
-				'i',
-				'ipoPriceRange',
-				'ipoDate',
-				'revenue'
-			])
+			setShowColumns(defaultColumnsIPOs)
+			setFetchedColumns(defaultColumnsIPOs)
 		} else if (type == 'etf') {
 			fetchFullData(type)
-			setShowColumns([
-				's',
-				'n',
-				'assetClass',
-				'assets',
-				'p',
-				'c',
-				'v',
-				'holdings'
-			] as FilterId[])
-			setFetchedColumns(['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v'])
+			setShowColumns(defaultColumnsETFs)
+			setFetchedColumns(defaultColumnsETFs)
 			removeFilteredColumn('m')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

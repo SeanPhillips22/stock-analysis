@@ -2805,7 +2805,7 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Over 100K', value: 'over-100K' },
 			{ name: 'Over 10K', value: 'over-10K' },
 			{ name: 'Over 1K', value: 'over-1K' },
-			{ name: 'Over 0', value: 'over-0' },
+			{ name: 'Not Zero', value: 'notzero' },
 			{ name: 'Under 1K', value: 'under-1K' },
 			{ name: 'Under 10K', value: 'under-10K' },
 			{ name: 'Under 100K', value: 'under-100K' },
@@ -2825,9 +2825,8 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Over 1B', value: 'over-1B' },
 			{ name: 'Over 100M', value: 'over-100M' },
 			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Exactly Zero', value: 'exactly-0' },
-			{ name: 'Under Zero', value: 'under-0' }
+			{ name: 'Over 1M', value: 'over-1M' },
+			{ name: 'Not Zero', value: 'notzero' }
 		]
 	},
 	{
@@ -2872,7 +2871,7 @@ export const ETFFiltersMap: FilterProps[] = [
 
 	{
 		name: 'Dividend Yield (%)',
-		id: 'etfDividendYield',
+		id: 'dy',
 		category: ['Dividends'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2888,7 +2887,7 @@ export const ETFFiltersMap: FilterProps[] = [
 
 	{
 		name: 'Exchange',
-		id: 'etfExchange',
+		id: 'exchange',
 		category: ['Popular'],
 		filterType: 'stringmatch',
 		options: [
@@ -2899,8 +2898,8 @@ export const ETFFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Expense Ratio',
-		id: 'etfExpenseRatio',
-		category: ['Performance'],
+		id: 'expenseRatio',
+		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
 			{ name: 'Under 10', value: 'under-10' },
@@ -2914,7 +2913,7 @@ export const ETFFiltersMap: FilterProps[] = [
 
 	{
 		name: 'Ex-Dividend Date',
-		id: 'etfExDividendDate',
+		id: 'exDivDate',
 		category: ['Dividends'],
 		filterType: 'date',
 		options: [
@@ -2931,7 +2930,7 @@ export const ETFFiltersMap: FilterProps[] = [
 	{
 		name: 'Holdings',
 		id: 'holdings',
-		category: ['Dividends'],
+		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
 			{ name: 'Over 5000', value: 'over-5000' },

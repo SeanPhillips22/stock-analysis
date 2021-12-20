@@ -1,4 +1,7 @@
-export const TOOLTIP_MAP = [
+// make type with array of objects with string as key and string as value
+type MapProps = { [key: string]: string }[]
+
+export const TOOLTIP_MAP: MapProps = [
 	{
 		id: 'm',
 		title: 'Market Capitalization',
@@ -23,7 +26,8 @@ export const TOOLTIP_MAP = [
 		id: 'exDivDate',
 		title: 'Ex-Dividend Date',
 		tooltip:
-			'Only shareholders that buy the stock before the ex-dividend date will receive the dividend payment.'
+			'Only shareholders that buy the stock before the ex-dividend date will receive the dividend payment.',
+		etf: 'Only those who own shares before the ex-dividend date will receive the payment.'
 	},
 	{
 		id: 'nextDivDate',
@@ -344,12 +348,8 @@ export const TOOLTIP_MAP = [
 	{
 		id: 'exchange',
 		title: 'Stock Exchange',
-		tooltip: 'The stock exchange that the stock is listed on.'
-	},
-	{
-		id: 'etfExchange',
-		title: 'Stock Exchange',
-		tooltip: 'The stock exchange that the ETF shares are listed on.'
+		tooltip: 'The stock exchange that the stock is listed on.',
+		etf: 'The stock exchange that the ETF shares are listed on.'
 	},
 	{
 		id: 'country',
@@ -672,10 +672,21 @@ export const TOOLTIP_MAP = [
 			'Whether the stock is a Special Purpose Acquisition Company (SPAC), also known as a blank check company. This means that the business has no operations but plans to merge with a private company to take it public.'
 	},
 	{
+		id: 'assets',
+		title: 'Assets Under Management',
+		tooltip:
+			'Assets under management (AUM) class is the type of asset that the fund primarily holds. For example, ETFs with the "Equity" asset class mostly hold stocks.'
+	},
+	{
 		id: 'assetClass',
 		title: 'Asset Class',
 		tooltip:
 			'Assets class is the type of asset that the fund primarily holds. For example, ETFs with the "Equity" asset class mostly hold stocks.'
+	},
+	{
+		id: 'holdings',
+		title: 'ETF Holdings',
+		tooltip: 'The number of individual securities that the fund holds.'
 	},
 	{
 		id: 'inceptionDate',
