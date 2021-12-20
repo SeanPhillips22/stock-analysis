@@ -34,6 +34,16 @@ module.exports = {
 				source: '/etf/wp-login.php',
 				destination: '/etf/',
 				permanent: true
+			},
+			{
+				source: '/stock-screener/',
+				destination: '/screener/stock/',
+				permanent: true
+			},
+			{
+				source: '/ipos/screener/',
+				destination: '/screener/ipo/',
+				permanent: true
 			}
 		]
 	},

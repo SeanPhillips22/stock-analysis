@@ -1,8 +1,30 @@
 import create from 'zustand'
-import { FilterId, FilterValue } from 'components/StockScreener/screener.types'
+import {
+	ScreenerTypes,
+	SingleStock,
+	SingleDataPoint,
+	FilterId,
+	FilterValue
+} from 'components/StockScreener/screener.types'
 import { PresetFilter } from './maps/presetFilters.map'
+import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
 
 interface ScreenerState {
+	// Type
+	type: ScreenerTypes | ''
+	setType: (type: ScreenerTypes) => void
+
+	// Data
+	data: SingleStock[]
+	setData: (data: SingleStock[]) => void
+	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) => void
+	fullCount: number
+	setFullCount: (fullCount: number) => void
+
+	// Loading
+	loaded: boolean
+	setLoaded: (loaded: boolean) => void
+
 	// Filters
 	filters: FilterValue[]
 	addFilter: (newFilter: FilterValue) => void
@@ -46,6 +68,25 @@ interface ScreenerState {
 }
 
 export const screenerState = create<ScreenerState>((set) => ({
+	// Type
+	type: '',
+	setType: (newType: ScreenerTypes) => set({ type: newType }),
+
+	// Data
+	data: [],
+	setData: (newData: SingleStock[]) =>
+		set((state) => ({ ...state, data: newData })),
+	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) =>
+		set((state) => ({
+			data: mergeColumns(state.data, newColumn, id)
+		})),
+	fullCount: 0,
+	setFullCount: (newFullCount: number) => set({ fullCount: newFullCount }),
+
+	// Loading
+	loaded: false,
+	setLoaded: (newLoaded: boolean) => set({ loaded: newLoaded }),
+
 	// Filters
 	filters: [],
 	addFilter: (newFilter: FilterValue) =>

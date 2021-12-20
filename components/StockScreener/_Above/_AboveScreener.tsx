@@ -1,10 +1,10 @@
-import { screenerDataState } from '../screenerdata.state'
+import { screenerState } from '../screener.state'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { PresetFilters } from './PresetFilters'
 import { SavedFilters } from './SavedFilters/_SavedFilters'
 
 export function AboveScreener() {
-	const type = screenerDataState((state) => state.type)
+	const type = screenerState((state) => state.type)
 
 	let typeTitle = type === 'stocks' ? 'Stock' : type.toUpperCase()
 

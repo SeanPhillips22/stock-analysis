@@ -111,18 +111,18 @@ export type FilterId =
 	| 'spac' // Is SPAC
 	| 'sharesOffered' // Shares Offered
 	| 'assets' // ETF assets
-	| 'etfPeRatio' // ETF PEO Ratio
-	| 'assetClass'
-	| 'etfExpenseRatio'
-	| 'etfSharesOut'
-	| 'etfDividendYield'
-	| 'etfBeta'
-	| 'etfHoldings'
-	| 'etfInceptionDate'
-	| 'etfExDividendDate'
-	| 'etfSector'
-	| 'etfRegion'
-	| 'etfExchange'
+	| 'etfPeRatio' // ETF PE Ratio
+	| 'assetClass' // ETF Asset Class
+	| 'etfExpenseRatio' // ETF Expense Ratio
+	| 'etfSharesOut' // ETF Shares Outstanding
+	| 'etfDividendYield' // ETF Dividend Yield
+	| 'etfBeta' // ETF Beta
+	| 'etfHoldings' // ETF Holdings
+	| 'etfInceptionDate' // ETF Inception Date
+	| 'etfExDividendDate' // ETF Ex-Dividend Date
+	| 'etfSector' // ETF Sector
+	| 'etfRegion' // ETF Geopgrahic Region
+	| 'etfExchange' // ETF Exchange
 
 // Results columns
 export type ColumnName =
@@ -134,28 +134,23 @@ export type ColumnName =
 	| 'Valuation'
 	| 'Dividends'
 	| 'Analysts'
-	| 'Custom'
 	| 'Income'
 	| 'Balance Sheet'
 	| 'Cash Flow'
 
 export type ColumnsMap = {
-	// eslint-disable-next-line no-unused-vars
-	[key in ColumnName]: FilterId[]
+	[key: string]: FilterId[]
 }
 
 export type SingleStock = {
-	// eslint-disable-next-line no-unused-vars
 	[key in FilterId]: string
 }
 
 export type SingleIPO = {
-	// eslint-disable-next-line no-unused-vars
 	[key in FilterId]: string
 }
 
 export type SingleETF = {
-	// eslint-disable-next-line no-unused-vars
 	[key in FilterId]: string
 }
 

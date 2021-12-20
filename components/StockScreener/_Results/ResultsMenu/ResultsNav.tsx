@@ -1,7 +1,7 @@
-import { ResultsMenuItem } from 'components/StockScreener/_Results/ResultsMenu/ResultsMenuItem';
+import { ResultsMenuItem } from 'components/StockScreener/_Results/ResultsMenu/ResultsMenuItem'
 
 interface Props {
-	type: string;
+	type: string
 }
 export function ResultsNav({ type }: Props) {
 	return (
@@ -28,7 +28,7 @@ export function ResultsNav({ type }: Props) {
 							<ResultsMenuItem type={type} name="Cash Flow" />
 						</>
 					)) ||
-					(type == 'etfs' && (
+					(type == 'etf' && (
 						<>
 							<ResultsMenuItem type={type} name="General" />
 							<ResultsMenuItem type={type} name="Filtered" />
@@ -38,5 +38,5 @@ export function ResultsNav({ type }: Props) {
 					))}
 			</ul>
 		</nav>
-	);
+	)
 }

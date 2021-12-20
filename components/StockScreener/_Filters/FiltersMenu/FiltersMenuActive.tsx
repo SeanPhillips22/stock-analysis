@@ -1,10 +1,10 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { screenerDataState } from 'components/StockScreener//screenerdata.state'
 import { CloseCircleIcon } from 'components/Icons/CloseCircle'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 
 export function FiltersMenuActive() {
+	const type = screenerState((state) => state.type)
 	const filters = screenerState((state) => state.filters)
 	const filterMenu = screenerState((state) => state.filterMenu)
 	const resultsMenu = screenerState((state) => state.resultsMenu)
@@ -21,7 +21,6 @@ export function FiltersMenuActive() {
 	if (filterMenu !== 'Active') {
 		classes += ' bll'
 	}
-	const type = screenerDataState((state) => state.type)
 
 	return (
 		<>

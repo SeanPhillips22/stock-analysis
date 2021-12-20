@@ -1,4 +1,3 @@
-import { screenerDataState } from '../screenerdata.state'
 import { FiltersMap } from 'components/StockScreener/maps/filters.map'
 import { useModifyFilters } from '../functions/useModifyFilters'
 import { useModifyColumns } from '../functions/useModifyColumns'
@@ -7,7 +6,7 @@ import { useState } from 'react'
 
 export function PresetFilters() {
 	const [selected, setSelected] = useState('')
-	const type = screenerDataState((state) => state.type)
+	const type = screenerState((state) => state.type)
 	const presets = screenerState((state) => state.presets)
 	const setFilterMenu = screenerState((state) => state.setFilterMenu)
 	const { add, clear } = useModifyFilters()

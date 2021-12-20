@@ -1,4 +1,3 @@
-import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { useEffect, useMemo } from 'react'
 import {
@@ -15,24 +14,13 @@ import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { FilterId } from 'components/StockScreener/screener.types'
-import {
-	useFetchFullData,
-	useFetchFullIPOData,
-	useFetchFullETFData
-} from 'components/StockScreener/functions/useFetchFullData'
+import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData'
 import { Loading } from 'components/Loading'
 
-interface Props {
-	cols: any
-}
-
-export function ResultsTable({ cols }: Props) {
-	const type = screenerDataState((state) => state.type)
-	const rows = screenerDataState((state) => state.data)
-	const loaded = screenerDataState((state) => state.loaded)
-	const fetchFullData = useFetchFullData()
-	const fetchFullIPOData = useFetchFullIPOData()
-	const fetchFullETFData = useFetchFullETFData()
+export function ResultsTable({ cols }: { cols: any }) {
+	const type = screenerState((state) => state.type)
+	const rows = screenerState((state) => state.data)
+	const loaded = screenerState((state) => state.loaded)
 	const filters = screenerState((state) => state.filters)
 	const tablePage = screenerState((state) => state.tablePage)
 	const tableSize = screenerState((state) => state.tableSize)
@@ -42,15 +30,15 @@ export function ResultsTable({ cols }: Props) {
 	const removeFilteredColumn = screenerState(
 		(state) => state.removeFilteredColumn
 	)
+	const fetchFullData = useFetchFullData()
 
 	useEffect(() => {
 		if (type == 'stocks') {
-			fetchFullData()
+			fetchFullData(type)
 			setShowColumns(['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'] as FilterId[])
 			setFetchedColumns(['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'])
-			// eslint-disable-next-line react-hooks/exhaustive-deps
 		} else if (type == 'ipo') {
-			fetchFullIPOData()
+			fetchFullData(type)
 			setShowColumns([
 				's',
 				'n',
@@ -70,7 +58,7 @@ export function ResultsTable({ cols }: Props) {
 				'revenue'
 			])
 		} else if (type == 'etf') {
-			fetchFullETFData()
+			fetchFullData(type)
 			setShowColumns([
 				's',
 				'n',
@@ -84,7 +72,7 @@ export function ResultsTable({ cols }: Props) {
 			removeFilteredColumn('m')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [type])
 
 	const data = useMemo(() => filterItems(rows, filters), [rows, filters])
 	const columns = useMemo(() => cols, [cols])

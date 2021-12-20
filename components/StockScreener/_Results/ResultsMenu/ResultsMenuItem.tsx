@@ -1,5 +1,4 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { FilterId, ColumnName } from 'components/StockScreener/screener.types'
 import { returnResultColumns } from 'components/StockScreener/maps/resultColumns.map'
 import { getData } from 'functions/apis/API'
@@ -35,7 +34,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 	const fetchedColumns = screenerState((state) => state.fetchedColumns)
 	const filteredColumns = screenerState((state) => state.filteredColumns)
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn)
-	const addDataColumn = screenerDataState((state) => state.addDataColumn)
+	const addDataColumn = screenerState((state) => state.addDataColumn)
 
 	let display = name.toString()
 	let dataTitle = name.toString()
@@ -66,7 +65,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 				screenerType = 'etfscreener'
 			}
 
-			fetchManyColumns(returnResultColumns(type)[name], screenerType)
+			fetchManyColumns(returnResultColumns(type, name), screenerType)
 		}
 	}
 
@@ -78,7 +77,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 		} else if (name === 'General') {
 			setShowColumns(defaultColumns)
 		} else {
-			setShowColumns(returnResultColumns(type)[name])
+			setShowColumns(returnResultColumns(type, name))
 		}
 	}
 

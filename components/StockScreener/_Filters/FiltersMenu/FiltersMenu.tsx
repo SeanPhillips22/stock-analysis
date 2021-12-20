@@ -1,11 +1,10 @@
-import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { FiltersMenuItem } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuItem'
 import { FiltersMenuActive } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuActive'
 import { FilterSearch } from './FilterSearch'
 
 export function FiltersMenu() {
-	const type = screenerDataState((state) => state.type)
+	const type = screenerState((state) => state.type)
 	const filtersShown = screenerState((state) => state.filtersShown)
 
 	const showHideBorder = filtersShown ? ' border-b border-gray-300' : ''

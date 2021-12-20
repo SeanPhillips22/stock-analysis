@@ -1,8 +1,8 @@
-import { ColumnsMap } from 'components/StockScreener/screener.types'
+import { ColumnName, ColumnsMap } from 'components/StockScreener/screener.types'
 
-export const resultColumns: ColumnsMap = {
-	Filtered: [],
+const resultColumnsStocks: ColumnsMap = {
 	General: ['s', 'n', 'm', 'i', 'p', 'c', 'v', 'pe'],
+	Filtered: [],
 	Company: [],
 	Performance: [
 		's',
@@ -30,7 +30,6 @@ export const resultColumns: ColumnsMap = {
 	Valuation: ['s', 'n', 'm', 'ev', 'pe', 'fpe', 'ps', 'pb', 'pfcf'],
 	Dividends: ['s', 'n', 'm', 'dps', 'dy', 'pr', 'dg'],
 	Analysts: ['s', 'n', 'm', 'ar', 'ac', 'p', 'pt', 'ptc'],
-	Custom: ['s', 'n', 'm'],
 	Income: [
 		's',
 		'n',
@@ -46,61 +45,59 @@ export const resultColumns: ColumnsMap = {
 	'Cash Flow': ['s', 'n', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf', 'fcfps']
 }
 
-export function returnResultColumns(type: string) {
+const resultColumnsIPOs: ColumnsMap = {
+	General: ['s', 'n', 'm', 'i', 'p', 'c', 'v', 'pe'],
+	Filtered: [],
+	Company: [
+		's',
+		'n',
+		'se',
+		'i',
+		'country',
+		'exchange',
+		'employees',
+		'founded'
+	],
+	Income: [
+		's',
+		'n',
+		'revenue',
+		'grossProfit',
+		'operatingIncome',
+		'netIncome',
+		'eps',
+		'ebit',
+		'ebitda'
+	],
+	'Balance Sheet': ['s', 'n', 'cash', 'liabilities', 'debt', 'equity'],
+	'Cash Flow': ['s', 'n', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf', 'fcfps']
+}
+
+const resultColumnsETFs: ColumnsMap = {
+	General: ['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v'],
+	Filtered: [],
+	Performance: [
+		's',
+		'n',
+		'p',
+		'c',
+		'ch1m',
+		'ch6m',
+		'chYTD',
+		'ch1y',
+		'ch3y',
+		'ch5y'
+	],
+	Dividends: ['s', 'n', 'etfHoldings', 'etfExDividendDate', 'etfDividendYield']
+}
+
+export function returnResultColumns(type: string, name: ColumnName) {
 	if (type == 'stocks') {
-		return resultColumns
-	} else if (type == 'ipo') {
-		// Change to IPO columns
-		resultColumns['General'] = [
-			's',
-			'n',
-			'm',
-			'i',
-			'ipoPriceRange',
-			'ipoDate',
-			'revenue'
-		]
-		resultColumns['Company'] = [
-			's',
-			'n',
-			'se',
-			'i',
-			'country',
-			'exchange',
-			'employees',
-			'founded'
-		]
-		return resultColumns
-	} else {
-		// Change to ETF columns
-		resultColumns['General'] = [
-			's',
-			'n',
-			'assetClass',
-			'assets',
-			'p',
-			'c',
-			'v'
-		]
-		resultColumns['Performance'] = [
-			's',
-			'n',
-			'p',
-			'c',
-			'ch1m',
-			'ch6m',
-			'chYTD',
-			'ch1y',
-			'ch3y',
-			'ch5y'
-		]
-		resultColumns['Dividends'] = [
-			's',
-			'n',
-			'etfHoldings',
-			'etfExDividendDate',
-			'etfDividendYield'
-		]
-		return resultColumns
+		return resultColumnsStocks[name]
+	} else if (type === 'ipo') {
+		return resultColumnsIPOs[name]
+	} else if (type === 'etf') {
+		return resultColumnsETFs[name]
 	}
+	return resultColumnsStocks[name]
 }
