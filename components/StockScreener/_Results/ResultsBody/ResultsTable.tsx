@@ -66,7 +66,8 @@ export function ResultsTable({ cols }: { cols: any }) {
 				'assets',
 				'p',
 				'c',
-				'v'
+				'v',
+				'holdings'
 			] as FilterId[])
 			setFetchedColumns(['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v'])
 			removeFilteredColumn('m')

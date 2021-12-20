@@ -74,7 +74,7 @@ const resultColumnsIPOs: ColumnsMap = {
 }
 
 const resultColumnsETFs: ColumnsMap = {
-	General: ['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v'],
+	General: ['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v', 'holdings'],
 	Filtered: [],
 	Performance: [
 		's',
@@ -88,7 +88,7 @@ const resultColumnsETFs: ColumnsMap = {
 		'ch3y',
 		'ch5y'
 	],
-	Dividends: ['s', 'n', 'etfHoldings', 'etfExDividendDate', 'etfDividendYield']
+	Dividends: ['s', 'n', 'etfExDividendDate', 'etfDividendYield']
 }
 
 export function returnResultColumns(type: string, name: ColumnName) {

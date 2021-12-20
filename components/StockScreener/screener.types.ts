@@ -117,11 +117,11 @@ export type FilterId =
 	| 'etfSharesOut' // ETF Shares Outstanding
 	| 'etfDividendYield' // ETF Dividend Yield
 	| 'etfBeta' // ETF Beta
-	| 'etfHoldings' // ETF Holdings
-	| 'etfInceptionDate' // ETF Inception Date
+	| 'holdings' // ETF Holdings
+	| 'inceptionDate' // ETF Inception Date
 	| 'etfExDividendDate' // ETF Ex-Dividend Date
 	| 'etfSector' // ETF Sector
-	| 'etfRegion' // ETF Geopgrahic Region
+	| 'etfRegion' // ETF Geographic Region
 	| 'etfExchange' // ETF Exchange
 
 // Results columns
