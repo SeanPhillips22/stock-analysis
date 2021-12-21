@@ -13,7 +13,7 @@ declare global {
 function getPageAds(path: PathType) {
 	// Front page
 	if (!path.one) {
-		return ['in-content_1_mobile']
+		return ['top_leaderboard', 'in-content_1_mobile']
 	}
 
 	// IPO pages
