@@ -62,7 +62,7 @@ const resultColumnsStocks: ColumnsMap = {
 		'eps'
 	],
 	Valuation: ['s', 'n', 'm', 'ev', 'pe', 'fpe', 'ps', 'pb', 'pfcf'],
-	Dividends: ['s', 'n', 'm', 'dps', 'dy', 'pr', 'dg'],
+	Dividends: ['s', 'n', 'm', 'dps', 'dy', 'pr', 'dg', 'payoutFrequency'],
 	Analysts: ['s', 'n', 'm', 'ar', 'ac', 'p', 'pt', 'ptc'],
 	Income: [
 		's',
@@ -122,7 +122,16 @@ const resultColumnsETFs: ColumnsMap = {
 		'ch3y',
 		'ch5y'
 	],
-	Dividends: ['s', 'n', 'exDivDate', 'dy']
+	Dividends: [
+		's',
+		'n',
+		'dps',
+		'dy',
+		'dg',
+		'pr',
+		'exDivDate',
+		'payoutFrequency'
+	]
 }
 
 export function returnResultColumns(type: string, name: ColumnName) {

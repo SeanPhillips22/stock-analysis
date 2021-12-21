@@ -68,6 +68,7 @@ export type FilterId =
 	| 'dps' // Dividend ($)
 	| 'dg' // Div. Growth
 	| 'pr' // Payout Ratio
+	| 'payoutFrequency' // Payout Frequency
 	| 'buybackYield' // Buyback Yield
 	| 'totalReturn' // Total Return
 	| 'averageVolume' // Average Volume

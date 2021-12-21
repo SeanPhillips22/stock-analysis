@@ -442,6 +442,11 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'date'
 	},
 	{
+		Header: 'Payout Freq.',
+		accessor: 'payoutFrequency',
+		format: 'align'
+	},
+	{
 		Header: 'ROE',
 		accessor: 'roe',
 		format: 'percentage'

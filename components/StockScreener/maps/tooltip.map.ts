@@ -634,6 +634,12 @@ export const TOOLTIP_MAP: MapProps = [
 			'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
 	},
 	{
+		id: 'payoutFrequency',
+		title: 'Payout Frequency',
+		tooltip:
+			'Payout frequency is the schedule at which the dividends are paid. For example, a "Quarterly" payout ratio implies that dividends are paid every three months.'
+	},
+	{
 		id: 'buybackYield',
 		title: 'Buyback Yield / Dilution',
 		tooltip:

@@ -1360,6 +1360,18 @@ export const FiltersMap: FilterProps[] = [
 		]
 	},
 	{
+		name: 'Payout Freq.',
+		id: 'payoutFrequency',
+		category: ['Dividends'],
+		filterType: 'stringmatch',
+		options: [
+			{ name: 'Monthly', value: 'Monthly' },
+			{ name: 'Quarterly', value: 'Quarterly' },
+			{ name: 'Semi-Annual', value: 'Semi-Annual' },
+			{ name: 'Annual', value: 'Annual' }
+		]
+	},
+	{
 		name: 'Buyback Yield',
 		id: 'buybackYield',
 		category: ['Dividends'],
@@ -2868,9 +2880,22 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Under -3', value: 'under-X3' }
 		]
 	},
-
 	{
-		name: 'Dividend Yield (%)',
+		name: 'Dividend ($)',
+		id: 'dps',
+		category: ['Dividends'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 10', value: 'over-10' },
+			{ name: 'Over 5', value: 'over-5' },
+			{ name: 'Over 3', value: 'over-3' },
+			{ name: 'Over 2', value: 'over-2' },
+			{ name: 'Over 1', value: 'over-1' },
+			{ name: 'Over Zero', value: 'over-0' }
+		]
+	},
+	{
+		name: 'Dividend Yield',
 		id: 'dy',
 		category: ['Dividends'],
 		filterType: 'numeric',
@@ -2884,7 +2909,72 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Over Zero', value: 'over-0' }
 		]
 	},
-
+	{
+		name: 'Div. Growth',
+		id: 'dg',
+		category: ['Dividends'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 3%', value: 'over-3' },
+			{ name: 'Over 2%', value: 'over-2' },
+			{ name: 'Over 1%', value: 'over-1' },
+			{ name: '3-5%', value: 'between-3-5' },
+			{ name: '1-3%', value: 'between-1-3' },
+			{ name: '0-1%', value: 'between-0-1' },
+			{ name: 'Over Zero', value: 'over-0' }
+		]
+	},
+	{
+		name: 'Payout Ratio',
+		id: 'pr',
+		category: ['Dividends'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Under 100%', value: 'under-100' },
+			{ name: 'Under 90%', value: 'under-90' },
+			{ name: 'Under 80%', value: 'under-80' },
+			{ name: 'Under 70%', value: 'under-70' },
+			{ name: 'Under 60%', value: 'under-60' },
+			{ name: 'Under 50%', value: 'under-50' },
+			{ name: 'Under 40%', value: 'under-40' },
+			{ name: 'Under 30%', value: 'under-30' },
+			{ name: 'Under 20%', value: 'under-20' },
+			{ name: 'Under 10%', value: 'under-10' }
+		]
+	},
+	{
+		name: 'Payout Freq.',
+		id: 'payoutFrequency',
+		category: ['Dividends'],
+		filterType: 'stringmatch',
+		options: [
+			{ name: 'Weekly', value: 'Weekly' },
+			{ name: 'Monthly', value: 'Monthly' },
+			{ name: 'Quarterly', value: 'Quarterly' },
+			{ name: 'Semi-Annual', value: 'Semi-Annual' },
+			{ name: 'Annual', value: 'Annual' }
+		]
+	},
+	{
+		name: 'Ex-Div Date',
+		id: 'exDivDate',
+		category: ['Dividends'],
+		filterType: 'date',
+		options: [
+			{ name: 'Today', value: 'today' },
+			{ name: 'Yesterday', value: 'yesterday' },
+			{ name: 'Past Week', value: 'under-7D' },
+			{ name: 'Past Month', value: 'under-1M' },
+			{ name: 'Past 3 Months', value: 'under-3M' },
+			{ name: 'Past 6 Months', value: 'under-6M' },
+			{ name: 'Past 12 Months', value: 'under-12M', div: true }
+		]
+	},
 	{
 		name: 'Exchange',
 		id: 'exchange',
@@ -2910,23 +3000,6 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Not Zero', value: 'notzero' }
 		]
 	},
-
-	{
-		name: 'Ex-Dividend Date',
-		id: 'exDivDate',
-		category: ['Dividends'],
-		filterType: 'date',
-		options: [
-			{ name: 'Today', value: 'today' },
-			{ name: 'Yesterday', value: 'yesterday' },
-			{ name: 'Past Week', value: 'under-7D' },
-			{ name: 'Past Month', value: 'under-1M' },
-			{ name: 'Past 3 Months', value: 'under-3M' },
-			{ name: 'Past 6 Months', value: 'under-6M' },
-			{ name: 'Past 12 Months', value: 'under-12M', div: true }
-		]
-	},
-
 	{
 		name: 'Holdings',
 		id: 'holdings',
