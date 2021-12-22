@@ -1,4 +1,4 @@
-import { InfoTableType } from 'types/Dividend';
+import { InfoTableType } from 'types/Dividend'
 
 export const InfoTable = ({ data }: { data: InfoTableType }) => {
 	return (
@@ -40,5 +40,5 @@ export const InfoTable = ({ data }: { data: InfoTableType }) => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}

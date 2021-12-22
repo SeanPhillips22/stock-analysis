@@ -24,48 +24,48 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-import { path } from '../utils';
-import { EMA as defaultOptions } from './defaultOptionsForComputation';
+import { path } from '../utils'
+import { EMA as defaultOptions } from './defaultOptionsForComputation'
 export default function Ema() {
-	let options = defaultOptions;
+	let options = defaultOptions
 	const calculator = (data) => {
-		const { windowSize, sourcePath } = options;
-		const source = path(sourcePath);
-		const alpha = 2 / (windowSize + 1);
-		let previous;
-		let initialAccumulator = 0;
-		let skip = 0;
+		const { windowSize, sourcePath } = options
+		const source = path(sourcePath)
+		const alpha = 2 / (windowSize + 1)
+		let previous
+		let initialAccumulator = 0
+		let skip = 0
 		return data.map(function (d, i) {
-			const v = source(d, i);
+			const v = source(d, i)
 			if (previous === undefined && v === undefined) {
-				skip++;
-				return undefined;
+				skip++
+				return undefined
 			} else if (i < windowSize + skip - 1) {
-				initialAccumulator += v;
-				return undefined;
+				initialAccumulator += v
+				return undefined
 			} else if (i === windowSize + skip - 1) {
-				initialAccumulator += v;
-				const initialValue = initialAccumulator / windowSize;
-				previous = initialValue;
-				return initialValue;
+				initialAccumulator += v
+				const initialValue = initialAccumulator / windowSize
+				previous = initialValue
+				return initialValue
 			} else {
-				const nextValue = v * alpha + (1 - alpha) * previous;
-				previous = nextValue;
-				return nextValue;
+				const nextValue = v * alpha + (1 - alpha) * previous
+				previous = nextValue
+				return nextValue
 			}
-		});
-	};
+		})
+	}
 	calculator.undefinedLength = () => {
-		const { windowSize } = options;
-		return windowSize - 1;
-	};
+		const { windowSize } = options
+		return windowSize - 1
+	}
 	calculator.options = (newOptions) => {
 		if (newOptions === undefined) {
-			return options;
+			return options
 		}
-		options = Object.assign(Object.assign({}, defaultOptions), newOptions);
-		return calculator;
-	};
-	return calculator;
+		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
+		return calculator
+	}
+	return calculator
 }
 // # sourceMappingURL=ema.js.map

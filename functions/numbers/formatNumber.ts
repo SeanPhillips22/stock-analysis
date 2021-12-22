@@ -7,7 +7,7 @@ export const formatNumber = (
 	return (
 		new Intl.NumberFormat('en-US', {
 			minimumFractionDigits: min,
-			maximumFractionDigits: max,
+			maximumFractionDigits: max
 		}).format(num) + append
-	);
-};
+	)
+}

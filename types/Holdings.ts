@@ -1,14 +1,14 @@
 export interface HoldingsType {
-	count: number;
-	list: Holding[];
-	top10: number;
-	updated: string;
+	count: number
+	list: Holding[]
+	top10: number
+	updated: string
 }
 
 export interface Holding {
-	no: number;
-	symbol: string;
-	name: string;
-	assets: string;
-	shares: string;
+	no: number
+	symbol: string
+	name: string
+	assets: string
+	shares: string
 }

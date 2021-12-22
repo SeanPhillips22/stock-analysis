@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { navState } from 'state/navState'
 
-interface Symbol {
+type Props = {
 	symbol: string
 }
 
-export const TabNavigationETF = ({ symbol }: Symbol) => {
+export const TabNavigationETF = ({ symbol }: Props) => {
 	const path = navState((state) => state.path)
 
 	return (

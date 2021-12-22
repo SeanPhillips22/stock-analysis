@@ -1,52 +1,52 @@
 /* eslint-disable no-invalid-this */
-import { strokeDashTypes } from '../core';
-import * as PropTypes from 'prop-types';
-import * as React from 'react';
-import { Axis } from './Axis';
+import { strokeDashTypes } from '../core'
+import * as PropTypes from 'prop-types'
+import * as React from 'react'
+import { Axis } from './Axis'
 
 export interface XAxisProps<T extends number | Date> {
-	readonly axisAt?: number | 'top' | 'bottom' | 'middle';
-	readonly className?: string;
-	readonly domainClassName?: string;
-	readonly fontFamily?: string;
-	readonly fontSize?: number;
-	readonly fontWeight?: number;
+	readonly axisAt?: number | 'top' | 'bottom' | 'middle'
+	readonly className?: string
+	readonly domainClassName?: string
+	readonly fontFamily?: string
+	readonly fontSize?: number
+	readonly fontWeight?: number
 	readonly getMouseDelta?: (
 		startXY: [number, number],
 		mouseXY: [number, number]
-	) => number;
-	readonly gridLinesStrokeStyle?: string;
-	readonly gridLinesStrokeWidth?: number;
-	readonly gridLinesStrokeDasharray?: strokeDashTypes;
-	readonly innerTickSize?: number;
+	) => number
+	readonly gridLinesStrokeStyle?: string
+	readonly gridLinesStrokeWidth?: number
+	readonly gridLinesStrokeDasharray?: strokeDashTypes
+	readonly innerTickSize?: number
 	readonly onContextMenu?: (
 		e: React.MouseEvent,
 		mousePosition: [number, number]
-	) => void;
+	) => void
 	readonly onDoubleClick?: (
 		e: React.MouseEvent,
 		mousePosition: [number, number]
-	) => void;
-	readonly orient?: 'top' | 'bottom';
-	readonly outerTickSize?: number;
-	readonly showDomain?: boolean;
-	readonly showGridLines?: boolean;
-	readonly showTicks?: boolean;
-	readonly showTickLabel?: boolean;
-	readonly strokeStyle?: string;
-	readonly strokeWidth?: number;
-	readonly tickFormat?: (value: T) => string;
-	readonly tickPadding?: number;
-	readonly tickSize?: number;
-	readonly tickLabelFill?: string;
-	readonly ticks?: number;
-	readonly tickStrokeStyle?: string;
-	readonly tickStrokeWidth?: number;
-	readonly tickStrokeDasharray?: strokeDashTypes;
-	readonly tickValues?: number[];
-	readonly xZoomHeight?: number;
-	readonly zoomEnabled?: boolean;
-	readonly zoomCursorClassName?: string;
+	) => void
+	readonly orient?: 'top' | 'bottom'
+	readonly outerTickSize?: number
+	readonly showDomain?: boolean
+	readonly showGridLines?: boolean
+	readonly showTicks?: boolean
+	readonly showTickLabel?: boolean
+	readonly strokeStyle?: string
+	readonly strokeWidth?: number
+	readonly tickFormat?: (value: T) => string
+	readonly tickPadding?: number
+	readonly tickSize?: number
+	readonly tickLabelFill?: string
+	readonly ticks?: number
+	readonly tickStrokeStyle?: string
+	readonly tickStrokeWidth?: number
+	readonly tickStrokeDasharray?: strokeDashTypes
+	readonly tickValues?: number[]
+	readonly xZoomHeight?: number
+	readonly zoomEnabled?: boolean
+	readonly zoomCursorClassName?: string
 }
 
 export class XAxis<T extends number | Date> extends React.Component<
@@ -78,13 +78,13 @@ export class XAxis<T extends number | Date> extends React.Component<
 		tickStrokeStyle: '#000000',
 		xZoomHeight: 25,
 		zoomEnabled: true,
-		zoomCursorClassName: 'react-financial-charts-ew-resize-cursor',
-	};
+		zoomCursorClassName: 'react-financial-charts-ew-resize-cursor'
+	}
 
 	public static contextTypes = {
 		chartConfig: PropTypes.object.isRequired,
-		xAxisZoom: PropTypes.func.isRequired,
-	};
+		xAxisZoom: PropTypes.func.isRequired
+	}
 
 	public render() {
 		const {
@@ -95,9 +95,9 @@ export class XAxis<T extends number | Date> extends React.Component<
 			strokeWidth = XAxis.defaultProps.strokeWidth,
 			zoomEnabled,
 			...rest
-		} = this.props;
+		} = this.props
 
-		const { ...moreProps } = this.helper();
+		const { ...moreProps } = this.helper()
 
 		return (
 			<Axis
@@ -112,77 +112,77 @@ export class XAxis<T extends number | Date> extends React.Component<
 				axisZoomCallback={this.axisZoomCallback}
 				getMaxTicks={undefined}
 			/>
-		);
+		)
 	}
 
 	private readonly axisZoomCallback = (newXDomain: number[]) => {
-		const { xAxisZoom } = this.context;
+		const { xAxisZoom } = this.context
 
-		xAxisZoom(newXDomain);
-	};
+		xAxisZoom(newXDomain)
+	}
 
 	private readonly helper = () => {
 		const {
 			axisAt,
 			xZoomHeight = XAxis.defaultProps.xZoomHeight,
 			orient,
-			ticks,
-		} = this.props;
+			ticks
+		} = this.props
 		const {
-			chartConfig: { width, height },
-		} = this.context;
+			chartConfig: { width, height }
+		} = this.context
 
-		let axisLocation;
-		const x = 0;
-		const w = width;
-		const h = xZoomHeight;
+		let axisLocation
+		const x = 0
+		const w = width
+		const h = xZoomHeight
 
 		switch (axisAt) {
 			case 'top':
-				axisLocation = 0;
-				break;
+				axisLocation = 0
+				break
 			case 'bottom':
-				axisLocation = height;
-				break;
+				axisLocation = height
+				break
 			case 'middle':
-				axisLocation = height / 2;
-				break;
+				axisLocation = height / 2
+				break
 			default:
-				axisLocation = axisAt;
+				axisLocation = axisAt
 		}
 
-		const y = orient === 'top' ? -xZoomHeight : 0;
+		const y = orient === 'top' ? -xZoomHeight : 0
 
 		return {
 			transform: [0, axisLocation],
 			range: [0, width],
 			getScale: this.getXScale,
 			bg: { x, y, h, w },
-			ticks: ticks ?? this.getXTicks(width),
-		};
-	};
+			ticks: ticks ?? this.getXTicks(width)
+		}
+	}
 
 	private readonly getXTicks = (width: number) => {
 		if (width < 400) {
-			return 2;
+			return 2
 		}
 
 		if (width < 500) {
-			return 6;
+			return 6
 		}
 
-		return 8;
-	};
+		return 8
+	}
 
 	private readonly getXScale = (moreProps: any) => {
-		const { xScale: scale, width } = moreProps;
+		const { xScale: scale, width } = moreProps
 
 		if (scale.invert) {
-			const trueRange = [0, width];
-			const trueDomain = trueRange.map(scale.invert);
-			return scale.copy().domain(trueDomain).range(trueRange);
+			const trueRange = [0, width]
+			const trueDomain = trueRange.map(scale.invert)
+			return scale.copy().domain(trueDomain).range(trueRange)
 		}
 
-		return scale;
-	};
+		return scale
+	}
 }

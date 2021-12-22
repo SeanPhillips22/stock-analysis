@@ -1,18 +1,18 @@
-import { Info } from 'types/Info';
+import { Info } from 'types/Info'
 
 export function IPOPrice({ info }: { info: Info }) {
-	const ipoInfo = info.ipoInfo;
+	const ipoInfo = info.ipoInfo
 	if (!ipoInfo) {
-		return null;
+		return null
 	}
 
-	const { ipoPrice, ipoPriceLow, ipoPriceHigh, ipoPriceNotice } = ipoInfo;
+	const { ipoPrice, ipoPriceLow, ipoPriceHigh, ipoPriceNotice } = ipoInfo
 
 	const price = ipoPrice
 		? '$' + ipoPrice
 		: ipoInfo && ipoPriceLow && ipoPriceHigh
 		? '$' + ipoPriceLow + ' - $' + ipoPriceHigh
-		: 'Pending';
+		: 'Pending'
 
 	return (
 		<div>
@@ -23,5 +23,5 @@ export function IPOPrice({ info }: { info: Info }) {
 
 			<div className="text-small text-gray-700 mt-0">{ipoPriceNotice}</div>
 		</div>
-	);
+	)
 }

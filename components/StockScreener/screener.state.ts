@@ -10,6 +10,7 @@ import {
 } from 'components/StockScreener/screener.types'
 import { PresetFilter } from './maps/presetFilters.map'
 import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
+import { returnDefaultColumns } from 'components/StockScreener/maps/resultColumns.map'
 
 interface ScreenerState {
 	// Type
@@ -55,7 +56,7 @@ interface ScreenerState {
 	showColumns: FilterId[]
 	filteredColumns: FilterId[]
 	addFetchedColumn: (newColumn: FilterId) => void
-	setFetchedColumns: (newArray: any[]) => void
+	setFetchedColumns: (newArray: FilterId[]) => void
 	addFilteredColumn: (newColumn: FilterId) => void
 	removeFilteredColumn: (columns: FilterId) => void
 	setShowColumns: (newColumns: FilterId[]) => void
@@ -71,6 +72,8 @@ interface ScreenerState {
 	// Preset filters
 	presets: PresetFilter[]
 	setPresets: (presets: PresetFilter[]) => void
+	activePreset: string
+	setActivePreset: (preset: string) => void
 }
 
 export const screenerState = create<ScreenerState>((set) => ({
@@ -106,11 +109,12 @@ export const screenerState = create<ScreenerState>((set) => ({
 			filters: state.filters.filter((f) => f.id !== filter)
 		})),
 	clearFilters: () =>
-		set({
+		set((state) => ({
 			filters: [],
 			filterMenu: 'Active',
-			filteredColumns: ['s', 'n', 'm']
-		}),
+			filteredColumns: returnDefaultColumns(state.type),
+			activePreset: ''
+		})),
 	filtersShown: true,
 	setFiltersShown: (show: boolean) =>
 		set({ filtersShown: show, filterMenu: 'Active' }),
@@ -144,12 +148,13 @@ export const screenerState = create<ScreenerState>((set) => ({
 	fetchedColumns: [], // All data columns that have been fetched
 	showColumns: [], // Columns that are currently showing
 	filteredColumns: ['s', 'n'], // All data columns that are being filtered
-	addFetchedColumn: (newColumn: any) =>
+	addFetchedColumn: (newColumn: FilterId) =>
 		set((state) => ({
 			fetchedColumns: [...state.fetchedColumns, newColumn]
 		})),
-	setFetchedColumns: (newArray: any[]) => set({ fetchedColumns: newArray }),
-	addFilteredColumn: (newColumn: any) =>
+	setFetchedColumns: (newArray: FilterId[]) =>
+		set({ fetchedColumns: newArray }),
+	addFilteredColumn: (newColumn: FilterId) =>
 		set((state) => ({
 			filteredColumns: [...state.filteredColumns, newColumn]
 		})),
@@ -170,5 +175,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 	// Preset filters
 	presets: [],
 	setPresets: (newPresets) =>
-		set((state) => ({ ...state, presets: newPresets }))
+		set((state) => ({ ...state, presets: newPresets })),
+	activePreset: '',
+	setActivePreset: (newPreset: string) => set({ activePreset: newPreset })
 }))

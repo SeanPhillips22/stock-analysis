@@ -10,7 +10,7 @@ const displayTextsDefault = {
 	h: ' H: ',
 	l: ' L: ',
 	c: ' C: ',
-	na: 'n/a',
+	na: 'n/a'
 }
 
 export interface OHLCTooltipProps {
@@ -51,7 +51,7 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			"-apple-system, system-ui, 'Helvetica Neue', Ubuntu, sans-serif",
 		ohlcFormat: format('.2f'),
 		origin: [0, 0],
-		percentFormat: format('.2%'),
+		percentFormat: format('.2%')
 	}
 
 	public render() {
@@ -77,12 +77,12 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			onClick,
 			percentFormat = OHLCTooltipCustom.defaultProps.percentFormat,
 			textFill,
-			time,
+			time
 		} = this.props
 
 		const {
 			chartConfig: { width, height },
-			fullData,
+			fullData
 		} = moreProps
 
 		const currentItem =

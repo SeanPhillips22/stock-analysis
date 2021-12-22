@@ -1,14 +1,14 @@
-import { LockClosedIcon } from '@heroicons/react/solid';
-import { useRouter } from 'next/router';
+import { LockClosedIcon } from '@heroicons/react/solid'
+import { useRouter } from 'next/router'
 
 interface ExportItemProps {
-	title: string;
-	type: string;
+	title: string
+	type: string
 }
 
 export default function Restricted({ title, type }: ExportItemProps) {
-	const router = useRouter();
-	const id = `tag-upgr-controls-export-${type.toLowerCase()}`;
+	const router = useRouter()
+	const id = `tag-upgr-controls-export-${type.toLowerCase()}`
 
 	return (
 		<div
@@ -20,5 +20,5 @@ export default function Restricted({ title, type }: ExportItemProps) {
 			{title}
 			<LockClosedIcon className="h-4 w-4 text-gray-500" aria-hidden="true" />
 		</div>
-	);
+	)
 }

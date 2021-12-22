@@ -1,24 +1,24 @@
-import { screenerState } from 'components/StockScreener/screener.state';
-import { FilterId } from 'components/StockScreener/screener.types';
-import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns';
+import { screenerState } from 'components/StockScreener/screener.state'
+import { FilterId } from 'components/StockScreener/screener.types'
+import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns'
 
 type Props = {
-	name: string;
-	id: FilterId;
-	type: string;
-};
+	name: string
+	id: FilterId
+	type: string
+}
 
 /**
  * A checkbox that activates/deactivates a custom column for the screener results table
  * @return {JSX.Element}
  */
 export function ColumnItem({ name, id, type }: Props): JSX.Element {
-	const { fetchColumn, toggle, isShowing } = useModifyColumns();
-	const setOpen = screenerState((state) => state.setColumnDropdownOpen);
+	const { fetchColumn, toggle, isShowing } = useModifyColumns()
+	const setOpen = screenerState((state) => state.setColumnDropdownOpen)
 
 	function handleKeyDown(e: React.KeyboardEvent) {
-		if (e.key === 'Enter') toggle(id, type);
-		if (e.key === 'Escape') setOpen(false);
+		if (e.key === 'Enter') toggle(id, type)
+		if (e.key === 'Escape') setOpen(false)
 	}
 
 	return (
@@ -37,5 +37,5 @@ export function ColumnItem({ name, id, type }: Props): JSX.Element {
 				{name}
 			</label>
 		</div>
-	);
+	)
 }

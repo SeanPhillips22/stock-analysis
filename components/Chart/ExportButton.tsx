@@ -27,7 +27,7 @@ export function Export({ buttons, data, time }: Props) {
 		'Close',
 		'High',
 		'Low',
-		'Volume',
+		'Volume'
 	])
 
 	useEffect(() => {
@@ -44,7 +44,7 @@ export function Export({ buttons, data, time }: Props) {
 					'Low',
 					'Volume',
 					'MA1',
-					'MA2',
+					'MA2'
 				])
 			}
 
@@ -68,7 +68,7 @@ export function Export({ buttons, data, time }: Props) {
 						data[i].close,
 						data[i].high,
 						data[i].low,
-						data[i].volume,
+						data[i].volume
 					]
 				} else {
 					arr = [
@@ -79,7 +79,7 @@ export function Export({ buttons, data, time }: Props) {
 						data[i].low,
 						data[i].volume,
 						data[i].ma1,
-						data[i].ma2,
+						data[i].ma2
 					]
 				}
 				result.push(arr)

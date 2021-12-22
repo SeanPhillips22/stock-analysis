@@ -1,7 +1,8 @@
 import {
 	ColumnName,
 	ColumnsMap,
-	FilterId
+	FilterId,
+	ScreenerTypes
 } from 'components/StockScreener/screener.types'
 
 export const defaultColumnsStocks: FilterId[] = [
@@ -143,4 +144,15 @@ export function returnResultColumns(type: string, name: ColumnName) {
 		return resultColumnsETFs[name]
 	}
 	return resultColumnsStocks[name]
+}
+
+export function returnDefaultColumns(type: ScreenerTypes) {
+	if (type === 'stocks') {
+		return defaultColumnsStocks
+	} else if (type === 'ipo') {
+		return defaultColumnsIPOs
+	} else if (type === 'etf') {
+		return defaultColumnsETFs
+	}
+	return defaultColumnsStocks
 }

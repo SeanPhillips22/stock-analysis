@@ -1,56 +1,56 @@
-import { FinancialReport } from 'types/Financials';
-import { formatNumber } from 'functions/numbers/formatNumber';
+import { FinancialReport } from 'types/Financials'
+import { formatNumber } from 'functions/numbers/formatNumber'
 
 export const getPeriodLabel = (range: string) => {
 	switch (range) {
 		case 'annual':
-			return 'Year';
+			return 'Year'
 
 		case 'quarterly':
-			return 'Quarter Ended';
+			return 'Quarter Ended'
 
 		case 'trailing':
-			return 'Period Ended';
+			return 'Period Ended'
 
 		default:
-			return '';
+			return ''
 	}
-};
+}
 
 export const getPeriodTooltip = (range: string) => {
 	switch (range) {
 		case 'annual':
-			return "The company's fiscal year, which is a 12-month financial reporting period. The fiscal year does not always match the calendar year.";
+			return "The company's fiscal year, which is a 12-month financial reporting period. The fiscal year does not always match the calendar year."
 
 		case 'quarterly':
-			return 'The end date of the fiscal quarter, which is a 3-month financial reporting period.';
+			return 'The end date of the fiscal quarter, which is a 3-month financial reporting period.'
 
 		case 'trailing':
-			return 'The end date of the preceding trailing twelve-month period.';
+			return 'The end date of the preceding trailing twelve-month period.'
 
 		default:
-			return '';
+			return ''
 	}
-};
+}
 
 export const redOrGreen = (value: string, id: string) => {
-	let change = parseFloat(value);
+	let change = parseFloat(value)
 	if (id === 'shareschange') {
-		change = change * -1;
+		change = change * -1
 	} // Inverse colors
 
 	if (change > 0) {
-		return 'text-green-700';
+		return 'text-green-700'
 	} else if (change < 0) {
-		return 'text-red-600';
+		return 'text-red-600'
 	} else {
-		return 'inherit';
+		return 'inherit'
 	}
-};
+}
 
 export const setBorder = (rowname: string) => {
-	return rowname.includes('Growth') && '1px solid #CCC';
-};
+	return rowname.includes('Growth') && '1px solid #CCC'
+}
 
 // Format the Y axis on hover charts
 export const formatY = (
@@ -64,34 +64,34 @@ export const formatY = (
 		((ymax && (ymax > 10000000 || ymax < -10000000)) ||
 			(ymin && (ymin > 10000000 || ymin < -10000000)))
 	) {
-		return formatNumber(value / 1000000, 0, 0);
+		return formatNumber(value / 1000000, 0, 0)
 	}
 
 	if (
 		format === 'reduce_precision' &&
 		(value > 10000000 || value < -10000000)
 	) {
-		return formatNumber(value / 1000000, 0, 0); // new Intl.NumberFormat('en-US').format(value / 1000000);
+		return formatNumber(value / 1000000, 0, 0) // new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
 
 	if (format === 'growth' || format === 'margin') {
-		return formatNumber(value, 0, 0, '%');
+		return formatNumber(value, 0, 0, '%')
 	}
 	if (format === 'percentage') {
-		return formatNumber(value, 0, 2, '%');
+		return formatNumber(value, 0, 2, '%')
 	}
 	if (format === 'ratio' || format === 'pershare') {
-		return formatNumber(value, 2, 2);
+		return formatNumber(value, 2, 2)
 	}
-	return formatNumber(value, 0, 0);
-};
+	return formatNumber(value, 0, 0)
+}
 
 interface FormatCell {
-	type: string;
-	current: number;
-	previous: number | null | string;
-	revenue: number | null;
-	divider: string;
+	type: string
+	current: number
+	previous: number | null | string
+	revenue: number | null
+	divider: string
 }
 
 // Format the number in the cells
@@ -100,20 +100,20 @@ export function formatCell({
 	current,
 	previous,
 	revenue,
-	divider,
+	divider
 }: FormatCell) {
-	const numbersIn: number = getDivider(divider);
-	const decimals = divider === 'raw' ? 3 : 2;
+	const numbersIn: number = getDivider(divider)
+	const decimals = divider === 'raw' ? 3 : 2
 
 	switch (type) {
 		case 'standard':
-			return formatNumber(current / numbersIn, 0, 2);
+			return formatNumber(current / numbersIn, 0, 2)
 
 		case 'reduce_precision': {
 			if (current) {
-				return formatNumber(current / numbersIn, 0, 0);
+				return formatNumber(current / numbersIn, 0, 0)
 			}
-			return '-';
+			return '-'
 		}
 
 		case 'growth': {
@@ -125,38 +125,38 @@ export function formatCell({
 				current > 0 &&
 				previous > 0
 			) {
-				return ((current / previous - 1) * 100).toFixed(decimals) + '%';
+				return ((current / previous - 1) * 100).toFixed(decimals) + '%'
 			}
-			return '-';
+			return '-'
 		}
 
 		case 'margin': {
 			if (current && revenue) {
-				return ((current / revenue) * 100).toFixed(2) + '%';
+				return ((current / revenue) * 100).toFixed(2) + '%'
 			}
-			return '-';
+			return '-'
 		}
 
 		case 'percentage': {
-			return (current * 100).toFixed(decimals) + '%';
+			return (current * 100).toFixed(decimals) + '%'
 		}
 
 		case 'pershare': {
 			if (current) {
-				return current.toFixed(decimals);
+				return current.toFixed(decimals)
 			}
-			return '-';
+			return '-'
 		}
 
 		case 'ratio': {
 			if (current) {
-				return current.toFixed(decimals);
+				return current.toFixed(decimals)
 			}
-			return '-';
+			return '-'
 		}
 
 		default:
-			return '';
+			return ''
 	}
 }
 
@@ -165,20 +165,19 @@ export function formatCellExport({
 	type,
 	current,
 	previous,
-	revenue,
-	divider,
+	revenue
 }: FormatCell) {
-	const decimals = 3;
+	const decimals = 3
 
 	switch (type) {
 		case 'standard':
-			return current;
+			return current
 
 		case 'reduce_precision': {
 			if (current) {
-				return current;
+				return current
 			}
-			return;
+			return
 		}
 
 		case 'growth': {
@@ -190,110 +189,110 @@ export function formatCellExport({
 				current > 0 &&
 				previous > 0
 			) {
-				return parseFloat((current / previous - 1).toFixed(decimals));
+				return parseFloat((current / previous - 1).toFixed(decimals))
 			}
-			return;
+			return
 		}
 
 		case 'margin': {
 			if (current && revenue) {
-				return parseFloat((current / revenue).toFixed(decimals));
+				return parseFloat((current / revenue).toFixed(decimals))
 			}
-			return;
+			return
 		}
 
 		case 'percentage': {
-			return current;
+			return current
 		}
 
 		case 'pershare': {
 			if (current) {
-				return current;
+				return current
 			}
-			return;
+			return
 		}
 
 		case 'ratio': {
 			if (current) {
-				return current;
+				return current
 			}
-			return;
+			return
 		}
 
 		default:
-			return;
+			return
 	}
 }
 
 export function formatYear(date: string | number) {
-	const dateObject = new Date(date);
-	let year = dateObject.getFullYear();
-	const month = dateObject.getMonth();
+	const dateObject = new Date(date)
+	let year = dateObject.getFullYear()
+	const month = dateObject.getMonth()
 	// If fiscal year ends in Jan-Mar, show year as previous
 
 	if (month < 4) {
-		year--;
+		year--
 	}
-	return year;
+	return year
 }
 
 export function countDecimals(value: string) {
-	const float = parseFloat(value);
-	if (Math.floor(float.valueOf()) === float.valueOf()) return 0;
+	const float = parseFloat(value)
+	if (Math.floor(float.valueOf()) === float.valueOf()) return 0
 
-	const str = value.toString();
+	const str = value.toString()
 	if (str.indexOf('.') !== -1 && str.indexOf('-') !== -1) {
-		return str.split('-')[1] || 0;
+		return str.split('-')[1] || 0
 	} else if (str.indexOf('.') !== -1) {
-		return str.split('.')[1].length || 0;
+		return str.split('.')[1].length || 0
 	}
-	return str.split('-')[1] || 0;
+	return str.split('-')[1] || 0
 }
 
 export function reducePrecisionFix(value: number) {
 	if (value > 10000000 || value < -10000000) {
-		const divided = value / 1000000;
-		return formatNumber(divided, 0, 0);
+		const divided = value / 1000000
+		return formatNumber(divided, 0, 0)
 	}
-	return value;
+	return value
 }
 
 // Show numbers in thousands, millions or raw
 function getDivider(divider: string) {
 	switch (divider) {
 		case 'thousands':
-			return 1000;
+			return 1000
 
 		case 'millions':
-			return 1000000;
+			return 1000000
 
 		case 'raw':
-			return 1;
+			return 1
 	}
-	return 1000;
+	return 1000
 }
 
 // Slice financial data if paywalled
 export function sliceData(data: FinancialReport, showcount: number) {
-	const sliced = {} as FinancialReport;
+	const sliced = {} as FinancialReport
 
 	if (data) {
 		Object.keys(data).forEach((key) => {
-			sliced[key] = data[key].slice(0, showcount);
-		});
+			sliced[key] = data[key].slice(0, showcount)
+		})
 
-		return sliced;
+		return sliced
 	}
-	return data;
+	return data
 }
 
 // Reverse left/right order of financial data
 export function reverseData(data: FinancialReport) {
-	const reversed = {} as FinancialReport;
+	const reversed = {} as FinancialReport
 
 	Object.keys(data).forEach((key) => {
-		reversed[key] = data[key].reverse();
-	});
+		reversed[key] = data[key].reverse()
+	})
 
-	return reversed;
+	return reversed
 }

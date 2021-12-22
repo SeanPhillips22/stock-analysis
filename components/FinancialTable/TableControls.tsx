@@ -1,53 +1,53 @@
-import { LeftRightIcon } from 'components/Icons/LeftRight';
-import { DropdownIcon } from 'components/Icons/Dropdown';
-import { financialsState } from 'state/financialsState';
-import { useRef, useState, useEffect } from 'react';
-import { ExportMenu } from './ExportMenu/_ExportMenu';
+import { LeftRightIcon } from 'components/Icons/LeftRight'
+import { DropdownIcon } from 'components/Icons/Dropdown'
+import { financialsState } from 'state/financialsState'
+import { useRef, useState, useEffect } from 'react'
+import { ExportMenu } from './ExportMenu/_ExportMenu'
 
 interface Props {
-	symbol: string;
-	statement: string;
-	range: string;
+	symbol: string
+	statement: string
+	range: string
 }
 
 export const TableControls = ({ symbol, statement, range }: Props) => {
-	const dropdownNode = useRef<HTMLDivElement>(null);
-	const [exportOpen, setExportOpen] = useState(false);
-	const leftRight = financialsState((state) => state.leftRight);
-	const setLeftRight = financialsState((state) => state.setLeftRight);
+	const dropdownNode = useRef<HTMLDivElement>(null)
+	const [exportOpen, setExportOpen] = useState(false)
+	const leftRight = financialsState((state) => state.leftRight)
+	const setLeftRight = financialsState((state) => state.setLeftRight)
 
 	const clickOutside = (e: MouseEvent) => {
-		const node = dropdownNode.current ?? null;
-		const doc = document.querySelector('.dropdown') ?? null;
+		const node = dropdownNode.current ?? null
+		const doc = document.querySelector('.dropdown') ?? null
 
 		if (
 			(node && node.contains(e.target as Node)) ||
 			(doc && doc.contains(e.target as Node))
 		) {
-			return;
+			return
 		}
-		setExportOpen(false);
-	};
+		setExportOpen(false)
+	}
 
 	useEffect(() => {
 		if (exportOpen) {
-			document.addEventListener('mousedown', clickOutside);
+			document.addEventListener('mousedown', clickOutside)
 		} else {
-			document.removeEventListener('mousedown', clickOutside);
+			document.removeEventListener('mousedown', clickOutside)
 		}
 
 		return () => {
-			document.removeEventListener('mousedown', clickOutside);
-		};
-	}, [exportOpen]);
+			document.removeEventListener('mousedown', clickOutside)
+		}
+	}, [exportOpen])
 
 	const clickLeftRight = () => {
 		if (leftRight === 'left') {
-			setLeftRight('right');
+			setLeftRight('right')
 		} else {
-			setLeftRight('left');
+			setLeftRight('left')
 		}
-	};
+	}
 
 	return (
 		<div className="hidden sm:flex sm:flex-row sm:space-x-2 pb-2">
@@ -81,5 +81,5 @@ export const TableControls = ({ symbol, statement, range }: Props) => {
 				</button>
 			</div>
 		</div>
-	);
-};
+	)
+}

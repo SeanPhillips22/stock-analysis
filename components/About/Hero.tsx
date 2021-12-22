@@ -14,5 +14,5 @@ export function AboutHero() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

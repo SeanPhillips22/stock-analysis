@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next'
-import { ParsedUrlQuery } from 'querystring'
 import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
@@ -77,10 +76,6 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 }
 
 export default IpoYear
-
-interface IParams extends ParsedUrlQuery {
-	year: string
-}
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const year = context?.params?.year as string

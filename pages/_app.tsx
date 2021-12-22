@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 const queryClient = new QueryClient()
 
 NProgress.configure({ showSpinner: false })
-Router.events.on('routeChangeStart', (url) => {
+Router.events.on('routeChangeStart', () => {
 	NProgress.start()
 })
 

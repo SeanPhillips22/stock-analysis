@@ -1,4 +1,4 @@
-import { FilterValue } from 'components/StockScreener/screener.types';
+import { FilterValue } from 'components/StockScreener/screener.types'
 
 /**
  * Turn a filter into a short value that can be used as a label
@@ -11,66 +11,66 @@ export function createLabelFromString(
 	filter?: FilterValue
 ): string {
 	if (value === 'notzero') {
-		return 'Not Zero';
+		return 'Not Zero'
 	}
 
-	value = value.replaceAll('--', '-X');
+	value = value.replaceAll('--', '-X')
 
 	// Split the string
-	const explode = value.split('-');
+	const explode = value.split('-')
 
 	// First bit is the "compare" value
-	const compare = explode[0];
+	const compare = explode[0]
 
 	// Second bit is the "first" value
-	let first = explode[1] as string;
-	first = first?.replace('X', '-');
+	let first = explode[1] as string
+	first = first?.replace('X', '-')
 
 	// Third bit is the "second" value
-	let second = explode[2] as string;
-	second = second?.replace('X', '-');
+	let second = explode[2] as string
+	second = second?.replace('X', '-')
 
 	// Append percentage
 	if (filter?.numberType === 'percentage') {
 		if (second) {
-			second += '%';
+			second += '%'
 		} else {
-			first += '%';
+			first += '%'
 		}
 	}
 
 	switch (compare) {
 		case 'over':
-			return `Over ${first}`;
+			return `Over ${first}`
 
 		case 'under':
-			return `Under ${first}`;
+			return `Under ${first}`
 
 		case 'between':
-			return `${first || ''}-${second || ''}`;
+			return `${first || ''}-${second || ''}`
 
 		case 'exactly':
-			return `Exactly ${first}`;
+			return `Exactly ${first}`
 
 		case 'future':
-			return `Next ${first}`;
+			return `Next ${first}`
 
 		case 'today':
-			return 'Today';
+			return 'Today'
 
 		case 'yesterday':
-			return 'Yesterday';
+			return 'Yesterday'
 
 		case 'tomorrow':
-			return 'Tomorrow';
+			return 'Tomorrow'
 
 		case 'this':
-			return first === 'year' ? 'This Year' : 'This Month';
+			return first === 'year' ? 'This Year' : 'This Month'
 
 		case 'last':
-			return first === 'year' ? 'Last Year' : 'Last Month';
+			return first === 'year' ? 'Last Year' : 'Last Month'
 
 		default:
-			return value;
+			return value
 	}
 }

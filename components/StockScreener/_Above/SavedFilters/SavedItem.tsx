@@ -3,23 +3,8 @@ import { useModifyFilters } from '../../functions/useModifyFilters'
 import { useModifyColumns } from '../../functions/useModifyColumns'
 import { screenerState } from '../../screener.state'
 import { useSavedScreens } from './useSavedScreens'
-import {
-	FilterId,
-	ScreenerTypes
-} from 'components/StockScreener/screener.types'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { XIcon } from '@heroicons/react/solid'
-
-type SavedFilter = {
-	id: FilterId
-	name: string
-	value: string
-}
-
-type Screen = {
-	name: string
-	id: number
-	filters: SavedFilter[]
-}
 
 type Props = {
 	name: string

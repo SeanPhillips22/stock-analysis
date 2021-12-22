@@ -1,32 +1,22 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { FilterId, ColumnName } from 'components/StockScreener/screener.types'
-import { returnResultColumns } from 'components/StockScreener/maps/resultColumns.map'
+import {
+	FilterId,
+	ColumnName,
+	ScreenerTypes
+} from 'components/StockScreener/screener.types'
+import {
+	returnDefaultColumns,
+	returnResultColumns
+} from 'components/StockScreener/maps/resultColumns.map'
 import { getData } from 'functions/apis/API'
+import { getScreenerUrl } from 'components/StockScreener/functions/getScreenerUrl'
 
 type Props = {
 	name: ColumnName
-	type: string
+	type: ScreenerTypes
 }
 
 export function ResultsMenuItem({ name, type }: Props) {
-	let defaultColumns: FilterId[] = []
-
-	if (type == 'stocks') {
-		defaultColumns = ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe']
-	} else if (type == 'ipo') {
-		defaultColumns = [
-			's',
-			'n',
-			'm',
-			'se',
-			'ipoPriceRange',
-			'ipoDate',
-			'revenue'
-		]
-	} else {
-		defaultColumns = ['s', 'n', 'assetClass', 'assets', 'p', 'c', 'v']
-	}
-
 	const filters = screenerState((state) => state.filters)
 	const resultsMenu = screenerState((state) => state.resultsMenu)
 	const setResultsMenu = screenerState((state) => state.setResultsMenu)
@@ -56,15 +46,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 	// When hovering over a results tab, fetch the required columns
 	function handleHover(name: ColumnName) {
 		if (name !== 'Filtered' && name !== 'General') {
-			let screenerType: string
-			if (type == 'stocks') {
-				screenerType = 'screener'
-			} else if (type == 'ipo') {
-				screenerType = 'iposcreener'
-			} else {
-				screenerType = 'etfscreener'
-			}
-
+			let screenerType = getScreenerUrl(type)
 			fetchManyColumns(returnResultColumns(type, name), screenerType)
 		}
 	}
@@ -75,7 +57,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 		if (name === 'Filtered') {
 			setShowColumns(filteredColumns)
 		} else if (name === 'General') {
-			setShowColumns(defaultColumns)
+			setShowColumns(returnDefaultColumns(type))
 		} else {
 			setShowColumns(returnResultColumns(type, name))
 		}

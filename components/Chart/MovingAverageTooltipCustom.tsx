@@ -1,26 +1,26 @@
-import { functor, GenericChartComponent, last } from './core';
-import { format } from 'd3-format';
-import * as React from 'react';
-import { ToolTipText } from './ToolTipText';
-import { ToolTipTSpanLabel } from './ToolTipTSpanLabel';
+import { functor, GenericChartComponent, last } from './core'
+import { format } from 'd3-format'
+import * as React from 'react'
+import { ToolTipText } from './ToolTipText'
+import { ToolTipTSpanLabel } from './ToolTipTSpanLabel'
 
 export interface SingleMAToolTipProps {
-	readonly color: string;
-	readonly displayName: string;
-	readonly fontFamily?: string;
-	readonly fontSize?: number;
-	readonly fontWeight?: number;
-	readonly forChart: number | string;
-	readonly labelFill?: string;
-	readonly labelFontWeight?: number;
+	readonly color: string
+	readonly displayName: string
+	readonly fontFamily?: string
+	readonly fontSize?: number
+	readonly fontWeight?: number
+	readonly forChart: number | string
+	readonly labelFill?: string
+	readonly labelFontWeight?: number
 	readonly onClick?: (
 		event: React.MouseEvent<SVGRectElement, MouseEvent>,
 		details: any
-	) => void;
-	readonly options: any;
-	readonly origin: [number, number];
-	readonly textFill?: string;
-	readonly value: string;
+	) => void
+	readonly options: any
+	readonly origin: [number, number]
+	readonly textFill?: string
+	readonly value: string
 }
 
 export class SingleMAToolTip extends React.Component<SingleMAToolTipProps> {
@@ -34,15 +34,11 @@ export class SingleMAToolTip extends React.Component<SingleMAToolTipProps> {
 			textFill,
 			labelFill,
 			labelFontWeight,
-			value,
-		} = this.props;
+			value
+		} = this.props
 
 		const translate =
-			'translate(' +
-			this.props.origin[0] +
-			', ' +
-			this.props.origin[1] +
-			')';
+			'translate(' + this.props.origin[0] + ', ' + this.props.origin[1] + ')'
 
 		return (
 			<g transform={translate}>
@@ -71,44 +67,44 @@ export class SingleMAToolTip extends React.Component<SingleMAToolTipProps> {
 					stroke="none"
 				/>
 			</g>
-		);
+		)
 	}
 
 	private readonly onClick = (
 		event: React.MouseEvent<SVGRectElement, MouseEvent>
 	) => {
 		// eslint-disable-next-line no-invalid-this
-		const { onClick, forChart, options } = this.props;
+		const { onClick, forChart, options } = this.props
 		if (onClick !== undefined) {
-			onClick(event, { chartId: forChart, ...options });
+			onClick(event, { chartId: forChart, ...options })
 		}
-	};
+	}
 }
 
 interface MovingAverageTooltipProps {
-	readonly className?: string;
-	readonly displayFormat: (value: number) => string;
-	readonly origin: number[];
-	readonly displayInit?: string;
+	readonly className?: string
+	readonly displayFormat: (value: number) => string
+	readonly origin: number[]
+	readonly displayInit?: string
 	readonly displayValuesFor?: (
 		props: MovingAverageTooltipProps,
 		moreProps: any
-	) => any;
+	) => any
 	readonly onClick?: (
 		event: React.MouseEvent<SVGRectElement, MouseEvent>
-	) => void;
-	readonly textFill?: string;
-	readonly labelFill?: string;
-	readonly fontFamily?: string;
-	readonly fontSize?: number;
-	readonly fontWeight?: number;
-	readonly width?: number;
+	) => void
+	readonly textFill?: string
+	readonly labelFill?: string
+	readonly fontFamily?: string
+	readonly fontSize?: number
+	readonly fontWeight?: number
+	readonly width?: number
 	readonly options: {
-		yAccessor: (data: any) => number;
-		type: string;
-		stroke: string;
-		windowSize: number | null;
-	}[];
+		yAccessor: (data: any) => number
+		type: string
+		stroke: string
+		windowSize: number | null
+	}[]
 }
 
 // tslint:disable-next-line: max-classes-per-file
@@ -120,8 +116,8 @@ export class MovingAverageTooltipCustom extends React.Component<MovingAverageToo
 		displayInit: 'n/a',
 		displayValuesFor: (_: any, props: any) => props.currentItem,
 		origin: [0, 10],
-		width: 65,
-	};
+		width: 65
+	}
 
 	public render() {
 		return (
@@ -130,7 +126,7 @@ export class MovingAverageTooltipCustom extends React.Component<MovingAverageToo
 				svgDraw={this.renderSVG}
 				drawOn={['mousemove']}
 			/>
-		);
+		)
 	}
 
 	private readonly renderSVG = (moreProps: any) => {
@@ -138,8 +134,8 @@ export class MovingAverageTooltipCustom extends React.Component<MovingAverageToo
 			chartId,
 			chartConfig,
 			chartConfig: { height },
-			fullData,
-		} = moreProps;
+			fullData
+		} = moreProps
 
 		const {
 			className,
@@ -155,32 +151,32 @@ export class MovingAverageTooltipCustom extends React.Component<MovingAverageToo
 			displayFormat,
 			displayValuesFor = MovingAverageTooltipCustom.defaultProps
 				.displayValuesFor,
-			options,
+			options
 			// eslint-disable-next-line no-invalid-this
-		} = this.props;
+		} = this.props
 
 		const currentItem =
 			// eslint-disable-next-line no-invalid-this
-			displayValuesFor(this.props, moreProps) ?? last(fullData);
+			displayValuesFor(this.props, moreProps) ?? last(fullData)
 
-		const config = chartConfig;
+		const config = chartConfig
 
-		const origin = functor(originProp);
-		const [x, y] = origin(width, height);
-		const [ox, oy] = config.origin;
+		const origin = functor(originProp)
+		const [x, y] = origin(width, height)
+		const [ox, oy] = config.origin
 
 		return (
 			<g transform={`translate(${ox + x}, ${oy + y})`} className={className}>
 				{options.map((each, idx) => {
-					const yValue = currentItem && each.yAccessor(currentItem);
+					const yValue = currentItem && each.yAccessor(currentItem)
 
 					const tooltipLabel = each.windowSize
 						? `${each.type} (${each.windowSize})`
-						: `${each.type}`;
+						: `${each.type}`
 
 					const yDisplayValue = yValue
 						? displayFormat(yValue)
-						: displayInit;
+						: displayInit
 					return (
 						<SingleMAToolTip
 							key={idx}
@@ -197,9 +193,9 @@ export class MovingAverageTooltipCustom extends React.Component<MovingAverageToo
 							textFill={textFill}
 							labelFill={labelFill}
 						/>
-					);
+					)
 				})}
 			</g>
-		);
-	};
+		)
+	}
 }

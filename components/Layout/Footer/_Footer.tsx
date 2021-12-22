@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useNavState } from 'hooks/useNavState'
 import Link from 'next/link'
-import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd'
-import { LoadFooter } from 'components/Ads/Dianomi/LoadFooter'
 import { noAdsRelaxed } from 'components/Ads/noAds'
 import { LoadAds } from 'components/Ads/Snigel/LoadAds'
 import { useAuthState } from 'hooks/useAuthState'
@@ -26,15 +24,12 @@ const navigation = {
 }
 
 export const Footer = () => {
-	const { checked, isLoggedIn, isPro } = useAuthState()
+	const { checked, isPro } = useAuthState()
 	const { path } = useNavState()
 
 	return (
 		<>
 			{checked && !isPro && !noAdsRelaxed(path.one) && <LoadAds />}
-			{/* <LazyLoadAd offset={400}>
-					<LoadFooter />
-				</LazyLoadAd> */}
 			<footer className="bg-gray-800 clear-both">
 				<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
 					<div className="xl:grid xl:grid-cols-3 xl:gap-8">

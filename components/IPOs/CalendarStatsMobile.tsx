@@ -1,10 +1,10 @@
-import { IpoCounts } from 'types/Ipos';
+import { IpoCounts } from 'types/Ipos'
 
 export function CalendarStatsMobile({ counts }: { counts: IpoCounts }) {
 	const total =
-		counts.thisweek + counts.nextweek + counts.later + counts.unscheduled;
+		counts.thisweek + counts.nextweek + counts.later + counts.unscheduled
 
-	const hasLater = counts.later > 0;
+	const hasLater = counts.later > 0
 
 	return (
 		<div className="pt-2 pb-3 lg:hidden">
@@ -48,5 +48,5 @@ export function CalendarStatsMobile({ counts }: { counts: IpoCounts }) {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

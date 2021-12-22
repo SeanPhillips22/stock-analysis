@@ -26,7 +26,7 @@ const parseData = () => {
 	}
 }
 
-const parseData1D5D = (time: string | null) => {
+const parseData1D5D = () => {
 	return (d: any) => {
 		const date = parseDate1D5D(d.date)
 
@@ -55,7 +55,7 @@ function fixDataHeaders(obj: any) {
 		volume: obj.v,
 		date: obj.t,
 		ma1: obj.ma1,
-		ma2: obj.ma2,
+		ma2: obj.ma2
 	}
 	return newObj
 }
@@ -67,7 +67,7 @@ function fixDataHeaders1D5D(obj: any) {
 		high: obj.h,
 		low: obj.l,
 		open: obj.o,
-		volume: obj.v,
+		volume: obj.v
 	}
 }
 
@@ -87,7 +87,7 @@ interface WithOHLCState {
 	data?: IOHLCData[]
 }
 
-export function withOHLCData(dataSet = 'DAILY') {
+export function withOHLCData() {
 	return <TProps extends WithOHLCDataProps>(
 		OriginalComponent: React.ComponentClass<TProps>
 	) => {
@@ -99,11 +99,11 @@ export function withOHLCData(dataSet = 'DAILY') {
 				super(props)
 
 				this.state = {
-					data: undefined,
+					data: undefined
 				}
 			}
 
-			public componentDidUpdate(prevProps: any, prevState: any) {
+			public componentDidUpdate(prevProps: any) {
 				let { data } = this.state
 				let loading = this.props.setLoading
 
@@ -156,7 +156,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 					)
 						.then((res) => {
 							const forDateParse = res.data.map(fixDataHeaders1D5D)
-							data = forDateParse.map(parseData1D5D(newProps.time))
+							data = forDateParse.map(parseData1D5D())
 							this.setState({ data })
 
 							setTimeout(function () {
@@ -192,7 +192,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 								loading(false)
 							}, 0)
 							const forDateParse = res.data.map(fixDataHeaders1D5D)
-							data = forDateParse.map(parseData1D5D(newProps.time))
+							data = forDateParse.map(parseData1D5D())
 							this.setState({ data })
 							if (typeof data != 'undefined') {
 								this.props.setData(data)
@@ -222,7 +222,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D)
-								data = forDateParse.map(parseData1D5D(newProps.time))
+								data = forDateParse.map(parseData1D5D())
 								this.setState({ data })
 
 								setTimeout(function () {
@@ -275,7 +275,7 @@ export function withOHLCData(dataSet = 'DAILY') {
 						)
 							.then((res) => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D)
-								data = forDateParse.map(parseData1D5D(newProps.time))
+								data = forDateParse.map(parseData1D5D())
 								this.setState({ data })
 
 								setTimeout(function () {

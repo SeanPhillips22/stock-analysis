@@ -1,4 +1,4 @@
-import { IPOTab } from './IPOTab';
+import { IPOTab } from './IPOTab'
 
 export function CalendarNavigation({ path }: { path: string }) {
 	return (
@@ -23,5 +23,5 @@ export function CalendarNavigation({ path }: { path: string }) {
 				</ul>
 			</nav>
 		</div>
-	);
+	)
 }

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 export interface IFormatters {
-	readonly yearFormat: string;
-	readonly quarterFormat: string;
-	readonly monthFormat: string;
-	readonly weekFormat: string;
-	readonly dayFormat: string;
-	readonly hourFormat: string;
-	readonly minuteFormat: string;
-	readonly secondFormat: string;
-	readonly milliSecondFormat: string;
+	readonly yearFormat: string
+	readonly quarterFormat: string
+	readonly monthFormat: string
+	readonly weekFormat: string
+	readonly dayFormat: string
+	readonly hourFormat: string
+	readonly minuteFormat: string
+	readonly secondFormat: string
+	readonly milliSecondFormat: string
 }
 
 export const defaultFormatters: IFormatters = {
@@ -21,8 +21,8 @@ export const defaultFormatters: IFormatters = {
 	hourFormat: '%H:%M',
 	minuteFormat: '%H:%M',
 	secondFormat: '%H:%M:%S',
-	milliSecondFormat: '.%L',
-};
+	milliSecondFormat: '.%L'
+}
 
 export const levelDefinition = [
 	/* 22 */ (d: any, date: Date, i: number) =>
@@ -63,5 +63,5 @@ export const levelDefinition = [
 		d.startOf5Seconds && 'secondFormat',
 	/* 1  */ (d: any, date: Date, i: number) =>
 		d.startOfSecond && 'secondFormat',
-	/* 0  */ (d: any, date: Date, i: number) => 'milliSecondFormat',
-];
+	/* 0  */ (d: any, date: Date, i: number) => 'milliSecondFormat'
+]

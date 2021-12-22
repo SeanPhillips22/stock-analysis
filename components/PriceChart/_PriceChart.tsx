@@ -31,12 +31,7 @@ export const PriceChart = ({ info }: { info: Info }) => {
 		}
 
 		const fetchChartData = async (selected: string) => {
-			const url = getChartUrl(
-				info.symbol,
-				info.type,
-				selected,
-				info.exceptions.overrideChart
-			)
+			const url = getChartUrl(info.symbol, info.type, selected)
 			const data = await getData(url)
 			if (data && data.length > 0) {
 				setChartData(data)

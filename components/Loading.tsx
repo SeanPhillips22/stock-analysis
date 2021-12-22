@@ -24,5 +24,5 @@ export const Loading = () => {
 				</svg>
 			</div>
 		</div>
-	);
-};
+	)
+}

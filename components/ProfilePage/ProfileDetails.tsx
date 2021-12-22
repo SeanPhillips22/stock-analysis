@@ -1,4 +1,4 @@
-import { StockDetails } from 'types/Company';
+import { StockDetails } from 'types/Company'
 
 export const ProfileDetails = ({ details }: { details: StockDetails }) => {
 	return (
@@ -88,5 +88,5 @@ export const ProfileDetails = ({ details }: { details: StockDetails }) => {
 				`}</style>
 			</div>
 		</>
-	);
-};
+	)
+}

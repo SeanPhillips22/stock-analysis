@@ -3,43 +3,43 @@ import {
 	functor,
 	getAxisCanvas,
 	GenericChartComponent,
-	plotDataLengthBarWidth,
-} from '../core';
-import { group } from 'd3-array';
-import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale';
-import * as React from 'react';
+	plotDataLengthBarWidth
+} from '../core'
+import { group } from 'd3-array'
+import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale'
+import * as React from 'react'
 
 export interface ICandle {
-	readonly x: number;
-	readonly y: number;
-	readonly height: number;
-	readonly fill: string;
-	readonly stroke: string;
-	readonly direction: number;
-	readonly width: number;
+	readonly x: number
+	readonly y: number
+	readonly height: number
+	readonly fill: string
+	readonly stroke: string
+	readonly direction: number
+	readonly width: number
 	readonly wick: {
-		readonly stroke: string;
-		readonly x: number;
-		readonly y1: number;
-		readonly y2: number;
-		readonly y3: number;
-		readonly y4: number;
-	};
+		readonly stroke: string
+		readonly x: number
+		readonly y1: number
+		readonly y2: number
+		readonly y3: number
+		readonly y4: number
+	}
 }
 
 export interface CandlestickSeriesProps {
-	readonly candleStrokeWidth?: number;
-	readonly clip?: boolean;
-	readonly fill?: string | ((data: any) => string);
-	readonly stroke?: string | ((data: any) => string);
-	readonly wickStroke?: string | ((data: any) => string);
+	readonly candleStrokeWidth?: number
+	readonly clip?: boolean
+	readonly fill?: string | ((data: any) => string)
+	readonly stroke?: string | ((data: any) => string)
+	readonly wickStroke?: string | ((data: any) => string)
 	readonly width?:
 		| number
-		| ((props: CandlestickSeriesProps, moreProps: any) => number);
-	readonly widthRatio?: number;
+		| ((props: CandlestickSeriesProps, moreProps: any) => number)
+	readonly widthRatio?: number
 	readonly yAccessor: (
 		data: any
-	) => { open: number; high: number; low: number; close: number } | undefined;
+	) => { open: number; high: number; low: number; close: number } | undefined
 }
 
 export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
@@ -55,12 +55,12 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 			open: d.open,
 			high: d.high,
 			low: d.low,
-			close: d.close,
-		}),
-	};
+			close: d.close
+		})
+	}
 
 	public render() {
-		const { clip } = this.props;
+		const { clip } = this.props
 
 		return (
 			<GenericChartComponent
@@ -69,7 +69,7 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 				canvasToDraw={getAxisCanvas}
 				drawOn={['pan']}
 			/>
-		);
+		)
 	}
 
 	private readonly drawOnCanvas = (
@@ -77,67 +77,62 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 		moreProps: any
 	) => {
 		const {
-			candleStrokeWidth = CandlestickSeries.defaultProps.candleStrokeWidth,
-		} = this.props;
+			candleStrokeWidth = CandlestickSeries.defaultProps.candleStrokeWidth
+		} = this.props
 		const {
 			xScale,
 			chartConfig: { yScale },
 			plotData,
-			xAccessor,
-		} = moreProps;
+			xAccessor
+		} = moreProps
 
-		const candleData = this.getCandleData(
-			xAccessor,
-			xScale,
-			yScale,
-			plotData
-		);
+		const candleData = this.getCandleData(xAccessor, xScale, yScale, plotData)
 
-		const wickNest = group(candleData, (d) => d.wick.stroke);
+		const wickNest = group(candleData, (d) => d.wick.stroke)
 
 		wickNest.forEach((values, key) => {
-			ctx.fillStyle = key;
+			ctx.fillStyle = key
 			values.forEach((each) => {
-				const d = each.wick;
+				const d = each.wick
 
-				ctx.fillRect(d.x - 0.5, d.y1, 1, d.y2 - d.y1);
-				ctx.fillRect(d.x - 0.5, d.y3, 1, d.y4 - d.y3);
-			});
-		});
+				ctx.fillRect(d.x - 0.5, d.y1, 1, d.y2 - d.y1)
+				ctx.fillRect(d.x - 0.5, d.y3, 1, d.y4 - d.y3)
+			})
+		})
 
 		const candleNest = group(
 			candleData,
 			(d) => d.stroke,
 			// @ts-ignore typings are incorrect for d3-array
 			(d) => d.fill
-		);
+		)
 
 		candleNest.forEach((strokeValues, strokeKey) => {
 			if (strokeKey !== 'none') {
 				// @ts-ignore
-				ctx.strokeStyle = strokeKey;
-				ctx.lineWidth = candleStrokeWidth;
+				ctx.strokeStyle = strokeKey
+				ctx.lineWidth = candleStrokeWidth
 			}
 			strokeValues.forEach((values, key) => {
 				// @ts-ignore
-				ctx.fillStyle = key;
+				ctx.fillStyle = key
 
 				// @ts-ignore
 				values.forEach((d) => {
 					if (d.width <= 1) {
-						ctx.fillRect(d.x - 0.5, d.y, 1, d.height);
+						ctx.fillRect(d.x - 0.5, d.y, 1, d.height)
 					} else if (d.height === 0) {
-						ctx.fillRect(d.x - 0.5, d.y, d.width, 1);
+						ctx.fillRect(d.x - 0.5, d.y, d.width, 1)
 					} else {
-						ctx.fillRect(d.x - 0.5, d.y, d.width, d.height);
+						ctx.fillRect(d.x - 0.5, d.y, d.width, d.height)
 						if (strokeKey !== 'none') {
-							ctx.strokeRect(d.x, d.y, d.width, d.height);
+							ctx.strokeRect(d.x, d.y, d.width, d.height)
 						}
 					}
-				});
-			});
-		});
-	};
+				})
+			})
+		})
+	}
 
 	private readonly getCandleData = (
 		xAccessor: (data: any) => number | Date,
@@ -151,38 +146,38 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 			fill: fillProp,
 			stroke: strokeProp,
 			yAccessor,
-			wickStroke: wickStrokeProp,
-		} = this.props;
+			wickStroke: wickStrokeProp
+		} = this.props
 
-		const fill = functor(fillProp);
-		const stroke = functor(strokeProp);
-		const wickStroke = functor(wickStrokeProp);
-		const widthFunctor = functor(this.props.width);
+		const fill = functor(fillProp)
+		const stroke = functor(strokeProp)
+		const wickStroke = functor(wickStrokeProp)
+		const widthFunctor = functor(this.props.width)
 		const width = widthFunctor(this.props, {
 			xScale,
 			xAccessor,
-			plotData,
-		});
+			plotData
+		})
 
-		const trueOffset = 0.5 * width;
+		const trueOffset = 0.5 * width
 		const offset =
-			trueOffset > 0.7 ? Math.round(trueOffset) : Math.floor(trueOffset);
+			trueOffset > 0.7 ? Math.round(trueOffset) : Math.floor(trueOffset)
 
 		return plotData
 			.filter((d) => d.close !== undefined)
 			.map((d) => {
-				const ohlc = yAccessor(d);
+				const ohlc = yAccessor(d)
 				if (ohlc === undefined) {
-					return undefined;
+					return undefined
 				}
 
-				const xValue = xAccessor(d);
-				const x = Math.round(xScale(xValue));
-				const y = Math.round(yScale(Math.max(ohlc.open, ohlc.close)));
+				const xValue = xAccessor(d)
+				const x = Math.round(xScale(xValue))
+				const y = Math.round(yScale(Math.max(ohlc.open, ohlc.close)))
 				const height = Math.max(
 					1,
 					Math.round(Math.abs(yScale(ohlc.open) - yScale(ohlc.close)))
-				);
+				)
 
 				return {
 					x: x - offset,
@@ -193,15 +188,15 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 						y1: Math.round(yScale(ohlc.high)),
 						y2: y,
 						y3: y + height,
-						y4: Math.round(yScale(ohlc.low)),
+						y4: Math.round(yScale(ohlc.low))
 					},
 					height,
 					width: offset * 2,
 					fill: fill(ohlc),
 					stroke: stroke(ohlc),
-					direction: ohlc.close - ohlc.open,
-				};
+					direction: ohlc.close - ohlc.open
+				}
 			})
-			.filter((d) => d !== undefined) as ICandle[];
-	};
+			.filter((d) => d !== undefined) as ICandle[]
+	}
 }

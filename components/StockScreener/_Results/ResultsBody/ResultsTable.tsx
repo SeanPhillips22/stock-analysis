@@ -111,7 +111,10 @@ export function ResultsTable({ cols }: { cols: any }) {
 				tableId="screener-table"
 			/>
 			<div className="overflow-x-auto">
-				<table className="symbol-table w-full" id="screener-table">
+				<table
+					className={`symbol-table w-full ${type}`}
+					id="screener-table"
+				>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

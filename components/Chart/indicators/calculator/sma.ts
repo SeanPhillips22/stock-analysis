@@ -1,42 +1,42 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { mean } from 'd3-array';
-import { slidingWindow } from '../utils';
-import { SMA as defaultOptions } from './defaultOptionsForComputation';
+import { mean } from 'd3-array'
+import { slidingWindow } from '../utils'
+import { SMA as defaultOptions } from './defaultOptionsForComputation'
 
 export interface SMAOptions {
-	readonly sourcePath?: string;
-	readonly windowSize: number;
+	readonly sourcePath?: string
+	readonly windowSize: number
 }
 
 export default function Sma() {
-	let options = defaultOptions;
+	let options = defaultOptions
 
 	const calculator = (data: any[]) => {
-		const { windowSize, sourcePath } = options;
+		const { windowSize, sourcePath } = options
 
 		const average = slidingWindow()
 			.windowSize(windowSize)
 			.sourcePath(sourcePath)
-			.accumulator((values: any[]) => mean(values));
+			.accumulator((values: any[]) => mean(values))
 
-		return average(data);
-	};
+		return average(data)
+	}
 
 	calculator.undefinedLength = () => {
-		const { windowSize } = options;
+		const { windowSize } = options
 
-		return windowSize - 1;
-	};
+		return windowSize - 1
+	}
 
 	calculator.options = (newOptions?: SMAOptions) => {
 		if (newOptions === undefined) {
-			return options;
+			return options
 		}
 
-		options = { ...defaultOptions, ...newOptions };
+		options = { ...defaultOptions, ...newOptions }
 
-		return calculator;
-	};
+		return calculator
+	}
 
-	return calculator;
+	return calculator
 }

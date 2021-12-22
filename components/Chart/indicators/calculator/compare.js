@@ -1,50 +1,50 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { path } from '../utils';
-import { Change as defaultOptions } from './defaultOptionsForComputation';
+import { path } from '../utils'
+import { Change as defaultOptions } from './defaultOptionsForComputation'
 export default function Compare() {
-	let options = defaultOptions;
+	let options = defaultOptions
 	const calculator = (data) => {
-		const { basePath, mainKeys, compareKeys } = options;
-		const base = path(basePath);
-		const first = data[0];
-		const b = base(first);
-		const firsts = {};
+		const { basePath, mainKeys, compareKeys } = options
+		const base = path(basePath)
+		const first = data[0]
+		const b = base(first)
+		const firsts = {}
 		const compareData = data.map((d) => {
-			const result = {};
+			const result = {}
 			mainKeys.forEach((key) => {
 				if (typeof d[key] === 'object') {
 					// @ts-ignore
-					result[key] = {};
+					result[key] = {}
 					Object.keys(d[key]).forEach((subkey) => {
 						// @ts-ignore
-						result[key][subkey] = (d[key][subkey] - b) / b;
-					});
+						result[key][subkey] = (d[key][subkey] - b) / b
+					})
 				} else {
 					// @ts-ignore
-					result[key] = (d[key] - b) / b;
+					result[key] = (d[key] - b) / b
 				}
-			});
+			})
 			compareKeys.forEach((key) => {
 				if (d[key] !== undefined && firsts[key] === undefined) {
 					// @ts-ignore
-					firsts[key] = d[key];
+					firsts[key] = d[key]
 				}
 				if (d[key] !== undefined && firsts[key] !== undefined) {
 					// @ts-ignore
-					result[key] = (d[key] - firsts[key]) / firsts[key];
+					result[key] = (d[key] - firsts[key]) / firsts[key]
 				}
-			});
-			return result;
-		});
-		return compareData;
-	};
+			})
+			return result
+		})
+		return compareData
+	}
 	calculator.options = (newOptions) => {
 		if (newOptions === undefined) {
-			return options;
+			return options
 		}
-		options = Object.assign(Object.assign({}, defaultOptions), newOptions);
-		return calculator;
-	};
-	return calculator;
+		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
+		return calculator
+	}
+	return calculator
 }
 // # sourceMappingURL=compare.js.map

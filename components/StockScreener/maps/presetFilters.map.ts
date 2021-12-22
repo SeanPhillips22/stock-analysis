@@ -79,11 +79,13 @@ export const PresetFiltersETFs: PresetFilter[] = [
 	{
 		name: 'Dividend Growth',
 		filters: [
-			{ id: 'm', value: 'over-1B' },
 			{ id: 'dy', value: 'over-0.5' },
 			{ id: 'dg', value: 'over-5' },
-			{ id: 'pr', value: 'under-60' },
-			{ id: 'revenueGrowth', value: 'over-3' }
+			{ id: 'pr', value: 'under-80' }
 		]
+	},
+	{
+		name: 'Monthly Dividends',
+		filters: [{ id: 'payoutFrequency', value: 'Monthly' }]
 	}
 ]

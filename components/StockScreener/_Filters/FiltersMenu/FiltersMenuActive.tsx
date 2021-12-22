@@ -4,15 +4,12 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 
 export function FiltersMenuActive() {
-	const type = screenerState((state) => state.type)
 	const filters = screenerState((state) => state.filters)
 	const filterMenu = screenerState((state) => state.filterMenu)
-	const resultsMenu = screenerState((state) => state.resultsMenu)
 	const setFilterMenu = screenerState((state) => state.setFilterMenu)
 	const clearFilters = screenerState((state) => state.clearFilters)
 	const filtersShown = screenerState((state) => state.filtersShown)
 	const setFiltersShown = screenerState((state) => state.setFiltersShown)
-	const setShowColumns = screenerState((state) => state.setShowColumns)
 
 	const count = filters.length
 
@@ -60,20 +57,10 @@ export function FiltersMenuActive() {
 						title="Clear All Filters"
 						onClick={() => {
 							clearFilters()
-							if (resultsMenu === 'Filtered' && type != 'etf') {
-								setShowColumns(['s', 'n', 'm'])
-							} else {
-								setShowColumns(['s', 'n'])
-							}
 						}}
 						onKeyPress={(e) => {
 							if (e.key === 'Enter') {
 								clearFilters()
-								if (resultsMenu === 'Filtered' && type != 'etf') {
-									setShowColumns(['s', 'n', 'm'])
-								} else {
-									setShowColumns(['s', 'n'])
-								}
 							}
 						}}
 						tabIndex={0}

@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 interface Props {
-	range: string;
-	fullcount: number;
-	showcount: number;
+	range: string
+	fullcount: number
+	showcount: number
 }
 
 export default function Paywall({ range, fullcount, showcount }: Props) {
-	const diff = fullcount - showcount;
-	const type = range === 'annual' ? 'years' : 'quarters';
+	const diff = fullcount - showcount
+	const type = range === 'annual' ? 'years' : 'quarters'
 
 	return (
 		<div className="flex flex-col px-8 justify-center items-center whitespace-nowrap bg-gray-100 border-l border-gray-300">
@@ -27,5 +27,5 @@ export default function Paywall({ range, fullcount, showcount }: Props) {
 				</a>
 			</Link>
 		</div>
-	);
+	)
 }

@@ -1,6 +1,6 @@
-import { Info } from 'types/Info';
-import { IPOPrice } from './Types/IPOPrice';
-import { LiveQuote } from './LiveQuote';
+import { Info } from 'types/Info'
+import { IPOPrice } from './Types/IPOPrice'
+import { LiveQuote } from './LiveQuote'
 
 export function StockQuote({ info }: { info: Info }) {
 	if (info.state === 'upcomingipo') {
@@ -8,8 +8,8 @@ export function StockQuote({ info }: { info: Info }) {
 			<section className="mb-5">
 				<IPOPrice info={info} />
 			</section>
-		);
+		)
 	}
 
-	return <LiveQuote info={info} />;
+	return <LiveQuote info={info} />
 }

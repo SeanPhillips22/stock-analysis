@@ -1,5 +1,5 @@
 interface Props {
-	classes?: string;
+	classes?: string
 }
 
 export const WarningIcon = ({ classes }: Props) => (
@@ -16,4 +16,4 @@ export const WarningIcon = ({ classes }: Props) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)

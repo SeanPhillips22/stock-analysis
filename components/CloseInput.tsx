@@ -1,9 +1,9 @@
-import { CloseIcon } from 'components/Icons/Close';
+import { CloseIcon } from 'components/Icons/Close'
 
 type Props = {
-	search: string;
-	setSearch: (search: string) => void;
-};
+	search: string
+	setSearch: (search: string) => void
+}
 
 /**
  * A close icon that clears an input field, used for filter and search boxes
@@ -13,7 +13,7 @@ type Props = {
  */
 export function CloseInput({ search, setSearch }: Props) {
 	if (search === '' || search.length === 0) {
-		return null;
+		return null
 	}
 
 	return (
@@ -23,16 +23,16 @@ export function CloseInput({ search, setSearch }: Props) {
 				title="Clear"
 				tabIndex={0}
 				onClick={() => {
-					setSearch('');
+					setSearch('')
 				}}
 				onKeyPress={(e) => {
 					if (e.key === 'Enter') {
-						setSearch('');
+						setSearch('')
 					}
 				}}
 			>
 				<CloseIcon classes="h-4 w-4 xs:h-4 xs:w-5 text-gray-600 hover:text-blue-500" />
 			</span>
 		</div>
-	);
+	)
 }

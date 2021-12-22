@@ -1,4 +1,4 @@
-import { IPOTab } from './IPOTab';
+import { IPOTab } from './IPOTab'
 
 export function RecentNavigation({ path }: { path: string }) {
 	return (
@@ -28,5 +28,5 @@ export function RecentNavigation({ path }: { path: string }) {
 				</ul>
 			</nav>
 		</div>
-	);
+	)
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { FinancialReport, FinancialsMapType } from 'types/Financials';
+import { FinancialReport, FinancialsMapType } from 'types/Financials'
 
 import {
 	BarController,
@@ -12,29 +12,29 @@ import {
 	Title,
 	CategoryScale,
 	defaults,
-	Filler,
-} from 'chart.js';
-import { ReactChart } from 'components/ReactChart';
+	Filler
+} from 'chart.js'
+import { ReactChart } from 'components/ReactChart'
 import {
 	formatY,
 	formatCell,
 	formatYear,
 	countDecimals,
-	reducePrecisionFix,
-} from './FinancialTable.functions';
-import { Unavailable } from 'components/Unavailable';
+	reducePrecisionFix
+} from './FinancialTable.functions'
+import { Unavailable } from 'components/Unavailable'
 
 defaults.font.family =
-	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 interface Props {
-	data: FinancialReport;
-	count: number;
-	row: FinancialsMapType;
-	range: string;
-	ticker: string;
-	divider: string;
-	leftRight: 'left' | 'right';
+	data: FinancialReport
+	count: number
+	row: FinancialsMapType
+	range: string
+	ticker: string
+	divider: string
+	leftRight: 'left' | 'right'
 }
 
 export const HoverChart = ({
@@ -44,7 +44,7 @@ export const HoverChart = ({
 	range,
 	ticker,
 	divider,
-	leftRight,
+	leftRight
 }: Props) => {
 	if (
 		typeof window !== 'undefined' &&
@@ -56,7 +56,7 @@ export const HoverChart = ({
 				small={true}
 				classes="whitespace-normal"
 			/>
-		);
+		)
 	}
 	ReactChart.register(
 		BarController,
@@ -69,38 +69,38 @@ export const HoverChart = ({
 		PointElement,
 		Title,
 		Filler
-	);
+	)
 
 	ReactChart.defaults.font.family =
-		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-	const rangeUppercase = range.charAt(0).toUpperCase() + range.slice(1);
-	const dataid = row.data || row.id;
-	const rowdata = data[dataid as keyof FinancialReport];
-	const type = row.format;
+	const rangeUppercase = range.charAt(0).toUpperCase() + range.slice(1)
+	const dataid = row.data || row.id
+	const rowdata = data[dataid as keyof FinancialReport]
+	const type = row.format
 
 	// Exception: If recent IPO and only 6 quarters, use 3 quarter offset to calculate growth
-	let offs = 4;
+	let offs = 4
 	if (
 		row.format === 'growth' &&
 		(range === 'quarterly' || range === 'trailing') &&
 		count === 6
 	) {
 		if (data?.datekey?.length === 6) {
-			const firstDate = data.datekey[0];
-			const compareDate = data.datekey[3];
+			const firstDate = data.datekey[0]
+			const compareDate = data.datekey[3]
 
 			if (firstDate.split('-')[1] === compareDate.split('-')[1]) {
-				offs = 3;
+				offs = 3
 			}
 		}
 	}
 
 	const y = rowdata.map((curr, index) => {
-		const offset = range === 'quarterly' || range === 'trailing' ? offs : 1;
-		const previous = row.format === 'growth' ? rowdata[index + offset] : null;
-		const revenue = row.format === 'margin' ? data.revenue[index] : null;
-		const current = curr as number;
+		const offset = range === 'quarterly' || range === 'trailing' ? offs : 1
+		const previous = row.format === 'growth' ? rowdata[index + offset] : null
+		const revenue = row.format === 'margin' ? data.revenue[index] : null
+		const current = curr as number
 
 		const cellContent =
 			type && type !== 'reduce_precision'
@@ -109,49 +109,49 @@ export const HoverChart = ({
 						current,
 						previous,
 						revenue,
-						divider,
+						divider
 				  })
-				: current;
+				: current
 
 		return typeof cellContent === 'string'
 			? parseFloat(cellContent)
-			: cellContent;
-	});
+			: cellContent
+	})
 
 	// Format dates as years if annual
-	let xdatadraft: Array<number | string> = data.datekey.slice(0, count);
+	let xdatadraft: Array<number | string> = data.datekey.slice(0, count)
 	if (range === 'annual') {
 		xdatadraft = xdatadraft.map((item) => {
-			return formatYear(item);
-		});
+			return formatYear(item)
+		})
 	}
-	const xdata = xdatadraft;
-	const ydata = y.slice(0, count);
+	const xdata = xdatadraft
+	const ydata = y.slice(0, count)
 
-	const xaxis = leftRight === 'left' ? xdata.reverse() : xdata;
-	const yaxis = leftRight === 'left' ? ydata.reverse() : ydata;
+	const xaxis = leftRight === 'left' ? xdata.reverse() : xdata
+	const yaxis = leftRight === 'left' ? ydata.reverse() : ydata
 
 	// Cut zero values from start of data array
-	const ylength = yaxis.length;
+	const ylength = yaxis.length
 	for (let i = 0; i < ylength; i++) {
 		if (!yaxis[0]) {
-			yaxis.shift();
-			xaxis.shift();
+			yaxis.shift()
+			xaxis.shift()
 		} else {
-			break;
+			break
 		}
 	}
 
-	const ymin = yaxis[0];
-	const ymax = yaxis[yaxis.length - 1];
+	const ymin = yaxis[0]
+	const ymax = yaxis[yaxis.length - 1]
 
-	const chartType = type === 'ratio' || type === 'percentage' ? 'line' : 'bar';
+	const chartType = type === 'ratio' || type === 'percentage' ? 'line' : 'bar'
 	const bgColor =
 		type === 'ratio' || type === 'percentage'
 			? 'rgba(44, 98, 136, 0.4)'
-			: 'rgba(44, 98, 136, 1)';
+			: 'rgba(44, 98, 136, 1)'
 
-	const padding = chartType == 'line' ? 15 : 0;
+	const padding = chartType == 'line' ? 15 : 0
 
 	return (
 		<ReactChart
@@ -168,157 +168,157 @@ export const HoverChart = ({
 						fill: true,
 						pointRadius: 0,
 						pointHoverRadius: 5,
-						pointHitRadius: 10,
-					},
-				],
+						pointHitRadius: 10
+					}
+				]
 			}}
 			plugins={[
 				{
 					id: '1',
 					afterDatasetsDraw: function (chart: any) {
-						const chartInstance = chart;
-						const ctx = chartInstance.ctx;
+						const chartInstance = chart
+						const ctx = chartInstance.ctx
 
 						ctx.font =
-							'13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"';
-						const fontSize = 12;
-						ctx.textAlign = 'start';
-						ctx.textBaseline = 'bottom';
+							'13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+						const fontSize = 12
+						ctx.textAlign = 'start'
+						ctx.textBaseline = 'bottom'
 						chartInstance.data.datasets.forEach(function (
 							dataset: any,
 							i: any
 						) {
-							const meta = chartInstance.getDatasetMeta(i);
-							const last = meta.data.length - 1; // The last index of the array, so that the latest stock price is shown
+							const meta = chartInstance.getDatasetMeta(i)
+							const last = meta.data.length - 1 // The last index of the array, so that the latest stock price is shown
 
 							// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
 
 							const x =
 								meta.vScale._labelItems[
 									meta.vScale._labelItems.length - 1
-								].translation[0] - 0.5;
+								].translation[0] - 0.5
 
-							const y = meta.data[last].y - 7.5;
+							const y = meta.data[last].y - 7.5
 
-							let str: any;
+							let str: any
 
 							if (
 								isNaN(dataset.data[last]) ||
 								dataset.data[last] == '0'
 							) {
-								return;
+								return
 							}
 							// retrieve the stock price, data.
 							if (type == 'reduce_precision') {
-								str = reducePrecisionFix(dataset.data[last]);
+								str = reducePrecisionFix(dataset.data[last])
 							} else {
-								str = formatY(dataset.data[last], type, ymin, ymax);
+								str = formatY(dataset.data[last], type, ymin, ymax)
 							}
 
 							// begin drawing and styling
-							ctx.strokeStyle = '#2c6288';
-							ctx.fillStyle = '#2c6288';
-							ctx.lineWidth = '3.5 ';
-							ctx.lineJoin = 'miter';
+							ctx.strokeStyle = '#2c6288'
+							ctx.fillStyle = '#2c6288'
+							ctx.lineWidth = '3.5 '
+							ctx.lineJoin = 'miter'
 
 							// calculate the width of the box and height is based on fontsize.
 
-							let widthOffset = 1.5;
+							let widthOffset = 1.5
 
 							if (!str) {
-								str = '-';
+								str = '-'
 							}
 							if (str[0] == '-') {
-								widthOffset = 3.6;
+								widthOffset = 3.6
 							}
 
-							const numberOfDecimals = countDecimals(str);
+							const numberOfDecimals = countDecimals(str)
 
 							if (numberOfDecimals == 2 && str.length > 3) {
-								widthOffset = 2;
+								widthOffset = 2
 							}
 
-							const width = ctx.measureText(str).width + widthOffset;
+							const width = ctx.measureText(str).width + widthOffset
 
 							if (chartType == 'line') {
 								// x = x - 15.5; Need to fix
 							}
 
-							const height = fontSize + 2.8;
+							const height = fontSize + 2.8
 
-							ctx.beginPath();
-							ctx.moveTo(x + 0.7, y + height);
-							ctx.moveTo(x - 6, y + height / 2);
-							ctx.lineTo(x + 0.7, y + height);
-							ctx.lineTo(x + 0.7 + width, y + height);
-							ctx.lineTo(x + 0.7 + width, y);
-							ctx.lineTo(x + 0.7, y);
-							ctx.fill();
-							ctx.closePath();
-							ctx.stroke();
+							ctx.beginPath()
+							ctx.moveTo(x + 0.7, y + height)
+							ctx.moveTo(x - 6, y + height / 2)
+							ctx.lineTo(x + 0.7, y + height)
+							ctx.lineTo(x + 0.7 + width, y + height)
+							ctx.lineTo(x + 0.7 + width, y)
+							ctx.lineTo(x + 0.7, y)
+							ctx.fill()
+							ctx.closePath()
+							ctx.stroke()
 
 							// draw the text
-							ctx.fillStyle = '#ffffff';
+							ctx.fillStyle = '#ffffff'
 
-							ctx.fillText(str, x, meta.data[last].y + 7);
-						});
-					},
-				},
+							ctx.fillText(str, x, meta.data[last].y + 7)
+						})
+					}
+				}
 			]}
 			options={{
 				maintainAspectRatio: false,
 				layout: {
 					padding: {
-						right: padding,
-					},
+						right: padding
+					}
 				},
 				scales: {
 					x: {
 						ticks: {
 							color: '#323232',
 							font: {
-								size: 13,
-							},
+								size: 13
+							}
 						},
 						grid: {
-							display: false,
-						},
+							display: false
+						}
 					},
 					y: {
 						position: 'right',
 						ticks: {
 							color: '#323232',
 							font: {
-								size: 13,
+								size: 13
 							},
 							callback: function (value: number | string) {
 								if (typeof value == 'string') {
-									value = parseFloat(value);
+									value = parseFloat(value)
 								}
-								return formatY(value, row.format, ymin, ymax);
-							},
+								return formatY(value, row.format, ymin, ymax)
+							}
 						},
 						grid: {
-							drawBorder: false,
-						},
-					},
+							drawBorder: false
+						}
+					}
 				},
 				animation: false,
 				plugins: {
 					legend: {
-						display: false,
+						display: false
 					},
 					title: {
 						display: true,
 						text: `${ticker} ${row.title} (${rangeUppercase})`,
 						font: {
-							size: 18,
+							size: 18
 						},
 						color: '#333',
 						padding: {
 							top: 4,
-							bottom: 12,
-						},
+							bottom: 12
+						}
 					},
 					tooltip: {
 						backgroundColor: '#f6f7f8',
@@ -328,39 +328,39 @@ export const HoverChart = ({
 						bodyColor: '#323232',
 						titleFont: {
 							size: 17,
-							weight: '600',
+							weight: '600'
 						},
 						bodyFont: {
 							size: 14,
-							weight: '400',
+							weight: '400'
 						},
 						padding: 10,
 						displayColors: false,
 						callbacks: {
 							label: function (context: { parsed: { y: any } }) {
-								const val = parseFloat(context.parsed.y) || 0;
+								const val = parseFloat(context.parsed.y) || 0
 								if (
 									type === 'growth' ||
 									type === 'percentage' ||
 									type === 'margin'
 								) {
-									return `${val.toFixed(3)}%`;
+									return `${val.toFixed(3)}%`
 								} else if (type === 'ratio') {
-									return `${val.toFixed(3)}`;
+									return `${val.toFixed(3)}`
 								} else if (!type || type === 'reduce_precision') {
 									return new Intl.NumberFormat('en-US', {
-										maximumFractionDigits: 0,
-									}).format(val);
+										maximumFractionDigits: 0
+									}).format(val)
 								} else {
-									return val.toString();
+									return val.toString()
 								}
-							},
-						},
-					},
-				},
+							}
+						}
+					}
+				}
 			}}
 		/>
-	);
-};
+	)
+}
 
-export default HoverChart;
+export default HoverChart

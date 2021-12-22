@@ -31,7 +31,7 @@ export function NewsMenu({
 	setQuery,
 	searched,
 	setSearched,
-	setEnd,
+	setEnd
 }: Props) {
 	return (
 		<div className="flex flex-row justify-between items-center border-b">

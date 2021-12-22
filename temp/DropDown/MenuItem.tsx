@@ -1,12 +1,12 @@
-import { Menu } from '@headlessui/react';
+import { Menu } from '@headlessui/react'
 
 interface MenuItemProps {
-	title: string;
-	active: boolean;
+	title: string
+	active: boolean
 }
 
 function classNames(...classes: string[]) {
-	return classes.filter(Boolean).join(' ');
+	return classes.filter(Boolean).join(' ')
 }
 
 export const MenuItem = ({ title, active }: MenuItemProps) => (
@@ -23,4 +23,4 @@ export const MenuItem = ({ title, active }: MenuItemProps) => (
 			{title}
 		</a>
 	</Menu.Item>
-);
+)

@@ -1,26 +1,26 @@
 /* eslint-disable no-invalid-this */
-import * as React from 'react';
-import { getMouseCanvas, GenericChartComponent, isNotDefined } from '../core';
-import { drawOnCanvas } from './EdgeCoordinateV3';
+import * as React from 'react'
+import { getMouseCanvas, GenericChartComponent, isNotDefined } from '../core'
+import { drawOnCanvas } from './EdgeCoordinateV3'
 
 export interface MouseCoordinateYProps {
-	readonly arrowWidth?: number;
-	readonly at?: 'left' | 'right';
-	readonly displayFormat: (value: number) => string;
-	readonly dx?: number;
-	readonly fontFamily?: string;
-	readonly fontSize?: number;
-	readonly fill?: string;
-	readonly fitToText?: boolean;
-	readonly opacity?: number;
-	readonly orient?: 'left' | 'right';
-	readonly rectWidth?: number;
-	readonly rectHeight?: number;
-	readonly stroke?: string;
-	readonly strokeOpacity?: number;
-	readonly strokeWidth?: number;
-	readonly textFill?: string;
-	readonly yAxisPad?: number;
+	readonly arrowWidth?: number
+	readonly at?: 'left' | 'right'
+	readonly displayFormat: (value: number) => string
+	readonly dx?: number
+	readonly fontFamily?: string
+	readonly fontSize?: number
+	readonly fill?: string
+	readonly fitToText?: boolean
+	readonly opacity?: number
+	readonly orient?: 'left' | 'right'
+	readonly rectWidth?: number
+	readonly rectHeight?: number
+	readonly stroke?: string
+	readonly strokeOpacity?: number
+	readonly strokeWidth?: number
+	readonly textFill?: string
+	readonly yAxisPad?: number
 }
 
 export class MouseCoordinateY extends React.Component<MouseCoordinateYProps> {
@@ -40,8 +40,8 @@ export class MouseCoordinateY extends React.Component<MouseCoordinateYProps> {
 		strokeOpacity: 1,
 		strokeWidth: 1,
 		textFill: '#FFFFFF',
-		yAxisPad: 0,
-	};
+		yAxisPad: 0
+	}
 
 	public render() {
 		return (
@@ -51,20 +51,20 @@ export class MouseCoordinateY extends React.Component<MouseCoordinateYProps> {
 				canvasToDraw={getMouseCanvas}
 				drawOn={['mousemove', 'pan', 'drag']}
 			/>
-		);
+		)
 	}
 
 	private readonly drawOnCanvas = (
 		ctx: CanvasRenderingContext2D,
 		moreProps: any
 	) => {
-		const props = this.helper(this.props, moreProps);
+		const props = this.helper(this.props, moreProps)
 		if (props === undefined) {
-			return;
+			return
 		}
 
-		drawOnCanvas(ctx, props);
-	};
+		drawOnCanvas(ctx, props)
+	}
 
 	private readonly helper = (props: MouseCoordinateYProps, moreProps: any) => {
 		const {
@@ -72,29 +72,29 @@ export class MouseCoordinateY extends React.Component<MouseCoordinateYProps> {
 			chartId,
 			currentCharts,
 			mouseXY,
-			show,
-		} = moreProps;
+			show
+		} = moreProps
 
 		if (!show) {
-			return undefined;
+			return undefined
 		}
 
 		if (isNotDefined(mouseXY)) {
-			return undefined;
+			return undefined
 		}
 
 		if (currentCharts.indexOf(chartId) < 0) {
-			return undefined;
+			return undefined
 		}
 
-		const y = mouseXY[1];
+		const y = mouseXY[1]
 
-		const { displayFormat } = props;
+		const { displayFormat } = props
 
-		const coordinate = displayFormat(yScale.invert(y));
+		const coordinate = displayFormat(yScale.invert(y))
 
-		return getYCoordinate(y, coordinate, props, moreProps);
-	};
+		return getYCoordinate(y, coordinate, props, moreProps)
+	}
 }
 
 export function getYCoordinate(
@@ -103,7 +103,7 @@ export function getYCoordinate(
 	props: any,
 	moreProps: any
 ) {
-	const { width } = moreProps;
+	const { width } = moreProps
 
 	const {
 		orient,
@@ -113,8 +113,8 @@ export function getYCoordinate(
 		dx,
 		stroke,
 		strokeOpacity,
-		strokeWidth,
-	} = props;
+		strokeWidth
+	} = props
 	const {
 		fill,
 		opacity,
@@ -122,15 +122,15 @@ export function getYCoordinate(
 		fontFamily,
 		fontSize,
 		textFill,
-		arrowWidth,
-	} = props;
+		arrowWidth
+	} = props
 
-	const x1 = 0;
-	const x2 = width;
-	const edgeAt = at === 'right' ? width : 0;
+	const x1 = 0
+	const x2 = width
+	const edgeAt = at === 'right' ? width : 0
 
-	const type = 'horizontal';
-	const hideLine = true;
+	const type = 'horizontal'
+	const hideLine = true
 
 	const coordinateProps = {
 		coordinate,
@@ -155,8 +155,8 @@ export function getYCoordinate(
 		x1,
 		x2,
 		y1: y,
-		y2: y,
-	};
+		y2: y
+	}
 
-	return coordinateProps;
+	return coordinateProps
 }

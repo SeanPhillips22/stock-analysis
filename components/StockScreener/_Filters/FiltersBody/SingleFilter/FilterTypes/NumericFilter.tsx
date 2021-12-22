@@ -1,11 +1,11 @@
-import { FilterProps } from 'components/StockScreener/screener.types';
-import { CustomChoice } from './Choices/CustomChoice';
-import { PresetChoice } from './Choices/PresetChoice';
+import { FilterProps } from 'components/StockScreener/screener.types'
+import { CustomChoice } from './Choices/CustomChoice'
+import { PresetChoice } from './Choices/PresetChoice'
 
 type Props = {
-	filter: FilterProps;
-	active: string | false;
-};
+	filter: FilterProps
+	active: string | false
+}
 
 export function NumericFilter({ filter, active }: Props) {
 	return (
@@ -24,5 +24,5 @@ export function NumericFilter({ filter, active }: Props) {
 				</div>
 			)}
 		</div>
-	);
+	)
 }

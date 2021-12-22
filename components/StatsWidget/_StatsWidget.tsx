@@ -1,12 +1,12 @@
-import { StatisticType } from 'types/Statistics';
-import { FinancialsMapType } from 'types/Financials';
-import { Tooltip } from './StatsTooltips';
-import styles from './StatsWidget.module.css';
+import { StatisticType } from 'types/Statistics'
+import { FinancialsMapType } from 'types/Financials'
+import { Tooltip } from './StatsTooltips'
+import styles from './StatsWidget.module.css'
 
 interface Props {
-	title: string;
-	data: StatisticType;
-	map: FinancialsMapType[];
+	title: string
+	data: StatisticType
+	map: FinancialsMapType[]
 }
 
 export const StatsWidget = ({ title, data, map }: Props) => {
@@ -21,7 +21,7 @@ export const StatsWidget = ({ title, data, map }: Props) => {
 			<table className={'text-sm xs:text-base ' + styles.statstable}>
 				<tbody>
 					{data.data.map((item) => {
-						const indicatorInfo = map.find((info) => info.id === item[0]);
+						const indicatorInfo = map.find((info) => info.id === item[0])
 
 						return (
 							<tr key={item[0]}>
@@ -30,10 +30,10 @@ export const StatsWidget = ({ title, data, map }: Props) => {
 								</td>
 								<td title={item[3]}>{item[2]}</td>
 							</tr>
-						);
+						)
 					})}
 				</tbody>
 			</table>
 		</>
-	);
-};
+	)
+}

@@ -3,7 +3,7 @@ import {
 	useTable,
 	useGlobalFilter,
 	useAsyncDebounce,
-	useSortBy,
+	useSortBy
 } from 'react-table'
 import { StockLink } from 'components/Links'
 import { IpoUpcoming } from 'types/Ipos'
@@ -38,14 +38,14 @@ const columns: Column[] = [
 				return 0
 			}
 		},
-		sortInverted: true,
+		sortInverted: true
 	},
 	{
 		Header: 'Symbol',
 		accessor: 'symbol',
 		Cell: function DateCell({ cell: { value } }: CellString) {
 			return <StockLink symbol={value} />
-		},
+		}
 	},
 	{
 		Header: 'Name',
@@ -62,21 +62,21 @@ const columns: Column[] = [
 				return 0
 			}
 		},
-		sortInverted: true,
+		sortInverted: true
 	},
 	{
 		Header: 'Exchange',
-		accessor: 'exchange',
+		accessor: 'exchange'
 	},
 	{
 		Header: 'Price Range',
-		accessor: 'price',
+		accessor: 'price'
 	},
 
 	{
 		Header: 'Shares',
-		accessor: 'shares',
-	},
+		accessor: 'shares'
+	}
 ]
 
 const NoIpos = ({ title }: { title: string }) => {
@@ -121,9 +121,8 @@ export const CalendarTable = ({
 	data,
 	tableId,
 	border,
-	filter,
+	filter
 }: Props) => {
-
 	const initialState = !data[0]?.date ? { hiddenColumns: ['date'] } : {}
 
 	const tableInstance = useTable(
@@ -136,7 +135,7 @@ export const CalendarTable = ({
 		rows,
 		prepareRow,
 		setGlobalFilter,
-		state: { globalFilter },
+		state: { globalFilter }
 	} = tableInstance
 
 	const count = data.length
@@ -162,13 +161,13 @@ export const CalendarTable = ({
 							{
 								title: 'Export to Excel',
 								type: 'xlsx',
-								restricted: true,
+								restricted: true
 							},
 							{
 								title: 'Export to CSV',
 								type: 'csv',
-								restricted: true,
-							},
+								restricted: true
+							}
 						]}
 						tableId={tableId}
 					/>
@@ -191,7 +190,7 @@ export const CalendarTable = ({
 								{headerGroup.headers.map((column, index) => (
 									<th
 										{...column.getSortByToggleProps({
-											title: `Sort by: ${column.Header}`,
+											title: `Sort by: ${column.Header}`
 										})}
 										key={index}
 									>

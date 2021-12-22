@@ -1,21 +1,21 @@
-import { screenerState } from 'components/StockScreener/screener.state';
-import { FilterId } from 'components/StockScreener/screener.types';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { createLabelFromString } from 'components/StockScreener/functions/filterString/createLabelFromString';
+import { screenerState } from 'components/StockScreener/screener.state'
+import { FilterId } from 'components/StockScreener/screener.types'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { createLabelFromString } from 'components/StockScreener/functions/filterString/createLabelFromString'
 
 type Props = {
-	active: string | false;
-	id: FilterId;
-};
+	active: string | false
+	id: FilterId
+}
 
 export function FilterButton({ active, id }: Props) {
-	const filters = screenerState((state) => state.filters);
-	const openFilter = screenerState((state) => state.openFilter);
-	const setOpenFilter = screenerState((state) => state.setOpenFilter);
+	const filters = screenerState((state) => state.filters)
+	const openFilter = screenerState((state) => state.openFilter)
+	const setOpenFilter = screenerState((state) => state.setOpenFilter)
 
 	function findName() {
-		const filter = filters.find((filter) => filter.id === id);
-		const value = filter?.value;
+		const filter = filters.find((filter) => filter.id === id)
+		const value = filter?.value
 
 		if (
 			value &&
@@ -23,22 +23,22 @@ export function FilterButton({ active, id }: Props) {
 				filter?.filterType === 'date' ||
 				filter?.filterType === 'numericRange')
 		) {
-			return createLabelFromString(value, filter);
+			return createLabelFromString(value, filter)
 		} else if (value && filter?.filterType === 'stringmatch') {
-			return value;
+			return value
 		}
-		return false;
+		return false
 	}
 
 	function handleClick() {
 		if (id === openFilter) {
-			setOpenFilter('');
+			setOpenFilter('')
 		} else {
-			setOpenFilter(id);
+			setOpenFilter(id)
 		}
 	}
 
-	const buttonText = active ? findName() : 'Any';
+	const buttonText = active ? findName() : 'Any'
 
 	return (
 		<div
@@ -56,5 +56,5 @@ export function FilterButton({ active, id }: Props) {
 				aria-hidden="true"
 			/>
 		</div>
-	);
+	)
 }

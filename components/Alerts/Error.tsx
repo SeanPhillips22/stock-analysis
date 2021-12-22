@@ -1,7 +1,7 @@
-import { ErrorIcon } from 'components/Icons/Error';
+import { ErrorIcon } from 'components/Icons/Error'
 
 interface Props {
-	message: string;
+	message: string
 }
 
 export const Error = ({ message }: Props) => (
@@ -17,4 +17,4 @@ export const Error = ({ message }: Props) => (
 			</div>
 		</div>
 	</div>
-);
+)

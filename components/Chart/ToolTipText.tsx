@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 export class ToolTipText extends React.PureComponent<
 	React.SVGProps<SVGTextElement>
@@ -7,12 +7,12 @@ export class ToolTipText extends React.PureComponent<
 		className: 'react-financial-charts-tooltip',
 		fontFamily:
 			"-apple-system, system-ui, 'Helvetica Neue', Ubuntu, sans-serif",
-		fontSize: 11,
-	};
+		fontSize: 11
+	}
 
 	public render() {
-		const { children, ...rest } = this.props;
+		const { children, ...rest } = this.props
 
-		return <text {...rest}>{children}</text>;
+		return <text {...rest}>{children}</text>
 	}
 }

@@ -1,11 +1,11 @@
-import { useQuote } from 'hooks/useQuote';
-import { Info } from 'types/Info';
-import { changeColor } from '../quote.functions';
+import { useQuote } from 'hooks/useQuote'
+import { Info } from 'types/Info'
+import { changeColor } from '../quote.functions'
 
 export function RegularQuote({ info }: { info: Info }) {
-	const quote = useQuote(info);
-	const color = changeColor(Number(quote.c));
-	const market = quote.ms == 'open' ? 'Market open' : 'Market closed';
+	const quote = useQuote(info)
+	const color = changeColor(Number(quote.c))
+	const market = quote.ms == 'open' ? 'Market open' : 'Market closed'
 
 	return (
 		<div>
@@ -19,5 +19,5 @@ export function RegularQuote({ info }: { info: Info }) {
 				{`${quote.u} - ${market}`}
 			</div>
 		</div>
-	);
+	)
 }

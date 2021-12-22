@@ -2,20 +2,20 @@ import { FiltersMap } from 'components/StockScreener/maps/filters.map'
 import { useModifyFilters } from '../functions/useModifyFilters'
 import { useModifyColumns } from '../functions/useModifyColumns'
 import { screenerState } from '../screener.state'
-import { useState } from 'react'
 
 export function PresetFilters() {
-	const [selected, setSelected] = useState('')
 	const type = screenerState((state) => state.type)
 	const presets = screenerState((state) => state.presets)
 	const setFilterMenu = screenerState((state) => state.setFilterMenu)
+	const activePreset = screenerState((state) => state.activePreset)
+	const setActivePreset = screenerState((state) => state.setActivePreset)
 	const { add, clear } = useModifyFilters()
 	const { fetchColumn } = useModifyColumns()
 
 	function renderPresetFilters(value: string) {
 		clear()
 		setFilterMenu('Active')
-		setSelected(value)
+		setActivePreset(value)
 		presets?.map((item) => {
 			if (item.name === value) {
 				item.filters.map((filter) => {
@@ -48,7 +48,7 @@ export function PresetFilters() {
 				id="location"
 				name="location"
 				className="block w-full pl-3 pr-10 py-2 text-sm border-gray-300 focus:ring-0 focus:ring-blue-500 focus:border-blue-500 rounded-md"
-				value={selected || 'Select preset'}
+				value={activePreset || 'Select preset'}
 				onChange={(e) => renderPresetFilters(e.target.value)}
 			>
 				<option value="Select preset">Select preset</option>

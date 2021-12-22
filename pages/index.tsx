@@ -5,8 +5,6 @@ import { Movers } from 'components/HomePage/Movers'
 import { LatestNews } from 'components/HomePage/LatestNews'
 import { IPOwidgets } from 'components/HomePage/IPOwidgets'
 import { getHomePageData } from 'functions/apis/callBackEnd'
-import { LeftNav } from 'components/Layout/Navigation/LeftNav'
-import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 import { Layout } from 'components/Layout/_Layout'
 
 type Trending = {

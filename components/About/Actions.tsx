@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import Link from 'next/link';
+import Link from 'next/link'
 
 export function AboutActions() {
 	return (
@@ -114,5 +114,5 @@ export function AboutActions() {
 				</div>
 			</div>
 		</section>
-	);
+	)
 }

@@ -2,13 +2,13 @@ import dynamic from 'next/dynamic'
 import { useAuthState } from 'hooks/useAuthState'
 
 const ExportButtons = dynamic(() => import('./ExportButtons'), {
-	ssr: false,
+	ssr: false
 })
 
 const ExportButtonsRestricted = dynamic(
 	() => import('./ExportButtonsRestricted'),
 	{
-		ssr: false,
+		ssr: false
 	}
 )
 
@@ -23,7 +23,7 @@ export const ExportMenu = ({
 	symbol,
 	statement,
 	range,
-	setExportOpen,
+	setExportOpen
 }: Props) => {
 	const { isPro } = useAuthState()
 

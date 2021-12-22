@@ -2,35 +2,35 @@ import {
 	DatabaseIcon,
 	LightningBoltIcon,
 	EmojiHappyIcon,
-	AdjustmentsIcon,
-} from '@heroicons/react/outline';
+	AdjustmentsIcon
+} from '@heroicons/react/outline'
 
 const features = [
 	{
 		name: 'Data accuracy',
 		description:
 			'We are committed to the highest standards of data accuracy. We use both automated scans and manual reviews of the data to ensure this.',
-		icon: DatabaseIcon,
+		icon: DatabaseIcon
 	},
 	{
 		name: 'Ease of use',
 		description:
 			'Our goal is for the site to be clean, simple and intuitive to both use and understand. It should "just work."',
-		icon: EmojiHappyIcon,
+		icon: EmojiHappyIcon
 	},
 	{
 		name: 'Speed',
 		description:
 			'Few things are more annoying than slow and unresponsive websites. This site is super fast and we aim to make everything load instantly.',
-		icon: LightningBoltIcon,
+		icon: LightningBoltIcon
 	},
 	{
 		name: 'Integrity',
 		description:
 			"We don't promote individual stocks and present each data point following objective rules.",
-		icon: AdjustmentsIcon,
-	},
-];
+		icon: AdjustmentsIcon
+	}
+]
 
 export function AboutFeatures() {
 	return (
@@ -70,5 +70,5 @@ export function AboutFeatures() {
 				</div>
 			</div>
 		</section>
-	);
+	)
 }

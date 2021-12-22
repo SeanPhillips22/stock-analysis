@@ -1,13 +1,13 @@
-import { News } from 'types/News';
-import { Tickers } from './Tickers';
-import { LiteYouTubeEmbed } from './LiteYouTubeEmbed';
-import { NewsAds } from './NewsAds';
+import { News } from 'types/News'
+import { Tickers } from './Tickers'
+import { LiteYouTubeEmbed } from './LiteYouTubeEmbed'
+import { NewsAds } from './NewsAds'
 
 interface Props {
-	index: number;
-	item: News;
-	related?: string;
-	count: number;
+	index: number
+	item: News
+	related?: string
+	count: number
 }
 
 export const NewsVideo = ({ index, item, related, count }: Props) => {
@@ -33,5 +33,5 @@ export const NewsVideo = ({ index, item, related, count }: Props) => {
 				(count < 3 && count === index + 1) ||
 				index === 7) && <NewsAds index={index} count={count} />}
 		</>
-	);
-};
+	)
+}

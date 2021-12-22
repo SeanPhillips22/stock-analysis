@@ -1,12 +1,12 @@
-import { Executive } from 'types/Company';
+import { Executive } from 'types/Company'
 
 interface Props {
-	executives: Executive[];
+	executives: Executive[]
 }
 
 export const ProfileExecutives = ({ executives }: Props) => {
 	if (!executives) {
-		return null;
+		return null
 	}
 
 	return (
@@ -43,5 +43,5 @@ export const ProfileExecutives = ({ executives }: Props) => {
 				</tbody>
 			</table>
 		</>
-	);
-};
+	)
+}

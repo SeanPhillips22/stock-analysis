@@ -1,17 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { screenerState } from 'components/StockScreener/screener.state'
-import { useEffect, useState } from 'react'
-import {
-	FilterId,
-	ScreenerTypes
-} from 'components/StockScreener/screener.types'
+import { useState } from 'react'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { supabase } from 'functions/supabase'
 import { useAuthState } from 'hooks/useAuthState'
-
-type SavedFilter = {
-	id: FilterId
-	value: string
-}
 
 // if there are no saved screens, return this initial state
 const initialState = {
@@ -41,8 +33,7 @@ export function useSavedScreens(type: ScreenerTypes) {
 			.from('userdata')
 			.select('screener')
 
-		let screener = fetchedData![0].screener
-		return screener ?? initialState
+		return fetchedData ? fetchedData[0].screener : initialState
 	}
 
 	const { data } = useQuery(['screener', type], () => fetchScreener(), {

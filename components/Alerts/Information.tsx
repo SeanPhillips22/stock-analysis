@@ -1,13 +1,13 @@
-import { InformationCircleIcon } from '@heroicons/react/solid';
+import { InformationCircleIcon } from '@heroicons/react/solid'
 
 interface Props {
-	message: string;
-	classes?: string;
+	message: string
+	classes?: string
 }
 
 export const Information = ({ message, classes }: Props) => {
-	let css = 'bg-blue-50 border-l-4 border-blue-400 p-4 text-blue-700';
-	if (classes) css += ` ${classes}`;
+	let css = 'bg-blue-50 border-l-4 border-blue-400 p-4 text-blue-700'
+	if (classes) css += ` ${classes}`
 
 	return (
 		<div className={css}>
@@ -23,5 +23,5 @@ export const Information = ({ message, classes }: Props) => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}

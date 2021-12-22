@@ -32,7 +32,7 @@ export const withDeviceRatio = () => {
 				const { current } = this.ref
 				if (current === null) {
 					this.setState({
-						ratio: 1,
+						ratio: 1
 					})
 
 					return
@@ -51,7 +51,7 @@ export const withDeviceRatio = () => {
 					1
 
 				this.setState({
-					ratio: devicePixelRatio / backingStoreRatio,
+					ratio: devicePixelRatio / backingStoreRatio
 				})
 			}
 

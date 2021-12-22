@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 type NewsMin = {
-	t: string;
-	u: string;
-	n: string;
-	d: string;
-};
+	t: string
+	u: string
+	n: string
+	d: string
+}
 
 export const LatestNews = ({ news }: { news: NewsMin[] }) => (
 	<section className="mx-auto px-3 xs:px-4 sm:px-5 lg:px-0 lg:col-span-2">
@@ -33,7 +33,7 @@ export const LatestNews = ({ news }: { news: NewsMin[] }) => (
 								<span className="text-gray-600"> - {item.n}</span>
 							</td>
 						</tr>
-					);
+					)
 				})}
 				<tr className="border-b border-gray-200">
 					<td
@@ -61,4 +61,4 @@ export const LatestNews = ({ news }: { news: NewsMin[] }) => (
 			</tbody>
 		</table>
 	</section>
-);
+)

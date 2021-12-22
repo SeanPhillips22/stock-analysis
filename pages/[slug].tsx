@@ -1,58 +1,58 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import fs from 'fs';
-import path from 'path';
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
-import matter from 'gray-matter';
-import { ArticleLayout } from 'components/Layout/ArticleLayout';
-import { SEO } from 'components/SEO';
-import { CustomLink, External } from 'components/CustomLink';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import fs from 'fs'
+import path from 'path'
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from 'next-mdx-remote'
+import matter from 'gray-matter'
+import { ArticleLayout } from 'components/Layout/ArticleLayout'
+import { SEO } from 'components/SEO'
+import { CustomLink, External } from 'components/CustomLink'
 
 const components = {
 	a: CustomLink,
-	External,
-};
+	External
+}
 
 interface Props {
 	content: {
-		compiledSource: string;
-	};
+		compiledSource: string
+	}
 	meta: {
-		title: string;
-		heading: string;
-		description: string;
-		image: string;
-		date: string;
-	};
-	slug: string;
+		title: string
+		heading: string
+		description: string
+		image: string
+		date: string
+	}
+	slug: string
 }
 
 interface Schema {
-	'@context': string;
-	'@type': string;
+	'@context': string
+	'@type': string
 	mainEntityOfPage: {
-		'@type': string;
-		'@id': string;
-	};
-	headline: string;
-	description: string;
+		'@type': string
+		'@id': string
+	}
+	headline: string
+	description: string
 	author: {
-		'@type': string;
-		name: string;
-	};
+		'@type': string
+		name: string
+	}
 	publisher: {
-		'@type': string;
-		name: string;
+		'@type': string
+		name: string
 		logo: {
-			'@type': string;
-			url: string;
-		};
-	};
+			'@type': string
+			url: string
+		}
+	}
 	image?: {
-		'@type'?: string;
-		url?: string;
-	};
-	datePublished?: string;
+		'@type'?: string
+		url?: string
+	}
+	datePublished?: string
 }
 
 export default function Page({ content, meta, slug }: Props) {
@@ -62,7 +62,7 @@ export default function Page({ content, meta, slug }: Props) {
 		'@type': 'Article',
 		mainEntityOfPage: {
 			'@type': 'WebPage',
-			'@id': `https://stockanalysis/${slug}/`,
+			'@id': `https://stockanalysis/${slug}/`
 		},
 		headline: meta.title,
 		description: meta.description,
@@ -72,20 +72,20 @@ export default function Page({ content, meta, slug }: Props) {
 			name: 'Stock Analysis',
 			logo: {
 				'@type': 'ImageObject',
-				url: 'https://stockanalysis.com/logo.png',
-			},
-		},
-	};
+				url: 'https://stockanalysis.com/logo.png'
+			}
+		}
+	}
 
 	if (meta.image) {
 		schema.image = {
 			'@type': 'ImageObject',
-			url: `https://stockanalysis${meta.image}`,
-		};
+			url: `https://stockanalysis${meta.image}`
+		}
 	}
 
 	if (meta.date) {
-		schema.datePublished = meta.date;
+		schema.datePublished = meta.date
 	}
 
 	return (
@@ -108,28 +108,28 @@ export default function Page({ content, meta, slug }: Props) {
 				</div>
 			</ArticleLayout>
 		</>
-	);
+	)
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const slug = params ? params.slug : '';
-	const filePath = path.join(process.cwd(), 'content', `${slug}.mdx`);
-	const source = fs.readFileSync(filePath);
+	const slug = params ? params.slug : ''
+	const filePath = path.join(process.cwd(), 'content', `${slug}.mdx`)
+	const source = fs.readFileSync(filePath)
 
-	const { content, data } = matter(source);
+	const { content, data } = matter(source)
 
 	const mdxSource = await serialize(content, {
-		scope: data,
-	});
+		scope: data
+	})
 
 	return {
 		props: {
 			content: mdxSource,
 			meta: data,
-			slug: slug,
-		},
-	};
-};
+			slug: slug
+		}
+	}
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = [
@@ -162,11 +162,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		{ params: { slug: 'where-to-park-cash' } },
 		{ params: { slug: 'who-determines-recessions' } },
 		{ params: { slug: 'why-stock-buybacks-are-good' } },
-		{ params: { slug: 'youtube-stock' } },
-	];
+		{ params: { slug: 'youtube-stock' } }
+	]
 
 	return {
 		paths,
-		fallback: false,
-	};
-};
+		fallback: false
+	}
+}

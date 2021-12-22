@@ -1,15 +1,15 @@
-import { FormEvent, useState } from 'react';
-import { ArticleLayout } from 'components/Layout/ArticleLayout';
-import { SEO } from 'components/SEO';
-import { Success } from 'components/Alerts/Success';
-import { Error } from 'components/Alerts/Error';
-import { Warning } from 'components/Alerts/Warning';
-import Axios from 'axios';
-import { SpinnerIcon } from 'components/Icons/Spinner';
-import { validateEmailAddress, validateLength } from 'functions/validation';
+import { FormEvent, useState } from 'react'
+import { ArticleLayout } from 'components/Layout/ArticleLayout'
+import { SEO } from 'components/SEO'
+import { Success } from 'components/Alerts/Success'
+import { Error } from 'components/Alerts/Error'
+import { Warning } from 'components/Alerts/Warning'
+import Axios from 'axios'
+import { SpinnerIcon } from 'components/Icons/Spinner'
+import { validateEmailAddress, validateLength } from 'functions/validation'
 
 interface MessageData {
-	[key: string]: string;
+	[key: string]: string
 }
 
 export default function Contact() {
@@ -24,7 +24,7 @@ export default function Contact() {
 				meta={{
 					title: 'Contact Us',
 					description:
-						'This page contains a contact form. Use this form if you have questions or suggestions about the content on this site.',
+						'This page contains a contact form. Use this form if you have questions or suggestions about the content on this site.'
 				}}
 			>
 				<p>
@@ -49,64 +49,64 @@ export default function Contact() {
 				</p>
 			</ArticleLayout>
 		</>
-	);
+	)
 }
 
 function ContactForm() {
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [message, setMessage] = useState('');
-	const [subject, setSubject] = useState('');
-	const [responseType, setResponseType] = useState<string | null>(null);
-	const [loading, setLoading] = useState(false);
-	const [warning, setWarning] = useState<string | null>(null);
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [message, setMessage] = useState('')
+	const [subject, setSubject] = useState('')
+	const [responseType, setResponseType] = useState<string | null>(null)
+	const [loading, setLoading] = useState(false)
+	const [warning, setWarning] = useState<string | null>(null)
 
-	const url = '/api/contact/';
+	const url = '/api/contact/'
 
 	const handleSubmit = async (e: FormEvent) => {
-		e.preventDefault();
+		e.preventDefault()
 
-		setResponseType(null);
-		setWarning(null);
+		setResponseType(null)
+		setWarning(null)
 
 		if (!validateEmailAddress(email)) {
-			return setWarning('Please enter a valid email address.');
+			return setWarning('Please enter a valid email address.')
 		}
 
 		if (!validateLength(message, 10)) {
 			return setWarning(
 				'Your message is too short to be meaningful. Add more details.'
-			);
+			)
 		}
 
-		setLoading(true);
+		setLoading(true)
 		try {
 			const messageData: MessageData = {
 				name,
 				email,
 				subject,
-				message,
-			};
+				message
+			}
 
-			const res = await Axios.post(url, messageData);
-			const data = res.data;
+			const res = await Axios.post(url, messageData)
+			const data = res.data
 
 			if (data.status === 'email_sent') {
-				setResponseType('success');
-				setName('');
-				setEmail('');
-				setSubject('');
-				setMessage('');
+				setResponseType('success')
+				setName('')
+				setEmail('')
+				setSubject('')
+				setMessage('')
 			} else {
-				setResponseType('error');
+				setResponseType('error')
 			}
 		} catch (err) {
-			console.error({ err });
-			setResponseType('error');
+			console.error({ err })
+			setResponseType('error')
 		} finally {
-			setLoading(false);
+			setLoading(false)
 		}
-	};
+	}
 
 	return (
 		<div className="bg-white">
@@ -226,5 +226,5 @@ function ContactForm() {
 				)}
 			</div>
 		</div>
-	);
+	)
 }

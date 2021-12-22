@@ -5,10 +5,10 @@ export const formatNum = (
 	append?: string
 ) => {
 	if (num === null) {
-		return '-';
+		return '-'
 	}
 	if (append) {
-		return formatter.format(num) + append;
+		return formatter.format(num) + append
 	}
-	return formatter.format(num);
-};
+	return formatter.format(num)
+}

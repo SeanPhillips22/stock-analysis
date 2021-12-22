@@ -5,40 +5,40 @@ import {
 	Legend,
 	LinearScale,
 	Title,
-	CategoryScale,
-} from 'chart.js';
-import { ReactChart } from 'components/ReactChart';
-import { Unavailable } from 'components/Unavailable';
+	CategoryScale
+} from 'chart.js'
+import { ReactChart } from 'components/ReactChart'
+import { Unavailable } from 'components/Unavailable'
 
 interface FinancialsWidgetChartI {
 	data: {
-		financialChart: [][];
-	};
-	colors: string[];
+		financialChart: [][]
+	}
+	colors: string[]
 	padLegend: {
-		id: string;
+		id: string
 		beforeInit: (chart: {
 			legend: {
-				fit: () => void;
-				height: number;
-			};
-		}) => void;
-	};
+				fit: () => void
+				height: number
+			}
+		}) => void
+	}
 	colorEarnings: {
-		id: string;
+		id: string
 		beforeDraw: (chart: {
 			legend: {
-				legendItems: any;
-			};
-		}) => void;
-	};
+				legendItems: any
+			}
+		}) => void
+	}
 }
 
 export function FinancialsWidgetChart({
 	data,
 	colors,
 	padLegend,
-	colorEarnings,
+	colorEarnings
 }: FinancialsWidgetChartI) {
 	if (
 		typeof window !== 'undefined' &&
@@ -49,7 +49,7 @@ export function FinancialsWidgetChart({
 				message="This chart does not work in your browser. Please update to the latest browser version."
 				small={true}
 			/>
-		);
+		)
 	}
 	ReactChart.register(
 		BarController,
@@ -61,10 +61,10 @@ export function FinancialsWidgetChart({
 		Legend,
 		padLegend,
 		colorEarnings
-	);
+	)
 
 	ReactChart.defaults.font.family =
-		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'";
+		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 	return (
 		<ReactChart
 			id={'1'}
@@ -77,16 +77,16 @@ export function FinancialsWidgetChart({
 						backgroundColor: '#2C6288',
 						data: data.financialChart[1],
 						categoryPercentage: 0.8,
-						barPercentage: 0.85,
+						barPercentage: 0.85
 					},
 					{
 						label: 'Earnings',
 						backgroundColor: colors,
 						data: data.financialChart[2],
 						categoryPercentage: 0.8,
-						barPercentage: 0.85,
-					},
-				],
+						barPercentage: 0.85
+					}
+				]
 			}}
 			options={{
 				maintainAspectRatio: false,
@@ -95,35 +95,35 @@ export function FinancialsWidgetChart({
 					x: {
 						ticks: {
 							font: {
-								size: 14,
+								size: 14
 							},
-							maxRotation: 0,
+							maxRotation: 0
 						},
 						grid: {
-							display: false,
-						},
+							display: false
+						}
 					},
 					y: {
 						position: 'right',
 						suggestedMin: 0,
 						ticks: {
 							font: {
-								size: 14,
+								size: 14
 							},
 							padding: 0,
 
 							// beginAtZero: true,
 							callback: function (value: any) {
-								const newvalue = value / 1000000;
+								const newvalue = value / 1000000
 								return newvalue
 									.toString()
-									.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-							},
+									.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+							}
 						},
 						grid: {
-							drawBorder: false,
-						},
-					},
+							drawBorder: false
+						}
+					}
 				},
 				plugins: {
 					legend: {
@@ -131,31 +131,31 @@ export function FinancialsWidgetChart({
 						align: 'start',
 						labels: {
 							font: {
-								size: 15,
+								size: 15
 							},
-							padding: 12,
-						},
+							padding: 12
+						}
 					},
 					tooltip: {
 						borderWidth: 1,
 						titleFont: {
 							size: 17,
-							weight: '600',
+							weight: '600'
 						},
 						bodyFont: {
 							size: 15,
-							weight: '400',
+							weight: '400'
 						},
 						padding: {
 							top: 12,
 							right: 15,
 							bottom: 12,
-							left: 15,
+							left: 15
 						},
-						displayColors: false,
-					},
-				},
+						displayColors: false
+					}
+				}
 			}}
 		/>
-	);
+	)
 }

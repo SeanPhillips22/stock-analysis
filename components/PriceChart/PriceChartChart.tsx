@@ -73,7 +73,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		return item.c
 	})
 
-	let change: Number
+	let change: number
 	const count = priceAxis.length
 	if (chartTime === '1D') {
 		change = Number(quote.c)

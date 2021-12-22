@@ -1,26 +1,26 @@
-import { useRef, UIEvent, useEffect } from 'react';
-import Link from 'next/link';
-import { navState } from 'state/navState';
-import { actionsState } from 'state/actionsState';
+import { useRef, UIEvent, useEffect } from 'react'
+import Link from 'next/link'
+import { navState } from 'state/navState'
+import { actionsState } from 'state/actionsState'
 
 export const ActionsNavigation = () => {
-	const path = navState((state) => state.path);
-	const menuref = useRef<HTMLUListElement>(null);
-	const pos = actionsState((state) => state.pos);
-	const setPos = actionsState((state) => state.setPos);
+	const path = navState((state) => state.path)
+	const menuref = useRef<HTMLUListElement>(null)
+	const pos = actionsState((state) => state.pos)
+	const setPos = actionsState((state) => state.setPos)
 
 	function handleScroll(e: UIEvent<HTMLUListElement>) {
 		if (e && e.currentTarget.scrollLeft !== pos) {
-			setPos(e.currentTarget.scrollLeft);
+			setPos(e.currentTarget.scrollLeft)
 		}
 	}
 
 	useEffect(() => {
 		if (menuref.current && menuref.current.scrollLeft !== pos) {
-			menuref.current.scrollLeft = pos;
+			menuref.current.scrollLeft = pos
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [])
 
 	const tabs = [
 		'listed',
@@ -29,8 +29,8 @@ export const ActionsNavigation = () => {
 		'changes',
 		'spinoffs',
 		'bankruptcies',
-		'acquisitions',
-	];
+		'acquisitions'
+	]
 
 	return (
 		<nav className="border-b-[3px] border-blue-brand_sharp">
@@ -53,13 +53,13 @@ export const ActionsNavigation = () => {
 					</Link>
 				</li>
 				{tabs.map((tab) => {
-					let append = '';
-					const last = path.three ?? path.two ?? path.one;
+					let append = ''
+					const last = path.three ?? path.two ?? path.one
 					if (
 						(last?.includes('20') || last?.includes('19')) &&
 						path.two !== tab
 					) {
-						append = `${last}/`;
+						append = `${last}/`
 					}
 
 					return (
@@ -73,9 +73,9 @@ export const ActionsNavigation = () => {
 								</a>
 							</Link>
 						</li>
-					);
+					)
 				})}
 			</ul>
 		</nav>
-	);
-};
+	)
+}

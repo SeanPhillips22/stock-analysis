@@ -1,9 +1,9 @@
 type Props = {
-	show: string;
-	setShow: (value: string) => void;
-	setError: (value: string) => void;
-	pageType: string;
-};
+	show: string
+	setShow: (value: string) => void
+	setError: (value: string) => void
+	pageType: string
+}
 
 export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 	return (
@@ -14,8 +14,8 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 						className={show === 'all' ? 'font-semibold' : 'bll'}
 						id="tag-feat-news-menu-all"
 						onClick={() => {
-							setError('');
-							setShow('all');
+							setError('')
+							setShow('all')
 						}}
 					>
 						All
@@ -28,8 +28,8 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 						}
 						id="tag-feat-news-menu-videos"
 						onClick={() => {
-							setError('');
-							setShow('v');
+							setError('')
+							setShow('v')
 						}}
 					>
 						Videos
@@ -43,8 +43,8 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 							}
 							id="tag-feat-news-menu-press"
 							onClick={() => {
-								setError('');
-								setShow('pr');
+								setError('')
+								setShow('pr')
 							}}
 						>
 							Press
@@ -57,8 +57,8 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 						className={show === 'chat' ? 'font-semibold' : 'bll'}
 						id="tag-feat-news-menu-chat"
 						onClick={() => {
-							setError('');
-							setShow('chat');
+							setError('')
+							setShow('chat')
 						}}
 					>
 						Conversation
@@ -66,5 +66,5 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 				</li>
 			</ul>
 		</div>
-	);
+	)
 }

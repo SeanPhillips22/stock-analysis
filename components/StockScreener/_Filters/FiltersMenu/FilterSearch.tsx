@@ -1,12 +1,12 @@
-import { screenerState } from 'components/StockScreener/screener.state';
-import { CloseInput } from 'components/CloseInput';
+import { screenerState } from 'components/StockScreener/screener.state'
+import { CloseInput } from 'components/CloseInput'
 
 export function FilterSearch() {
-	const search = screenerState((state) => state.filterSearch);
-	const setSearch = screenerState((state) => state.setFilterSearch);
-	const filtersShown = screenerState((state) => state.filtersShown);
+	const search = screenerState((state) => state.filterSearch)
+	const setSearch = screenerState((state) => state.setFilterSearch)
+	const filtersShown = screenerState((state) => state.filtersShown)
 
-	const addMargin = filtersShown ? ' mb-1' : '';
+	const addMargin = filtersShown ? ' mb-1' : ''
 
 	return (
 		<div className="relative flex items-center">
@@ -20,5 +20,5 @@ export function FilterSearch() {
 			/>
 			<CloseInput search={search} setSearch={setSearch} />
 		</div>
-	);
+	)
 }

@@ -1,10 +1,10 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 type TabTypes = {
-	url: string;
-	title: string;
-	css: 'active' | 'inactive';
-};
+	url: string
+	title: string
+	css: 'active' | 'inactive'
+}
 
 export function IPOTab({ url, title, css }: TabTypes) {
 	return (
@@ -15,5 +15,5 @@ export function IPOTab({ url, title, css }: TabTypes) {
 				</a>
 			</Link>
 		</li>
-	);
+	)
 }

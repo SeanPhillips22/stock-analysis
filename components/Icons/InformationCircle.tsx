@@ -1,5 +1,5 @@
 interface IProps {
-	classes: string;
+	classes: string
 }
 
 export const InformationCircleIcon = ({ classes }: IProps) => {
@@ -17,5 +17,5 @@ export const InformationCircleIcon = ({ classes }: IProps) => {
 				clipRule="evenodd"
 			/>
 		</svg>
-	);
-};
+	)
+}

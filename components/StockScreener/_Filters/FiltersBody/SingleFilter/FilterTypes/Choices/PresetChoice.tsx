@@ -1,39 +1,39 @@
-import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters';
-import { screenerState } from 'components/StockScreener/screener.state';
+import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters'
+import { screenerState } from 'components/StockScreener/screener.state'
 import {
 	FilterOption,
-	FilterProps,
-} from 'components/StockScreener/screener.types';
+	FilterProps
+} from 'components/StockScreener/screener.types'
 
 type Props = {
-	option: FilterOption;
-	filter: FilterProps;
-	active: string | false;
-};
+	option: FilterOption
+	filter: FilterProps
+	active: string | false
+}
 
-export function PresetChoice({ option, filter, active }: Props) {
-	const setOpenFilter = screenerState((state) => state.setOpenFilter);
-	const { id, filterType, numberType } = filter;
-	const { add } = useModifyFilters();
+export function PresetChoice({ option, filter }: Props) {
+	const setOpenFilter = screenerState((state) => state.setOpenFilter)
+	const { id, filterType, numberType } = filter
+	const { add } = useModifyFilters()
 
 	function handleSelection(name: string, value: string) {
 		if (id) {
 			// Add the new filter
-			add(id, name, value, filterType, numberType);
+			add(id, name, value, filterType, numberType)
 
 			// Close the dropdown
-			setOpenFilter('');
+			setOpenFilter('')
 		}
 	}
 
 	function handleKeyPress(e: React.KeyboardEvent) {
 		if (e.key === 'Enter') {
-			e.preventDefault();
-			handleSelection(option.name, option.value);
+			e.preventDefault()
+			handleSelection(option.name, option.value)
 		}
 		if (e.key === 'Escape') {
-			e.preventDefault();
-			setOpenFilter('');
+			e.preventDefault()
+			setOpenFilter('')
 		}
 	}
 
@@ -48,5 +48,5 @@ export function PresetChoice({ option, filter, active }: Props) {
 				{option.name}
 			</div>
 		</div>
-	);
+	)
 }

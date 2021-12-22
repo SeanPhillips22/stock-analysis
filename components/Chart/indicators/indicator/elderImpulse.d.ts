@@ -2,9 +2,9 @@ export default function (): {
 	(
 		data: any,
 		options?: {
-			merge: boolean;
+			merge: boolean
 		}
-	): any;
-	macdSource(x: any): any;
-	emaSource(x: any): any;
-};
+	): any
+	macdSource(x: any): any
+	emaSource(x: any): any
+}

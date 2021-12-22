@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 export const LoginPrompt = () => {
 	return (
@@ -21,5 +21,5 @@ export const LoginPrompt = () => {
 				.
 			</p>
 		</div>
-	);
-};
+	)
+}
