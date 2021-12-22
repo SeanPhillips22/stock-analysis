@@ -44,6 +44,11 @@ module.exports = {
 				source: '/ipos/screener/',
 				destination: '/screener/ipo/',
 				permanent: true
+			},
+			{
+				source: '/screener/',
+				destination: '/screener/stock/',
+				permanent: true
 			}
 		]
 	},
