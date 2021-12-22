@@ -115,11 +115,12 @@ export type FilterId =
 	| 'etfPeRatio' // ETF PE Ratio
 	| 'assetClass' // ETF Asset Class
 	| 'expenseRatio' // ETF Expense Ratio
-	| 'etfSharesOut' // ETF Shares Outstanding
 	| 'holdings' // ETF Holdings
 	| 'inceptionDate' // ETF Inception Date
 	| 'etfSector' // ETF Sector
 	| 'etfRegion' // ETF Geographic Region
+	| 'issuer' // ETF Geographic Region
+	| 'etfIndex' // Index tracked by the ETF
 
 // Results columns
 export type ColumnName =
@@ -193,12 +194,18 @@ export type FilterProps = {
 	options: FilterOption[]
 	filterType: FilterType
 	numberType?: NumberType
+	variable?: boolean
 }
 
 export type FilterOption = {
 	name: string
 	value: string
 	div?: boolean // Set true to add a divider in the dropdown
+}
+
+export type VariableFilter = {
+	options: FilterOption[]
+	id: FilterId
 }
 
 export type FilterValue = {

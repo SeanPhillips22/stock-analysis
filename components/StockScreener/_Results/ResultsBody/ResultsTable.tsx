@@ -23,7 +23,7 @@ import {
 
 export function ResultsTable({ cols }: { cols: any }) {
 	const type = screenerState((state) => state.type)
-	const rows = screenerState((state) => state.data)
+	const datarows = screenerState((state) => state.data)
 	const loaded = screenerState((state) => state.loaded)
 	const filters = screenerState((state) => state.filters)
 	const tablePage = screenerState((state) => state.tablePage)
@@ -54,7 +54,10 @@ export function ResultsTable({ cols }: { cols: any }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type])
 
-	const data = useMemo(() => filterItems(rows, filters), [rows, filters])
+	const data = useMemo(
+		() => filterItems(datarows, filters),
+		[datarows, filters]
+	)
 	const columns = useMemo(() => cols, [cols])
 
 	const {
@@ -66,6 +69,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 		pageOptions,
 		nextPage,
 		previousPage,
+		rows,
 		setPageSize,
 		setGlobalFilter,
 		state: { pageIndex, pageSize, globalFilter }
@@ -99,7 +103,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 		<>
 			<ResultsMenu
 				type={type}
-				count={data.length}
+				count={rows.length}
 				title="Matches"
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={globalFilter}

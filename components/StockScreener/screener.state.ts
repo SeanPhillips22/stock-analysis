@@ -4,7 +4,9 @@ import {
 	SingleStock,
 	SingleDataPoint,
 	FilterId,
-	FilterValue
+	FilterValue,
+	VariableFilter,
+	FilterOption
 } from 'components/StockScreener/screener.types'
 import { PresetFilter } from './maps/presetFilters.map'
 import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
@@ -43,6 +45,10 @@ interface ScreenerState {
 
 	resultsMenu: string
 	setResultsMenu: (newMenu: string) => void
+
+	// Variable filters
+	variableFilters: VariableFilter[]
+	addVariableFilter: (options: FilterOption[], id: FilterId) => void
 
 	// Columns
 	fetchedColumns: FilterId[]
@@ -123,14 +129,21 @@ export const screenerState = create<ScreenerState>((set) => ({
 			filterMenu: 'Active'
 		}),
 
+	// Variable filters
+	variableFilters: [],
+	addVariableFilter: (options: FilterOption[], id: FilterId) =>
+		set((state) => ({
+			variableFilters: [...state.variableFilters, { id, options }]
+		})),
+
 	// Results Menu
 	resultsMenu: 'General',
 	setResultsMenu: (newMenu: string) => set({ resultsMenu: newMenu }),
 
 	// Columns
-	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // All data columns that have been fetched
+	fetchedColumns: [], // All data columns that have been fetched
 	showColumns: [], // Columns that are currently showing
-	filteredColumns: ['s', 'n', 'm'], // All data columns that are being filtered
+	filteredColumns: ['s', 'n'], // All data columns that are being filtered
 	addFetchedColumn: (newColumn: any) =>
 		set((state) => ({
 			fetchedColumns: [...state.fetchedColumns, newColumn]

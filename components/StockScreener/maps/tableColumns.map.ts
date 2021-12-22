@@ -615,5 +615,17 @@ export const COLUMNS_MAP: Column[] = [
 		accessor: 'etfSector',
 		format: 'padleft',
 		sortType: stringNullFix
+	},
+	{
+		Header: 'Issuer',
+		accessor: 'issuer',
+		format: 'string',
+		sortType: stringNullFix
+	},
+	{
+		Header: 'Index',
+		accessor: 'etfIndex',
+		format: 'string',
+		sortType: stringNullFix
 	}
 ]

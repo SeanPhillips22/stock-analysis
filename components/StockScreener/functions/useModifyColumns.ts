@@ -1,12 +1,7 @@
 import { FilterId } from '../screener.types'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { getData } from 'functions/apis/API'
-
-function getScreenerUrl(type: string) {
-	if (type === 'ipo') return 'iposcreener'
-	if (type === 'etf') return 'etfscreener'
-	return 'screener'
-}
+import { getScreenerUrl } from './getScreenerUrl'
 
 /**
  * A custom hook with functions to manipulate the columns in the stock screener results table

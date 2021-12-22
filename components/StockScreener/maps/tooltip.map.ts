@@ -39,12 +39,8 @@ export const TOOLTIP_MAP: MapProps = [
 		id: 'sharesOut',
 		title: 'Shares Outstanding',
 		tooltip:
-			"The total amount of outstanding common stock currently held by all of the company's shareholders."
-	},
-	{
-		id: 'etfSharesOut',
-		title: 'Shares Outstanding',
-		tooltip: 'The total number of outstanding ETF shares that been issued.'
+			"The total amount of outstanding common stock currently held by all of the company's shareholders.",
+		etf: 'The total number of outstanding ETF shares that been issued.'
 	},
 	{
 		id: 'sharesOffered',
@@ -278,7 +274,7 @@ export const TOOLTIP_MAP: MapProps = [
 		id: 'beta',
 		title: 'Beta (1Y)',
 		tooltip:
-			'Beta measures the price volatility of a stock in comparison to the overall stock market. A value higher than 1 indicates greater volatility, while a value under 1 indicates less volatility.'
+			'Beta measures the price volatility of a stock in comparison to the overall stock market. A value over 1 indicates higher volatility, while a value under 1 indicates lower volatility.'
 	},
 	{
 		id: 'c',
@@ -712,8 +708,15 @@ export const TOOLTIP_MAP: MapProps = [
 		tooltip: 'The geographic region that the ETF primarily invests in.'
 	},
 	{
-		id: 'etfSector',
-		title: 'ETF Sector',
-		tooltip: 'The sector or category that the fund primarily invests in.'
+		id: 'issuer',
+		title: 'ETF Issuer',
+		tooltip:
+			'The company or organization that manages the exchange-traded fund.'
+	},
+	{
+		id: 'etfIndex',
+		title: 'ETF Index',
+		tooltip:
+			'Many ETFs are designed to track the performance of an index. Examples include the S&P500 or the Nasdaq-100.'
 	}
 ]
