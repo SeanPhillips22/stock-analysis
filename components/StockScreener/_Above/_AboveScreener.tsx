@@ -9,10 +9,8 @@ export function AboveScreener() {
 
 	return (
 		<>
-			<div className="mb-3 md:flex md:mb-0 md:justify-between md:items-end">
-				<div>
-					<h1 className="hh1">{typeTitle + ' Screener'}</h1>
-				</div>
+			<div className="mb-2.5 md:flex md:mb-1.5 md:justify-between md:items-end">
+				<h1 className="hh1 md:mb-2">{typeTitle + ' Screener'}</h1>
 				<div className="flex space-x-2 items-center">
 					<PresetFilters />
 					<SavedFilters />
