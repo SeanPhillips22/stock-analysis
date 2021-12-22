@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { useState } from 'react'
@@ -33,11 +34,20 @@ export function useSavedScreens(type: ScreenerTypes) {
 			.from('userdata')
 			.select('screener')
 
-		return fetchedData ? fetchedData[0].screener : initialState
+		if (!fetchedData![0].screener) {
+			await supabase
+				.from('userdata')
+				.update({ screener: initialState })
+				.eq('id', user?.id)
+
+			return initialState
+		}
+
+		return fetchedData![0].screener
 	}
 
 	const { data } = useQuery(['screener', type], () => fetchScreener(), {
-		refetchOnWindowFocus: true,
+		refetchOnWindowFocus: false,
 		enabled: user ? true : false
 	})
 
