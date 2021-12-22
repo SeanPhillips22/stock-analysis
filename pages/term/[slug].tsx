@@ -1,30 +1,30 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import fs from 'fs';
-import path from 'path';
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
-import matter from 'gray-matter';
-import { ArticleLayout } from 'components/Layout/ArticleLayout';
-import { SEO } from 'components/SEO';
-import { CustomLink, External } from 'components/CustomLink';
+import { GetStaticProps, GetStaticPaths } from 'next'
+import fs from 'fs'
+import path from 'path'
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from 'next-mdx-remote'
+import matter from 'gray-matter'
+import { ArticleLayout } from 'components/Layout/ArticleLayout'
+import { SEO } from 'components/SEO'
+import { CustomLink, External } from 'components/CustomLink'
 
 const components = {
 	a: CustomLink,
-	External,
-};
+	External
+}
 
 interface Props {
 	content: {
-		compiledSource: string;
-	};
+		compiledSource: string
+	}
 	meta: {
-		title: string;
-		heading: string;
-		description: string;
-		image: string;
-		date: string;
-	};
-	slug: string;
+		title: string
+		heading: string
+		description: string
+		image: string
+		date: string
+	}
+	slug: string
 }
 
 export default function Page({ content, meta, slug }: Props) {
@@ -43,28 +43,28 @@ export default function Page({ content, meta, slug }: Props) {
 				</div>
 			</ArticleLayout>
 		</>
-	);
+	)
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const slug = params ? params.slug : '';
-	const filePath = path.join(process.cwd(), 'content/term', `${slug}.mdx`);
-	const source = fs.readFileSync(filePath);
+	const slug = params ? params.slug : ''
+	const filePath = path.join(process.cwd(), 'content/term', `${slug}.mdx`)
+	const source = fs.readFileSync(filePath)
 
-	const { content, data } = matter(source);
+	const { content, data } = matter(source)
 
 	const mdxSource = await serialize(content, {
-		scope: data,
-	});
+		scope: data
+	})
 
 	return {
 		props: {
 			content: mdxSource,
 			meta: data,
-			slug: slug,
-		},
-	};
-};
+			slug: slug
+		}
+	}
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = [
@@ -84,11 +84,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		{ params: { slug: 'revenue' } },
 		{ params: { slug: 'roe-return-on-equity' } },
 		{ params: { slug: 'ttm-trailing-twelve-months' } },
-		{ params: { slug: 'yoy-year-over-year' } },
-	];
+		{ params: { slug: 'yoy-year-over-year' } }
+	]
 
 	return {
 		paths,
-		fallback: false,
-	};
-};
+		fallback: false
+	}
+}

@@ -1,5 +1,5 @@
 interface Props {
-	classes?: string;
+	classes?: string
 }
 
 export const SuccessIcon = ({ classes }: Props) => (
@@ -16,4 +16,4 @@ export const SuccessIcon = ({ classes }: Props) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)

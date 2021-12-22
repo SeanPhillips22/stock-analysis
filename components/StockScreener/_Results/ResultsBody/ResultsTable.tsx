@@ -1,4 +1,3 @@
-import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { useEffect, useMemo } from 'react'
 import {
@@ -14,62 +13,51 @@ import { ResultsMenu } from '../ResultsMenu/ResultsMenu'
 import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
-import { FilterId } from 'components/StockScreener/screener.types'
-import {
-	useFetchFullData,
-	useFetchFullIPOData
-} from 'components/StockScreener/functions/useFetchFullData'
+import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData'
 import { Loading } from 'components/Loading'
+import {
+	defaultColumnsStocks,
+	defaultColumnsIPOs,
+	defaultColumnsETFs
+} from 'components/StockScreener/maps/resultColumns.map'
 
-interface Props {
-	cols: any
-}
-
-export function ResultsTable({ cols }: Props) {
-	const type = screenerDataState((state) => state.type)
-	const rows = screenerDataState((state) => state.data)
-	const fullyLoaded = screenerDataState((state) => state.fullyLoaded)
-	const fetchFullData = useFetchFullData()
-	const fetchFullIPOData = useFetchFullIPOData()
+export function ResultsTable({ cols }: { cols: any }) {
+	const type = screenerState((state) => state.type)
+	const datarows = screenerState((state) => state.data)
+	const loaded = screenerState((state) => state.loaded)
 	const filters = screenerState((state) => state.filters)
 	const tablePage = screenerState((state) => state.tablePage)
 	const tableSize = screenerState((state) => state.tableSize)
 	const showColumns = screenerState((state) => state.showColumns)
 	const setShowColumns = screenerState((state) => state.setShowColumns)
 	const setFetchedColumns = screenerState((state) => state.setFetchedColumns)
+	const removeFilteredColumn = screenerState(
+		(state) => state.removeFilteredColumn
+	)
+	const fetchFullData = useFetchFullData()
 
 	useEffect(() => {
 		if (type == 'stocks') {
-			fetchFullData()
-			setShowColumns(['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'] as FilterId[])
-			setFetchedColumns(['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'])
-			// eslint-disable-next-line react-hooks/exhaustive-deps
-		} else {
-			fetchFullIPOData()
-			setShowColumns([
-				's',
-				'n',
-				'm',
-				'i',
-				'ipoPriceRange',
-				'ipoDate',
-				'revenue'
-			] as FilterId[])
-			setFetchedColumns([
-				's',
-				'n',
-				'm',
-				'i',
-				'ipoPriceRange',
-				'ipoDate',
-				'revenue'
-			])
+			fetchFullData(type)
+			setShowColumns(defaultColumnsStocks)
+			setFetchedColumns(defaultColumnsStocks)
+		} else if (type == 'ipo') {
+			fetchFullData(type)
+			setShowColumns(defaultColumnsIPOs)
+			setFetchedColumns(defaultColumnsIPOs)
+		} else if (type == 'etf') {
+			fetchFullData(type)
+			setShowColumns(defaultColumnsETFs)
+			setFetchedColumns(defaultColumnsETFs)
+			removeFilteredColumn('m')
 		}
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [type])
 
-	const data = useMemo(() => filterItems(rows, filters), [rows, filters])
+	const data = useMemo(
+		() => filterItems(datarows, filters),
+		[datarows, filters]
+	)
 	const columns = useMemo(() => cols, [cols])
 
 	const {
@@ -81,6 +69,7 @@ export function ResultsTable({ cols }: Props) {
 		pageOptions,
 		nextPage,
 		previousPage,
+		rows,
 		setPageSize,
 		setGlobalFilter,
 		state: { pageIndex, pageSize, globalFilter }
@@ -102,7 +91,7 @@ export function ResultsTable({ cols }: Props) {
 		usePagination
 	)
 
-	if (!fullyLoaded) {
+	if (!loaded) {
 		return (
 			<div className="h-[600px] mt-6">
 				<Loading />
@@ -114,7 +103,7 @@ export function ResultsTable({ cols }: Props) {
 		<>
 			<ResultsMenu
 				type={type}
-				count={data.length}
+				count={rows.length}
 				title="Matches"
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={globalFilter}
@@ -122,7 +111,10 @@ export function ResultsTable({ cols }: Props) {
 				tableId="screener-table"
 			/>
 			<div className="overflow-x-auto">
-				<table className="symbol-table w-full" id="screener-table">
+				<table
+					className={`symbol-table w-full ${type}`}
+					id="screener-table"
+				>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

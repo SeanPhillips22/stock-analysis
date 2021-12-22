@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { navState } from 'state/navState';
-import { actionsState } from 'state/actionsState';
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { navState } from 'state/navState'
+import { actionsState } from 'state/actionsState'
 
 export const ActionsNavigationSub = () => {
-	const path = navState((state) => state.path);
-	const all = actionsState((state) => state.all);
-	const setAll = actionsState((state) => state.setAll);
-	const [count, setCount] = useState<number>(2);
+	const path = navState((state) => state.path)
+	const all = actionsState((state) => state.all)
+	const setAll = actionsState((state) => state.setAll)
+	const [count, setCount] = useState<number>(2)
 
 	const type =
 		path.two && !path.two.includes('20') && !path.two.includes('19')
 			? path.two
-			: '';
+			: ''
 
 	const tabs = [
 		'2021',
@@ -38,17 +38,17 @@ export const ActionsNavigationSub = () => {
 		'2001',
 		'2000',
 		'1999',
-		'1998',
-	];
-	const length = tabs.length;
+		'1998'
+	]
+	const length = tabs.length
 
 	useEffect(() => {
 		if (all) {
-			setCount(length);
+			setCount(length)
 		} else {
-			setCount(2);
+			setCount(2)
 		}
-	}, [all, length]);
+	}, [all, length])
 
 	return (
 		<nav className="mb-2 lg:mb-3">
@@ -113,5 +113,5 @@ export const ActionsNavigationSub = () => {
 				</li>
 			</ul>
 		</nav>
-	);
-};
+	)
+}

@@ -1,6 +1,6 @@
 /* eslint-disable no-invalid-this */
-import { format } from 'd3-format';
-import * as React from 'react';
+import { format } from 'd3-format'
+import * as React from 'react'
 import {
 	first,
 	functor,
@@ -8,30 +8,30 @@ import {
 	GenericChartComponent,
 	last,
 	noop,
-	strokeDashTypes,
-} from '../core';
-import { drawOnCanvas } from './EdgeCoordinateV3';
+	strokeDashTypes
+} from '../core'
+import { drawOnCanvas } from './EdgeCoordinateV3'
 
 export interface EdgeIndicatorProps {
-	readonly arrowWidth?: number;
-	readonly displayFormat?: (n: number) => string;
-	readonly edgeAt?: 'left' | 'right';
-	readonly fill?: string | ((datum: any) => string);
-	readonly fitToText?: boolean;
-	readonly fontFamily?: string;
-	readonly fontSize?: number;
-	readonly fullWidth?: boolean;
-	readonly itemType: 'first' | 'last';
-	readonly lineStroke?: string | ((datum: any) => string);
-	readonly lineStrokeDasharray?: strokeDashTypes;
-	readonly orient?: 'left' | 'right';
-	readonly rectHeight?: number;
-	readonly rectWidth?: number;
-	readonly stroke?: string | ((datum: any) => string);
-	readonly textFill?: string | ((datum: any) => string);
-	readonly type?: 'horizontal';
-	readonly yAccessor: (data: any) => number | undefined;
-	readonly yAxisPad?: number;
+	readonly arrowWidth?: number
+	readonly displayFormat?: (n: number) => string
+	readonly edgeAt?: 'left' | 'right'
+	readonly fill?: string | ((datum: any) => string)
+	readonly fitToText?: boolean
+	readonly fontFamily?: string
+	readonly fontSize?: number
+	readonly fullWidth?: boolean
+	readonly itemType: 'first' | 'last'
+	readonly lineStroke?: string | ((datum: any) => string)
+	readonly lineStrokeDasharray?: strokeDashTypes
+	readonly orient?: 'left' | 'right'
+	readonly rectHeight?: number
+	readonly rectWidth?: number
+	readonly stroke?: string | ((datum: any) => string)
+	readonly textFill?: string | ((datum: any) => string)
+	readonly type?: 'horizontal'
+	readonly yAccessor: (data: any) => number | undefined
+	readonly yAxisPad?: number
 }
 
 export class EdgeIndicator extends React.Component<EdgeIndicatorProps> {
@@ -58,8 +58,8 @@ export class EdgeIndicator extends React.Component<EdgeIndicatorProps> {
 		strokeOpacity: 1,
 		strokeWidth: 1,
 		textFill: '#FFFFFF',
-		type: 'horizontal',
-	};
+		type: 'horizontal'
+	}
 
 	public render() {
 		return (
@@ -70,41 +70,41 @@ export class EdgeIndicator extends React.Component<EdgeIndicatorProps> {
 				canvasToDraw={getAxisCanvas}
 				drawOn={['pan']}
 			/>
-		);
+		)
 	}
 
 	private readonly drawOnCanvas = (
 		ctx: CanvasRenderingContext2D,
 		moreProps: any
 	) => {
-		const edge = this.helper(this.props, moreProps);
+		const edge = this.helper(this.props, moreProps)
 		if (edge === undefined) {
-			return;
+			return
 		}
 
 		const props = {
 			...this.props,
-			...edge,
-		};
+			...edge
+		}
 
-		drawOnCanvas(ctx, props);
-	};
+		drawOnCanvas(ctx, props)
+	}
 
 	private readonly helper = (props: EdgeIndicatorProps, moreProps: any) => {
-		const { itemType, yAccessor } = props;
+		const { itemType, yAccessor } = props
 
-		const { plotData } = moreProps;
+		const { plotData } = moreProps
 
 		const item =
 			itemType === 'first'
 				? first(plotData, yAccessor)
-				: last(plotData, yAccessor);
+				: last(plotData, yAccessor)
 
 		const edge =
-			item !== undefined ? this.getEdge(moreProps, item) : undefined;
+			item !== undefined ? this.getEdge(moreProps, item) : undefined
 
-		return edge;
-	};
+		return edge
+	}
 
 	private readonly getEdge = (moreProps: any, item: any) => {
 		const {
@@ -123,28 +123,28 @@ export class EdgeIndicator extends React.Component<EdgeIndicatorProps> {
 			rectHeight,
 			rectWidth,
 			arrowWidth,
-			stroke,
-		} = this.props;
+			stroke
+		} = this.props
 
 		const {
 			xScale,
 			chartConfig: { yScale },
 			xAccessor,
-			width,
-		} = moreProps;
+			width
+		} = moreProps
 
-		const yValue = yAccessor(item);
+		const yValue = yAccessor(item)
 		if (yValue === undefined) {
-			return undefined;
+			return undefined
 		}
 
-		const xValue = xAccessor(item);
+		const xValue = xAccessor(item)
 
-		const x1 = fullWidth ? 0 : Math.round(xScale(xValue));
-		const y1 = Math.round(yScale(yValue));
+		const x1 = fullWidth ? 0 : Math.round(xScale(xValue))
+		const y1 = Math.round(yScale(yValue))
 
-		const [left, right] = [0, width];
-		const edgeX = edgeAt === 'left' ? left - yAxisPad : right + yAxisPad;
+		const [left, right] = [0, width]
+		const edgeX = edgeAt === 'left' ? left - yAxisPad : right + yAxisPad
 
 		return {
 			coordinate: displayFormat(yValue),
@@ -164,7 +164,7 @@ export class EdgeIndicator extends React.Component<EdgeIndicatorProps> {
 			x1,
 			y1,
 			x2: right,
-			y2: y1,
-		};
-	};
+			y2: y1
+		}
+	}
 }

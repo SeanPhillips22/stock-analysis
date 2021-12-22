@@ -1,5 +1,5 @@
 interface IProps {
-	classes: string;
+	classes: string
 }
 
 export const SortDownIcon = ({ classes }: IProps) => (
@@ -10,4 +10,4 @@ export const SortDownIcon = ({ classes }: IProps) => (
 			clipRule="evenodd"
 		/>
 	</svg>
-);
+)

@@ -24,41 +24,41 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-import { zip } from 'd3-array';
-import { MACD as defaultOptions } from './defaultOptionsForComputation';
-import ema from './ema';
+import { zip } from 'd3-array'
+import { MACD as defaultOptions } from './defaultOptionsForComputation'
+import ema from './ema'
 export default function Macd() {
-	let options = defaultOptions;
+	let options = defaultOptions
 	const calculator = (data) => {
-		const { fast, slow, signal, sourcePath } = options;
-		const fastEMA = ema().options({ windowSize: fast, sourcePath });
-		const slowEMA = ema().options({ windowSize: slow, sourcePath });
+		const { fast, slow, signal, sourcePath } = options
+		const fastEMA = ema().options({ windowSize: fast, sourcePath })
+		const slowEMA = ema().options({ windowSize: slow, sourcePath })
 		const signalEMA = ema().options({
 			windowSize: signal,
-			sourcePath: undefined,
-		});
+			sourcePath: undefined
+		})
 		const diff = zip(fastEMA(data), slowEMA(data)).map((d) =>
 			d[0] !== undefined && d[1] !== undefined ? d[0] - d[1] : undefined
-		);
-		const averageDiff = signalEMA(diff);
+		)
+		const averageDiff = signalEMA(diff)
 		return zip(diff, averageDiff).map((d) => ({
 			macd: d[0],
 			signal: d[1],
 			divergence:
-				d[0] !== undefined && d[1] !== undefined ? d[0] - d[1] : undefined,
-		}));
-	};
+				d[0] !== undefined && d[1] !== undefined ? d[0] - d[1] : undefined
+		}))
+	}
 	calculator.undefinedLength = () => {
-		const { slow, signal } = options;
-		return slow + signal - 1;
-	};
+		const { slow, signal } = options
+		return slow + signal - 1
+	}
 	calculator.options = (newOptions) => {
 		if (newOptions === undefined) {
-			return options;
+			return options
 		}
-		options = Object.assign(Object.assign({}, defaultOptions), newOptions);
-		return calculator;
-	};
-	return calculator;
+		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
+		return calculator
+	}
+	return calculator
 }
 // # sourceMappingURL=macd.js.map

@@ -174,7 +174,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		}
 
 		const candleChartExtents = (data: IOHLCData) => {
-			if (time == '1D' || '5D') {
+			if (time === '1D' || time === '5D') {
 				return [data.close]
 			} else {
 				return [data.high, data.low, data.ma1, data.ma2]

@@ -1,13 +1,13 @@
-import { useQuote } from 'hooks/useQuote';
-import { Info } from 'types/Info';
-import { Overview } from 'types/Overview';
+import { useQuote } from 'hooks/useQuote'
+import { Info } from 'types/Info'
+import { Overview } from 'types/Overview'
 
 const cssRows =
-	'flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0';
-const cssCells = 'py-[1px] sm:py-2 px-1 whitespace-nowrap';
-const cssCellLeft = cssCells;
+	'flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0'
+const cssCells = 'py-[1px] sm:py-2 px-1 whitespace-nowrap'
+const cssCellLeft = cssCells
 const cssCellRight =
-	cssCells + ' text-left sm:text-right text-base sm:text-small font-semibold';
+	cssCells + ' text-left sm:text-right text-base sm:text-small font-semibold'
 
 export const InfoTable = ({ data }: { data: Overview }) => {
 	return (
@@ -47,15 +47,15 @@ export const InfoTable = ({ data }: { data: Overview }) => {
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>1-Year Return</td>
-					<td className={cssCellRight}>{data.change1y}</td>
+					<td className={cssCellRight}>{data.change1y || 'n/a'}</td>
 				</tr>
 			</tbody>
 		</table>
-	);
-};
+	)
+}
 
 export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
-	const q = useQuote(info);
+	const q = useQuote(info)
 
 	return (
 		<table className="text-small w-[48%] lg:w-auto text-gray-900">
@@ -100,5 +100,5 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 				</tr>
 			</tbody>
 		</table>
-	);
-};
+	)
+}

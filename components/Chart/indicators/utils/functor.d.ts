@@ -1,1 +1,1 @@
-export declare const functor: (v: any) => any;
+export declare const functor: (v: any) => any

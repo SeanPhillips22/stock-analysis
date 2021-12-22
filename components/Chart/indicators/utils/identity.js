@@ -1,2 +1,2 @@
-export const identity = (d) => d;
+export const identity = (d) => d
 // # sourceMappingURL=identity.js.map

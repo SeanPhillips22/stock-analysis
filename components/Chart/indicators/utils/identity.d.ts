@@ -1,1 +1,1 @@
-export declare const identity: <T>(d: T) => T;
+export declare const identity: <T>(d: T) => T

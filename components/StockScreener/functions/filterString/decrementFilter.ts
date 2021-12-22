@@ -1,5 +1,5 @@
 export function decrementFilter(string: string) {
-	let append = '';
+	let append = ''
 
 	// Check if last character is K, M, B or T
 	if (
@@ -8,11 +8,11 @@ export function decrementFilter(string: string) {
 		string.slice(-1) === 'B' ||
 		string.slice(-1) === 'T'
 	) {
-		append = string.slice(-1);
+		append = string.slice(-1)
 
 		// Remove last character
-		string = string.slice(0, -1);
+		string = string.slice(0, -1)
 	}
 
-	return Number(string) - 1 + append;
+	return Number(string) - 1 + append
 }

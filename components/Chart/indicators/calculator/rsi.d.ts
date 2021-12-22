@@ -1,14 +1,14 @@
 export interface RSIOptions {
-	windowSize: number;
-	sourcePath?: string;
+	windowSize: number
+	sourcePath?: string
 }
 export default function (): {
-	(data: any[]): any[];
-	undefinedLength(): number;
+	(data: any[]): any[]
+	undefinedLength(): number
 	options(newOptions?: RSIOptions | undefined):
 		| {
-				windowSize: number;
-				sourcePath: string;
+				windowSize: number
+				sourcePath: string
 		  }
-		| any;
-};
+		| any
+}

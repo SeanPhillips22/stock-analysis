@@ -1,9 +1,9 @@
-import { CloseInput } from 'components/CloseInput';
+import { CloseInput } from 'components/CloseInput'
 
 type Props = {
-	search: string;
-	setSearch: (search: string) => void;
-};
+	search: string
+	setSearch: (search: string) => void
+}
 
 /**
  * The search box inside the custom column dropdown
@@ -25,5 +25,5 @@ export function ColumnSearch({ search, setSearch }: Props) {
 			/>
 			<CloseInput search={search} setSearch={setSearch} />
 		</div>
-	);
+	)
 }

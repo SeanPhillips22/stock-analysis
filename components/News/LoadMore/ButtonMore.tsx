@@ -1,12 +1,12 @@
-import { SpinnerIcon } from 'components/Icons/Spinner';
-import { Success } from 'components/Alerts/Success';
+import { SpinnerIcon } from 'components/Icons/Spinner'
+import { Success } from 'components/Alerts/Success'
 
 type Props = {
-	fn: () => Promise<void>;
-	tag: string;
-	loading: boolean;
-	end: boolean;
-};
+	fn: () => Promise<void>
+	tag: string
+	loading: boolean
+	end: boolean
+}
 
 export function ButtonMore({ fn, tag, loading, end }: Props) {
 	if (end) {
@@ -14,7 +14,7 @@ export function ButtonMore({ fn, tag, loading, end }: Props) {
 			<div className="mt-4">
 				<Success message="You have reached the end of the news feed!" />
 			</div>
-		);
+		)
 	}
 
 	return (
@@ -32,5 +32,5 @@ export function ButtonMore({ fn, tag, loading, end }: Props) {
 				'Load More News'
 			)}
 		</button>
-	);
+	)
 }

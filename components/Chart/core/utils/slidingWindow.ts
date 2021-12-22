@@ -29,117 +29,117 @@ THE SOFTWARE.
 
 */
 
-import { functor, path } from './index';
-import { noop } from './noop';
+import { functor, path } from './index'
+import { noop } from './noop'
 
 interface SlidingWindow {
-	(data: any[]): any[];
-	misc(): any;
-	misc(x: any): SlidingWindow;
-	accumulator(): any;
-	accumulator(x: any): SlidingWindow;
-	skipInitial(): number;
-	skipInitial(x: number): SlidingWindow;
-	source(): any;
-	source(source: any): SlidingWindow;
-	sourcePath(): any;
-	sourcePath(x: any): SlidingWindow;
-	windowSize(): number;
-	windowSize(windowSize: number): SlidingWindow;
-	undefinedValue(): any;
-	undefinedValue(x: any): SlidingWindow;
+	(data: any[]): any[]
+	misc(): any
+	misc(x: any): SlidingWindow
+	accumulator(): any
+	accumulator(x: any): SlidingWindow
+	skipInitial(): number
+	skipInitial(x: number): SlidingWindow
+	source(): any
+	source(source: any): SlidingWindow
+	sourcePath(): any
+	sourcePath(x: any): SlidingWindow
+	windowSize(): number
+	windowSize(windowSize: number): SlidingWindow
+	undefinedValue(): any
+	undefinedValue(x: any): SlidingWindow
 }
 
 export default function SlidingWindowComponent() {
-	let undefinedValue: any;
-	let windowSize = 10;
-	let accumulator = noop;
-	let sourcePath: any;
-	let source: any;
-	let skipInitial = 0;
-	let misc: any;
+	let undefinedValue: any
+	let windowSize = 10
+	let accumulator = noop
+	let sourcePath: any
+	let source: any
+	let skipInitial = 0
+	let misc: any
 
 	const slidingWindow = (data: any[]) => {
-		const sourceFunction = source || path(sourcePath);
+		const sourceFunction = source || path(sourcePath)
 
 		// @ts-ignore
-		const size = functor(windowSize).apply(this, arguments);
+		const size = functor(windowSize).apply(this, arguments)
 		const windowData = data
 			.slice(skipInitial, size + skipInitial)
-			.map(sourceFunction);
+			.map(sourceFunction)
 
-		let accumulatorIdx = 0;
-		const undef = functor(undefinedValue);
+		let accumulatorIdx = 0
+		const undef = functor(undefinedValue)
 		return data.map((d, i) => {
 			if (i < skipInitial + size - 1) {
-				return undef(sourceFunction(d), i, misc);
+				return undef(sourceFunction(d), i, misc)
 			}
 			if (i >= skipInitial + size) {
 				// Treat windowData as FIFO rolling buffer
-				windowData.shift();
-				windowData.push(sourceFunction(d, i));
+				windowData.shift()
+				windowData.push(sourceFunction(d, i))
 			}
 
 			// @ts-ignore
-			return accumulator(windowData, i, accumulatorIdx++, misc);
-		});
-	};
+			return accumulator(windowData, i, accumulatorIdx++, misc)
+		})
+	}
 
 	slidingWindow.undefinedValue = function (x: any) {
 		if (!arguments.length) {
-			return undefinedValue;
+			return undefinedValue
 		}
-		undefinedValue = x;
-		return slidingWindow;
-	};
+		undefinedValue = x
+		return slidingWindow
+	}
 
 	slidingWindow.windowSize = function (x: any) {
 		if (!arguments.length) {
-			return windowSize;
+			return windowSize
 		}
-		windowSize = x;
-		return slidingWindow;
-	};
+		windowSize = x
+		return slidingWindow
+	}
 
 	slidingWindow.misc = function (x: any) {
 		if (!arguments.length) {
-			return misc;
+			return misc
 		}
-		misc = x;
-		return slidingWindow;
-	};
+		misc = x
+		return slidingWindow
+	}
 
 	slidingWindow.accumulator = function (x: any) {
 		if (!arguments.length) {
-			return accumulator;
+			return accumulator
 		}
-		accumulator = x;
-		return slidingWindow;
-	};
+		accumulator = x
+		return slidingWindow
+	}
 
 	slidingWindow.skipInitial = function (x: any) {
 		if (!arguments.length) {
-			return skipInitial;
+			return skipInitial
 		}
-		skipInitial = x;
-		return slidingWindow;
-	};
+		skipInitial = x
+		return slidingWindow
+	}
 
 	slidingWindow.sourcePath = function (x: any) {
 		if (!arguments.length) {
-			return sourcePath;
+			return sourcePath
 		}
-		sourcePath = x;
-		return slidingWindow;
-	};
+		sourcePath = x
+		return slidingWindow
+	}
 
 	slidingWindow.source = function (x: any) {
 		if (!arguments.length) {
-			return source;
+			return source
 		}
-		source = x;
-		return slidingWindow;
-	};
+		source = x
+		return slidingWindow
+	}
 
-	return slidingWindow as SlidingWindow;
+	return slidingWindow as SlidingWindow
 }

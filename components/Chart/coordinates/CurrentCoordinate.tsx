@@ -1,25 +1,25 @@
 /* eslint-disable no-invalid-this */
 /* eslint-disable valid-jsdoc */
-import { getMouseCanvas, GenericChartComponent } from '../core';
-import * as React from 'react';
+import { getMouseCanvas, GenericChartComponent } from '../core'
+import * as React from 'react'
 
 export interface CurrentCoordinateProps {
 	/**
 	 * Fill style for the circle.
 	 */
-	readonly fillStyle?: string | ((datum: any) => string);
+	readonly fillStyle?: string | ((datum: any) => string)
 	/**
 	 * The radius to draw the circle
 	 */
-	readonly r: number;
+	readonly r: number
 	/**
 	 * Stroke of the circle
 	 */
-	readonly strokeStyle?: string | ((datum: any) => string);
+	readonly strokeStyle?: string | ((datum: any) => string)
 	/**
 	 * Y accessor to use for the circle.
 	 */
-	readonly yAccessor: (item: any) => number;
+	readonly yAccessor: (item: any) => number
 }
 
 /**
@@ -28,8 +28,8 @@ export interface CurrentCoordinateProps {
 export class CurrentCoordinate extends React.Component<CurrentCoordinateProps> {
 	public static defaultProps = {
 		fillStyle: '#2196f3',
-		r: 3,
-	};
+		r: 3
+	}
 
 	public render() {
 		return (
@@ -38,43 +38,43 @@ export class CurrentCoordinate extends React.Component<CurrentCoordinateProps> {
 				canvasToDraw={getMouseCanvas}
 				drawOn={['mousemove', 'pan']}
 			/>
-		);
+		)
 	}
 
 	private readonly drawOnCanvas = (
 		ctx: CanvasRenderingContext2D,
 		moreProps: any
 	) => {
-		const circle = this.getCircle(moreProps);
+		const circle = this.getCircle(moreProps)
 		if (circle === undefined) {
-			return;
+			return
 		}
 
-		const { fillStyle, r, strokeStyle } = this.props;
+		const { fillStyle, r, strokeStyle } = this.props
 
 		const fillColor =
 			fillStyle instanceof Function
 				? fillStyle(moreProps.currentItem)
-				: fillStyle;
+				: fillStyle
 		if (fillColor !== undefined) {
-			ctx.fillStyle = fillColor;
+			ctx.fillStyle = fillColor
 		}
 
 		const strokeColor =
 			strokeStyle instanceof Function
 				? strokeStyle(moreProps.currentItem)
-				: strokeStyle;
+				: strokeStyle
 		if (strokeColor !== undefined) {
-			ctx.strokeStyle = strokeColor;
+			ctx.strokeStyle = strokeColor
 		}
 
-		ctx.beginPath();
-		ctx.arc(circle.x, circle.y, r, 0, 2 * Math.PI, false);
-		ctx.fill();
+		ctx.beginPath()
+		ctx.arc(circle.x, circle.y, r, 0, 2 * Math.PI, false)
+		ctx.fill()
 		if (strokeColor !== undefined) {
-			ctx.stroke();
+			ctx.stroke()
 		}
-	};
+	}
 
 	private readonly getCircle = (moreProps: any) => {
 		const {
@@ -82,25 +82,25 @@ export class CurrentCoordinate extends React.Component<CurrentCoordinateProps> {
 			xScale,
 			chartConfig: { yScale },
 			currentItem,
-			xAccessor,
-		} = moreProps;
+			xAccessor
+		} = moreProps
 
 		if (!show || currentItem === undefined) {
-			return undefined;
+			return undefined
 		}
 
-		const { yAccessor } = this.props;
+		const { yAccessor } = this.props
 
-		const xValue = xAccessor(currentItem);
-		const yValue = yAccessor(currentItem);
+		const xValue = xAccessor(currentItem)
+		const yValue = yAccessor(currentItem)
 
 		if (yValue === undefined) {
-			return undefined;
+			return undefined
 		}
 
-		const x = Math.round(xScale(xValue));
-		const y = Math.round(yScale(yValue));
+		const x = Math.round(xScale(xValue))
+		const y = Math.round(yScale(yValue))
 
-		return { x, y };
-	};
+		return { x, y }
+	}
 }

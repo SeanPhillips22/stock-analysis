@@ -1,6 +1,7 @@
+export type ScreenerTypes = 'stocks' | 'ipo' | 'etf' | ''
+
 // All possible filters
 // The IDs are shortened to minimize data payload size
-
 export type FilterId =
 	| 's' // Symbol
 	| 'n' // Name
@@ -67,6 +68,7 @@ export type FilterId =
 	| 'dps' // Dividend ($)
 	| 'dg' // Div. Growth
 	| 'pr' // Payout Ratio
+	| 'payoutFrequency' // Payout Frequency
 	| 'buybackYield' // Buyback Yield
 	| 'totalReturn' // Total Return
 	| 'averageVolume' // Average Volume
@@ -109,6 +111,16 @@ export type FilterId =
 	| 'ipoPriceRange' // IPO Price Range
 	| 'spac' // Is SPAC
 	| 'sharesOffered' // Shares Offered
+	| 'assets' // ETF assets
+	| 'etfPeRatio' // ETF PE Ratio
+	| 'assetClass' // ETF Asset Class
+	| 'expenseRatio' // ETF Expense Ratio
+	| 'holdings' // ETF Holdings
+	| 'inceptionDate' // ETF Inception Date
+	| 'etfSector' // ETF Sector
+	| 'etfRegion' // ETF Geographic Region
+	| 'issuer' // ETF Geographic Region
+	| 'etfIndex' // Index tracked by the ETF
 
 // Results columns
 export type ColumnName =
@@ -120,27 +132,48 @@ export type ColumnName =
 	| 'Valuation'
 	| 'Dividends'
 	| 'Analysts'
-	| 'Custom'
 	| 'Income'
 	| 'Balance Sheet'
 	| 'Cash Flow'
 
 export type ColumnsMap = {
-	// eslint-disable-next-line no-unused-vars
-	[key in ColumnName]: FilterId[]
+	[key: string]: FilterId[]
 }
 
 export type SingleStock = {
-	// eslint-disable-next-line no-unused-vars
 	[key in FilterId]: string
 }
 
 export type SingleIPO = {
-	// eslint-disable-next-line no-unused-vars
+	[key in FilterId]: string
+}
+
+export type SingleETF = {
 	[key in FilterId]: string
 }
 
 export type SingleDataPoint = string[]
+
+export type ScreenerData = {
+	stocks: {
+		count: number
+		data: SingleStock[]
+	}
+}
+
+export type IPOScreenerData = {
+	ipos: {
+		count: number
+		data: SingleIPO[]
+	}
+}
+
+export type ETFScreenerData = {
+	etfs: {
+		count: number
+		data: SingleETF[]
+	}
+}
 
 export type CellString = {
 	cell: {
@@ -161,12 +194,18 @@ export type FilterProps = {
 	options: FilterOption[]
 	filterType: FilterType
 	numberType?: NumberType
+	variable?: boolean
 }
 
 export type FilterOption = {
 	name: string
 	value: string
 	div?: boolean // Set true to add a divider in the dropdown
+}
+
+export type VariableFilter = {
+	options: FilterOption[]
+	id: FilterId
 }
 
 export type FilterValue = {

@@ -1,24 +1,23 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { mappedSlidingWindow } from '../utils';
-import { SAR as defaultOptions } from './defaultOptionsForComputation';
+import { mappedSlidingWindow } from '../utils'
+import { SAR as defaultOptions } from './defaultOptionsForComputation'
 function calc(prev, now) {
-	const risingSar =
-		prev.risingSar + prev.af * (prev.risingEp - prev.risingSar);
+	const risingSar = prev.risingSar + prev.af * (prev.risingEp - prev.risingSar)
 	const fallingSar =
-		prev.fallingSar - prev.af * (prev.fallingSar - prev.fallingEp);
-	const risingEp = Math.max(prev.risingEp, now.high);
-	const fallingEp = Math.min(prev.fallingEp, now.low);
+		prev.fallingSar - prev.af * (prev.fallingSar - prev.fallingEp)
+	const risingEp = Math.max(prev.risingEp, now.high)
+	const fallingEp = Math.min(prev.fallingEp, now.low)
 	return {
 		risingSar,
 		fallingSar,
 		risingEp,
-		fallingEp,
-	};
+		fallingEp
+	}
 }
 export default function Sar() {
-	let options = defaultOptions;
+	let options = defaultOptions
 	const calculator = (data) => {
-		const { accelerationFactor, maxAccelerationFactor } = options;
+		const { accelerationFactor, maxAccelerationFactor } = options
 		const algorithm = mappedSlidingWindow()
 			.windowSize(2)
 			// @ts-ignore
@@ -28,14 +27,14 @@ export default function Sar() {
 					risingEp: high,
 					fallingSar: high,
 					fallingEp: low,
-					af: accelerationFactor,
-				};
+					af: accelerationFactor
+				}
 			})
 			.accumulator(([prev, now]) => {
 				const { risingSar, fallingSar, risingEp, fallingEp } = calc(
 					prev,
 					now
-				);
+				)
 				if (
 					prev.use === undefined &&
 					risingSar > now.low &&
@@ -45,8 +44,8 @@ export default function Sar() {
 						risingSar,
 						fallingSar,
 						risingEp,
-						fallingEp,
-					};
+						fallingEp
+					}
 				}
 				const use =
 					prev.use !== undefined
@@ -59,7 +58,7 @@ export default function Sar() {
 							: 'falling'
 						: risingSar > now.low
 						? 'falling'
-						: 'rising';
+						: 'rising'
 				const current =
 					prev.use === use
 						? {
@@ -70,34 +69,34 @@ export default function Sar() {
 								fallingEp,
 								risingEp,
 								fallingSar,
-								risingSar,
+								risingSar
 						  }
 						: {
 								af: accelerationFactor,
 								fallingEp: now.low,
 								risingEp: now.high,
 								fallingSar: Math.max(prev.risingEp, now.high),
-								risingSar: Math.min(prev.fallingEp, now.low),
-						  };
-				const { date, high, low } = now;
+								risingSar: Math.min(prev.fallingEp, now.low)
+						  }
+				const { date, high, low } = now
 				return Object.assign(Object.assign({ date, high, low }, current), {
 					use,
-					sar: use === 'falling' ? current.fallingSar : current.risingSar,
-				});
-			});
-		const calculatedData = algorithm(data).map((d) => d.sar);
-		return calculatedData;
-	};
+					sar: use === 'falling' ? current.fallingSar : current.risingSar
+				})
+			})
+		const calculatedData = algorithm(data).map((d) => d.sar)
+		return calculatedData
+	}
 	calculator.undefinedLength = () => {
-		return 1;
-	};
+		return 1
+	}
 	calculator.options = (newOptions) => {
 		if (newOptions === undefined) {
-			return options;
+			return options
 		}
-		options = Object.assign(Object.assign({}, defaultOptions), newOptions);
-		return calculator;
-	};
-	return calculator;
+		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
+		return calculator
+	}
+	return calculator
 }
 // # sourceMappingURL=sar.js.map

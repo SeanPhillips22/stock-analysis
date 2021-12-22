@@ -6,21 +6,21 @@ const people = [
 		imageUrl: '/img/kris-gunnars.jpg',
 		bio: "Kris is a full-time investor and internet entrepreneur. He founded Stock Analysis in 2019 and also owns the investment company Skuggi Capital ehf. He has a Bachelor's degree in medicine from the University of Iceland. Kris Gunnars is a pen name, his full name is Kristjan Mar Gunnarsson.",
 		twitterUrl: 'https://twitter.com/krisgunnars',
-		linkedinUrl: 'https://www.linkedin.com/in/kris-gunnars/',
+		linkedinUrl: 'https://www.linkedin.com/in/kris-gunnars/'
 	},
 	{
 		name: 'Orn Orri Olafsson',
 		role: 'Developer / Part-Owner',
 		imageUrl: '/img/orn-orri.jpg',
-		bio: 'Orn is a professional programmer. He has a degree in computer science from the University of Reykjavik.',
+		bio: 'Orn is a professional programmer. He has a degree in computer science from the University of Reykjavik.'
 	},
 	{
 		name: 'Kendal March',
 		role: 'Accounting Expert',
 		imageUrl: '/img/kendal-march.jpg',
-		bio: 'Kendal has many years of experience working in accounting. She manages our IPO data and handles quality control for our stocks and ETFs.',
-	},
-];
+		bio: 'Kendal has many years of experience working in accounting. She manages our IPO data and handles quality control for our stocks and ETFs.'
+	}
+]
 
 export function AboutTeam() {
 	return (
@@ -125,5 +125,5 @@ export function AboutTeam() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

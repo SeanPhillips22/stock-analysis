@@ -1,7 +1,7 @@
-import { SuccessIcon } from 'components/Icons/Success';
+import { SuccessIcon } from 'components/Icons/Success'
 
 interface Props {
-	message: string;
+	message: string
 }
 
 export const Success = ({ message }: Props) => (
@@ -17,4 +17,4 @@ export const Success = ({ message }: Props) => (
 			</div>
 		</div>
 	</div>
-);
+)

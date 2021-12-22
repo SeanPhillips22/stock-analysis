@@ -1,51 +1,51 @@
-import { DividendChartDataType } from 'types/Dividend';
-import { useEffect, useState } from 'react';
-import { SingleChart } from './SingleChart';
+import { DividendChartDataType } from 'types/Dividend'
+import { useEffect, useState } from 'react'
+import { SingleChart } from './SingleChart'
 
 interface Props {
-	data: DividendChartDataType;
+	data: DividendChartDataType
 	options: {
-		growth: boolean;
-		trailing: boolean;
-	};
-	ticker: string;
+		growth: boolean
+		trailing: boolean
+	}
+	ticker: string
 }
 
 // Count how many data points are not zero, hide dividend growth chart if 0-1 data points
-function countNotZero(yData: Number[]) {
-	let count = 0;
+function countNotZero(yData: number[]) {
+	let count = 0
 	yData.forEach((y) => {
 		if (y !== 0) {
-			count++;
+			count++
 		}
-	});
-	return count;
+	})
+	return count
 }
 
 export const DividendChart = ({ data, options, ticker }: Props) => {
-	const [active, setActive] = useState('all');
-	const [y1, setY1] = useState<number[]>([]);
-	const [y2, setY2] = useState<number[]>([]);
+	const [active, setActive] = useState('all')
+	const [y1, setY1] = useState<number[]>([])
+	const [y2, setY2] = useState<number[]>([])
 
 	useEffect(() => {
-		setY1(data.amount);
-		setY2(data.growth);
-	}, [data.amount, data.growth]);
+		setY1(data.amount)
+		setY2(data.growth)
+	}, [data.amount, data.growth])
 
 	const setAll = () => {
-		setActive('all');
-		setY1(data.amount);
-		setY2(data.growth);
-	};
+		setActive('all')
+		setY1(data.amount)
+		setY2(data.growth)
+	}
 
 	const setTrailing = () => {
-		setActive('trailing');
-		setY1(data.ttm);
-		setY2(data.growthTTM);
-	};
+		setActive('trailing')
+		setY1(data.ttm)
+		setY2(data.growthTTM)
+	}
 
 	if (data === null || data.amount.length === 0) {
-		return null;
+		return null
 	}
 
 	return (
@@ -102,5 +102,5 @@ export const DividendChart = ({ data, options, ticker }: Props) => {
 				)}
 			</div>
 		</>
-	);
-};
+	)
+}

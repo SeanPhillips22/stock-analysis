@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { CompanyInfo, Logo } from 'types/Company';
+import { CompanyInfo, Logo } from 'types/Company'
 
 interface Props {
-	info: CompanyInfo;
-	logo: Logo;
+	info: CompanyInfo
+	logo: Logo
 }
 
 export const ProfileInfo = ({ info, logo }: Props) => {
@@ -96,5 +96,5 @@ export const ProfileInfo = ({ info, logo }: Props) => {
 				</tbody>
 			</table>
 		</div>
-	);
-};
+	)
+}

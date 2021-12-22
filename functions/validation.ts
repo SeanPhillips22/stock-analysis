@@ -1,19 +1,20 @@
+/* eslint-disable no-useless-escape */
 // Validate an email address
 export const validateEmailAddress = (emailAddress: string) => {
 	const re =
-		/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(String(emailAddress).toLowerCase());
-};
+		/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	return re.test(String(emailAddress).toLowerCase())
+}
 
 // Validate the length of a string
 export const validateLength = (str: string, min: number) => {
-	return str.length >= min;
-};
+	return str.length >= min
+}
 
 // Validate that a URL bit is valid, no ?/&/#
 export const validateUrlBit = (bit: string | null | undefined) => {
 	if (!bit) {
-		return null;
+		return null
 	}
 
 	if (
@@ -21,8 +22,8 @@ export const validateUrlBit = (bit: string | null | undefined) => {
 		bit.charAt(0) === '?' ||
 		bit.charAt(0) === '%'
 	) {
-		return null;
+		return null
 	}
 
-	return bit;
-};
+	return bit
+}

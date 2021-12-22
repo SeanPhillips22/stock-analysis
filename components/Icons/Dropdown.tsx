@@ -1,5 +1,5 @@
 interface IProps {
-	classes: string;
+	classes: string
 }
 
 export const DropdownIcon = ({ classes }: IProps) => (
@@ -15,4 +15,4 @@ export const DropdownIcon = ({ classes }: IProps) => (
 			clipRule="evenodd"
 		></path>
 	</svg>
-);
+)

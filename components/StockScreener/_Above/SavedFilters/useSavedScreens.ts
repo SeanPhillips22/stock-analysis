@@ -1,14 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { screenerState } from 'components/StockScreener/screener.state'
-import { useEffect, useState } from 'react'
-import { FilterId } from 'components/StockScreener/screener.types'
+import { useState } from 'react'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { supabase } from 'functions/supabase'
 import { useAuthState } from 'hooks/useAuthState'
-
-type SavedFilter = {
-	id: FilterId
-	value: string
-}
 
 // if there are no saved screens, return this initial state
 const initialState = {
@@ -16,8 +11,8 @@ const initialState = {
 	screeners: {
 		stocks: {},
 		ipo: {},
-		etf: {},
-	},
+		etf: {}
+	}
 }
 
 /**
@@ -25,7 +20,7 @@ const initialState = {
  * @param type What the screener is for (stock, ipo, etf)
  * @returns
  */
-export function useSavedScreens(type: 'stocks' | 'ipo') {
+export function useSavedScreens(type: ScreenerTypes) {
 	const { user } = useAuthState()
 	const filters = screenerState((state) => state.filters)
 	const [msg, setMsg] = useState('')
@@ -38,13 +33,12 @@ export function useSavedScreens(type: 'stocks' | 'ipo') {
 			.from('userdata')
 			.select('screener')
 
-		let screener = fetchedData![0].screener
-		return screener ?? initialState
+		return fetchedData ? fetchedData[0].screener : initialState
 	}
 
 	const { data } = useQuery(['screener', type], () => fetchScreener(), {
 		refetchOnWindowFocus: true,
-		enabled: user ? true : false,
+		enabled: user ? true : false
 	})
 
 	function clearMessages() {
@@ -64,7 +58,7 @@ export function useSavedScreens(type: 'stocks' | 'ipo') {
 			// add the new screen to the screener
 			id: data.count,
 			name: name,
-			filters: save,
+			filters: save
 		}
 
 		let { error } = await supabase
@@ -103,13 +97,13 @@ export function useSavedScreens(type: 'stocks' | 'ipo') {
 	const add = useMutation((name: string) => addScreen(name), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('screener')
-		},
+		}
 	})
 
 	const del = useMutation((name: string) => deleteScreen(name), {
 		onSuccess: () => {
 			queryClient.invalidateQueries('screener')
-		},
+		}
 	})
 
 	return {
@@ -120,6 +114,6 @@ export function useSavedScreens(type: 'stocks' | 'ipo') {
 		setMsg,
 		err,
 		setErr,
-		clearMessages,
+		clearMessages
 	}
 }

@@ -1,35 +1,35 @@
 const capitalize = (word: string) => {
-	const split = word.split('-');
+	const split = word.split('-')
 	if (split.length === 1) {
-		return word.charAt(0).toUpperCase() + word.slice(1);
+		return word.charAt(0).toUpperCase() + word.slice(1)
 	} else {
-		let capitalized = '';
+		let capitalized = ''
 		for (let i = 0; i < split.length; i++) {
 			if (i > 0) {
-				capitalized += ' ';
+				capitalized += ' '
 			}
-			capitalized += split[i].charAt(0).toUpperCase() + split[i].slice(1);
+			capitalized += split[i].charAt(0).toUpperCase() + split[i].slice(1)
 		}
-		return capitalized;
+		return capitalized
 	}
-};
+}
 
 export const getSchema = (path: string, title: string) => {
-	const split = path.split('/');
-	const one = split[0] || null;
-	const two = split[1] || null;
-	const three = split[2] || null;
-	const four = split[3] || null;
+	const split = path.split('/')
+	const one = split[0] || null
+	const two = split[1] || null
+	const three = split[2] || null
+	const four = split[3] || null
 
-	let obj: object | undefined;
+	let obj: any
 
 	if (one === 'stocks' || one === 'etf') {
-		let oneC: string | undefined;
+		let oneC: string | undefined
 		if (one === 'stocks') {
-			oneC = 'Stocks';
+			oneC = 'Stocks'
 		}
 		if (one === 'etf') {
-			oneC = 'ETF';
+			oneC = 'ETF'
 		}
 
 		if (!two) {
@@ -40,17 +40,17 @@ export const getSchema = (path: string, title: string) => {
 					{
 						'@type': 'ListItem',
 						position: 1,
-						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' }
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
-							name: oneC,
-						},
-					},
-				],
-			};
+							name: oneC
+						}
+					}
+				]
+			}
 		} else if (two && !three) {
 			obj = {
 				'@context': 'https://schema.org',
@@ -59,23 +59,23 @@ export const getSchema = (path: string, title: string) => {
 					{
 						'@type': 'ListItem',
 						position: 1,
-						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' }
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
 							'@id': `https://stockanalysis.com/${one}/`,
-							name: oneC,
-						},
+							name: oneC
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 3,
-						item: { name: two.toUpperCase() },
-					},
-				],
-			};
+						item: { name: two.toUpperCase() }
+					}
+				]
+			}
 		} else if (three && !four) {
 			obj = {
 				'@context': 'https://schema.org',
@@ -84,33 +84,33 @@ export const getSchema = (path: string, title: string) => {
 					{
 						'@type': 'ListItem',
 						position: 1,
-						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' }
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
 							'@id': `https://stockanalysis.com/${one}/`,
-							name: oneC,
-						},
+							name: oneC
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 3,
 						item: {
 							'@id': `https://stockanalysis.com/${one}/${two.toLowerCase()}/`,
-							name: two.toUpperCase(),
-						},
+							name: two.toUpperCase()
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 4,
 						item: {
-							name: capitalize(three),
-						},
-					},
-				],
-			};
+							name: capitalize(three)
+						}
+					}
+				]
+			}
 		} else if (three && four) {
 			obj = {
 				'@context': 'https://schema.org',
@@ -119,46 +119,46 @@ export const getSchema = (path: string, title: string) => {
 					{
 						'@type': 'ListItem',
 						position: 1,
-						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' }
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
 							'@id': `https://stockanalysis.com/${one}/`,
-							name: oneC,
-						},
+							name: oneC
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 3,
 						item: {
 							'@id': `https://stockanalysis.com/${one}/${two.toLowerCase()}/`,
-							name: two.toUpperCase(),
-						},
+							name: two.toUpperCase()
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 4,
 						item: {
 							'@id': `https://stockanalysis.com/${one}/${two.toLowerCase()}/${three.toLowerCase()}/`,
-							name: capitalize(three),
-						},
+							name: capitalize(three)
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 5,
 						item: {
-							name: capitalize(four),
-						},
-					},
-				],
-			};
+							name: capitalize(four)
+						}
+					}
+				]
+			}
 		}
 	} else if (one === 'ipos') {
-		let twoC: string | undefined;
+		let twoC: string | undefined
 		if (two === 'calendar' || two === 'news' || two === 'statistics') {
-			twoC = 'IPO ' + capitalize(two);
+			twoC = 'IPO ' + capitalize(two)
 		}
 
 		if (!two) {
@@ -169,17 +169,17 @@ export const getSchema = (path: string, title: string) => {
 					{
 						'@type': 'ListItem',
 						position: 1,
-						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' }
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
-							name: 'Recent IPOs',
-						},
-					},
-				],
-			};
+							name: 'Recent IPOs'
+						}
+					}
+				]
+			}
 		} else if (two) {
 			obj = {
 				'@context': 'https://schema.org',
@@ -188,26 +188,26 @@ export const getSchema = (path: string, title: string) => {
 					{
 						'@type': 'ListItem',
 						position: 1,
-						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' }
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
 							'@id': 'https://stockanalysis.com/ipos/',
-							name: 'IPOs',
-						},
+							name: 'IPOs'
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 3,
 						item: {
 							'@id': `https://stockanalysis.com/ipos/${two.toLowerCase()}/`,
-							name: twoC || two,
-						},
-					},
-				],
-			};
+							name: twoC || two
+						}
+					}
+				]
+			}
 		}
 	} else if (one === 'actions') {
 		if (!two) {
@@ -218,17 +218,17 @@ export const getSchema = (path: string, title: string) => {
 					{
 						'@type': 'ListItem',
 						position: 1,
-						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' }
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
-							name: 'Corporate Actions',
-						},
-					},
-				],
-			};
+							name: 'Corporate Actions'
+						}
+					}
+				]
+			}
 		} else if (two) {
 			if (!three) {
 				obj = {
@@ -240,26 +240,26 @@ export const getSchema = (path: string, title: string) => {
 							position: 1,
 							item: {
 								'@id': 'https://stockanalysis.com/',
-								name: 'Home',
-							},
+								name: 'Home'
+							}
 						},
 						{
 							'@type': 'ListItem',
 							position: 2,
 							item: {
 								'@id': 'https://stockanalysis.com/actions/',
-								name: 'Actions',
-							},
+								name: 'Actions'
+							}
 						},
 						{
 							'@type': 'ListItem',
 							position: 3,
 							item: {
-								name: capitalize(two),
-							},
-						},
-					],
-				};
+								name: capitalize(two)
+							}
+						}
+					]
+				}
 			} else {
 				obj = {
 					'@context': 'https://schema.org',
@@ -270,34 +270,34 @@ export const getSchema = (path: string, title: string) => {
 							position: 1,
 							item: {
 								'@id': 'https://stockanalysis.com/',
-								name: 'Home',
-							},
+								name: 'Home'
+							}
 						},
 						{
 							'@type': 'ListItem',
 							position: 2,
 							item: {
 								'@id': 'https://stockanalysis.com/actions/',
-								name: 'Actions',
-							},
+								name: 'Actions'
+							}
 						},
 						{
 							'@type': 'ListItem',
 							position: 3,
 							item: {
 								'@id': `https://stockanalysis.com/actions/${two}/`,
-								name: capitalize(two),
-							},
+								name: capitalize(two)
+							}
 						},
 						{
 							'@type': 'ListItem',
 							position: 4,
 							item: {
-								name: capitalize(three),
-							},
-						},
-					],
-				};
+								name: capitalize(three)
+							}
+						}
+					]
+				}
 			}
 		}
 	} else {
@@ -309,18 +309,18 @@ export const getSchema = (path: string, title: string) => {
 					{
 						'@type': 'ListItem',
 						position: 1,
-						item: { '@id': 'https://stockanalysis.com/', name: 'Home' },
+						item: { '@id': 'https://stockanalysis.com/', name: 'Home' }
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
 							'@id': `https://stockanalysis.com/${one.toLowerCase()}/`,
-							name: title,
-						},
-					},
-				],
-			};
+							name: title
+						}
+					}
+				]
+			}
 		} else if (one && two) {
 			obj = {
 				'@context': 'https://schema.org',
@@ -331,33 +331,33 @@ export const getSchema = (path: string, title: string) => {
 						position: 1,
 						item: {
 							'@id': 'https://stockanalysis.com/',
-							name: 'Home',
-						},
+							name: 'Home'
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 2,
 						item: {
 							'@id': `https://stockanalysis.com/${one.toLowerCase()}/`,
-							name: capitalize(one),
-						},
+							name: capitalize(one)
+						}
 					},
 					{
 						'@type': 'ListItem',
 						position: 3,
 						item: {
 							'@id': `https://stockanalysis.com/${two.toLowerCase()}/`,
-							name: title,
-						},
-					},
-				],
-			};
+							name: title
+						}
+					}
+				]
+			}
 		}
 	}
 
 	if (obj) {
-		return obj;
+		return obj
 	}
 
-	return null;
-};
+	return null
+}

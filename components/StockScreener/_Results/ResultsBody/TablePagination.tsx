@@ -23,7 +23,7 @@ export function TablePagination({
 	pageSize,
 	setPageSize,
 	nextPage,
-	canNextPage,
+	canNextPage
 }: Props) {
 	const { isPro } = useAuthState()
 	const tablePage = screenerState((state) => state.tablePage)
@@ -34,7 +34,7 @@ export function TablePagination({
 		{ value: 20, name: '20 Rows' },
 		{ value: 50, name: '50 Rows' },
 		{ value: 100, name: '100 Rows' },
-		{ value: 200, name: '200 Rows' },
+		{ value: 200, name: '200 Rows' }
 	]
 
 	if (isPro) {

@@ -1,59 +1,59 @@
-import { formatNumber } from 'functions/numbers/formatNumber';
+import { formatNumber } from 'functions/numbers/formatNumber'
 
 // sum of all values in an object with key as year
 export const sumObjectValues = (obj: { [key: string]: number }) => {
-	let sum = 0;
+	let sum = 0
 	for (const key in obj) {
-		if (obj.hasOwnProperty(key)) {
-			sum += obj[key];
+		if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			sum += obj[key]
 		}
 	}
-	return formatNumber(sum, 0, 0);
-};
+	return formatNumber(sum, 0, 0)
+}
 
 interface Years {
 	[key: string]: {
-		[key: string]: number;
-	};
+		[key: string]: number
+	}
 }
 
 export const makeYearArray = (years: Years, current: number) => {
 	return Object.keys(years)
 		.flatMap((year) => {
-			return Number(year) < current - 2 && Number(year) > 1997 ? [year] : [];
+			return Number(year) < current - 2 && Number(year) > 1997 ? [year] : []
 		})
-		.reverse();
-};
+		.reverse()
+}
 
 export const leastMost = (years: any, current?: number) => {
 	// iterate through object to find the smallest and largest value
-	let smallest = Number.MAX_VALUE;
-	let smallestYear = '';
-	let largest = 0;
-	let largestYear = '';
+	let smallest = Number.MAX_VALUE
+	let smallestYear = ''
+	let largest = 0
+	let largestYear = ''
 
 	Object.keys(years).forEach((year) => {
 		if (Number(years[year]) < smallest && Number(year) !== current) {
-			smallest = Number(years[year]);
-			smallestYear = year;
+			smallest = Number(years[year])
+			smallestYear = year
 		}
 		if (Number(years[year]) > largest) {
-			largest = Number(years[year]);
-			largestYear = year;
+			largest = Number(years[year])
+			largestYear = year
 		}
-	});
+	})
 
 	return {
 		least: {
 			key: smallestYear,
-			value: smallest,
+			value: smallest
 		},
 		most: {
 			key: largestYear,
-			value: largest,
-		},
-	};
-};
+			value: largest
+		}
+	}
+}
 
 export const getFullMonth = (monthStr: string) => {
 	const months = [
@@ -68,9 +68,9 @@ export const getFullMonth = (monthStr: string) => {
 		'September',
 		'October',
 		'November',
-		'December',
-	];
+		'December'
+	]
 
-	const date = new Date(`${monthStr}-06-01`);
-	return months[date.getMonth()];
-};
+	const date = new Date(`${monthStr}-06-01`)
+	return months[date.getMonth()]
+}

@@ -1,16 +1,16 @@
-import { screenerState } from 'components/StockScreener/screener.state';
-import { SelectComparison } from './SelectComparison';
-import { isFilterSelected } from 'components/StockScreener/functions/isFilterSelected';
+import { screenerState } from 'components/StockScreener/screener.state'
+import { SelectComparison } from './SelectComparison'
+import { isFilterSelected } from 'components/StockScreener/functions/isFilterSelected'
 import {
 	ComparisonOption,
-	FilterProps,
-} from 'components/StockScreener/screener.types';
-import { useEffect, useState } from 'react';
-import { getFilterFromString } from 'components/StockScreener/functions/filterString/getFilterFromString';
-import { createFilterString } from 'components/StockScreener/functions/filterString/createFilterString';
-import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters';
-import { incrementFilter } from 'components/StockScreener/functions/filterString/incrementFilter';
-import { decrementFilter } from 'components/StockScreener/functions/filterString/decrementFilter';
+	FilterProps
+} from 'components/StockScreener/screener.types'
+import { useEffect, useState } from 'react'
+import { getFilterFromString } from 'components/StockScreener/functions/filterString/getFilterFromString'
+import { createFilterString } from 'components/StockScreener/functions/filterString/createFilterString'
+import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters'
+import { incrementFilter } from 'components/StockScreener/functions/filterString/incrementFilter'
+import { decrementFilter } from 'components/StockScreener/functions/filterString/decrementFilter'
 
 /**
  * Screener component that renders the custom filter where it is possible to select your own comparison. Over/Under/Between plus values.
@@ -18,69 +18,69 @@ import { decrementFilter } from 'components/StockScreener/functions/filterString
  * @return {JSX.Element}
  */
 export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
-	const { id, name, filterType, numberType } = filter;
-	const [compare, setCompare] = useState<ComparisonOption>('over');
-	const [first, setFirst] = useState<string>('');
-	const [second, setSecond] = useState<string>('');
-	const [active, setActive] = useState<string | false>();
-	const filters = screenerState((state) => state.filters);
-	const setOpenFilter = screenerState((state) => state.setOpenFilter);
-	const { add, remove } = useModifyFilters();
+	const { id, name, filterType, numberType } = filter
+	const [compare, setCompare] = useState<ComparisonOption>('over')
+	const [first, setFirst] = useState<string>('')
+	const [second, setSecond] = useState<string>('')
+	const [active, setActive] = useState<string | false>()
+	const filters = screenerState((state) => state.filters)
+	const setOpenFilter = screenerState((state) => state.setOpenFilter)
+	const { add, remove } = useModifyFilters()
 
 	// Extract the filter values in order to populate the custom choice inputs
 	useEffect(() => {
-		setActive(isFilterSelected(id, filters));
+		setActive(isFilterSelected(id, filters))
 
 		if (active) {
-			const filterObject = getFilterFromString(active, false);
+			const filterObject = getFilterFromString(active, false)
 
-			setCompare(filterObject.compare);
-			setFirst(filterObject.first?.replace('X', '-'));
-			setSecond(filterObject.second?.replace('X', '-'));
+			setCompare(filterObject.compare)
+			setFirst(filterObject.first?.replace('X', '-'))
+			setSecond(filterObject.second?.replace('X', '-'))
 
 			if (filterObject.compare === 'notzero') {
-				setFirst('');
+				setFirst('')
 			}
 			if (filterObject.compare !== 'between' && filterObject.second !== '') {
-				setSecond('');
+				setSecond('')
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, active, id]);
+	}, [filters, active, id])
 
 	// Update the filter if the values in the custom choice inputs change
 	useEffect(() => {
 		// If values have been cleared, remove the filter
 		if (active && !first && !second && compare !== 'notzero') {
-			remove(id);
-			setActive(false);
+			remove(id)
+			setActive(false)
 		}
 
 		// If the values are valid, create a new filter string and update the filter
 		else if (first || second || compare === 'notzero') {
-			const filterString = createFilterString({ compare, first, second });
+			const filterString = createFilterString({ compare, first, second })
 
 			if (filterString !== active) {
-				setActive(filterString);
-				add(id, name, filterString, filterType, numberType);
+				setActive(filterString)
+				add(id, name, filterString, filterType, numberType)
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [compare, first, second]);
+	}, [compare, first, second])
 
-	const firstValue = numberType === 'percentage' ? `${first}%` : first;
-	const secondValue = numberType === 'percentage' ? `${second}%` : second;
+	const firstValue = numberType === 'percentage' ? `${first}%` : first
+	const secondValue = numberType === 'percentage' ? `${second}%` : second
 
 	function handleKeyDown(e: React.KeyboardEvent, input: string) {
-		if (e.key === 'Enter') setOpenFilter('');
-		if (e.key === 'Escape') setOpenFilter('');
+		if (e.key === 'Enter') setOpenFilter('')
+		if (e.key === 'Escape') setOpenFilter('')
 		if (e.key === 'ArrowUp') {
-			if (input === 'first') setFirst(incrementFilter(first));
-			if (input === 'second') setSecond(incrementFilter(second));
+			if (input === 'first') setFirst(incrementFilter(first))
+			if (input === 'second') setSecond(incrementFilter(second))
 		}
 		if (e.key === 'ArrowDown') {
-			if (input === 'first') setFirst(decrementFilter(first));
-			if (input === 'second') setSecond(decrementFilter(second));
+			if (input === 'first') setFirst(decrementFilter(first))
+			if (input === 'second') setSecond(decrementFilter(second))
 		}
 	}
 
@@ -121,5 +121,5 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 				}"`}</div>
 			)}
 		</div>
-	);
+	)
 }

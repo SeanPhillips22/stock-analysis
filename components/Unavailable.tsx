@@ -1,7 +1,7 @@
 interface props {
-	message: string;
-	small?: boolean;
-	classes?: string;
+	message: string
+	small?: boolean
+	classes?: string
 }
 
 export function Unavailable({ message, small, classes }: props) {
@@ -13,5 +13,5 @@ export function Unavailable({ message, small, classes }: props) {
 		>
 			{message}
 		</div>
-	);
+	)
 }

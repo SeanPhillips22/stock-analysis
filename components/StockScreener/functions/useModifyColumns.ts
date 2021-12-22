@@ -1,12 +1,7 @@
 import { FilterId } from '../screener.types'
 import { screenerState } from 'components/StockScreener/screener.state'
-import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { getData } from 'functions/apis/API'
-
-function getScreenerUrl(type: string) {
-	if (type === 'ipo') return 'iposcreener'
-	return 'screener'
-}
+import { getScreenerUrl } from './getScreenerUrl'
 
 /**
  * A custom hook with functions to manipulate the columns in the stock screener results table
@@ -17,7 +12,7 @@ export function useModifyColumns() {
 	const setShowColumns = screenerState((state) => state.setShowColumns)
 	const fetchedColumns = screenerState((state) => state.fetchedColumns)
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn)
-	const addDataColumn = screenerDataState((state) => state.addDataColumn)
+	const addDataColumn = screenerState((state) => state.addDataColumn)
 
 	// Fetch a new data column
 	async function fetchColumn(id: FilterId, type: string) {

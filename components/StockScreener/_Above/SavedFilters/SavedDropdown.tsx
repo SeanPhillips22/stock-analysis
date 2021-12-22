@@ -1,5 +1,8 @@
 import { useSavedScreens } from './useSavedScreens'
-import { FilterId } from 'components/StockScreener/screener.types'
+import {
+	FilterId,
+	ScreenerTypes
+} from 'components/StockScreener/screener.types'
 import { SavedItem } from './SavedItem'
 import { SaveScreen } from './SaveScreen'
 
@@ -16,7 +19,7 @@ type Screen = {
 }
 
 type Props = {
-	type: 'stocks' | 'ipo'
+	type: ScreenerTypes
 }
 
 export function SavedDropdown({ type }: Props) {

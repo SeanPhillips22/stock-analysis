@@ -1,21 +1,21 @@
-import { Fragment, useEffect, useState } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { actionsState } from 'state/actionsState';
+import { Fragment, useEffect, useState } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { actionsState } from 'state/actionsState'
 
 interface Props {
-	setColumnFilter: (columId: string, updater: any) => void;
+	setColumnFilter: (columId: string, updater: any) => void
 }
 
 export default function SplitsFilter({ setColumnFilter }: Props) {
-	const [title, setTitle] = useState('All Splits');
-	const setIsFiltered = actionsState((state) => state.setIsFiltered);
+	const [title, setTitle] = useState('All Splits')
+	const setIsFiltered = actionsState((state) => state.setIsFiltered)
 
 	useEffect(() => {
 		return () => {
-			setIsFiltered(false);
-		};
-	}, [setIsFiltered]);
+			setIsFiltered(false)
+		}
+	}, [setIsFiltered])
 
 	return (
 		<Menu as="div" className="relative inline-block text-left">
@@ -44,9 +44,9 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 							<div
 								className="text-gray-700 hover:bg-gray-100 px-4 py-2 text-sm cursor-default"
 								onClick={() => {
-									setColumnFilter('splitType', '');
-									setTitle('All Splits');
-									setIsFiltered(false);
+									setColumnFilter('splitType', '')
+									setTitle('All Splits')
+									setIsFiltered(false)
 								}}
 							>
 								All Splits
@@ -56,9 +56,9 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 							<div
 								className="text-gray-700 hover:bg-gray-100 px-4 py-2 text-sm cursor-default"
 								onClick={() => {
-									setColumnFilter('splitType', 'Forward');
-									setTitle('Forward');
-									setIsFiltered(true);
+									setColumnFilter('splitType', 'Forward')
+									setTitle('Forward')
+									setIsFiltered(true)
 								}}
 							>
 								Forward Splits
@@ -68,9 +68,9 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 							<div
 								className="text-gray-700 hover:bg-gray-100 px-4 py-2 text-sm cursor-default"
 								onClick={() => {
-									setColumnFilter('splitType', 'Reverse');
-									setTitle('Reverse');
-									setIsFiltered(true);
+									setColumnFilter('splitType', 'Reverse')
+									setTitle('Reverse')
+									setIsFiltered(true)
 								}}
 							>
 								Reverse Splits
@@ -80,5 +80,5 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 				</Menu.Items>
 			</Transition>
 		</Menu>
-	);
+	)
 }

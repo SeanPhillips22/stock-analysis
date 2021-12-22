@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { supabaseAdmin } from 'functions/supabaseAdmin'
 import { verifyPaddleWebhook } from 'verify-paddle-webhook'
@@ -30,7 +29,7 @@ export default async function handler(
 	// Check if the webhook signature is correct
 	if (!verifyPaddleWebhook(PUBLIC_KEY, req.body)) {
 		return res.status(400).json({
-			error: 'Invalid signature',
+			error: 'Invalid signature'
 		})
 	}
 
@@ -68,7 +67,7 @@ export default async function handler(
 	}
 
 	// User was found -- proceed to update the user's details
-	let user = returned![0]
+	let user = returned ? returned[0] : null
 
 	if (alert_name) {
 		// delay subscription_created to wait for subscription_payment_succeeded to finish
@@ -86,7 +85,7 @@ export default async function handler(
 				if (!returnedAgain)
 					return res.status(406).json({ error: 'No data returned' })
 
-				user = returnedAgain![0]
+				user = returnedAgain ? returnedAgain[0] : null
 			}
 		}
 
@@ -103,7 +102,7 @@ export default async function handler(
 			customer_name,
 			status,
 			cancellation_effective_date,
-			paused_from,
+			paused_from
 		} = req.body
 
 		if (alert_name) user.alert_name = alert_name

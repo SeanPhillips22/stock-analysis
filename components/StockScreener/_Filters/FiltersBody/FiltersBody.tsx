@@ -1,9 +1,9 @@
-import { screenerDataState } from 'components/StockScreener/screenerdata.state'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { FilterProps } from 'components/StockScreener/screener.types'
 import {
 	FiltersMap,
-	IPOFiltersMap
+	IPOFiltersMap,
+	ETFFiltersMap
 } from 'components/StockScreener/maps/filters.map'
 import { FilterBody } from 'components/StockScreener/_Filters/FiltersBody/SingleFilter/_SingleFilter'
 import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns'
@@ -15,7 +15,7 @@ interface FilterWrapProps {
 }
 
 function FilterWrap({ f }: FilterWrapProps) {
-	const type = screenerDataState((state) => state.type)
+	const type = screenerState((state) => state.type)
 	const { fetchColumn } = useModifyColumns()
 
 	return (
@@ -43,7 +43,7 @@ function FilterWrap({ f }: FilterWrapProps) {
 }
 
 export function RenderFilters() {
-	const type = screenerDataState((state) => state.type)
+	const type = screenerState((state) => state.type)
 	const filters = screenerState((state) => state.filters)
 	const filterMenu = screenerState((state) => state.filterMenu)
 	const filterSearch = screenerState((state) => state.filterSearch)
@@ -54,7 +54,13 @@ export function RenderFilters() {
 	}
 	let filterMap = []
 
-	type == 'stocks' ? (filterMap = FiltersMap) : (filterMap = IPOFiltersMap)
+	if (type == 'stocks') {
+		filterMap = FiltersMap
+	} else if (type == 'ipo') {
+		filterMap = IPOFiltersMap
+	} else {
+		filterMap = ETFFiltersMap
+	}
 
 	if (filterSearch.length > 0) {
 		return (

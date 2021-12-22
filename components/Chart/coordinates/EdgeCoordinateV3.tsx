@@ -1,22 +1,22 @@
-import * as React from 'react';
+import * as React from 'react'
 
 import {
 	getStrokeDasharray,
 	getStrokeDasharrayCanvas,
-	isDefined,
-} from '../core';
+	isDefined
+} from '../core'
 
 export const renderSVG = (props: any) => {
-	const { className } = props;
+	const { className } = props
 
-	const edge = helper(props);
+	const edge = helper(props)
 	if (edge === null) {
-		return null;
+		return null
 	}
 
-	let line;
-	let coordinateBase;
-	let coordinate;
+	let line
+	let coordinateBase
+	let coordinate
 
 	if (edge.line !== undefined) {
 		line = (
@@ -29,10 +29,10 @@ export const renderSVG = (props: any) => {
 				x2={edge.line.x2}
 				y2={edge.line.y2}
 			/>
-		);
+		)
 	}
 	if (edge.coordinate !== undefined && edge.coordinateBase !== undefined) {
-		const { rectWidth, rectHeight, arrowWidth } = edge.coordinateBase;
+		const { rectWidth, rectHeight, arrowWidth } = edge.coordinateBase
 
 		const path =
 			edge.orient === 'left'
@@ -43,7 +43,7 @@ export const renderSVG = (props: any) => {
 						rectWidth + arrowWidth
 				  },${rectHeight}L${
 						rectWidth + arrowWidth
-				  },0L${arrowWidth},0L0,${arrowWidth}`;
+				  },0L${arrowWidth},0L0,${arrowWidth}`
 
 		coordinateBase =
 			edge.orient === 'left' || edge.orient === 'right' ? (
@@ -72,7 +72,7 @@ export const renderSVG = (props: any) => {
 					width={rectWidth}
 					fill={edge.coordinateBase.fill}
 				/>
-			);
+			)
 
 		coordinate = (
 			<text
@@ -87,7 +87,7 @@ export const renderSVG = (props: any) => {
 			>
 				{edge.coordinate.displayCoordinate}
 			</text>
-		);
+		)
 	}
 	return (
 		<g className={className}>
@@ -95,8 +95,8 @@ export const renderSVG = (props: any) => {
 			{coordinateBase}
 			{coordinate}
 		</g>
-	);
-};
+	)
+}
 
 const helper = (props: any) => {
 	const {
@@ -122,42 +122,42 @@ const helper = (props: any) => {
 		y1,
 		x2,
 		y2,
-		dx,
-	} = props;
+		dx
+	} = props
 
 	if (!show) {
-		return null;
+		return null
 	}
 
-	let coordinateBase;
-	let coordinate;
+	let coordinateBase
+	let coordinate
 	if (displayCoordinate !== undefined) {
-		const textAnchor = 'middle';
+		const textAnchor = 'middle'
 
-		let edgeXRect;
-		let edgeYRect;
-		let edgeXText;
-		let edgeYText;
+		let edgeXRect
+		let edgeYRect
+		let edgeXText
+		let edgeYText
 
 		if (type === 'horizontal') {
 			edgeXRect =
-				dx + (orient === 'right' ? edgeAt + 1 : edgeAt - rectWidth - 1);
-			edgeYRect = y1 - rectHeight / 2 - strokeWidth;
+				dx + (orient === 'right' ? edgeAt + 1 : edgeAt - rectWidth - 1)
+			edgeYRect = y1 - rectHeight / 2 - strokeWidth
 			edgeXText =
 				dx +
 				(orient === 'right'
 					? edgeAt + rectWidth / 2
-					: edgeAt - rectWidth / 2);
-			edgeYText = y1;
+					: edgeAt - rectWidth / 2)
+			edgeYText = y1
 		} else {
-			const dy = orient === 'bottom' ? strokeWidth - 1 : -strokeWidth + 1;
-			edgeXRect = x1 - rectWidth / 2;
-			edgeYRect = (orient === 'bottom' ? edgeAt : edgeAt - rectHeight) + dy;
-			edgeXText = x1;
+			const dy = orient === 'bottom' ? strokeWidth - 1 : -strokeWidth + 1
+			edgeXRect = x1 - rectWidth / 2
+			edgeYRect = (orient === 'bottom' ? edgeAt : edgeAt - rectHeight) + dy
+			edgeXText = x1
 			edgeYText =
 				(orient === 'bottom'
 					? edgeAt + rectHeight / 2
-					: edgeAt - rectHeight / 2) + dy;
+					: edgeAt - rectHeight / 2) + dy
 		}
 
 		coordinateBase = {
@@ -169,8 +169,8 @@ const helper = (props: any) => {
 			fill,
 			arrowWidth,
 			stroke,
-			strokeWidth,
-		};
+			strokeWidth
+		}
 		coordinate = {
 			edgeXText,
 			edgeYText,
@@ -178,8 +178,8 @@ const helper = (props: any) => {
 			fontFamily,
 			fontSize,
 			textFill,
-			displayCoordinate,
-		};
+			displayCoordinate
+		}
 	}
 
 	const line = hideLine
@@ -190,103 +190,103 @@ const helper = (props: any) => {
 				x1,
 				y1,
 				x2,
-				y2,
-		  };
+				y2
+		  }
 
 	return {
 		coordinateBase,
 		coordinate,
 		line,
-		orient,
-	};
-};
+		orient
+	}
+}
 
 export const drawOnCanvas = (ctx: CanvasRenderingContext2D, props: any) => {
-	const { coordinate, fitToText, fontSize, fontFamily, rectWidth } = props;
+	const { coordinate, fitToText, fontSize, fontFamily, rectWidth } = props
 
-	ctx.font = `${fontSize}px ${fontFamily}`;
-	ctx.textBaseline = 'middle';
+	ctx.font = `${fontSize}px ${fontFamily}`
+	ctx.textBaseline = 'middle'
 
-	let width = rectWidth;
+	let width = rectWidth
 	if (fitToText) {
-		width = Math.round(ctx.measureText(coordinate).width + 10);
+		width = Math.round(ctx.measureText(coordinate).width + 10)
 	}
 
-	const edge = helper({ ...props, rectWidth: width });
+	const edge = helper({ ...props, rectWidth: width })
 	if (edge === null) {
-		return;
+		return
 	}
 
 	if (edge.line !== undefined && isDefined(edge.line)) {
-		const dashArray = getStrokeDasharrayCanvas(edge.line.strokeDasharray);
-		ctx.setLineDash(dashArray);
-		ctx.strokeStyle = edge.line.stroke;
-		ctx.lineWidth = 1;
-		ctx.beginPath();
-		ctx.moveTo(edge.line.x1, edge.line.y1);
-		ctx.lineTo(edge.line.x2, edge.line.y2);
-		ctx.stroke();
+		const dashArray = getStrokeDasharrayCanvas(edge.line.strokeDasharray)
+		ctx.setLineDash(dashArray)
+		ctx.strokeStyle = edge.line.stroke
+		ctx.lineWidth = 1
+		ctx.beginPath()
+		ctx.moveTo(edge.line.x1, edge.line.y1)
+		ctx.lineTo(edge.line.x2, edge.line.y2)
+		ctx.stroke()
 	}
 
-	ctx.setLineDash([]);
+	ctx.setLineDash([])
 
 	if (edge.coordinateBase !== undefined) {
 		const { arrowWidth, rectWidth, rectHeight, rectRadius } =
-			edge.coordinateBase;
+			edge.coordinateBase
 
-		ctx.fillStyle = edge.coordinateBase.fill;
+		ctx.fillStyle = edge.coordinateBase.fill
 		if (edge.coordinateBase.stroke !== undefined) {
-			ctx.strokeStyle = edge.coordinateBase.stroke;
-			ctx.lineWidth = edge.coordinateBase.strokeWidth;
+			ctx.strokeStyle = edge.coordinateBase.stroke
+			ctx.lineWidth = edge.coordinateBase.strokeWidth
 		}
 
-		let x = edge.coordinateBase.edgeXRect;
-		const y = edge.coordinateBase.edgeYRect;
-		const halfHeight = rectHeight / 2;
+		let x = edge.coordinateBase.edgeXRect
+		const y = edge.coordinateBase.edgeYRect
+		const halfHeight = rectHeight / 2
 
-		ctx.beginPath();
+		ctx.beginPath()
 
 		if (arrowWidth > 0 && edge.orient === 'right') {
-			x -= arrowWidth;
-			ctx.moveTo(x, y + halfHeight);
-			ctx.lineTo(x + arrowWidth, y);
-			ctx.lineTo(x + rectWidth + arrowWidth, y);
-			ctx.lineTo(x + rectWidth + arrowWidth, y + rectHeight);
-			ctx.lineTo(x + arrowWidth, y + rectHeight);
-			ctx.closePath();
+			x -= arrowWidth
+			ctx.moveTo(x, y + halfHeight)
+			ctx.lineTo(x + arrowWidth, y)
+			ctx.lineTo(x + rectWidth + arrowWidth, y)
+			ctx.lineTo(x + rectWidth + arrowWidth, y + rectHeight)
+			ctx.lineTo(x + arrowWidth, y + rectHeight)
+			ctx.closePath()
 		} else if (arrowWidth > 0 && edge.orient === 'left') {
-			ctx.moveTo(x, y);
-			ctx.lineTo(x + rectWidth, y);
-			ctx.lineTo(x + rectWidth + arrowWidth, y + halfHeight);
-			ctx.lineTo(x + rectWidth, y + rectHeight);
-			ctx.lineTo(x, y + rectHeight);
-			ctx.closePath();
+			ctx.moveTo(x, y)
+			ctx.lineTo(x + rectWidth, y)
+			ctx.lineTo(x + rectWidth + arrowWidth, y + halfHeight)
+			ctx.lineTo(x + rectWidth, y + rectHeight)
+			ctx.lineTo(x, y + rectHeight)
+			ctx.closePath()
 		} else if (rectRadius) {
-			roundRect(ctx, x - 0.5, y - 0.5, rectWidth, rectHeight, 3);
+			roundRect(ctx, x - 0.5, y - 0.5, rectWidth, rectHeight, 3)
 		} else {
-			ctx.rect(x - 0.5, y, rectWidth, rectHeight);
+			ctx.rect(x - 0.5, y, rectWidth, rectHeight)
 		}
 
-		ctx.fill();
+		ctx.fill()
 
 		if (edge.coordinateBase.stroke !== undefined) {
-			ctx.stroke();
+			ctx.stroke()
 		}
 
 		if (edge.coordinate !== undefined) {
-			ctx.fillStyle = edge.coordinate.textFill;
+			ctx.fillStyle = edge.coordinate.textFill
 			ctx.textAlign =
 				edge.coordinate.textAnchor === 'middle'
 					? 'center'
-					: (edge.coordinate.textAnchor as CanvasTextAlign);
+					: (edge.coordinate.textAnchor as CanvasTextAlign)
 			ctx.fillText(
 				edge.coordinate.displayCoordinate,
 				edge.coordinate.edgeXText,
 				edge.coordinate.edgeYText
-			);
+			)
 		}
 	}
-};
+}
 
 const roundRect = (
 	ctx: CanvasRenderingContext2D,
@@ -296,15 +296,15 @@ const roundRect = (
 	height: number,
 	radius: number
 ) => {
-	ctx.beginPath();
-	ctx.moveTo(x + radius, y);
-	ctx.lineTo(x + width - radius, y);
-	ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-	ctx.lineTo(x + width, y + height - radius);
-	ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-	ctx.lineTo(x + radius, y + height);
-	ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-	ctx.lineTo(x, y + radius);
-	ctx.quadraticCurveTo(x, y, x + radius, y);
-	ctx.closePath();
-};
+	ctx.beginPath()
+	ctx.moveTo(x + radius, y)
+	ctx.lineTo(x + width - radius, y)
+	ctx.quadraticCurveTo(x + width, y, x + width, y + radius)
+	ctx.lineTo(x + width, y + height - radius)
+	ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height)
+	ctx.lineTo(x + radius, y + height)
+	ctx.quadraticCurveTo(x, y + height, x, y + height - radius)
+	ctx.lineTo(x, y + radius)
+	ctx.quadraticCurveTo(x, y, x + radius, y)
+	ctx.closePath()
+}

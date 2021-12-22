@@ -1,6 +1,6 @@
 const outputHtml = (text: string) => {
-	return { __html: text };
-};
+	return { __html: text }
+}
 
 export const ProfileDescription = ({ text }: { text: string }) => {
 	return (
@@ -11,5 +11,5 @@ export const ProfileDescription = ({ text }: { text: string }) => {
 				dangerouslySetInnerHTML={outputHtml(text)}
 			/>
 		</>
-	);
-};
+	)
+}

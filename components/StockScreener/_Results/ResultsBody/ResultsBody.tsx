@@ -21,189 +21,207 @@ function formatHeader(text: string) {
 	return <div className="ml-auto">{text}</div>
 }
 
-const columns = COLUMNS_MAP.map((column) => {
-	// If column has a "format" property, use it to format the value
-	if (column.format) {
-		let header
-		let cell
-		let sortInverted
-		switch (column.format) {
-			case 'linkSymbol': {
-				header = column.Header
-				cell = function FormatCell({ cell: { value } }: CellString) {
-					const symb = value.includes('.') ? value : `${value}/`
-					return (
-						<Link href={`/stocks/${symb.toLowerCase()}`} prefetch={false}>
-							<a>{value}</a>
-						</Link>
-					)
-				}
-				sortInverted = false
-				break
-			}
+function formatColumns() {
+	const columns = COLUMNS_MAP.map((column) => {
+		const type = screenerState((state) => state.type)
+		let urlPath = type === 'etf' ? 'etf' : 'stocks'
 
-			case 'string': {
-				header = column.Header
-				cell = function FormatCell({ cell: { value } }: any) {
-					return value || null
-				}
-				sortInverted = false
-				break
-			}
-
-			case 'abbreviate': {
-				header = formatHeader(column.Header)
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return (
-						<div className="text-right">
-							{abbreviate(value, format2dec)}
-						</div>
-					)
-				}
-
-				break
-			}
-
-			case 'changePcColor': {
-				header = formatHeader(column.Header)
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					if (!value) {
-						return <div className="text-right">-</div>
-					}
-					const formatted = formatNum(value, format2dec) + '%'
-					if (value > 0) {
+		// If column has a "format" property, use it to format the value
+		if (column.format) {
+			let header
+			let cell
+			let sortInverted
+			switch (column.format) {
+				case 'linkSymbol': {
+					header = column.Header
+					cell = function FormatCell({ cell: { value } }: CellString) {
+						const symb = value.includes('.') ? value : `${value}/`
 						return (
-							<div className="text-right text-[green]">{formatted}</div>
-						)
-					} else if (value < 0) {
-						return (
-							<div className="text-right text-[red]">{formatted}</div>
-						)
-					} else {
-						return (
-							<div className="text-right text-gray-800">{formatted}</div>
+							<Link
+								href={`/${urlPath}/${symb.toLowerCase()}`}
+								prefetch={false}
+							>
+								<a>{value}</a>
+							</Link>
 						)
 					}
+					sortInverted = false
+					break
 				}
-				break
-			}
 
-			case 'format2dec': {
-				header = formatHeader(column.Header)
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return (
-						<div className="text-right">
-							{formatNum(value, format2dec)}
-						</div>
-					)
-				}
-				break
-			}
-
-			case 'format0dec': {
-				header = formatHeader(column.Header)
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return (
-						<div className="text-right">
-							{formatNum(value, format0dec)}
-						</div>
-					)
-				}
-				break
-			}
-
-			case 'amount': {
-				header = formatHeader(column.Header)
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return (
-						<div className="text-right">
-							{formatNum(value, format2dec)}
-						</div>
-					)
-				}
-				break
-			}
-
-			case 'align': {
-				header = formatHeader(column.Header)
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return <div className="text-right">{value}</div>
-				}
-				break
-			}
-
-			case 'percentage': {
-				header = formatHeader(column.Header)
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return (
-						<div className="text-right">
-							{formatNum(value, format2dec, '%')}
-						</div>
-					)
-				}
-				break
-			}
-
-			case 'date': {
-				header = formatHeader(column.Header)
-				cell = function FormatCell({ cell: { value } }: CellString) {
-					if (!value) {
-						return <div className="text-right">-</div>
+				case 'string': {
+					header = column.Header
+					cell = function FormatCell({ cell: { value } }: any) {
+						return value || null
 					}
-					return <div className="text-right">{formatDateClean(value)}</div>
+					sortInverted = false
+					break
 				}
-				break
+
+				case 'abbreviate': {
+					header = formatHeader(column.Header)
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						return (
+							<div className="text-right">
+								{abbreviate(value, format2dec)}
+							</div>
+						)
+					}
+
+					break
+				}
+
+				case 'changePcColor': {
+					header = formatHeader(column.Header)
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						if (!value) {
+							return <div className="text-right">-</div>
+						}
+						const formatted = formatNum(value, format2dec) + '%'
+						if (value > 0) {
+							return (
+								<div className="text-right text-[green]">
+									{formatted}
+								</div>
+							)
+						} else if (value < 0) {
+							return (
+								<div className="text-right text-[red]">{formatted}</div>
+							)
+						} else {
+							return (
+								<div className="text-right text-gray-800">
+									{formatted}
+								</div>
+							)
+						}
+					}
+					break
+				}
+
+				case 'format2dec': {
+					header = formatHeader(column.Header)
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						return (
+							<div className="text-right">
+								{formatNum(value, format2dec)}
+							</div>
+						)
+					}
+					break
+				}
+
+				case 'format0dec': {
+					header = formatHeader(column.Header)
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						return (
+							<div className="text-right">
+								{formatNum(value, format0dec)}
+							</div>
+						)
+					}
+					break
+				}
+
+				case 'amount': {
+					header = formatHeader(column.Header)
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						return (
+							<div className="text-right">
+								{formatNum(value, format2dec)}
+							</div>
+						)
+					}
+					break
+				}
+
+				case 'align': {
+					header = formatHeader(column.Header)
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						return <div className="text-right">{value}</div>
+					}
+					break
+				}
+
+				case 'percentage': {
+					header = formatHeader(column.Header)
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						return (
+							<div className="text-right">
+								{formatNum(value, format2dec, '%')}
+							</div>
+						)
+					}
+					break
+				}
+
+				case 'date': {
+					header = formatHeader(column.Header)
+					cell = function FormatCell({ cell: { value } }: CellString) {
+						if (!value) {
+							return <div className="text-right">-</div>
+						}
+						return (
+							<div className="text-right">{formatDateClean(value)}</div>
+						)
+					}
+					break
+				}
+
+				case 'marketcap': {
+					header = <div className="ml-auto mr-3">{column.Header}</div>
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						return (
+							<div className="text-right mr-3">
+								{abbreviate(value, format2dec)}
+							</div>
+						)
+					}
+
+					break
+				}
+
+				case 'padleft': {
+					header = <div className="ml-1">{column.Header}</div>
+					cell = function FormatCell({ cell: { value } }: CellNumber) {
+						return <div className="ml-1">{value}</div>
+					}
+					sortInverted = false
+					break
+				}
+
+				default:
+					header = column.Header
+					cell = function FormatCell({ cell: { value } }: any) {
+						return value
+					}
+					break
 			}
 
-			case 'marketcap': {
-				header = <div className="ml-auto mr-3">{column.Header}</div>
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return (
-						<div className="text-right mr-3">
-							{abbreviate(value, format2dec)}
-						</div>
-					)
-				}
-
-				break
+			return {
+				Header: header,
+				accessor: column.accessor,
+				name: column.Header,
+				Cell: cell,
+				sortType: column.sortType || 'basic',
+				sortInverted: sortInverted ?? true
 			}
-
-			case 'padleft': {
-				header = <div className="ml-1">{column.Header}</div>
-				cell = function FormatCell({ cell: { value } }: CellNumber) {
-					return <div className="ml-1">{value}</div>
-				}
-				sortInverted = false
-				break
-			}
-
-			default:
-				header = column.Header
-				cell = function FormatCell({ cell: { value } }: any) {
-					return value
-				}
-				break
 		}
 
+		// If no format specified, just return plain Header/accessor pair
 		return {
-			Header: header,
-			accessor: column.accessor,
-			name: column.Header,
-			Cell: cell,
-			sortType: column.sortType || 'basic',
-			sortInverted: sortInverted ?? true
+			Header: column.Header,
+			accessor: column.accessor
 		}
-	}
+	})
 
-	// If no format specified, just return plain Header/accessor pair
-	return {
-		Header: column.Header,
-		accessor: column.accessor
-	}
-})
+	return columns
+}
 
 export function ResultsBody() {
 	const showColumns = screenerState((state) => state.showColumns)
+
+	const columns = formatColumns()
 
 	const displayColumns = columns.filter((column: any) =>
 		showColumns.includes(column.accessor)

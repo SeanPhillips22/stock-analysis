@@ -1,27 +1,27 @@
-import ExcellentExport from 'excellentexport';
+import ExcellentExport from 'excellentexport'
 
 interface Props {
-	symbol: string;
-	statement: string;
-	range: string;
-	setExportOpen: (arg: boolean) => void;
+	symbol: string
+	statement: string
+	range: string
+	setExportOpen: (arg: boolean) => void
 }
 
 export default function ExportButtons({
 	statement,
 	symbol,
 	range,
-	setExportOpen,
+	setExportOpen
 }: Props) {
 	function executeExport(type: 'csv' | 'xls' | 'xlsx') {
-		setExportOpen(false);
-		const fileName = symbol + '-' + statement + '-' + range;
+		setExportOpen(false)
+		const fileName = symbol + '-' + statement + '-' + range
 
 		return ExcellentExport.convert(
 			{
 				openAsDownload: true,
 				filename: fileName,
-				format: type,
+				format: type
 			},
 			[
 				{
@@ -29,26 +29,26 @@ export default function ExportButtons({
 					from: { table: 'financial-table' },
 					fixValue: (value, row, col) => {
 						if (row === 0 && col !== 0) {
-							return `${value}`;
+							return `${value}`
 						}
 						if (col === 0) {
-							return value.replace(/(<([^>]+)>)/gi, '');
+							return value.replace(/(<([^>]+)>)/gi, '')
 						}
 						if (value === '-') {
-							return '';
+							return ''
 						}
-						value = value.match(/"([^"]*)"/)[1];
+						value = value.match(/"([^"]*)"/)[1]
 						if (value.includes(',')) {
-							return parseFloat(value.replace(/,/g, ''));
+							return parseFloat(value.replace(/,/g, ''))
 						}
 						if (value.includes('%')) {
-							return parseFloat(value.replace(/%/, '')) / 100;
+							return parseFloat(value.replace(/%/, '')) / 100
 						}
-						return parseFloat(value);
-					},
-				},
+						return parseFloat(value)
+					}
+				}
 			]
-		);
+		)
 	}
 
 	return (
@@ -68,5 +68,5 @@ export default function ExportButtons({
 				Export to CSV
 			</button>
 		</>
-	);
+	)
 }

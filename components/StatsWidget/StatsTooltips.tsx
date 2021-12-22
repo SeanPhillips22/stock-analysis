@@ -1,12 +1,12 @@
-import { FinancialsMapType } from 'types/Financials';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light.css';
-import styles from './StatsWidget.module.css';
+import { FinancialsMapType } from 'types/Financials'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
+import 'tippy.js/themes/light.css'
+import styles from './StatsWidget.module.css'
 
 const TooltipContent = ({ data }: { data?: FinancialsMapType }) => {
 	if (!data) {
-		return <></>;
+		return <></>
 	}
 	return (
 		<div>
@@ -18,12 +18,12 @@ const TooltipContent = ({ data }: { data?: FinancialsMapType }) => {
 				</div>
 			)}
 		</div>
-	);
-};
+	)
+}
 
 interface Props {
-	data?: FinancialsMapType;
-	indicator: string;
+	data?: FinancialsMapType
+	indicator: string
 }
 
 export const Tooltip = ({ data, indicator }: Props) => {
@@ -37,5 +37,5 @@ export const Tooltip = ({ data, indicator }: Props) => {
 		>
 			<span>{indicator}</span>
 		</Tippy>
-	);
-};
+	)
+}

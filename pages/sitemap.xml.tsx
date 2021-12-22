@@ -1,7 +1,9 @@
 import { getData } from 'functions/apis/API'
 import { GetServerSideProps } from 'next'
 
-const Sitemap = () => {}
+const Sitemap = () => {
+	/* Do nothing */
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const pages = [
@@ -14,20 +16,21 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'pro/',
 		'apis/',
 		'stocks/',
-		'stock-screener/',
 		'etf/',
 		'ipos/',
 		'ipos/calendar/',
 		'ipos/2021/',
 		'ipos/2020/',
 		'ipos/2019/',
-		'ipos/screener/',
 		'ipos/news/',
 		'ipos/statistics/',
 		'news/',
 		'news/all-stocks/',
 		'news/press-releases/',
 		'trending/',
+		'screener/stock/',
+		'screener/ipo/',
+		'screener/etf/',
 		'actions/',
 		'actions/listed/',
 		'actions/delisted/',

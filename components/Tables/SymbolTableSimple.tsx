@@ -1,24 +1,24 @@
 // Used on the /stocks/ and /etf/ index pages
-import { useMemo } from 'react';
-import { useTable, useSortBy, Column } from 'react-table';
-import { SortUpIcon } from 'components/Icons/SortUp';
-import { SortDownIcon } from 'components/Icons/SortDown';
-import { Controls } from 'components/Controls/_Controls';
+import { useMemo } from 'react'
+import { useTable, useSortBy, Column } from 'react-table'
+import { SortUpIcon } from 'components/Icons/SortUp'
+import { SortDownIcon } from 'components/Icons/SortDown'
+import { Controls } from 'components/Controls/_Controls'
 
 interface TrendingType {
-	price: number;
-	name: string;
-	pageviews: number;
-	marketcap: number;
-	change: number;
+	price: number
+	name: string
+	pageviews: number
+	marketcap: number
+	change: number
 }
 
 type Props = {
-	title: string;
-	columndata: Column[];
-	rowdata: TrendingType[];
-	append?: string;
-};
+	title: string
+	columndata: Column[]
+	rowdata: TrendingType[]
+	append?: string
+}
 
 /**
  * A simpler symbol table, without pagination and filters
@@ -31,18 +31,18 @@ export function SymbolTableSimple({
 	title,
 	columndata,
 	rowdata,
-	append,
+	append
 }: Props) {
-	const columns = useMemo(() => columndata, [columndata]);
-	const data = useMemo(() => rowdata, [rowdata]);
+	const columns = useMemo(() => columndata, [columndata])
+	const data = useMemo(() => rowdata, [rowdata])
 
 	const { headerGroups, prepareRow, rows } = useTable(
 		{
 			columns,
-			data,
+			data
 		},
 		useSortBy
-	);
+	)
 
 	return (
 		<>
@@ -60,7 +60,7 @@ export function SymbolTableSimple({
 								{headerGroup.headers.map((column, index) => (
 									<th
 										{...column.getSortByToggleProps({
-											title: `Sort by: ${column.Header}`,
+											title: `Sort by: ${column.Header}`
 										})}
 										key={index}
 									>
@@ -84,18 +84,18 @@ export function SymbolTableSimple({
 					</thead>
 					<tbody>
 						{rows.map((row, index) => {
-							prepareRow(row);
+							prepareRow(row)
 							return (
 								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return <td key={index}>{cell.render('Cell')}</td>;
+										return <td key={index}>{cell.render('Cell')}</td>
 									})}
 								</tr>
-							);
+							)
 						})}
 					</tbody>
 				</table>
 			</div>
 		</>
-	);
+	)
 }

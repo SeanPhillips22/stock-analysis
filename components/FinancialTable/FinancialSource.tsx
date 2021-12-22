@@ -1,4 +1,4 @@
-import { Info } from 'types/Info';
+import { Info } from 'types/Info'
 
 const nasdaqLink = (
 	<a
@@ -9,7 +9,7 @@ const nasdaqLink = (
 	>
 		Nasdaq Data Link
 	</a>
-);
+)
 
 function secLink(cik: string | undefined, text: string, type?: string) {
 	if (cik) {
@@ -26,9 +26,9 @@ function secLink(cik: string | undefined, text: string, type?: string) {
 			>
 				{text}
 			</a>
-		);
+		)
 	}
-	return text;
+	return text
 }
 
 function returnLink(type: string, cik: string | undefined) {
@@ -42,14 +42,14 @@ function returnLink(type: string, cik: string | undefined) {
 			>
 				{type}
 			</a>
-		);
+		)
 	}
-	return type;
+	return type
 }
 
 export function FinancialSource({ info }: { info: Info }) {
 	if (!info.cik) {
-		return null;
+		return null
 	}
 
 	if (
@@ -63,10 +63,10 @@ export function FinancialSource({ info }: { info: Info }) {
 				{secLink(info.cik, 'S-1 and S-1/A filings', 'S-1')} submitted to the
 				Securities and Exchange Commission (SEC).
 			</div>
-		);
+		)
 	}
 
-	if (info.exchange === 'OTCMKTS') return null;
+	if (info.exchange === 'OTCMKTS') return null
 
 	if (info.currency !== 'USD') {
 		return (
@@ -76,7 +76,7 @@ export function FinancialSource({ info }: { info: Info }) {
 				audited reports submitted to the{' '}
 				{secLink(info.cik, 'Securities and Exchange Commission')} (SEC).
 			</div>
-		);
+		)
 	}
 
 	return (
@@ -87,5 +87,5 @@ export function FinancialSource({ info }: { info: Info }) {
 			{returnLink('10-Q', info.cik)}) reports submitted to the Securities and
 			Exchange Commission (SEC).
 		</div>
-	);
+	)
 }

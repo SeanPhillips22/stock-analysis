@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 export function IPONavigation({ path }: { path: string }) {
 	return (
@@ -41,18 +41,6 @@ export function IPONavigation({ path }: { path: string }) {
 							</Link>
 						</li>
 						<li>
-							<Link href="/ipos/screener/" prefetch={false}>
-								<a
-									data-title="Screener"
-									className={
-										path === 'screener' ? 'active' : 'inactive'
-									}
-								>
-									Screener
-								</a>
-							</Link>
-						</li>
-						<li>
 							<Link href="/ipos/news/" prefetch={false}>
 								<a
 									data-title="News"
@@ -66,5 +54,5 @@ export function IPONavigation({ path }: { path: string }) {
 				</nav>
 			</div>
 		</div>
-	);
+	)
 }

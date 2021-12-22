@@ -1,29 +1,22 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { screenerDataState } from 'components/StockScreener/screenerdata.state'
-import { FilterId, ColumnName } from 'components/StockScreener/screener.types'
-import { returnResultColumns } from 'components/StockScreener/maps/resultColumns.map'
+import {
+	FilterId,
+	ColumnName,
+	ScreenerTypes
+} from 'components/StockScreener/screener.types'
+import {
+	returnDefaultColumns,
+	returnResultColumns
+} from 'components/StockScreener/maps/resultColumns.map'
 import { getData } from 'functions/apis/API'
+import { getScreenerUrl } from 'components/StockScreener/functions/getScreenerUrl'
 
 type Props = {
 	name: ColumnName
-	type: string
+	type: ScreenerTypes
 }
 
 export function ResultsMenuItem({ name, type }: Props) {
-	let defaultColumns: FilterId[] = []
-
-	type == 'stocks'
-		? (defaultColumns = ['s', 'n', 'm', 'p', 'c', 'se', 'v', 'pe'])
-		: (defaultColumns = [
-				's',
-				'n',
-				'm',
-				'se',
-				'ipoPriceRange',
-				'ipoDate',
-				'revenue'
-		  ])
-
 	const filters = screenerState((state) => state.filters)
 	const resultsMenu = screenerState((state) => state.resultsMenu)
 	const setResultsMenu = screenerState((state) => state.setResultsMenu)
@@ -31,7 +24,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 	const fetchedColumns = screenerState((state) => state.fetchedColumns)
 	const filteredColumns = screenerState((state) => state.filteredColumns)
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn)
-	const addDataColumn = screenerDataState((state) => state.addDataColumn)
+	const addDataColumn = screenerState((state) => state.addDataColumn)
 
 	let display = name.toString()
 	let dataTitle = name.toString()
@@ -53,13 +46,8 @@ export function ResultsMenuItem({ name, type }: Props) {
 	// When hovering over a results tab, fetch the required columns
 	function handleHover(name: ColumnName) {
 		if (name !== 'Filtered' && name !== 'General') {
-			let screenerType: string
-			if (type == 'stocks') {
-				screenerType = 'screener'
-			} else {
-				screenerType = 'iposcreener'
-			}
-			fetchManyColumns(returnResultColumns(type)[name], screenerType)
+			let screenerType = getScreenerUrl(type)
+			fetchManyColumns(returnResultColumns(type, name), screenerType)
 		}
 	}
 
@@ -69,9 +57,9 @@ export function ResultsMenuItem({ name, type }: Props) {
 		if (name === 'Filtered') {
 			setShowColumns(filteredColumns)
 		} else if (name === 'General') {
-			setShowColumns(defaultColumns)
+			setShowColumns(returnDefaultColumns(type))
 		} else {
-			setShowColumns(returnResultColumns(type)[name])
+			setShowColumns(returnResultColumns(type, name))
 		}
 	}
 

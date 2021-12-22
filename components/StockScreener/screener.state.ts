@@ -1,7 +1,33 @@
 import create from 'zustand'
-import { FilterId, FilterValue } from 'components/StockScreener/screener.types'
+import {
+	ScreenerTypes,
+	SingleStock,
+	SingleDataPoint,
+	FilterId,
+	FilterValue,
+	VariableFilter,
+	FilterOption
+} from 'components/StockScreener/screener.types'
+import { PresetFilter } from './maps/presetFilters.map'
+import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
+import { returnDefaultColumns } from 'components/StockScreener/maps/resultColumns.map'
 
 interface ScreenerState {
+	// Type
+	type: ScreenerTypes | ''
+	setType: (type: ScreenerTypes) => void
+
+	// Data
+	data: SingleStock[]
+	setData: (data: SingleStock[]) => void
+	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) => void
+	fullCount: number
+	setFullCount: (fullCount: number) => void
+
+	// Loading
+	loaded: boolean
+	setLoaded: (loaded: boolean) => void
+
 	// Filters
 	filters: FilterValue[]
 	addFilter: (newFilter: FilterValue) => void
@@ -21,26 +47,55 @@ interface ScreenerState {
 	resultsMenu: string
 	setResultsMenu: (newMenu: string) => void
 
+	// Variable filters
+	variableFilters: VariableFilter[]
+	addVariableFilter: (options: FilterOption[], id: FilterId) => void
+
 	// Columns
 	fetchedColumns: FilterId[]
 	showColumns: FilterId[]
 	filteredColumns: FilterId[]
 	addFetchedColumn: (newColumn: FilterId) => void
-	setFetchedColumns: (newArray: any[]) => void
-
+	setFetchedColumns: (newArray: FilterId[]) => void
 	addFilteredColumn: (newColumn: FilterId) => void
 	removeFilteredColumn: (columns: FilterId) => void
 	setShowColumns: (newColumns: FilterId[]) => void
 	columnDropdownOpen: boolean
 	setColumnDropdownOpen: (open: boolean) => void
 
+	// Pagination
 	tablePage: number
 	setTablePage: (newTablePage: number) => void
 	tableSize: number
 	setTableSize: (tableSize: number) => void
+
+	// Preset filters
+	presets: PresetFilter[]
+	setPresets: (presets: PresetFilter[]) => void
+	activePreset: string
+	setActivePreset: (preset: string) => void
 }
 
 export const screenerState = create<ScreenerState>((set) => ({
+	// Type
+	type: '',
+	setType: (newType: ScreenerTypes) => set({ type: newType }),
+
+	// Data
+	data: [],
+	setData: (newData: SingleStock[]) =>
+		set((state) => ({ ...state, data: newData })),
+	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) =>
+		set((state) => ({
+			data: mergeColumns(state.data, newColumn, id)
+		})),
+	fullCount: 0,
+	setFullCount: (newFullCount: number) => set({ fullCount: newFullCount }),
+
+	// Loading
+	loaded: false,
+	setLoaded: (newLoaded: boolean) => set({ loaded: newLoaded }),
+
 	// Filters
 	filters: [],
 	addFilter: (newFilter: FilterValue) =>
@@ -55,10 +110,10 @@ export const screenerState = create<ScreenerState>((set) => ({
 		})),
 	clearFilters: () =>
 		set((state) => ({
-			...state,
 			filters: [],
 			filterMenu: 'Active',
-			filteredColumns: ['s', 'n', 'm']
+			filteredColumns: returnDefaultColumns(state.type),
+			activePreset: ''
 		})),
 	filtersShown: true,
 	setFiltersShown: (show: boolean) =>
@@ -78,20 +133,28 @@ export const screenerState = create<ScreenerState>((set) => ({
 			filterMenu: 'Active'
 		}),
 
+	// Variable filters
+	variableFilters: [],
+	addVariableFilter: (options: FilterOption[], id: FilterId) =>
+		set((state) => ({
+			variableFilters: [...state.variableFilters, { id, options }]
+		})),
+
 	// Results Menu
 	resultsMenu: 'General',
 	setResultsMenu: (newMenu: string) => set({ resultsMenu: newMenu }),
 
 	// Columns
-	fetchedColumns: ['s', 'n', 'm', 'p', 'c', 'i', 'v', 'pe'], // All data columns that have been fetched
+	fetchedColumns: [], // All data columns that have been fetched
 	showColumns: [], // Columns that are currently showing
-	filteredColumns: ['s', 'n', 'm'], // All data columns that are being filtered
-	addFetchedColumn: (newColumn: any) =>
+	filteredColumns: ['s', 'n'], // All data columns that are being filtered
+	addFetchedColumn: (newColumn: FilterId) =>
 		set((state) => ({
 			fetchedColumns: [...state.fetchedColumns, newColumn]
 		})),
-	setFetchedColumns: (newArray: any[]) => set({ fetchedColumns: newArray }),
-	addFilteredColumn: (newColumn: any) =>
+	setFetchedColumns: (newArray: FilterId[]) =>
+		set({ fetchedColumns: newArray }),
+	addFilteredColumn: (newColumn: FilterId) =>
 		set((state) => ({
 			filteredColumns: [...state.filteredColumns, newColumn]
 		})),
@@ -107,5 +170,12 @@ export const screenerState = create<ScreenerState>((set) => ({
 	tablePage: 0,
 	setTablePage: (newTablePage) => set({ tablePage: newTablePage }),
 	tableSize: 20,
-	setTableSize: (newTableSize) => set({ tableSize: newTableSize })
+	setTableSize: (newTableSize) => set({ tableSize: newTableSize }),
+
+	// Preset filters
+	presets: [],
+	setPresets: (newPresets) =>
+		set((state) => ({ ...state, presets: newPresets })),
+	activePreset: '',
+	setActivePreset: (newPreset: string) => set({ activePreset: newPreset })
 }))

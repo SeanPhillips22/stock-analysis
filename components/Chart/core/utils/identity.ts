@@ -1,1 +1,1 @@
-export const identity = (d: any) => d;
+export const identity = (d: any) => d

@@ -6,8 +6,8 @@ const NO_ADS = [
 	'privacy-policy',
 	'terms-of-use',
 	'apis',
-	'subscribe',
-];
+	'subscribe'
+]
 
 const NO_ADS_RELAXED = [
 	'login',
@@ -15,13 +15,13 @@ const NO_ADS_RELAXED = [
 	'contact',
 	'terms-of-use',
 	'apis',
-	'subscribe',
-];
+	'subscribe'
+]
 
 export function noAds(path: string | null) {
-	return path ? NO_ADS.includes(path) : false;
+	return path ? NO_ADS.includes(path) : false
 }
 
 export function noAdsRelaxed(path: string | null) {
-	return path ? NO_ADS_RELAXED.includes(path) : false;
+	return path ? NO_ADS_RELAXED.includes(path) : false
 }

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { scaleOrdinal } from 'd3-scale';
+import { scaleOrdinal } from 'd3-scale'
 const defaultColors = [
 	'#F44336',
 	'#2196F3',
@@ -8,62 +8,62 @@ const defaultColors = [
 	'#3F51B5',
 	'#03A9F4',
 	'#9C27B0',
-	'#4CAF50',
-];
-let i = 0;
-const overlayColors = scaleOrdinal(defaultColors);
+	'#4CAF50'
+]
+let i = 0
+const overlayColors = scaleOrdinal(defaultColors)
 export default function BaseIndicator() {
-	let id = i++;
-	let accessor;
-	let stroke;
-	let fill;
-	let echo;
-	let type;
+	let id = i++
+	let accessor
+	let stroke
+	let fill
+	let echo
+	let type
 	const baseIndicator = () => () => {
 		/** Do Nothing */
-	};
+	}
 	baseIndicator.id = (newId) => {
 		if (newId === undefined) {
-			return id;
+			return id
 		}
-		id = newId;
-		return baseIndicator;
-	};
+		id = newId
+		return baseIndicator
+	}
 	baseIndicator.accessor = (newAccessor) => {
 		if (newAccessor === undefined) {
-			return accessor;
+			return accessor
 		}
-		accessor = newAccessor;
-		return baseIndicator;
-	};
+		accessor = newAccessor
+		return baseIndicator
+	}
 	baseIndicator.stroke = (newStroke) => {
 		if (newStroke === undefined) {
-			return !stroke ? (stroke = overlayColors(id)) : stroke;
+			return !stroke ? (stroke = overlayColors(id)) : stroke
 		}
-		stroke = newStroke;
-		return baseIndicator;
-	};
+		stroke = newStroke
+		return baseIndicator
+	}
 	baseIndicator.fill = (newFill) => {
 		if (newFill === undefined) {
-			return !fill ? (fill = overlayColors(id)) : fill;
+			return !fill ? (fill = overlayColors(id)) : fill
 		}
-		fill = newFill;
-		return baseIndicator;
-	};
+		fill = newFill
+		return baseIndicator
+	}
 	baseIndicator.echo = (newEcho) => {
 		if (newEcho === undefined) {
-			return echo;
+			return echo
 		}
-		echo = newEcho;
-		return baseIndicator;
-	};
+		echo = newEcho
+		return baseIndicator
+	}
 	baseIndicator.type = (newType) => {
 		if (newType === undefined) {
-			return type;
+			return type
 		}
-		type = newType;
-		return baseIndicator;
-	};
-	return baseIndicator;
+		type = newType
+		return baseIndicator
+	}
+	return baseIndicator
 }
 // # sourceMappingURL=baseIndicator.js.map

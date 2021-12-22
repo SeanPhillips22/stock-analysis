@@ -1,14 +1,14 @@
-import create from 'zustand';
+import create from 'zustand'
 
 interface ActionsState {
-	all: boolean;
-	filter: string;
-	pos: number;
-	isFiltered: boolean;
-	setAll: (newAll: boolean) => void;
-	setFilter: (newFilter: string) => void;
-	setPos: (newPos: number) => void;
-	setIsFiltered: (newIsFiltered: boolean) => void;
+	all: boolean
+	filter: string
+	pos: number
+	isFiltered: boolean
+	setAll: (newAll: boolean) => void
+	setFilter: (newFilter: string) => void
+	setPos: (newPos: number) => void
+	setIsFiltered: (newIsFiltered: boolean) => void
 }
 
 export const actionsState = create<ActionsState>((set) => ({
@@ -19,5 +19,5 @@ export const actionsState = create<ActionsState>((set) => ({
 	setAll: (newAll) => set({ all: newAll }),
 	setFilter: (newFilter) => set({ filter: newFilter }),
 	setPos: (newPos) => set({ pos: newPos }),
-	setIsFiltered: (newIsFiltered) => set({ isFiltered: newIsFiltered }),
-}));
+	setIsFiltered: (newIsFiltered) => set({ isFiltered: newIsFiltered })
+}))

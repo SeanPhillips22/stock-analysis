@@ -1,9 +1,11 @@
 import { getData } from 'functions/apis/API'
 import { GetServerSideProps } from 'next'
 
-const Sitemap = () => {}
+const Sitemap = () => {
+	/* Do nothing */
+}
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getServerSideProps: GetServerSideProps = async () => {
 	const pages = [
 		'about/',
 		'contact/',

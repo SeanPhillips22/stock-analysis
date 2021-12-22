@@ -1,19 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import { News } from 'types/News';
-import { Tickers } from './Tickers';
-import { NewsAds } from './NewsAds';
-import { useState } from 'react';
+import { News } from 'types/News'
+import { Tickers } from './Tickers'
+import { NewsAds } from './NewsAds'
+import { useState } from 'react'
 
 interface Props {
-	index: number;
-	item: News;
-	related?: string;
-	count: number;
+	index: number
+	item: News
+	related?: string
+	count: number
 }
 
 export const NewsArticle = ({ index, item, related, count }: Props) => {
-	const [imgSrc, setImgSrc] = useState<string | undefined>(item.image);
-	const onError = () => setImgSrc('/blank.png');
+	const [imgSrc, setImgSrc] = useState<string | undefined>(item.image)
+	const onError = () => setImgSrc('/blank.png')
 
 	return (
 		<>
@@ -61,5 +61,5 @@ export const NewsArticle = ({ index, item, related, count }: Props) => {
 				(count < 3 && count === index + 1) ||
 				index === 7) && <NewsAds index={index} count={count} />}
 		</>
-	);
-};
+	)
+}

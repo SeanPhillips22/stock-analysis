@@ -1,7 +1,7 @@
-import { InformationCircleIcon } from 'components/Icons/InformationCircle';
+import { InformationCircleIcon } from 'components/Icons/InformationCircle'
 
 interface Props {
-	text: string;
+	text: string
 }
 
 export const InfoBox = ({ text }: Props) => {
@@ -16,5 +16,5 @@ export const InfoBox = ({ text }: Props) => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}

@@ -1,83 +1,83 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { functor, merge, path } from '../utils';
-import atr from './atr';
-import { Kagi as defaultOptions } from './defaultOptionsForComputation';
+import { functor, merge, path } from '../utils'
+import atr from './atr'
+import { Kagi as defaultOptions } from './defaultOptionsForComputation'
 export default function KagiComponent() {
-	let options = defaultOptions;
-	let dateAccessor = (d) => d.date;
+	let options = defaultOptions
+	let dateAccessor = (d) => d.date
 	let dateMutator = (d, date) => {
-		d.date = date;
-	};
+		d.date = date
+	}
 	const calculator = (data) => {
-		const { reversalType, windowSize, reversal, sourcePath } = options;
-		const source = path(sourcePath);
-		let reversalThreshold;
+		const { reversalType, windowSize, reversal, sourcePath } = options
+		const source = path(sourcePath)
+		let reversalThreshold
 		if (reversalType === 'ATR') {
-			const atrAlgorithm = atr().options({ windowSize });
+			const atrAlgorithm = atr().options({ windowSize })
 			const atrCalculator = merge()
 				.algorithm(atrAlgorithm)
 				.merge((d, c) => {
-					d['atr' + windowSize] = c;
-				});
-			atrCalculator(data);
-			reversalThreshold = (d) => d['atr' + windowSize];
+					d['atr' + windowSize] = c
+				})
+			atrCalculator(data)
+			reversalThreshold = (d) => d['atr' + windowSize]
 		} else {
-			reversalThreshold = functor(reversal);
+			reversalThreshold = functor(reversal)
 		}
-		const kagiData = [];
-		let prevPeak;
-		let prevTrough;
-		let direction;
-		let line = {};
+		const kagiData = []
+		let prevPeak
+		let prevTrough
+		let direction
+		let line = {}
 		data.forEach(function (d) {
 			if (line.from === undefined) {
-				dateMutator(line, dateAccessor(d));
-				line.from = dateAccessor(d);
+				dateMutator(line, dateAccessor(d))
+				line.from = dateAccessor(d)
 				if (!line.open) {
-					line.open = d.open;
+					line.open = d.open
 				}
-				line.high = d.high;
-				line.low = d.low;
+				line.high = d.high
+				line.low = d.low
 				if (!line.close) {
-					line.close = source(d);
+					line.close = source(d)
 				}
-				line.startOfYear = d.startOfYear;
-				line.startOfQuarter = d.startOfQuarter;
-				line.startOfMonth = d.startOfMonth;
-				line.startOfWeek = d.startOfWeek;
+				line.startOfYear = d.startOfYear
+				line.startOfQuarter = d.startOfQuarter
+				line.startOfMonth = d.startOfMonth
+				line.startOfWeek = d.startOfWeek
 			}
 			if (!line.startOfYear) {
-				line.startOfYear = d.startOfYear;
+				line.startOfYear = d.startOfYear
 				if (line.startOfYear) {
-					line.date = d.date;
+					line.date = d.date
 				}
 			}
 			if (!line.startOfQuarter) {
-				line.startOfQuarter = d.startOfQuarter;
+				line.startOfQuarter = d.startOfQuarter
 				if (line.startOfQuarter && !line.startOfYear) {
-					line.date = d.date;
+					line.date = d.date
 				}
 			}
 			if (!line.startOfMonth) {
-				line.startOfMonth = d.startOfMonth;
+				line.startOfMonth = d.startOfMonth
 				if (line.startOfMonth && !line.startOfQuarter) {
-					line.date = d.date;
+					line.date = d.date
 				}
 			}
 			if (!line.startOfWeek) {
-				line.startOfWeek = d.startOfWeek;
+				line.startOfWeek = d.startOfWeek
 				if (line.startOfWeek && !line.startOfMonth) {
-					line.date = d.date;
+					line.date = d.date
 				}
 			}
-			line.volume = (line.volume || 0) + d.volume;
+			line.volume = (line.volume || 0) + d.volume
 			// @ts-ignore
-			line.high = Math.max(line.high, d.high);
+			line.high = Math.max(line.high, d.high)
 			// @ts-ignore
-			line.low = Math.min(line.low, d.low);
-			line.to = dateAccessor(d);
+			line.low = Math.min(line.low, d.low)
+			line.to = dateAccessor(d)
 			// @ts-ignore
-			const priceMovement = source(d) - line.close;
+			const priceMovement = source(d) - line.close
 			if (
 				// @ts-ignore
 				(line.close >= line.open /* going up */ &&
@@ -86,14 +86,14 @@ export default function KagiComponent() {
 				(line.close < line.open /* going down */ &&
 					priceMovement < 0) /* and moving in same direction */
 			) {
-				line.close = source(d);
+				line.close = source(d)
 				// @ts-ignore
 				if (prevTrough && line.close < prevTrough) {
 					// going below the prevTrough, so change from yang to yin
 					// A yin line forms when a Kagi line breaks below the prior trough.
-					line.changePoint = prevTrough;
+					line.changePoint = prevTrough
 					if (line.startAs !== 'yin') {
-						line.changeTo = 'yin';
+						line.changeTo = 'yin'
 						// line.startAs = "yang";
 					}
 				}
@@ -101,9 +101,9 @@ export default function KagiComponent() {
 				if (prevPeak && line.close > prevPeak) {
 					// going above the prevPeak, so change from yin to yang
 					// A yang line forms when a Kagi line breaks above the prior peak
-					line.changePoint = prevPeak;
+					line.changePoint = prevPeak
 					if (line.startAs !== 'yang') {
-						line.changeTo = 'yang';
+						line.changeTo = 'yang'
 						// line.startAs = "yin";
 					}
 				}
@@ -122,87 +122,87 @@ export default function KagiComponent() {
 					Math.abs(priceMovement) > reversalThreshold(d))
 			) {
 				// reverse direction
-				const nextLineOpen = line.close;
+				const nextLineOpen = line.close
 				// @ts-ignore
 				direction =
-					(line.close - line.open) / Math.abs(line.close - line.open);
-				let nextChangePoint;
-				let nextChangeTo;
+					(line.close - line.open) / Math.abs(line.close - line.open)
+				let nextChangePoint
+				let nextChangeTo
 				if (direction < 0 /* if direction so far has been -ve*/) {
 					// compare with line.close becomes prevTrough
 					if (prevPeak === undefined) {
-						prevPeak = line.open;
+						prevPeak = line.open
 					}
-					prevTrough = line.close;
+					prevTrough = line.close
 					if (source(d) > prevPeak) {
-						nextChangePoint = prevPeak;
-						nextChangeTo = 'yang';
+						nextChangePoint = prevPeak
+						nextChangeTo = 'yang'
 					}
 				} else {
 					if (prevTrough === undefined) {
-						prevTrough = line.open;
+						prevTrough = line.open
 					}
-					prevPeak = line.close;
+					prevPeak = line.close
 					if (source(d) < prevTrough) {
-						nextChangePoint = prevTrough;
-						nextChangeTo = 'yin';
+						nextChangePoint = prevTrough
+						nextChangeTo = 'yin'
 					}
 				}
 				if (line.startAs === undefined) {
-					line.startAs = direction > 0 ? 'yang' : 'yin';
+					line.startAs = direction > 0 ? 'yang' : 'yin'
 				}
-				const startAs = line.changeTo || line.startAs;
-				line.added = true;
-				kagiData.push(line);
-				direction = -1 * direction; // direction is reversed
-				line = Object.assign({}, line);
-				line.open = nextLineOpen;
-				line.close = source(d);
-				line.startAs = startAs;
-				line.changePoint = nextChangePoint;
-				line.changeTo = nextChangeTo;
-				line.added = false;
-				line.from = undefined;
-				line.volume = 0;
+				const startAs = line.changeTo || line.startAs
+				line.added = true
+				kagiData.push(line)
+				direction = -1 * direction // direction is reversed
+				line = Object.assign({}, line)
+				line.open = nextLineOpen
+				line.close = source(d)
+				line.startAs = startAs
+				line.changePoint = nextChangePoint
+				line.changeTo = nextChangeTo
+				line.added = false
+				line.from = undefined
+				line.volume = 0
 			} else {
 				// console.log("MOVING IN REV DIR BUT..", line.open, line.close, source(d));
 			}
-			line.current = source(d);
+			line.current = source(d)
 			// @ts-ignore
-			let dir = line.close - line.open;
-			dir = dir === 0 ? 1 : dir / Math.abs(dir);
+			let dir = line.close - line.open
+			dir = dir === 0 ? 1 : dir / Math.abs(dir)
 			// @ts-ignore
 			line.reverseAt =
 				dir > 0
 					? line.close - reversalThreshold(d)
-					: line.open - reversalThreshold(d);
-		});
+					: line.open - reversalThreshold(d)
+		})
 		if (!line.added) {
-			kagiData.push(line);
+			kagiData.push(line)
 		}
-		return kagiData;
-	};
+		return kagiData
+	}
 	calculator.options = (newOptions) => {
 		if (newOptions === undefined) {
-			return options;
+			return options
 		}
-		options = Object.assign(Object.assign({}, defaultOptions), newOptions);
-		return calculator;
-	};
+		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
+		return calculator
+	}
 	calculator.dateMutator = (newDateMutator) => {
 		if (newDateMutator === undefined) {
-			return dateMutator;
+			return dateMutator
 		}
-		dateMutator = newDateMutator;
-		return calculator;
-	};
+		dateMutator = newDateMutator
+		return calculator
+	}
 	calculator.dateAccessor = (newDateAccessor) => {
 		if (newDateAccessor === undefined) {
-			return dateAccessor;
+			return dateAccessor
 		}
-		dateAccessor = newDateAccessor;
-		return calculator;
-	};
-	return calculator;
+		dateAccessor = newDateAccessor
+		return calculator
+	}
+	return calculator
 }
 // # sourceMappingURL=kagi.js.map

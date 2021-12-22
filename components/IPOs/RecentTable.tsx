@@ -3,21 +3,21 @@ import {
 	useSortBy,
 	useGlobalFilter,
 	useAsyncDebounce,
-	Column,
-} from 'react-table';
-import { StockLink } from 'components/Links';
-import { useMemo } from 'react';
-import { SortUpIcon } from 'components/Icons/SortUp';
-import { SortDownIcon } from 'components/Icons/SortDown';
-import { IpoRecent } from 'types/Ipos';
-import { Controls } from 'components/Controls/_Controls';
+	Column
+} from 'react-table'
+import { StockLink } from 'components/Links'
+import { useMemo } from 'react'
+import { SortUpIcon } from 'components/Icons/SortUp'
+import { SortDownIcon } from 'components/Icons/SortDown'
+import { IpoRecent } from 'types/Ipos'
+import { Controls } from 'components/Controls/_Controls'
 
 interface CellString {
-	cell: { value: string };
+	cell: { value: string }
 }
 
 interface CellNumber {
-	cell: { value: number };
+	cell: { value: number }
 }
 
 export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
@@ -27,113 +27,109 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 				Header: 'IPO Date',
 				accessor: 'date',
 				sortType: (a, b) => {
-					const ad = new Date(a.values.date).getTime();
-					const bd = new Date(b.values.date).getTime();
+					const ad = new Date(a.values.date).getTime()
+					const bd = new Date(b.values.date).getTime()
 					if (ad < bd) {
-						return 1;
+						return 1
 					}
 					if (ad > bd) {
-						return -1;
+						return -1
 					} else {
-						return 0;
+						return 0
 					}
 				},
-				sortInverted: true,
+				sortInverted: true
 			},
 			{
 				Header: 'Symbol',
 				accessor: 'symbol',
 				Cell: function DateCell({ cell: { value } }: CellString) {
 					if (value.startsWith('=')) {
-						return value.slice(1);
+						return value.slice(1)
 					}
-					return <StockLink symbol={value} />;
+					return <StockLink symbol={value} />
 				},
 				sortType: (a, b) => {
-					let ad = a.values.symbol;
-					let bd = b.values.symbol;
+					let ad = a.values.symbol
+					let bd = b.values.symbol
 					if (ad.startsWith('=')) {
-						ad = ad.slice(1);
+						ad = ad.slice(1)
 					}
 					if (bd.startsWith('=')) {
-						bd = bd.slice(1);
+						bd = bd.slice(1)
 					}
 					if (ad < bd) {
-						return 1;
+						return 1
 					}
 					if (ad > bd) {
-						return -1;
+						return -1
 					} else {
-						return 0;
+						return 0
 					}
 				},
-				sortInverted: true,
+				sortInverted: true
 			},
 			{
 				Header: 'Name',
 				accessor: 'name',
 				sortType: (a, b) => {
-					const ad = a.values.name.toUpperCase();
-					const bd = b.values.name.toUpperCase();
+					const ad = a.values.name.toUpperCase()
+					const bd = b.values.name.toUpperCase()
 					if (ad < bd) {
-						return 1;
+						return 1
 					}
 					if (ad > bd) {
-						return -1;
+						return -1
 					} else {
-						return 0;
+						return 0
 					}
 				},
-				sortInverted: true,
+				sortInverted: true
 			},
 			{
 				Header: 'IPO Price',
 				accessor: 'ipoPrice',
 				Cell: ({ cell: { value } }: CellNumber) => {
-					return '$' + value.toFixed(2);
-				},
+					return '$' + value.toFixed(2)
+				}
 			},
 			{
 				Header: 'Current',
 				accessor: 'current',
 				Cell: ({ cell: { value } }: CellNumber) => {
-					return '$' + value.toFixed(2);
-				},
+					return '$' + value.toFixed(2)
+				}
 			},
 			{
 				Header: 'Return',
 				accessor: 'return',
 				sortType: 'basic',
 				Cell: function FormatCell({ cell: { value } }: CellNumber) {
-					const fixed = value.toFixed(2) + '%';
+					const fixed = value.toFixed(2) + '%'
 					if (value > 0) {
-						return <span className="text-[green]">{fixed}</span>;
+						return <span className="text-[green]">{fixed}</span>
 					} else if (value < 0) {
-						return <span className="text-[red]">{fixed}</span>;
+						return <span className="text-[red]">{fixed}</span>
 					} else {
-						return <span className="text-gray-800">{fixed}</span>;
+						return <span className="text-gray-800">{fixed}</span>
 					}
-				},
-			},
+				}
+			}
 		],
 		[]
-	);
+	)
 
-	const data = useMemo(() => rawdata, [rawdata]);
+	const data = useMemo(() => rawdata, [rawdata])
 
-	const tableInstance = useTable(
-		{ columns, data },
-		useGlobalFilter,
-		useSortBy
-	);
+	const tableInstance = useTable({ columns, data }, useGlobalFilter, useSortBy)
 
 	const {
 		headerGroups,
 		rows,
 		prepareRow,
 		setGlobalFilter,
-		state: { globalFilter },
-	} = tableInstance;
+		state: { globalFilter }
+	} = tableInstance
 
 	return (
 		<>
@@ -156,7 +152,7 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 								{headerGroup.headers.map((column, index) => (
 									<th
 										{...column.getSortByToggleProps({
-											title: `Sort by: ${column.Header}`,
+											title: `Sort by: ${column.Header}`
 										})}
 										key={index}
 									>
@@ -180,18 +176,18 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 					</thead>
 					<tbody>
 						{rows.map((row, index) => {
-							prepareRow(row);
+							prepareRow(row)
 							return (
 								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return <td key={index}>{cell.render('Cell')}</td>;
+										return <td key={index}>{cell.render('Cell')}</td>
 									})}
 								</tr>
-							);
+							)
 						})}
 					</tbody>
 				</table>
 			</div>
 		</>
-	);
-};
+	)
+}

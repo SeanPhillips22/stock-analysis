@@ -1,32 +1,32 @@
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1';
-import { StockLink } from 'components/Links';
+import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
+import { StockLink } from 'components/Links'
 
 const cellStyles =
-	'py-1.5 sm:py-2 px-1.5 xs:px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200';
+	'py-1.5 sm:py-2 px-1.5 xs:px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200'
 
 interface Mover {
-	s: string;
-	n: string;
-	p: string;
-	c: string;
+	s: string
+	n: string
+	p: string
+	c: string
 }
 
 interface Props {
-	date: string;
-	marketStatus: string;
-	gainers: Mover[];
-	losers: Mover[];
+	date: string
+	marketStatus: string
+	gainers: Mover[]
+	losers: Mover[]
 }
 
 export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 	interface InnerProps {
-		movers: Mover[];
-		type: string;
+		movers: Mover[]
+		type: string
 	}
 
 	const Rows = ({ movers, type }: InnerProps) => {
-		const items = movers.slice(0, 10);
-		const redOrGreen = type === 'Gainers' ? 'text-green-700' : 'text-red-600';
+		const items = movers.slice(0, 10)
+		const redOrGreen = type === 'Gainers' ? 'text-green-700' : 'text-red-600'
 
 		return (
 			<>
@@ -61,11 +61,11 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 					</tr>
 				))}
 			</>
-		);
-	};
+		)
+	}
 
 	const Table = ({ movers, type }: InnerProps) => {
-		const titlePrefix = marketStatus === 'premarket' ? 'Pre-Market' : 'Top';
+		const titlePrefix = marketStatus === 'premarket' ? 'Pre-Market' : 'Top'
 
 		return (
 			<div className="flex-grow">
@@ -103,8 +103,8 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 					</tbody>
 				</table>
 			</div>
-		);
-	};
+		)
+	}
 
 	return (
 		<>
@@ -114,5 +114,5 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 				<Mobile1 />
 			</section>
 		</>
-	);
-};
+	)
+}

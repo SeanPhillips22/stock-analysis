@@ -1,12 +1,12 @@
-import { screenerState } from 'components/StockScreener/screener.state';
-import { useEffect, useRef } from 'react';
-import { FilterProps } from 'components/StockScreener/screener.types';
-import { isFilterSelected } from 'components/StockScreener/functions/isFilterSelected';
-import { FilterButton } from './FilterButton';
-import { CloseCircleIcon } from 'components/Icons/CloseCircle';
-import { NumericFilter } from './FilterTypes/NumericFilter';
-import { StringFilter } from './FilterTypes/StringFilter';
-import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters';
+import { screenerState } from 'components/StockScreener/screener.state'
+import { useEffect, useRef } from 'react'
+import { FilterProps } from 'components/StockScreener/screener.types'
+import { isFilterSelected } from 'components/StockScreener/functions/isFilterSelected'
+import { FilterButton } from './FilterButton'
+import { CloseCircleIcon } from 'components/Icons/CloseCircle'
+import { NumericFilter } from './FilterTypes/NumericFilter'
+import { StringFilter } from './FilterTypes/StringFilter'
+import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters'
 
 /**
  * FilterBody
@@ -16,39 +16,39 @@ import { useModifyFilters } from 'components/StockScreener/functions/useModifyFi
  */
 
 export function FilterBody({ filter }: { filter: FilterProps }) {
-	const ref = useRef<HTMLDivElement>(null);
-	const filters = screenerState((state) => state.filters);
-	const openFilter = screenerState((state) => state.openFilter);
-	const setOpenFilter = screenerState((state) => state.setOpenFilter);
-	const { remove } = useModifyFilters();
+	const ref = useRef<HTMLDivElement>(null)
+	const filters = screenerState((state) => state.filters)
+	const openFilter = screenerState((state) => state.openFilter)
+	const setOpenFilter = screenerState((state) => state.setOpenFilter)
+	const { remove } = useModifyFilters()
 
-	const { id, filterType } = filter;
-	const active = isFilterSelected(id, filters);
+	const { id, filterType } = filter
+	const active = isFilterSelected(id, filters)
 
 	// Close dropdown if clicked outside of filter dropdown
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (ref.current && !ref.current.contains(event.target as Node)) {
-				setOpenFilter('');
-				document.removeEventListener('mousedown', handleClickOutside);
+				setOpenFilter('')
+				document.removeEventListener('mousedown', handleClickOutside)
 			}
-		};
+		}
 
 		if (id === openFilter) {
-			document.addEventListener('mousedown', handleClickOutside);
+			document.addEventListener('mousedown', handleClickOutside)
 		}
 
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, [id, openFilter, ref, setOpenFilter]);
+			document.removeEventListener('mousedown', handleClickOutside)
+		}
+	}, [id, openFilter, ref, setOpenFilter])
 
-	let Filter;
+	let Filter
 
 	if (filterType === 'numeric' || filterType === 'numericRange') {
-		Filter = NumericFilter;
+		Filter = NumericFilter
 	} else {
-		Filter = StringFilter;
+		Filter = StringFilter
 	}
 
 	return (
@@ -78,5 +78,5 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 				<Filter filter={filter} active={active} />
 			</div>
 		</div>
-	);
+	)
 }

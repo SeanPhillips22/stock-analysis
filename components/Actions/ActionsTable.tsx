@@ -15,8 +15,8 @@ import { actionsState } from 'state/actionsState'
 
 interface Props {
 	title: string
-	columndata: Column<object>[]
-	rowdata: object[]
+	columndata: Column<any>[]
+	rowdata: any[]
 	fullCount: number
 	type: string
 	year?: string

@@ -1,19 +1,19 @@
-import { useEffect } from 'react';
-import Script from 'next/script';
+import { useEffect } from 'react'
+import Script from 'next/script'
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
 	interface Window {
-		dianomiReloadContext: any;
+		dianomiReloadContext: any
 	}
 }
 
 export default function NewsAd1() {
 	useEffect(() => {
 		if (typeof window.dianomiReloadContext !== 'undefined') {
-			window.dianomiReloadContext();
+			window.dianomiReloadContext()
 		}
-	}, []);
+	}, [])
 
 	return (
 		<>
@@ -28,5 +28,5 @@ export default function NewsAd1() {
 				id="dianomi_context_script"
 			/>
 		</>
-	);
+	)
 }

@@ -5,19 +5,19 @@ import {
 	head,
 	getAxisCanvas,
 	GenericChartComponent,
-	plotDataLengthBarWidth,
-} from '../core';
-import { group } from 'd3-array';
-import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale';
-import * as React from 'react';
-import { drawOnCanvasHelper, identityStack } from './StackedBarSeries';
+	plotDataLengthBarWidth
+} from '../core'
+import { group } from 'd3-array'
+import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale'
+import * as React from 'react'
+import { drawOnCanvasHelper, identityStack } from './StackedBarSeries'
 
 interface IBar {
-	readonly x: number;
-	readonly y: number;
-	readonly height: number;
-	readonly width: number;
-	readonly fillStyle: string;
+	readonly x: number
+	readonly y: number
+	readonly height: number
+	readonly width: number
+	readonly fillStyle: string
 }
 
 export interface BarSeriesProps {
@@ -30,16 +30,16 @@ export interface BarSeriesProps {
 				yScale: ScaleContinuousNumeric<number, number>,
 				d: [number, number],
 				moreProps: any
-		  ) => number);
-	readonly clip?: boolean;
-	readonly fillStyle?: string | ((data: any) => string);
-	readonly strokeStyle?: string;
-	readonly swapScales?: boolean;
+		  ) => number)
+	readonly clip?: boolean
+	readonly fillStyle?: string | ((data: any) => string)
+	readonly strokeStyle?: string
+	readonly swapScales?: boolean
 	readonly width?:
 		| number
-		| ((props: { widthRatio: number }, moreProps: any) => number);
-	readonly widthRatio?: number;
-	readonly yAccessor: (data: any) => number | undefined;
+		| ((props: { widthRatio: number }, moreProps: any) => number)
+	readonly widthRatio?: number
+	readonly yAccessor: (data: any) => number | undefined
 }
 
 /**
@@ -55,11 +55,11 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 		fillStyle: 'rgba(70, 130, 180, 0.5)',
 		swapScales: false,
 		width: plotDataLengthBarWidth,
-		widthRatio: 0.8,
-	};
+		widthRatio: 0.8
+	}
 
 	public render() {
-		const { clip } = this.props;
+		const { clip } = this.props
 
 		return (
 			<GenericChartComponent
@@ -68,7 +68,7 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 				canvasDraw={this.drawOnCanvas}
 				drawOn={['pan']}
 			/>
-		);
+		)
 	}
 
 	private readonly drawOnCanvas = (
@@ -76,7 +76,7 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 		moreProps: any
 	) => {
 		if (this.props.swapScales) {
-			const { xAccessor } = moreProps;
+			const { xAccessor } = moreProps
 
 			drawOnCanvasHelper(
 				ctx,
@@ -84,81 +84,79 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 				moreProps,
 				xAccessor,
 				identityStack
-			);
+			)
 		} else {
-			const bars = this.getBars(moreProps);
+			const bars = this.getBars(moreProps)
 
-			const { strokeStyle } = this.props;
+			const { strokeStyle } = this.props
 
-			const nest = group(bars, (d: any) => d.fillStyle);
+			const nest = group(bars, (d: any) => d.fillStyle)
 
 			nest.forEach((values, key) => {
 				if (strokeStyle !== undefined) {
 					if (head(values).width > 1) {
-						ctx.strokeStyle = strokeStyle;
+						ctx.strokeStyle = strokeStyle
 					}
 				}
-				ctx.fillStyle = key;
+				ctx.fillStyle = key
 
 				values.forEach((d) => {
 					if (d.width <= 1) {
-						ctx.fillRect(d.x - 0.5, d.y, 1, d.height);
+						ctx.fillRect(d.x - 0.5, d.y, 1, d.height)
 					} else {
-						ctx.fillRect(d.x + 0.5, d.y + 0.5, d.width, d.height);
+						ctx.fillRect(d.x + 0.5, d.y + 0.5, d.width, d.height)
 						if (strokeStyle !== undefined) {
-							ctx.strokeRect(d.x, d.y, d.width, d.height);
+							ctx.strokeRect(d.x, d.y, d.width, d.height)
 						}
 					}
-				});
-			});
+				})
+			})
 		}
-	};
+	}
 
 	private readonly getBars = (moreProps: {
-		chartConfig: any;
-		xAccessor: (data: any) => number | Date;
-		xScale:
-			| ScaleContinuousNumeric<number, number>
-			| ScaleTime<number, number>;
-		plotData: any[];
+		chartConfig: any
+		xAccessor: (data: any) => number | Date
+		xScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>
+		plotData: any[]
 	}) => {
-		const { baseAt, fillStyle, width, yAccessor } = this.props;
+		const { baseAt, fillStyle, width, yAccessor } = this.props
 
 		const {
 			xScale,
 			xAccessor,
 			plotData,
-			chartConfig: { yScale },
-		} = moreProps;
+			chartConfig: { yScale }
+		} = moreProps
 
-		const getFill = functor(fillStyle);
-		const getBase = functor(baseAt);
-		const getWidth = functor(width);
+		const getFill = functor(fillStyle)
+		const getBase = functor(baseAt)
+		const getWidth = functor(width)
 
 		const barWidth = getWidth(this.props, {
 			xScale,
 			xAccessor,
-			plotData,
-		});
+			plotData
+		})
 
-		const offset = Math.floor(0.5 * barWidth);
+		const offset = Math.floor(0.5 * barWidth)
 
 		return plotData
 			.map((d) => {
-				const yValue = yAccessor(d);
+				const yValue = yAccessor(d)
 				if (yValue === undefined) {
-					return undefined;
+					return undefined
 				}
 
-				const xValue = xAccessor(d);
-				const x = Math.round(xScale(xValue)) - offset;
+				const xValue = xAccessor(d)
+				const x = Math.round(xScale(xValue)) - offset
 
-				let y = yScale(yValue);
+				let y = yScale(yValue)
 
-				let h = getBase(xScale, yScale, d) - yScale(yValue);
+				let h = getBase(xScale, yScale, d) - yScale(yValue)
 				if (h < 0) {
-					y = y + h;
-					h = -h;
+					y = y + h
+					h = -h
 				}
 
 				return {
@@ -166,9 +164,9 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 					y: Math.round(y),
 					height: Math.round(h),
 					width: offset * 2,
-					fillStyle: getFill(d),
-				};
+					fillStyle: getFill(d)
+				}
 			})
-			.filter((d) => d !== undefined) as IBar[];
-	};
+			.filter((d) => d !== undefined) as IBar[]
+	}
 }

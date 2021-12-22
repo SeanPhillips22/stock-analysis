@@ -1,31 +1,31 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { slidingWindow } from '../utils';
-import { Change as defaultOptions } from './defaultOptionsForComputation';
+import { slidingWindow } from '../utils'
+import { Change as defaultOptions } from './defaultOptionsForComputation'
 export default function ChangeComponent() {
-	let options = defaultOptions;
+	let options = defaultOptions
 	const calculator = (data) => {
-		const { sourcePath } = options;
+		const { sourcePath } = options
 		const algo = slidingWindow()
 			.windowSize(2)
 			.sourcePath(sourcePath)
 			.accumulator(([prev, curr]) => {
-				const absoluteChange = curr - prev;
-				const percentChange = (absoluteChange * 100) / prev;
-				return { absoluteChange, percentChange };
-			});
-		const newData = algo(data);
-		return newData;
-	};
+				const absoluteChange = curr - prev
+				const percentChange = (absoluteChange * 100) / prev
+				return { absoluteChange, percentChange }
+			})
+		const newData = algo(data)
+		return newData
+	}
 	calculator.undefinedLength = () => {
-		return 1;
-	};
+		return 1
+	}
 	calculator.options = (newOptions) => {
 		if (newOptions === undefined) {
-			return options;
+			return options
 		}
-		options = Object.assign(Object.assign({}, defaultOptions), newOptions);
-		return calculator;
-	};
-	return calculator;
+		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
+		return calculator
+	}
+	return calculator
 }
 // # sourceMappingURL=change.js.map

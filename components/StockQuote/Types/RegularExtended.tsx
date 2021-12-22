@@ -1,10 +1,10 @@
-import { useQuote } from 'hooks/useQuote';
-import { Info } from 'types/Info';
-import { changeColor } from '../quote.functions';
+import { useQuote } from 'hooks/useQuote'
+import { Info } from 'types/Info'
+import { changeColor } from '../quote.functions'
 
 export function RegularExtended({ info }: { info: Info }) {
-	const quote = useQuote(info);
-	const color = changeColor(Number(quote.c));
+	const quote = useQuote(info)
+	const color = changeColor(Number(quote.c))
 
 	return (
 		<div className="max-w-[50%]">
@@ -17,5 +17,5 @@ export function RegularExtended({ info }: { info: Info }) {
 				{quote.u}
 			</div>
 		</div>
-	);
+	)
 }

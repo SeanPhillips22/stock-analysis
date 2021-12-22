@@ -21,5 +21,5 @@ export const authState = create<AuthState>((set) => ({
 	setChecked: (newChecked) => set({ checked: newChecked }),
 	setIsLoggedIn: (newIsLoggedIn) => set({ isLoggedIn: newIsLoggedIn }),
 	setIsPro: (newIsPro) => set({ isPro: newIsPro }),
-	setUser: (newUser) => set({ user: newUser }),
+	setUser: (newUser) => set({ user: newUser })
 }))

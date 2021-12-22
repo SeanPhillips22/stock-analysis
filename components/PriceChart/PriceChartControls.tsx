@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react'
 
 interface Props {
-	chartTime: string;
-	setChartTime: Dispatch<SetStateAction<string>>;
+	chartTime: string
+	setChartTime: Dispatch<SetStateAction<string>>
 }
 
 export const Controls = ({ chartTime, setChartTime }: Props) => {
@@ -70,7 +70,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 				</button>
 			</li>
 		</ul>
-	);
-};
+	)
+}
 
-export default Controls;
+export default Controls

@@ -1,12 +1,14 @@
-import { FilterId } from '../screener.types';
+import { FilterId } from '../screener.types'
 import {
 	priceSort,
 	dateSort,
-} from 'components/StockScreener/functions/sort/sortFunctions';
+	stringNullFix,
+	numberNullFix
+} from 'components/StockScreener/functions/sort/sortFunctions'
 
 type Column = {
-	Header: string;
-	accessor: FilterId;
+	Header: string
+	accessor: FilterId
 	format?:
 		| 'string'
 		| 'linkSymbol'
@@ -19,539 +21,611 @@ type Column = {
 		| 'percentage'
 		| 'date'
 		| 'marketcap'
-		| 'padleft';
-	sortType?: any;
-	sortInverted?: boolean;
-};
+		| 'padleft'
+	sortType?: any
+	sortInverted?: boolean
+}
 
 export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Symbol',
 		accessor: 's',
-		format: 'linkSymbol',
+		format: 'linkSymbol'
 	},
 	{
-		Header: 'Company Name',
+		Header: 'Name',
 		accessor: 'n',
-		format: 'string',
+		format: 'string'
 	},
 	{
 		Header: 'Market Cap',
 		accessor: 'm',
-		format: 'marketcap',
+		format: 'marketcap'
+	},
+	{
+		Header: 'Assets',
+		accessor: 'assets',
+		format: 'marketcap'
 	},
 	{
 		Header: 'Sector',
 		accessor: 'se',
-		format: 'padleft',
+		format: 'padleft'
 	},
 	{
 		Header: 'Industry',
-		accessor: 'i',
+		accessor: 'i'
+	},
+	{
+		Header: 'Asset Class',
+		accessor: 'assetClass',
+		format: 'string',
+		sortType: stringNullFix
 	},
 	{
 		Header: 'Enterprise Value',
 		accessor: 'ev',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Exchange',
-		accessor: 'exchange',
+		accessor: 'exchange'
 	},
 	{
 		Header: 'Analyst Ratings',
 		accessor: 'ar',
-		format: 'align',
+		format: 'align'
 	},
 	{
 		Header: 'Count',
 		accessor: 'ac',
-		format: 'align',
+		format: 'align'
 	},
 	{
 		Header: 'Price',
 		accessor: 'p',
-		format: 'amount',
+		format: 'amount'
 	},
 	{
 		Header: 'Change 1D',
 		accessor: 'c',
-		format: 'changePcColor',
+		format: 'changePcColor'
 	},
 	{
 		Header: 'Volume',
 		accessor: 'v',
-		format: 'format0dec',
+		format: 'format0dec'
 	},
 	{
 		Header: 'PE Ratio',
 		accessor: 'pe',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Country',
-		accessor: 'country',
+		accessor: 'country'
 	},
 	{
 		Header: 'Employees',
 		accessor: 'employees',
-		format: 'format0dec',
+		format: 'format0dec'
 	},
 	{
 		Header: 'Founded',
 		accessor: 'founded',
-		format: 'align',
+		format: 'align'
 	},
 	{
 		Header: 'IPO Date',
 		accessor: 'ipoDate',
 		format: 'date',
-		sortType: dateSort,
+		sortType: dateSort
 	},
 	{
 		Header: 'Revenue',
 		accessor: 'revenue',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Forward PE',
 		accessor: 'fpe',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'P/S',
 		accessor: 'ps',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'P/B',
 		accessor: 'pb',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'P/FCF',
 		accessor: 'pfcf',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Target',
 		accessor: 'pt',
-		format: 'amount',
+		format: 'amount'
 	},
 	{
 		Header: 'Target (%)',
 		accessor: 'ptc',
-		format: 'changePcColor',
+		format: 'changePcColor'
 	},
 	{
 		Header: 'Dividend',
 		accessor: 'dps',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Yield (%)',
 		accessor: 'dy',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Payout Ratio',
 		accessor: 'pr',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Div. Growth',
 		accessor: 'dg',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Rev. Growth (1Y)',
 		accessor: 'revenueGrowth',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Gross Profit',
 		accessor: 'grossProfit',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Op. Income',
 		accessor: 'operatingIncome',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Net Income',
 		accessor: 'netIncome',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Net Income Growth',
 		accessor: 'netIncomeGrowth',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'EPS',
 		accessor: 'eps',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'EPS Growth',
 		accessor: 'epsGrowth',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'EBIT',
 		accessor: 'ebit',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'EBITDA',
 		accessor: 'ebitda',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Op. Cash Flow',
 		accessor: 'ocf',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Free Cash Flow',
 		accessor: 'fcf',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'FCF Growth',
 		accessor: 'fcfGrowth',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'FCF / Share',
 		accessor: 'fcfps',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Total Cash',
 		accessor: 'cash',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Total Debt',
 		accessor: 'debt',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Net Cash / Debt',
 		accessor: 'netCash',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Net Cash Growth',
 		accessor: 'netCashGrowth',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Gross Mrg.',
 		accessor: 'grossMargin',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Oper. Mrg.',
 		accessor: 'operatingMargin',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Profit Mrg.',
 		accessor: 'profitMargin',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'FCF Mrg.',
 		accessor: 'fcfMargin',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'EBITDA Mrg.',
 		accessor: 'ebitdaMargin',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'EBIT Mrg.',
 		accessor: 'ebitMargin',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'PEG Ratio',
 		accessor: 'peg',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'EV/Sales',
 		accessor: 'evSales',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'EV/Earnings',
 		accessor: 'evEarnings',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'EV/EBITDA',
 		accessor: 'evEbitda',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'EV/EBIT',
 		accessor: 'evEbit',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'EV/FCF',
 		accessor: 'evFcf',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Earn. Yield',
 		accessor: 'earningsYield',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'FCF Yield',
 		accessor: 'fcfYield',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Buyback Yield',
 		accessor: 'buybackYield',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Total Return',
 		accessor: 'totalReturn',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Av. Volume',
 		accessor: 'averageVolume',
-		format: 'format0dec',
+		format: 'format0dec'
 	},
 	{
 		Header: 'Chg. 1M',
 		accessor: 'ch1m',
-		format: 'changePcColor',
+		format: 'changePcColor'
 	},
 	{
 		Header: 'Chg. 6M',
 		accessor: 'ch6m',
-		format: 'changePcColor',
+		format: 'changePcColor'
 	},
 	{
 		Header: 'Chg. YTD',
 		accessor: 'chYTD',
-		format: 'changePcColor',
+		format: 'changePcColor'
 	},
 	{
 		Header: 'Chg. 1Y',
 		accessor: 'ch1y',
-		format: 'changePcColor',
+		format: 'changePcColor'
 	},
 	{
 		Header: 'Chg. 3Y',
 		accessor: 'ch3y',
-		format: 'changePcColor',
+		format: 'changePcColor'
 	},
 	{
 		Header: 'Chg. 5Y',
 		accessor: 'ch5y',
-		format: 'changePcColor',
+		format: 'changePcColor'
 	},
 	{
 		Header: 'Short/Float',
 		accessor: 'shortFloat',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Short/Shares',
 		accessor: 'shortShares',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Sh. Ratio',
 		accessor: 'shortRatio',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Beta',
 		accessor: 'beta',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Shares Out',
 		accessor: 'sharesOut',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Float',
 		accessor: 'float',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Shares Change (YoY)',
 		accessor: 'sharesYoY',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Shares Change (QoQ)',
 		accessor: 'sharesQoQ',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Owned Insiders',
 		accessor: 'sharesInsiders',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Owned Institutions',
 		accessor: 'sharesInstitutions',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Earnings Date',
 		accessor: 'earningsDate',
-		format: 'date',
+		format: 'date'
 	},
 	{
 		Header: 'Ex-Div Date',
 		accessor: 'exDivDate',
-		format: 'date',
+		format: 'date'
 	},
 	{
 		Header: 'Next Ex-Div',
 		accessor: 'nextDivDate',
-		format: 'date',
+		format: 'date'
+	},
+	{
+		Header: 'Payout Freq.',
+		accessor: 'payoutFrequency',
+		format: 'align'
 	},
 	{
 		Header: 'ROE',
 		accessor: 'roe',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'ROA',
 		accessor: 'roa',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'ROIC',
 		accessor: 'roic',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Rev / Employee',
 		accessor: 'revPerEmployee',
-		format: 'format0dec',
+		format: 'format0dec'
 	},
 	{
 		Header: 'Prof / Employee',
 		accessor: 'profitPerEmployee',
-		format: 'format0dec',
+		format: 'format0dec'
 	},
 	{
 		Header: 'Asset Turn.',
 		accessor: 'assetTurnover',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Inv. Turn.',
 		accessor: 'inventoryTurnover',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Current Ratio',
 		accessor: 'currentRatio',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Quick Ratio',
 		accessor: 'quickRatio',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Debt / Equity',
 		accessor: 'debtEquity',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Debt / EBITDA',
 		accessor: 'debtEbitda',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Debt / FCF',
 		accessor: 'debtFcf',
-		format: 'format2dec',
+		format: 'format2dec'
 	},
 	{
 		Header: 'Tax Rate',
 		accessor: 'taxRate',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Tax / Revenue',
 		accessor: 'taxByRevenue',
-		format: 'percentage',
+		format: 'percentage'
 	},
 	{
 		Header: 'Equity',
 		accessor: 'equity',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Working Capital',
 		accessor: 'workingCapital',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Last Split',
 		accessor: 'ls',
-		format: 'align',
+		format: 'align'
 	},
 	{
 		Header: 'Split Date',
 		accessor: 'splitDate',
-		format: 'date',
+		format: 'date'
 	},
 	{
 		Header: 'Liabilities',
 		accessor: 'liabilities',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Inv. Cash Flow',
 		accessor: 'icf',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Fin. Cash Flow',
 		accessor: 'cff',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Net Cash Flow',
 		accessor: 'ncf',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'Capital Exp.',
 		accessor: 'capex',
-		format: 'abbreviate',
+		format: 'abbreviate'
 	},
 	{
 		Header: 'IPO Price',
 		accessor: 'ipoPriceRange',
 		format: 'string',
-		sortType: priceSort,
+		sortType: priceSort
 	},
 	{
 		Header: 'Is SPAC',
 		accessor: 'spac',
-		format: 'string',
+		format: 'string'
 	},
-];
+	{
+		Header: 'Beta',
+		accessor: 'beta',
+		format: 'format2dec'
+	},
+	{
+		Header: 'Exchange',
+		accessor: 'exchange',
+		format: 'string'
+	},
+	{
+		Header: 'Expense Ratio',
+		accessor: 'expenseRatio',
+		format: 'format2dec'
+	},
+	{
+		Header: 'Holdings',
+		accessor: 'holdings',
+		format: 'format0dec',
+		sortInverted: true
+	},
+	{
+		Header: 'Inception Date',
+		accessor: 'inceptionDate',
+		format: 'date'
+	},
+	{
+		Header: 'PE Ratio',
+		accessor: 'etfPeRatio',
+		format: 'format2dec',
+		sortType: numberNullFix
+	},
+	{
+		Header: 'Region',
+		accessor: 'etfRegion',
+		format: 'string',
+		sortType: stringNullFix
+	},
+	{
+		Header: 'Sector',
+		accessor: 'etfSector',
+		format: 'padleft',
+		sortType: stringNullFix
+	},
+	{
+		Header: 'Issuer',
+		accessor: 'issuer',
+		format: 'string',
+		sortType: stringNullFix
+	},
+	{
+		Header: 'Index',
+		accessor: 'etfIndex',
+		format: 'string',
+		sortType: stringNullFix
+	}
+]

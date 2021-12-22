@@ -33,10 +33,6 @@ const navigation = [
 				name: 'IPO Statistics',
 				href: '/ipos/statistics/'
 			},
-			{
-				name: 'IPO Screener',
-				href: '/ipos/screener/'
-			},
 			{ name: 'IPO News', href: '/ipos/news/' }
 		]
 	},
@@ -53,16 +49,20 @@ const navigation = [
 	},
 	{
 		name: 'Screener',
-		href: '/stock-screener/',
+		href: '/screener/stock/',
 		icon: AdjustmentsIcon,
 		children: [
 			{
 				name: 'Stock Screener',
-				href: '/stock-screener/'
+				href: '/screener/stock/'
 			},
 			{
 				name: 'IPO Screener',
-				href: '/ipos/screener/'
+				href: '/screener/ipo/'
+			},
+			{
+				name: 'ETF Screener',
+				href: '/screener/etf/'
 			}
 		]
 	},

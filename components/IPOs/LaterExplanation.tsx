@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { InformationCircleIcon } from 'components/Icons/InformationCircle';
+import Link from 'next/link'
+import { InformationCircleIcon } from 'components/Icons/InformationCircle'
 
 export function LaterExplanation() {
 	return (
@@ -26,5 +26,5 @@ export function LaterExplanation() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

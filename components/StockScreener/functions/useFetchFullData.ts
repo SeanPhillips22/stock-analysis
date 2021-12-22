@@ -1,32 +1,28 @@
-import { screenerDataState } from '../screenerdata.state'
+import { screenerState } from '../screener.state'
 import { getData } from 'functions/apis/API'
+import { ScreenerTypes } from '../screener.types'
 
+/**
+ * This hook returns a function that fetches the full initial set of data for the screener
+ * @param type the type of screener to fetch data for
+ */
 export function useFetchFullData() {
-	const data = screenerDataState((state) => state.data)
-	const setData = screenerDataState((state) => state.setData)
-	const setFullyLoaded = screenerDataState((state) => state.setFullyLoaded)
+	const setLoaded = screenerState((state) => state.setLoaded)
+	const data = screenerState((state) => state.data)
+	const setData = screenerState((state) => state.setData)
 
-	async function fetchFullData() {
-		if (!data || data.length < 1000) {
-			const data = await getData('screener?type=f')
+	async function fetchFullData(type: ScreenerTypes) {
+		const screenerType =
+			type === 'stocks'
+				? 'screener'
+				: type === 'ipo'
+				? 'iposcreener'
+				: 'etfscreener'
+
+		if (!data || data.length < 100) {
+			const data = await getData(`${screenerType}?type=f`)
+			setLoaded(true)
 			setData(data.data)
-			setFullyLoaded(true)
-		}
-	}
-
-	return fetchFullData
-}
-
-export function useFetchFullIPOData() {
-	const data = screenerDataState((state) => state.data)
-	const setData = screenerDataState((state) => state.setData)
-	const setFullyLoaded = screenerDataState((state) => state.setFullyLoaded)
-
-	async function fetchFullData() {
-		if (!data || data.length < 100 || data.length > 1000) {
-			const data = await getData('iposcreener?type=f')
-			setData(data.data)
-			setFullyLoaded(true)
 		}
 	}
 

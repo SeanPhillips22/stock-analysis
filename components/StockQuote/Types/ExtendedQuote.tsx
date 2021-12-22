@@ -1,12 +1,12 @@
-import { useQuote } from 'hooks/useQuote';
-import { Info } from 'types/Info';
-import { changeColor } from '../quote.functions';
-import { MoonIcon } from 'components/Icons/Moon';
-import { SunIcon } from 'components/Icons/Sun';
+import { useQuote } from 'hooks/useQuote'
+import { Info } from 'types/Info'
+import { changeColor } from '../quote.functions'
+import { MoonIcon } from 'components/Icons/Moon'
+import { SunIcon } from 'components/Icons/Sun'
 
 export function ExtendedQuote({ info }: { info: Info }) {
-	const quote = useQuote(info);
-	const color = changeColor(Number(quote.ec));
+	const quote = useQuote(info)
+	const color = changeColor(Number(quote.ec))
 
 	return (
 		<div className="border-l border-gray-200 pl-5">
@@ -24,5 +24,5 @@ export function ExtendedQuote({ info }: { info: Info }) {
 				<span className="sm:ml-1">{quote.eu}</span>
 			</div>
 		</div>
-	);
+	)
 }

@@ -1,18 +1,18 @@
-import { Menu } from '@headlessui/react';
-import { LockClosedIcon } from '@heroicons/react/solid';
-import { useRouter } from 'next/router';
+import { Menu } from '@headlessui/react'
+import { LockClosedIcon } from '@heroicons/react/solid'
+import { useRouter } from 'next/router'
 
 interface MenuItemProps {
-	title: string;
-	active: boolean;
+	title: string
+	active: boolean
 }
 
 function classNames(...classes: string[]) {
-	return classes.filter(Boolean).join(' ');
+	return classes.filter(Boolean).join(' ')
 }
 
 export const MenuItemRestricted = ({ title, active }: MenuItemProps) => {
-	const router = useRouter();
+	const router = useRouter()
 
 	return (
 		<Menu.Item>
@@ -33,5 +33,5 @@ export const MenuItemRestricted = ({ title, active }: MenuItemProps) => {
 				/>
 			</div>
 		</Menu.Item>
-	);
-};
+	)
+}

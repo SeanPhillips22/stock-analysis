@@ -1,13 +1,13 @@
-import { screenerState } from 'components/StockScreener/screener.state';
+import { screenerState } from 'components/StockScreener/screener.state'
 
 type Props = {
-	name: string;
-};
+	name: string
+}
 
 export function FiltersMenuItem({ name }: Props) {
-	const search = screenerState((state) => state.filterSearch);
-	const filterMenu = screenerState((state) => state.filterMenu);
-	const setFilterMenu = screenerState((state) => state.setFilterMenu);
+	const search = screenerState((state) => state.filterSearch)
+	const filterMenu = screenerState((state) => state.filterMenu)
+	const setFilterMenu = screenerState((state) => state.setFilterMenu)
 
 	if (filterMenu === name) {
 		return (
@@ -21,7 +21,7 @@ export function FiltersMenuItem({ name }: Props) {
 					{name}
 				</span>
 			</li>
-		);
+		)
 	}
 
 	return (
@@ -36,5 +36,5 @@ export function FiltersMenuItem({ name }: Props) {
 				{name}
 			</span>
 		</li>
-	);
+	)
 }

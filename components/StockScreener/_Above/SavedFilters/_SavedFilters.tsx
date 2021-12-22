@@ -1,44 +1,44 @@
-import { screenerDataState } from 'components/StockScreener/screenerdata.state';
-import { ChevronDownIcon } from '@heroicons/react/solid';
-import { useState, useRef, useEffect } from 'react';
-import { SavedDropdown } from './SavedDropdown';
+import { screenerState } from 'components/StockScreener/screener.state'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { useState, useRef, useEffect } from 'react'
+import { SavedDropdown } from './SavedDropdown'
 
 export function SavedFilters() {
-	const type = screenerDataState((state) => state.type);
-	const [open, setOpen] = useState(false);
-	const ref = useRef<HTMLDivElement>(null);
+	const type = screenerState((state) => state.type)
+	const [open, setOpen] = useState(false)
+	const ref = useRef<HTMLDivElement>(null)
 
 	function handleKeyDown(event: React.KeyboardEvent) {
-		if (event.key === 'Enter') setOpen(true);
-		if (event.key === 'Escape') setOpen(false);
+		if (event.key === 'Enter') setOpen(true)
+		if (event.key === 'Escape') setOpen(false)
 	}
 
 	// Close dropdown if clicked outside of it
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (ref.current && !ref.current.contains(event.target as Node)) {
-				setOpen(false);
-				document.removeEventListener('mousedown', handleClickOutside);
+				setOpen(false)
+				document.removeEventListener('mousedown', handleClickOutside)
 			}
-		};
+		}
 
 		const handleEscape = (event: KeyboardEvent) => {
 			if (event.key === 'Escape') {
-				setOpen(false);
-				document.removeEventListener('keydown', handleEscape);
+				setOpen(false)
+				document.removeEventListener('keydown', handleEscape)
 			}
-		};
+		}
 
 		if (open) {
-			document.addEventListener('mousedown', handleClickOutside);
-			document.addEventListener('keydown', handleEscape);
+			document.addEventListener('mousedown', handleClickOutside)
+			document.addEventListener('keydown', handleEscape)
 		}
 
 		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-			document.removeEventListener('keydown', handleEscape);
-		};
-	}, [open, setOpen]);
+			document.removeEventListener('mousedown', handleClickOutside)
+			document.removeEventListener('keydown', handleEscape)
+		}
+	}, [open, setOpen])
 
 	return (
 		<div className="flex-grow">
@@ -73,5 +73,5 @@ export function SavedFilters() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

@@ -22,12 +22,10 @@ export function NewsMenuSearch({
 	symbol,
 	type,
 	setData,
-	news,
 	setError,
 	setLoaded,
 	query,
 	setQuery,
-	searched,
 	setSearched,
 	setEnd
 }: Props) {

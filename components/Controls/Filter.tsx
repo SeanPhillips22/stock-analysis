@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react';
-import { FilterValue } from 'react-table';
-import { CloseIcon } from 'components/Icons/Close';
+import { useState, useEffect } from 'react'
+import { FilterValue } from 'react-table'
+import { CloseIcon } from 'components/Icons/Close'
 
 interface Props {
-	useAsyncDebounce: (value: any, wait: number) => any;
-	globalFilter: any;
-	setGlobalFilter: (filterValue: FilterValue) => void;
-	filterText?: string;
+	useAsyncDebounce: (value: any, wait: number) => any
+	globalFilter: any
+	setGlobalFilter: (filterValue: FilterValue) => void
+	filterText?: string
 }
 
 export function Filter({
 	useAsyncDebounce,
 	globalFilter,
 	setGlobalFilter,
-	filterText = 'Filter...',
+	filterText = 'Filter...'
 }: Props) {
-	const [value, setValue] = useState(globalFilter);
+	const [value, setValue] = useState(globalFilter)
 	const onChange = useAsyncDebounce((value: any) => {
-		setGlobalFilter(value || undefined);
-	}, 100);
+		setGlobalFilter(value || undefined)
+	}, 100)
 
 	useEffect(() => {
-		if (value) onChange(value);
-	}, [onChange, value]);
+		if (value) onChange(value)
+	}, [onChange, value])
 
 	return (
 		<div className="min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px] relative flex items-center">
@@ -36,8 +36,8 @@ export function Filter({
 				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md"
 				value={value || ''}
 				onChange={(e) => {
-					setValue(e.target.value);
-					onChange(e.target.value);
+					setValue(e.target.value)
+					onChange(e.target.value)
 				}}
 				placeholder={filterText}
 			/>
@@ -48,13 +48,13 @@ export function Filter({
 						title="Clear"
 						tabIndex={0}
 						onClick={() => {
-							setValue('');
-							onChange('');
+							setValue('')
+							onChange('')
 						}}
 						onKeyPress={(e) => {
 							if (e.key === 'Enter') {
-								setValue('');
-								onChange('');
+								setValue('')
+								onChange('')
 							}
 						}}
 					>
@@ -63,5 +63,5 @@ export function Filter({
 				</div>
 			)}
 		</div>
-	);
+	)
 }

@@ -1,5 +1,5 @@
-import { UserLayout } from 'components/Layout/UserLayout';
-import Head from 'next/head';
+import { UserLayout } from 'components/Layout/UserLayout'
+import Head from 'next/head'
 
 export default function Custom404() {
 	return (
@@ -12,5 +12,5 @@ export default function Custom404() {
 				It looks like this page was not found. Maybe try searching?
 			</div>
 		</UserLayout>
-	);
+	)
 }

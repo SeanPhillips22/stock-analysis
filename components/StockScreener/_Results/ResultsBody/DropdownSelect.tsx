@@ -1,31 +1,31 @@
-import { Fragment } from 'react';
-import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { Fragment } from 'react'
+import { Listbox, Transition } from '@headlessui/react'
+import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
 function classNames(...classes: any) {
-	return classes.filter(Boolean).join(' ');
+	return classes.filter(Boolean).join(' ')
 }
 
 function getName(selected: number | string, selectOptions: SelectOption[]) {
-	const found = selectOptions.find((item) => item.value === selected);
-	return found?.name;
+	const found = selectOptions.find((item) => item.value === selected)
+	return found?.name
 }
 
 type SelectOption = {
-	value: string | number;
-	name: string | number;
-};
+	value: string | number
+	name: string | number
+}
 
 type Props = {
-	selected: number | string;
-	setSelected: any;
-	selectOptions: SelectOption[];
-};
+	selected: number | string
+	setSelected: any
+	selectOptions: SelectOption[]
+}
 
 export function DropdownSelect({
 	selected,
 	setSelected,
-	selectOptions,
+	selectOptions
 }: Props) {
 	return (
 		<Listbox value={selected} onChange={setSelected}>
@@ -60,7 +60,7 @@ export function DropdownSelect({
 								}
 								value={option.value}
 							>
-								{({ selected, active }) => (
+								{({ selected }) => (
 									<>
 										<span
 											className={classNames(
@@ -87,5 +87,5 @@ export function DropdownSelect({
 				</Transition>
 			</div>
 		</Listbox>
-	);
+	)
 }

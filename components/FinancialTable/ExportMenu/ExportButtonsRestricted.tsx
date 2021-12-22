@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
-import { LockClosedIcon } from '@heroicons/react/solid';
+import { LockClosedIcon } from '@heroicons/react/solid'
 
 export default function ExportButtonsRestricted() {
-	const router = useRouter();
+	const router = useRouter()
 
 	return (
 		<>
@@ -32,5 +32,5 @@ export default function ExportButtonsRestricted() {
 				/>
 			</button>
 		</>
-	);
+	)
 }

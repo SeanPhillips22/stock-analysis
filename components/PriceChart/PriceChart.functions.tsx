@@ -1,12 +1,7 @@
 import { Info } from 'types/Info'
 
 // Make API url
-export function getChartUrl(
-	symbol: string,
-	type: string,
-	time: string,
-	override: boolean
-) {
+export function getChartUrl(symbol: string, type: string, time: string) {
 	const params = `s=${symbol}&t=${type}&r=${time}&m=1`
 
 	let apiurl

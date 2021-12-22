@@ -1,17 +1,17 @@
-import { SymbolLink } from 'components/Links';
+import { SymbolLink } from 'components/Links'
 
 interface Props {
-	tickers: string[];
-	intro?: string;
+	tickers: string[]
+	intro?: string
 }
 
 export const Tickers = ({ tickers, intro }: Props) => {
 	if (tickers === null || tickers.length === 0) {
-		return null;
+		return null
 	}
 
 	if (tickers.length > 5) {
-		tickers = tickers.slice(0, 8);
+		tickers = tickers.slice(0, 8)
 	}
 
 	return (
@@ -19,13 +19,13 @@ export const Tickers = ({ tickers, intro }: Props) => {
 			{intro && <span className="mr-1">{intro}:</span>}
 			<span className="">
 				{tickers.map(function (ticker, index) {
-					return <SingleTicker ticker={ticker} key={index} />;
+					return <SingleTicker ticker={ticker} key={index} />
 				})}
 			</span>
 		</div>
-	);
-};
+	)
+}
 
 function SingleTicker({ ticker }: { ticker: string }) {
-	return <SymbolLink symbol={ticker} className="news-ticker" />;
+	return <SymbolLink symbol={ticker} className="news-ticker" />
 }

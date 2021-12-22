@@ -1,9 +1,9 @@
-import { extent } from 'd3-array';
-import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale';
-import flattenDeep from 'lodash.flattendeep';
-import * as React from 'react';
+import { extent } from 'd3-array'
+import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale'
+import flattenDeep from 'lodash.flattendeep'
+import * as React from 'react'
 
-import { Chart, ChartProps } from '../Chart';
+import { Chart, ChartProps } from '../Chart'
 
 import {
 	functor,
@@ -14,8 +14,8 @@ import {
 	last,
 	mapObject,
 	shallowEqual,
-	zipper,
-} from './index';
+	zipper
+} from './index'
 
 export function getChartOrigin(
 	origin: any,
@@ -25,54 +25,54 @@ export function getChartOrigin(
 	const originCoordinates =
 		typeof origin === 'function'
 			? origin(contextWidth, contextHeight)
-			: origin;
+			: origin
 
-	return originCoordinates;
+	return originCoordinates
 }
 
 export function getDimensions({ width, height }: any, chartProps: any) {
-	const chartHeight = chartProps.height || height;
+	const chartHeight = chartProps.height || height
 
 	return {
 		availableHeight: height,
 		width,
-		height: chartHeight,
-	};
+		height: chartHeight
+	}
 }
 
 function values(func: any) {
 	return (d: any) => {
-		const obj = func(d);
+		const obj = func(d)
 		if (isObject(obj)) {
-			return mapObject(obj);
+			return mapObject(obj)
 		}
-		return obj;
-	};
+		return obj
+	}
 }
 
 function isArraySize2AndNumber(yExtentsProp: any) {
 	if (Array.isArray(yExtentsProp) && yExtentsProp.length === 2) {
-		const [a, b] = yExtentsProp;
-		return typeof a === 'number' && typeof b === 'number';
+		const [a, b] = yExtentsProp
+		return typeof a === 'number' && typeof b === 'number'
 	}
 
-	return false;
+	return false
 }
 
 const isChartProps = (
 	props: ChartProps | any | undefined
 ): props is ChartProps => {
 	if (props === undefined) {
-		return false;
+		return false
 	}
 
-	const chartProps = props as ChartProps;
+	const chartProps = props as ChartProps
 	if (chartProps.id === undefined) {
-		return false;
+		return false
 	}
 
-	return true;
-};
+	return true
+}
 
 export function getNewChartConfig(
 	innerDimension: any,
@@ -83,8 +83,8 @@ export function getNewChartConfig(
 		if (each !== undefined && each !== null && isChartProps(each.props)) {
 			const chartProps = {
 				...Chart.defaultProps,
-				...each.props,
-			};
+				...each.props
+			}
 
 			const {
 				id,
@@ -93,24 +93,24 @@ export function getNewChartConfig(
 				yExtents: yExtentsProp,
 				yScale: yScaleProp,
 				flipYScale,
-				yExtentsCalculator,
-			} = chartProps;
+				yExtentsCalculator
+			} = chartProps
 
-			const yScale = yScaleProp.copy();
+			const yScale = yScaleProp.copy()
 			const { width, height, availableHeight } = getDimensions(
 				innerDimension,
 				chartProps
-			);
+			)
 
-			const { yPan } = chartProps;
-			let { yPanEnabled } = chartProps;
+			const { yPan } = chartProps
+			let { yPanEnabled } = chartProps
 			const yExtents = isDefined(yExtentsProp)
 				? (Array.isArray(yExtentsProp) ? yExtentsProp : [yExtentsProp]).map(
 						functor
 				  )
-				: undefined;
+				: undefined
 
-			const prevChartConfig = existingChartConfig.find((d) => d.id === id);
+			const prevChartConfig = existingChartConfig.find((d) => d.id === id)
 
 			if (isArraySize2AndNumber(yExtentsProp)) {
 				if (
@@ -121,17 +121,17 @@ export function getNewChartConfig(
 					yPanEnabled &&
 					shallowEqual(prevChartConfig.originalYExtentsProp, yExtentsProp)
 				) {
-					yScale.domain(prevChartConfig.yScale.domain());
+					yScale.domain(prevChartConfig.yScale.domain())
 				} else {
-					const [a, b] = yExtentsProp;
-					yScale.domain([a, b]);
+					const [a, b] = yExtentsProp
+					yScale.domain([a, b])
 				}
 			} else if (isDefined(prevChartConfig) && prevChartConfig.yPanEnabled) {
 				if (isArraySize2AndNumber(prevChartConfig.originalYExtentsProp)) {
 					// do nothing
 				} else {
-					yScale.domain(prevChartConfig.yScale.domain());
-					yPanEnabled = true;
+					yScale.domain(prevChartConfig.yScale.domain())
+					yPanEnabled = true
 				}
 			}
 
@@ -147,62 +147,59 @@ export function getNewChartConfig(
 				yPan,
 				yPanEnabled,
 				width,
-				height,
-			};
+				height
+			}
 		}
 
-		return undefined;
-	}).filter((each: any) => each !== undefined);
+		return undefined
+	}).filter((each: any) => each !== undefined)
 }
 
 export function getCurrentCharts(chartConfig: any, mouseXY: number[]) {
 	const currentCharts = chartConfig
 		.filter((eachConfig: any) => {
-			const top = eachConfig.origin[1];
-			const bottom = top + eachConfig.height;
-			return mouseXY[1] > top && mouseXY[1] < bottom;
+			const top = eachConfig.origin[1]
+			const bottom = top + eachConfig.height
+			return mouseXY[1] > top && mouseXY[1] < bottom
 		})
-		.map((config: any) => config.id);
+		.map((config: any) => config.id)
 
-	return currentCharts;
+	return currentCharts
 }
 
 function setRange(scale: any, height: number, padding: any, flipYScale: any) {
 	if (scale.rangeRoundPoints || isNotDefined(scale.invert)) {
 		if (isNaN(padding)) {
-			throw new Error('padding has to be a number for ordinal scale');
+			throw new Error('padding has to be a number for ordinal scale')
 		}
 		if (scale.rangeRoundPoints) {
-			scale.rangeRoundPoints(
-				flipYScale ? [0, height] : [height, 0],
-				padding
-			);
+			scale.rangeRoundPoints(flipYScale ? [0, height] : [height, 0], padding)
 		}
 		if (scale.rangeRound) {
-			scale.range(flipYScale ? [0, height] : [height, 0]).padding(padding);
+			scale.range(flipYScale ? [0, height] : [height, 0]).padding(padding)
 		}
 	} else {
 		const { top, bottom } = isNaN(padding)
 			? padding
-			: { top: padding, bottom: padding };
+			: { top: padding, bottom: padding }
 
-		scale.range(flipYScale ? [top, height - bottom] : [height - bottom, top]);
+		scale.range(flipYScale ? [top, height - bottom] : [height - bottom, top])
 	}
-	return scale;
+	return scale
 }
 
 function yDomainFromYExtents(yExtents: any, yScale: any, plotData: any[]) {
 	const yValues = yExtents.map((eachExtent: any) =>
 		plotData.map(values(eachExtent))
-	);
+	)
 
-	const allYValues: number[] = flattenDeep(yValues);
+	const allYValues: number[] = flattenDeep(yValues)
 
 	const realYDomain = yScale.invert
 		? extent(allYValues)
-		: [...new Set(allYValues).values()];
+		: [...new Set(allYValues).values()]
 
-	return realYDomain;
+	return realYDomain
 }
 
 export function getChartConfigWithUpdatedYScales(
@@ -220,9 +217,9 @@ export function getChartConfigWithUpdatedYScales(
 						xDomain,
 						xAccessor,
 						displayXAccessor,
-						fullData,
+						fullData
 				  })
-				: yDomainFromYExtents(yExtents, yScale, plotData);
+				: yDomainFromYExtents(yExtents, yScale, plotData)
 
 			const yDomainDY =
 				dy !== undefined
@@ -230,14 +227,14 @@ export function getChartConfigWithUpdatedYScales(
 							.range()
 							.map((each: any) => each - dy)
 							.map(yScale.invert)
-					: yScale.domain();
+					: yScale.domain()
 			return {
 				realYDomain,
 				yDomainDY,
-				prevYDomain: yScale.domain(),
-			};
+				prevYDomain: yScale.domain()
+			}
 		}
-	);
+	)
 
 	const combine = zipper().combine(
 		(config: any, { realYDomain, yDomainDY, prevYDomain }: any) => {
@@ -248,36 +245,36 @@ export function getChartConfigWithUpdatedYScales(
 				yScale,
 				yPan,
 				flipYScale,
-				yPanEnabled = false,
-			} = config;
+				yPanEnabled = false
+			} = config
 
 			const another =
-				chartsToPan !== undefined ? chartsToPan.indexOf(id) > -1 : true;
+				chartsToPan !== undefined ? chartsToPan.indexOf(id) > -1 : true
 			const domain =
 				yPan && yPanEnabled
 					? another
 						? yDomainDY
 						: prevYDomain
-					: realYDomain;
+					: realYDomain
 
 			const newYScale = setRange(
 				yScale.copy().domain(domain),
 				height,
 				padding,
 				flipYScale
-			);
+			)
 
 			return {
 				...config,
 				yScale: newYScale,
-				realYDomain,
-			};
+				realYDomain
+			}
 		}
-	);
+	)
 
-	const updatedChartConfig = combine(chartConfig, yDomains);
+	const updatedChartConfig = combine(chartConfig, yDomains)
 
-	return updatedChartConfig;
+	return updatedChartConfig
 }
 
 export function getCurrentItem(
@@ -286,20 +283,20 @@ export function getCurrentItem(
 	mouseXY: number[],
 	plotData: any[]
 ) {
-	let xValue: number | Date;
-	let item: any;
+	let xValue: number | Date
+	let item: any
 	if (xScale.invert) {
-		xValue = xScale.invert(mouseXY[0]);
-		item = getClosestItem(plotData, xValue, xAccessor);
+		xValue = xScale.invert(mouseXY[0])
+		item = getClosestItem(plotData, xValue, xAccessor)
 	} else {
 		const dr = xScale
 			.range()
 			.map((d, idx) => ({ x: Math.abs(d - mouseXY[0]), idx }))
-			.reduce((a, b) => (a.x < b.x ? a : b));
+			.reduce((a, b) => (a.x < b.x ? a : b))
 
-		item = dr !== undefined ? plotData[dr.idx] : plotData[0];
+		item = dr !== undefined ? plotData[dr.idx] : plotData[0]
 	}
-	return item;
+	return item
 }
 
 export function getXValue(
@@ -308,22 +305,22 @@ export function getXValue(
 	mouseXY: number[],
 	plotData: any[]
 ) {
-	let xValue: number | Date;
-	let item: any;
+	let xValue: number | Date
+	let item: any
 	if (xScale.invert) {
-		xValue = xScale.invert(mouseXY[0]);
+		xValue = xScale.invert(mouseXY[0])
 		if (xValue > xAccessor(last(plotData))) {
-			return Math.round(xValue.valueOf());
+			return Math.round(xValue.valueOf())
 		} else {
-			item = getClosestItem(plotData, xValue, xAccessor);
+			item = getClosestItem(plotData, xValue, xAccessor)
 		}
 	} else {
 		const dr = xScale
 			.range()
 			.map((d, idx) => ({ x: Math.abs(d - mouseXY[0]), idx }))
-			.reduce((a, b) => (a.x < b.x ? a : b));
+			.reduce((a, b) => (a.x < b.x ? a : b))
 
-		item = dr !== undefined ? plotData[dr.idx] : plotData[0];
+		item = dr !== undefined ? plotData[dr.idx] : plotData[0]
 	}
-	return xAccessor(item);
+	return xAccessor(item)
 }

@@ -1,55 +1,54 @@
-import { DividendType } from 'types/Dividend';
-import { useMemo } from 'react';
-import { Column, useTable } from 'react-table';
-import { Export } from 'components/Controls/Export';
-import styles from './HistoryTable.module.css';
+import { DividendType } from 'types/Dividend'
+import { useMemo } from 'react'
+import { Column, useTable } from 'react-table'
+import { Export } from 'components/Controls/Export'
+import styles from './HistoryTable.module.css'
 
 const formatter = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 3,
-	maximumFractionDigits: 5,
-});
+	maximumFractionDigits: 5
+})
 
 type Props = {
-	rawdata: DividendType[];
-	disclaimer?: boolean;
-};
+	rawdata: DividendType[]
+	disclaimer?: boolean
+}
 
 export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 	const columns: Column[] = useMemo(
 		() => [
 			{
 				Header: 'Ex-Dividend Date',
-				accessor: 'exDate',
+				accessor: 'exDate'
 			},
 			{
 				Header: 'Cash Amount',
 				accessor: 'amount',
 				Cell: ({ cell: { value } }: any) => {
-					const split =
-						typeof value === 'string' ? value.split('-') : null;
+					const split = typeof value === 'string' ? value.split('-') : null
 					if (split && split[1]) {
-						return formatter.format(Number(split[0])) + ' ' + split[1];
+						return formatter.format(Number(split[0])) + ' ' + split[1]
 					}
-					return '$' + formatter.format(value);
-				},
+					return '$' + formatter.format(value)
+				}
 			},
 			{
 				Header: 'Record Date',
-				accessor: 'recordDate',
+				accessor: 'recordDate'
 			},
 			{
 				Header: 'Pay Date',
-				accessor: 'payDate',
-			},
+				accessor: 'payDate'
+			}
 		],
 		[]
-	);
+	)
 
-	const data = useMemo(() => rawdata, [rawdata]);
+	const data = useMemo(() => rawdata, [rawdata])
 
-	const tableInstance = useTable({ columns, data });
+	const tableInstance = useTable({ columns, data })
 
-	const { headerGroups, rows, prepareRow } = tableInstance;
+	const { headerGroups, rows, prepareRow } = tableInstance
 
 	return (
 		<div className="mt-4 bp:mt-7">
@@ -62,13 +61,13 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 							{
 								title: 'Export to Excel',
 								type: 'xlsx',
-								restricted: true,
+								restricted: true
 							},
 							{
 								title: 'Export to CSV',
 								type: 'csv',
-								restricted: true,
-							},
+								restricted: true
+							}
 						]}
 						tableId="dividend-table"
 					/>
@@ -107,14 +106,14 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 					</thead>
 					<tbody>
 						{rows.map((row, index) => {
-							prepareRow(row);
+							prepareRow(row)
 							return (
 								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return <td key={index}>{cell.render('Cell')}</td>;
+										return <td key={index}>{cell.render('Cell')}</td>
 									})}
 								</tr>
-							);
+							)
 						})}
 					</tbody>
 				</table>
@@ -126,5 +125,5 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 				)}
 			</div>
 		</div>
-	);
-};
+	)
+}

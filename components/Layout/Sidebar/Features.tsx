@@ -8,29 +8,29 @@ const FeaturesMap = [
 		description:
 			'Unlimited access to all our financial data with up to 30 years of history.',
 		url: '/pro/',
-		tagId: 'tag-upgr-nav-widget',
+		tagId: 'tag-upgr-nav-widget'
 	},
 	{
 		title: 'IPO Calendar',
 		description:
 			'All upcoming IPOs on the stock market with detailed statistics and financials.',
 		url: '/ipos/calendar/',
-		tagId: 'tag-feat-nav-widget-calendar',
+		tagId: 'tag-feat-nav-widget-calendar'
 	},
 	{
 		title: 'Stock Screener',
 		description:
 			'Filter, sort and analyze all stocks to find your next investment.',
 		url: '/stock-screener/',
-		tagId: 'tag-feat-nav-widget-screener',
+		tagId: 'tag-feat-nav-widget-screener'
 	},
 	{
 		title: 'Market News',
 		description:
 			"Get the latest news to keep up with what's going on in the markets.",
 		url: '/news/',
-		tagId: 'tag-feat-nav-widget-news',
-	},
+		tagId: 'tag-feat-nav-widget-news'
+	}
 ]
 
 export function Features() {

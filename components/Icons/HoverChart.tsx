@@ -14,4 +14,4 @@ export const HoverChartIcon = () => (
 		<rect x="15" y="4" width="6" height="16" rx="1" />
 		<line x1="4" y1="20" x2="18" y2="20" />
 	</svg>
-);
+)

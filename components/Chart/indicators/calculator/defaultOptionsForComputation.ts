@@ -3,114 +3,114 @@ export const BollingerBand = {
 	// source: d => d.close, // "high", "low", "open", "close"
 	sourcePath: 'close',
 	multiplier: 2,
-	movingAverageType: 'sma',
-};
+	movingAverageType: 'sma'
+}
 
 export const ATR = {
-	windowSize: 14,
-};
+	windowSize: 14
+}
 
 export const ForceIndex = {
 	sourcePath: 'close', // "high", "low", "open", "close"
-	volumePath: 'volume',
-};
+	volumePath: 'volume'
+}
 
 export const SmoothedForceIndex = {
 	sourcePath: 'close', // "high", "low", "open", "close"
 	volumePath: 'volume',
 	smoothingType: 'ema',
-	smoothingWindow: 13,
-};
+	smoothingWindow: 13
+}
 
 export const Change = {
 	sourcePath: 'close', // "high", "low", "open", "close"
 	basePath: 'close',
 	mainKeys: [],
-	compareKeys: [],
-};
+	compareKeys: []
+}
 
 export const Compare = {
 	basePath: 'close',
 	mainKeys: ['open', 'high', 'low', 'close'],
-	compareKeys: [],
-};
+	compareKeys: []
+}
 
 export const ElderRay = {
 	windowSize: 13,
 	// source: d => d.close, // "high", "low", "open", "close"
 	sourcePath: 'close', // "high", "low", "open", "close"
-	movingAverageType: 'sma',
-};
+	movingAverageType: 'sma'
+}
 
 export const ElderImpulse = {
-	sourcePath: 'close', // "high", "low", "open", "close"
-};
+	sourcePath: 'close' // "high", "low", "open", "close"
+}
 
 export const SAR = {
 	accelerationFactor: 0.02,
-	maxAccelerationFactor: 0.2,
-};
+	maxAccelerationFactor: 0.2
+}
 
 export const MACD = {
 	fast: 12,
 	slow: 26,
 	signal: 9,
 	// source: d => d.close, // "high", "low", "open", "close"
-	sourcePath: 'close',
-};
+	sourcePath: 'close'
+}
 
 export const FullStochasticOscillator = {
 	windowSize: 12,
 	kWindowSize: 3,
-	dWindowSize: 3,
-};
+	dWindowSize: 3
+}
 
 export const RSI = {
 	windowSize: 14,
 	// source: d => d.close, // "high", "low", "open", "close"
-	sourcePath: 'close', // "high", "low", "open", "close"
-};
+	sourcePath: 'close' // "high", "low", "open", "close"
+}
 
 export const EMA = {
 	// source: d => d.close, // "high", "low", "open", "close"
 	sourcePath: 'close',
-	windowSize: 10,
-};
+	windowSize: 10
+}
 
 export const SMA = {
 	// source: d => d.close, // "high", "low", "open", "close"
 	sourcePath: 'close',
-	windowSize: 10,
-};
+	windowSize: 10
+}
 
 export const WMA = {
 	// source: d => d.close, // "high", "low", "open", "close"
 	sourcePath: 'close',
-	windowSize: 10,
-};
+	windowSize: 10
+}
 
 export const TMA = {
 	// source: d => d.close, // "high", "low", "open", "close"
 	sourcePath: 'close',
-	windowSize: 10,
-};
+	windowSize: 10
+}
 
 export const Kagi = {
 	reversalType: 'ATR', // "ATR", "FIXED"
 	windowSize: 14,
 	reversal: 2,
-	sourcePath: 'close', // "high", "low", "open", "close"
-};
+	sourcePath: 'close' // "high", "low", "open", "close"
+}
 
 export const Renko = {
 	reversalType: 'ATR', // "ATR", "FIXED"
 	windowSize: 14,
 	fixedBrickSize: 2,
-	sourcePath: 'high/low', // "close", "high/low"
-};
+	sourcePath: 'high/low' // "close", "high/low"
+}
 
 export const PointAndFigure = {
 	boxSize: 0.5,
 	reversal: 3,
-	sourcePath: 'high/low', // "close", "high/low"
-};
+	sourcePath: 'high/low' // "close", "high/low"
+}

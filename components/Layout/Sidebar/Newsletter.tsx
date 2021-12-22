@@ -1,5 +1,5 @@
-import { MailIcon } from 'components/Icons/Mail';
-import Link from 'next/link';
+import { MailIcon } from 'components/Icons/Mail'
+import Link from 'next/link'
 
 export const NewsletterWidget = () => {
 	return (
@@ -57,5 +57,5 @@ export const NewsletterWidget = () => {
 				</div>
 			</form>
 		</div>
-	);
-};
+	)
+}

@@ -1,11 +1,11 @@
-import { Info } from 'types/Info';
-import { useQuote } from 'hooks/useQuote';
-import { RegularQuote } from './Types/RegularQuote';
-import { RegularExtended } from './Types/RegularExtended';
-import { ExtendedQuote } from './Types/ExtendedQuote';
+import { Info } from 'types/Info'
+import { useQuote } from 'hooks/useQuote'
+import { RegularQuote } from './Types/RegularQuote'
+import { RegularExtended } from './Types/RegularExtended'
+import { ExtendedQuote } from './Types/ExtendedQuote'
 
 export function LiveQuote({ info }: { info: Info }) {
-	const quote = useQuote(info);
+	const quote = useQuote(info)
 
 	if (quote.e) {
 		return (
@@ -13,12 +13,12 @@ export function LiveQuote({ info }: { info: Info }) {
 				<RegularExtended info={info} />
 				<ExtendedQuote info={info} />
 			</section>
-		);
+		)
 	}
 
 	return (
 		<section className="mb-5">
 			<RegularQuote info={info} />
 		</section>
-	);
+	)
 }

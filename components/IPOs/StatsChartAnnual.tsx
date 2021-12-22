@@ -1,8 +1,8 @@
-import { StatsChart } from './StatsChart';
+import { StatsChart } from './StatsChart'
 
 interface Props {
-	title: string;
-	data: number;
+	title: string
+	data: number
 }
 
 export const StatsChartAnnual = ({ title, data }: Props) => {
@@ -28,8 +28,8 @@ export const StatsChartAnnual = ({ title, data }: Props) => {
 		255,
 		232,
 		480,
-		data,
-	];
+		data
+	]
 	const x = [
 		'2000',
 		'2001',
@@ -52,8 +52,8 @@ export const StatsChartAnnual = ({ title, data }: Props) => {
 		'2018',
 		'2019',
 		'2020',
-		'2021',
-	];
+		'2021'
+	]
 
-	return <StatsChart title={title} x={x} y={y} />;
-};
+	return <StatsChart title={title} x={x} y={y} />
+}

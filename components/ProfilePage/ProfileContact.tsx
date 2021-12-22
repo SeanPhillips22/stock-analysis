@@ -1,12 +1,12 @@
-import { Contact } from 'types/Company';
+import { Contact } from 'types/Company'
 
 const address = (address: string) => {
-	return { __html: address };
-};
+	return { __html: address }
+}
 
 export const ProfileContact = ({ contact }: { contact: Contact }) => {
 	if (!contact.address && !contact.phone && !contact.website) {
-		return null;
+		return null
 	}
 
 	return (
@@ -54,5 +54,5 @@ export const ProfileContact = ({ contact }: { contact: Contact }) => {
 				</table>
 			</div>
 		</>
-	);
-};
+	)
+}

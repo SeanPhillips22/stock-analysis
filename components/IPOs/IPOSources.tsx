@@ -8,5 +8,5 @@ export function IPOSources() {
 			dates are estimated and may change, and in some cases companies
 			postpone or withdraw their plans.
 		</div>
-	);
+	)
 }

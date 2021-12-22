@@ -1,14 +1,14 @@
-import Head from 'next/head';
-import { getSchema } from 'functions/getSchema';
+import Head from 'next/head'
+import { getSchema } from 'functions/getSchema'
 
 interface ISEO {
-	title: string;
-	description?: string;
-	canonical: string;
-	noindex?: boolean;
-	image?: string;
-	schema?: object | null;
-	type?: string | null;
+	title: string
+	description?: string
+	canonical: string
+	noindex?: boolean
+	image?: string
+	schema?: any
+	type?: string | null
 }
 
 export const SEO = ({
@@ -18,26 +18,26 @@ export const SEO = ({
 	noindex = false,
 	image,
 	schema = null,
-	type = null,
+	type = null
 }: ISEO) => {
 	const seoTitle =
 		title === 'Stock Analysis | Free Online Stock Information for Investors'
 			? title
-			: title + ' | Stock Analysis';
+			: title + ' | Stock Analysis'
 
 	const metaRobots = noindex
 		? 'noindex, nofollow'
-		: 'max-snippet:-1,max-image-preview:large,max-video-preview:-1';
+		: 'max-snippet:-1,max-image-preview:large,max-video-preview:-1'
 
-	const canonicalUrl = 'https://stockanalysis.com' + canonical;
+	const canonicalUrl = 'https://stockanalysis.com' + canonical
 
 	const featuredImage = image
 		? `https://stockanalysis.com${image}`
-		: 'https://stockanalysis.com/img/bear-vs-bull.jpg';
+		: 'https://stockanalysis.com/img/bear-vs-bull.jpg'
 
-	const schemaObj = canonical && title ? getSchema(canonical, title) : null;
+	const schemaObj = canonical && title ? getSchema(canonical, title) : null
 
-	const ogType = type ? type : 'website';
+	const ogType = type ? type : 'website'
 
 	return (
 		<Head>
@@ -94,5 +94,5 @@ export const SEO = ({
 				/>
 			)}
 		</Head>
-	);
-};
+	)
+}

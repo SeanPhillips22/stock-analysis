@@ -1,6 +1,6 @@
 export default function (): (
 	data: any[],
 	options?: {
-		merge: boolean;
+		merge: boolean
 	}
-) => any;
+) => any
