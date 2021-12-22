@@ -2616,12 +2616,10 @@ export const ETFFiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 500', value: 'over-500' },
 			{ name: 'Over 100', value: 'over-100' },
 			{ name: 'Over 10', value: 'over-10' },
 			{ name: 'Over 5', value: 'over-5' },
 			{ name: 'Over 1', value: 'over-1' },
-			{ name: 'From 500-1000', value: 'between-500-1000' },
 			{ name: 'From 100-500', value: 'between-100-500' },
 			{ name: 'From 50-100', value: 'between-50-100' },
 			{ name: 'From 20-50', value: 'between-20-50' },
@@ -2638,12 +2636,14 @@ export const ETFFiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Under 10', value: 'under-10' },
-			{ name: 'Under 5', value: 'under-5' },
-			{ name: 'Under 3', value: 'under-3' },
-			{ name: 'Under 2', value: 'under-2' },
-			{ name: 'Under 1', value: 'under-1' },
-			{ name: 'Not Zero', value: 'notzero' }
+			{ name: 'Over 2%', value: 'over-2' },
+			{ name: 'Over 1%', value: 'over-1' },
+			{ name: 'Under 1%', value: 'under-1' },
+			{ name: 'Under 0.5%', value: 'under-0.5' },
+			{ name: 'Under 0.3%', value: 'under-0.3' },
+			{ name: 'Under 0.2%', value: 'under-0.2' },
+			{ name: 'Under 0.1%', value: 'under-0.1' },
+			{ name: 'Under 0.05%', value: 'under-0.05' }
 		]
 	},
 	{
@@ -2676,7 +2676,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
 			{ name: 'Over 10M', value: 'over-10M' },
 			{ name: 'Over 1M', value: 'over-1M' },
 			{ name: 'Over 100K', value: 'over-100K' },
@@ -2859,7 +2858,7 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Over 3', value: 'over-3' },
 			{ name: 'Over 2', value: 'over-2' },
 			{ name: 'Over 1', value: 'over-1' },
-			{ name: 'Over Zero', value: 'over-0' }
+			{ name: 'Not Zero', value: 'notzero' }
 		]
 	},
 	{
@@ -2869,12 +2868,15 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 3%', value: 'over-3' },
 			{ name: 'Over 2%', value: 'over-2' },
 			{ name: 'Over 1%', value: 'over-1' },
 			{ name: '2-3%', value: 'between-2-3' },
 			{ name: '1-2%', value: 'between-1-2' },
 			{ name: '0-1%', value: 'between-0-1' },
-			{ name: 'Over Zero', value: 'over-0' }
+			{ name: 'Not Zero', value: 'notzero' }
 		]
 	},
 	{
@@ -2889,9 +2891,6 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Over 3%', value: 'over-3' },
 			{ name: 'Over 2%', value: 'over-2' },
 			{ name: 'Over 1%', value: 'over-1' },
-			{ name: '3-5%', value: 'between-3-5' },
-			{ name: '1-3%', value: 'between-1-3' },
-			{ name: '0-1%', value: 'between-0-1' },
 			{ name: 'Over Zero', value: 'over-0' }
 		]
 	},
@@ -2998,19 +2997,12 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
-			{ name: 'Over 100%', value: 'over-100' },
-			{ name: 'Over 50%', value: 'over-50' },
-			{ name: 'Over 20%', value: 'over-20' },
-			{ name: 'Over 10%', value: 'over-10' },
 			{ name: 'Over 5%', value: 'over-5' },
 			{ name: 'Over 1%', value: 'over-1' },
 			{ name: 'From 0-1%', value: 'between-0-1' },
 			{ name: 'From -1-0%', value: 'between-X1-0' },
 			{ name: 'Under -1%', value: 'under-X1' },
-			{ name: 'Under -5%', value: 'under-X5' },
-			{ name: 'Under -10%', value: 'under-X10' },
-			{ name: 'Under -20%', value: 'under-X20' },
-			{ name: 'Under -50%', value: 'under-X50' }
+			{ name: 'Under -5%', value: 'under-X5' }
 		]
 	},
 	{
@@ -3020,8 +3012,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
-			{ name: 'Over 100%', value: 'over-100' },
-			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
 			{ name: 'Over 5%', value: 'over-5' },
@@ -3031,8 +3021,7 @@ export const ETFFiltersMap: FilterProps[] = [
 			{ name: 'Under -1%', value: 'under-X1' },
 			{ name: 'Under -5%', value: 'under-X5' },
 			{ name: 'Under -10%', value: 'under-X10' },
-			{ name: 'Under -20%', value: 'under-X20' },
-			{ name: 'Under -50%', value: 'under-X50' }
+			{ name: 'Under -20%', value: 'under-X20' }
 		]
 	},
 	{
@@ -3042,7 +3031,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
-			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
@@ -3064,11 +3052,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
-			{ name: 'Over 1000%', value: 'over-1000' },
-			{ name: 'Over 500%', value: 'over-500' },
-			{ name: 'Over 300%', value: 'over-300' },
-			{ name: 'Over 200%', value: 'over-200' },
-			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
@@ -3090,7 +3073,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
-			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
@@ -3112,8 +3094,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
-			{ name: 'Over 500%', value: 'over-500' },
-			{ name: 'Over 300%', value: 'over-300' },
 			{ name: 'Over 200%', value: 'over-200' },
 			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
@@ -3138,8 +3118,6 @@ export const ETFFiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
-			{ name: 'Over 1000%', value: 'over-1000' },
-			{ name: 'Over 500%', value: 'over-500' },
 			{ name: 'Over 300%', value: 'over-300' },
 			{ name: 'Over 200%', value: 'over-200' },
 			{ name: 'Over 100%', value: 'over-100' },
