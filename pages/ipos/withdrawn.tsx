@@ -9,7 +9,6 @@ import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
 import { Layout } from 'components/Layout/_Layout'
 
@@ -59,7 +58,6 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 										url: '/ipos/news/'
 									}}
 								/>
-								<Sidebar2 />
 							</aside>
 						</div>
 					</div>

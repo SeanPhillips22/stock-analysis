@@ -12,7 +12,7 @@ export function Sidebar2() {
 			return (
 				<div
 					id="ad-banner"
-					className="mx-auto text-center hidden lg:block lg:sticky lg:top-20"
+					className="mx-auto text-center hidden lg:block lg:sticky lg:top-16"
 				>
 					<div
 						id="adngin-sidebar_2-0"
