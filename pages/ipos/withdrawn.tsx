@@ -46,20 +46,18 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 								/>
 							</div>
 						</div>
-						<div className="flex flex-col lg:pt-4">
-							<aside className="space-y-8 lg:space-y-10 pt-1">
-								<RecentTableMin recent={recent} />
-								<Sidebar1 />
-								<NewsWidget
-									title="IPO News"
-									news={news}
-									button={{
-										text: 'More IPO News',
-										url: '/ipos/news/'
-									}}
-								/>
-							</aside>
-						</div>
+						<aside className="flex flex-col space-y-8 lg:space-y-10 pt-4 lg:pt-5">
+							<RecentTableMin recent={recent} />
+							<Sidebar1 />
+							<NewsWidget
+								title="IPO News"
+								news={news}
+								button={{
+									text: 'More IPO News',
+									url: '/ipos/news/'
+								}}
+							/>
+						</aside>
 					</div>
 				</div>
 			</Layout>
