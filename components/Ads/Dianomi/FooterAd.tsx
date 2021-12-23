@@ -19,6 +19,12 @@ export default function FooterAd() {
 		}
 	}, [path])
 
+	if (process.env.NODE_ENV === 'development') {
+		return (
+			<div className="max-w-[970px] min-h-[280px] mx-auto px-3 xs:px-4 lg:px-0 my-10 bg-blue-100"></div>
+		)
+	}
+
 	return (
 		<>
 			<div

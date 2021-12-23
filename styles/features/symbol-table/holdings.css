@@ -1,0 +1,25 @@
+/*
+* Symbol Table - Holdings
+* Configure the symbol table for the screeners
+*/
+
+@layer components {
+	.symbol-table.holdings tr th {
+		@apply font-semibold;
+		font-size: 1.05rem;
+	}
+
+	.symbol-table.holdings tr > *:nth-child(n + 4) {
+		text-align: right;
+	}
+
+	.symbol-table.holdings tr td:nth-child(3) {
+		max-width: 350px;
+	}
+
+	@media screen and (max-width: 600px) {
+		.symbol-table.holdings tr td:nth-child(3) {
+			max-width: 250px;
+		}
+	}
+}

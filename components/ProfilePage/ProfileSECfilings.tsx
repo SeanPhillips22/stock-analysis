@@ -88,9 +88,12 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 						</tr>
 					</thead>
 					<tbody>
-						{entries.map((entry, index) => {
+						{entries.map((entry) => {
 							return (
-								<tr key={index} className="border-b border-gray-200">
+								<tr
+									key={entry['url']}
+									className="border-b border-gray-200"
+								>
 									<td className="py-3 pr-1 xs:px-2 text-gray-900 whitespace-nowrap align-top">
 										<span title={entry['time']}>
 											{entry['cleantime']}

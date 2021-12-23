@@ -1,0 +1,13 @@
+/*
+* Touch
+* Can be applied to touch targets
+*/
+
+@layer utilities {
+	.touch-auto {
+		touch-action: auto;
+	}
+	.touch-none {
+		touch-action: none;
+	}
+}

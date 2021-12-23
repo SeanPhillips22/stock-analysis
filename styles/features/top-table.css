@@ -1,0 +1,22 @@
+/*
+* Top Tables
+* The tables at the top of the overview pages
+*/
+
+@layer components {
+	.top-table {
+		@apply text-small w-[48%] lg:w-auto lg:min-w-[210px] text-gray-900;
+	}
+
+	.top-table tr {
+		@apply flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0;
+	}
+
+	.top-table tr td {
+		@apply py-[1px] sm:py-2 px-1 whitespace-nowrap;
+	}
+
+	.top-table tr td:last-child {
+		@apply text-left sm:text-right text-base sm:text-small font-semibold;
+	}
+}

@@ -46,6 +46,7 @@ const SymbolStatistics = ({ info, data }: Props) => {
 				<div className="float-none lg:float-left lg:profilewrap mb-2">
 					<ProfileExecutives executives={data.executives} />
 					<ProfileSECfilings
+						key={info.symbol}
 						info={info}
 						cik={data.stockDetails.cik}
 						filings={data.secFilings}

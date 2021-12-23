@@ -17,7 +17,7 @@
 	.leftnav {
 		@apply xxl:sticky top-16
 		px-3 xxl:px-2 xxxl:px-5
-		pt-4 flex-grow overflow-y-auto;
+		py-4 flex-grow overflow-y-auto;
 	}
 
 	.nav-col {

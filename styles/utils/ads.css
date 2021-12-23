@@ -1,0 +1,14 @@
+/*
+* Ads
+* Styles that can be applied to ads
+*/
+
+@layer utilities {
+	.center-children div iframe {
+		@apply mx-auto text-center;
+	}
+
+	.fullwidth .header-ad {
+		@apply bg-gray-100 -mb-4;
+	}
+}

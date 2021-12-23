@@ -1,0 +1,18 @@
+/*
+* Search
+* The on-site search functions
+*/
+
+@layer components {
+	.dropd {
+		@apply max-h-[265px] w-full bg-white absolute top-9 md:top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
+	}
+
+	.dropd.active {
+		@apply opacity-100;
+	}
+
+	.dropd .activeresult {
+		background-color: #f3f4f6;
+	}
+}

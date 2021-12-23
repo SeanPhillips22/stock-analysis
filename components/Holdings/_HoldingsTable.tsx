@@ -6,7 +6,6 @@ import {
 	Column
 } from 'react-table'
 import { useState, useEffect, useMemo } from 'react'
-import styles from './HoldingsTable.module.css'
 import { StockLink, ETFLink } from 'components/Links'
 import { useAuthState } from 'hooks/useAuthState'
 import { getPageDataFull } from 'functions/apis/callBackEnd'
@@ -110,7 +109,7 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 				tableId="holdings-table"
 			/>
 			<div className="overflow-x-auto">
-				<table className={styles.table} id="holdings-table">
+				<table className="symbol-table holdings" id="holdings-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

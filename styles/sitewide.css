@@ -7,4 +7,24 @@
 	body {
 		@apply text-gray-900 bg-white;
 	}
+
+	.bll {
+		@apply text-blue-link hover:text-gray-900;
+	}
+
+	.hh1 {
+		@apply text-3xl font-bold mb-4;
+	}
+
+	.hh2 {
+		@apply text-2xl font-bold mb-3;
+	}
+
+	.hh3 {
+		@apply text-xl font-bold mb-2.5 xs:mb-3;
+	}
+
+	.text-shadow {
+		text-shadow: 0 0 0.5px #555555;
+	}
 }

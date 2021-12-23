@@ -1,0 +1,15 @@
+/* 
+* Breadcrumbs
+* The breadcrumbs above the title in the navigation
+*/
+
+@layer base {
+	.breadcrumbs ol {
+		@apply flex flex-wrap text-sm sm:text-small text-gray-600 sm:mb-0.5;
+	}
+
+	nav.breadcrumbs li:not(:first-child)::before {
+		margin: 0 6px;
+		content: '»';
+	}
+}

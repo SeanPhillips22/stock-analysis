@@ -1,0 +1,34 @@
+/*
+* Price Chart
+* Stock price chart on overview page
+*/
+
+@layer components {
+	.price-chart {
+		@apply flex space-x-[3px] xs:space-x-1 whitespace-nowrap overflow-x-auto hide-scroll pl-0.5;
+	}
+
+	.price-chart > li > button {
+		@apply text-smaller py-1 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-2 rounded-md;
+	}
+
+	.price-chart > li > button {
+		@apply sm:px-3;
+	}
+
+	.price-chart > li > button.inactive {
+		@apply text-gray-900 hover:text-gray-900 hover:text-shadow;
+	}
+
+	.price-chart > li > button.active {
+		@apply bp:bg-gray-100 text-gray-800 font-semibold;
+	}
+
+	.price-chart > li > button > span:first-child {
+		@apply block sm:hidden lg:block xl:hidden;
+	}
+
+	.price-chart > li > button > span:last-child {
+		@apply hidden sm:block lg:hidden xl:block;
+	}
+}
