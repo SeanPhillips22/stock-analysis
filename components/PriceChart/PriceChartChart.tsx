@@ -19,15 +19,16 @@ import {
 import { Unavailable } from 'components/Unavailable'
 import { ReactChart } from 'components/ReactChart'
 import { Info } from 'types/Info'
-import { useQuote } from 'hooks/useQuote'
 import { ChartDataPoint } from 'types/Charts'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { getChartColor } from './PriceChart.functions'
+import { Quote } from 'types/Quote'
 
 interface Props {
 	chartData: ChartDataPoint[]
 	chartTime: string
 	info: Info
+	quote: Quote
 	changeProps: any
 }
 
@@ -44,44 +45,51 @@ ReactChart.register(
 ReactChart.defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-export const Chart = ({ chartData, chartTime, info, changeProps }: Props) => {
+export const Chart = ({
+	chartData,
+	chartTime,
+	info,
+	quote,
+	changeProps
+}: Props) => {
 	const [change, setChange] = useState(changeProps.change)
 	const [lineColor, setLineColor] = useState(changeProps.lineColor)
-	const quote = useQuote(info)
-	// const [lineColor, setLineColor] = useState('')
 	const [count] = useState(chartData.length)
 
+	// Refresh the change and line color
 	useEffect(() => {
 		const fresh = getChartColor(chartData, chartTime, quote)
 		setChange(fresh.change)
 		setLineColor(fresh.lineColor)
 	}, [chartData, chartTime, quote])
 
-	// let lineColor = 'rgba(4, 120, 87, 1)'
-	// useEffect(() => {
-	// 	let ch: number
+	const timeAxis = useMemo(
+		() =>
+			chartData.map((item) => {
+				return item.t
+			}),
+		[chartData]
+	)
 
-	// 	if (chartTime === '1D') {
-	// 		ch = Number(quote.c)
-	// 	} else {
-	// 		const first = chartData[0].o || chartData[0].c
-	// 		const last = chartData[count - 1].c
-	// 		ch = last - first
-	// 	}
+	const priceAxis = useMemo(
+		() =>
+			chartData.map((item) => {
+				return item.c
+			}),
+		[chartData]
+	)
 
-	// 	// setChange(ch)
+	const changeWithoutComma = Number(quote.cl.replace(',', ''))
 
-	// 	// if (ch > 0) {
-	// 	// 	console.log('negative')
-	// 	// 	setLineColor('rgba(4, 120, 87, 1)')
-	// 	// } else if (ch < 0) {
-	// 	// 	console.log('negative')
-	// 	// 	setLineColor('rgba(220, 38, 38, 1)')
-	// 	// } else {
-	// 	// 	console.log('neutral')
-	// 	// 	setLineColor('rgba(0, 0, 0, 1)')
-	// 	// }
-	// }, [change, chartData, chartTime, count, quote.c])
+	const prevCloseLine = useMemo(
+		() =>
+			chartData.map(() => {
+				return changeWithoutComma
+			}),
+		[chartData, changeWithoutComma]
+	)
+
+	let id = info.symbol + '-' + chartTime
 
 	// Chart.js causes critical errors on older Safari versions
 	if (
@@ -95,25 +103,6 @@ export const Chart = ({ chartData, chartTime, info, changeProps }: Props) => {
 			/>
 		)
 	}
-
-	const label =
-		chartTime === '1D' || chartTime === '5D' ? 'Price' : 'Closing Price'
-
-	const timeAxis = chartData.map((item) => {
-		return item.t
-	})
-
-	const priceAxis = chartData.map((item) => {
-		return item.c
-	})
-
-	const changeWithoutComma = Number(quote.cl.replace(',', ''))
-
-	const prevCloseLine = chartData.map(() => {
-		return changeWithoutComma
-	})
-
-	let id = info.symbol + '-' + chartTime
 
 	let data: any[] = [
 		{
@@ -367,6 +356,10 @@ export const Chart = ({ chartData, chartTime, info, changeProps }: Props) => {
 									) {
 										currlabel = 'Latest Price: ' + value
 									} else {
+										let label =
+											chartTime === '1D' || chartTime === '5D'
+												? 'Price'
+												: 'Closing Price'
 										currlabel = label + ': ' + value
 									}
 								}

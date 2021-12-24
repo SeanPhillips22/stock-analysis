@@ -7,6 +7,8 @@ import { Info } from 'types/Info'
 import { getChartUrl } from 'components/PriceChart/PriceChart.functions'
 
 async function queryQuote({ queryKey }: { queryKey: string[] }) {
+	console.log('fetch chart data')
+
 	let symbol = queryKey[1]
 	let type = queryKey[2]
 	let time = queryKey[3]

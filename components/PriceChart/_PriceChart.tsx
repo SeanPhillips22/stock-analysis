@@ -3,15 +3,13 @@ import { Controls } from './PriceChartControls'
 import { PriceChange } from './PriceChange'
 import { Chart } from './PriceChartChart'
 import { Info } from 'types/Info'
-import { getData } from 'functions/apis/API'
 import {
-	getChartUrl,
 	translateTime,
 	UnavailableIpo,
 	getChartColor
 } from './PriceChart.functions'
 import { Unavailable } from 'components/Unavailable'
-import { ChartDataPayload, ChartDataPoint } from 'types/Charts'
+import { ChartDataPayload } from 'types/Charts'
 import { useChart } from 'hooks/useChart'
 import { useQuote } from 'hooks/useQuote'
 
@@ -21,54 +19,26 @@ type Props = {
 }
 
 export const PriceChart = ({ info, chart }: Props) => {
-	// const [chartData, setChartData] = useState<ChartDataPoint[]>([])
 	const [chartTime, setChartTime] = useState(
 		info.exchange === 'OTCMKTS' ? '1Y' : '1D'
 	)
-	// const [message, setMessage] = useState('')
-
-	// useEffect(() => {
-	// 	if (info.exchange === 'OTCMKTS' || info.ticker === 'BRK.A') {
-	// 		setChartTime('1Y')
-	// 	} else {
-	// 		setChartTime('1D')
-	// 	}
-	// }, [info.exchange, info.quote, info.ticker])
+	const [message, setMessage] = useState('')
 
 	const quote = useQuote(info)
 	const chartData = useChart(info, chart, chartTime)
 
-	// useEffect(() => {
-	// 	setMessage('')
-	// 	if (info.state === 'upcomingipo') {
-	// 		return
-	// 	}
+	useEffect(() => {
+		setMessage('')
+		if (info.state === 'upcomingipo') {
+			return
+		}
 
-	// const fetchChartData = async (selected: string) => {
-	// 	const url = getChartUrl(info.symbol, info.type, selected)
-	// 	const data = await getData(url)
-	// 	if (data && data.length > 0) {
-	// 		setChartData(data)
-	// 	} else {
-	// 		setChartData([])
-	// 		setMessage(`No ${translateTime(chartTime)} chart data available`)
-	// 	}
-	// }
+		if (!chartData || !chartData.length) {
+			setMessage(`No ${translateTime(chartTime)} chart data available`)
+		}
+	}, [chartData, chartTime, info.state])
 
-	// if (chartTime) {
-	// 	fetchChartData(chartTime)
-	// }
-
-	// return () => {
-	// 	setChartData([])
-	// }
-	// }, [
-	// 	chartTime,
-	// 	info.exceptions.overrideChart,
-	// 	info.symbol,
-	// 	info.type,
-	// 	info.state
-	// ])
+	const changeProps = getChartColor(chartData, chartTime, quote)
 
 	if (info.state === 'upcomingipo') {
 		return <UnavailableIpo info={info} />
@@ -87,18 +57,19 @@ export const PriceChart = ({ info, chart }: Props) => {
 				)}
 			</div>
 			<div className="h-[240px] sm:h-[300px] overflow-x-auto hide-scroll">
-				{/* {message && (
+				{message && (
 					<div className="pt-1.5 h-full">
 						<Unavailable message={message} />
 					</div>
-				)} */}
+				)}
 				{chartData && chartData.length > 0 && (
 					<Chart
 						key={quote.u}
-						changeProps={getChartColor(chartData, chartTime, quote)}
+						changeProps={changeProps}
 						chartData={chartData}
 						chartTime={chartTime}
 						info={info}
+						quote={quote}
 					/>
 				)}
 			</div>
