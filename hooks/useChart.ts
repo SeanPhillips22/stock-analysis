@@ -27,8 +27,8 @@ export function useChart(info: Info, chart: ChartDataPayload, time: string) {
 	const { data } = useQuery(['c', info.symbol, info.type, time], queryQuote, {
 		refetchInterval: tradingHours ? 60000 : false,
 		refetchOnWindowFocus: tradingHours ? true : false,
-		initialData: chart.data,
-		initialDataUpdatedAt: chart.updated,
+		initialData: chart?.data || [],
+		initialDataUpdatedAt: chart?.updated || 0,
 		staleTime: 60 * 1000,
 		enabled: info.state !== 'upcomingipo' && !info.archived
 	})
