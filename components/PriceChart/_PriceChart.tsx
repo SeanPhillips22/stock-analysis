@@ -7,54 +7,68 @@ import { getData } from 'functions/apis/API'
 import {
 	getChartUrl,
 	translateTime,
-	UnavailableIpo
+	UnavailableIpo,
+	getChartColor
 } from './PriceChart.functions'
 import { Unavailable } from 'components/Unavailable'
+import { ChartDataPayload, ChartDataPoint } from 'types/Charts'
+import { useChart } from 'hooks/useChart'
+import { useQuote } from 'hooks/useQuote'
 
-export const PriceChart = ({ info }: { info: Info }) => {
-	const [chartData, setChartData] = useState<any>([])
-	const [chartTime, setChartTime] = useState('')
-	const [message, setMessage] = useState('')
+type Props = {
+	info: Info
+	chart: ChartDataPayload
+}
 
-	useEffect(() => {
-		if (info.exchange === 'OTCMKTS' || info.ticker === 'BRK.A') {
-			setChartTime('1Y')
-		} else {
-			setChartTime('1D')
-		}
-	}, [info.exchange, info.quote, info.ticker])
+export const PriceChart = ({ info, chart }: Props) => {
+	// const [chartData, setChartData] = useState<ChartDataPoint[]>([])
+	const [chartTime, setChartTime] = useState(
+		info.exchange === 'OTCMKTS' ? '1Y' : '1D'
+	)
+	// const [message, setMessage] = useState('')
 
-	useEffect(() => {
-		setMessage('')
-		if (info.state === 'upcomingipo') {
-			return
-		}
+	// useEffect(() => {
+	// 	if (info.exchange === 'OTCMKTS' || info.ticker === 'BRK.A') {
+	// 		setChartTime('1Y')
+	// 	} else {
+	// 		setChartTime('1D')
+	// 	}
+	// }, [info.exchange, info.quote, info.ticker])
 
-		const fetchChartData = async (selected: string) => {
-			const url = getChartUrl(info.symbol, info.type, selected)
-			const data = await getData(url)
-			if (data && data.length > 0) {
-				setChartData(data)
-			} else {
-				setChartData([])
-				setMessage(`No ${translateTime(chartTime)} chart data available`)
-			}
-		}
+	const quote = useQuote(info)
+	const chartData = useChart(info, chart, chartTime)
 
-		if (chartTime) {
-			fetchChartData(chartTime)
-		}
+	// useEffect(() => {
+	// 	setMessage('')
+	// 	if (info.state === 'upcomingipo') {
+	// 		return
+	// 	}
 
-		return () => {
-			setChartData([])
-		}
-	}, [
-		chartTime,
-		info.exceptions.overrideChart,
-		info.symbol,
-		info.type,
-		info.state
-	])
+	// const fetchChartData = async (selected: string) => {
+	// 	const url = getChartUrl(info.symbol, info.type, selected)
+	// 	const data = await getData(url)
+	// 	if (data && data.length > 0) {
+	// 		setChartData(data)
+	// 	} else {
+	// 		setChartData([])
+	// 		setMessage(`No ${translateTime(chartTime)} chart data available`)
+	// 	}
+	// }
+
+	// if (chartTime) {
+	// 	fetchChartData(chartTime)
+	// }
+
+	// return () => {
+	// 	setChartData([])
+	// }
+	// }, [
+	// 	chartTime,
+	// 	info.exceptions.overrideChart,
+	// 	info.symbol,
+	// 	info.type,
+	// 	info.state
+	// ])
 
 	if (info.state === 'upcomingipo') {
 		return <UnavailableIpo info={info} />
@@ -73,13 +87,19 @@ export const PriceChart = ({ info }: { info: Info }) => {
 				)}
 			</div>
 			<div className="h-[240px] sm:h-[300px] overflow-x-auto hide-scroll">
-				{message && (
+				{/* {message && (
 					<div className="pt-1.5 h-full">
 						<Unavailable message={message} />
 					</div>
-				)}
+				)} */}
 				{chartData && chartData.length > 0 && (
-					<Chart chartData={chartData} chartTime={chartTime} info={info} />
+					<Chart
+						key={quote.u}
+						changeProps={getChartColor(chartData, chartTime, quote)}
+						chartData={chartData}
+						chartTime={chartTime}
+						info={info}
+					/>
 				)}
 			</div>
 		</div>

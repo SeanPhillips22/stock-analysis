@@ -20,17 +20,15 @@ import { Unavailable } from 'components/Unavailable'
 import { ReactChart } from 'components/ReactChart'
 import { Info } from 'types/Info'
 import { useQuote } from 'hooks/useQuote'
-
-type ChartDataType = {
-	t: string
-	c: number
-	o?: number
-}
+import { ChartDataPoint } from 'types/Charts'
+import { useEffect, useState } from 'react'
+import { getChartColor } from './PriceChart.functions'
 
 interface Props {
-	chartData: ChartDataType[]
+	chartData: ChartDataPoint[]
 	chartTime: string
 	info: Info
+	changeProps: any
 }
 
 ReactChart.register(
@@ -46,8 +44,44 @@ ReactChart.register(
 ReactChart.defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-export const Chart = ({ chartData, chartTime, info }: Props) => {
+export const Chart = ({ chartData, chartTime, info, changeProps }: Props) => {
+	const [change, setChange] = useState(changeProps.change)
+	const [lineColor, setLineColor] = useState(changeProps.lineColor)
 	const quote = useQuote(info)
+	// const [lineColor, setLineColor] = useState('')
+	const [count] = useState(chartData.length)
+
+	useEffect(() => {
+		const fresh = getChartColor(chartData, chartTime, quote)
+		setChange(fresh.change)
+		setLineColor(fresh.lineColor)
+	}, [chartData, chartTime, quote])
+
+	// let lineColor = 'rgba(4, 120, 87, 1)'
+	// useEffect(() => {
+	// 	let ch: number
+
+	// 	if (chartTime === '1D') {
+	// 		ch = Number(quote.c)
+	// 	} else {
+	// 		const first = chartData[0].o || chartData[0].c
+	// 		const last = chartData[count - 1].c
+	// 		ch = last - first
+	// 	}
+
+	// 	// setChange(ch)
+
+	// 	// if (ch > 0) {
+	// 	// 	console.log('negative')
+	// 	// 	setLineColor('rgba(4, 120, 87, 1)')
+	// 	// } else if (ch < 0) {
+	// 	// 	console.log('negative')
+	// 	// 	setLineColor('rgba(220, 38, 38, 1)')
+	// 	// } else {
+	// 	// 	console.log('neutral')
+	// 	// 	setLineColor('rgba(0, 0, 0, 1)')
+	// 	// }
+	// }, [change, chartData, chartTime, count, quote.c])
 
 	// Chart.js causes critical errors on older Safari versions
 	if (
@@ -73,26 +107,13 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		return item.c
 	})
 
-	let change: number
-	const count = priceAxis.length
-	if (chartTime === '1D') {
-		change = Number(quote.c)
-	} else {
-		const first = chartData[0].o || priceAxis[0]
-		const last = priceAxis[count - 1]
-		change = last - first
-	}
-
-	let lineColor = 'rgba(4, 120, 87, 1)'
-	if (change < 0) {
-		lineColor = 'rgba(220, 38, 38, 1)'
-	}
-
 	const changeWithoutComma = Number(quote.cl.replace(',', ''))
 
 	const prevCloseLine = chartData.map(() => {
 		return changeWithoutComma
 	})
+
+	let id = info.symbol + '-' + chartTime
 
 	let data: any[] = [
 		{
@@ -139,9 +160,11 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		]
 	}
 
+	console.log({ change, lineColor })
+
 	return (
 		<ReactChart
-			id={info.symbol}
+			id={id}
 			type="line"
 			data={{
 				labels: timeAxis,
@@ -149,7 +172,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 			}}
 			plugins={[
 				{
-					id: '1',
+					id: Date.now().toString(),
 					afterDatasetsDraw: function (chart: any) {
 						const chartInstance = chart
 						const ctx = chartInstance.ctx
