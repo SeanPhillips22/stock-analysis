@@ -42,9 +42,9 @@ export const PriceChange = ({ chartData, chartTime, info }: Props) => {
 
 	const css = raw
 		? raw > 0
-			? 'green'
+			? 'text-green-700'
 			: raw < 0
-			? 'red'
+			? 'text-red-600'
 			: 'text-gray-600'
 		: 'text-gray-600'
 
