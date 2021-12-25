@@ -22,7 +22,8 @@ export function useQuote(info: Info) {
 		refetchOnWindowFocus: tradingHours ? true : false,
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
-		enabled: info.state !== 'upcomingipo' && !info.archived
+		enabled: info.state !== 'upcomingipo' && !info.archived,
+		notifyOnChangeProps: 'tracked'
 	})
 
 	return data as Quote

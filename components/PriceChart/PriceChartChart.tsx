@@ -19,18 +19,17 @@ import {
 import { Unavailable } from 'components/Unavailable'
 import { ReactChart } from 'components/ReactChart'
 import { Info } from 'types/Info'
-import { useQuote } from 'hooks/useQuote'
-
-type ChartDataType = {
-	t: string
-	c: number
-	o?: number
-}
+import { ChartDataPoint } from 'types/Charts'
+import { useEffect, useMemo, useState } from 'react'
+import { getChartColor } from './PriceChart.functions'
+import { Quote } from 'types/Quote'
 
 interface Props {
-	chartData: ChartDataType[]
+	chartData: ChartDataPoint[]
 	chartTime: string
 	info: Info
+	quote: Quote
+	changeProps: any
 }
 
 ReactChart.register(
@@ -46,8 +45,51 @@ ReactChart.register(
 ReactChart.defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-export const Chart = ({ chartData, chartTime, info }: Props) => {
-	const quote = useQuote(info)
+export const Chart = ({
+	chartData,
+	chartTime,
+	info,
+	quote,
+	changeProps
+}: Props) => {
+	const [change, setChange] = useState(changeProps.change)
+	const [lineColor, setLineColor] = useState(changeProps.lineColor)
+	const [count] = useState(chartData.length)
+
+	// Refresh the change and line color
+	useEffect(() => {
+		const fresh = getChartColor(chartData, chartTime, quote)
+		if (fresh) {
+			setChange(fresh.change)
+			setLineColor(fresh.lineColor)
+		}
+	}, [chartData, chartTime, quote])
+
+	const timeAxis = useMemo(
+		() =>
+			chartData.map((item) => {
+				return item.t
+			}),
+		[chartData]
+	)
+
+	const priceAxis = useMemo(
+		() =>
+			chartData.map((item) => {
+				return item.c
+			}),
+		[chartData]
+	)
+
+	const changeWithoutComma = Number(quote.cl.replace(',', ''))
+
+	const prevCloseLine = useMemo(
+		() =>
+			chartData.map(() => {
+				return changeWithoutComma
+			}),
+		[chartData, changeWithoutComma]
+	)
 
 	// Chart.js causes critical errors on older Safari versions
 	if (
@@ -61,38 +103,6 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 			/>
 		)
 	}
-
-	const label =
-		chartTime === '1D' || chartTime === '5D' ? 'Price' : 'Closing Price'
-
-	const timeAxis = chartData.map((item) => {
-		return item.t
-	})
-
-	const priceAxis = chartData.map((item) => {
-		return item.c
-	})
-
-	let change: number
-	const count = priceAxis.length
-	if (chartTime === '1D') {
-		change = Number(quote.c)
-	} else {
-		const first = chartData[0].o || priceAxis[0]
-		const last = priceAxis[count - 1]
-		change = last - first
-	}
-
-	let lineColor = 'rgba(4, 120, 87, 1)'
-	if (change < 0) {
-		lineColor = 'rgba(220, 38, 38, 1)'
-	}
-
-	const changeWithoutComma = Number(quote.cl.replace(',', ''))
-
-	const prevCloseLine = chartData.map(() => {
-		return changeWithoutComma
-	})
 
 	let data: any[] = [
 		{
@@ -111,8 +121,11 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 				if (change < 0) {
 					gradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)')
 					gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
-				} else {
+				} else if (change > 0) {
 					gradient.addColorStop(0, 'rgba(4, 120, 87, 1)')
+					gradient.addColorStop(1, 'rgba(255,255,255,0)')
+				} else {
+					gradient.addColorStop(0, 'rgba(100, 100, 100, 1)')
 					gradient.addColorStop(1, 'rgba(255,255,255,0)')
 				}
 
@@ -139,9 +152,11 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 		]
 	}
 
+	let id = info.symbol + '-' + chartTime
+
 	return (
 		<ReactChart
-			id={info.symbol}
+			id={id}
 			type="line"
 			data={{
 				labels: timeAxis,
@@ -149,7 +164,7 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 			}}
 			plugins={[
 				{
-					id: '1',
+					id: id,
 					afterDatasetsDraw: function (chart: any) {
 						const chartInstance = chart
 						const ctx = chartInstance.ctx
@@ -344,6 +359,10 @@ export const Chart = ({ chartData, chartTime, info }: Props) => {
 									) {
 										currlabel = 'Latest Price: ' + value
 									} else {
+										let label =
+											chartTime === '1D' || chartTime === '5D'
+												? 'Price'
+												: 'Closing Price'
 										currlabel = label + ': ' + value
 									}
 								}

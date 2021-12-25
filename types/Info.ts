@@ -8,6 +8,7 @@ export interface Info {
 	type: string
 	nameFull: string
 	exchange: string
+	isOTC: boolean // Is it an over the counter stock (short for exchange === 'OTCMKTS')
 	quote: Quote
 	fiscalYear: string
 	currency: string

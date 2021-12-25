@@ -14,6 +14,28 @@ export function getChartUrl(symbol: string, type: string, time: string) {
 	return apiurl
 }
 
+export function getChartColor(chartData: any, chartTime: any, quote: any) {
+	if (!chartData || !chartData.length) return null
+
+	let change: number
+	if (chartTime === '1D') {
+		change = Number(quote.c)
+	} else {
+		const count = chartData.length
+		const first = chartData[0].o || chartData[0].c
+		const last = chartData[count - 1].c
+		change = last - first
+	}
+
+	if (change > 0) {
+		return { change: change, lineColor: 'rgba(4, 120, 87, 1)' }
+	} else if (change < 0) {
+		return { change: change, lineColor: 'rgba(220, 38, 38, 1)' }
+	} else {
+		return { change: change, lineColor: 'rgba(100, 100, 100, 1)' }
+	}
+}
+
 // Turn the 1D/5D into a human-friendly string
 export function translateTime(time: string): string {
 	switch (time) {
