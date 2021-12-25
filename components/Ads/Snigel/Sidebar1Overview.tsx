@@ -18,7 +18,7 @@ export function Sidebar1Overview({ news }: { news: News[] }) {
 					>
 						<div
 							id="adngin-sidebar_1-0"
-							className="hidden lg:block lg:min-h-[263px] mx-auto center-children"
+							className="hidden lg:block lg:min-h-[269px] mx-auto center-children"
 						></div>
 						<div
 							id="adngin-in-content_1_mobile-0"
