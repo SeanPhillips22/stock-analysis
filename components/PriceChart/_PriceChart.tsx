@@ -20,8 +20,7 @@ export const PriceChart = ({ info }: { info: Info }) => {
 		if (info.exchange === 'OTCMKTS' || info.ticker === 'BRK.A') {
 			setChartTime('1Y')
 		} else {
-			// setChartTime('1D')
-			setChartTime('1Y') // TODO -- Change to 1D when market opens again
+			setChartTime('1D')
 		}
 	}, [info.exchange, info.quote, info.ticker])
 

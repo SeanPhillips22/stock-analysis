@@ -10,10 +10,7 @@ export function Sidebar2() {
 	if (!noAds(path.one)) {
 		if (!checked || (checked && !isPro)) {
 			return (
-				<div
-					id="ad-banner"
-					className="mx-auto text-center hidden lg:block lg:sticky lg:top-16"
-				>
+				<div id="ad-banner" className="mx-auto text-center hidden lg:block">
 					<div
 						id="adngin-sidebar_2-0"
 						className="hidden lg:block mx-auto center-children"
