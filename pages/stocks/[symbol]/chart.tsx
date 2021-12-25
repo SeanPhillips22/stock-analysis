@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Stock } from 'components/Layout/StockLayout'
 import { SEO } from 'components/SEO'
-import { Loading } from 'components/Loading'
+import { Loading } from 'components/Loading/Loading'
 import { Info } from 'types/Info'
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI'
 import { getPageDataSSR } from 'functions/apis/callBackEnd'

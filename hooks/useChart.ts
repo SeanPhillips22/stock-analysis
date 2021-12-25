@@ -15,16 +15,16 @@ async function queryChart(symbol: string, type: string, time: string) {
 export function useChart(info: Info, time: string) {
 	const tradingHours = isTradingHoursOpen()
 
-	const { data, isLoading } = useQuery(
+	const { data, isFetching } = useQuery(
 		['c', info.symbol, info.type, time],
 		() => queryChart(info.symbol, info.type, time),
 		{
-			refetchInterval: 60000, // tradingHours ? 60000 : false,
+			refetchInterval: tradingHours ? 60000 : false,
 			refetchOnWindowFocus: tradingHours ? true : false,
-			staleTime: 60 * 1000,
-			enabled: info.state !== 'upcomingipo' && !info.archived
+			enabled: info.state !== 'upcomingipo' && !info.archived,
+			notifyOnChangeProps: 'tracked'
 		}
 	)
 
-	return { data, isLoading }
+	return { data, isFetching }
 }

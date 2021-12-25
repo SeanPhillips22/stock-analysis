@@ -32,7 +32,7 @@ export function getChartColor(chartData: any, chartTime: any, quote: any) {
 	} else if (change < 0) {
 		return { change: change, lineColor: 'rgba(220, 38, 38, 1)' }
 	} else {
-		return { change: change, lineColor: 'rgba(0, 0, 0, 1)' }
+		return { change: change, lineColor: 'rgba(100, 100, 100, 1)' }
 	}
 }
 

@@ -9,38 +9,31 @@ import {
 	getChartColor
 } from './PriceChart.functions'
 import { Unavailable } from 'components/Unavailable'
-import { ChartDataPayload } from 'types/Charts'
 import { useChart } from 'hooks/useChart'
 import { useQuote } from 'hooks/useQuote'
+import { LoadingLight } from 'components/Loading/LoadingLight'
 
 type Props = {
 	info: Info
-	chart: ChartDataPayload
 }
 
 export const PriceChart = ({ info }: Props) => {
-	const [chartTime, setChartTime] = useState('')
+	const [chartTime, setChartTime] = useState(
+		info.isOTC || info.ticker === 'BRK.A' ? '1Y' : '1D'
+	)
 	const [message, setMessage] = useState('')
 
-	useEffect(() => {
-		if (info.isOTC || info.ticker === 'BRK.A') {
-			setChartTime('1Y')
-		} else {
-			setChartTime('1D')
-		}
-	}, [info.isOTC, info.ticker])
-
 	const quote = useQuote(info)
-	const { data, isLoading } = useChart(info, chartTime)
+	const { data, isFetching } = useChart(info, chartTime)
 
 	useEffect(() => {
 		setMessage('')
 		if (info.state === 'upcomingipo') return
 
-		if (!isLoading && (!data || !data.length)) {
+		if (!isFetching && (!data || !data.length)) {
 			setMessage(`No ${translateTime(chartTime)} chart data available`)
 		}
-	}, [data, chartTime, info.state, isLoading])
+	}, [data, chartTime, info.state, isFetching])
 
 	const changeProps = getChartColor(data, chartTime, quote)
 
@@ -66,15 +59,20 @@ export const PriceChart = ({ info }: Props) => {
 						<Unavailable message={message} />
 					</div>
 				)}
-				{data && data.length > 0 && (
-					<Chart
-						key={`${quote.u}-${chartTime}`}
-						changeProps={changeProps}
-						chartData={data}
-						chartTime={chartTime}
-						info={info}
-						quote={quote}
-					/>
+				{isFetching ? (
+					<LoadingLight />
+				) : (
+					data &&
+					data.length && (
+						<Chart
+							key={Date.now()}
+							chartData={data}
+							chartTime={chartTime}
+							info={info}
+							quote={quote}
+							changeProps={changeProps}
+						/>
+					)
 				)}
 			</div>
 		</div>

@@ -12,16 +12,14 @@ import { NewsArea } from 'components/Overview/NewsArea'
 import { HoldingsWidget } from 'components/Overview/HoldingsWidget'
 import { DividendWidget } from 'components/Overview/DividendWidget'
 import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
-import { ChartDataPayload } from 'types/Charts'
 
 interface Props {
 	info: Info
 	data: Overview
 	news: { data: News[]; updated: number }
-	chart: ChartDataPayload
 }
 
-const EtfOverview = ({ info, data, news, chart }: Props) => {
+const EtfOverview = ({ info, data, news }: Props) => {
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/`}>
 			<SEO
@@ -31,7 +29,7 @@ const EtfOverview = ({ info, data, news, chart }: Props) => {
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
-					<PriceChart info={info} chart={chart} />
+					<PriceChart info={info} />
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">
 					<InfoTable data={data} />

@@ -3,8 +3,3 @@ export type ChartDataPoint = {
 	c: number
 	o?: number
 }
-
-export type ChartDataPayload = {
-	updated: number
-	data: ChartDataPoint[]
-}

@@ -12,16 +12,14 @@ import { NewsArea } from 'components/Overview/NewsArea'
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget'
 import { AnalystWidget } from 'components/Overview/AnalystWidget'
 import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
-import { ChartDataPayload } from 'types/Charts'
 
 interface Props {
 	info: Info
 	data: Overview
 	news: { data: News[]; updated: number }
-	chart: ChartDataPayload
 }
 
-const StockOverview = ({ info, data, news, chart }: Props) => {
+const StockOverview = ({ info, data, news }: Props) => {
 	let description = `Get a real-time ${info.nameFull} (${info.ticker}) stock price quote with breaking news, financials, statistics, charts and more.`
 	if (info.state == 'upcomingipo') {
 		description = `Get the latest ${info.nameFull} (${info.ticker}) stock price quote with news, financials, IPO details and other important investing information.`
@@ -40,7 +38,7 @@ const StockOverview = ({ info, data, news, chart }: Props) => {
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
-					<PriceChart info={info} chart={chart} />
+					<PriceChart info={info} />
 				</div>
 				<div className="order-1 flex flex-row gap-4">
 					<InfoTable data={data} />

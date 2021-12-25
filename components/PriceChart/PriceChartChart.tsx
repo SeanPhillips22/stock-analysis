@@ -91,9 +91,6 @@ export const Chart = ({
 		[chartData, changeWithoutComma]
 	)
 
-	let id = info.symbol + '-' + chartTime
-	console.log(id)
-
 	// Chart.js causes critical errors on older Safari versions
 	if (
 		typeof window !== 'undefined' &&
@@ -124,8 +121,11 @@ export const Chart = ({
 				if (change < 0) {
 					gradient.addColorStop(0, 'rgba(220, 38, 38, 0.8)')
 					gradient.addColorStop(1, 'rgba(255, 255, 255, 0)')
-				} else {
+				} else if (change > 0) {
 					gradient.addColorStop(0, 'rgba(4, 120, 87, 1)')
+					gradient.addColorStop(1, 'rgba(255,255,255,0)')
+				} else {
+					gradient.addColorStop(0, 'rgba(100, 100, 100, 1)')
 					gradient.addColorStop(1, 'rgba(255,255,255,0)')
 				}
 
@@ -152,7 +152,7 @@ export const Chart = ({
 		]
 	}
 
-	// console.log({ change, lineColor })
+	let id = info.symbol + '-' + chartTime
 
 	return (
 		<ReactChart
@@ -164,7 +164,7 @@ export const Chart = ({
 			}}
 			plugins={[
 				{
-					id: Date.now().toString(),
+					id: id,
 					afterDatasetsDraw: function (chart: any) {
 						const chartInstance = chart
 						const ctx = chartInstance.ctx

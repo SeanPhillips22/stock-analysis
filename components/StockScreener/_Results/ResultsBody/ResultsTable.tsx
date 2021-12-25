@@ -14,7 +14,7 @@ import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData'
-import { Loading } from 'components/Loading'
+import { Loading } from 'components/Loading/Loading'
 import {
 	defaultColumnsStocks,
 	defaultColumnsIPOs,
