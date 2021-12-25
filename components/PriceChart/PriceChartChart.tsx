@@ -59,8 +59,10 @@ export const Chart = ({
 	// Refresh the change and line color
 	useEffect(() => {
 		const fresh = getChartColor(chartData, chartTime, quote)
-		setChange(fresh.change)
-		setLineColor(fresh.lineColor)
+		if (fresh) {
+			setChange(fresh.change)
+			setLineColor(fresh.lineColor)
+		}
 	}, [chartData, chartTime, quote])
 
 	const timeAxis = useMemo(
@@ -90,6 +92,7 @@ export const Chart = ({
 	)
 
 	let id = info.symbol + '-' + chartTime
+	console.log(id)
 
 	// Chart.js causes critical errors on older Safari versions
 	if (
@@ -149,7 +152,7 @@ export const Chart = ({
 		]
 	}
 
-	console.log({ change, lineColor })
+	// console.log({ change, lineColor })
 
 	return (
 		<ReactChart

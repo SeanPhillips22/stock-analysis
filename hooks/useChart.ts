@@ -1,37 +1,30 @@
 import { getData } from 'functions/apis/API'
 import { isTradingHoursOpen } from 'functions/datetime/isTradingHours'
 import { useQuery } from 'react-query'
-import { ChartDataPayload } from 'types/Charts'
 import { Info } from 'types/Info'
-// import { Quote } from 'types/Quote'
 import { getChartUrl } from 'components/PriceChart/PriceChart.functions'
 
-async function queryQuote({ queryKey }: { queryKey: string[] }) {
-	console.log('fetch chart data')
-
-	let symbol = queryKey[1]
-	let type = queryKey[2]
-	let time = queryKey[3]
-
-	if (typeof symbol === 'undefined') {
-		return null
-	}
+async function queryChart(symbol: string, type: string, time: string) {
+	if (!time) return
+	if (typeof symbol === 'undefined') return
 
 	let url = getChartUrl(symbol, type, time)
 	return await getData(url)
 }
 
-export function useChart(info: Info, chart: ChartDataPayload, time: string) {
+export function useChart(info: Info, time: string) {
 	const tradingHours = isTradingHoursOpen()
 
-	const { data } = useQuery(['c', info.symbol, info.type, time], queryQuote, {
-		refetchInterval: tradingHours ? 60000 : false,
-		refetchOnWindowFocus: tradingHours ? true : false,
-		initialData: chart?.data || [],
-		initialDataUpdatedAt: chart?.updated || 0,
-		staleTime: 60 * 1000,
-		enabled: info.state !== 'upcomingipo' && !info.archived
-	})
+	const { data, isLoading } = useQuery(
+		['c', info.symbol, info.type, time],
+		() => queryChart(info.symbol, info.type, time),
+		{
+			refetchInterval: 60000, // tradingHours ? 60000 : false,
+			refetchOnWindowFocus: tradingHours ? true : false,
+			staleTime: 60 * 1000,
+			enabled: info.state !== 'upcomingipo' && !info.archived
+		}
+	)
 
-	return data
+	return { data, isLoading }
 }

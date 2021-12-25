@@ -15,6 +15,8 @@ export function getChartUrl(symbol: string, type: string, time: string) {
 }
 
 export function getChartColor(chartData: any, chartTime: any, quote: any) {
+	if (!chartData || !chartData.length) return null
+
 	let change: number
 	if (chartTime === '1D') {
 		change = Number(quote.c)

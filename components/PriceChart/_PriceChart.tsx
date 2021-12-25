@@ -18,27 +18,31 @@ type Props = {
 	chart: ChartDataPayload
 }
 
-export const PriceChart = ({ info, chart }: Props) => {
-	const [chartTime, setChartTime] = useState(
-		info.exchange === 'OTCMKTS' ? '1Y' : '1D'
-	)
+export const PriceChart = ({ info }: Props) => {
+	const [chartTime, setChartTime] = useState('')
 	const [message, setMessage] = useState('')
 
+	useEffect(() => {
+		if (info.isOTC || info.ticker === 'BRK.A') {
+			setChartTime('1Y')
+		} else {
+			setChartTime('1D')
+		}
+	}, [info.isOTC, info.ticker])
+
 	const quote = useQuote(info)
-	const chartData = useChart(info, chart, chartTime)
+	const { data, isLoading } = useChart(info, chartTime)
 
 	useEffect(() => {
 		setMessage('')
-		if (info.state === 'upcomingipo') {
-			return
-		}
+		if (info.state === 'upcomingipo') return
 
-		if (!chartData || !chartData.length) {
+		if (!isLoading && (!data || !data.length)) {
 			setMessage(`No ${translateTime(chartTime)} chart data available`)
 		}
-	}, [chartData, chartTime, info.state])
+	}, [data, chartTime, info.state, isLoading])
 
-	const changeProps = getChartColor(chartData, chartTime, quote)
+	const changeProps = getChartColor(data, chartTime, quote)
 
 	if (info.state === 'upcomingipo') {
 		return <UnavailableIpo info={info} />
@@ -48,9 +52,9 @@ export const PriceChart = ({ info, chart }: Props) => {
 		<div className="border-t border-b border-gray-200 lg:border-0 py-0.5 xs:py-1 sm:py-3 sm:px-2 lg:py-0 lg:px-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0">
 			<div className="flex flex-row justify-between space-x-1 items-center py-1 sm:pt-0.5">
 				<Controls chartTime={chartTime} setChartTime={setChartTime} />
-				{chartData && chartData.length > 0 && (
+				{data && data.length > 0 && (
 					<PriceChange
-						chartData={chartData}
+						chartData={data}
 						chartTime={chartTime}
 						info={info}
 					/>
@@ -62,11 +66,11 @@ export const PriceChart = ({ info, chart }: Props) => {
 						<Unavailable message={message} />
 					</div>
 				)}
-				{chartData && chartData.length > 0 && (
+				{data && data.length > 0 && (
 					<Chart
-						key={quote.u}
+						key={`${quote.u}-${chartTime}`}
 						changeProps={changeProps}
-						chartData={chartData}
+						chartData={data}
 						chartTime={chartTime}
 						info={info}
 						quote={quote}
