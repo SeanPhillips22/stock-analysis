@@ -6,6 +6,7 @@ import { screenerState } from '../screener.state'
 export function PresetFilters() {
 	const type = screenerState((state) => state.type)
 	const presets = screenerState((state) => state.presets)
+	const setSort = screenerState((state) => state.setSort)
 	const setFilterMenu = screenerState((state) => state.setFilterMenu)
 	const activePreset = screenerState((state) => state.activePreset)
 	const setActivePreset = screenerState((state) => state.setActivePreset)
@@ -32,6 +33,7 @@ export function PresetFilters() {
 						}
 					})
 				})
+				if (item.sort) setSort([item.sort])
 			}
 		})
 	}

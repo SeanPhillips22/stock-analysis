@@ -169,7 +169,7 @@ function formatColumns() {
 				}
 
 				case 'marketcap': {
-					header = <div className="ml-auto mr-3">{column.Header}</div>
+					header = <div className="ml-auto">{column.Header}</div>
 					cell = function FormatCell({ cell: { value } }: CellNumber) {
 						return (
 							<div className="text-right mr-3">

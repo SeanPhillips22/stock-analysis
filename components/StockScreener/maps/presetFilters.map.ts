@@ -1,4 +1,4 @@
-import { FilterId } from '../screener.types'
+import { FilterId, SortObject } from '../screener.types'
 
 type Single = {
 	id: FilterId
@@ -8,6 +8,7 @@ type Single = {
 export type PresetFilter = {
 	name: string
 	filters: Single[]
+	sort?: SortObject
 }
 
 export const PresetFiltersStocks: PresetFilter[] = [
@@ -20,6 +21,7 @@ export const PresetFiltersStocks: PresetFilter[] = [
 			{ id: 'pr', value: 'under-60' },
 			{ id: 'revenueGrowth', value: 'over-3' }
 		]
+		// sort: { id: 'dg', desc: false }
 	},
 	{
 		name: 'Strong Cash Flow',

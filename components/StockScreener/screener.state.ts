@@ -6,7 +6,8 @@ import {
 	FilterId,
 	FilterValue,
 	VariableFilter,
-	FilterOption
+	FilterOption,
+	SortObject
 } from 'components/StockScreener/screener.types'
 import { PresetFilter } from './maps/presetFilters.map'
 import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
@@ -62,6 +63,10 @@ interface ScreenerState {
 	setShowColumns: (newColumns: FilterId[]) => void
 	columnDropdownOpen: boolean
 	setColumnDropdownOpen: (open: boolean) => void
+
+	// Sort
+	sort: SortObject[]
+	setSort: (newSort: SortObject[]) => void
 
 	// Pagination
 	tablePage: number
@@ -165,6 +170,10 @@ export const screenerState = create<ScreenerState>((set) => ({
 	setShowColumns: (newColumns) => set({ showColumns: newColumns }),
 	columnDropdownOpen: false,
 	setColumnDropdownOpen: (open: boolean) => set({ columnDropdownOpen: open }),
+
+	// Sort
+	sort: [{ id: 'm', desc: false }],
+	setSort: (newSort: SortObject[]) => set({ sort: newSort }),
 
 	// Pagination
 	tablePage: 0,

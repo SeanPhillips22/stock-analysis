@@ -237,3 +237,8 @@ export type ComparisonOption =
 	| 'between'
 	| 'exactly'
 	| 'notzero'
+
+export type SortObject = {
+	id: FilterId
+	desc?: boolean
+}

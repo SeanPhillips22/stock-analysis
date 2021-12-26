@@ -26,6 +26,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const datarows = screenerState((state) => state.data)
 	const loaded = screenerState((state) => state.loaded)
 	const filters = screenerState((state) => state.filters)
+	const sort = screenerState((state) => state.sort)
 	const tablePage = screenerState((state) => state.tablePage)
 	const tableSize = screenerState((state) => state.tableSize)
 	const showColumns = screenerState((state) => state.showColumns)
@@ -60,6 +61,8 @@ export function ResultsTable({ cols }: { cols: any }) {
 	)
 	const columns = useMemo(() => cols, [cols])
 
+	const sortResultsBy = useMemo(() => sort, [sort])
+
 	const {
 		headerGroups,
 		prepareRow,
@@ -82,9 +85,9 @@ export function ResultsTable({ cols }: { cols: any }) {
 				pageSize: tableSize,
 				hiddenColumns: columns
 					.filter((col: any) => !showColumns.includes(col.accessor))
-					.map((col: any) => col.accessor)
-			},
-			autoResetSortBy: false
+					.map((col: any) => col.accessor),
+				sortBy: sortResultsBy
+			}
 		},
 		useGlobalFilter,
 		useSortBy,
