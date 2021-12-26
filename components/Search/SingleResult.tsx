@@ -1,11 +1,6 @@
 import { navState } from 'state/navState'
 import Link from 'next/link'
-
-interface SearchItem {
-	s: string
-	n: string
-	t: string
-}
+import { SearchItem } from './search.types'
 
 interface Props {
 	index: number

@@ -3,9 +3,9 @@ import { SearchIcon } from 'components/Icons/Search'
 import { SingleResult } from './SingleResult'
 import { useRouter } from 'next/router'
 import { getData } from 'functions/apis/API'
-import { getSearchResults } from 'functions/apis/search'
 import { CloseIcon } from 'components/Icons/Close'
 import { useDebounce } from 'hooks/useDebounce'
+import { useSearch } from './useSearch'
 
 type Props = {
 	classes: string
@@ -18,11 +18,10 @@ export const SiteSearch = ({ classes }: Props) => {
 	const debouncedQuery = useDebounce<string>(query, 150)
 	const [fetched, setFetched] = useState(false)
 	const [loading, setLoading] = useState(false)
-	const [filtering, setFiltering] = useState(false)
-	const [results, setResults] = useState([])
 	const [open, setOpen] = useState(false)
 	const [trending, setTrending] = useState([])
 	const [error, setError] = useState(false)
+	const { results, filtering } = useSearch(debouncedQuery, trending)
 	let num = 1
 
 	// Fetch the site index
@@ -42,23 +41,6 @@ export const SiteSearch = ({ classes }: Props) => {
 			}
 		}
 	}
-
-	async function queryCFWorker(search: string) {
-		return await getSearchResults('search?q=' + search)
-	}
-
-	useEffect(() => {
-		setFiltering(true)
-
-		if (debouncedQuery.length) {
-			queryCFWorker(debouncedQuery).then((data) => {
-				setResults(data)
-				setFiltering(false)
-			})
-		} else if (trending.length) {
-			setResults(trending)
-		}
-	}, [debouncedQuery, trending])
 
 	function keyClick(e: KeyboardEvent) {
 		const active = document.querySelector('.activeresult')
