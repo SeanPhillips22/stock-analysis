@@ -11,7 +11,7 @@ import {
 } from 'components/StockScreener/screener.types'
 import { PresetFilter } from './maps/presetFilters.map'
 import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
-import { returnDefaultColumns } from 'components/StockScreener/maps/resultColumns.map'
+import { returnFilteredColumns } from 'components/StockScreener/maps/resultColumns.map'
 
 interface ScreenerState {
 	// Type
@@ -117,7 +117,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set((state) => ({
 			filters: [],
 			filterMenu: 'Active',
-			filteredColumns: returnDefaultColumns(state.type),
+			filteredColumns: returnFilteredColumns(state.type),
 			activePreset: ''
 		})),
 	filtersShown: true,
@@ -167,12 +167,16 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set((state) => ({
 			filteredColumns: state.filteredColumns.filter((c) => c !== column)
 		})),
-	setShowColumns: (newColumns) => set({ showColumns: newColumns }),
+	setShowColumns: (newColumns: FilterId[]) =>
+		set((state) => ({ ...state, showColumns: newColumns })),
 	columnDropdownOpen: false,
 	setColumnDropdownOpen: (open: boolean) => set({ columnDropdownOpen: open }),
 
 	// Sort
-	sort: [{ id: 'm', desc: false }],
+	sort: [
+		{ id: 'm', desc: false },
+		{ id: 'assets', desc: false }
+	],
 	setSort: (newSort: SortObject[]) => set({ sort: newSort }),
 
 	// Pagination

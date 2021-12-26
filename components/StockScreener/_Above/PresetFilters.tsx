@@ -2,6 +2,7 @@ import { FiltersMap } from 'components/StockScreener/maps/filters.map'
 import { useModifyFilters } from '../functions/useModifyFilters'
 import { useModifyColumns } from '../functions/useModifyColumns'
 import { screenerState } from '../screener.state'
+import { returnFilteredColumns } from '../maps/resultColumns.map'
 
 export function PresetFilters() {
 	const type = screenerState((state) => state.type)
@@ -10,6 +11,8 @@ export function PresetFilters() {
 	const setFilterMenu = screenerState((state) => state.setFilterMenu)
 	const activePreset = screenerState((state) => state.activePreset)
 	const setActivePreset = screenerState((state) => state.setActivePreset)
+	const setShowColumns = screenerState((state) => state.setShowColumns)
+	const resultsMenu = screenerState((state) => state.resultsMenu)
 	const { add, clear } = useModifyFilters()
 	const { fetchColumn } = useModifyColumns()
 
@@ -34,6 +37,14 @@ export function PresetFilters() {
 					})
 				})
 				if (item.sort) setSort([item.sort])
+				// If "Filtered" menu is selected, add all the values
+				if (resultsMenu === 'Filtered') {
+					const cols = returnFilteredColumns(type)
+					item.filters.map((filter) => {
+						cols.push(filter.id)
+					})
+					setShowColumns(cols)
+				}
 			}
 		})
 	}

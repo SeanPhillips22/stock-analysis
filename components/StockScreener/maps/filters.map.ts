@@ -2030,8 +2030,7 @@ export const IPOFiltersMap: FilterProps[] = [
 			{ name: 'Over 100M', value: 'over-100M' },
 			{ name: 'Over 10M', value: 'over-10M' },
 			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Exactly Zero', value: 'exactly-0' },
-			{ name: 'Under Zero', value: 'under-0' }
+			{ name: 'Exactly Zero', value: 'exactly-0' }
 		]
 	},
 	{

@@ -37,8 +37,7 @@ export const defaultColumnsETFs: FilterId[] = [
 
 const resultColumnsStocks: ColumnsMap = {
 	General: defaultColumnsStocks,
-	Filtered: [],
-	Company: [],
+	Filtered: ['s', 'n', 'm'],
 	Performance: [
 		's',
 		'n',
@@ -82,7 +81,7 @@ const resultColumnsStocks: ColumnsMap = {
 
 const resultColumnsIPOs: ColumnsMap = {
 	General: defaultColumnsIPOs,
-	Filtered: [],
+	Filtered: ['s', 'n', 'm'],
 	Company: [
 		's',
 		'n',
@@ -110,7 +109,7 @@ const resultColumnsIPOs: ColumnsMap = {
 
 const resultColumnsETFs: ColumnsMap = {
 	General: defaultColumnsETFs,
-	Filtered: [],
+	Filtered: ['s', 'n', 'assets'],
 	Performance: [
 		's',
 		'n',
@@ -155,4 +154,15 @@ export function returnDefaultColumns(type: ScreenerTypes) {
 		return defaultColumnsETFs
 	}
 	return defaultColumnsStocks
+}
+
+export function returnFilteredColumns(type: ScreenerTypes): FilterId[] {
+	if (type === 'stocks') {
+		return ['s', 'n', 'm']
+	} else if (type === 'ipo') {
+		return ['s', 'n', 'm']
+	} else if (type === 'etf') {
+		return ['s', 'n', 'assets']
+	}
+	return ['s', 'n', 'm']
 }
