@@ -24,14 +24,15 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 	const [second, setSecond] = useState<string>('')
 	const [active, setActive] = useState<string | false>()
 	const filters = screenerState((state) => state.filters)
+	const openFilter = screenerState((state) => state.openFilter)
 	const setOpenFilter = screenerState((state) => state.setOpenFilter)
-	const { add, remove } = useModifyFilters()
+	const { add } = useModifyFilters()
 
 	// Extract the filter values in order to populate the custom choice inputs
 	useEffect(() => {
 		setActive(isFilterSelected(id, filters))
 
-		if (active) {
+		if (active && openFilter === id) {
 			const filterObject = getFilterFromString(active, false)
 
 			setCompare(filterObject.compare)
@@ -45,19 +46,12 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 				setSecond('')
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [filters, active, id])
+	}, [filters, active, id, openFilter])
 
 	// Update the filter if the values in the custom choice inputs change
 	useEffect(() => {
-		// If values have been cleared, remove the filter
-		if (active && !first && !second && compare !== 'notzero') {
-			remove(id)
-			setActive(false)
-		}
-
 		// If the values are valid, create a new filter string and update the filter
-		else if (first || second || compare === 'notzero') {
+		if (first || second || compare === 'notzero') {
 			const filterString = createFilterString({ compare, first, second })
 
 			if (filterString !== active) {
@@ -107,6 +101,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 					placeholder="Value"
 					value={second}
 					onChange={(e) => setSecond(e.target.value)}
+					onKeyDown={(e) => handleKeyDown(e, 'second')}
 					tabIndex={0}
 					className={`shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]${
 						compare === 'between' ? ' block' : ' hidden'

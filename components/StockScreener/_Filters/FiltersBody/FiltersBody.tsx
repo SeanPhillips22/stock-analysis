@@ -20,10 +20,10 @@ function FilterWrap({ f }: FilterWrapProps) {
 
 	return (
 		<div
-			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900 cursor-help"
+			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900"
 			key={f.name}
 		>
-			<div>
+			<div className="cursor-help">
 				<Tooltip
 					content={<TooltipContent id={f.id} />}
 					theme="light"

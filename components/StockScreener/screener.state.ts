@@ -7,11 +7,16 @@ import {
 	FilterValue,
 	VariableFilter,
 	FilterOption,
-	SortObject
+	SortObject,
+	ColumnName
 } from 'components/StockScreener/screener.types'
 import { PresetFilter } from './maps/presetFilters.map'
 import { mergeColumns } from 'components/StockScreener/functions/mergeColumns'
-import { returnFilteredColumns } from 'components/StockScreener/maps/resultColumns.map'
+import {
+	returnDefaultColumns,
+	returnFilteredColumns,
+	returnResultColumns
+} from 'components/StockScreener/maps/resultColumns.map'
 
 interface ScreenerState {
 	// Type
@@ -45,8 +50,8 @@ interface ScreenerState {
 	filterSearch: string
 	setFilterSearch: (newSearch: string) => void
 
-	resultsMenu: string
-	setResultsMenu: (newMenu: string) => void
+	resultsMenu: ColumnName
+	setResultsMenu: (newMenu: ColumnName) => void
 
 	// Variable filters
 	variableFilters: VariableFilter[]
@@ -147,7 +152,16 @@ export const screenerState = create<ScreenerState>((set) => ({
 
 	// Results Menu
 	resultsMenu: 'General',
-	setResultsMenu: (newMenu: string) => set({ resultsMenu: newMenu }),
+	setResultsMenu: (newMenu: ColumnName) =>
+		set((state) => ({
+			resultsMenu: newMenu,
+			showColumns:
+				newMenu === 'Filtered'
+					? state.filteredColumns
+					: newMenu === 'General'
+					? returnDefaultColumns(state.type)
+					: returnResultColumns(state.type, newMenu)
+		})),
 
 	// Columns
 	fetchedColumns: [], // All data columns that have been fetched

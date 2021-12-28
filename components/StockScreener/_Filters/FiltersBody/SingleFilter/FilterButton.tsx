@@ -38,6 +38,11 @@ export function FilterButton({ active, id }: Props) {
 		}
 	}
 
+	function handleKeyDown(e: React.KeyboardEvent) {
+		if (e.key === 'Escape') setOpenFilter('')
+		if (e.key === 'Enter') handleClick()
+	}
+
 	const buttonText = active ? findName() : 'Any'
 
 	return (
@@ -46,7 +51,7 @@ export function FilterButton({ active, id }: Props) {
 				active ? ' bg-yellow-100 px-2' : ''
 			}`}
 			onClick={handleClick}
-			onKeyPress={(e) => e.key === 'Enter' && handleClick()}
+			onKeyDown={handleKeyDown}
 			tabIndex={0}
 		>
 			<span className="overflow-hidden overflow-ellipsis">{buttonText}</span>

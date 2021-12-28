@@ -13,6 +13,7 @@ export function PresetFilters() {
 	const setActivePreset = screenerState((state) => state.setActivePreset)
 	const setShowColumns = screenerState((state) => state.setShowColumns)
 	const resultsMenu = screenerState((state) => state.resultsMenu)
+	const setResultsMenu = screenerState((state) => state.setResultsMenu)
 	const { add, clear } = useModifyFilters()
 	const { fetchColumn } = useModifyColumns()
 
@@ -36,7 +37,10 @@ export function PresetFilters() {
 						}
 					})
 				})
-				if (item.sort) setSort([item.sort])
+				if (item.sort) {
+					setSort([item.sort])
+					setResultsMenu('Filtered')
+				}
 				// If "Filtered" menu is selected, add all the values
 				if (resultsMenu === 'Filtered') {
 					const cols = returnFilteredColumns(type)

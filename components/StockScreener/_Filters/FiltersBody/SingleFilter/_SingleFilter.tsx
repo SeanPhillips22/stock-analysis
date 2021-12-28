@@ -74,6 +74,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 						? ' visible opacity-100 transform translate-y-0'
 						: ' invisible opacity-0 transform -translate-y-2'
 				}`}
+				onKeyDown={(e) => e.key === 'Escape' && setOpenFilter('')}
 			>
 				<Filter filter={filter} active={active} />
 			</div>

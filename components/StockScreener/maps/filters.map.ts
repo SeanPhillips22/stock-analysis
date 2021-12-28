@@ -121,7 +121,7 @@ export const FiltersMap: FilterProps[] = [
 			{ name: '3-5%', value: 'between-3-5' },
 			{ name: '1-3%', value: 'between-1-3' },
 			{ name: '0-1%', value: 'between-0-1' },
-			{ name: 'Over Zero', value: 'over-0' }
+			{ name: 'Not Zero', value: 'notzero' }
 		]
 	},
 	{

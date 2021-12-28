@@ -24,7 +24,7 @@ export function SelectComparison({ compare, setCompare }: Props) {
 			{({ open }) => (
 				<>
 					<div className="relative">
-						<Listbox.Button className="relative w-full pl-2 pr-7 py-2 text-left cursor-default focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-smaller font-semibold text-gray-800">
+						<Listbox.Button className="relative w-full pl-2 pr-7 py-2 text-left cursor-default focus:outline-none focus:ring-0 text-smaller font-semibold text-gray-800">
 							<span className="block truncate">
 								{compare === 'notzero'
 									? 'Not Zero'

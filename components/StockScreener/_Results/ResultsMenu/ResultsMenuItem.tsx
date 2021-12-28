@@ -4,10 +4,7 @@ import {
 	ColumnName,
 	ScreenerTypes
 } from 'components/StockScreener/screener.types'
-import {
-	returnDefaultColumns,
-	returnResultColumns
-} from 'components/StockScreener/maps/resultColumns.map'
+import { returnResultColumns } from 'components/StockScreener/maps/resultColumns.map'
 import { getData } from 'functions/apis/API'
 import { getScreenerUrl } from 'components/StockScreener/functions/getScreenerUrl'
 
@@ -20,9 +17,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 	const filters = screenerState((state) => state.filters)
 	const resultsMenu = screenerState((state) => state.resultsMenu)
 	const setResultsMenu = screenerState((state) => state.setResultsMenu)
-	const setShowColumns = screenerState((state) => state.setShowColumns)
 	const fetchedColumns = screenerState((state) => state.fetchedColumns)
-	const filteredColumns = screenerState((state) => state.filteredColumns)
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn)
 	const addDataColumn = screenerState((state) => state.addDataColumn)
 
@@ -51,18 +46,6 @@ export function ResultsMenuItem({ name, type }: Props) {
 		}
 	}
 
-	function handleFilter(name: ColumnName) {
-		setResultsMenu(name)
-
-		if (name === 'Filtered') {
-			setShowColumns(filteredColumns)
-		} else if (name === 'General') {
-			setShowColumns(returnDefaultColumns(type))
-		} else {
-			setShowColumns(returnResultColumns(type, name))
-		}
-	}
-
 	if (resultsMenu === name) {
 		return (
 			<li>
@@ -82,9 +65,9 @@ export function ResultsMenuItem({ name, type }: Props) {
 			<span
 				className="py-1 px-2 hover:bg-gray-100 hover:rounded-md cursor-pointer focus:outline-none"
 				data-title={dataTitle}
-				onClick={() => handleFilter(name)}
+				onClick={() => setResultsMenu(name)}
 				onKeyPress={(e) => {
-					e.key === 'Enter' && handleFilter(name)
+					e.key === 'Enter' && setResultsMenu(name)
 				}}
 				onMouseOver={() => handleHover(name)}
 				onFocus={() => handleHover(name)}
