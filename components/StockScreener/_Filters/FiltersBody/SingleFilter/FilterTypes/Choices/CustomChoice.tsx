@@ -11,6 +11,8 @@ import { createFilterString } from 'components/StockScreener/functions/filterStr
 import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters'
 import { incrementFilter } from 'components/StockScreener/functions/filterString/incrementFilter'
 import { decrementFilter } from 'components/StockScreener/functions/filterString/decrementFilter'
+import { ChevronUpIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon } from '@heroicons/react/outline'
 
 /**
  * Screener component that renders the custom filter where it is possible to select your own comparison. Over/Under/Between plus values.
@@ -45,6 +47,10 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 			if (filterObject.compare !== 'between' && filterObject.second !== '') {
 				setSecond('')
 			}
+		} else {
+			setCompare('over')
+			setFirst('')
+			setSecond('')
 		}
 	}, [filters, active, id, openFilter])
 
@@ -84,7 +90,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 				<div>
 					<SelectComparison compare={compare} setCompare={setCompare} />
 				</div>
-				<div className={compare !== 'notzero' ? 'block' : 'hidden'}>
+				<div className={compare !== 'notzero' ? 'flex' : 'hidden'}>
 					<input
 						type="text"
 						placeholder="Value"
@@ -94,6 +100,23 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 						tabIndex={0}
 						className="shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]"
 					/>
+					{/* Add two icons that increase and decrease the input value */}
+					{compare !== 'notzero' && compare !== 'between' && (
+						<div className="flex flex-col items-center ml-1 space-y-0">
+							<span title="Increase by 1">
+								<ChevronUpIcon
+									className="w-4 h-4 text-gray-500 hover:text-black cursor-pointer"
+									onClick={() => setFirst(incrementFilter(first))}
+								/>
+							</span>
+							<span title="Decrease by 1">
+								<ChevronDownIcon
+									className="w-4 h-4 text-gray-500 hover:text-black cursor-pointer"
+									onClick={() => setFirst(decrementFilter(first))}
+								/>
+							</span>
+						</div>
+					)}
 				</div>
 				<div className={compare === 'between' ? 'block' : 'hidden'}>&</div>
 				<input

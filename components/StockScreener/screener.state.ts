@@ -123,7 +123,11 @@ export const screenerState = create<ScreenerState>((set) => ({
 			filters: [],
 			filterMenu: 'Active',
 			filteredColumns: returnFilteredColumns(state.type),
-			activePreset: ''
+			activePreset: '',
+			sort: [
+				{ id: 'm', desc: false },
+				{ id: 'assets', desc: false }
+			]
 		})),
 	filtersShown: true,
 	setFiltersShown: (show: boolean) =>

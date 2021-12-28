@@ -64,7 +64,7 @@ export function PresetFilters() {
 			<select
 				id="location"
 				name="location"
-				className="block w-full pl-3 pr-10 py-2 text-sm border-gray-300 focus:ring-0 focus:ring-blue-500 focus:border-blue-500 rounded-md"
+				className="block w-full pl-3 pr-10 py-2 text-sm border-gray-300 focus:ring-0 focus:ring-blue-500 focus:border-blue-500 rounded-md cursor-pointer"
 				value={activePreset || 'Select preset'}
 				onChange={(e) => renderPresetFilters(e.target.value)}
 			>
