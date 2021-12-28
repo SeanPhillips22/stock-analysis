@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Error } from 'components/Alerts/Error'
 import { SpinnerIcon } from 'components/Icons/Spinner'
+import { CrispChat } from 'components/Scripts/CrispChat'
 
 type Props = {
 	signIn: (email: string) => void
@@ -29,7 +30,12 @@ export function LogIn({ signIn, loading, errorMsg }: Props) {
 			</div>
 
 			<div className="mt-6 xs:mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-				{errorMsg && <Error message={errorMsg} />}
+				{errorMsg && (
+					<>
+						<Error message={errorMsg} />
+						<CrispChat />
+					</>
+				)}
 				<div className="bg-white py-6 xs:py-8 px-4 sm:rounded-lg sm:px-10 border border-gray-300">
 					<div>
 						<label

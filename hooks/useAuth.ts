@@ -2,6 +2,7 @@
 import { supabase } from 'functions/supabase'
 import { useEffect } from 'react'
 import { authState } from 'state/authState'
+import { navState } from 'state/navState'
 
 export function useAuth() {
 	const user = authState((state) => state.user)
@@ -12,6 +13,7 @@ export function useAuth() {
 	const setIsPro = authState((state) => state.setIsPro)
 	const checked = authState((state) => state.checked)
 	const setChecked = authState((state) => state.setChecked)
+	const route = navState((state) => state.route)
 
 	useEffect(() => {
 		// subscribe to login and logout events
@@ -113,6 +115,13 @@ export function useAuth() {
 
 	async function signOut() {
 		await supabase.auth.signOut()
+	}
+
+	// If there is a login error, redirect to the login page and show an error message
+	if (route === '/#error_code=404&error_description=User+not+found') {
+		if (typeof window !== 'undefined') {
+			window.location.href = '/login/?error=Login+failed'
+		}
 	}
 
 	return {
