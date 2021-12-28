@@ -15,6 +15,10 @@
 		gap-x-1 tiny:gap-x-2 xs:gap-x-4;
 	}
 
+	.hd-inner.hidenav {
+		@apply xxl:justify-between;
+	}
+
 	.skip-nav {
 		@apply sr-only focus:not-sr-only;
 	}
@@ -41,6 +45,10 @@
 
 	.hd-login {
 		@apply hidden xxl:flex flex-row items-center gap-x-2 whitespace-nowrap ml-auto;
+	}
+
+	.hidenav .hd-login {
+		@apply xxl:ml-0;
 	}
 
 	.hd-login.logged-in {

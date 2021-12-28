@@ -11,7 +11,7 @@ type Props = {
 export function Header({ hideNav }: Props) {
 	return (
 		<header className="hd-wrap">
-			<div className="hd-inner">
+			<div className={hideNav ? 'hd-inner hidenav' : 'hd-inner'}>
 				{/* Skip Link */}
 				<HeaderSkipLink />
 
