@@ -6,7 +6,10 @@ import {
 	IPOFiltersMap,
 	ETFFiltersMap
 } from 'components/StockScreener/maps/filters.map'
-import { FilterId } from 'components/StockScreener/screener.types'
+import {
+	FilterId,
+	ScreenerTypes
+} from 'components/StockScreener/screener.types'
 import { ColumnItem } from './ColumnItem'
 import { useMemo } from 'react'
 
@@ -17,7 +20,7 @@ type ColumnProperties = {
 
 type Props = {
 	search: string
-	type: string
+	type: ScreenerTypes
 }
 /**
  * Wrapper that contains all the individual checkboxes to select columns for the results table

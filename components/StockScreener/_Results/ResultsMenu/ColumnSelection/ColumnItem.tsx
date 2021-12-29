@@ -1,11 +1,14 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { FilterId } from 'components/StockScreener/screener.types'
+import {
+	FilterId,
+	ScreenerTypes
+} from 'components/StockScreener/screener.types'
 import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns'
 
 type Props = {
 	name: string
 	id: FilterId
-	type: string
+	type: ScreenerTypes
 }
 
 /**

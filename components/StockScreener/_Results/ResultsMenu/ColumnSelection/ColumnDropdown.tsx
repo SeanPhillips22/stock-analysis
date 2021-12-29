@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { ColumnItemWrap } from './ColumnItemWrap'
 import { ColumnSearch } from './ColumnSearch'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 
 /**
  * The custom columns dropdown. It contains a search filter and checkbox for each column.
@@ -10,7 +11,7 @@ import { ColumnSearch } from './ColumnSearch'
  */
 
 type Props = {
-	type: string
+	type: ScreenerTypes
 }
 
 export function ColumnDropdown({ type }: Props) {

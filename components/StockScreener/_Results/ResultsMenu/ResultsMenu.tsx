@@ -4,6 +4,7 @@ import { Export } from 'components/Controls/Export'
 import { Filter } from 'components/Controls/Filter'
 import { ResultsNav } from './ResultsNav'
 import { ColumnDropdown } from 'components/StockScreener/_Results/ResultsMenu/ColumnSelection/ColumnDropdown'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 
 interface Props {
 	count: number
@@ -13,7 +14,7 @@ interface Props {
 	setGlobalFilter: (filterValue: FilterValue) => void
 	tableId: string
 	append?: string
-	type: string
+	type: ScreenerTypes
 }
 
 export function ResultsMenu({
