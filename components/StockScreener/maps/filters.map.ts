@@ -2691,7 +2691,7 @@ export const ETFFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Assets',
-		id: 'assets',
+		id: 'aum',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [

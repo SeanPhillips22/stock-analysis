@@ -41,9 +41,14 @@ export type FilterId =
 	| 'ebit' // EBIT
 	| 'ebitda' // EBITDA
 	| 'ocf' // Op. Cash Flow
+	| 'icf' // Investing Cash Flow
+	| 'cff' // Cash Flow From Financing
+	| 'ncf' // Net Cash Flow
+	| 'capex' // Capital expenditures
 	| 'fcf' // Free Cash Flow
 	| 'fcfGrowth' // FCF Growth
 	| 'fcfps' // FCF / Share
+	| 'assets' // Assets
 	| 'cash' // Total Cash
 	| 'debt' // Total Debt
 	| 'netCash' // Net Cash / Debt
@@ -104,14 +109,10 @@ export type FilterId =
 	| 'ls' // Last Stock Split
 	| 'splitDate' // Last Split Date
 	| 'liabilities' // Liabilities
-	| 'icf' // Investing Cash Flow
-	| 'cff' // Cash Flow From Financing
-	| 'ncf' // Net Cash Flow
-	| 'capex' // Capital expenditures
 	| 'ipoPriceRange' // IPO Price Range
 	| 'spac' // Is SPAC
 	| 'sharesOffered' // Shares Offered
-	| 'assets' // ETF assets
+	| 'aum' // ETF assets
 	| 'etfPeRatio' // ETF PE Ratio
 	| 'assetClass' // ETF Asset Class
 	| 'expenseRatio' // ETF Expense Ratio

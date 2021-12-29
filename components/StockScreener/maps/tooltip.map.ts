@@ -674,10 +674,10 @@ export const TOOLTIP_MAP: MapProps = [
 			'Whether the stock is a Special Purpose Acquisition Company (SPAC), also known as a blank check company. This means that the business has no operations but plans to merge with a private company to take it public.'
 	},
 	{
-		id: 'assets',
+		id: 'aum',
 		title: 'Assets Under Management',
 		tooltip:
-			'Assets under management (AUM) class is the type of asset that the fund primarily holds. For example, ETFs with the "Equity" asset class mostly hold stocks.'
+			'Assets under management (AUM) is the total value of all assets held by the exchange-traded fund.'
 	},
 	{
 		id: 'assetClass',

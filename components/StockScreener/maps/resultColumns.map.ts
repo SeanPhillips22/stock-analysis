@@ -28,7 +28,7 @@ export const defaultColumnsETFs: FilterId[] = [
 	's',
 	'n',
 	'assetClass',
-	'assets',
+	'aum',
 	'p',
 	'c',
 	'v',
@@ -63,20 +63,7 @@ const resultColumnsStocks: ColumnsMap = {
 	],
 	Valuation: ['s', 'n', 'm', 'ev', 'pe', 'fpe', 'ps', 'pb', 'pfcf'],
 	Dividends: ['s', 'n', 'm', 'dps', 'dy', 'pr', 'dg', 'payoutFrequency'],
-	Analysts: ['s', 'n', 'm', 'ar', 'ac', 'p', 'pt', 'ptc'],
-	Income: [
-		's',
-		'n',
-		'revenue',
-		'grossProfit',
-		'operatingIncome',
-		'netIncome',
-		'eps',
-		'ebit',
-		'ebitda'
-	],
-	'Balance Sheet': ['s', 'n', 'cash', 'liabilities', 'debt', 'equity'],
-	'Cash Flow': ['s', 'n', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf', 'fcfps']
+	Analysts: ['s', 'n', 'm', 'ar', 'ac', 'p', 'pt', 'ptc']
 }
 
 const resultColumnsIPOs: ColumnsMap = {
@@ -85,6 +72,7 @@ const resultColumnsIPOs: ColumnsMap = {
 	Company: [
 		's',
 		'n',
+		'm',
 		'se',
 		'i',
 		'country',
@@ -95,6 +83,7 @@ const resultColumnsIPOs: ColumnsMap = {
 	Income: [
 		's',
 		'n',
+		'm',
 		'revenue',
 		'grossProfit',
 		'operatingIncome',
@@ -103,16 +92,26 @@ const resultColumnsIPOs: ColumnsMap = {
 		'ebit',
 		'ebitda'
 	],
-	'Balance Sheet': ['s', 'n', 'cash', 'liabilities', 'debt', 'equity'],
-	'Cash Flow': ['s', 'n', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf', 'fcfps']
+	'Balance Sheet': [
+		's',
+		'n',
+		'm',
+		'cash',
+		'assets',
+		'debt',
+		'liabilities',
+		'equity'
+	],
+	'Cash Flow': ['s', 'n', 'm', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf']
 }
 
 const resultColumnsETFs: ColumnsMap = {
 	General: defaultColumnsETFs,
-	Filtered: ['s', 'n', 'assets'],
+	Filtered: ['s', 'n', 'aum'],
 	Performance: [
 		's',
 		'n',
+		'aum',
 		'p',
 		'c',
 		'ch1m',
@@ -125,6 +124,7 @@ const resultColumnsETFs: ColumnsMap = {
 	Dividends: [
 		's',
 		'n',
+		'aum',
 		'dps',
 		'dy',
 		'dg',
@@ -162,7 +162,7 @@ export function returnFilteredColumns(type: ScreenerTypes): FilterId[] {
 	} else if (type === 'ipo') {
 		return ['s', 'n', 'm']
 	} else if (type === 'etf') {
-		return ['s', 'n', 'assets']
+		return ['s', 'n', 'aum']
 	}
 	return ['s', 'n', 'm']
 }

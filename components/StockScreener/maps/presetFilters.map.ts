@@ -105,7 +105,7 @@ export const PresetFiltersETFs: PresetFilter[] = [
 			{ id: 'dg', value: 'over-5' },
 			{ id: 'pr', value: 'under-80' }
 		],
-		sort: { id: 'assets', desc: false }
+		sort: { id: 'aum', desc: false }
 	},
 	{
 		name: 'Monthly Dividends',
@@ -113,6 +113,6 @@ export const PresetFiltersETFs: PresetFilter[] = [
 			{ id: 'payoutFrequency', value: 'Monthly' },
 			{ id: 'dy', value: 'notzero' }
 		],
-		sort: { id: 'assets', desc: false }
+		sort: { id: 'aum', desc: false }
 	}
 ]

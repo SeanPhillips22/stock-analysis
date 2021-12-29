@@ -35,6 +35,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const removeFilteredColumn = screenerState(
 		(state) => state.removeFilteredColumn
 	)
+	const fetching = screenerState((state) => state.fetching)
 	const fetchFullData = useFetchFullData()
 
 	useEffect(() => {
@@ -94,7 +95,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 		usePagination
 	)
 
-	if (!loaded) {
+	if (!loaded || (fetching.length && !rows.length)) {
 		return (
 			<div className="h-[600px] mt-6">
 				<Loading />

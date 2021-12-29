@@ -1,4 +1,4 @@
-import { FilterId } from '../screener.types'
+import { FilterId, ScreenerTypes } from '../screener.types'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { getData } from 'functions/apis/API'
 import { getScreenerUrl } from './getScreenerUrl'
@@ -13,14 +13,27 @@ export function useModifyColumns() {
 	const fetchedColumns = screenerState((state) => state.fetchedColumns)
 	const addFetchedColumn = screenerState((state) => state.addFetchedColumn)
 	const addDataColumn = screenerState((state) => state.addDataColumn)
+	const addFetching = screenerState((state) => state.addFetching)
+	const removeFetching = screenerState((state) => state.removeFetching)
 
 	// Fetch a new data column
-	async function fetchColumn(id: FilterId, type: string) {
+	async function fetchColumn(id: FilterId, type: ScreenerTypes) {
 		if (!isFetched(id)) {
+			addFetching(id)
 			addFetchedColumn(id)
 			const fetched = await getData(getScreenerUrl(type) + `?type=${id}`)
 			addDataColumn(fetched, id)
+			removeFetching(id)
 		}
+	}
+
+	// Fetch many data columns at a time
+	async function fetchManyColumns(columns: FilterId[], type: ScreenerTypes) {
+		columns.forEach(async (id) => {
+			if (!fetchedColumns.includes(id)) {
+				fetchColumn(id, type)
+			}
+		})
 	}
 
 	// Check if data for a column has been fetched
@@ -29,7 +42,7 @@ export function useModifyColumns() {
 	}
 
 	// Toggle a column to either show or hide
-	function toggle(id: FilterId, type: string) {
+	function toggle(id: FilterId, type: ScreenerTypes) {
 		if (showColumns.includes(id)) {
 			setShowColumns(showColumns.filter((filter) => filter !== id))
 		} else {
@@ -45,5 +58,5 @@ export function useModifyColumns() {
 		return showColumns.includes(id)
 	}
 
-	return { fetchColumn, isFetched, toggle, isShowing }
+	return { fetchColumn, fetchManyColumns, isFetched, toggle, isShowing }
 }

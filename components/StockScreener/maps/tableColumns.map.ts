@@ -44,7 +44,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Assets',
-		accessor: 'assets',
+		accessor: 'aum',
 		format: 'marketcap'
 	},
 	{
@@ -244,6 +244,11 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Total Cash',
 		accessor: 'cash',
+		format: 'abbreviate'
+	},
+	{
+		Header: 'Assets',
+		accessor: 'assets',
 		format: 'abbreviate'
 	},
 	{
@@ -542,22 +547,22 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'abbreviate'
 	},
 	{
-		Header: 'Inv. Cash Flow',
+		Header: 'Investing CF',
 		accessor: 'icf',
 		format: 'abbreviate'
 	},
 	{
-		Header: 'Fin. Cash Flow',
+		Header: 'Financial CF',
 		accessor: 'cff',
 		format: 'abbreviate'
 	},
 	{
-		Header: 'Net Cash Flow',
+		Header: 'Net CF',
 		accessor: 'ncf',
 		format: 'abbreviate'
 	},
 	{
-		Header: 'Capital Exp.',
+		Header: 'CapEx',
 		accessor: 'capex',
 		format: 'abbreviate'
 	},
@@ -576,11 +581,6 @@ export const COLUMNS_MAP: Column[] = [
 		Header: 'Beta',
 		accessor: 'beta',
 		format: 'format2dec'
-	},
-	{
-		Header: 'Exchange',
-		accessor: 'exchange',
-		format: 'string'
 	},
 	{
 		Header: 'Expense Ratio',

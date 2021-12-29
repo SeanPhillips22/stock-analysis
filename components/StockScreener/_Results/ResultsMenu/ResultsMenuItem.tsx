@@ -1,12 +1,10 @@
 import { screenerState } from 'components/StockScreener/screener.state'
 import {
-	FilterId,
 	ColumnName,
 	ScreenerTypes
 } from 'components/StockScreener/screener.types'
 import { returnResultColumns } from 'components/StockScreener/maps/resultColumns.map'
-import { getData } from 'functions/apis/API'
-import { getScreenerUrl } from 'components/StockScreener/functions/getScreenerUrl'
+import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns'
 
 type Props = {
 	name: ColumnName
@@ -17,9 +15,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 	const filters = screenerState((state) => state.filters)
 	const resultsMenu = screenerState((state) => state.resultsMenu)
 	const setResultsMenu = screenerState((state) => state.setResultsMenu)
-	const fetchedColumns = screenerState((state) => state.fetchedColumns)
-	const addFetchedColumn = screenerState((state) => state.addFetchedColumn)
-	const addDataColumn = screenerState((state) => state.addDataColumn)
+	const { fetchManyColumns } = useModifyColumns()
 
 	let display = name.toString()
 	let dataTitle = name.toString()
@@ -28,21 +24,10 @@ export function ResultsMenuItem({ name, type }: Props) {
 		dataTitle = `${name} (5)`
 	}
 
-	function fetchManyColumns(columns: FilterId[], screenerType: string) {
-		columns.forEach(async (id) => {
-			if (!fetchedColumns.includes(id)) {
-				addFetchedColumn(id)
-				const fetched = await getData(screenerType + `?type=${id}`)
-				addDataColumn(fetched, id)
-			}
-		})
-	}
-
 	// When hovering over a results tab, fetch the required columns
 	function handleHover(name: ColumnName) {
 		if (name !== 'Filtered' && name !== 'General') {
-			let screenerType = getScreenerUrl(type)
-			fetchManyColumns(returnResultColumns(type, name), screenerType)
+			fetchManyColumns(returnResultColumns(type, name), type)
 		}
 	}
 

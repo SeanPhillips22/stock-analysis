@@ -33,6 +33,9 @@ interface ScreenerState {
 	// Loading
 	loaded: boolean
 	setLoaded: (loaded: boolean) => void
+	fetching: FilterId[]
+	addFetching: (newFetching: FilterId) => void
+	removeFetching: (newFetching: FilterId) => void
 
 	// Filters
 	filters: FilterValue[]
@@ -105,6 +108,17 @@ export const screenerState = create<ScreenerState>((set) => ({
 	// Loading
 	loaded: false,
 	setLoaded: (newLoaded: boolean) => set({ loaded: newLoaded }),
+	fetching: [],
+	addFetching: (newFetching: FilterId) =>
+		set((state) => ({
+			...state,
+			fetching: [...state.fetching, newFetching]
+		})),
+	removeFetching: (newFetching: FilterId) =>
+		set((state) => ({
+			...state,
+			fetching: state.fetching.filter((fetching) => fetching !== newFetching)
+		})),
 
 	// Filters
 	filters: [],
@@ -126,7 +140,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 			activePreset: '',
 			sort: [
 				{ id: 'm', desc: false },
-				{ id: 'assets', desc: false }
+				{ id: 'aum', desc: false }
 			]
 		})),
 	filtersShown: true,
@@ -193,7 +207,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 	// Sort
 	sort: [
 		{ id: 'm', desc: false },
-		{ id: 'assets', desc: false }
+		{ id: 'aum', desc: false }
 	],
 	setSort: (newSort: SortObject[]) => set({ sort: newSort }),
 
