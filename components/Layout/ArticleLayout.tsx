@@ -32,9 +32,9 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 			<Header />
 			<main id="main">
 				<div className="contain lg:max-w-[1150px] mt-2 mx-auto">
+					<HeaderAd />
 					<div className="lg:right-sidebar">
 						<article className="text-page md:px-6">
-							<HeaderAd />
 							<header className="article-header">
 								<h1>{meta.heading || meta.title}</h1>
 								{meta.date && <Byline date={meta.date} />}
