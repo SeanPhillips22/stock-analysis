@@ -27,7 +27,7 @@ function FilterWrap({ f }: FilterWrapProps) {
 				<Tooltip
 					content={<TooltipContent id={f.id} />}
 					theme="light"
-					delay={400}
+					delay={500}
 				>
 					<div>{f.name}</div>
 				</Tooltip>

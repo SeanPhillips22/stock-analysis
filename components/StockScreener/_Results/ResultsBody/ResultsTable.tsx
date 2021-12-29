@@ -14,6 +14,7 @@ import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
+import { useSortReset } from 'components/StockScreener/functions/sort/useSortReset'
 
 export function ResultsTable({ cols }: { cols: any }) {
 	const type = screenerState((state) => state.type)
@@ -25,6 +26,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const tableSize = screenerState((state) => state.tableSize)
 	const showColumns = screenerState((state) => state.showColumns)
 	const fetching = screenerState((state) => state.fetching)
+	const resetSort = useSortReset()
 
 	const data = useMemo(
 		() => filterItems(datarows, filters),
@@ -58,7 +60,8 @@ export function ResultsTable({ cols }: { cols: any }) {
 					.filter((col: any) => !showColumns.includes(col.accessor))
 					.map((col: any) => col.accessor),
 				sortBy: sortResultsBy
-			}
+			},
+			autoResetSortBy: resetSort
 		},
 		useGlobalFilter,
 		useSortBy,

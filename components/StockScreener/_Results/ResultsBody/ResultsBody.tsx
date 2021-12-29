@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 import { formatNum } from 'components/StockScreener/functions/formatNum'
 import { ResultsTable } from './ResultsTable'
-import { COLUMNS_MAP } from 'components/StockScreener/maps/tableColumns.map'
+import { COLUMNS_MAP } from 'components/StockScreener/maps/allColumns.map'
 import { formatDateClean } from 'functions/datetime/formatDates'
 
 const format0dec = new Intl.NumberFormat('en-US', {

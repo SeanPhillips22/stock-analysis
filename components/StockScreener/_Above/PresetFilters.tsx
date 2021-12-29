@@ -8,6 +8,7 @@ export function PresetFilters() {
 	const type = screenerState((state) => state.type)
 	const presets = screenerState((state) => state.presets)
 	const setSort = screenerState((state) => state.setSort)
+	const setResetSort = screenerState((state) => state.setResetSort)
 	const setFilterMenu = screenerState((state) => state.setFilterMenu)
 	const activePreset = screenerState((state) => state.activePreset)
 	const setActivePreset = screenerState((state) => state.setActivePreset)
@@ -21,6 +22,7 @@ export function PresetFilters() {
 		clear()
 		setFilterMenu('Active')
 		setActivePreset(value)
+		setResetSort(true)
 		presets?.map((item) => {
 			if (item.name === value) {
 				item.filters.map((filter) => {
@@ -66,7 +68,9 @@ export function PresetFilters() {
 				name="location"
 				className="block w-full pl-3 pr-10 py-2 text-sm border-gray-300 focus:ring-0 focus:ring-blue-500 focus:border-blue-500 rounded-md cursor-pointer"
 				value={activePreset || 'Select preset'}
-				onChange={(e) => renderPresetFilters(e.target.value)}
+				onChange={(e) => {
+					renderPresetFilters(e.target.value)
+				}}
 			>
 				<option value="Select preset">Select preset</option>
 				{presets?.map((item) => (

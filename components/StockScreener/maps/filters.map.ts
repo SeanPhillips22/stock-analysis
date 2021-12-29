@@ -129,182 +129,16 @@ export const FiltersMap: FilterProps[] = [
 		id: 'se',
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
-		options: [
-			{ name: 'Blank Check / SPAC', value: 'Blank Check / SPAC' },
-			{ name: 'Communication Services', value: 'Communication Services' },
-			{ name: 'Consumer Discretionary', value: 'Consumer Discretionary' },
-			{ name: 'Consumer Staples', value: 'Consumer Staples' },
-			{ name: 'Energy', value: 'Energy' },
-			{ name: 'Financials', value: 'Financials' },
-			{ name: 'Health Care', value: 'Health Care' },
-			{ name: 'Industrials', value: 'Industrials' },
-			{ name: 'Information Technology', value: 'Information Technology' },
-			{ name: 'Materials', value: 'Materials' },
-			{ name: 'Real Estate', value: 'Real Estate' },
-			{ name: 'Utilities', value: 'Utilities' }
-		]
+		variable: true,
+		options: []
 	},
 	{
 		name: 'Industry',
 		id: 'i',
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
-		options: [
-			{ name: 'Aerospace & Defense', value: 'Aerospace & Defense' },
-			{ name: 'Air Freight & Logistics', value: 'Air Freight & Logistics' },
-			{ name: 'Airlines', value: 'Airlines' },
-			{ name: 'Auto Components', value: 'Auto Components' },
-			{ name: 'Automobiles', value: 'Automobiles' },
-			{ name: 'Banks', value: 'Banks' },
-			{ name: 'Beverages', value: 'Beverages' },
-			{ name: 'Biotechnology', value: 'Biotechnology' },
-			{ name: 'Blank Check / SPAC', value: 'Blank Check / SPAC' },
-			{ name: 'Building Products', value: 'Building Products' },
-			{ name: 'Capital Markets', value: 'Capital Markets' },
-			{ name: 'Chemicals', value: 'Chemicals' },
-			{
-				name: 'Commercial Services & Supplies',
-				value: 'Commercial Services & Supplies'
-			},
-			{
-				name: 'Communications Equipment',
-				value: 'Communications Equipment'
-			},
-			{
-				name: 'Construction & Engineering',
-				value: 'Construction & Engineering'
-			},
-			{ name: 'Construction Materials', value: 'Construction Materials' },
-			{ name: 'Consumer Finance', value: 'Consumer Finance' },
-			{ name: 'Containers & Packaging', value: 'Containers & Packaging' },
-			{ name: 'Distributors', value: 'Distributors' },
-			{
-				name: 'Diversified Consumer Services',
-				value: 'Diversified Consumer Services'
-			},
-			{
-				name: 'Diversified Financial Services',
-				value: 'Diversified Financial Services'
-			},
-			{
-				name: 'Diversified Telecommunication Services',
-				value: 'Diversified Telecommunication Services'
-			},
-			{ name: 'Electric Utilities', value: 'Electric Utilities' },
-			{ name: 'Electrical Equipment', value: 'Electrical Equipment' },
-			{
-				name: 'Electronic Equipment, Instruments & Components',
-				value: 'Electronic Equipment, Instruments & Components'
-			},
-			{
-				name: 'Energy Equipment & Services',
-				value: 'Energy Equipment & Services'
-			},
-			{ name: 'Entertainment', value: 'Entertainment' },
-			{
-				name: 'Equity Real Estate Investment Trusts (REITs)',
-				value: 'Equity Real Estate Investment Trusts (REITs)'
-			},
-			{
-				name: 'Food & Staples Retailing',
-				value: 'Food & Staples Retailing'
-			},
-			{ name: 'Food Products', value: 'Food Products' },
-			{ name: 'Gas Utilities', value: 'Gas Utilities' },
-			{
-				name: 'Health Care Equipment & Supplies',
-				value: 'Health Care Equipment & Supplies'
-			},
-			{
-				name: 'Health Care Providers & Services',
-				value: 'Health Care Providers & Services'
-			},
-			{ name: 'Health Care Technology', value: 'Health Care Technology' },
-			{
-				name: 'Hotels, Restaurants & Leisure',
-				value: 'Hotels, Restaurants & Leisure'
-			},
-			{ name: 'Household Durables', value: 'Household Durables' },
-			{ name: 'Household Products', value: 'Household Products' },
-			{
-				name: 'Independent Power and Renewable Electricity Producers',
-				value: 'Independent Power and Renewable Electricity Producers'
-			},
-			{
-				name: 'Industrial Conglomerates',
-				value: 'Industrial Conglomerates'
-			},
-			{ name: 'Insurance', value: 'Insurance' },
-			{
-				name: 'Interactive Media & Services',
-				value: 'Interactive Media & Services'
-			},
-			{
-				name: 'Internet & Direct Marketing Retail',
-				value: 'Internet & Direct Marketing Retail'
-			},
-			{ name: 'IT Services', value: 'IT Services' },
-			{ name: 'Leisure Products', value: 'Leisure Products' },
-			{
-				name: 'Life Sciences Tools & Services',
-				value: 'Life Sciences Tools & Services'
-			},
-			{ name: 'Machinery', value: 'Machinery' },
-			{ name: 'Marine', value: 'Marine' },
-			{ name: 'Media', value: 'Media' },
-			{ name: 'Metals & Mining', value: 'Metals & Mining' },
-			{
-				name: 'Mortgage Real Estate Investment Trusts (REITs)',
-				value: 'Mortgage Real Estate Investment Trusts (REITs)'
-			},
-			{ name: 'Multi-Utilities', value: 'Multi-Utilities' },
-			{ name: 'Multiline Retail', value: 'Multiline Retail' },
-			{
-				name: 'Oil, Gas & Consumable Fuels',
-				value: 'Oil, Gas & Consumable Fuels'
-			},
-			{ name: 'Paper & Forest Products', value: 'Paper & Forest Products' },
-			{ name: 'Personal Products', value: 'Personal Products' },
-			{ name: 'Pharmaceuticals', value: 'Pharmaceuticals' },
-			{ name: 'Professional Services', value: 'Professional Services' },
-			{
-				name: 'Real Estate Management & Development',
-				value: 'Real Estate Management & Development'
-			},
-			{ name: 'Road & Rail', value: 'Road & Rail' },
-			{
-				name: 'Semiconductors & Semiconductor Equipment',
-				value: 'Semiconductors & Semiconductor Equipment'
-			},
-			{ name: 'Software', value: 'Software' },
-			{ name: 'Specialty Retail', value: 'Specialty Retail' },
-			{
-				name: 'Technology Hardware, Storage & Peripherals',
-				value: 'Technology Hardware, Storage & Peripherals'
-			},
-			{
-				name: 'Textiles, Apparel & Luxury Goods',
-				value: 'Textiles, Apparel & Luxury Goods'
-			},
-			{
-				name: 'Thrifts & Mortgage Finance',
-				value: 'Thrifts & Mortgage Finance'
-			},
-			{ name: 'Tobacco', value: 'Tobacco' },
-			{
-				name: 'Trading Companies & Distributors',
-				value: 'Trading Companies & Distributors'
-			},
-			{
-				name: 'Transportation Infrastructure',
-				value: 'Transportation Infrastructure'
-			},
-			{ name: 'Water Utilities', value: 'Water Utilities' },
-			{
-				name: 'Wireless Telecommunication Services',
-				value: 'Wireless Telecommunication Services'
-			}
-		]
+		variable: true,
+		options: []
 	},
 	{
 		name: 'Price Change 1D',
@@ -577,66 +411,8 @@ export const FiltersMap: FilterProps[] = [
 		id: 'country',
 		category: ['Company'],
 		filterType: 'stringmatch',
-		options: [
-			{ name: 'United States', value: 'United States' },
-			{ name: 'Canada', value: 'Canada' },
-			{ name: 'China', value: 'China' },
-			{ name: 'United Kingdom', value: 'United Kingdom' },
-			{ name: 'Israel', value: 'Israel' },
-			{ name: 'Bermuda', value: 'Bermuda' },
-			{ name: 'Brazil', value: 'Brazil' },
-			{ name: 'Switzerland', value: 'Switzerland' },
-			{ name: 'Hong Kong', value: 'Hong Kong' },
-			{ name: 'Ireland', value: 'Ireland' },
-			{ name: 'Netherlands', value: 'Netherlands' },
-			{ name: 'Cayman Islands', value: 'Cayman Islands' },
-			{ name: 'Germany', value: 'Germany' },
-			{ name: 'Argentina', value: 'Argentina' },
-			{ name: 'France', value: 'France' },
-			{ name: 'Mexico', value: 'Mexico' },
-			{ name: 'Greece', value: 'Greece' },
-			{ name: 'Luxembourg', value: 'Luxembourg' },
-			{ name: 'Singapore', value: 'Singapore' },
-			{ name: 'Chile', value: 'Chile' },
-			{ name: 'Japan', value: 'Japan' },
-			{ name: 'South Korea', value: 'South Korea' },
-			{ name: 'India', value: 'India' },
-			{ name: 'Taiwan', value: 'Taiwan' },
-			{ name: 'Australia', value: 'Australia' },
-			{ name: 'Monaco', value: 'Monaco' },
-			{ name: 'Sweden', value: 'Sweden' },
-			{ name: 'Denmark', value: 'Denmark' },
-			{ name: 'South Africa', value: 'South Africa' },
-			{ name: 'Belgium', value: 'Belgium' },
-			{ name: 'Spain', value: 'Spain' },
-			{ name: 'Peru', value: 'Peru' },
-			{ name: 'Colombia', value: 'Colombia' },
-			{ name: 'Italy', value: 'Italy' },
-			{ name: 'British Virgin Islands', value: 'British Virgin Islands' },
-			{ name: 'Russia', value: 'Russia' },
-			{ name: 'Norway', value: 'Norway' },
-			{ name: 'Puerto Rico', value: 'Puerto Rico' },
-			{ name: 'Uruguay', value: 'Uruguay' },
-			{ name: 'Cyprus', value: 'Cyprus' },
-			{ name: 'Jersey', value: 'Jersey' },
-			{ name: 'Turkey', value: 'Turkey' },
-			{ name: 'Panama', value: 'Panama' },
-			{ name: 'Indonesia', value: 'Indonesia' },
-			{ name: 'Philippines', value: 'Philippines' },
-			{ name: 'Bahamas', value: 'Bahamas' },
-			{ name: 'Finland', value: 'Finland' },
-			{ name: 'New Zealand', value: 'New Zealand' },
-			{ name: 'The Netherlands', value: 'The Netherlands' },
-			{ name: 'Malta', value: 'Malta' },
-			{ name: 'Gibraltar', value: 'Gibraltar' },
-			{ name: 'Thailand', value: 'Thailand' },
-			{ name: 'Austria', value: 'Austria' },
-			{ name: 'Costa Rica', value: 'Costa Rica' },
-			{ name: 'Guernsey', value: 'Guernsey' },
-			{ name: 'Macau', value: 'Macau' },
-			{ name: 'England', value: 'England' },
-			{ name: 'Korea', value: 'Korea' }
-		]
+		variable: true,
+		options: []
 	},
 	{
 		name: 'Employees',
@@ -2115,19 +1891,8 @@ export const IPOFiltersMap: FilterProps[] = [
 		id: 'se',
 		category: ['General'],
 		filterType: 'stringmatch',
-		options: [
-			{ name: 'Communication Services', value: 'Communication Services' },
-			{ name: 'Consumer Discretionary', value: 'Consumer Discretionary' },
-			{ name: 'Consumer Staples', value: 'Consumer Staples' },
-			{ name: 'Energy', value: 'Energy' },
-			{ name: 'Financials', value: 'Financials' },
-			{ name: 'Health Care', value: 'Health Care' },
-			{ name: 'Industrials', value: 'Industrials' },
-			{ name: 'Information Technology', value: 'Information Technology' },
-			{ name: 'Materials', value: 'Materials' },
-			{ name: 'Real Estate', value: 'Real Estate' },
-			{ name: 'Utilities', value: 'Utilities' }
-		]
+		variable: true,
+		options: []
 	},
 	{
 		name: 'IPO Date',
@@ -2161,227 +1926,16 @@ export const IPOFiltersMap: FilterProps[] = [
 		id: 'i',
 		category: ['General'],
 		filterType: 'stringmatch',
-		options: [
-			{ name: 'Aerospace & Defense', value: 'Aerospace & Defense' },
-			{ name: 'Air Freight & Logistics', value: 'Air Freight & Logistics' },
-			{ name: 'Airlines', value: 'Airlines' },
-			{ name: 'Auto Components', value: 'Auto Components' },
-			{ name: 'Automobiles', value: 'Automobiles' },
-			{ name: 'Banks', value: 'Banks' },
-			{ name: 'Beverages', value: 'Beverages' },
-			{ name: 'Biotechnology', value: 'Biotechnology' },
-			{ name: 'Building Products', value: 'Building Products' },
-			{ name: 'Capital Markets', value: 'Capital Markets' },
-			{ name: 'Chemicals', value: 'Chemicals' },
-			{
-				name: 'Commercial Services & Supplies',
-				value: 'Commercial Services & Supplies'
-			},
-			{
-				name: 'Communications Equipment',
-				value: 'Communications Equipment'
-			},
-			{
-				name: 'Construction & Engineering',
-				value: 'Construction & Engineering'
-			},
-			{ name: 'Construction Materials', value: 'Construction Materials' },
-			{ name: 'Consumer Finance', value: 'Consumer Finance' },
-			{ name: 'Containers & Packaging', value: 'Containers & Packaging' },
-			{ name: 'Distributors', value: 'Distributors' },
-			{
-				name: 'Diversified Consumer Services',
-				value: 'Diversified Consumer Services'
-			},
-			{
-				name: 'Diversified Financial Services',
-				value: 'Diversified Financial Services'
-			},
-			{
-				name: 'Diversified Telecommunication Services',
-				value: 'Diversified Telecommunication Services'
-			},
-			{ name: 'Electric Utilities', value: 'Electric Utilities' },
-			{ name: 'Electrical Equipment', value: 'Electrical Equipment' },
-			{
-				name: 'Electronic Equipment, Instruments & Components',
-				value: 'Electronic Equipment, Instruments & Components'
-			},
-			{
-				name: 'Energy Equipment & Services',
-				value: 'Energy Equipment & Services'
-			},
-			{ name: 'Entertainment', value: 'Entertainment' },
-			{
-				name: 'Equity Real Estate Investment Trusts (REITs)',
-				value: 'Equity Real Estate Investment Trusts (REITs)'
-			},
-			{
-				name: 'Food & Staples Retailing',
-				value: 'Food & Staples Retailing'
-			},
-			{ name: 'Food Products', value: 'Food Products' },
-			{ name: 'Gas Utilities', value: 'Gas Utilities' },
-			{
-				name: 'Health Care Equipment & Supplies',
-				value: 'Health Care Equipment & Supplies'
-			},
-			{
-				name: 'Health Care Providers & Services',
-				value: 'Health Care Providers & Services'
-			},
-			{ name: 'Health Care Technology', value: 'Health Care Technology' },
-			{
-				name: 'Hotels, Restaurants & Leisure',
-				value: 'Hotels, Restaurants & Leisure'
-			},
-			{ name: 'Household Durables', value: 'Household Durables' },
-			{ name: 'Household Products', value: 'Household Products' },
-			{
-				name: 'Independent Power and Renewable Electricity Producers',
-				value: 'Independent Power and Renewable Electricity Producers'
-			},
-			{
-				name: 'Industrial Conglomerates',
-				value: 'Industrial Conglomerates'
-			},
-			{ name: 'Insurance', value: 'Insurance' },
-			{
-				name: 'Interactive Media & Services',
-				value: 'Interactive Media & Services'
-			},
-			{
-				name: 'Internet & Direct Marketing Retail',
-				value: 'Internet & Direct Marketing Retail'
-			},
-			{ name: 'IT Services', value: 'IT Services' },
-			{ name: 'Leisure Products', value: 'Leisure Products' },
-			{
-				name: 'Life Sciences Tools & Services',
-				value: 'Life Sciences Tools & Services'
-			},
-			{ name: 'Machinery', value: 'Machinery' },
-			{ name: 'Marine', value: 'Marine' },
-			{ name: 'Media', value: 'Media' },
-			{ name: 'Metals & Mining', value: 'Metals & Mining' },
-			{
-				name: 'Mortgage Real Estate Investment Trusts (REITs)',
-				value: 'Mortgage Real Estate Investment Trusts (REITs)'
-			},
-			{ name: 'Multi-Utilities', value: 'Multi-Utilities' },
-			{ name: 'Multiline Retail', value: 'Multiline Retail' },
-			{
-				name: 'Oil, Gas & Consumable Fuels',
-				value: 'Oil, Gas & Consumable Fuels'
-			},
-			{ name: 'Paper & Forest Products', value: 'Paper & Forest Products' },
-			{ name: 'Personal Products', value: 'Personal Products' },
-			{ name: 'Pharmaceuticals', value: 'Pharmaceuticals' },
-			{ name: 'Professional Services', value: 'Professional Services' },
-			{
-				name: 'Real Estate Management & Development',
-				value: 'Real Estate Management & Development'
-			},
-			{ name: 'Road & Rail', value: 'Road & Rail' },
-			{
-				name: 'Semiconductors & Semiconductor Equipment',
-				value: 'Semiconductors & Semiconductor Equipment'
-			},
-			{ name: 'Software', value: 'Software' },
-			{ name: 'Specialty Retail', value: 'Specialty Retail' },
-			{
-				name: 'Technology Hardware, Storage & Peripherals',
-				value: 'Technology Hardware, Storage & Peripherals'
-			},
-			{
-				name: 'Textiles, Apparel & Luxury Goods',
-				value: 'Textiles, Apparel & Luxury Goods'
-			},
-			{
-				name: 'Thrifts & Mortgage Finance',
-				value: 'Thrifts & Mortgage Finance'
-			},
-			{ name: 'Tobacco', value: 'Tobacco' },
-			{
-				name: 'Trading Companies & Distributors',
-				value: 'Trading Companies & Distributors'
-			},
-			{
-				name: 'Transportation Infrastructure',
-				value: 'Transportation Infrastructure'
-			},
-			{ name: 'Water Utilities', value: 'Water Utilities' },
-			{
-				name: 'Wireless Telecommunication Services',
-				value: 'Wireless Telecommunication Services'
-			}
-		]
+		variable: true,
+		options: []
 	},
 	{
 		name: 'Country',
 		id: 'country',
 		category: ['General'],
 		filterType: 'stringmatch',
-		options: [
-			{ name: 'United States', value: 'United States' },
-			{ name: 'Canada', value: 'Canada' },
-			{ name: 'China', value: 'China' },
-			{ name: 'United Kingdom', value: 'United Kingdom' },
-			{ name: 'Israel', value: 'Israel' },
-			{ name: 'Bermuda', value: 'Bermuda' },
-			{ name: 'Brazil', value: 'Brazil' },
-			{ name: 'Switzerland', value: 'Switzerland' },
-			{ name: 'Hong Kong', value: 'Hong Kong' },
-			{ name: 'Ireland', value: 'Ireland' },
-			{ name: 'Netherlands', value: 'Netherlands' },
-			{ name: 'Cayman Islands', value: 'Cayman Islands' },
-			{ name: 'Germany', value: 'Germany' },
-			{ name: 'Argentina', value: 'Argentina' },
-			{ name: 'France', value: 'France' },
-			{ name: 'Mexico', value: 'Mexico' },
-			{ name: 'Greece', value: 'Greece' },
-			{ name: 'Luxembourg', value: 'Luxembourg' },
-			{ name: 'Singapore', value: 'Singapore' },
-			{ name: 'Chile', value: 'Chile' },
-			{ name: 'Japan', value: 'Japan' },
-			{ name: 'South Korea', value: 'South Korea' },
-			{ name: 'India', value: 'India' },
-			{ name: 'Taiwan', value: 'Taiwan' },
-			{ name: 'Australia', value: 'Australia' },
-			{ name: 'Monaco', value: 'Monaco' },
-			{ name: 'Sweden', value: 'Sweden' },
-			{ name: 'Denmark', value: 'Denmark' },
-			{ name: 'South Africa', value: 'South Africa' },
-			{ name: 'Belgium', value: 'Belgium' },
-			{ name: 'Spain', value: 'Spain' },
-			{ name: 'Peru', value: 'Peru' },
-			{ name: 'Colombia', value: 'Colombia' },
-			{ name: 'Italy', value: 'Italy' },
-			{ name: 'British Virgin Islands', value: 'British Virgin Islands' },
-			{ name: 'Russia', value: 'Russia' },
-			{ name: 'Norway', value: 'Norway' },
-			{ name: 'Puerto Rico', value: 'Puerto Rico' },
-			{ name: 'Uruguay', value: 'Uruguay' },
-			{ name: 'Cyprus', value: 'Cyprus' },
-			{ name: 'Jersey', value: 'Jersey' },
-			{ name: 'Turkey', value: 'Turkey' },
-			{ name: 'Panama', value: 'Panama' },
-			{ name: 'Indonesia', value: 'Indonesia' },
-			{ name: 'Philippines', value: 'Philippines' },
-			{ name: 'Bahamas', value: 'Bahamas' },
-			{ name: 'Finland', value: 'Finland' },
-			{ name: 'New Zealand', value: 'New Zealand' },
-			{ name: 'The Netherlands', value: 'The Netherlands' },
-			{ name: 'Malta', value: 'Malta' },
-			{ name: 'Gibraltar', value: 'Gibraltar' },
-			{ name: 'Thailand', value: 'Thailand' },
-			{ name: 'Austria', value: 'Austria' },
-			{ name: 'Costa Rica', value: 'Costa Rica' },
-			{ name: 'Guernsey', value: 'Guernsey' },
-			{ name: 'Macau', value: 'Macau' },
-			{ name: 'England', value: 'England' },
-			{ name: 'Korea', value: 'Korea' }
-		]
+		variable: true,
+		options: []
 	},
 	{
 		name: 'Exchange',
@@ -2953,49 +2507,8 @@ export const ETFFiltersMap: FilterProps[] = [
 		id: 'etfSector',
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
-		options: [
-			{ name: 'Agriculture', value: 'Agriculture' },
-			{ name: 'Alternative Investments', value: 'Alternative Investments' },
-			{ name: 'Asia', value: 'Asia' },
-			{ name: 'Biotech', value: 'Biotech' },
-			{ name: 'Bonds', value: 'Bonds' },
-			{ name: 'Commodities', value: 'Commodities' },
-			{ name: 'Commodities General', value: 'Commodities General' },
-			{ name: 'Consumer Discretionary', value: 'Consumer Discretionary' },
-			{ name: 'Consumer Staples', value: 'Consumer Staples' },
-			{ name: 'Consumer Non-Cyclical', value: 'Consumer Non-Cyclical' },
-			{ name: 'Construction', value: 'Construction' },
-			{ name: 'Currency', value: 'Currency' },
-			{ name: 'Defense', value: 'Defense' },
-			{ name: 'Emerging Markets', value: 'Emerging Markets' },
-			{ name: 'Energy', value: 'Energy' },
-			{ name: 'Enviromental', value: 'Enviromental' },
-			{ name: 'Europe', value: 'Europe' },
-			{ name: 'Financial Services', value: 'Financial Services' },
-			{ name: 'Grains', value: 'Grains' },
-			{ name: 'Healthcare', value: 'Healthcare' },
-			{ name: 'Income', value: 'Income' },
-			{ name: 'Industrials', value: 'Industrials' },
-			{ name: 'International', value: 'International' },
-			{ name: 'Large Cap', value: 'Large Cap' },
-			{ name: 'Managed ETFs', value: 'Managed ETFs' },
-			{ name: 'Materials', value: 'Materials' },
-			{ name: 'Mid Cap', value: 'Mid Cap' },
-			{ name: 'Metals', value: 'Metals' },
-			{ name: 'Multi Cap', value: 'Multi Cap' },
-			{ name: 'Mixed Asset', value: 'Mixed Asset' },
-			{ name: 'Power', value: 'Power' },
-			{ name: 'Natural Resources', value: 'Natural Resources' },
-			{ name: 'Non-Taxable Bonds', value: 'Non-Taxable Bonds' },
-			{ name: 'Precious Metals', value: 'Precious Metals' },
-			{ name: 'Real Estate', value: 'Real Estate' },
-			{ name: 'Small Cap', value: 'Small Cap' },
-			{ name: 'Taxable Bonds', value: 'Taxable Bonds' },
-			{ name: 'Technology', value: 'Technology' },
-			{ name: 'Telecommunications', value: 'Telecommunications' },
-			{ name: 'Transportation', value: 'Transportation' },
-			{ name: 'Utilities', value: 'Utilities' }
-		]
+		variable: true,
+		options: []
 	},
 	{
 		name: 'Issuer',
@@ -3187,19 +2700,8 @@ export const ETFFiltersMap: FilterProps[] = [
 		id: 'etfRegion',
 		category: ['Popular'],
 		filterType: 'stringmatch',
-		options: [
-			{ name: 'Africa', value: 'Africa' },
-			{ name: 'Asia-Pacific', value: 'Asia-Pacific' },
-			{ name: 'Developed', value: 'Developed' },
-			{ name: 'EAFE', value: 'EAFE' },
-			{ name: 'Emerging-Broad', value: 'Emerging-Broad' },
-			{ name: 'Europe', value: 'Europe' },
-			{ name: 'Global', value: 'Global' },
-			{ name: 'Global-Ex-US', value: 'Global-Ex-US' },
-			{ name: 'Latin America', value: 'Latin America' },
-			{ name: 'Middle East', value: 'Middle East' },
-			{ name: 'North America', value: 'North America' }
-		]
+		variable: true,
+		options: []
 	},
 	{
 		name: 'Shares Out',

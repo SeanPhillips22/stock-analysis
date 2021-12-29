@@ -722,6 +722,12 @@ export const TOOLTIP_MAP: MapProps = [
 			'Assets class is the type of asset that the fund primarily holds. For example, ETFs with the "Equity" asset class mostly hold stocks.'
 	},
 	{
+		id: 'expenseRatio',
+		title: 'Expense Ratio',
+		tooltip:
+			"Expense ratio is the percentage of the fund's assets that are charged as expenses by the company that issues the fund. The lower the expense ratio, the better."
+	},
+	{
 		id: 'holdings',
 		title: 'ETF Holdings',
 		tooltip: 'The number of individual securities that the fund holds.'

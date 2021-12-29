@@ -13,6 +13,16 @@ export type PresetFilter = {
 
 export const PresetFiltersStocks: PresetFilter[] = [
 	{
+		name: 'Top Gainers (1D)',
+		filters: [
+			{ id: 'm', value: 'over-100M' },
+			{ id: 'p', value: 'over-1' },
+			{ id: 'v', value: 'over-10K' },
+			{ id: 'c', value: 'over-0' }
+		],
+		sort: { id: 'c', desc: false }
+	},
+	{
 		name: 'Top Gainers (1Y)',
 		filters: [
 			{ id: 'm', value: 'over-100M' },

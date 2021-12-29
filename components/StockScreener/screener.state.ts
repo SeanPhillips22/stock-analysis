@@ -59,6 +59,7 @@ interface ScreenerState {
 	// Variable filters
 	variableFilters: VariableFilter[]
 	addVariableFilter: (options: FilterOption[], id: FilterId) => void
+	clearVarFilters: () => void
 
 	// Columns
 	fetchedColumns: FilterId[]
@@ -75,6 +76,8 @@ interface ScreenerState {
 	// Sort
 	sort: SortObject[]
 	setSort: (newSort: SortObject[]) => void
+	resetSort: boolean
+	setResetSort: (reset: boolean) => void
 
 	// Pagination
 	tablePage: number
@@ -167,6 +170,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 		set((state) => ({
 			variableFilters: [...state.variableFilters, { id, options }]
 		})),
+	clearVarFilters: () => set({ variableFilters: [] }),
 
 	// Results Menu
 	resultsMenu: 'General',
@@ -210,6 +214,9 @@ export const screenerState = create<ScreenerState>((set) => ({
 		{ id: 'aum', desc: false }
 	],
 	setSort: (newSort: SortObject[]) => set({ sort: newSort }),
+	resetSort: false,
+	setResetSort: (reset: boolean) =>
+		set((state) => ({ ...state, resetSort: reset })),
 
 	// Pagination
 	tablePage: 0,
