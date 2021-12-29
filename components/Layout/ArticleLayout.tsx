@@ -31,8 +31,8 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 		<>
 			<Header />
 			<main id="main">
+				<HeaderAd />
 				<div className="contain lg:max-w-[1150px] mt-2 mx-auto">
-					<HeaderAd />
 					<div className="lg:right-sidebar">
 						<article className="text-page md:px-6">
 							<header className="article-header">
