@@ -107,12 +107,14 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 								<ChevronUpIcon
 									className="w-4 h-4 text-gray-500 hover:text-black cursor-pointer"
 									onClick={() => setFirst(incrementFilter(first))}
+									style={{ maxWidth: '40px' }}
 								/>
 							</span>
 							<span title="Decrease by 1">
 								<ChevronDownIcon
 									className="w-4 h-4 text-gray-500 hover:text-black cursor-pointer"
 									onClick={() => setFirst(decrementFilter(first))}
+									style={{ maxWidth: '40px' }}
 								/>
 							</span>
 						</div>
