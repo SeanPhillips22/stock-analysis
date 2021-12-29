@@ -552,7 +552,7 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'abbreviate'
 	},
 	{
-		Header: 'Financial CF',
+		Header: 'Financing CF',
 		accessor: 'cff',
 		format: 'abbreviate'
 	},

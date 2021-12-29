@@ -485,6 +485,18 @@ export const TOOLTIP_MAP: MapProps = [
 			'Net cash/debt growth is the change in net cash position of the company in one year.'
 	},
 	{
+		id: 'assets',
+		title: 'Total Assets',
+		tooltip:
+			'Total assets is the sum of all current and non-current assets on the balance sheet. Assets are everything that the company owns.'
+	},
+	{
+		id: 'liabilities',
+		title: 'Total Liabilities',
+		tooltip:
+			'Total liabilities is the sum of all current and non-current liabilities on the balance sheet. Liabilities are everything that the company owes to others.'
+	},
+	{
 		id: 'equity',
 		title: "Shareholders' Equity",
 		tooltip:
@@ -524,6 +536,30 @@ export const TOOLTIP_MAP: MapProps = [
 		tooltip:
 			'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
 		formula: 'FCF Per Share = Free Cash Flow / Shares Outstanding'
+	},
+	{
+		id: 'icf',
+		title: 'Investing Cash Flow',
+		tooltip:
+			'Investing cash flow, also called cash flow from investing activities, is the cash used to buy and sell investments and long-term assets. Capital expenditures are included in this category.'
+	},
+	{
+		id: 'cff',
+		title: 'Financing Cash Flow',
+		tooltip:
+			'Financing cash flow, also called cash flow from financing activities, is the cash that flows to and from owners, investors, and creditors (like banks). It includes changes in debt and equity, along with dividends and share buybacks.'
+	},
+	{
+		id: 'ncf',
+		title: 'Net Cash Flow',
+		tooltip:
+			'Net cash flow is the sum of operating, investing and financing cash flows. It is equal to the changes in cash and cash equivalents on the balance sheet.'
+	},
+	{
+		id: 'capex',
+		title: 'Capital Expenditures',
+		tooltip:
+			'Capital Expenditures (CapEx) is the cash spent on acquiring long-term assets that will be used to run the business. It is often called "payments for property, plants and equipment."'
 	},
 	{
 		id: 'grossMargin',
