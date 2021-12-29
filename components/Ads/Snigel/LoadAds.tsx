@@ -24,10 +24,11 @@ function getPageAds(path: PathType) {
 		if (path.two === 'statistics') {
 			return ['top_leaderboard', 'sidebar_1']
 		}
-		if (path.two === 'screener') {
-			return ['top_leaderboard']
-		}
 		return ['top_leaderboard', 'sidebar_1', 'sidebar_2']
+	}
+
+	if (path.one === 'screener') {
+		return ['top_leaderboard']
 	}
 
 	// News and Actions pages
@@ -48,17 +49,17 @@ function getPageAds(path: PathType) {
 			path.three === 'company' ||
 			path.three === 'dividend'
 		) {
-			return ['top_leaderboard', 'sidebar_1', 'in-content_1_mobile']
+			return [
+				'top_leaderboard',
+				'sidebar_1',
+				'sidebar_2',
+				'in-content_1_mobile'
+			]
 		}
 		// Holdings pages
 		if (path.three === 'holdings') {
 			return ['top_leaderboard', 'sidebar_1', 'sidebar_2']
 		}
-	}
-
-	// Screener page
-	if (path.one === 'stock-screener') {
-		return ['top_leaderboard']
 	}
 
 	// Trending page
