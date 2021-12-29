@@ -4,6 +4,8 @@ import { Screener } from 'components/StockScreener/_Screener'
 import { ScreenerLayout } from 'components/Layout/ScreenerLayout'
 import { PresetFiltersStocks } from 'components/StockScreener/maps/presetFilters.map'
 import { useEffect } from 'react'
+import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData'
+import { defaultColumnsStocks } from 'components/StockScreener/maps/resultColumns.map'
 
 export default function StockScreenerPage() {
 	const type = screenerState((state) => state.type)
@@ -13,6 +15,9 @@ export default function StockScreenerPage() {
 	const clearFilters = screenerState((state) => state.clearFilters)
 	const setResultsMenu = screenerState((state) => state.setResultsMenu)
 	const setPresets = screenerState((state) => state.setPresets)
+	const setShowColumns = screenerState((state) => state.setShowColumns)
+	const setFetchedColumns = screenerState((state) => state.setFetchedColumns)
+	const fetchFullData = useFetchFullData()
 
 	// Reset everything when switching between screeners
 	useEffect(() => {
@@ -23,6 +28,9 @@ export default function StockScreenerPage() {
 			setResultsMenu('General')
 			setData([])
 			setPresets(PresetFiltersStocks)
+			fetchFullData('stocks')
+			setShowColumns(defaultColumnsStocks)
+			setFetchedColumns(defaultColumnsStocks)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type])

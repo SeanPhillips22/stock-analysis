@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import {
 	useTable,
 	useSortBy,
@@ -13,13 +13,7 @@ import { ResultsMenu } from '../ResultsMenu/ResultsMenu'
 import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
-import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData'
 import { Loading } from 'components/Loading/Loading'
-import {
-	defaultColumnsStocks,
-	defaultColumnsIPOs,
-	defaultColumnsETFs
-} from 'components/StockScreener/maps/resultColumns.map'
 
 export function ResultsTable({ cols }: { cols: any }) {
 	const type = screenerState((state) => state.type)
@@ -30,31 +24,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const tablePage = screenerState((state) => state.tablePage)
 	const tableSize = screenerState((state) => state.tableSize)
 	const showColumns = screenerState((state) => state.showColumns)
-	const setShowColumns = screenerState((state) => state.setShowColumns)
-	const setFetchedColumns = screenerState((state) => state.setFetchedColumns)
-	const removeFilteredColumn = screenerState(
-		(state) => state.removeFilteredColumn
-	)
 	const fetching = screenerState((state) => state.fetching)
-	const fetchFullData = useFetchFullData()
-
-	useEffect(() => {
-		if (type == 'stocks') {
-			fetchFullData(type)
-			setShowColumns(defaultColumnsStocks)
-			setFetchedColumns(defaultColumnsStocks)
-		} else if (type == 'ipo') {
-			fetchFullData(type)
-			setShowColumns(defaultColumnsIPOs)
-			setFetchedColumns(defaultColumnsIPOs)
-		} else if (type == 'etf') {
-			fetchFullData(type)
-			setShowColumns(defaultColumnsETFs)
-			setFetchedColumns(defaultColumnsETFs)
-			removeFilteredColumn('m')
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [type])
 
 	const data = useMemo(
 		() => filterItems(datarows, filters),

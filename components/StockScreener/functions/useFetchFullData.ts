@@ -8,7 +8,6 @@ import { ScreenerTypes } from '../screener.types'
  */
 export function useFetchFullData() {
 	const setLoaded = screenerState((state) => state.setLoaded)
-	const data = screenerState((state) => state.data)
 	const setData = screenerState((state) => state.setData)
 
 	async function fetchFullData(type: ScreenerTypes) {
@@ -19,11 +18,9 @@ export function useFetchFullData() {
 				? 'iposcreener'
 				: 'etfscreener'
 
-		if (!data || data.length < 100) {
-			const data = await getData(`${screenerType}?type=f`)
-			setLoaded(true)
-			setData(data.data)
-		}
+		const data = await getData(`${screenerType}?type=f`)
+		setLoaded(true)
+		setData(data.data)
 	}
 
 	return fetchFullData
