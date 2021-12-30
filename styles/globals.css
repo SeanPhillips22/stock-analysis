@@ -9,6 +9,7 @@
 @import './features/search';
 @import './features/navmenu';
 @import './features/news';
+@import './features/quote';
 @import './features/price-chart';
 @import './features/top-table';
 @import './features/ipo-table';

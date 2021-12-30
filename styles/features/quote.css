@@ -1,0 +1,17 @@
+@keyframes pulseup {
+	0% {
+		color: rgba(0, 128, 0);
+	}
+	110% {
+		color: rgba(17, 24, 39);
+	}
+}
+
+@keyframes pulsedown {
+	0% {
+		color: rgba(139, 0, 0);
+	}
+	110% {
+		color: rgba(17, 24, 39);
+	}
+}
