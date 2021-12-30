@@ -77,4 +77,22 @@
 	.nav-login {
 		@apply px-3 mb-6;
 	}
+
+	.collapse {
+		@apply hidden xxl:flex items-center
+		border-t border-gray-200
+		mt-4 pt-1 cursor-pointer;
+	}
+
+	.shrink .nav-icon {
+		@apply mr-0;
+	}
+
+	.shrink .nav-label {
+		@apply hidden;
+	}
+
+	.shrink .nav-arrow-wrap {
+		@apply hidden;
+	}
 }

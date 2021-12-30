@@ -5,6 +5,7 @@ import { MobileNav } from './MobileNav'
 
 export function LeftNav() {
 	const visible = navMenuState((state) => state.visible)
+	const expanded = navMenuState((state) => state.expanded)
 
 	return (
 		<>
@@ -21,7 +22,7 @@ export function LeftNav() {
 					<MobileNav />
 				</Transition>
 			</div>
-			<aside className="leftcol">
+			<aside className={expanded ? 'leftcol' : 'leftcol shrink'}>
 				<MainNav />
 			</aside>
 		</>

@@ -12,6 +12,7 @@ import { matchParentPath } from 'functions/helpers/matchPath'
 import { useEffect } from 'react'
 import { navMenuState } from 'state/navMenuState'
 import { navState } from 'state/navState'
+import { Collapse } from './Collapse'
 import { MenuNavItem } from './NavItems/Menu'
 import { SingleNavItem } from './NavItems/Single'
 
@@ -105,6 +106,7 @@ export function MainNav() {
 					)
 				)}
 			</nav>
+			<Collapse />
 		</div>
 	)
 }

@@ -14,6 +14,8 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 	const isOpen = navMenuState((state) => state.isOpen)
 	const setIsOpen = navMenuState((state) => state.setIsOpen)
 	const close = navMenuState((state) => state.toggle)
+	const expanded = navMenuState((state) => state.expanded)
+	const expand = navMenuState((state) => state.expand)
 
 	function openClose() {
 		let openClosed = isOpen[item.name] ? true : false
@@ -28,6 +30,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 						? 'nav-menu-wrap current group'
 						: 'nav-menu-wrap group'
 				}
+				onClick={expand}
 			>
 				<Link href={item.href} prefetch={false}>
 					<a
@@ -36,6 +39,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 								? 'nav-item current parent'
 								: 'nav-item parent'
 						}
+						title={item.name}
 					>
 						<item.icon
 							className="nav-icon"
@@ -53,7 +57,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 				</div>
 			</div>
 
-			{item.children && isOpen[item.name] && (
+			{item.children && isOpen[item.name] && expanded && (
 				<div className="space-y-0.5">
 					{item.children.map((subItem) => (
 						<Link key={subItem.name} href={subItem.href} prefetch={false}>
@@ -64,6 +68,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 										: 'nav-item subitem'
 								}
 								onClick={close}
+								title={subItem.name}
 							>
 								<span className="nav-label">{subItem.name}</span>
 							</a>

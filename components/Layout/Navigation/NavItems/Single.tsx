@@ -15,6 +15,7 @@ export function SingleNavItem({ item, path }: NavItemProps) {
 						: 'nav-item group'
 				}
 				onClick={close}
+				title={item.name}
 			>
 				<item.icon className="nav-icon" style={{ maxWidth: '50px' }} />
 				<span className="nav-label">{item.name}</span>
