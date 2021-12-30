@@ -15,7 +15,7 @@ async function queryChart(symbol: string, type: string, time: string) {
 export function useChart(info: Info, time: string) {
 	const tradingHours = isTradingHoursOpen()
 
-	const { data, isFetching } = useQuery(
+	const { data, isLoading } = useQuery(
 		['c', info.symbol, info.type, time],
 		() => queryChart(info.symbol, info.type, time),
 		{
@@ -26,5 +26,13 @@ export function useChart(info: Info, time: string) {
 		}
 	)
 
-	return { data, isFetching }
+	return { data, isLoading }
+}
+
+// function that returns the number of seconds until the next minute starts
+export function getSecondsUntilNextMinute() {
+	const now = new Date()
+	const seconds = now.getSeconds()
+	const nextMinute = 60 - seconds
+	return nextMinute * 1000
 }

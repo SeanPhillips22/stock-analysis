@@ -24,16 +24,27 @@ export const PriceChart = ({ info }: Props) => {
 	const [message, setMessage] = useState('')
 
 	const quote = useQuote(info)
-	const { data, isFetching } = useChart(info, chartTime)
+	const { data, isLoading } = useChart(info, chartTime)
 
 	useEffect(() => {
 		setMessage('')
 		if (info.state === 'upcomingipo') return
 
-		if (!isFetching && (!data || !data.length)) {
+		if (!isLoading && (!data || !data.length)) {
 			setMessage(`No ${translateTime(chartTime)} chart data available`)
 		}
-	}, [data, chartTime, info.state, isFetching])
+	}, [data, chartTime, info.state, isLoading])
+
+	useEffect(() => {
+		if (data && quote) {
+			// Check if quote.u is more recent than the last data point in the data array
+			let lastDataPoint = data[data.length - 1]
+			if (new Date(quote.u) > new Date(lastDataPoint.t)) {
+				data.push({ c: quote.p, t: quote.u })
+			}
+			data[data.length - 1].c = quote.p
+		}
+	}, [data, quote])
 
 	const changeProps = getChartColor(data, chartTime, quote)
 
@@ -59,7 +70,7 @@ export const PriceChart = ({ info }: Props) => {
 						<Unavailable message={message} />
 					</div>
 				)}
-				{isFetching ? (
+				{isLoading ? (
 					<LoadingLight />
 				) : (
 					data &&

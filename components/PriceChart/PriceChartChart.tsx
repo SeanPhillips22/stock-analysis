@@ -188,7 +188,8 @@ export const Chart = ({
 								const y = meta.data[last].y - 10
 
 								// retrieve the stock price, data.
-								const raw = parseFloat(dataset.data[last])
+								// const raw = parseFloat(dataset.data[last])
+								const raw = quote.p
 								// const str = dataset.data[last];
 								const str = raw.toFixed(2)
 
