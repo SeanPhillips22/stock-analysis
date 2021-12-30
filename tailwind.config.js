@@ -61,6 +61,20 @@ module.exports = {
 					sharp: 'rgba(1, 90, 210, 1)',
 					link: 'rgb(30, 115, 186, 1)'
 				}
+			},
+			keyframes: {
+				pulseup: {
+					'0%': { color: 'rgba(0, 128, 0)' },
+					'100%': { color: 'rgba(17, 24, 39)' }
+				},
+				pulsedown: {
+					'0%': { color: 'rgba(139, 0, 0)' },
+					'100%': { color: 'rgba(17, 24, 39)' }
+				}
+			},
+			animation: {
+				pulseup: 'pulseup 0.8s linear 0s',
+				pulsedown: 'pulsedown 0.8s linear 0s'
 			}
 		}
 	},

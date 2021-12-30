@@ -15,13 +15,13 @@ export function RegularQuote({ info }: { info: Info }) {
 	useEffect(() => {
 		if (quote.p > prev) {
 			console.log('up')
-			setAnimation('pulseup 0.8s linear 0s')
+			setAnimation('animate-pulseup')
 			setTimeout(() => {
 				setAnimation('')
 			}, 800)
 		} else if (quote.p < prev) {
 			console.log('down')
-			setAnimation('pulsedown 0.8s linear 0s')
+			setAnimation('animate-pulsedown')
 			setTimeout(() => {
 				setAnimation('')
 			}, 800)
@@ -32,11 +32,9 @@ export function RegularQuote({ info }: { info: Info }) {
 	}, [quote])
 
 	return (
-		<div>
-			<span className="text-4xl font-bold" style={{ animation }}>
-				{quote.pd}
-			</span>{' '}
-			<span className="text-2xl font-semibold" style={{ animation }}>
+		<div className="quote">
+			<span className={`price ${animation}`}>{quote.pd}</span>{' '}
+			<span className={`priceChange ${animation}`}>
 				<span className={color}>{`${quote.c || '0.00'} (${
 					quote.cp || '0.00'
 				}%)`}</span>

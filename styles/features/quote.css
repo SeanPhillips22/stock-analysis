@@ -1,17 +1,7 @@
-@keyframes pulseup {
-	0% {
-		color: rgba(0, 128, 0);
-	}
-	110% {
-		color: rgba(17, 24, 39);
-	}
+.quote .price {
+	@apply text-4xl font-bold;
 }
 
-@keyframes pulsedown {
-	0% {
-		color: rgba(139, 0, 0);
-	}
-	110% {
-		color: rgba(17, 24, 39);
-	}
+.quote .priceChange {
+	@apply text-2xl font-semibold;
 }
