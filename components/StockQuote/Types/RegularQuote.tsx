@@ -13,21 +13,21 @@ export function RegularQuote({ info }: { info: Info }) {
 	const prev = usePrevious(quote.p)
 
 	useEffect(() => {
+		let timer: any
+
 		if (quote.p > prev) {
-			console.log('up')
 			setAnimation('animate-pulseup')
-			setTimeout(() => {
+			timer = setTimeout(() => {
 				setAnimation('')
 			}, 800)
 		} else if (quote.p < prev) {
-			console.log('down')
 			setAnimation('animate-pulsedown')
-			setTimeout(() => {
+			timer = setTimeout(() => {
 				setAnimation('')
 			}, 800)
-		} else {
-			console.log('same')
 		}
+
+		return () => clearTimeout(timer)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [quote])
 

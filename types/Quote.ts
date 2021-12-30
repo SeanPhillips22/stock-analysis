@@ -9,6 +9,7 @@ export interface Quote {
 	l: string // day's low
 	v: string // day's volume
 	u: string // last updated timestamp (market hours)
+	uc: string // last updated timestamp, same format as chart
 	td: string // trading date
 	h52: string // 52-week high
 	l52: string // 52-week low

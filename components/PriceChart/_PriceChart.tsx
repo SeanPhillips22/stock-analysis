@@ -38,11 +38,13 @@ export const PriceChart = ({ info }: Props) => {
 	useEffect(() => {
 		if (data && quote) {
 			// Check if quote.u is more recent than the last data point in the data array
-			let lastDataPoint = data[data.length - 1]
-			if (new Date(quote.u) > new Date(lastDataPoint.t)) {
-				data.push({ c: quote.p, t: quote.u })
+			let price = Math.round(quote.p * 100) / 100
+			let last = data[data.length - 1]
+			if (quote.uc === last.t) {
+				data[data.length - 1] = { c: price, t: quote.uc }
+			} else if (new Date(quote.u).getTime() > new Date(last.t).getTime()) {
+				data.push({ c: price, t: quote.uc })
 			}
-			data[data.length - 1].c = quote.p
 		}
 	}, [data, quote])
 
