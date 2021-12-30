@@ -2,7 +2,7 @@ import { PathObject } from 'state/navState'
 
 /**
  * This function checks whether the current path matches a particular nav item
- * @param path the object that contains the current navigated path
+ * @param path the object that contains the current navigation path
  * @param checkHref the url to check against the current path
  * @returns
  */
@@ -18,12 +18,13 @@ export function matchPath(path: PathObject, checkHref: string) {
 	return false
 }
 
-// export function matchRootPath(path: PathObject, checkHref: string) {
-// 	// Match full path
-// 	let currentUrl = '/' + path.one + '/'
-// 	if (currentUrl === checkHref) return true
-// 	if (currentUrl.toLowerCase() === checkHref.toLowerCase()) return true
+export function matchParentPath(path: PathObject, checkHref: string) {
+	let parentHref = checkHref.split('/')[1]
 
-// 	// No match
-// 	return false
-// }
+	// Match full path
+	if (path.one === parentHref) return true
+	if (path.one?.toLowerCase() === parentHref.toLowerCase()) return true
+
+	// No match
+	return false
+}

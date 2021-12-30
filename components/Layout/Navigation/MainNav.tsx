@@ -8,6 +8,9 @@ import {
 	NewspaperIcon,
 	ArchiveIcon
 } from '@heroicons/react/outline'
+import { matchParentPath } from 'functions/helpers/matchPath'
+import { useEffect } from 'react'
+import { navMenuState } from 'state/navMenuState'
 import { navState } from 'state/navState'
 import { MenuNavItem } from './NavItems/Menu'
 import { SingleNavItem } from './NavItems/Single'
@@ -74,7 +77,22 @@ const navigation = [
 ]
 
 export function MainNav() {
+	const setIsOpen = navMenuState((state) => state.setIsOpen)
 	const path = navState((state) => state.path)
+
+	useEffect(() => {
+		if (path) {
+			setIsOpen({})
+			navigation.map((item) => {
+				if (item.children) {
+					if (matchParentPath(path, item.href)) {
+						setIsOpen({ [item.name]: true })
+					}
+				}
+			})
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [path])
 
 	return (
 		<div className="leftnav">

@@ -1,6 +1,6 @@
 export const SearchIcon = () => {
 	return (
-		<div className="absolute inset-y-0 left-0 flex items-center pl-2">
+		<div className="absolute inset-y-0 left-0 flex items-center pl-2.5">
 			<svg
 				className="w-4 h-4 xs:w-5 xs:h-5 text-gray-600"
 				fill="none"

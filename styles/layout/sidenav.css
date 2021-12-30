@@ -25,20 +25,12 @@
 	}
 
 	.nav-menu-wrap {
-		@apply flex flex-row items-center w-full
+		@apply flex flex-row items-center
 		text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md;
 	}
 
 	.nav-menu-wrap.current {
 		@apply bg-gray-100;
-	}
-
-	.nav-item {
-		@apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md py-2 px-2 flex items-center text-sm font-semibold whitespace-nowrap flex-grow;
-	}
-
-	.nav-item.current {
-		@apply bg-gray-100 text-gray-900;
 	}
 
 	.nav-icon {
@@ -48,7 +40,7 @@
 	}
 
 	.nav-arrow-wrap {
-		@apply h-full ml-auto border-l px-1 border-gray-300;
+		@apply h-full ml-auto border-l px-1 border-gray-300 cursor-pointer;
 	}
 
 	.nav-arrow {
@@ -63,12 +55,23 @@
 		@apply text-gray-400 rotate-90;
 	}
 
-	.nav-subitem {
-		@apply w-full flex items-center pl-11 pr-2 py-1.5 text-sm font-semibold text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50;
+	.nav-item {
+		@apply flex flex-grow items-center 
+		rounded-md py-2 px-2
+		text-gray-600 hover:bg-gray-50 hover:text-gray-900 
+		text-sm font-semibold whitespace-nowrap;
 	}
 
-	.nav-subitem.current {
-		@apply bg-gray-100 text-gray-900;
+	.nav-item.current {
+		@apply bg-blue-50 text-gray-900;
+	}
+
+	.nav-item.parent.current {
+		@apply bg-gray-100;
+	}
+
+	.nav-item.subitem {
+		@apply pl-11 pr-2 py-1.5;
 	}
 
 	.nav-login {

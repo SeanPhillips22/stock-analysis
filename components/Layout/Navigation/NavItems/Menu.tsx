@@ -2,7 +2,7 @@ import { NavArrowIcon } from 'components/Icons/NavArrow'
 import Link from 'next/link'
 import { NavItemProps } from './NavItems.types'
 import { navMenuState } from 'state/navMenuState'
-import { matchPath } from 'functions/helpers/matchPath'
+import { matchPath, matchParentPath } from 'functions/helpers/matchPath'
 
 /**
  * A single nav item that has children, so when toggled it displays a dropdown
@@ -13,6 +13,7 @@ import { matchPath } from 'functions/helpers/matchPath'
 export function MenuNavItem({ item, path }: NavItemProps) {
 	const isOpen = navMenuState((state) => state.isOpen)
 	const setIsOpen = navMenuState((state) => state.setIsOpen)
+	const close = navMenuState((state) => state.toggle)
 
 	function openClose() {
 		let openClosed = isOpen[item.name] ? true : false
@@ -23,18 +24,17 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 		<>
 			<div
 				className={
-					matchPath(path, item.href)
+					matchParentPath(path, item.href)
 						? 'nav-menu-wrap current group'
 						: 'nav-menu-wrap group'
 				}
-				onClick={openClose}
 			>
 				<Link href={item.href} prefetch={false}>
 					<a
 						className={
-							matchPath(path, item.href)
-								? 'nav-item current'
-								: 'nav-item'
+							matchParentPath(path, item.href)
+								? 'nav-item current parent'
+								: 'nav-item parent'
 						}
 					>
 						<item.icon
@@ -60,9 +60,10 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 							<a
 								className={
 									matchPath(path, subItem.href)
-										? 'nav-subitem current group'
-										: 'nav-subitem group'
+										? 'nav-item current subitem'
+										: 'nav-item subitem'
 								}
+								onClick={close}
 							>
 								<span className="nav-label">{subItem.name}</span>
 							</a>
