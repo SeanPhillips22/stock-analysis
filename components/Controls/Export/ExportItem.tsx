@@ -5,14 +5,20 @@ const Download = dynamic(() => import('./Download'), {
 	ssr: false
 })
 
-interface ExportItemProps {
+type ExportItemProps = {
 	title: string
 	type: 'csv' | 'xlsx'
 	data: string | any[]
+	fileName?: string
 }
 
-export const ExportItem = ({ title, type, data }: ExportItemProps) => (
+export const ExportItem = ({
+	title,
+	type,
+	data,
+	fileName
+}: ExportItemProps) => (
 	<Menu.Item>
-		<Download title={title} type={type} data={data} />
+		<Download title={title} type={type} data={data} fileName={fileName} />
 	</Menu.Item>
 )

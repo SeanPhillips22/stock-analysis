@@ -16,9 +16,10 @@ interface Props {
 	title: string
 	buttons: Button[]
 	tableId: string
+	fileName?: string
 }
 
-export function Export({ title, buttons, tableId }: Props) {
+export function Export({ title, buttons, tableId, fileName }: Props) {
 	const { isPro } = useAuthState()
 
 	return (
@@ -58,6 +59,7 @@ export function Export({ title, buttons, tableId }: Props) {
 										title={button.title}
 										type={button.type}
 										data={tableId}
+										fileName={fileName}
 									/>
 								)
 							)}
