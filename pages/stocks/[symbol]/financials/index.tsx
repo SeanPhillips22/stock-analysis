@@ -29,6 +29,7 @@ export default function IncomeStatement({ info, data, counts }: Props) {
 			<div className="px-4 lg:px-6 mx-auto">
 				<SubNavigation info={info} statement="income_statement" />
 				<FinancialTable
+					key={`${info.symbol}-income_statement`}
 					statement="income_statement"
 					financials={data}
 					map={MAP_INCOME_STATEMENT}

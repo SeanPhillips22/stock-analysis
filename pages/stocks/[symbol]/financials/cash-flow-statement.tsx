@@ -32,6 +32,7 @@ export default function CashFlowStatement({ info, data, counts }: Props) {
 			<div className="px-4 lg:px-6 mx-auto">
 				<SubNavigation info={info} statement="cash_flow_statement" />
 				<FinancialTable
+					key={`${info.symbol}-cash_flow_statement`}
 					statement="cash_flow_statement"
 					financials={data}
 					map={MAP_CASH_FLOW_STATEMENT}

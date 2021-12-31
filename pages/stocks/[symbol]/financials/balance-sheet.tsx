@@ -32,6 +32,7 @@ export default function BalanceSheet({ info, data, counts }: Props) {
 			<div className="px-4 lg:px-6 mx-auto">
 				<SubNavigation info={info} statement="balance_sheet" />
 				<FinancialTable
+					key={`${info.symbol}-balance_sheet`}
 					statement="balance_sheet"
 					financials={data}
 					map={MAP_BALANCE_SHEET}
