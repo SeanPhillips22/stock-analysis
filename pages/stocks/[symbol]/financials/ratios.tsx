@@ -29,6 +29,7 @@ export default function Ratios({ info, data, counts }: Props) {
 			<div className="px-4 lg:px-6 mx-auto">
 				<SubNavigation info={info} statement="ratios" />
 				<FinancialTable
+					key={`${info.symbol}-ratios`}
 					statement="ratios"
 					financials={data}
 					map={MAP_RATIOS}

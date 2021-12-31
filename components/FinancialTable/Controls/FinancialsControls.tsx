@@ -10,22 +10,13 @@ type Props = {
 }
 
 export function FinancialsControls({ symbol, statement, range }: Props) {
-	const leftRight = financialsState((state) => state.leftRight)
-	const setLeftRight = financialsState((state) => state.setLeftRight)
-
-	const clickLeftRight = () => {
-		if (leftRight === 'left') {
-			setLeftRight('right')
-		} else {
-			setLeftRight('left')
-		}
-	}
+	const toggleReversed = financialsState((state) => state.toggleReversed)
 
 	return (
 		<div className="hidden sm:flex sm:space-x-2 pb-2">
 			<button
 				className="controls-btn"
-				onClick={() => clickLeftRight()}
+				onClick={() => toggleReversed()}
 				id="tag-feat-fin-leftright"
 				title="Switch order of columns"
 			>

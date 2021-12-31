@@ -14,8 +14,7 @@ import {
 	redOrGreen,
 	getPeriodLabel,
 	getPeriodTooltip,
-	sliceData,
-	reverseData
+	sliceData
 } from './FinancialTable.functions'
 import { HoverChartIcon } from 'components/Icons/HoverChart'
 import { TableTitle } from './TableTitle'
@@ -52,9 +51,7 @@ export const FinancialTable = ({
 }: Props) => {
 	const range = financialsState((state) => state.range)
 	const divider = financialsState((state) => state.divider)
-	const leftRight = financialsState((state) => state.leftRight)
 	const reversed = financialsState((state) => state.reversed)
-	const setReversed = financialsState((state) => state.setReversed)
 	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
 	const [fullData, setFullData] = useState<FinancialsType>()
@@ -94,18 +91,9 @@ export const FinancialTable = ({
 	}, [info.symbol, isPro, fullcount, paywall, statement, range, fullData])
 
 	let data = useMemo(
-		() => sliceData(dataRows, showcount),
-		[dataRows, showcount]
+		() => sliceData(dataRows, showcount, reversed),
+		[dataRows, showcount, reversed]
 	)
-
-	// Switch data left/right if applicable
-	if (
-		(leftRight === 'right' && !reversed) ||
-		(leftRight === 'left' && reversed)
-	) {
-		data = reverseData(data)
-		setReversed(!reversed)
-	}
 
 	// If count is empty, show message
 	if (
@@ -216,7 +204,7 @@ export const FinancialTable = ({
 		}
 		const revenuedata = data.revenue
 
-		if (leftRight === 'right') {
+		if (reversed) {
 			offset = -offset
 		}
 
@@ -321,7 +309,7 @@ export const FinancialTable = ({
 											range={range}
 											ticker={info.ticker}
 											divider={divider}
-											leftRight={leftRight}
+											reversed={reversed}
 										/>
 									)}
 								</div>

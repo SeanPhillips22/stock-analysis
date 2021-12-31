@@ -276,7 +276,11 @@ export function getDivider(divider: number) {
 }
 
 // Slice financial data if paywalled
-export function sliceData(data: FinancialReport, showcount: number) {
+export function sliceData(
+	data: FinancialReport,
+	showcount: number,
+	reversed: boolean
+) {
 	const sliced = {} as FinancialReport
 
 	if (data) {
@@ -284,9 +288,9 @@ export function sliceData(data: FinancialReport, showcount: number) {
 			sliced[key] = data[key].slice(0, showcount)
 		})
 
-		return sliced
+		return reversed ? reverseData(sliced) : sliced
 	}
-	return data
+	return reversed ? reverseData(data) : data
 }
 
 // Reverse left/right order of financial data

@@ -7,11 +7,8 @@ interface FinancialsState {
 	divider: number
 	setDivider: (newDivider: number) => void
 
-	leftRight: 'left' | 'right'
-	setLeftRight: (newLeftRight: 'left' | 'right') => void
-
 	reversed: boolean
-	setReversed: (newReversed: boolean) => void
+	toggleReversed: () => void
 }
 
 export const financialsState = create<FinancialsState>((set) => ({
@@ -21,9 +18,6 @@ export const financialsState = create<FinancialsState>((set) => ({
 	divider: 1000000,
 	setDivider: (newDivider) => set({ divider: newDivider }),
 
-	leftRight: 'left',
-	setLeftRight: (newLeftRight) => set({ leftRight: newLeftRight }),
-
 	reversed: false,
-	setReversed: (newReversed) => set({ reversed: newReversed })
+	toggleReversed: () => set((state) => ({ reversed: !state.reversed }))
 }))
