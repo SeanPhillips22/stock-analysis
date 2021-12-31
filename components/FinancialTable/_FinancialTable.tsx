@@ -19,7 +19,7 @@ import {
 } from './FinancialTable.functions'
 import { HoverChartIcon } from 'components/Icons/HoverChart'
 import { TableTitle } from './TableTitle'
-import { TableControls } from './TableControls'
+import { FinancialsControls } from './Controls/FinancialsControls'
 import Paywall from './Paywall'
 import dynamic from 'next/dynamic'
 import { Tooltip } from './Tooltip'
@@ -230,7 +230,7 @@ export const FinancialTable = ({
 					current: cell,
 					previous: prev,
 					revenue: rev,
-					divider: 'raw'
+					divider
 				})
 
 				const cellContent = formatCell({
@@ -352,7 +352,7 @@ export const FinancialTable = ({
 					currency={info.currency}
 					fiscalYear={info.fiscalYear}
 				/>
-				<TableControls
+				<FinancialsControls
 					symbol={info.symbol}
 					statement={statement}
 					range={range}

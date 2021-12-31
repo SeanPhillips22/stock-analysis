@@ -59,7 +59,7 @@ export default function Download({ title, type, data, fileName }: Props) {
 
 	return (
 		<div
-			className="text-gray-700 hover:bg-gray-100 block px-4 py-2 text-sm cursor-pointer"
+			className="dd-option"
 			onClick={() => {
 				download(type)
 			}}

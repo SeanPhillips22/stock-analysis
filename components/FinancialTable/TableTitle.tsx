@@ -1,4 +1,5 @@
 import { financialsState } from 'state/financialsState'
+import { getDivider } from './FinancialTable.functions'
 
 interface Props {
 	statement: string
@@ -53,11 +54,14 @@ function TableHeader({ statement }: { statement: string }) {
 
 function TableInfo({ statement, currency, fiscalYear }: Props) {
 	const divider = financialsState((state) => state.divider)
+	const dividerText = getDivider(divider)
 	const firstWord = statement === 'ratios' ? 'Market cap' : 'Financials'
 
 	return (
 		<div className="text-sm pb-1 text-gray-600">
-			{`${firstWord} in ${divider} ${currency}. Fiscal year is ${fiscalYear}.`}
+			{`${firstWord} in ${
+				dividerText ? dividerText + ' ' : ''
+			}${currency}. Fiscal year is ${fiscalYear}.`}
 		</div>
 	)
 }

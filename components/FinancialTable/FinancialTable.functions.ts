@@ -86,12 +86,12 @@ export const formatY = (
 	return formatNumber(value, 0, 0)
 }
 
-interface FormatCell {
+type FormatCell = {
 	type: string
 	current: number
 	previous: number | null | string
 	revenue: number | null
-	divider: string
+	divider: number
 }
 
 // Format the number in the cells
@@ -102,16 +102,15 @@ export function formatCell({
 	revenue,
 	divider
 }: FormatCell) {
-	const numbersIn: number = getDivider(divider)
-	const decimals = divider === 'raw' ? 3 : 2
+	const decimals = divider === 1 ? 3 : 2
 
 	switch (type) {
 		case 'standard':
-			return formatNumber(current / numbersIn, 0, 2)
+			return formatNumber(current / divider, 0, 2)
 
 		case 'reduce_precision': {
 			if (current) {
-				return formatNumber(current / numbersIn, 0, 0)
+				return formatNumber(current / divider, 0, 0)
 			}
 			return '-'
 		}
@@ -258,18 +257,22 @@ export function reducePrecisionFix(value: number) {
 }
 
 // Show numbers in thousands, millions or raw
-function getDivider(divider: string) {
+export function getDivider(divider: number) {
 	switch (divider) {
-		case 'thousands':
-			return 1000
+		case 1000000000:
+			return 'billions'
 
-		case 'millions':
-			return 1000000
+		case 1000000:
+			return 'millions'
 
-		case 'raw':
-			return 1
+		case 1000:
+			return 'thousands'
+
+		case 1:
+			return null
 	}
-	return 1000
+
+	return null
 }
 
 // Slice financial data if paywalled

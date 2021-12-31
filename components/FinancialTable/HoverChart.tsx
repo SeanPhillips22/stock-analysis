@@ -33,7 +33,7 @@ interface Props {
 	row: FinancialsMapType
 	range: string
 	ticker: string
-	divider: string
+	divider: number
 	leftRight: 'left' | 'right'
 }
 
