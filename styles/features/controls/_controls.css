@@ -1,0 +1,10 @@
+/*
+* Controls
+* Buttons, dropdowns and more for control elements
+*/
+
+@layer components {
+	.controls {
+		@apply flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1;
+	}
+}

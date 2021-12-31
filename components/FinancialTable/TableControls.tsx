@@ -21,9 +21,8 @@ export function TableControls({ symbol, statement, range }: Props) {
 	}
 
 	return (
-		<div className="hidden sm:flex sm:flex-row sm:space-x-2 pb-2">
+		<div className="hidden sm:flex sm:space-x-2 pb-2">
 			<Export
-				title="Export"
 				buttons={[
 					{ title: 'Export to Excel', type: 'xlsx', restricted: true },
 					{ title: 'Export to CSV', type: 'csv', restricted: true }
@@ -31,15 +30,14 @@ export function TableControls({ symbol, statement, range }: Props) {
 				tableId="financial-table"
 				fileName={`${symbol}-${statement}-${range}`}
 			/>
-			<div>
-				<button
-					className="bg-gray-100 border border-gray-300 h-12 rounded-sm hover:bg-white px-3"
-					onClick={() => clickLeftRight()}
-					id="tag-feat-fin-leftright"
-				>
-					<LeftRightIcon classes="h-9 w-9 pointer-events-none" />
-				</button>
-			</div>
+			<button
+				className="controls-btn"
+				onClick={() => clickLeftRight()}
+				id="tag-feat-fin-leftright"
+				title="Switch order of columns"
+			>
+				<LeftRightIcon classes="h-5 w-5 pointer-events-none" />
+			</button>
 		</div>
 	)
 }
