@@ -12,6 +12,7 @@
 @import './features/price-chart';
 @import './features/top-table';
 @import './features/ipo-table';
+@import './features/financials';
 @import './features/definitions';
 @import './features/symbol-table/_symbol-table.css';
 @import './features/symbol-table/screener.css';

@@ -18,7 +18,6 @@ import {
 	reverseData
 } from './FinancialTable.functions'
 import { HoverChartIcon } from 'components/Icons/HoverChart'
-import styles from './FinancialTable.module.css'
 import { TableTitle } from './TableTitle'
 import { TableControls } from './TableControls'
 import Paywall from './Paywall'
@@ -181,7 +180,7 @@ export const FinancialTable = ({
 
 	const ChartIcon = forwardRef<HTMLDivElement>((props, ref) => {
 		return (
-			<div ref={ref} className={styles.iconcelldiv}>
+			<div ref={ref} className="iconcelldiv">
 				<HoverChartIcon />
 			</div>
 		)
@@ -300,7 +299,7 @@ export const FinancialTable = ({
 							content={<IndicatorTooltip row={row} />}
 							theme="light"
 							delay={100}
-							className={styles.bigTooltipText}
+							className="bigTooltipText"
 						>
 							<RowTitle
 								title={row.title}
@@ -365,11 +364,7 @@ export const FinancialTable = ({
 					(paywalled ? ' flex flex-row' : '')
 				}
 			>
-				{paywalled && <div className="flex flex-row"></div>}
-				<table
-					className={[styles.table, styles.table_financial].join(' ')}
-					id="financial-table"
-				>
+				<table className="fintbl" id="financial-table">
 					<thead>
 						<tr className="border-b-2 border-gray-300">
 							<th className="flex flex-row justify-between items-center">
@@ -377,7 +372,7 @@ export const FinancialTable = ({
 									content={getPeriodTooltip(range)}
 									theme="light"
 									delay={100}
-									className={styles.bigTooltipText}
+									className="bigTooltipText"
 								>
 									<RowTitle
 										title={getPeriodLabel(range)}
