@@ -237,7 +237,7 @@ export const Footer = () => {
 							</a>
 						</div>
 						<p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-							&copy; 2021 Stock Analysis. All rights reserved.
+							&copy; 2022 Stock Analysis. All rights reserved.
 						</p>
 					</div>
 					<div className="mt-8 border-t border-gray-700 pt-8 pb-6 text-center text-sm text-gray-400">
