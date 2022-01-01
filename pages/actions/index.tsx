@@ -6,7 +6,7 @@ import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
 import { CellString, ActionProps } from 'components/Actions/actions.types'
 
-export const ActionsAll = ({ data }: ActionProps) => {
+export default function ActionsAll({ data }: ActionProps) {
 	const columns = [
 		{
 			Header: 'Date',
@@ -52,7 +52,6 @@ export const ActionsAll = ({ data }: ActionProps) => {
 		</>
 	)
 }
-export default ActionsAll
 
 export const getStaticProps: GetStaticProps = async () => {
 	const data = await getActionsData('all')
