@@ -3,7 +3,7 @@ import { Info } from 'types/Info'
 import { FinancialReport, Range } from 'types/Financials'
 import { FinancialTable } from 'components/FinancialTable/_FinancialTable'
 import { getStockFinancialsSSR } from 'functions/apis/callBackEnd'
-import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement'
+import { MAP_CASH_FLOW_STATEMENT } from 'data/financials/map_cash_flow_statement'
 import { FinancialsLayout } from 'components/Layout/FinancialsLayout'
 
 type Props = {
@@ -13,21 +13,21 @@ type Props = {
 	range: Range
 }
 
-export default function IncomeStatement({ info, data, count, range }: Props) {
+export default function CashFlowStatement({ info, data, count, range }: Props) {
 	return (
 		<FinancialsLayout
 			info={info}
-			url={`/stocks/${info.symbol}/financials/`}
-			title={`${info.nameFull} (${info.ticker}) Financial Statements: Income`}
-			description={`Detailed financial statements for ${info.nameFull} (${info.ticker}), including the income statement, balance sheet, and cash flow statement.`}
-			statement="income-statement"
+			url={`/stocks/${info.symbol}/financials/cash-flow-statement/`}
+			title={`${info.nameFull} (${info.ticker}) Cash Flow Statement`}
+			description={`Detailed cash flow statements for ${info.nameFull} (${info.ticker}), including operating cash flow, capex and free cash flow.`}
+			statement="cash-flow-statement"
 			range={range}
 		>
 			<FinancialTable
-				key={`${info.symbol}-income-statement`}
-				statement="income-statement"
+				key={`${info.symbol}-cash-flow-statement`}
+				statement="cash-flow-statement"
 				financials={data}
-				map={MAP_INCOME_STATEMENT}
+				map={MAP_CASH_FLOW_STATEMENT}
 				info={info}
 				count={count}
 				range={range}
@@ -38,10 +38,11 @@ export default function IncomeStatement({ info, data, count, range }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const symbol = context?.params?.symbol as string
+	const range = (context?.params?.range as Range) || 'annual'
 	const data = await getStockFinancialsSSR(
-		'income-statement',
+		'cash-flow-statement',
 		symbol,
-		'annual'
+		range
 	)
 
 	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')

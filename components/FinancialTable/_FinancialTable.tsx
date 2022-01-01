@@ -1,10 +1,5 @@
 /* eslint-disable react/display-name */
-import {
-	FinancialsType,
-	FinancialsMapType,
-	FinancialReport,
-	Statement
-} from 'types/Financials'
+import { FinancialsMapType, FinancialReport, Statement } from 'types/Financials'
 import { Info } from 'types/Info'
 import { useState, useEffect, forwardRef, useMemo } from 'react'
 import { financialsState } from 'state/financialsState'
@@ -32,14 +27,11 @@ const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false })
 
 interface Props {
 	statement: Statement
-	financials: FinancialsType
+	financials: FinancialReport
 	info: Info
 	map: FinancialsMapType[]
-	counts: {
-		annual: number
-		quarterly: number
-		trailing: number
-	}
+	count: number
+	range: 'annual' | 'quarterly' | 'trailing'
 }
 
 export const FinancialTable = ({
@@ -47,26 +39,25 @@ export const FinancialTable = ({
 	financials,
 	info,
 	map,
-	counts
+	count,
+	range
 }: Props) => {
-	const range = financialsState((state) => state.range)
+	// const range = financialsState((state) => state.range)
 	const divider = financialsState((state) => state.divider)
 	const reversed = financialsState((state) => state.reversed)
 	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
-	const [fullData, setFullData] = useState<FinancialsType>()
-	const [dataRows, setDataRows] = useState(
-		financials[range as keyof FinancialsType]
-	)
+	const [fullData, setFullData] = useState<FinancialReport>()
+	const [dataRows, setDataRows] = useState(financials)
 
 	// Check if financial data is paywalled
 	const paywall = range === 'annual' ? 10 : 40
-	const fullcount = counts[range] // The total number of years/quarters available
+	const fullcount = count // The total number of years/quarters available
 	const showcount = !isPro && fullcount > paywall ? paywall : fullcount // How many years/quarter to show
 	const paywalled = showcount < fullcount ? 'true' : false
 
 	useEffect(() => {
-		setDataRows(financials[range as keyof FinancialsType])
+		setDataRows(financials)
 	}, [financials, range])
 
 	// If pro user and data is limited, fetch the full data
@@ -74,10 +65,10 @@ export const FinancialTable = ({
 		async function fetchFullFinancials() {
 			const res = fullData
 				? fullData
-				: await getStockFinancialsFull(statement, info.symbol)
-			if (res && res[range]?.datekey?.length > paywall) {
+				: await getStockFinancialsFull(statement, info.symbol, range)
+			if (res && res?.datekey?.length > paywall) {
 				setFullData(res)
-				setDataRows(res[range])
+				setDataRows(res)
 			} else {
 				throw new Error(
 					'Unable to fetch full data, response was invalid or empty array'
@@ -103,10 +94,15 @@ export const FinancialTable = ({
 		return (
 			<>
 				<div className="">
-					<TableTitle statement={statement} />
+					<TableTitle
+						statement={statement}
+						currency={info.currency}
+						fiscalYear={info.fiscalYear}
+						range={range}
+					/>
 					<Unavailable
 						message={`No ${range} ${statement.replace(
-							/_/g,
+							/-/g,
 							' '
 						)} data available for this stock.`}
 						classes="min-h-[300px] lg:min-h-[500px]"
@@ -218,7 +214,7 @@ export const FinancialTable = ({
 					current: cell,
 					previous: prev,
 					revenue: rev,
-					divider
+					divider: 1
 				})
 
 				const cellContent = formatCell({
@@ -241,7 +237,7 @@ export const FinancialTable = ({
 				}
 
 				return (
-					<td key={index} title={titleTag} className={cellClass()}>
+					<td key={index} className={cellClass()}>
 						{cellContent !== '-' ? (
 							<span title={titleTag}>{cellContent}</span>
 						) : (
@@ -339,6 +335,7 @@ export const FinancialTable = ({
 					statement={statement}
 					currency={info.currency}
 					fiscalYear={info.fiscalYear}
+					range={range}
 				/>
 				<FinancialsControls
 					symbol={info.symbol}

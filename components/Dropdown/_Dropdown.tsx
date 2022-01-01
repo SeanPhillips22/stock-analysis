@@ -5,11 +5,12 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 type Props = {
 	title: string
 	children: React.ReactNode
+	hoverTitle?: string
 }
 
-export function Dropdown({ title, children }: Props) {
+export function Dropdown({ title, children, hoverTitle }: Props) {
 	return (
-		<Menu as="div" className="controls-menu">
+		<Menu as="div" className="controls-menu" title={hoverTitle}>
 			<Menu.Button className="controls-btn">
 				{title}
 				<ChevronDownIcon className="controls-icon" aria-hidden="true" />

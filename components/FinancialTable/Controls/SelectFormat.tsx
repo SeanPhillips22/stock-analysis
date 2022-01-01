@@ -28,7 +28,10 @@ export function SelectFormat() {
 	let active = DIVIDER_MAP.find((item) => item.value === divider)
 
 	return (
-		<Dropdown title={active ? active.title : 'Format'}>
+		<Dropdown
+			title={active ? active.title : 'Format'}
+			hoverTitle="Change number units"
+		>
 			{DIVIDER_MAP.map((item) => (
 				<div
 					key={item.value}

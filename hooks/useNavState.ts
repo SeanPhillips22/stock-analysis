@@ -19,12 +19,14 @@ export const useNavState = () => {
 		const two = validateUrlBit(split[2])
 		const three = validateUrlBit(split[3])
 		const four = validateUrlBit(split[4])
+		const five = validateUrlBit(split[5])
 
 		setPath({
 			one,
 			two,
 			three,
-			four
+			four,
+			five
 		})
 
 		setRoute(url)

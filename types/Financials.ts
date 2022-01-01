@@ -1,20 +1,16 @@
-export interface FinancialsType {
-	annual: FinancialReport
-	quarterly: FinancialReport
-	trailing: FinancialReport
-}
-
-export interface FinancialReport {
+export type FinancialReport = {
 	[key: string]: any[]
 }
 
+export type Range = 'annual' | 'quarterly' | 'trailing'
+
 export type Statement =
-	| 'income_statement'
-	| 'balance_sheet'
-	| 'cash_flow_statement'
+	| 'income-statement'
+	| 'balance-sheet'
+	| 'cash-flow-statement'
 	| 'ratios'
 
-export interface FinancialsMapType {
+export type FinancialsMapType = {
 	id: string
 	title: string
 	tooltipTitle?: string

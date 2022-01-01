@@ -5,6 +5,7 @@ export type PathObject = {
 	two: string | null
 	three: string | null
 	four: string | null
+	five: string | null
 }
 
 interface NavStateInterface {

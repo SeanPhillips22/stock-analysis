@@ -1,42 +1,27 @@
 import { financialsState } from 'state/financialsState'
+import { Range } from 'types/Financials'
 import { getDivider } from './FinancialTable.functions'
 
-interface Props {
+type Props = {
 	statement: string
 	currency?: string
 	fiscalYear?: string
+	range: Range
 }
 
-export const TableTitle = ({ statement, currency, fiscalYear }: Props) => {
-	return (
-		<div>
-			<TableHeader statement={statement} />
-			{currency && fiscalYear && (
-				<TableInfo
-					statement={statement}
-					currency={currency}
-					fiscalYear={fiscalYear}
-				/>
-			)}
-		</div>
-	)
-}
-
-function TableHeader({ statement }: { statement: string }) {
-	const range = financialsState((state) => state.range)
-
+export function TableTitle({ statement, currency, fiscalYear, range }: Props) {
 	const rangeTitle = range.charAt(0).toUpperCase() + range.slice(1)
 	let statementTitle
 	switch (statement) {
-		case 'income_statement':
+		case 'income-statement':
 			statementTitle = 'Income Statement'
 			break
 
-		case 'balance_sheet':
+		case 'balance-sheet':
 			statementTitle = 'Balance Sheet'
 			break
 
-		case 'cash_flow_statement':
+		case 'cash-flow-statement':
 			statementTitle = 'Cash Flow Statement'
 			break
 
@@ -45,23 +30,22 @@ function TableHeader({ statement }: { statement: string }) {
 			break
 	}
 
-	return (
-		<h2 className="text-2xl font-bold mb-3">
-			{statementTitle} ({rangeTitle})
-		</h2>
-	)
-}
-
-function TableInfo({ statement, currency, fiscalYear }: Props) {
 	const divider = financialsState((state) => state.divider)
 	const dividerText = getDivider(divider)
 	const firstWord = statement === 'ratios' ? 'Market cap' : 'Financials'
 
 	return (
-		<div className="text-sm pb-1 text-gray-600">
-			{`${firstWord} in ${
-				dividerText ? dividerText + ' ' : ''
-			}${currency}. Fiscal year is ${fiscalYear}.`}
+		<div>
+			<h2 className="text-2xl font-bold mb-3">
+				{statementTitle} ({rangeTitle})
+			</h2>
+			{currency && fiscalYear && (
+				<div className="text-sm pb-1 text-gray-600">
+					{`${firstWord} in ${
+						dividerText ? dividerText + ' ' : ''
+					}${currency}. Fiscal year is ${fiscalYear}.`}
+				</div>
+			)}
 		</div>
 	)
 }
