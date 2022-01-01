@@ -26,7 +26,6 @@ type Props = {
  * Wrapper that contains all the individual checkboxes to select columns for the results table
  * @param {string} search - The search term to filter the results
  * @return {JSX.Element}
- * TODO styling: scrollbar
  */
 export function ColumnItemWrap({ search, type }: Props) {
 	const { isShowing } = useModifyColumns()

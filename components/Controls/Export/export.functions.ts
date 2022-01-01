@@ -29,3 +29,23 @@ export function removeNanValues(value: string): string | null {
 	}
 	return value
 }
+
+export function extractFinancialValues(value: any, row: number, col: number) {
+	if (row === 0 && col !== 0) {
+		return `${value}`
+	}
+	if (col === 0) {
+		return value.replace(/(<([^>]+)>)/gi, '')
+	}
+	if (value === '-') {
+		return ''
+	}
+	value = value.match(/"([^"]*)"/)[1]
+	if (value.includes(',')) {
+		return parseFloat(value.replace(/,/g, ''))
+	}
+	if (value.includes('%')) {
+		return parseFloat(value.replace(/%/, '')) / 100
+	}
+	return parseFloat(value)
+}

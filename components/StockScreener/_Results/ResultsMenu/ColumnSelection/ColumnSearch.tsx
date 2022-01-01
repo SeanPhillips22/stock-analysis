@@ -10,8 +10,6 @@ type Props = {
  * @param {string} search
  * @param {function} setSearch
  * @return {JSX.Element}
- * TODO make the input focus automatically when the dropdown is opened
- * TODO add keyboard controls
  */
 export function ColumnSearch({ search, setSearch }: Props) {
 	return (

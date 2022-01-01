@@ -1,0 +1,10 @@
+/*
+* Export
+* Export button and dropdown
+*/
+
+@layer components {
+	.lock-icon {
+		@apply h-4 w-4 text-gray-500;
+	}
+}

@@ -2,22 +2,22 @@ import create from 'zustand'
 
 interface FinancialsState {
 	range: 'annual' | 'quarterly' | 'trailing'
-	divider: string
-	leftRight: 'left' | 'right'
-	reversed: boolean
 	setRange: (newRange: 'annual' | 'quarterly' | 'trailing') => void
-	setDivider: (newDivider: string) => void
-	setLeftRight: (newLeftRight: 'left' | 'right') => void
-	setReversed: (newReversed: boolean) => void
+
+	divider: number
+	setDivider: (newDivider: number) => void
+
+	reversed: boolean
+	toggleReversed: () => void
 }
 
 export const financialsState = create<FinancialsState>((set) => ({
 	range: 'annual',
-	divider: 'millions',
-	leftRight: 'left',
-	reversed: false,
 	setRange: (newRange) => set({ range: newRange }),
+
+	divider: 1000000,
 	setDivider: (newDivider) => set({ divider: newDivider }),
-	setLeftRight: (newLeftRight) => set({ leftRight: newLeftRight }),
-	setReversed: (newReversed) => set({ reversed: newReversed })
+
+	reversed: false,
+	toggleReversed: () => set((state) => ({ reversed: !state.reversed }))
 }))

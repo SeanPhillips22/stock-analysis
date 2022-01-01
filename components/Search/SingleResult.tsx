@@ -44,21 +44,23 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 				case 'financials':
 					{
 						if (type === 's') {
+							let rangePath = path.five ? `${path.five}/` : ''
 							switch (path.four) {
 								case 'balance-sheet':
-									url = `${url}financials/balance-sheet/`
+									url = `${url}financials/balance-sheet/${rangePath}`
 									break
 
 								case 'cash-flow-statement':
-									url = `${url}financials/cash-flow-statement/`
+									url = `${url}financials/cash-flow-statement/${rangePath}`
 									break
 
 								case 'ratios':
-									url = `${url}financials/ratios/`
+									url = `${url}financials/ratios/${rangePath}`
 									break
 
 								default:
-									url = `${url}financials/`
+									rangePath = path.four ? `${path.four}/` : ''
+									url = `${url}financials/${rangePath}`
 									break
 							}
 						}

@@ -1,4 +1,5 @@
 import { getData } from 'functions/apis/API'
+import { Range, Statement } from 'types/Financials'
 
 const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null
 
@@ -28,8 +29,14 @@ export async function getPageDataSSR(
 	return respondSSR(response)
 }
 
-export async function getStockFinancialsSSR(page: string, symbol: string) {
-	const response = await getData(`financials?type=${page}&symbol=${symbol}`)
+export async function getStockFinancialsSSR(
+	statement: Statement,
+	symbol: string,
+	range: Range
+) {
+	const response = await getData(
+		`financials?type=${statement}&symbol=${symbol}&range=${range}`
+	)
 	return respondSSR(response)
 }
 
@@ -66,21 +73,13 @@ export async function getPageDataFull(page: string, symbol: string) {
 	return []
 }
 
-export async function getStockFinancials(
-	page: string,
-	symbol: string,
-	reval: number
-) {
-	const response = await getData(`financials?type=${page}&symbol=${symbol}`)
-	return respond(response, reval)
-}
-
 export async function getStockFinancialsFull(
-	statement: string,
-	symbol: string
+	statement: Statement,
+	symbol: string,
+	range: Range
 ) {
 	const response = await getData(
-		`financials?type=${statement}&s=${symbol}&f=${PRO_KEY}`
+		`financials?type=${statement}&s=${symbol}&f=${PRO_KEY}&range=${range}`
 	)
 	if (response.status === 200) {
 		return response.data

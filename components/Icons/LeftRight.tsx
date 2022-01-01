@@ -9,8 +9,13 @@ export const LeftRightIcon = ({ classes }: IProps) => (
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
 		style={{ maxWidth: '40px' }}
+		stroke="currentColor"
 	>
-		<path d="M16 13V11.5H10V9.5H16V8L19 10.5L16 13Z" fill="currentColor" />
-		<path d="M8 17V15.5H14V13.5H8V12L5 14.5L8 17Z" fill="currentColor" />
+		<path
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={2}
+			d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+		/>
 	</svg>
 )

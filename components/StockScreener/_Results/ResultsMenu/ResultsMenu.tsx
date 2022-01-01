@@ -43,7 +43,6 @@ export function ResultsMenu({
 				</div>
 				<div className="hidden md:block">
 					<Export
-						title="Export"
 						buttons={[
 							{
 								title: 'Export to Excel',

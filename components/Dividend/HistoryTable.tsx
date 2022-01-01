@@ -56,7 +56,6 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 				<h2 className="hh2 mb-0.5 sm:mb-2">Dividend History</h2>
 				<div className="hidden sm:block pb-0.5">
 					<Export
-						title="Export"
 						buttons={[
 							{
 								title: 'Export to Excel',

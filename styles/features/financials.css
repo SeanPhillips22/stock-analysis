@@ -1,0 +1,95 @@
+/*
+* Financials
+* Financials page styles
+*/
+
+@layer components {
+	.finnav-wrap {
+		@apply flex flex-col md:flex-row md:justify-between mb-2 md:mb-3 space-y-3 md:space-y-0;
+	}
+
+	.fintbl {
+		@apply w-full whitespace-nowrap;
+	}
+
+	.fintbl th {
+		@apply bg-gray-light;
+	}
+
+	.fintbl tr:not(:first-child) {
+		@apply border-t border-gray-300;
+	}
+
+	.fintbl tr th {
+		@apply py-[7px] px-3 font-semibold;
+	}
+
+	.fintbl tr td:first-child {
+		@apply bg-gray-light;
+	}
+
+	.fintbl tr td {
+		@apply min-w-[100px] py-[5px] px-3;
+	}
+
+	.fintbl tr > *:not(:last-child) {
+		@apply border-r border-gray-300;
+	}
+
+	.fintbl tr > *:first-child {
+		@apply text-left;
+	}
+
+	.fintbl tr > *:not(:first-child) {
+		@apply text-right;
+	}
+
+	.fintbl svg {
+		@apply w-[22px] h-[22px] my-0 mx-[5px] stroke-[#777];
+	}
+
+	@media screen and (min-width: 1025px) {
+		.fintbl tr:hover td {
+			@apply bg-blue-row_hover;
+		}
+	}
+
+	.bigTooltipText {
+		font-size: 1rem !important;
+		padding: 0.3rem;
+	}
+
+	.iconcell {
+		@apply p-0;
+	}
+
+	.iconcelldiv {
+		@apply relative p-[3px] border border-t-0 border-transparent z-10 delay-100;
+	}
+
+	.iconcelldiv:hover {
+		@apply bg-white border-gray-200 z-50;
+	}
+
+	.iconcelldiv:hover svg {
+		@apply stroke-[#2c6288];
+	}
+
+	.fintbl svg:focus {
+		@apply stroke-[#2c6288];
+	}
+
+	@media screen and (max-width: 639px) {
+		.fintbl {
+			@apply text-sm;
+		}
+
+		.fintbl tr th {
+			@apply py-1.5 px-2;
+		}
+
+		.fintbl tr td {
+			@apply min-w-[80px] py-1 px-2;
+		}
+	}
+}

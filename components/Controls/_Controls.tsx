@@ -31,7 +31,7 @@ export const Controls = ({
 	append = ''
 }: Props) => {
 	return (
-		<div className="flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1">
+		<div className="controls">
 			<div className="mr-auto">
 				<h2 className="text-xl bp:text-2xl font-semibold whitespace-nowrap">
 					{`${append && append + ' '}${count} ${title}`}
@@ -44,7 +44,6 @@ export const Controls = ({
 			)}
 			<div className="hidden sm:block">
 				<Export
-					title="Export"
 					buttons={[
 						{ title: 'Export to Excel', type: 'xlsx', restricted: true },
 						{ title: 'Export to CSV', type: 'csv', restricted: true }

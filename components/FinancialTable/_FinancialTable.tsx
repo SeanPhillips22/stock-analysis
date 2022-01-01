@@ -1,10 +1,5 @@
 /* eslint-disable react/display-name */
-import {
-	FinancialsType,
-	FinancialsMapType,
-	FinancialReport,
-	Statement
-} from 'types/Financials'
+import { FinancialsMapType, FinancialReport, Statement } from 'types/Financials'
 import { Info } from 'types/Info'
 import { useState, useEffect, forwardRef, useMemo } from 'react'
 import { financialsState } from 'state/financialsState'
@@ -14,13 +9,11 @@ import {
 	redOrGreen,
 	getPeriodLabel,
 	getPeriodTooltip,
-	sliceData,
-	reverseData
+	sliceData
 } from './FinancialTable.functions'
 import { HoverChartIcon } from 'components/Icons/HoverChart'
-import styles from './FinancialTable.module.css'
 import { TableTitle } from './TableTitle'
-import { TableControls } from './TableControls'
+import { FinancialsControls } from './Controls/FinancialsControls'
 import Paywall from './Paywall'
 import dynamic from 'next/dynamic'
 import { Tooltip } from './Tooltip'
@@ -34,14 +27,11 @@ const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false })
 
 interface Props {
 	statement: Statement
-	financials: FinancialsType
+	financials: FinancialReport
 	info: Info
 	map: FinancialsMapType[]
-	counts: {
-		annual: number
-		quarterly: number
-		trailing: number
-	}
+	count: number
+	range: 'annual' | 'quarterly' | 'trailing'
 }
 
 export const FinancialTable = ({
@@ -49,28 +39,25 @@ export const FinancialTable = ({
 	financials,
 	info,
 	map,
-	counts
+	count,
+	range
 }: Props) => {
-	const range = financialsState((state) => state.range)
+	// const range = financialsState((state) => state.range)
 	const divider = financialsState((state) => state.divider)
-	const leftRight = financialsState((state) => state.leftRight)
 	const reversed = financialsState((state) => state.reversed)
-	const setReversed = financialsState((state) => state.setReversed)
 	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
-	const [fullData, setFullData] = useState<FinancialsType>()
-	const [dataRows, setDataRows] = useState(
-		financials[range as keyof FinancialsType]
-	)
+	const [fullData, setFullData] = useState<FinancialReport>()
+	const [dataRows, setDataRows] = useState(financials)
 
 	// Check if financial data is paywalled
 	const paywall = range === 'annual' ? 10 : 40
-	const fullcount = counts[range] // The total number of years/quarters available
+	const fullcount = count // The total number of years/quarters available
 	const showcount = !isPro && fullcount > paywall ? paywall : fullcount // How many years/quarter to show
 	const paywalled = showcount < fullcount ? 'true' : false
 
 	useEffect(() => {
-		setDataRows(financials[range as keyof FinancialsType])
+		setDataRows(financials)
 	}, [financials, range])
 
 	// If pro user and data is limited, fetch the full data
@@ -78,10 +65,10 @@ export const FinancialTable = ({
 		async function fetchFullFinancials() {
 			const res = fullData
 				? fullData
-				: await getStockFinancialsFull(statement, info.symbol)
-			if (res && res[range]?.datekey?.length > paywall) {
+				: await getStockFinancialsFull(statement, info.symbol, range)
+			if (res && res?.datekey?.length > paywall) {
 				setFullData(res)
-				setDataRows(res[range])
+				setDataRows(res)
 			} else {
 				throw new Error(
 					'Unable to fetch full data, response was invalid or empty array'
@@ -95,18 +82,9 @@ export const FinancialTable = ({
 	}, [info.symbol, isPro, fullcount, paywall, statement, range, fullData])
 
 	let data = useMemo(
-		() => sliceData(dataRows, showcount),
-		[dataRows, showcount]
+		() => sliceData(dataRows, showcount, reversed),
+		[dataRows, showcount, reversed]
 	)
-
-	// Switch data left/right if applicable
-	if (
-		(leftRight === 'right' && !reversed) ||
-		(leftRight === 'left' && reversed)
-	) {
-		data = reverseData(data)
-		setReversed(!reversed)
-	}
 
 	// If count is empty, show message
 	if (
@@ -116,10 +94,15 @@ export const FinancialTable = ({
 		return (
 			<>
 				<div className="">
-					<TableTitle statement={statement} />
+					<TableTitle
+						statement={statement}
+						currency={info.currency}
+						fiscalYear={info.fiscalYear}
+						range={range}
+					/>
 					<Unavailable
 						message={`No ${range} ${statement.replace(
-							/_/g,
+							/-/g,
 							' '
 						)} data available for this stock.`}
 						classes="min-h-[300px] lg:min-h-[500px]"
@@ -181,7 +164,7 @@ export const FinancialTable = ({
 
 	const ChartIcon = forwardRef<HTMLDivElement>((props, ref) => {
 		return (
-			<div ref={ref} className={styles.iconcelldiv}>
+			<div ref={ref} className="iconcelldiv">
 				<HoverChartIcon />
 			</div>
 		)
@@ -217,7 +200,7 @@ export const FinancialTable = ({
 		}
 		const revenuedata = data.revenue
 
-		if (leftRight === 'right') {
+		if (reversed) {
 			offset = -offset
 		}
 
@@ -231,7 +214,7 @@ export const FinancialTable = ({
 					current: cell,
 					previous: prev,
 					revenue: rev,
-					divider: 'raw'
+					divider: 1
 				})
 
 				const cellContent = formatCell({
@@ -254,7 +237,7 @@ export const FinancialTable = ({
 				}
 
 				return (
-					<td key={index} title={titleTag} className={cellClass()}>
+					<td key={index} className={cellClass()}>
 						{cellContent !== '-' ? (
 							<span title={titleTag}>{cellContent}</span>
 						) : (
@@ -300,7 +283,7 @@ export const FinancialTable = ({
 							content={<IndicatorTooltip row={row} />}
 							theme="light"
 							delay={100}
-							className={styles.bigTooltipText}
+							className="bigTooltipText"
 						>
 							<RowTitle
 								title={row.title}
@@ -322,7 +305,7 @@ export const FinancialTable = ({
 											range={range}
 											ticker={info.ticker}
 											divider={divider}
-											leftRight={leftRight}
+											reversed={reversed}
 										/>
 									)}
 								</div>
@@ -352,8 +335,9 @@ export const FinancialTable = ({
 					statement={statement}
 					currency={info.currency}
 					fiscalYear={info.fiscalYear}
+					range={range}
 				/>
-				<TableControls
+				<FinancialsControls
 					symbol={info.symbol}
 					statement={statement}
 					range={range}
@@ -365,11 +349,7 @@ export const FinancialTable = ({
 					(paywalled ? ' flex flex-row' : '')
 				}
 			>
-				{paywalled && <div className="flex flex-row"></div>}
-				<table
-					className={[styles.table, styles.table_financial].join(' ')}
-					id="financial-table"
-				>
+				<table className="fintbl" id="financial-table">
 					<thead>
 						<tr className="border-b-2 border-gray-300">
 							<th className="flex flex-row justify-between items-center">
@@ -377,7 +357,7 @@ export const FinancialTable = ({
 									content={getPeriodTooltip(range)}
 									theme="light"
 									delay={100}
-									className={styles.bigTooltipText}
+									className="bigTooltipText"
 								>
 									<RowTitle
 										title={getPeriodLabel(range)}

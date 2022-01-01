@@ -156,7 +156,6 @@ export const CalendarTable = ({
 				</h2>
 				<div className="hidden sm:block">
 					<Export
-						title="Export"
 						buttons={[
 							{
 								title: 'Export to Excel',

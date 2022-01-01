@@ -33,8 +33,8 @@ interface Props {
 	row: FinancialsMapType
 	range: string
 	ticker: string
-	divider: string
-	leftRight: 'left' | 'right'
+	divider: number
+	reversed: boolean
 }
 
 export const HoverChart = ({
@@ -44,7 +44,7 @@ export const HoverChart = ({
 	range,
 	ticker,
 	divider,
-	leftRight
+	reversed
 }: Props) => {
 	if (
 		typeof window !== 'undefined' &&
@@ -128,8 +128,8 @@ export const HoverChart = ({
 	const xdata = xdatadraft
 	const ydata = y.slice(0, count)
 
-	const xaxis = leftRight === 'left' ? xdata.reverse() : xdata
-	const yaxis = leftRight === 'left' ? ydata.reverse() : ydata
+	const xaxis = reversed ? xdata : xdata.reverse()
+	const yaxis = reversed ? ydata : ydata.reverse()
 
 	// Cut zero values from start of data array
 	const ylength = yaxis.length

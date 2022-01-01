@@ -3,7 +3,7 @@ import { Info } from 'types/Info'
 import { FinancialReport, Range } from 'types/Financials'
 import { FinancialTable } from 'components/FinancialTable/_FinancialTable'
 import { getStockFinancialsSSR } from 'functions/apis/callBackEnd'
-import { MAP_INCOME_STATEMENT } from 'data/financials/map_income_statement'
+import { MAP_RATIOS } from 'data/financials/map_ratios'
 import { FinancialsLayout } from 'components/Layout/FinancialsLayout'
 
 type Props = {
@@ -13,21 +13,21 @@ type Props = {
 	range: Range
 }
 
-export default function IncomeStatement({ info, data, count, range }: Props) {
+export default function Ratios({ info, data, count, range }: Props) {
 	return (
 		<FinancialsLayout
 			info={info}
-			url={`/stocks/${info.symbol}/financials/`}
-			title={`${info.nameFull} (${info.ticker}) Financial Statements: Income`}
-			description={`Detailed financial statements for ${info.nameFull} (${info.ticker}), including the income statement, balance sheet, and cash flow statement.`}
-			statement="income-statement"
+			url={`/stocks/${info.symbol}/financials/ratios/`}
+			title={`${info.nameFull} (${info.ticker}) Financial Ratios and Metrics`}
+			description={`Financial ratios and metrics for ${info.nameFull} (${info.ticker}). Includes annual, quarterly and trailing numbers with full history and charts.`}
+			statement="ratios"
 			range={range}
 		>
 			<FinancialTable
-				key={`${info.symbol}-income-statement`}
-				statement="income-statement"
+				key={`${info.symbol}-ratios`}
+				statement="ratios"
 				financials={data}
-				map={MAP_INCOME_STATEMENT}
+				map={MAP_RATIOS}
 				info={info}
 				count={count}
 				range={range}
@@ -38,11 +38,8 @@ export default function IncomeStatement({ info, data, count, range }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const symbol = context?.params?.symbol as string
-	const data = await getStockFinancialsSSR(
-		'income-statement',
-		symbol,
-		'annual'
-	)
+	const range = (context?.params?.range as Range) || 'annual'
+	const data = await getStockFinancialsSSR('ratios', symbol, range)
 
 	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 
