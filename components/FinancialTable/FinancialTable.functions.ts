@@ -92,6 +92,7 @@ type FormatCell = {
 	previous: number | null | string
 	revenue: number | null
 	divider: number
+	isTTMcolumn: boolean
 }
 
 // Format the number in the cells
@@ -100,7 +101,8 @@ export function formatCell({
 	current,
 	previous,
 	revenue,
-	divider
+	divider,
+	isTTMcolumn
 }: FormatCell) {
 	const decimals = divider === 1 ? 3 : 2
 
@@ -122,7 +124,8 @@ export function formatCell({
 				typeof current === 'number' &&
 				typeof previous === 'number' &&
 				current > 0 &&
-				previous > 0
+				previous > 0 &&
+				!isTTMcolumn
 			) {
 				return ((current / previous - 1) * 100).toFixed(decimals) + '%'
 			}
@@ -223,7 +226,9 @@ export function formatCellExport({
 	}
 }
 
-export function formatYear(date: string | number) {
+export function formatYear(date: string | number, statement?: string) {
+	if (date === 'TTM') return statement === 'ratios' ? 'Current' : 'TTM'
+
 	const dateObject = new Date(date)
 	let year = dateObject.getFullYear()
 	const month = dateObject.getMonth()

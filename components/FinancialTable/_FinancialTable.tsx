@@ -45,6 +45,7 @@ export const FinancialTable = ({
 	// const range = financialsState((state) => state.range)
 	const divider = financialsState((state) => state.divider)
 	const reversed = financialsState((state) => state.reversed)
+	const trailing = financialsState((state) => state.trailing)
 	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
 	const [fullData, setFullData] = useState<FinancialReport>()
@@ -122,9 +123,27 @@ export const FinancialTable = ({
 		const headerdata = data.datekey
 
 		return headerdata.map((cell, index) => {
+			if (cell === 'TTM' && !trailing) return // Do not show trailing if not enabled
+
+			let cellBody =
+				range === 'annual'
+					? formatYear(cell, statement)
+					: statement === 'ratios' && cell === 'TTM'
+					? 'Current'
+					: cell
+
 			return (
-				<th key={index} title={cell}>
-					{range === 'annual' ? formatYear(cell) : cell}
+				<th
+					key={index}
+					title={
+						cell !== 'TTM'
+							? cell
+							: statement === 'ratios'
+							? 'Current values'
+							: 'Trailing-Twelve Months'
+					}
+				>
+					{cellBody}
 				</th>
 			)
 		})
@@ -205,6 +224,9 @@ export const FinancialTable = ({
 		}
 
 		const dataRows = rowdata.map((cell, index) => {
+			let isTTMcolumn = data.datekey[index] === 'TTM' ? true : false
+			if (isTTMcolumn && !trailing) return // Do not show trailing if not enabled
+
 			if (typeof cell === 'number') {
 				const prev = format === 'growth' ? rowdata[index + offset] : null
 				const rev = format === 'margin' ? revenuedata[index] : null
@@ -214,7 +236,8 @@ export const FinancialTable = ({
 					current: cell,
 					previous: prev,
 					revenue: rev,
-					divider: 1
+					divider: 1,
+					isTTMcolumn
 				})
 
 				const cellContent = formatCell({
@@ -222,7 +245,8 @@ export const FinancialTable = ({
 					current: cell,
 					previous: prev,
 					revenue: rev,
-					divider
+					divider,
+					isTTMcolumn
 				})
 
 				const cellClass = () => {
@@ -306,6 +330,8 @@ export const FinancialTable = ({
 											ticker={info.ticker}
 											divider={divider}
 											reversed={reversed}
+											trailing={trailing}
+											statement={statement}
 										/>
 									)}
 								</div>

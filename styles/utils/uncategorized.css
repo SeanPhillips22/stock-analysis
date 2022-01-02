@@ -23,4 +23,8 @@
 	table.n3-right tr > *:nth-child(n + 4) {
 		text-align: right;
 	}
+
+	.noring {
+		@apply focus:ring-0 focus:ring-offset-0;
+	}
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { FinancialReport, FinancialsMapType } from 'types/Financials'
+import { FinancialReport, FinancialsMapType, Statement } from 'types/Financials'
 
 import {
 	BarController,
@@ -35,6 +35,8 @@ interface Props {
 	ticker: string
 	divider: number
 	reversed: boolean
+	trailing: boolean
+	statement: Statement
 }
 
 export const HoverChart = ({
@@ -44,7 +46,9 @@ export const HoverChart = ({
 	range,
 	ticker,
 	divider,
-	reversed
+	reversed,
+	trailing,
+	statement
 }: Props) => {
 	if (
 		typeof window !== 'undefined' &&
@@ -97,6 +101,9 @@ export const HoverChart = ({
 	}
 
 	const y = rowdata.map((curr, index) => {
+		let isTTMcolumn = data.datekey[index] === 'TTM' ? true : false
+		if (isTTMcolumn && type === 'growth') return
+
 		const offset = range === 'quarterly' || range === 'trailing' ? offs : 1
 		const previous = row.format === 'growth' ? rowdata[index + offset] : null
 		const revenue = row.format === 'margin' ? data.revenue[index] : null
@@ -109,7 +116,8 @@ export const HoverChart = ({
 						current,
 						previous,
 						revenue,
-						divider
+						divider,
+						isTTMcolumn
 				  })
 				: current
 
@@ -125,11 +133,22 @@ export const HoverChart = ({
 			return formatYear(item)
 		})
 	}
-	const xdata = xdatadraft
-	const ydata = y.slice(0, count)
+	let xdata = xdatadraft
+	let ydata = y.slice(0, count)
 
-	const xaxis = reversed ? xdata : xdata.reverse()
-	const yaxis = reversed ? ydata : ydata.reverse()
+	let xaxis = reversed ? xdata : xdata.reverse()
+	let yaxis: any = reversed ? ydata : ydata.reverse()
+
+	// If ttm/latest is disabled, remove those values from the X and Y data
+	let l = xaxis.length - 1
+	if (xaxis[l] === 'TTM') {
+		if (!trailing || type === 'growth') {
+			xaxis = xaxis.slice(0, l)
+			yaxis = yaxis.slice(0, l)
+		} else if (statement === 'ratios') {
+			xaxis[l] = 'Current'
+		}
+	}
 
 	// Cut zero values from start of data array
 	const ylength = yaxis.length
@@ -142,14 +161,18 @@ export const HoverChart = ({
 		}
 	}
 
+	console.log(yaxis)
+
 	const ymin = yaxis[0]
 	const ymax = yaxis[yaxis.length - 1]
 
-	const chartType = type === 'ratio' || type === 'percentage' ? 'line' : 'bar'
+	let chartType: any =
+		type === 'ratio' || type === 'percentage' ? 'line' : 'bar'
+	if ((type === 'ratio' || type === 'percentage') && yaxis.length === 1)
+		chartType = 'bar'
+
 	const bgColor =
-		type === 'ratio' || type === 'percentage'
-			? 'rgba(44, 98, 136, 0.4)'
-			: 'rgba(44, 98, 136, 1)'
+		chartType === 'line' ? 'rgba(44, 98, 136, 0.4)' : 'rgba(44, 98, 136, 1)'
 
 	const padding = chartType == 'line' ? 15 : 0
 
