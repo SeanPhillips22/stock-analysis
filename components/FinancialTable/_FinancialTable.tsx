@@ -364,7 +364,7 @@ export const FinancialTable = ({
 					range={range}
 				/>
 				<FinancialsControls
-					symbol={info.symbol}
+					info={info}
 					statement={statement}
 					range={range}
 				/>

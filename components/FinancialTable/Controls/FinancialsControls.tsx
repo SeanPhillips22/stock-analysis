@@ -4,14 +4,15 @@ import { Export } from 'components/Controls/Export'
 import { SelectFormat } from './SelectFormat'
 import { ShowTrailing } from './ShowTrailing'
 import { Range, Statement } from 'types/Financials'
+import { Info } from 'types/Info'
 
 type Props = {
-	symbol: string
+	info: Info
 	statement: Statement
 	range: Range
 }
 
-export function FinancialsControls({ symbol, statement, range }: Props) {
+export function FinancialsControls({ info, statement, range }: Props) {
 	const reversed = financialsState((state) => state.reversed)
 	const toggleReversed = financialsState((state) => state.toggleReversed)
 
@@ -25,7 +26,9 @@ export function FinancialsControls({ symbol, statement, range }: Props) {
 			>
 				<LeftRightIcon classes="h-5 w-5 pointer-events-none" />
 			</button>
-			<ShowTrailing range={range} statement={statement} />
+			{!info.exceptions.hideTTM && (
+				<ShowTrailing range={range} statement={statement} />
+			)}
 			<SelectFormat />
 			<Export
 				buttons={[
@@ -33,7 +36,7 @@ export function FinancialsControls({ symbol, statement, range }: Props) {
 					{ title: 'Export to CSV', type: 'csv', restricted: true }
 				]}
 				tableId="financial-table"
-				fileName={`${symbol}-${statement}-${range}`}
+				fileName={`${info.symbol}-${statement}-${range}`}
 			/>
 		</div>
 	)
