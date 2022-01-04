@@ -28,8 +28,6 @@ export function startAdsAuction(url: string) {
 			}
 		}
 
-		console.log(ads)
-
 		// Start the ads auction
 		window.adngin.queue.push(function () {
 			window.adngin.cmd.startAuction(ads)
