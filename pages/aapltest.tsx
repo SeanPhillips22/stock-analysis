@@ -13,6 +13,7 @@ import { FinancialsWidget } from 'components/Overview/FinancialsWidget'
 import { AnalystWidget } from 'components/Overview/AnalystWidget'
 import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
 import Script from 'next/script'
+import TestAd from 'components/Ads/GPT/TestAd'
 
 interface Props {
 	info: Info
@@ -34,12 +35,12 @@ const StockTestOverview = ({ info, data, news }: Props) => {
 		<Stock info={info} url={`/stocks/${symbol}`}>
 			<Script
 				id="gpt"
-				strategy="beforeInteractive"
+				strategy="afterInteractive"
 				src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 			/>
 			<Script
 				id="gpt-ads"
-				strategy="beforeInteractive"
+				strategy="afterInteractive"
 				dangerouslySetInnerHTML={{
 					__html: `window.googletag = window.googletag || {cmd: []};
   googletag.cmd.push(function() {
@@ -80,6 +81,7 @@ const StockTestOverview = ({ info, data, news }: Props) => {
 							}}
 						/>
 					</div>
+					<TestAd adId="1641290361391-0" />
 				</div>
 				{news && (
 					<div className="lg:order-1">
