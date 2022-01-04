@@ -35,7 +35,7 @@ const StockTestOverview = ({ info, data, news }: Props) => {
 		<Stock info={info} url={`/stocks/${symbol}`}>
 			<Script
 				id="gpt"
-				strategy="afterInteractive"
+				strategy="beforeInteractive"
 				src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 			/>
 			<SEO
