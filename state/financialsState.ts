@@ -12,6 +12,9 @@ interface FinancialsState {
 
 	trailing: boolean
 	toggleTrailing: () => void
+
+	current: boolean
+	toggleCurrent: () => void
 }
 
 export const financialsState = create<FinancialsState>((set) => ({
@@ -25,5 +28,8 @@ export const financialsState = create<FinancialsState>((set) => ({
 	toggleReversed: () => set((state) => ({ reversed: !state.reversed })),
 
 	trailing: false,
-	toggleTrailing: () => set((state) => ({ trailing: !state.trailing }))
+	toggleTrailing: () => set((state) => ({ trailing: !state.trailing })),
+
+	current: true,
+	toggleCurrent: () => set((state) => ({ current: !state.current }))
 }))

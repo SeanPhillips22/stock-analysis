@@ -21,7 +21,6 @@ export interface Info {
 	cik?: string
 	exceptions: {
 		hideTTM: boolean
-		hideRatios: boolean
 		hideChart: boolean
 		overrideChart: boolean
 	}

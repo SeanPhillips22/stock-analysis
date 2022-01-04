@@ -46,6 +46,7 @@ export const FinancialTable = ({
 	const divider = financialsState((state) => state.divider)
 	const reversed = financialsState((state) => state.reversed)
 	const trailing = financialsState((state) => state.trailing)
+	const current = financialsState((state) => state.current)
 	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
 	const [fullData, setFullData] = useState<FinancialReport>()
@@ -56,6 +57,13 @@ export const FinancialTable = ({
 	const fullcount = count // The total number of years/quarters available
 	const showcount = !isPro && fullcount > paywall ? paywall : fullcount // How many years/quarter to show
 	const paywalled = showcount < fullcount ? 'true' : false
+
+	let showTTM =
+		range === 'annual' && statement !== 'ratios' && trailing
+			? true
+			: statement === 'ratios' && current
+			? true
+			: false
 
 	useEffect(() => {
 		setDataRows(financials)
@@ -88,28 +96,23 @@ export const FinancialTable = ({
 	)
 
 	// If count is empty, show message
-	if (
-		showcount === 0 ||
-		(statement === 'ratios' && info.exceptions.hideRatios)
-	) {
+	if (showcount === 0) {
 		return (
-			<>
-				<div className="">
-					<TableTitle
-						statement={statement}
-						currency={info.currency}
-						fiscalYear={info.fiscalYear}
-						range={range}
-					/>
-					<Unavailable
-						message={`No ${range} ${statement.replace(
-							/-/g,
-							' '
-						)} data available for this stock.`}
-						classes="min-h-[300px] lg:min-h-[500px]"
-					/>
-				</div>
-			</>
+			<div>
+				<TableTitle
+					statement={statement}
+					currency={info.currency}
+					fiscalYear={info.fiscalYear}
+					range={range}
+				/>
+				<Unavailable
+					message={`No ${range} ${statement.replace(
+						/-/g,
+						' '
+					)} data available for this stock.`}
+					classes="min-h-[300px] lg:min-h-[500px]"
+				/>
+			</div>
 		)
 	}
 
@@ -122,8 +125,8 @@ export const FinancialTable = ({
 	const headerRow = () => {
 		const headerdata = data.datekey
 
-		return headerdata.map((cell, index) => {
-			if (cell === 'TTM' && !trailing) return // Do not show trailing if not enabled
+		return headerdata?.map((cell, index) => {
+			if (cell === 'TTM' && !showTTM) return // Do not show trailing if not enabled
 
 			let cellBody =
 				range === 'annual'
@@ -225,7 +228,7 @@ export const FinancialTable = ({
 
 		const dataRows = rowdata.map((cell, index) => {
 			let isTTMcolumn = data.datekey[index] === 'TTM' ? true : false
-			if (isTTMcolumn && !trailing) return // Do not show trailing if not enabled
+			if (isTTMcolumn && !showTTM) return // Do not show trailing if not enabled
 
 			if (typeof cell === 'number') {
 				const prev = format === 'growth' ? rowdata[index + offset] : null
@@ -330,8 +333,8 @@ export const FinancialTable = ({
 											ticker={info.ticker}
 											divider={divider}
 											reversed={reversed}
-											trailing={trailing}
 											statement={statement}
+											showTTM={showTTM}
 										/>
 									)}
 								</div>

@@ -93,6 +93,7 @@ type FormatCell = {
 	revenue: number | null
 	divider: number
 	isTTMcolumn: boolean
+	isHover?: boolean
 }
 
 // Format the number in the cells
@@ -102,7 +103,8 @@ export function formatCell({
 	previous,
 	revenue,
 	divider,
-	isTTMcolumn
+	isTTMcolumn,
+	isHover
 }: FormatCell) {
 	const decimals = divider === 1 ? 3 : 2
 
@@ -152,7 +154,9 @@ export function formatCell({
 
 		case 'ratio': {
 			if (current) {
-				return current.toFixed(decimals)
+				return divider === 1 || isHover
+					? (Math.round(current * 1000) / 1000).toFixed(3)
+					: (Math.round(current * 100) / 100).toFixed(2)
 			}
 			return '-'
 		}

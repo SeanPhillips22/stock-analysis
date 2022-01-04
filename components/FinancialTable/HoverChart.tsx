@@ -35,8 +35,8 @@ interface Props {
 	ticker: string
 	divider: number
 	reversed: boolean
-	trailing: boolean
 	statement: Statement
+	showTTM: boolean
 }
 
 export const HoverChart = ({
@@ -47,8 +47,8 @@ export const HoverChart = ({
 	ticker,
 	divider,
 	reversed,
-	trailing,
-	statement
+	statement,
+	showTTM
 }: Props) => {
 	if (
 		typeof window !== 'undefined' &&
@@ -117,7 +117,8 @@ export const HoverChart = ({
 						previous,
 						revenue,
 						divider,
-						isTTMcolumn
+						isTTMcolumn,
+						isHover: true
 				  })
 				: current
 
@@ -142,7 +143,7 @@ export const HoverChart = ({
 	// If ttm/latest is disabled, remove those values from the X and Y data
 	let l = xaxis.length - 1
 	if (xaxis[l] === 'TTM') {
-		if (!trailing || type === 'growth') {
+		if (!showTTM || type === 'growth') {
 			xaxis = xaxis.slice(0, l)
 			yaxis = yaxis.slice(0, l)
 		} else if (statement === 'ratios') {
