@@ -1,121 +1,59 @@
 import { useEffect, useState } from 'react'
 import Script from 'next/script'
-import { navState } from 'state/navState'
-import { PathType } from 'types/Path'
+import { getAdsForPage } from './Loading/getAdsForPage'
+import { useNavState } from 'hooks/useNavState'
+import { useLoadAds } from './Loading/_useLoadAds'
 
-declare global {
-	// eslint-disable-next-line no-unused-vars
-	interface Window {
-		adngin: any
-	}
-}
-
-function getPageAds(path: PathType) {
-	// Front page
-	if (!path.one) {
-		return ['top_leaderboard', 'in-content_1_mobile']
-	}
-
-	// IPO pages
-	if (path.one === 'ipos') {
-		if (path.two === 'calendar') {
-			return ['top_leaderboard', 'in-content_1_mobile']
-		}
-		if (path.two === 'statistics') {
-			return ['top_leaderboard', 'sidebar_1']
-		}
-		return ['top_leaderboard', 'sidebar_1', 'sidebar_2']
-	}
-
-	if (path.one === 'screener') {
-		return ['top_leaderboard']
-	}
-
-	// News and Actions pages
-	if (path.one === 'news' || path.one === 'actions') {
-		return ['top_leaderboard', 'sidebar_1', 'sidebar_2']
-	}
-
-	// Stocks and ETF pages
-	if (path.one === 'stocks' || path.one === 'etf') {
-		// Index pages
-		if (!path.two) {
-			return ['top_leaderboard', 'sidebar_1', 'sidebar_2']
-		}
-		// Overview, statistics, company, dividend pages
-		if (
-			!path.three ||
-			path.three === 'statistics' ||
-			path.three === 'company' ||
-			path.three === 'dividend'
-		) {
-			return [
-				'top_leaderboard',
-				'sidebar_1',
-				'sidebar_2',
-				'in-content_1_mobile'
-			]
-		}
-		// Holdings pages
-		if (path.three === 'holdings') {
-			return ['top_leaderboard', 'sidebar_1', 'sidebar_2']
-		}
-	}
-
-	// Trending page
-	if (path.one === 'trending') {
-		return ['top_leaderboard', 'sidebar_1']
-	}
-
-	// Mostly article pages
-	if (path.one !== 'stocks' && path.one !== 'etf') {
-		return ['top_leaderboard', 'sidebar_1', 'sidebar_2']
-	}
-
-	// Default
-	return ['top_leaderboard']
-}
+// declare global {
+// 	// eslint-disable-next-line no-unused-vars
+// 	interface Window {
+// 		adngin: any
+// 	}
+// }
 
 export function LoadAds() {
 	const [ads, setAds] = useState<string[]>([])
-	const path = navState((state) => state.path)
+	const { path } = useNavState()
+	useLoadAds()
 
 	useEffect(() => {
-		let adsArray = getPageAds(path)
+		setAds(getAdsForPage(path))
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
-		setAds(adsArray)
-		if (
-			adsArray.length > 0 &&
-			window.adngin &&
-			window.adngin.adnginLoaderReady
-		) {
-			window.adngin.queue.push(function () {
-				if (window.innerWidth) {
-					if (window.innerWidth >= 768) {
-						adsArray = adsArray.filter(
-							(ad) => ad !== 'in-content_1_mobile'
-						)
-					} else if (window.innerWidth < 768) {
-						adsArray = adsArray.filter(
-							(ad) =>
-								ad === 'in-content_1_mobile' || ad === 'top_leaderboard'
-						)
-					}
-				}
+	// useEffect(() => {
+	// 	let adsArray = getAdsForPage(path)
 
-				window.adngin.cmd.startAuction(adsArray)
-			})
-		}
-	}, [path])
+	// 	setAds(adsArray)
+	// 	if (
+	// 		adsArray.length > 0 &&
+	// 		window.adngin &&
+	// 		window.adngin.adnginLoaderReady
+	// 	) {
+	// 		window.adngin.queue.push(function () {
+	// 			if (window.innerWidth) {
+	// 				if (window.innerWidth >= 768) {
+	// 					adsArray = adsArray.filter(
+	// 						(ad) => ad !== 'in-content_1_mobile'
+	// 					)
+	// 				} else if (window.innerWidth < 768) {
+	// 					adsArray = adsArray.filter(
+	// 						(ad) =>
+	// 							ad === 'in-content_1_mobile' || ad === 'top_leaderboard'
+	// 					)
+	// 				}
+	// 			}
+
+	// 			window.adngin.cmd.startAuction(adsArray)
+	// 		})
+	// 	}
+	// }, [path])
 
 	if (
 		typeof window === 'undefined' ||
-		process.env.NODE_ENV === 'development'
+		process.env.NODE_ENV === 'development' ||
+		ads.length === 0
 	) {
-		return null
-	}
-
-	if (ads.length === 0) {
 		return null
 	}
 
