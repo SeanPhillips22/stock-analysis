@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { navState } from 'state/navState'
-import { validateUrlBit } from 'functions/validation'
+import { splitUrl } from 'functions/helpers/splitUrl'
 
 export const useNavState = () => {
 	const router = useRouter()
@@ -14,12 +14,7 @@ export const useNavState = () => {
 
 	useEffect(() => {
 		const url = router.asPath
-		const split = url.split('/')
-		const one = validateUrlBit(split[1])
-		const two = validateUrlBit(split[2])
-		const three = validateUrlBit(split[3])
-		const four = validateUrlBit(split[4])
-		const five = validateUrlBit(split[5])
+		const { one, two, three, four, five } = splitUrl(url)
 
 		setPath({
 			one,

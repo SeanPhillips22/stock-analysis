@@ -1,8 +1,7 @@
 import { getAdsForPage } from './getAdsForPage'
-import { PathType } from 'types/Path'
+import { splitUrl } from 'functions/helpers/splitUrl'
 
 declare global {
-	// eslint-disable-next-line no-unused-vars
 	interface Window {
 		adngin: any
 	}
@@ -12,7 +11,8 @@ declare global {
  * Start the header bidding auction for the Snigel ads
  * @param ads an array of ad names to show on the page
  */
-export function startAdsAuction(path: PathType) {
+export function startAdsAuction(url: string) {
+	let path = splitUrl(url)
 	let ads = getAdsForPage(path)
 
 	// Check if a) there are ads to display and b) the loader is ready
@@ -28,7 +28,7 @@ export function startAdsAuction(path: PathType) {
 			}
 		}
 
-		console.log({ ads, path })
+		console.log(ads)
 
 		// Start the ads auction
 		window.adngin.queue.push(function () {

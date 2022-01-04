@@ -3,4 +3,5 @@ export type PathType = {
 	two: string | null
 	three: string | null
 	four: string | null
+	five: string | null
 }

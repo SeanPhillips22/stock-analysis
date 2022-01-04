@@ -32,13 +32,18 @@ export function getAdsForPage(path: PathType) {
 		if (!path.two) {
 			return ['top_leaderboard', 'sidebar_1', 'sidebar_2']
 		}
-		// Overview, statistics, company, dividend pages
+
+		// Overview, statistics and company pages
 		if (
 			!path.three ||
 			path.three === 'statistics' ||
-			path.three === 'company' ||
-			path.three === 'dividend'
+			path.three === 'company'
 		) {
+			return ['top_leaderboard', 'sidebar_1', 'in-content_1_mobile']
+		}
+
+		// Dividend pages
+		if (path.three === 'dividend') {
 			return [
 				'top_leaderboard',
 				'sidebar_1',
@@ -46,6 +51,7 @@ export function getAdsForPage(path: PathType) {
 				'in-content_1_mobile'
 			]
 		}
+
 		// Holdings pages
 		if (path.three === 'holdings') {
 			return ['top_leaderboard', 'sidebar_1', 'sidebar_2']

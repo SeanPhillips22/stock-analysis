@@ -1,15 +1,13 @@
-import { useNavState } from 'hooks/useNavState'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { startAdsAuction } from './startAdsAuction'
 
 export function useLoadAds() {
-	const { path } = useNavState()
 	const router = useRouter()
 
 	useEffect(() => {
-		function loadAds() {
-			startAdsAuction(path)
+		function loadAds(url: string) {
+			startAdsAuction(url)
 		}
 
 		// Load ads when the route has changed
