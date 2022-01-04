@@ -11,7 +11,7 @@ import { Profile } from 'components/Overview/ProfileWidget'
 import { NewsArea } from 'components/Overview/NewsArea'
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget'
 import { AnalystWidget } from 'components/Overview/AnalystWidget'
-import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
+// import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
 import Script from 'next/script'
 import TestAd from 'components/Ads/GPT/TestAd'
 
@@ -38,19 +38,6 @@ const StockTestOverview = ({ info, data, news }: Props) => {
 				strategy="afterInteractive"
 				src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
 			/>
-			<Script
-				id="gpt-ads"
-				strategy="afterInteractive"
-				dangerouslySetInnerHTML={{
-					__html: `window.googletag = window.googletag || {cmd: []};
-  googletag.cmd.push(function() {
-    googletag.defineSlot('/21976450666/Sidebar_Vertical_Bottom_300x600', [[300, 600], [300, 250]], 'div-gpt-ad-1641290361391-0').addService(googletag.pubads());
-    googletag.pubads().enableSingleRequest();
-    googletag.enableServices();
-  });`
-				}}
-			/>
-
 			<SEO
 				title={`${info.nameFull} (${info.ticker}) Stock Price, Quote & News`}
 				description={description}
@@ -68,20 +55,11 @@ const StockTestOverview = ({ info, data, news }: Props) => {
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10">
 				<div className="px-4 lg:pt-1 md:px-0 lg:order-2 space-y-6">
-					<Sidebar1Overview news={news.data} />
+					<TestAd adId="1641290361391-0" />
+					{/* <Sidebar1Overview news={news.data} /> */}
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />
-					<div id="div-gpt-ad-1641290361391-0">
-						<Script
-							id="gpt-ads"
-							strategy="beforeInteractive"
-							dangerouslySetInnerHTML={{
-								__html: `googletag.cmd.push(function() { googletag.display('div-gpt-ad-1641290361391-0'); });`
-							}}
-						/>
-					</div>
-					<TestAd adId="1641290361391-0" />
 				</div>
 				{news && (
 					<div className="lg:order-1">
