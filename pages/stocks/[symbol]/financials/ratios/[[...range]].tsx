@@ -14,8 +14,6 @@ type Props = {
 }
 
 export default function Ratios({ info, data, count, range }: Props) {
-	console.log({ count, data })
-
 	return (
 		<FinancialsLayout
 			info={info}
