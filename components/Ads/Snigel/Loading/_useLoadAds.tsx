@@ -1,10 +1,10 @@
+import { useNavState } from 'hooks/useNavState'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { navState } from 'state/navState'
 import { startAdsAuction } from './startAdsAuction'
 
 export function useLoadAds() {
-	const path = navState((state) => state.path)
+	const { path } = useNavState()
 	const router = useRouter()
 
 	useEffect(() => {

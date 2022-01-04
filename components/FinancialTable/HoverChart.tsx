@@ -161,8 +161,6 @@ export const HoverChart = ({
 		}
 	}
 
-	console.log(yaxis)
-
 	const ymin = yaxis[0]
 	const ymax = yaxis[yaxis.length - 1]
 
