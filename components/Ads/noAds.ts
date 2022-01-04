@@ -9,15 +9,13 @@ const NO_ADS = [
 	'subscribe'
 ]
 
-// TODO remove test page
 const NO_ADS_RELAXED = [
 	'login',
 	'pro',
 	'contact',
 	'terms-of-use',
 	'apis',
-	'subscribe',
-	'aapltest'
+	'subscribe'
 ]
 
 export function noAds(path: string | null) {

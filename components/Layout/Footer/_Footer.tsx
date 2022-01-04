@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import { useNavState } from 'hooks/useNavState'
 import Link from 'next/link'
 import { noAdsRelaxed } from 'components/Ads/noAds'
 import { LoadAds } from 'components/Ads/Snigel/LoadAds'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuth } from 'hooks/useAuth'
 
 const navigation = {
 	sections: [
@@ -24,7 +23,7 @@ const navigation = {
 }
 
 export const Footer = () => {
-	const { checked, isPro } = useAuthState()
+	const { checked, isPro } = useAuth()
 	const { path } = useNavState()
 
 	return (
