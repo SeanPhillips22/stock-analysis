@@ -69,7 +69,8 @@ export const formatY = (
 
 	if (
 		format === 'reduce_precision' &&
-		(value > 10000000 || value < -10000000)
+		((ymax && (ymax > 1000000 || ymax < -1000000)) ||
+			(ymin && (ymin > 1000000 || ymin < -1000000)))
 	) {
 		return formatNumber(value / 1000000, 0, 0) // new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
@@ -153,6 +154,7 @@ export function formatCell({
 		}
 
 		case 'ratio': {
+			if (current === 0) return '0'
 			if (current) {
 				return divider === 1 || isHover
 					? (Math.round(current * 1000) / 1000).toFixed(3)
