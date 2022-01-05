@@ -99,12 +99,7 @@ export const FinancialTable = ({
 	if (showcount === 0) {
 		return (
 			<div>
-				<TableTitle
-					statement={statement}
-					currency={info.currency}
-					fiscalYear={info.fiscalYear}
-					range={range}
-				/>
+				<TableTitle info={info} statement={statement} range={range} />
 				<Unavailable
 					message={`No ${range} ${statement.replace(
 						/-/g,
@@ -359,13 +354,8 @@ export const FinancialTable = ({
 
 	return (
 		<div>
-			<div className="flex flex-row justify-between items-end">
-				<TableTitle
-					statement={statement}
-					currency={info.currency}
-					fiscalYear={info.fiscalYear}
-					range={range}
-				/>
+			<div className="md:flex md:flex-row md:justify-between md:items-end">
+				<TableTitle info={info} statement={statement} range={range} />
 				<FinancialsControls
 					info={info}
 					statement={statement}

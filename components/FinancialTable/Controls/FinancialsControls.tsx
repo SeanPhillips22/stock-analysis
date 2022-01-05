@@ -15,16 +15,17 @@ type Props = {
 export function FinancialsControls({ info, statement, range }: Props) {
 	const reversed = financialsState((state) => state.reversed)
 	const toggleReversed = financialsState((state) => state.toggleReversed)
+	const controls = financialsState((state) => state.controls)
 
 	return (
-		<div className="hidden sm:flex sm:space-x-2 pb-2">
+		<div className={controls ? 'finctrl vis' : 'finctrl'}>
 			<button
 				className={reversed ? 'controls-btn active' : 'controls-btn'}
 				onClick={() => toggleReversed()}
 				id="tag-feat-fin-leftright"
 				title="Switch order of columns"
 			>
-				<LeftRightIcon classes="h-5 w-5 pointer-events-none" />
+				<LeftRightIcon classes="w-4 bp:w-5 h-4 bp:h-5 pointer-events-none" />
 			</button>
 			{!info.exceptions.hideTTM && (
 				<ShowTrailing range={range} statement={statement} />

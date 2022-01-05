@@ -9,7 +9,7 @@
 	}
 
 	.controls-btn {
-		@apply inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm font-medium hover:bg-gray-50 noring;
+		@apply inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-2 xs:px-3 sm:px-4 py-1.5 sm:py-2 bg-white text-xs bp:text-sm font-semibold hover:bg-gray-50 noring;
 	}
 
 	.controls-btn.active {
@@ -21,7 +21,7 @@
 	}
 
 	.controls-dropdown {
-		@apply origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none py-1;
+		@apply origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none py-1 z-50;
 	}
 
 	.dd-option {
@@ -33,6 +33,6 @@
 	}
 
 	.controls-icon {
-		@apply -mr-1 ml-2 h-5 w-5;
+		@apply -mr-1 ml-1 xs:ml-2 w-5 h-5;
 	}
 }

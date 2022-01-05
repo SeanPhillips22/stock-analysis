@@ -11,6 +11,7 @@ export interface Info {
 	isOTC: boolean // Is it an over the counter stock (short for exchange === 'OTCMKTS')
 	quote: Quote
 	fiscalYear: string
+	fiscalYearShort: string
 	currency: string
 	state: string
 	daysSince?: number
