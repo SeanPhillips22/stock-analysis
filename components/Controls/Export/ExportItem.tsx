@@ -10,15 +10,23 @@ type ExportItemProps = {
 	type: 'csv' | 'xlsx'
 	data: string | any[]
 	fileName?: string
+	returnData?: string
 }
 
 export const ExportItem = ({
 	title,
 	type,
 	data,
-	fileName
+	fileName,
+	returnData
 }: ExportItemProps) => (
 	<Menu.Item>
-		<Download title={title} type={type} data={data} fileName={fileName} />
+		<Download
+			title={title}
+			type={type}
+			data={data}
+			fileName={fileName}
+			returnData={returnData}
+		/>
 	</Menu.Item>
 )

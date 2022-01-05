@@ -11,9 +11,16 @@ interface Props {
 	type: 'csv' | 'xlsx'
 	data: any
 	fileName?: string
+	returnData?: any
 }
 
-export default function Download({ title, type, data, fileName }: Props) {
+export default function Download({
+	title,
+	type,
+	data,
+	fileName,
+	returnData
+}: Props) {
 	const path = navState((state) => state.path)
 
 	const fn = fileName
@@ -22,29 +29,35 @@ export default function Download({ title, type, data, fileName }: Props) {
 				path.three ? '-' + path.three : ''
 		  }`
 
-	let returnObject: any
+	let returnArray: any
 
-	if (data === 'financial-table') {
-		returnObject = {
-			name: path.two?.toUpperCase() || 'Export',
-			from: { table: data },
-			fixValue: extractFinancialValues
-		}
+	if (title === 'Bulk Export') {
+		returnArray = returnData
+	} else if (data === 'financial-table') {
+		returnArray = [
+			{
+				name: path.two?.toUpperCase() || 'Export',
+				from: { table: data },
+				fixValue: extractFinancialValues
+			}
+		]
 	} else if (typeof data === 'string') {
-		returnObject = {
-			name: 'Export',
-			from: { table: data },
-			fixValue: extractTextFromHTML
-		}
+		returnArray = [
+			{
+				name: 'Export',
+				from: { table: data },
+				fixValue: extractTextFromHTML
+			}
+		]
 	} else {
-		returnObject = {
-			name: 'Export',
-			from: { array: data },
-			fixValue: removeNanValues
-		}
+		returnArray = [
+			{
+				name: 'Export',
+				from: { array: data },
+				fixValue: removeNanValues
+			}
+		]
 	}
-
-	const returnArray = [returnObject]
 
 	function download(type: 'csv' | 'xlsx') {
 		return ExcellentExport.convert(

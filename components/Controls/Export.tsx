@@ -8,6 +8,7 @@ type Button = {
 	type: 'csv' | 'xlsx'
 	restricted: boolean
 	active?: boolean
+	data?: any
 }
 
 type Props = {
@@ -36,6 +37,7 @@ export function Export({ buttons, tableId, fileName }: Props) {
 							type={button.type}
 							data={tableId}
 							fileName={fileName}
+							returnData={button.data}
 						/>
 					)
 				)}
