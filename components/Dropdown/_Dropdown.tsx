@@ -6,11 +6,12 @@ type Props = {
 	title: string
 	children: React.ReactNode
 	hoverTitle?: string
+	id?: string
 }
 
-export function Dropdown({ title, children, hoverTitle }: Props) {
+export function Dropdown({ title, children, hoverTitle, id }: Props) {
 	return (
-		<Menu as="div" className="controls-menu" title={hoverTitle}>
+		<Menu as="div" className="controls-menu" title={hoverTitle} id={id}>
 			<Menu.Button className="controls-btn">
 				{title}
 				<ChevronDownIcon className="controls-icon" aria-hidden="true" />

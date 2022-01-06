@@ -8,6 +8,7 @@ type Button = {
 	type: 'csv' | 'xlsx'
 	restricted: boolean
 	active?: boolean
+	data?: any
 }
 
 type Props = {
@@ -20,7 +21,10 @@ export function Export({ buttons, tableId, fileName }: Props) {
 	const { isPro } = useAuthState()
 
 	return (
-		<Dropdown title="Export">
+		<Dropdown
+			title="Export"
+			id={`tag-feat-export${isPro ? '-pro' : '-notpro'}`}
+		>
 			{buttons &&
 				buttons.map((button, index) =>
 					button.restricted && !isPro ? (
@@ -36,6 +40,7 @@ export function Export({ buttons, tableId, fileName }: Props) {
 							type={button.type}
 							data={tableId}
 							fileName={fileName}
+							returnData={button.data}
 						/>
 					)
 				)}
