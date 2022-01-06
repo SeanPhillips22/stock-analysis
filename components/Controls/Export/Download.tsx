@@ -23,7 +23,7 @@ export default function Download({
 }: Props) {
 	const path = navState((state) => state.path)
 
-	const fn = fileName
+	let fn = fileName
 		? fileName
 		: `${path.one}${path.two ? '-' + path.two : ''}${
 				path.three ? '-' + path.three : ''
@@ -33,6 +33,7 @@ export default function Download({
 
 	if (title === 'Bulk Export') {
 		returnArray = returnData
+		fn = `${path.two}-financials`
 	} else if (data === 'financial-table') {
 		returnArray = [
 			{

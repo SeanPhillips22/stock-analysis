@@ -1,22 +1,37 @@
 import { extractFinancials } from './extractBulkFinancials'
 
+const CONVERT: any = {
+	annual: 'Annual',
+	quarterly: 'Quarterly',
+	trailing: 'TTM',
+	'income-statement': 'Income',
+	'balance-sheet': 'Balance-Sheet',
+	'cash-flow-statement': 'Cash-Flow',
+	ratios: 'Ratios'
+}
+
+/**
+ * This function builds an array that tells the excellentexport plugin how to export the data
+ * @param data the raw financial data from the backend API
+ * @returns
+ */
 export function buildReturnArray(data: any) {
-	let extracted = extractFinancials(data)
+	let ranges = ['annual', 'quarterly', 'trailing']
 
-	let obj = [
-		{
-			name: 'Export',
-			from: { array: extracted }
-		},
-		{
-			name: 'Export2',
-			from: { array: extracted }
-		},
-		{
-			name: 'Export3',
-			from: { array: extracted }
+	let extracted: any = []
+
+	ranges.forEach((key) => {
+		let range = data[key]
+		if (range) {
+			Object.keys(range).forEach((statement) => {
+				let statementObj = range[statement]
+				let d = statementObj.data
+				let arr = extractFinancials(d, statement, key)
+				let name = `${CONVERT[statement]}-${CONVERT[key]}`
+				extracted.push({ name, from: { array: arr } })
+			})
 		}
-	]
+	})
 
-	return obj
+	return extracted
 }
