@@ -21,7 +21,10 @@ export function Export({ buttons, tableId, fileName }: Props) {
 	const { isPro } = useAuthState()
 
 	return (
-		<Dropdown title="Export">
+		<Dropdown
+			title="Export"
+			id={`tag-feat-export${isPro ? '-pro' : '-notpro'}`}
+		>
 			{buttons &&
 				buttons.map((button, index) =>
 					button.restricted && !isPro ? (

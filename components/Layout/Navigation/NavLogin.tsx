@@ -24,7 +24,12 @@ export function NavLogin() {
 
 	return (
 		<div className="nav-login">
-			<Button text="Free Trial" url="/pro/" className="text-base" />
+			<Button
+				text="Free Trial"
+				url="/pro/"
+				className="text-base"
+				id="tag-upgr-leftnav-free-trial"
+			/>
 			<ButtonWhite text="Log In" url="/login/" className="mt-3 text-base" />
 		</div>
 	)

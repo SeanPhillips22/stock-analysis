@@ -18,6 +18,7 @@ export function ShowTrailing({ range, statement }: Props) {
 				className={trailing ? 'controls-btn active' : 'controls-btn'}
 				title="Include most recent values"
 				onClick={toggleTrailing}
+				id="tag-feat-fin-toggle-ttm"
 			>
 				TTM
 			</button>
@@ -30,6 +31,7 @@ export function ShowTrailing({ range, statement }: Props) {
 				className={current ? 'controls-btn active' : 'controls-btn'}
 				title="Include most recent values"
 				onClick={toggleCurrent}
+				id="tag-feat-fin-toggle-ttm"
 			>
 				Current
 			</button>

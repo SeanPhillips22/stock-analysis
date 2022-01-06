@@ -8,7 +8,9 @@ interface ExportItemProps {
 
 export default function Restricted({ title, type }: ExportItemProps) {
 	const router = useRouter()
-	const id = `tag-upgr-controls-export-${type.toLowerCase()}`
+	const id = `tag-upgr-controls-export-${
+		title === 'Bulk Export' ? 'bulk' : type.toLowerCase()
+	}`
 
 	return (
 		<div

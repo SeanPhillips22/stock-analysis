@@ -29,7 +29,12 @@ export function HeaderLogin() {
 				url="/login/"
 				className="mt-0 py-1 border-0 shadow-none text-gray-700"
 			/>
-			<Button text="Free Trial" url="/pro/" className="mt-0 py-1" />
+			<Button
+				text="Free Trial"
+				url="/pro/"
+				className="mt-0 py-1"
+				id="tag-upgr-header-free-trial"
+			/>
 		</div>
 	)
 }

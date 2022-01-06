@@ -42,14 +42,12 @@ export const FinancialTable = ({
 	count,
 	range
 }: Props) => {
-	// const range = financialsState((state) => state.range)
 	const divider = financialsState((state) => state.divider)
 	const reversed = financialsState((state) => state.reversed)
 	const trailing = financialsState((state) => state.trailing)
 	const current = financialsState((state) => state.current)
 	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
-	const [fullData, setFullData] = useState<FinancialReport>()
 	const [dataRows, setDataRows] = useState(financials)
 
 	// Check if financial data is paywalled
@@ -72,23 +70,17 @@ export const FinancialTable = ({
 	// If pro user and data is limited, fetch the full data
 	useEffect(() => {
 		async function fetchFullFinancials() {
-			const res = fullData
-				? fullData
-				: await getStockFinancialsFull(statement, info.symbol, range)
+			const res = await getStockFinancialsFull(statement, info.symbol, range)
 			if (res && res?.datekey?.length > paywall) {
-				setFullData(res)
 				setDataRows(res)
-			} else {
-				throw new Error(
-					'Unable to fetch full data, response was invalid or empty array'
-				)
 			}
 		}
 
 		if (isPro && fullcount > paywall) {
 			fetchFullFinancials()
 		}
-	}, [info.symbol, isPro, fullcount, paywall, statement, range, fullData])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [info.symbol, isPro, statement, range])
 
 	let data = useMemo(
 		() => sliceData(dataRows, showcount, reversed),
