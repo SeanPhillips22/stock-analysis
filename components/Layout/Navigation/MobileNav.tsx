@@ -1,6 +1,6 @@
 import { useClickOutside } from 'hooks/useClickOutside'
 import { useRef } from 'react'
-import { navMenuState } from 'state/navMenuState'
+import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 import { MainNav } from './MainNav'
 import { NavLogin } from './NavLogin'
 

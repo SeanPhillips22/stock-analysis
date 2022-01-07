@@ -13,7 +13,7 @@
 	}
 
 	.maincol {
-		@apply w-full mx-auto xxl:mx-0 xl:max-w-screen-xl mb-8;
+		@apply w-full mx-auto xxl:mx-0 xl:max-w-screen-xl mb-10;
 	}
 
 	.fullwidth .maincol {

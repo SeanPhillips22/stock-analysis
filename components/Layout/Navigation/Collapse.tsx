@@ -2,7 +2,7 @@ import {
 	ChevronDoubleLeftIcon,
 	ChevronDoubleRightIcon
 } from '@heroicons/react/outline'
-import { navMenuState } from 'state/navMenuState'
+import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 
 export function Collapse() {
 	const expanded = navMenuState((state) => state.expanded)

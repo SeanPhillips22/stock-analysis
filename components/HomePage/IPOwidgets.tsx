@@ -72,7 +72,16 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 							</Link>
 						</span>
 					</div>
-					<IPOTable ipos={upcoming} />
+					{upcoming.length ? (
+						<IPOTable ipos={upcoming} />
+					) : (
+						<div className="w-full border border-gray-200 p-3">
+							There are no upcoming IPOs that have been scheduled.{' '}
+							<Link href="/ipos/filings/" prefetch={false}>
+								<a className="bll">View all IPO filings.</a>
+							</Link>
+						</div>
+					)}
 				</section>
 			</div>
 		</>

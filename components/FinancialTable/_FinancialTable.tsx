@@ -296,7 +296,7 @@ export const FinancialTable = ({
 						<Tooltip
 							content={<IndicatorTooltip row={row} />}
 							theme="light"
-							delay={100}
+							delay={300}
 							className="bigTooltipText"
 						>
 							<RowTitle
@@ -326,7 +326,7 @@ export const FinancialTable = ({
 									)}
 								</div>
 							)}
-							delay={100}
+							delay={200}
 							interactive={true}
 							offset={[150, -1]}
 							popperOptions={{

@@ -10,14 +10,14 @@ import {
 } from '@heroicons/react/outline'
 import { matchParentPath } from 'functions/helpers/matchPath'
 import { useEffect } from 'react'
-import { navMenuState } from 'state/navMenuState'
+import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 import { navState } from 'state/navState'
 import { Collapse } from './Collapse'
 import { MenuNavItem } from './NavItems/Menu'
 import { SingleNavItem } from './NavItems/Single'
 
 const navigation = [
-	{ name: 'Home', href: '/', icon: HomeIcon, current: true },
+	{ name: 'Home', href: '/', icon: HomeIcon },
 	{
 		name: 'Stocks',
 		href: '/stocks/',
@@ -79,18 +79,23 @@ const navigation = [
 
 export function MainNav() {
 	const setIsOpen = navMenuState((state) => state.setIsOpen)
+	const initial = navMenuState((state) => state.initial)
+	const setInitial = navMenuState((state) => state.setInitial)
 	const path = navState((state) => state.path)
 
+	// Set the initial open state for the menu
 	useEffect(() => {
-		if (path) {
-			setIsOpen({})
-			navigation.map((item) => {
-				if (item.children) {
-					if (matchParentPath(path, item.href)) {
-						setIsOpen({ [item.name]: true })
+		if (initial && path.one) {
+			setInitial(false)
+			if (path) {
+				navigation.map((item) => {
+					if (item.children) {
+						if (matchParentPath(path, item.href)) {
+							setIsOpen({ [item.name]: true })
+						}
 					}
-				}
-			})
+				})
+			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [path])

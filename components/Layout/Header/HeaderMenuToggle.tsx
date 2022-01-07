@@ -1,6 +1,6 @@
 import { CloseIcon } from 'components/Icons/Close'
 import { HamburgerIcon } from 'components/Icons/Hamburger'
-import { navMenuState } from 'state/navMenuState'
+import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 
 /**
  * This components holds the hamburger icon to show/hide the left-aligned menu
