@@ -13,6 +13,8 @@ export function useAuth() {
 	const setIsPro = authState((state) => state.setIsPro)
 	const checked = authState((state) => state.checked)
 	const setChecked = authState((state) => state.setChecked)
+	const checking = authState((state) => state.checking)
+	const setChecking = authState((state) => state.setChecking)
 	const route = navState((state) => state.route)
 
 	useEffect(() => {
@@ -39,7 +41,10 @@ export function useAuth() {
 			}
 		)
 
-		checkUser()
+		if (!checking) {
+			setChecking(true)
+			checkUser()
+		}
 
 		return () => authListener?.unsubscribe()
 	}, [])

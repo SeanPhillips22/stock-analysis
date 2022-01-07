@@ -61,7 +61,8 @@ export function ResultsTable({ cols }: { cols: any }) {
 					.map((col: any) => col.accessor),
 				sortBy: sortResultsBy
 			},
-			autoResetSortBy: resetSort
+			autoResetSortBy: resetSort,
+			autoResetGlobalFilter: false
 		},
 		useGlobalFilter,
 		useSortBy,

@@ -173,7 +173,8 @@ export const HoverChart = ({
 	const bgColor =
 		chartType === 'line' ? 'rgba(44, 98, 136, 0.4)' : 'rgba(44, 98, 136, 1)'
 
-	const padding = chartType == 'line' ? 15 : 0
+	let padding = chartType == 'line' ? 15 : 0
+	if (xaxis.length === 1 && type === 'percentage') padding = 20
 
 	return (
 		<ReactChart

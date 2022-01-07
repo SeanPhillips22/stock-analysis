@@ -2,7 +2,7 @@ import { useNavState } from 'hooks/useNavState'
 import Link from 'next/link'
 import { noAdsRelaxed } from 'components/Ads/noAds'
 import { LoadAds } from 'components/Ads/Snigel/LoadAds'
-import { useAuth } from 'hooks/useAuth'
+import { useAuthState } from 'hooks/useAuthState'
 
 const navigation = {
 	sections: [
@@ -23,7 +23,7 @@ const navigation = {
 }
 
 export const Footer = () => {
-	const { checked, isPro } = useAuth()
+	const { checked, isPro } = useAuthState()
 	const { path } = useNavState()
 
 	return (
