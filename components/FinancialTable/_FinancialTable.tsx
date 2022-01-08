@@ -9,12 +9,13 @@ import {
 	redOrGreen,
 	getPeriodLabel,
 	getPeriodTooltip,
-	sliceData
+	sliceData,
+	getRowStyles
 } from './FinancialTable.functions'
 import { HoverChartIcon } from 'components/Icons/HoverChart'
 import { TableTitle } from './TableTitle'
 import { FinancialsControls } from './Controls/FinancialsControls'
-import Paywall from './Paywall'
+import { PaywallHeaderCell, PaywallBodyCell } from './Paywall'
 import dynamic from 'next/dynamic'
 import { Tooltip } from './Tooltip'
 import { TooltipChart } from './TooltipChart'
@@ -51,7 +52,7 @@ export const FinancialTable = ({
 	const [dataRows, setDataRows] = useState(financials)
 
 	// Check if financial data is paywalled
-	const paywall = range === 'annual' ? 10 : 40
+	const paywall = range === 'annual' ? 9 : 30
 	const fullcount = count // The total number of years/quarters available
 	const showcount = !isPro && fullcount > paywall ? paywall : fullcount // How many years/quarter to show
 	const paywalled = showcount < fullcount ? 'true' : false
@@ -184,7 +185,7 @@ export const FinancialTable = ({
 		let offs = 4
 		if (
 			row.format === 'growth' &&
-			(range === 'quarterly' || range === 'trailing') &&
+			['quarterly', 'trailing'].includes(range) &&
 			showcount === 6
 		) {
 			if (data?.datekey?.length === 6) {
@@ -264,29 +265,12 @@ export const FinancialTable = ({
 			}
 		})
 
-		const getRowStyles = () => {
-			const styles = []
-			if (row.format === 'growth' || row.border) {
-				styles.push(
-					'border-b-2 border-gray-300 text-[0.85rem] sm:text-[0.95rem]'
-				)
-			}
-			if (row.bold) {
-				styles.push('font-semibold text-gray-800')
-			}
-			if (row.extrabold) {
-				styles.push('font-bold text-gray-700')
-			}
-
-			return styles.join(' ')
-		}
-
 		if (total == 0) {
 			return null
 		}
 		return (
 			<>
-				<tr className={getRowStyles()}>
+				<tr className={getRowStyles(row)}>
 					<td
 						className="flex flex-row justify-between items-center"
 						onTouchStart={() => !hover && setHover(true)}
@@ -339,6 +323,13 @@ export const FinancialTable = ({
 						</TooltipChart>
 					</td>
 					{dataRows}
+					{paywalled && !isPro && (
+						<PaywallBodyCell
+							range={range}
+							showcount={showcount}
+							fullcount={fullcount}
+						/>
+					)}
 				</tr>
 			</>
 		)
@@ -377,6 +368,13 @@ export const FinancialTable = ({
 								</Tooltip>
 							</th>
 							{headerRow()}
+							{paywalled && !isPro && (
+								<PaywallHeaderCell
+									range={range}
+									diff={fullcount - showcount}
+									last={data.datekey[data.datekey.length - 1]}
+								/>
+							)}
 						</tr>
 					</thead>
 					<tbody>
@@ -385,13 +383,6 @@ export const FinancialTable = ({
 						})}
 					</tbody>
 				</table>
-				{paywalled && !isPro && (
-					<Paywall
-						range={range}
-						fullcount={fullcount}
-						showcount={showcount}
-					/>
-				)}
 			</div>
 			<FinancialSource info={info} />
 		</div>

@@ -33,11 +33,11 @@
 	}
 
 	.fintbl tr td:first-child {
-		@apply bg-gray-light;
+		@apply bg-gray-light pr-0.5 sm:pr-1.5;
 	}
 
 	.fintbl tr td {
-		@apply min-w-[100px] py-[5px] px-3;
+		@apply min-w-[97px] py-[5px] px-2.5;
 	}
 
 	.fintbl tr > *:not(:last-child) {
@@ -52,8 +52,8 @@
 		@apply text-right;
 	}
 
-	.fintbl svg {
-		@apply w-[22px] h-[22px] my-0 mx-[5px] stroke-[#777];
+	.fintbl tr > *:not(:last-child) svg {
+		@apply w-[22px] h-[22px] my-0 mx-1 stroke-[#777];
 	}
 
 	@media screen and (min-width: 1025px) {
@@ -99,5 +99,18 @@
 		.fintbl tr td {
 			@apply min-w-[80px] py-1 px-2;
 		}
+	}
+
+	/* Financials paywall cells */
+	.fintbl .lockhead {
+		@apply flex justify-center px-2;
+	}
+
+	.fintbl .lockcell {
+		@apply px-2;
+	}
+
+	.fintbl .lockcell > div {
+		@apply flex items-center justify-center font-medium text-small text-gray-500 py-0.5 cursor-pointer hover:text-gray-700;
 	}
 }
