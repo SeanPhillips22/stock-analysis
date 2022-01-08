@@ -1,4 +1,4 @@
-import { FinancialReport } from 'types/Financials'
+import { FinancialReport, FinancialsMapType } from 'types/Financials'
 import { formatNumber } from 'functions/numbers/formatNumber'
 
 export const getPeriodLabel = (range: string) => {
@@ -313,4 +313,20 @@ export function reverseData(data: FinancialReport) {
 	})
 
 	return reversed
+}
+
+// Get the css for the individual financial table rows
+export function getRowStyles(row: FinancialsMapType) {
+	const styles = []
+	if (row.format === 'growth' || row.border) {
+		styles.push('border-b-2 border-gray-300 text-[0.85rem] sm:text-[0.95rem]')
+	}
+	if (row.bold) {
+		styles.push('font-semibold text-gray-800')
+	}
+	if (row.extrabold) {
+		styles.push('font-bold text-gray-700')
+	}
+
+	return styles.join(' ')
 }

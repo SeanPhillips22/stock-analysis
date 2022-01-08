@@ -1,31 +1,53 @@
-import Link from 'next/link'
+import { LockClosedIcon } from '@heroicons/react/solid'
+import { useRouter } from 'next/router'
+import { formatYear } from './FinancialTable.functions'
 
-interface Props {
+type PropsHeaderCell = {
 	range: string
-	fullcount: number
-	showcount: number
+	diff: number
+	last: string
 }
 
-export default function Paywall({ range, fullcount, showcount }: Props) {
-	const diff = fullcount - showcount
+export function PaywallHeaderCell({ range, diff, last }: PropsHeaderCell) {
+	if (range === 'annual') {
+		let yearStart = Number(formatYear(last)) - 1
+		let yearEnd = yearStart - diff + 1
+
+		return <th className="lockhead">{`${yearStart} - ${yearEnd}`}</th>
+	}
+
+	return <th className="lockhead">{`+${diff} Quarters`}</th>
+}
+
+type PropsBodyCell = {
+	range: string
+	showcount: number
+	fullcount: number
+}
+
+export function PaywallBodyCell({
+	range,
+	showcount,
+	fullcount
+}: PropsBodyCell) {
 	const type = range === 'annual' ? 'years' : 'quarters'
+	const countShown = range === 'annual' ? showcount - 1 : showcount
+	const router = useRouter()
+
+	function goToTrialPage() {
+		router.push('/pro/')
+	}
 
 	return (
-		<div className="flex flex-col px-8 justify-center items-center whitespace-nowrap bg-gray-100 border-l border-gray-300">
-			<div className="text-xl font-bold mb-1">
-				Showing {showcount} of {fullcount} {type}
+		<td className="lockcell">
+			<div
+				title={`Showing ${countShown} of ${fullcount} ${type}`}
+				onClick={goToTrialPage}
+				id="tag-upgr-financials-table-cell"
+			>
+				<span>Upgrade</span>
+				<LockClosedIcon className="ml-1 w-3.5 h-3.5 text-gray-500" />
 			</div>
-			<div className="text-lg mb-3">
-				{diff} more {type} are available
-			</div>
-			<Link href="/pro/" prefetch={false}>
-				<a
-					className="bg-blue-brand_light hover:bg-blue-brand_sharp text-white py-3 px-5 text-xl font-semibold rounded-sm"
-					id="tag-upgr-financials-table"
-				>
-					Start Free Trial
-				</a>
-			</Link>
-		</div>
+		</td>
 	)
 }
