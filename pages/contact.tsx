@@ -7,6 +7,7 @@ import { Warning } from 'components/Alerts/Warning'
 import Axios from 'axios'
 import { SpinnerIcon } from 'components/Icons/Spinner'
 import { validateEmailAddress, validateLength } from 'functions/validation'
+import { CrispChat } from 'components/Scripts/CrispChat'
 
 interface MessageData {
 	[key: string]: string
@@ -20,6 +21,7 @@ export default function Contact() {
 				description="This page contains a contact form. Use this form if you have questions or suggestions about the content on this site."
 				canonical="/contact/"
 			/>
+			<CrispChat />
 			<ArticleLayout
 				meta={{
 					title: 'Contact Us',
