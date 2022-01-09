@@ -952,7 +952,7 @@ export const FiltersMap: FilterProps[] = [
 		]
 	},
 	{
-		name: 'Cash / Market Cap',
+		name: 'Cash/Market Cap',
 		id: 'netCashByMarketCap',
 		category: ['Financials'],
 		filterType: 'numeric',
