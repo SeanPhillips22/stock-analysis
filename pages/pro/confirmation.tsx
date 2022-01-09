@@ -1,6 +1,5 @@
 import { SEO } from 'components/SEO'
 import { UserLayout } from 'components/Layout/UserLayout'
-import { CrispChat } from 'components/Scripts/CrispChat'
 
 export default function FreeTrial() {
 	return (
@@ -10,7 +9,6 @@ export default function FreeTrial() {
 				canonical="/pro/confirmation/"
 				noindex={true}
 			/>
-			<CrispChat />
 			<UserLayout>
 				<div className="space-y-5 bp:space-y-6">
 					<h1 className="text-3xl bp:text-4xl font-bold mb-5 text-gray-800">

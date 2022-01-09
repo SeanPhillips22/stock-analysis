@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { supabase } from 'functions/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
 import { FocusedLayout } from 'components/Layout/FocusedLayout'
-import { CrispChat } from 'components/Scripts/CrispChat'
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
@@ -60,7 +59,6 @@ export default function LandingPage() {
 				description="Get unlimited access to all of our financial data, including full financial history, full ETF holdings, and more."
 				canonical="/pro/"
 			/>
-			<CrispChat />
 			<FocusedLayout>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
@@ -203,16 +201,6 @@ export default function LandingPage() {
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
-							How to get support?
-						</h3>
-
-						<p className="text-lg mb-5">
-							You can send an email to support@stockanalysis.com or send
-							a message via the contact form. You can also click the chat
-							widget button in the bottom right corner.
-						</p>
-
-						<h3 className="text-2xl font-bold mb-5 text-gray-800">
 							Can I cancel at any time?
 						</h3>
 
@@ -230,8 +218,8 @@ export default function LandingPage() {
 						<p className="text-lg mb-5">
 							Your card will not be charged until after 30 days. If you
 							cancel before 30 days are over then you will not be charged
-							at all. We will send you an email reminder a few days
-							before the trial ends.
+							at all. You will get an email reminder a few days before
+							the trial ends.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
