@@ -1,7 +1,8 @@
 import { screenerState } from 'components/StockScreener/screener.state'
 import { FiltersMenuItem } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuItem'
-import { FiltersMenuActive } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuActive'
+import { FiltersMenuHeader } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuHeader'
 import { FilterSearch } from './FilterSearch'
+import { FiltersMenuActive } from './FiltersMenuActive'
 
 export function FiltersMenu() {
 	const type = screenerState((state) => state.type)
@@ -16,7 +17,7 @@ export function FiltersMenu() {
 				className={`grid grid-cols-2 lg:flex justify-between items-end whitespace-nowrap overflow-x-auto${showHideBorder}`}
 			>
 				<div className="lg:order-1">
-					<FiltersMenuActive />
+					<FiltersMenuHeader />
 				</div>
 				<div className="ml-auto lg:ml-0 lg:order-3">
 					<FilterSearch />
@@ -28,6 +29,7 @@ export function FiltersMenu() {
 						<ul className="navmenu darkbg bg-gray-50 noshadow">
 							{(type == 'stocks' && (
 								<>
+									<FiltersMenuActive />
 									<FiltersMenuItem name="Popular" />
 									<FiltersMenuItem name="Company" />
 									<FiltersMenuItem name="Financials" />
@@ -39,6 +41,7 @@ export function FiltersMenu() {
 							)) ||
 								(type == 'ipo' && (
 									<>
+										<FiltersMenuActive />
 										<FiltersMenuItem name="General" />
 										<FiltersMenuItem name="Income" />
 										<FiltersMenuItem name="Balance Sheet" />
@@ -48,6 +51,7 @@ export function FiltersMenu() {
 								)) ||
 								(type == 'etf' && (
 									<>
+										<FiltersMenuActive />
 										<FiltersMenuItem name="Popular" />
 										<FiltersMenuItem name="Dividends" />
 										<FiltersMenuItem name="Performance" />
