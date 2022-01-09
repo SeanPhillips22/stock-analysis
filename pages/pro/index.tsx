@@ -199,9 +199,7 @@ export default function LandingPage() {
 
 						<p className="text-lg mb-5">
 							Click &quot;Start Free Trial&quot; above and enter your
-							email and payment details. Then you will instantly get an
-							email with a link to create a password and log in to the
-							site.
+							info, then you will get instant access.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
@@ -231,9 +229,9 @@ export default function LandingPage() {
 
 						<p className="text-lg mb-5">
 							Your card will not be charged until after 30 days. If you
-							cancel before the 30 days then you will not be charged at
-							all. We will send you an email reminder a few days before
-							the trial ends.
+							cancel before 30 days are over then you will not be charged
+							at all. We will send you an email reminder a few days
+							before the trial ends.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
