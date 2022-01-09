@@ -53,8 +53,11 @@ interface ScreenerState {
 	filterSearch: string
 	setFilterSearch: (newSearch: string) => void
 
+	// Results
 	resultsMenu: ColumnName
 	setResultsMenu: (newMenu: ColumnName) => void
+	resultsCount: number
+	setResultsCount: (newCount: number) => void
 
 	// Variable filters
 	variableFilters: VariableFilter[]
@@ -184,6 +187,8 @@ export const screenerState = create<ScreenerState>((set) => ({
 					? returnDefaultColumns(state.type)
 					: returnResultColumns(state.type, newMenu)
 		})),
+	resultsCount: 0,
+	setResultsCount: (newCount: number) => set({ resultsCount: newCount }),
 
 	// Columns
 	fetchedColumns: [], // All data columns that have been fetched

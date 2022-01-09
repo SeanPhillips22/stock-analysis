@@ -52,7 +52,7 @@ export function FiltersMenuHeader() {
 						}}
 						tabIndex={0}
 					>
-						<CloseCircleIcon classes="w-4 h-4 ml-1 lg:ml-2 -mb-0.5" />
+						<CloseCircleIcon classes="w-4 h-4 ml-1.5 lg:ml-2 -mb-0.5" />
 						<div className="ml-[1.5px]">Clear</div>
 					</div>
 				)}
