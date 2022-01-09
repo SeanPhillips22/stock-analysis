@@ -15,13 +15,17 @@ export function PaywallHeaderCell({ range, diff, last }: PropsHeaderCell) {
 		let yearEnd = yearStart - diff + 1
 
 		if (yearStart === yearEnd) {
-			return <th className="lockhead">{`${yearStart}`}</th>
+			return <th className="lockhead">{yearStart}</th>
 		}
 
-		return <th className="lockhead">{`${yearStart} - ${yearEnd}`}</th>
+		return (
+			<th className="lockhead">
+				{yearStart} - {yearEnd}
+			</th>
+		)
 	}
 
-	return <th className="lockhead">{`+${diff} Quarters`}</th>
+	return <th className="lockhead">+${diff} Quarters</th>
 }
 
 type PropsBodyCell = {
