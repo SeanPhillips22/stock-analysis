@@ -13,7 +13,7 @@ export function FiltersMenuItem({ name }: Props) {
 		return (
 			<li>
 				<span
-					className="active cursor-pointer focus:outline-none"
+					className="active cursor-pointer"
 					data-title={name}
 					onClick={() => setFilterMenu('Active')}
 					tabIndex={search.length > 0 ? -1 : 0}

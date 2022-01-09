@@ -34,7 +34,7 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 	}
 
 	// Format the values before comparing
-	const value = new Date(raw)
+	const value = new Date(Number(raw), 0)
 
 	// If there is no compare, or no value, then return false
 	if (!compare || !value) {

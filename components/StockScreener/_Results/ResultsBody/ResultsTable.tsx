@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import {
 	useTable,
 	useSortBy,
@@ -26,15 +26,21 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const tableSize = screenerState((state) => state.tableSize)
 	const showColumns = screenerState((state) => state.showColumns)
 	const fetching = screenerState((state) => state.fetching)
+	const setResultsCount = screenerState((state) => state.setResultsCount)
 	const resetSort = useSortReset()
 
+	// Memoize data and settings for the table
 	const data = useMemo(
 		() => filterItems(datarows, filters),
 		[datarows, filters]
 	)
 	const columns = useMemo(() => cols, [cols])
-
 	const sortResultsBy = useMemo(() => sort, [sort])
+
+	// Add the results count into global state
+	useEffect(() => {
+		setResultsCount(data.length)
+	}, [data, setResultsCount])
 
 	const {
 		headerGroups,
