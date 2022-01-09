@@ -393,9 +393,15 @@ export const TOOLTIP_MAP: MapProps = [
 		id: 'revenueGrowth',
 		title: 'Revenue Growth (YoY)',
 		tooltip:
-			"Revenue growth is how much a company's trailing 12-month revenue has increased compared to the previous 12-month period, expressed as a percentage.",
+			"Revenue growth is how much a company's trailing 12-month (ttm) revenue has increased compared to the previous 12-month period, expressed as a percentage.",
 		formula:
 			'Revenue Growth = ((Current Revenue / Previous Revenue) - 1) * 100%'
+	},
+	{
+		id: 'revenueGrowthQ',
+		title: 'Revenue Growth (Quarterly)',
+		tooltip:
+			"Quarterly revenue growth is how much a company's revenue increased in the last quarter compared to the same quarter a year earlier."
 	},
 	{
 		id: 'grossProfit',
@@ -405,12 +411,24 @@ export const TOOLTIP_MAP: MapProps = [
 		formula: 'Gross Profit = Revenue - Cost of Revenue'
 	},
 	{
+		id: 'grossProfitGrowth',
+		title: 'Gross Profit Growth (YoY)',
+		tooltip:
+			"Gross profit growth is how much a company's trailing 12-month (ttm) gross profit has increased or decreased compared to the previous 12-month period."
+	},
+	{
 		id: 'operatingIncome',
 		title: 'Operating Income',
 		tooltip:
 			'Operating income is the amount of profit in a company after paying for all the expenses related to its core operations.',
 		formula:
 			'Operating Income = Revenue - Cost of Revenue - Operating Expenses'
+	},
+	{
+		id: 'operatingIncomeGrowth',
+		title: 'Operating Income Growth (YoY)',
+		tooltip:
+			"Operating income growth is how much a company's trailing 12-month (ttm) operating income has increased or decreased compared to the previous 12-month period."
 	},
 	{
 		id: 'netIncome',
@@ -423,7 +441,7 @@ export const TOOLTIP_MAP: MapProps = [
 		id: 'netIncomeGrowth',
 		title: 'Net Income Growth (YoY)',
 		tooltip:
-			"Net income growth is how much a company's trailing 12-month earnings have increased or decreased compared to the 12-month period a year ago.",
+			"Net income growth is how much a company's trailing 12-month (ttm) earnings have increased or decreased compared to the 12-month period a year ago.",
 		formula:
 			'Net Income Growth = ((Current Net Income / Previous Net Income) - 1) * 100%'
 	},
@@ -485,6 +503,13 @@ export const TOOLTIP_MAP: MapProps = [
 			'Net cash/debt growth is the change in net cash position of the company in one year.'
 	},
 	{
+		id: 'netCashByMarketCap',
+		title: 'Net Cash / Market Cap',
+		tooltip:
+			"Net cash by market cap is the percentage of a company's net cash relative to its total market capitalization.",
+		formula: 'Net Cash / Market Cap = (Total Cash - Total Debt) / Market Cap'
+	},
+	{
 		id: 'assets',
 		title: 'Total Assets',
 		tooltip:
@@ -527,7 +552,7 @@ export const TOOLTIP_MAP: MapProps = [
 		id: 'fcfGrowth',
 		title: 'FCF Growth (YoY)',
 		tooltip:
-			"Free Cash Flow (FCF) growth is how much the company's trailing 12-month free cash flow has increased or decreased compared to the 12-month period a year ago.",
+			"Free Cash Flow (FCF) growth is how much the company's trailing 12-month (ttm) free cash flow has increased or decreased compared to the 12-month period a year ago.",
 		formula: 'FCF Growth = ((Current FCF / Previous FCF) - 1) * 100%'
 	},
 	{

@@ -29,14 +29,15 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const setResultsCount = screenerState((state) => state.setResultsCount)
 	const resetSort = useSortReset()
 
+	// Memoize data and settings for the table
 	const data = useMemo(
 		() => filterItems(datarows, filters),
 		[datarows, filters]
 	)
 	const columns = useMemo(() => cols, [cols])
-
 	const sortResultsBy = useMemo(() => sort, [sort])
 
+	// Add the results count into global state
 	useEffect(() => {
 		setResultsCount(data.length)
 	}, [data, setResultsCount])

@@ -182,14 +182,29 @@ export const COLUMNS_MAP: Column[] = [
 		format: 'percentage'
 	},
 	{
+		Header: 'Rev. Growth (Q)',
+		accessor: 'revenueGrowthQ',
+		format: 'percentage'
+	},
+	{
 		Header: 'Gross Profit',
 		accessor: 'grossProfit',
 		format: 'abbreviate'
 	},
 	{
+		Header: 'Gross P. Growth',
+		accessor: 'grossProfitGrowth',
+		format: 'percentage'
+	},
+	{
 		Header: 'Op. Income',
 		accessor: 'operatingIncome',
 		format: 'abbreviate'
+	},
+	{
+		Header: 'OpInc. Growth',
+		accessor: 'operatingIncomeGrowth',
+		format: 'percentage'
 	},
 	{
 		Header: 'Net Income',
@@ -264,6 +279,11 @@ export const COLUMNS_MAP: Column[] = [
 	{
 		Header: 'Net Cash Growth',
 		accessor: 'netCashGrowth',
+		format: 'percentage'
+	},
+	{
+		Header: 'Cash / M. Cap',
+		accessor: 'netCashByMarketCap',
 		format: 'percentage'
 	},
 	{

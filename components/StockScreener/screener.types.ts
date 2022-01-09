@@ -32,8 +32,11 @@ export type FilterId =
 	| 'ipoDate' // IPO Date
 	| 'revenue' // Revenue
 	| 'revenueGrowth' // Revenue Growth
+	| 'revenueGrowthQ' // Revenue Growth (Quarterly)
 	| 'grossProfit' // Gross Profit
+	| 'grossProfitGrowth' // Gross Profit Growth
 	| 'operatingIncome' // Op. Income
+	| 'operatingIncomeGrowth' // Op. Income Growth
 	| 'netIncome' // Net Income
 	| 'netIncomeGrowth' // Net Inc. Growth
 	| 'eps' // EPS
@@ -53,6 +56,7 @@ export type FilterId =
 	| 'debt' // Total Debt
 	| 'netCash' // Net Cash / Debt
 	| 'netCashGrowth' // Net Cash Growth
+	| 'netCashByMarketCap' // Net Cash / Market Cap
 	| 'grossMargin' // Gross Margin
 	| 'operatingMargin' // Operating Margin
 	| 'profitMargin' // Profit Margin

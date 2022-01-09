@@ -504,6 +504,28 @@ export const FiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
+			{ name: 'Over 200%', value: 'over-200' },
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' },
+			{ name: 'Under -50%', value: 'under-X50' }
+		]
+	},
+	{
+		name: 'Rev. Growth (Q)',
+		id: 'revenueGrowthQ',
+		category: ['Financials'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 200%', value: 'over-200' },
 			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
@@ -534,6 +556,26 @@ export const FiltersMap: FilterProps[] = [
 		]
 	},
 	{
+		name: 'Gross Prof. Growth',
+		id: 'grossProfitGrowth',
+		category: ['Financials'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 200%', value: 'over-200' },
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' },
+			{ name: 'Under -50%', value: 'under-X50' }
+		]
+	},
+	{
 		name: 'Op. Income',
 		id: 'operatingIncome',
 		category: ['Financials'],
@@ -547,6 +589,26 @@ export const FiltersMap: FilterProps[] = [
 			{ name: 'Over 1M', value: 'over-1M' },
 			{ name: 'Over Zero', value: 'over-0' },
 			{ name: 'Under Zero', value: 'under-0' }
+		]
+	},
+	{
+		name: 'Op. Income Growth',
+		id: 'operatingIncomeGrowth',
+		category: ['Financials'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 200%', value: 'over-200' },
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' },
+			{ name: 'Under -50%', value: 'under-X50' }
 		]
 	},
 	{
@@ -572,6 +634,7 @@ export const FiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
+			{ name: 'Over 200%', value: 'over-200' },
 			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
@@ -607,6 +670,7 @@ export const FiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
+			{ name: 'Over 200%', value: 'over-200' },
 			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
@@ -778,6 +842,7 @@ export const FiltersMap: FilterProps[] = [
 		filterType: 'numeric',
 		numberType: 'percentage',
 		options: [
+			{ name: 'Over 200%', value: 'over-200' },
 			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
@@ -884,6 +949,20 @@ export const FiltersMap: FilterProps[] = [
 			{ name: 'Under -10%', value: 'under-X10' },
 			{ name: 'Under -20%', value: 'under-X20' },
 			{ name: 'Under -50%', value: 'under-X50' }
+		]
+	},
+	{
+		name: 'Cash / Market Cap',
+		id: 'netCashByMarketCap',
+		category: ['Financials'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' }
 		]
 	},
 	{
