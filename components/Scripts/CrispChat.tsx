@@ -1,8 +1,33 @@
 import Script from 'next/script'
 import { useAuthState } from 'hooks/useAuthState'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-export const CrispChat = () => {
+declare global {
+	interface Window {
+		$crisp: any
+	}
+}
+
+// Hide the widget
+export function hideWidget() {
+	window?.$crisp?.push(['do', 'chat:hide'])
+}
+
+export function CrispChat() {
+	const router = useRouter()
 	const { user, isLoggedIn } = useAuthState()
+
+	// Show widget when entering a page that requires it
+	// Hide widget if navigated away from the page
+	useEffect(() => {
+		window?.$crisp?.push(['do', 'chat:show'])
+		router.events.on('routeChangeComplete', hideWidget)
+
+		return () => {
+			router.events.off('routeChangeComplete', hideWidget)
+		}
+	}, [router.events])
 
 	return (
 		<>
