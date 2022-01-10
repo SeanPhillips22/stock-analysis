@@ -16,7 +16,7 @@ export function useChart(info: Info, time: string) {
 	const tradingHours = isTradingHoursOpen()
 
 	const { data, isFetching } = useQuery(
-		['c', info.symbol, info.type, time],
+		['change', info.symbol, info.type, time],
 		() => queryChart(info.symbol, info.type, time),
 		{
 			refetchInterval: tradingHours ? 60000 : false,

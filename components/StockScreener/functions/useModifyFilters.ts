@@ -1,5 +1,6 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { FilterId, FilterType, NumberType } from '../screener.types'
+import { DataId } from 'types/Data'
+import { FilterType, NumberType } from '../screener.types'
 import { isFilterSelected } from './isFilterSelected'
 
 /**
@@ -20,7 +21,7 @@ export function useModifyFilters() {
 
 	// Add a filter
 	function add(
-		id: FilterId,
+		id: DataId,
 		name: string,
 		value: string,
 		filterType: FilterType,
@@ -51,11 +52,11 @@ export function useModifyFilters() {
 	}
 
 	// Remove a filter
-	function remove(id: FilterId) {
+	function remove(id: DataId) {
 		removeFilter(id)
 
 		// Remove the column from the filtered columns
-		if (id !== 'm') {
+		if (id !== 'marketCap') {
 			removeFilteredColumn(id)
 
 			// If viewing the filtered columns, force them to update right away

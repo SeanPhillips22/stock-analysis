@@ -3,14 +3,14 @@ type MapProps = { [key: string]: string }[]
 
 export const TOOLTIP_MAP: MapProps = [
 	{
-		id: 'm',
+		id: 'marketCap',
 		title: 'Market Capitalization',
 		tooltip:
 			"Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
 		formula: 'Market Cap = Shares Outstanding * Stock Price'
 	},
 	{
-		id: 'ev',
+		id: 'enterpriseValue',
 		title: 'Enterprise Value',
 		tooltip:
 			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and cash levels.",
@@ -79,35 +79,35 @@ export const TOOLTIP_MAP: MapProps = [
 			'Float is the amount of shares that are considered available for trading. It subtracts closely held shares by insiders and restricted stock from the total number of shares outstanding.'
 	},
 	{
-		id: 'pe',
+		id: 'peRatio',
 		title: 'PE Ratio',
 		tooltip:
 			'The price-to-earnings (P/E) ratio is a valuation metric that shows how expensive a stock is relative to earnings.',
 		formula: 'PE Ratio = Stock Price / Earnings Per Share'
 	},
 	{
-		id: 'fpe',
+		id: 'peForward',
 		title: 'Forward PE',
 		tooltip:
 			'The forward price-to-earnings (P/E) ratio is like the PE ratio, except that it uses the estimated earnings over the next year instead of historical earnings.',
 		formula: 'Forward PE = Stock Price / Forward EPS (1Y)'
 	},
 	{
-		id: 'ps',
+		id: 'psRatio',
 		title: 'PS Ratio',
 		tooltip:
 			'The price-to-sales (P/S) ratio is a commonly used valuation metric. It shows how expensive a stock is compared to revenue.',
 		formula: 'PS Ratio = Market Cap / Revenue'
 	},
 	{
-		id: 'pb',
+		id: 'pbRatio',
 		title: 'PB Ratio',
 		tooltip:
 			"The price-to-book (P/B) ratio measures a stock's price relative to book value. Book value is also called Shareholders' equity.",
 		formula: "PB Ratio = Market Cap / Shareholders' Equity"
 	},
 	{
-		id: 'pfcf',
+		id: 'pFcfRatio',
 		title: 'P/FCF Ratio',
 
 		tooltip:
@@ -115,7 +115,7 @@ export const TOOLTIP_MAP: MapProps = [
 		formula: 'P/FCF Ratio = Market Cap / Free Cash Flow'
 	},
 	{
-		id: 'peg',
+		id: 'pegRatio',
 		title: 'PEG Ratio',
 		tooltip:
 			"The price/earnings to growth (PEG) ratio is calculated by dividing a company's PE ratio by its expected earnings growth.",
@@ -277,7 +277,7 @@ export const TOOLTIP_MAP: MapProps = [
 			'Beta measures the price volatility of a stock in comparison to the overall stock market. A value over 1 indicates higher volatility, while a value under 1 indicates lower volatility.'
 	},
 	{
-		id: 'c',
+		id: 'change',
 		title: 'Price Change (1D)',
 		tooltip:
 			'The percentage change in the stock price on the current or latest trading day.'
@@ -319,24 +319,24 @@ export const TOOLTIP_MAP: MapProps = [
 			'The percentage change in the stock price compared to 5 years ago.'
 	},
 	{
-		id: 'ar',
+		id: 'analystRatings',
 		title: 'Analyst Rating',
 		tooltip: 'The average rating of analysts for the stock.'
 	},
 	{
-		id: 'ac',
+		id: 'analystCount',
 		title: 'Analyst Count',
 		tooltip:
 			'The number of analysts that have given a rating and price target for the stock.'
 	},
 	{
-		id: 'pt',
+		id: 'priceTarget',
 		title: 'Price Target',
 		tooltip:
 			'The average 12-month price target given to the stock by stock analysts.'
 	},
 	{
-		id: 'ptc',
+		id: 'priceTargetChange',
 		title: 'Price Target Difference',
 		tooltip:
 			'The difference between the average 12-month analyst price target and the current stock price.'
@@ -354,7 +354,7 @@ export const TOOLTIP_MAP: MapProps = [
 			'The country that the company is from and/or has its primary headquarters.'
 	},
 	{
-		id: 'v',
+		id: 'volume',
 		title: 'Current Volume',
 		tooltip:
 			'The number of shares traded during the current or latest trading day.'
@@ -536,7 +536,7 @@ export const TOOLTIP_MAP: MapProps = [
 		formula: 'Working Capital = Current Assets - Current Liabilities'
 	},
 	{
-		id: 'ocf',
+		id: 'operatingCF',
 		title: 'Operating Cash Flow',
 		tooltip:
 			'Operating cash flow, also called cash flow from operating activities, measures the amount of cash that a company generates from normal business activities. It is the amount of cash left after all cash income has been received, and all cash expenses have been paid.'
@@ -556,26 +556,26 @@ export const TOOLTIP_MAP: MapProps = [
 		formula: 'FCF Growth = ((Current FCF / Previous FCF) - 1) * 100%'
 	},
 	{
-		id: 'fcfps',
+		id: 'fcfPerShare',
 		title: 'Free Cash Flow Per Share',
 		tooltip:
 			'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
 		formula: 'FCF Per Share = Free Cash Flow / Shares Outstanding'
 	},
 	{
-		id: 'icf',
+		id: 'investingCF',
 		title: 'Investing Cash Flow',
 		tooltip:
 			'Investing cash flow, also called cash flow from investing activities, is the cash used to buy and sell investments and long-term assets. Capital expenditures are included in this category.'
 	},
 	{
-		id: 'cff',
+		id: 'financingCF',
 		title: 'Financing Cash Flow',
 		tooltip:
 			'Financing cash flow, also called cash flow from financing activities, is the cash that flows to and from owners, investors, and creditors (like banks). It includes changes in debt and equity, along with dividends and share buybacks.'
 	},
 	{
-		id: 'ncf',
+		id: 'netCF',
 		title: 'Net Cash Flow',
 		tooltip:
 			'Net cash flow is the sum of operating, investing and financing cash flows. It is equal to the changes in cash and cash equivalents on the balance sheet.'
@@ -635,7 +635,7 @@ export const TOOLTIP_MAP: MapProps = [
 			'Total amount paid to each outstanding share in dividends during the last 12 months.'
 	},
 	{
-		id: 'dy',
+		id: 'dividendYield',
 		title: 'Dividend Yield',
 		tooltip:
 			'The dividend yield is how much a stock pays in dividends each year, as a percentage of the stock price.',
@@ -643,19 +643,19 @@ export const TOOLTIP_MAP: MapProps = [
 			'Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%'
 	},
 	{
-		id: 'p',
+		id: 'price',
 		title: 'Stock Price',
 		tooltip:
 			'The stock price is the current price of a single share, in US dollars.'
 	},
 	{
-		id: 'se',
+		id: 'sector',
 		title: 'Sector',
 		tooltip:
 			'The sector that the company is in, according to the Global Industry Classification Standard (GICS).'
 	},
 	{
-		id: 'i',
+		id: 'industry',
 		title: 'Industry',
 		tooltip:
 			'The industry that the company is in, according to the Global Industry Classification Standard (GICS).'
@@ -675,7 +675,7 @@ export const TOOLTIP_MAP: MapProps = [
 		formula: 'FCF Yield = (Free Cash Flow / Market Cap) * 100%'
 	},
 	{
-		id: 'dg',
+		id: 'dividendGrowth',
 		title: 'Dividend Growth (1Y)',
 		tooltip:
 			'The percentage change in dividends paid per share, compared to one year ago.',
@@ -683,7 +683,7 @@ export const TOOLTIP_MAP: MapProps = [
 			'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%'
 	},
 	{
-		id: 'pr',
+		id: 'payoutRatio',
 		title: 'Payout Ratio',
 		tooltip:
 			"The payout ratio is the percentage of a company's profits that are paid out as dividends. A high ratio implies that the dividend payments may not be sustainable.",
@@ -712,7 +712,7 @@ export const TOOLTIP_MAP: MapProps = [
 		formula: 'Total Yield = Dividend Yield + Buyback Yield'
 	},
 	{
-		id: 'splitDate',
+		id: 'lastSplitDate',
 		title: 'Last Split Date',
 		tooltip: 'The date when the company last performed a stock split.'
 	},
@@ -729,7 +729,7 @@ export const TOOLTIP_MAP: MapProps = [
 			'The price of the shares during the IPO process. It usually starts as a range, but ends with a final number the day before or day of the IPO.'
 	},
 	{
-		id: 'spac',
+		id: 'isSpac',
 		title: 'Is SPAC / Blank Check',
 		tooltip:
 			'Whether the stock is a Special Purpose Acquisition Company (SPAC), also known as a blank check company. This means that the business has no operations but plans to merge with a private company to take it public.'

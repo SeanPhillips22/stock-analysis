@@ -1,4 +1,5 @@
-import { FilterId, SingleStock } from 'components/StockScreener/screener.types'
+import { DataId } from 'types/Data'
+import { SingleStock } from 'components/StockScreener/screener.types'
 
 function changeDate(date: Date, abbr: string) {
 	let str = abbr
@@ -21,7 +22,7 @@ function changeDate(date: Date, abbr: string) {
 	return date
 }
 
-export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
+export function dateMatch(stock: SingleStock, id: DataId, filter: string) {
 	// Explode the filter value string to get the individual items
 	const filterBits = filter.split('-')
 	const compare = filterBits[0] ?? null
@@ -34,7 +35,8 @@ export function dateMatch(stock: SingleStock, id: FilterId, filter: string) {
 	}
 
 	// Format the values before comparing
-	const value = new Date(Number(raw), 0)
+	const value =
+		raw.toString().length === 4 ? new Date(Number(raw), 0) : new Date(raw)
 
 	// If there is no compare, or no value, then return false
 	if (!compare || !value) {

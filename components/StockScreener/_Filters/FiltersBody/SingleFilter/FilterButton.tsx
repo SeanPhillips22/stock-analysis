@@ -1,11 +1,11 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { FilterId } from 'components/StockScreener/screener.types'
+import { DataId } from 'types/Data'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { createLabelFromString } from 'components/StockScreener/functions/filterString/createLabelFromString'
 
 type Props = {
 	active: string | false
-	id: FilterId
+	id: DataId
 }
 
 export function FilterButton({ active, id }: Props) {
