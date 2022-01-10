@@ -12,6 +12,13 @@ export function Hero({ trending }: { trending: Trending[] }) {
 		<>
 			<section className="bg-gray-100 py-12 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0 md:py-24 lg:py-40">
 				<div className="mx-auto max-w-[850px] text-center">
+					<div>
+						<Link href="/markets/gainers">
+							<a className="bll text-xl font-semibold text-center">
+								Stock Gainers
+							</a>
+						</Link>
+					</div>
 					<h1 className="text-2xl xs:text-3xl md:text-4xl lg:text-[42px] font-bold mb-5 lg:mb-7">
 						Search for a stock to start your analysis
 					</h1>
