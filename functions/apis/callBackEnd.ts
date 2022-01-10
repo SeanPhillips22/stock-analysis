@@ -18,6 +18,11 @@ export function respondSSR(response: Response) {
 	}
 }
 
+export async function getSSR(page: string) {
+	const response = await getData(page)
+	return respondSSR(response)
+}
+
 export async function getPageDataSSR(
 	page: string,
 	symbol: string,

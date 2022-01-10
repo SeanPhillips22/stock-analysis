@@ -2,7 +2,7 @@ import { LeftNav } from './Navigation/LeftNav'
 import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 import { Header } from 'components/Layout/Header/_Header'
 import { Footer } from 'components/Layout/Footer/_Footer'
-import { HeaderAd } from 'components/Ads/Snigel/HeaderAd'
+// import { HeaderAd } from 'components/Ads/Snigel/HeaderAd'
 
 type Props = {
 	children: React.ReactNode
@@ -16,7 +16,7 @@ export function Layout({ children, fullWidth }: Props) {
 			<div className={fullWidth ? 'mainbody fullwidth' : 'mainbody'}>
 				<LeftNav />
 				<div>
-					<HeaderAd />
+					{/* <HeaderAd /> */}
 					<main id="main" className="maincol">
 						{children}
 					</main>
