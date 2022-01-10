@@ -18,8 +18,8 @@ interface StockType {
 	n: string
 	cls?: string
 	aum?: number
-	ind?: string
-	mcap?: number
+	i?: string
+	m?: number
 }
 
 interface Props {

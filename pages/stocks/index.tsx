@@ -70,7 +70,7 @@ export default function StocksIndexPage({ stocks }: IStocks) {
 		},
 		{
 			Header: 'Market Cap',
-			accessor: 'marketCap',
+			accessor: 'm',
 			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
 				return abbreviate(value)
 			},

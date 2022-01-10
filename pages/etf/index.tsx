@@ -63,7 +63,7 @@ export default function StocksIndexPage({ stocks }: IEtfs) {
 		},
 		{
 			Header: 'Asset Class',
-			accessor: 'change'
+			accessor: 'c'
 		},
 		{
 			Header: 'Assets',
