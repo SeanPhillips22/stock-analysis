@@ -207,7 +207,7 @@ export default function LandingPage() {
 						<p className="text-lg mb-5">
 							You can send an email directly to
 							support@stockanalysis.com. You can also go to the contact
-							page and send a message via the form or live chat widget.
+							page and send a message via the form.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
