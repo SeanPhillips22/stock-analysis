@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 
 type Props = {
 	children: React.ReactNode
+	hideTrial?: boolean
 }
 
 /**
@@ -12,7 +13,7 @@ type Props = {
  * @param children The page content to display inside the layout
  * @returns
  */
-export function FocusedLayout({ children }: Props) {
+export function FocusedLayout({ children, hideTrial }: Props) {
 	const visible = navMenuState((state) => state.visible)
 	const close = navMenuState((state) => state.close)
 
@@ -23,7 +24,7 @@ export function FocusedLayout({ children }: Props) {
 
 	return (
 		<>
-			<Header hideNav={true} />
+			<Header hideNav={true} hideTrial={hideTrial} />
 			<main id="main">{children}</main>
 			<Footer />
 		</>

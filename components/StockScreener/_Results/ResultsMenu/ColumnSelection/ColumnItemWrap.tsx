@@ -6,15 +6,13 @@ import {
 	IPOFiltersMap,
 	ETFFiltersMap
 } from 'components/StockScreener/maps/filters.map'
-import {
-	FilterId,
-	ScreenerTypes
-} from 'components/StockScreener/screener.types'
+import { DataId } from 'types/Data'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { ColumnItem } from './ColumnItem'
 import { useMemo } from 'react'
 
 type ColumnProperties = {
-	id: FilterId
+	id: DataId
 	name: string
 }
 

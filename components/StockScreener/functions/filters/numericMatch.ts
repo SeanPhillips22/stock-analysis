@@ -1,7 +1,8 @@
-import { FilterId, SingleStock } from 'components/StockScreener/screener.types'
+import { DataId } from 'types/Data'
+import { SingleStock } from 'components/StockScreener/screener.types'
 import { getFilterFromString } from '../filterString/getFilterFromString'
 
-export function numericMatch(stock: SingleStock, id: FilterId, filter: string) {
+export function numericMatch(stock: SingleStock, id: DataId, filter: string) {
 	// Explode the filter value string to get the individiaul items
 	const { compare, first, second } = getFilterFromString(filter, true)
 

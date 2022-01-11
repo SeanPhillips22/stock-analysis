@@ -1,4 +1,4 @@
-import { FilterId } from '../screener.types'
+import { DataId } from 'types/Data'
 import {
 	priceSort,
 	dateSort,
@@ -8,7 +8,7 @@ import {
 
 type Column = {
 	Header: string
-	accessor: FilterId
+	accessor: DataId
 	format?:
 		| 'string'
 		| 'linkSymbol'
@@ -39,7 +39,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Market Cap',
-		accessor: 'm',
+		accessor: 'marketCap',
 		format: 'marketcap'
 	},
 	{
@@ -49,12 +49,12 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Sector',
-		accessor: 'se',
+		accessor: 'sector',
 		format: 'padleft'
 	},
 	{
 		Header: 'Industry',
-		accessor: 'i'
+		accessor: 'industry'
 	},
 	{
 		Header: 'Asset Class',
@@ -64,7 +64,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Enterprise Value',
-		accessor: 'ev',
+		accessor: 'enterpriseValue',
 		format: 'abbreviate'
 	},
 	{
@@ -73,32 +73,32 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Analyst Ratings',
-		accessor: 'ar',
+		accessor: 'analystRatings',
 		format: 'align'
 	},
 	{
 		Header: 'Count',
-		accessor: 'ac',
+		accessor: 'analystCount',
 		format: 'align'
 	},
 	{
 		Header: 'Price',
-		accessor: 'p',
+		accessor: 'price',
 		format: 'amount'
 	},
 	{
 		Header: 'Change 1D',
-		accessor: 'c',
+		accessor: 'change',
 		format: 'changePcColor'
 	},
 	{
 		Header: 'Volume',
-		accessor: 'v',
+		accessor: 'volume',
 		format: 'format0dec'
 	},
 	{
 		Header: 'PE Ratio',
-		accessor: 'pe',
+		accessor: 'peRatio',
 		format: 'format2dec'
 	},
 	{
@@ -128,32 +128,32 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Forward PE',
-		accessor: 'fpe',
+		accessor: 'peForward',
 		format: 'format2dec'
 	},
 	{
 		Header: 'P/S',
-		accessor: 'ps',
+		accessor: 'psRatio',
 		format: 'format2dec'
 	},
 	{
 		Header: 'P/B',
-		accessor: 'pb',
+		accessor: 'pbRatio',
 		format: 'format2dec'
 	},
 	{
 		Header: 'P/FCF',
-		accessor: 'pfcf',
+		accessor: 'pFcfRatio',
 		format: 'format2dec'
 	},
 	{
 		Header: 'Target',
-		accessor: 'pt',
+		accessor: 'priceTarget',
 		format: 'amount'
 	},
 	{
 		Header: 'Target (%)',
-		accessor: 'ptc',
+		accessor: 'priceTargetChange',
 		format: 'changePcColor'
 	},
 	{
@@ -163,17 +163,17 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Yield (%)',
-		accessor: 'dy',
+		accessor: 'dividendYield',
 		format: 'percentage'
 	},
 	{
 		Header: 'Payout Ratio',
-		accessor: 'pr',
+		accessor: 'payoutRatio',
 		format: 'percentage'
 	},
 	{
 		Header: 'Div. Growth',
-		accessor: 'dg',
+		accessor: 'dividendGrowth',
 		format: 'percentage'
 	},
 	{
@@ -238,7 +238,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Op. Cash Flow',
-		accessor: 'ocf',
+		accessor: 'operatingCF',
 		format: 'abbreviate'
 	},
 	{
@@ -253,7 +253,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'FCF / Share',
-		accessor: 'fcfps',
+		accessor: 'fcfPerShare',
 		format: 'format2dec'
 	},
 	{
@@ -318,7 +318,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'PEG Ratio',
-		accessor: 'peg',
+		accessor: 'pegRatio',
 		format: 'format2dec'
 	},
 	{
@@ -553,12 +553,12 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Last Split',
-		accessor: 'ls',
+		accessor: 'lastSplitType',
 		format: 'align'
 	},
 	{
 		Header: 'Split Date',
-		accessor: 'splitDate',
+		accessor: 'lastSplitDate',
 		format: 'date'
 	},
 	{
@@ -568,17 +568,17 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Investing CF',
-		accessor: 'icf',
+		accessor: 'investingCF',
 		format: 'abbreviate'
 	},
 	{
 		Header: 'Financing CF',
-		accessor: 'cff',
+		accessor: 'financingCF',
 		format: 'abbreviate'
 	},
 	{
 		Header: 'Net CF',
-		accessor: 'ncf',
+		accessor: 'netCF',
 		format: 'abbreviate'
 	},
 	{
@@ -594,7 +594,7 @@ export const COLUMNS_MAP: Column[] = [
 	},
 	{
 		Header: 'Is SPAC',
-		accessor: 'spac',
+		accessor: 'isSpac',
 		format: 'string'
 	},
 	{

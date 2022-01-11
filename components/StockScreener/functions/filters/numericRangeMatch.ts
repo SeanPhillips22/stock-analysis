@@ -1,4 +1,5 @@
-import { FilterId, SingleStock } from 'components/StockScreener/screener.types'
+import { DataId } from 'types/Data'
+import { SingleStock } from 'components/StockScreener/screener.types'
 import {
 	getFilterFromString,
 	getPriceRangeFilterFromString
@@ -6,7 +7,7 @@ import {
 
 export function numericRangeMatch(
 	stock: SingleStock,
-	id: FilterId,
+	id: DataId,
 	filter: string
 ) {
 	let result

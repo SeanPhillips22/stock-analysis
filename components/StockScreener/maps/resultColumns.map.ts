@@ -1,49 +1,49 @@
+import { DataId } from 'types/Data'
 import {
 	ColumnName,
 	ColumnsMap,
-	FilterId,
 	ScreenerTypes
 } from 'components/StockScreener/screener.types'
 
-export const defaultColumnsStocks: FilterId[] = [
+export const defaultColumnsStocks: DataId[] = [
 	's',
 	'n',
-	'm',
-	'p',
-	'c',
-	'i',
-	'v',
-	'pe'
+	'marketCap',
+	'price',
+	'change',
+	'industry',
+	'volume',
+	'peRatio'
 ]
-export const defaultColumnsIPOs: FilterId[] = [
+export const defaultColumnsIPOs: DataId[] = [
 	's',
 	'n',
-	'm',
-	'i',
+	'marketCap',
+	'industry',
 	'ipoPriceRange',
 	'ipoDate',
 	'revenue'
 ]
-export const defaultColumnsETFs: FilterId[] = [
+export const defaultColumnsETFs: DataId[] = [
 	's',
 	'n',
 	'assetClass',
 	'aum',
-	'p',
-	'c',
-	'v',
+	'price',
+	'change',
+	'volume',
 	'holdings'
 ]
 
 const resultColumnsStocks: ColumnsMap = {
 	General: defaultColumnsStocks,
-	Filtered: ['s', 'n', 'm'],
+	Filtered: ['s', 'n', 'marketCap'],
 	Performance: [
 		's',
 		'n',
-		'm',
-		'p',
-		'c',
+		'marketCap',
+		'price',
+		'change',
 		'ch1m',
 		'ch6m',
 		'chYTD',
@@ -54,27 +54,55 @@ const resultColumnsStocks: ColumnsMap = {
 	Financials: [
 		's',
 		'n',
-		'm',
+		'marketCap',
 		'revenue',
 		'operatingIncome',
 		'netIncome',
 		'fcf',
 		'eps'
 	],
-	Valuation: ['s', 'n', 'm', 'ev', 'pe', 'fpe', 'ps', 'pb', 'pfcf'],
-	Dividends: ['s', 'n', 'm', 'dps', 'dy', 'pr', 'dg', 'payoutFrequency'],
-	Analysts: ['s', 'n', 'm', 'ar', 'ac', 'p', 'pt', 'ptc']
+	Valuation: [
+		's',
+		'n',
+		'marketCap',
+		'enterpriseValue',
+		'peRatio',
+		'peForward',
+		'psRatio',
+		'pbRatio',
+		'pFcfRatio'
+	],
+	Dividends: [
+		's',
+		'n',
+		'marketCap',
+		'dps',
+		'dividendYield',
+		'payoutRatio',
+		'dividendGrowth',
+		'payoutFrequency'
+	],
+	Analysts: [
+		's',
+		'n',
+		'marketCap',
+		'analystRatings',
+		'analystCount',
+		'price',
+		'priceTarget',
+		'priceTargetChange'
+	]
 }
 
 const resultColumnsIPOs: ColumnsMap = {
 	General: defaultColumnsIPOs,
-	Filtered: ['s', 'n', 'm'],
+	Filtered: ['s', 'n', 'marketCap'],
 	Company: [
 		's',
 		'n',
-		'm',
-		'se',
-		'i',
+		'marketCap',
+		'sector',
+		'industry',
 		'country',
 		'exchange',
 		'employees',
@@ -83,7 +111,7 @@ const resultColumnsIPOs: ColumnsMap = {
 	Income: [
 		's',
 		'n',
-		'm',
+		'marketCap',
 		'revenue',
 		'grossProfit',
 		'operatingIncome',
@@ -95,14 +123,24 @@ const resultColumnsIPOs: ColumnsMap = {
 	'Balance Sheet': [
 		's',
 		'n',
-		'm',
+		'marketCap',
 		'cash',
 		'assets',
 		'debt',
 		'liabilities',
 		'equity'
 	],
-	'Cash Flow': ['s', 'n', 'm', 'ocf', 'icf', 'cff', 'ncf', 'capex', 'fcf']
+	'Cash Flow': [
+		's',
+		'n',
+		'marketCap',
+		'operatingCF',
+		'investingCF',
+		'financingCF',
+		'netCF',
+		'capex',
+		'fcf'
+	]
 }
 
 const resultColumnsETFs: ColumnsMap = {
@@ -112,8 +150,8 @@ const resultColumnsETFs: ColumnsMap = {
 		's',
 		'n',
 		'aum',
-		'p',
-		'c',
+		'price',
+		'change',
 		'ch1m',
 		'ch6m',
 		'chYTD',
@@ -126,9 +164,9 @@ const resultColumnsETFs: ColumnsMap = {
 		'n',
 		'aum',
 		'dps',
-		'dy',
-		'dg',
-		'pr',
+		'dividendYield',
+		'dividendGrowth',
+		'payoutRatio',
 		'exDivDate',
 		'payoutFrequency'
 	]
@@ -156,13 +194,13 @@ export function returnDefaultColumns(type: ScreenerTypes) {
 	return defaultColumnsStocks
 }
 
-export function returnFilteredColumns(type: ScreenerTypes): FilterId[] {
+export function returnFilteredColumns(type: ScreenerTypes): DataId[] {
 	if (type === 'stocks') {
-		return ['s', 'n', 'm']
+		return ['s', 'n', 'marketCap']
 	} else if (type === 'ipo') {
-		return ['s', 'n', 'm']
+		return ['s', 'n', 'marketCap']
 	} else if (type === 'etf') {
 		return ['s', 'n', 'aum']
 	}
-	return ['s', 'n', 'm']
+	return ['s', 'n', 'marketCap']
 }

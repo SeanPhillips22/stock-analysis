@@ -39,16 +39,6 @@ export default function Contact() {
 					.
 				</p>
 				<ContactForm />
-				<h2 className="mt-16">Mailing Address</h2>
-				<p>
-					Vefir ehf.
-					<br />
-					Austurkor 102,
-					<br />
-					203 Kopavogur,
-					<br />
-					Iceland
-				</p>
 			</ArticleLayout>
 		</>
 	)

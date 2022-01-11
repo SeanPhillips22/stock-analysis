@@ -5,7 +5,6 @@ import { AboutHero } from 'components/About/Hero'
 import { AboutFeatures } from 'components/About/Features'
 import { AboutTeam } from 'components/About/Team'
 import { AboutActions } from 'components/About/Actions'
-import { AboutDetails } from 'components/About/Details'
 import { FocusedLayout } from 'components/Layout/FocusedLayout'
 
 export default function FrontPage() {
@@ -21,7 +20,6 @@ export default function FrontPage() {
 				<AboutFeatures />
 				<AboutTeam />
 				<AboutActions />
-				<AboutDetails />
 			</FocusedLayout>
 		</>
 	)

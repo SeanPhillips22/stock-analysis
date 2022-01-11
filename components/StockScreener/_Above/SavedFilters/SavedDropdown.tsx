@@ -1,13 +1,11 @@
 import { useSavedScreens } from './useSavedScreens'
-import {
-	FilterId,
-	ScreenerTypes
-} from 'components/StockScreener/screener.types'
+import { DataId } from 'types/Data'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { SavedItem } from './SavedItem'
 import { SaveScreen } from './SaveScreen'
 
 type SavedFilter = {
-	id: FilterId
+	id: DataId
 	name: string
 	value: string
 }

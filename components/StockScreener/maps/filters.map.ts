@@ -3,7 +3,7 @@ import { FilterProps } from 'components/StockScreener/screener.types'
 export const FiltersMap: FilterProps[] = [
 	{
 		name: 'Market Cap',
-		id: 'm',
+		id: 'marketCap',
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -22,7 +22,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Enterprise Value',
-		id: 'ev',
+		id: 'enterpriseValue',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -42,7 +42,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Stock Price',
-		id: 'p',
+		id: 'price',
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -65,7 +65,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'PE Ratio',
-		id: 'pe',
+		id: 'peRatio',
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -81,7 +81,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Forward PE',
-		id: 'fpe',
+		id: 'peForward',
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -108,7 +108,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Dividend Yield',
-		id: 'dy',
+		id: 'dividendYield',
 		category: ['Popular', 'Dividends'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -126,7 +126,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Sector',
-		id: 'se',
+		id: 'sector',
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		variable: true,
@@ -134,7 +134,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Industry',
-		id: 'i',
+		id: 'industry',
 		category: ['Popular', 'Company'],
 		filterType: 'stringmatch',
 		variable: true,
@@ -142,7 +142,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Price Change 1D',
-		id: 'c',
+		id: 'change',
 		category: ['Popular', 'Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -315,7 +315,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Volume',
-		id: 'v',
+		id: 'volume',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
@@ -336,7 +336,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Analyst Rating',
-		id: 'ar',
+		id: 'analystRatings',
 		category: ['Popular'],
 		filterType: 'stringmatch',
 		options: [
@@ -349,7 +349,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Analyst Count',
-		id: 'ac',
+		id: 'analystCount',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
@@ -364,7 +364,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Price Target',
-		id: 'pt',
+		id: 'priceTarget',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -387,7 +387,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Price Target (%)',
-		id: 'ptc',
+		id: 'priceTargetChange',
 		category: ['Popular'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -718,7 +718,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Op. Cash Flow',
-		id: 'ocf',
+		id: 'operatingCF',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -739,7 +739,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Inv. Cash Flow',
-		id: 'icf',
+		id: 'investingCF',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -759,7 +759,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Fin. Cash Flow',
-		id: 'cff',
+		id: 'financingCF',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -780,7 +780,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Net Cash Flow',
-		id: 'ncf',
+		id: 'netCF',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -858,7 +858,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'FCF / Share',
-		id: 'fcfps',
+		id: 'fcfPerShare',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -1123,7 +1123,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'PS Ratio',
-		id: 'ps',
+		id: 'psRatio',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1138,7 +1138,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'PB Ratio',
-		id: 'pb',
+		id: 'pbRatio',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1153,7 +1153,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'P/FCF Ratio',
-		id: 'pfcf',
+		id: 'pFcfRatio',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1168,7 +1168,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'PEG Ratio',
-		id: 'peg',
+		id: 'pegRatio',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1301,7 +1301,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Div. Growth',
-		id: 'dg',
+		id: 'dividendGrowth',
 		category: ['Dividends'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1319,7 +1319,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Payout Ratio',
-		id: 'pr',
+		id: 'payoutRatio',
 		category: ['Dividends'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1597,7 +1597,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Is SPAC',
-		id: 'spac',
+		id: 'isSpac',
 		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [
@@ -1921,7 +1921,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Last Stock Split',
-		id: 'ls',
+		id: 'lastSplitType',
 		category: ['Other'],
 		filterType: 'stringmatch',
 		options: [
@@ -1932,7 +1932,7 @@ export const FiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Last Split Date',
-		id: 'splitDate',
+		id: 'lastSplitDate',
 		category: ['Other'],
 		filterType: 'date',
 		options: [
@@ -1948,7 +1948,7 @@ export const FiltersMap: FilterProps[] = [
 export const IPOFiltersMap: FilterProps[] = [
 	{
 		name: 'Market Cap',
-		id: 'm',
+		id: 'marketCap',
 		category: ['General'],
 		filterType: 'numeric',
 		options: [
@@ -1967,7 +1967,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Sector',
-		id: 'se',
+		id: 'sector',
 		category: ['General'],
 		filterType: 'stringmatch',
 		variable: true,
@@ -2002,7 +2002,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Industry',
-		id: 'i',
+		id: 'industry',
 		category: ['General'],
 		filterType: 'stringmatch',
 		variable: true,
@@ -2065,7 +2065,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Is SPAC',
-		id: 'spac',
+		id: 'isSpac',
 		category: ['General'],
 		filterType: 'stringmatch',
 		options: [
@@ -2309,7 +2309,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Op. Cash Flow',
-		id: 'ocf',
+		id: 'operatingCF',
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
@@ -2323,7 +2323,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Inv. Cash Flow',
-		id: 'icf',
+		id: 'investingCF',
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
@@ -2336,7 +2336,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Fin. Cash Flow',
-		id: 'cff',
+		id: 'financingCF',
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
@@ -2349,7 +2349,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Net Cash Flow',
-		id: 'ncf',
+		id: 'netCF',
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
@@ -2388,7 +2388,7 @@ export const IPOFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'FCF / Share',
-		id: 'fcfps',
+		id: 'fcfPerShare',
 		category: ['Cash Flow'],
 		filterType: 'numeric',
 		options: [
@@ -2474,7 +2474,7 @@ export const IPOFiltersMap: FilterProps[] = [
 export const ETFFiltersMap: FilterProps[] = [
 	{
 		name: 'Stock Price',
-		id: 'p',
+		id: 'price',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
@@ -2534,7 +2534,7 @@ export const ETFFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Volume',
-		id: 'v',
+		id: 'volume',
 		category: ['Popular'],
 		filterType: 'numeric',
 		options: [
@@ -2684,7 +2684,7 @@ export const ETFFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Dividend Yield',
-		id: 'dy',
+		id: 'dividendYield',
 		category: ['Popular', 'Dividends'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2702,7 +2702,7 @@ export const ETFFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Div. Growth',
-		id: 'dg',
+		id: 'dividendGrowth',
 		category: ['Dividends'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2717,7 +2717,7 @@ export const ETFFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Payout Ratio',
-		id: 'pr',
+		id: 'payoutRatio',
 		category: ['Dividends'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2802,7 +2802,7 @@ export const ETFFiltersMap: FilterProps[] = [
 	},
 	{
 		name: 'Price Change 1D',
-		id: 'c',
+		id: 'change',
 		category: ['Performance'],
 		filterType: 'numeric',
 		numberType: 'percentage',

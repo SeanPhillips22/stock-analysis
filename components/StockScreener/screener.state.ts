@@ -1,9 +1,9 @@
 import create from 'zustand'
+import { DataId } from 'types/Data'
 import {
 	ScreenerTypes,
 	SingleStock,
 	SingleDataPoint,
-	FilterId,
 	FilterValue,
 	VariableFilter,
 	FilterOption,
@@ -26,21 +26,21 @@ interface ScreenerState {
 	// Data
 	data: SingleStock[]
 	setData: (data: SingleStock[]) => void
-	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) => void
+	addDataColumn: (newColumn: SingleDataPoint[], id: DataId) => void
 	fullCount: number
 	setFullCount: (fullCount: number) => void
 
 	// Loading
 	loaded: boolean
 	setLoaded: (loaded: boolean) => void
-	fetching: FilterId[]
-	addFetching: (newFetching: FilterId) => void
-	removeFetching: (newFetching: FilterId) => void
+	fetching: DataId[]
+	addFetching: (newFetching: DataId) => void
+	removeFetching: (newFetching: DataId) => void
 
 	// Filters
 	filters: FilterValue[]
 	addFilter: (newFilter: FilterValue) => void
-	removeFilter: (filter: FilterId) => void
+	removeFilter: (filter: DataId) => void
 	clearFilters: () => void
 	filtersShown: boolean
 	setFiltersShown: (filtersShown: boolean) => void
@@ -48,8 +48,8 @@ interface ScreenerState {
 	// Filter menu
 	filterMenu: string
 	setFilterMenu: (newMenu: string) => void
-	openFilter: FilterId | ''
-	setOpenFilter: (newFilter: FilterId | '') => void
+	openFilter: DataId | ''
+	setOpenFilter: (newFilter: DataId | '') => void
 	filterSearch: string
 	setFilterSearch: (newSearch: string) => void
 
@@ -61,18 +61,18 @@ interface ScreenerState {
 
 	// Variable filters
 	variableFilters: VariableFilter[]
-	addVariableFilter: (options: FilterOption[], id: FilterId) => void
+	addVariableFilter: (options: FilterOption[], id: DataId) => void
 	clearVarFilters: () => void
 
 	// Columns
-	fetchedColumns: FilterId[]
-	showColumns: FilterId[]
-	filteredColumns: FilterId[]
-	addFetchedColumn: (newColumn: FilterId) => void
-	setFetchedColumns: (newArray: FilterId[]) => void
-	addFilteredColumn: (newColumn: FilterId) => void
-	removeFilteredColumn: (columns: FilterId) => void
-	setShowColumns: (newColumns: FilterId[]) => void
+	fetchedColumns: DataId[]
+	showColumns: DataId[]
+	filteredColumns: DataId[]
+	addFetchedColumn: (newColumn: DataId) => void
+	setFetchedColumns: (newArray: DataId[]) => void
+	addFilteredColumn: (newColumn: DataId) => void
+	removeFilteredColumn: (columns: DataId) => void
+	setShowColumns: (newColumns: DataId[]) => void
 	columnDropdownOpen: boolean
 	setColumnDropdownOpen: (open: boolean) => void
 
@@ -104,7 +104,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 	data: [],
 	setData: (newData: SingleStock[]) =>
 		set((state) => ({ ...state, data: newData })),
-	addDataColumn: (newColumn: SingleDataPoint[], id: FilterId) =>
+	addDataColumn: (newColumn: SingleDataPoint[], id: DataId) =>
 		set((state) => ({
 			data: mergeColumns(state.data, newColumn, id)
 		})),
@@ -115,12 +115,12 @@ export const screenerState = create<ScreenerState>((set) => ({
 	loaded: false,
 	setLoaded: (newLoaded: boolean) => set({ loaded: newLoaded }),
 	fetching: [],
-	addFetching: (newFetching: FilterId) =>
+	addFetching: (newFetching: DataId) =>
 		set((state) => ({
 			...state,
 			fetching: [...state.fetching, newFetching]
 		})),
-	removeFetching: (newFetching: FilterId) =>
+	removeFetching: (newFetching: DataId) =>
 		set((state) => ({
 			...state,
 			fetching: state.fetching.filter((fetching) => fetching !== newFetching)
@@ -146,7 +146,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 			activePreset: '',
 			resetSort: true,
 			sort: [
-				{ id: 'm', desc: false },
+				{ id: 'marketCap', desc: false },
 				{ id: 'aum', desc: false }
 			]
 		})),
@@ -158,7 +158,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 	setFilterMenu: (newMenu: string) =>
 		set({ filterMenu: newMenu, filterSearch: '', filtersShown: true }),
 	openFilter: '', // The filter menu that is open
-	setOpenFilter: (newFilter: FilterId | '') => set({ openFilter: newFilter }),
+	setOpenFilter: (newFilter: DataId | '') => set({ openFilter: newFilter }),
 	filterSearch: '',
 	setFilterSearch: (newSearch: string) =>
 		set({
@@ -169,7 +169,7 @@ export const screenerState = create<ScreenerState>((set) => ({
 
 	// Variable filters
 	variableFilters: [],
-	addVariableFilter: (options: FilterOption[], id: FilterId) =>
+	addVariableFilter: (options: FilterOption[], id: DataId) =>
 		set((state) => ({
 			variableFilters: [...state.variableFilters, { id, options }]
 		})),
@@ -194,28 +194,27 @@ export const screenerState = create<ScreenerState>((set) => ({
 	fetchedColumns: [], // All data columns that have been fetched
 	showColumns: [], // Columns that are currently showing
 	filteredColumns: ['s', 'n'], // All data columns that are being filtered
-	addFetchedColumn: (newColumn: FilterId) =>
+	addFetchedColumn: (newColumn: DataId) =>
 		set((state) => ({
 			fetchedColumns: [...state.fetchedColumns, newColumn]
 		})),
-	setFetchedColumns: (newArray: FilterId[]) =>
-		set({ fetchedColumns: newArray }),
-	addFilteredColumn: (newColumn: FilterId) =>
+	setFetchedColumns: (newArray: DataId[]) => set({ fetchedColumns: newArray }),
+	addFilteredColumn: (newColumn: DataId) =>
 		set((state) => ({
 			filteredColumns: [...state.filteredColumns, newColumn]
 		})),
-	removeFilteredColumn: (column: FilterId) =>
+	removeFilteredColumn: (column: DataId) =>
 		set((state) => ({
 			filteredColumns: state.filteredColumns.filter((c) => c !== column)
 		})),
-	setShowColumns: (newColumns: FilterId[]) =>
+	setShowColumns: (newColumns: DataId[]) =>
 		set((state) => ({ ...state, showColumns: newColumns })),
 	columnDropdownOpen: false,
 	setColumnDropdownOpen: (open: boolean) => set({ columnDropdownOpen: open }),
 
 	// Sort
 	sort: [
-		{ id: 'm', desc: false },
+		{ id: 'marketCap', desc: false },
 		{ id: 'aum', desc: false }
 	],
 	setSort: (newSort: SortObject[]) => set({ sort: newSort }),

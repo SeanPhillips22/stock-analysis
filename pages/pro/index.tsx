@@ -59,7 +59,7 @@ export default function LandingPage() {
 				description="Get unlimited access to all of our financial data, including full financial history, full ETF holdings, and more."
 				canonical="/pro/"
 			/>
-			<FocusedLayout>
+			<FocusedLayout hideTrial={true}>
 				<header className="bg-gray-100 py-12 md:py-32 border-b border-gray-200 shadow-sm px-4 landscape:border-t-2 landscape:md:border-t-0">
 					<div className="max-w-[850px] mx-auto text-center px-6 sm:px-0">
 						<h1 className="text-3xl xs:text-4xl sm:text-[60px] font-bold mb-5 text-gray-800">
@@ -197,7 +197,17 @@ export default function LandingPage() {
 
 						<p className="text-lg mb-5">
 							Click &quot;Start Free Trial&quot; above and enter your
-							info, then you will get instant access.
+							details. Then you will get access right away.
+						</p>
+
+						<h3 className="text-2xl font-bold mb-5 text-gray-800">
+							How to get support?
+						</h3>
+
+						<p className="text-lg mb-5">
+							You can send an email directly to
+							support@stockanalysis.com. You can also go to the contact
+							page and send a message via the form.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
@@ -217,9 +227,9 @@ export default function LandingPage() {
 
 						<p className="text-lg mb-5">
 							Your card will not be charged until after 30 days. If you
-							cancel before 30 days are over then you will not be charged
-							at all. You will get an email reminder a few days before
-							the trial ends.
+							cancel before the 30 days are over then you will not be
+							charged at all. We will send you an email reminder a few
+							days before the trial ends.
 						</p>
 
 						<h3 className="text-2xl font-bold mb-5 text-gray-800">
