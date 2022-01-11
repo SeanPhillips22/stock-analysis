@@ -26,7 +26,7 @@
 		@apply relative inline-block text-left;
 	}
 
-	.controls-dropdown {
+	.dropdown {
 		@apply origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none py-1 z-50;
 	}
 

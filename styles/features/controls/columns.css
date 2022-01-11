@@ -12,7 +12,7 @@
 }
 
 .columns-dropdown {
-	@apply transition duration-150 origin-top-right absolute right-2 lg:absolute lg:right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px] invisible opacity-0 transform -translate-y-2;
+	@apply transition duration-150 origin-top-right absolute right-2 lg:absolute lg:right-0 mt-2 py-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px] invisible opacity-0 transform -translate-y-2;
 }
 
 .columns-dropdown.active {
@@ -21,4 +21,8 @@
 
 .columns-icon {
 	@apply -mr-1 ml-2 h-5 w-5;
+}
+
+.dropdown .input-wrap {
+	@apply relative flex items-center;
 }

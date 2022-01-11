@@ -26,7 +26,7 @@ export function Dropdown({ title, children, hoverTitle, id }: Props) {
 				leaveFrom="transform opacity-100 scale-100"
 				leaveTo="transform opacity-0 scale-95"
 			>
-				<Menu.Items className="controls-dropdown">{children}</Menu.Items>
+				<Menu.Items className="dropdown">{children}</Menu.Items>
 			</Transition>
 		</Menu>
 	)

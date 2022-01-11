@@ -1,4 +1,4 @@
-import { capitalize } from 'lodash'
+import { capitalize } from 'functions/helpers/capitalize'
 
 export function getColumns(cols: string[]) {
 	const columns = cols.map((col) => {

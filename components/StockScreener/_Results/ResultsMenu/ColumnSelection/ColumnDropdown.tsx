@@ -58,10 +58,8 @@ export function ColumnDropdown({ type }: Props) {
 			</div>
 
 			<div className={classNames('columns-dropdown', open ? 'active' : '')}>
-				<div className="py-1">
-					<ColumnSearch search={search} setSearch={setSearch} />
-					<ColumnItemWrap search={search} type={type} />
-				</div>
+				<ColumnSearch search={search} setSearch={setSearch} />
+				<ColumnItemWrap search={search} type={type} />
 			</div>
 		</div>
 	)
