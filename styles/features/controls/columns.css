@@ -1,0 +1,24 @@
+/*
+* Columns
+* Dropdown to select table columns
+*/
+
+.columns-wrap {
+	@apply relative inline-block text-left;
+}
+
+.columns-button {
+	@apply inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer;
+}
+
+.columns-dropdown {
+	@apply transition duration-150 origin-top-right absolute right-2 lg:absolute lg:right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px] invisible opacity-0 transform -translate-y-2;
+}
+
+.columns-dropdown.active {
+	@apply visible opacity-100 transform translate-y-0;
+}
+
+.columns-icon {
+	@apply -mr-1 ml-2 h-5 w-5;
+}

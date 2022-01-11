@@ -6,9 +6,9 @@ import { PageConfig } from 'types/PageConfig'
 
 const columns = ['s', 'n', 'price', 'change', 'volume', 'marketCap']
 const config: PageConfig = {
-	title: 'Top Stock Gainers',
+	title: 'Top Stock Losers',
 	parentTitle: 'Market Movers',
-	active: 'gainers',
+	active: 'losers',
 	controls: {
 		range: true,
 		results: true,
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	let cols = columns.join(',')
 
 	const data = await getSSR(
-		'select?type=stocks&main=change&count=20&columns=' + cols
+		'select?type=stocks&main=change&count=20&sort=asc&columns=' + cols
 	)
 	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 

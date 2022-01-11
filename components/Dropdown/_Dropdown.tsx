@@ -11,8 +11,8 @@ type Props = {
 
 export function Dropdown({ title, children, hoverTitle, id }: Props) {
 	return (
-		<Menu as="div" className="controls-menu" title={hoverTitle} id={id}>
-			<Menu.Button className="controls-btn">
+		<Menu as="div" className="controls-menu" id={id}>
+			<Menu.Button className="controls-btn" title={hoverTitle}>
 				{title}
 				<ChevronDownIcon className="controls-icon" aria-hidden="true" />
 			</Menu.Button>

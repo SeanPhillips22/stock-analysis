@@ -6,7 +6,8 @@ import {
 	AdjustmentsIcon,
 	TrendingUpIcon,
 	NewspaperIcon,
-	ArchiveIcon
+	ArchiveIcon,
+	FireIcon
 } from '@heroicons/react/outline'
 import { matchParentPath } from 'functions/helpers/matchPath'
 import { useEffect } from 'react'
@@ -50,6 +51,21 @@ const navigation = [
 		name: 'Trending',
 		href: '/trending/',
 		icon: TrendingUpIcon
+	},
+	{
+		name: 'Market Movers',
+		href: '/markets/gainers/',
+		icon: FireIcon,
+		children: [
+			{
+				name: 'Top Gainers',
+				href: '/markets/gainers/'
+			},
+			{
+				name: 'Top Losers',
+				href: '/markets/losers/'
+			}
+		]
 	},
 	{
 		name: 'Screener',

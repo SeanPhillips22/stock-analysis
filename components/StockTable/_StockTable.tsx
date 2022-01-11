@@ -1,27 +1,57 @@
-import { useTable } from 'react-table'
-import { useContext, useMemo } from 'react'
-import { TableContext } from 'pages/markets/gainers'
+import {
+	useTable,
+	useSortBy,
+	useGlobalFilter,
+	useAsyncDebounce
+} from 'react-table'
+import { useMemo } from 'react'
 import { getColumns } from './getColumns'
+import { TableControls } from './Controls/_TableControls'
+import { PageConfig } from 'types/PageConfig'
+
+type Props = {
+	_data: any[]
+	_columns: string[]
+	config: PageConfig
+}
 
 /**
  * A re-usable screener mechanism that can output a table of stocks with specific properties
  * Customizable columns, export, filtering, sorting, and pagination
  */
-export function StockTable() {
-	const state = useContext(TableContext)
+export function StockTable({ _data, _columns, config }: Props) {
+	// add react query hook, pass data as initialData, then memoize the state from RQ
+	// When columns change, react query makes a new api call and updates the table
 
-	const data = useMemo(() => state.data, [state.data])
-	const columns = useMemo(() => getColumns(state.columns), [state.columns])
+	const data = useMemo(() => _data, [_data])
+	const columns = useMemo(() => getColumns(_columns), [_columns])
 
-	const { headerGroups, prepareRow, rows } = useTable({
-		columns,
-		data
-	})
+	const {
+		headerGroups,
+		prepareRow,
+		rows,
+		setGlobalFilter,
+		state: { globalFilter }
+	} = useTable(
+		{
+			columns,
+			data
+		},
+		useGlobalFilter,
+		useSortBy
+	)
 
 	return (
 		<div>
+			<div className="mt-3 sm:mt-0">
+				<TableControls
+					config={config}
+					tableId="stock-table"
+					filter={{ useAsyncDebounce, setGlobalFilter, globalFilter }}
+				/>
+			</div>
 			<div className="overflow-x-auto">
-				<table className="symbol-table index" id="symbol-table">
+				<table className="symbol-table index" id="stock-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
@@ -54,4 +84,3 @@ export function StockTable() {
 }
 
 // ? Needs a backend component, maybe a Screener object?
-// ? Should use React Query

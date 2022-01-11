@@ -1,12 +1,12 @@
 import Link from 'next/link'
 
-type TabTypes = {
+type Props = {
 	url: string
 	title: string
 	css: 'active' | 'inactive'
 }
 
-export function IPOTab({ url, title, css }: TabTypes) {
+export function NavTab({ url, title, css }: Props) {
 	return (
 		<li>
 			<Link href={url} prefetch={false}>

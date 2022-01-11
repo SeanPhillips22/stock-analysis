@@ -4,6 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import { ColumnItemWrap } from './ColumnItemWrap'
 import { ColumnSearch } from './ColumnSearch'
 import { ScreenerTypes } from 'components/StockScreener/screener.types'
+import { classNames } from 'functions/helpers/classNames'
 
 /**
  * The custom columns dropdown. It contains a search filter and checkbox for each column.
@@ -45,27 +46,18 @@ export function ColumnDropdown({ type }: Props) {
 	}
 
 	return (
-		<div ref={ref} className="relative inline-block text-left">
+		<div ref={ref} className="columns-wrap">
 			<div
-				className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer"
+				className="columns-button"
 				onClick={() => setOpen(!open)}
 				onKeyDown={handleKeyDown}
 				tabIndex={0}
 			>
 				Columns
-				<ChevronDownIcon
-					className="-mr-1 ml-2 h-5 w-5"
-					aria-hidden="true"
-				/>
+				<ChevronDownIcon className="columns-icon" aria-hidden="true" />
 			</div>
 
-			<div
-				className={`transition duration-150 origin-top-right absolute right-2 lg:absolute lg:right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px]${
-					open
-						? ' visible opacity-100 transform translate-y-0'
-						: ' invisible opacity-0 transform -translate-y-2'
-				}`}
-			>
+			<div className={classNames('columns-dropdown', open ? 'active' : '')}>
 				<div className="py-1">
 					<ColumnSearch search={search} setSearch={setSearch} />
 					<ColumnItemWrap search={search} type={type} />
