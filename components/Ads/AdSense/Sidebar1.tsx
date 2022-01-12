@@ -24,7 +24,7 @@ export function Sidebar1() {
 	const { path } = useNavState()
 
 	useEffect(() => {
-		if (noAds(path.one)) return // no ads for this page
+		if (noAds(path.one) || isPro) return // no ads for this page
 
 		// check if AdSense script is loaded every 300ms
 		let count = 0 // count attempts
