@@ -56,7 +56,7 @@ export function Sidebar1() {
 	if (!checked || (checked && !isPro)) {
 		return (
 			<>
-				<div id="ad-banner" className="mx-auto text-center hidden lg:block">
+				<div id="ad-banner" className="mx-auto text-center">
 					<ins
 						className="adsbygoogle"
 						style={{
