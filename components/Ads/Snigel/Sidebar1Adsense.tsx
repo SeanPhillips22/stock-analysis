@@ -44,11 +44,9 @@ export function Sidebar1Adsense() {
 				<div id="ad-banner" className="mx-auto text-center hidden lg:block">
 					<ins
 						className="adsbygoogle"
-						style={{ display: 'block' }}
+						style={{ display: 'block', width: '300px', height: '250px' }}
 						data-ad-client="ca-pub-7702053427535735"
 						data-ad-slot="8582549443"
-						data-ad-format="rectangle"
-						data-full-width-responsive="true"
 					></ins>
 				</div>
 				<Script
