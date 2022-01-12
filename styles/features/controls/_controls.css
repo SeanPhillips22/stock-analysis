@@ -27,7 +27,11 @@
 	}
 
 	.dropdown {
-		@apply origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none py-1 z-50;
+		@apply origin-top-right absolute right-0 mt-2 min-w-[160px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none py-1 z-50;
+	}
+
+	.dropdown.wide {
+		@apply min-w-[220px];
 	}
 
 	.dd-option {

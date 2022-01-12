@@ -1,12 +1,12 @@
 import { Dropdown } from 'components/Dropdown/_Dropdown'
-import { ColumnItemWrap } from 'components/StockScreener/_Results/ResultsMenu/ColumnSelection/ColumnItemWrap'
+import { ColumnList } from './ColumnList'
 import { ColumnSearch } from './ColumnSearch'
 
-export function TableColumns() {
+export function SelectColumns() {
 	return (
-		<Dropdown title="Columns">
+		<Dropdown title="Columns" classes="wide">
 			<ColumnSearch />
-			<ColumnItemWrap search={''} type={''} />
+			<ColumnList />
 		</Dropdown>
 	)
 }

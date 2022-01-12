@@ -1,15 +1,17 @@
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
+import { classNames } from 'functions/helpers/classNames'
 
 type Props = {
 	title: string
 	children: React.ReactNode
 	hoverTitle?: string
 	id?: string
+	classes?: string
 }
 
-export function Dropdown({ title, children, hoverTitle, id }: Props) {
+export function Dropdown({ title, children, hoverTitle, id, classes }: Props) {
 	return (
 		<Menu as="div" className="controls-menu" id={id}>
 			<Menu.Button className="controls-btn" title={hoverTitle}>
@@ -26,7 +28,11 @@ export function Dropdown({ title, children, hoverTitle, id }: Props) {
 				leaveFrom="transform opacity-100 scale-100"
 				leaveTo="transform opacity-0 scale-95"
 			>
-				<Menu.Items className="dropdown">{children}</Menu.Items>
+				<Menu.Items
+					className={classNames('dropdown', classes ? classes : '')}
+				>
+					{children}
+				</Menu.Items>
 			</Transition>
 		</Menu>
 	)
