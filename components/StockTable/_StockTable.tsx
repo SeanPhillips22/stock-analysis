@@ -8,10 +8,11 @@ import { useMemo } from 'react'
 import { getColumns } from './getColumns'
 import { TableControls } from './Controls/_TableControls'
 import { PageConfig } from 'types/PageConfig'
+import { DataId } from 'types/Data'
 
 type Props = {
 	_data: any[]
-	_columns: string[]
+	_columns: DataId[]
 	config: PageConfig
 }
 

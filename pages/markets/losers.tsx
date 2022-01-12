@@ -3,8 +3,9 @@ import { getSSR } from 'functions/apis/callBackEnd'
 import { StockTable } from 'components/StockTable/_StockTable'
 import { MarketsLayout } from 'components/Markets/_MarkeysLayout'
 import { PageConfig } from 'types/PageConfig'
+import { DataId } from 'types/Data'
 
-const columns = ['s', 'n', 'price', 'change', 'volume', 'marketCap']
+const columns: DataId[] = ['s', 'n', 'price', 'change', 'volume', 'marketCap']
 const config: PageConfig = {
 	title: 'Top Stock Losers',
 	parentTitle: 'Market Movers',

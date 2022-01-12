@@ -4,12 +4,6 @@ export type Action = {
 	symbol: string
 }
 
-export type CellString = {
-	cell: {
-		value: string
-	}
-}
-
 export interface ActionProps {
 	year?: string
 	data: {

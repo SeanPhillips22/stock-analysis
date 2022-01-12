@@ -1,14 +1,15 @@
 import { DataId } from 'types/Data'
+import { FormatFunction } from 'types/Tables'
 
 type Props = {
-	[key in DataId]?: { name: string }
+	[key in DataId]: { name: string; format?: FormatFunction }
 }
 
 /**
  * Stock Columns: all the data points available for a stock
  */
-export const StockDataPoints: Props = {
-	s: { name: 'Symbol' },
+export const DataPoints: Props = {
+	s: { name: 'Symbol', format: 'linkSymbol' },
 	n: { name: 'Name' },
 	marketCap: { name: 'Market Cap' },
 	price: { name: 'Stock Price' },
@@ -120,7 +121,17 @@ export const StockDataPoints: Props = {
 	liabilities: { name: 'Liabilities' },
 	ipoPriceRange: { name: 'IPO Price Range' },
 	isSpac: { name: 'Is SPAC' },
-	sharesOffered: { name: 'Shares Offered' }
+	sharesOffered: { name: 'Shares Offered' },
+	aum: { name: 'Assets Under Management' },
+	etfPeRatio: { name: 'PE Ratio' },
+	assetClass: { name: 'Asset Class' },
+	expenseRatio: { name: 'Expense Ratio' },
+	holdings: { name: 'Holdings' },
+	inceptionDate: { name: 'Inception Date' },
+	etfSector: { name: 'Sector' },
+	etfRegion: { name: 'Region' },
+	issuer: { name: 'Issuer' },
+	etfIndex: { name: 'Index' }
 }
 
 export const StockDataArray: DataId[] = [

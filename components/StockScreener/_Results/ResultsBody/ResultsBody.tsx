@@ -1,11 +1,11 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { CellString, CellNumber } from 'components/StockScreener/screener.types'
-import Link from 'next/link'
+import { CellString, CellNumber } from 'types/Tables'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 import { formatNum } from 'components/StockScreener/functions/formatNum'
 import { ResultsTable } from './ResultsTable'
 import { COLUMNS_MAP } from 'components/StockScreener/maps/allColumns.map'
 import { formatDateClean } from 'functions/datetime/formatDates'
+import { formatSymbol } from 'functions/tables/tableFormat'
 
 const format0dec = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 0,
@@ -24,7 +24,6 @@ function formatHeader(text: string) {
 function formatColumns() {
 	const columns = COLUMNS_MAP.map((column) => {
 		const type = screenerState((state) => state.type)
-		let urlPath = type === 'etf' ? 'etf' : 'stocks'
 
 		// If column has a "format" property, use it to format the value
 		if (column.format) {
@@ -34,17 +33,7 @@ function formatColumns() {
 			switch (column.format) {
 				case 'linkSymbol': {
 					header = column.Header
-					cell = function FormatCell({ cell: { value } }: CellString) {
-						const symb = value.includes('.') ? value : `${value}/`
-						return (
-							<Link
-								href={`/${urlPath}/${symb.toLowerCase()}`}
-								prefetch={false}
-							>
-								<a>{value}</a>
-							</Link>
-						)
-					}
+					cell = (props: any) => formatSymbol(props, type)
 					sortInverted = false
 					break
 				}

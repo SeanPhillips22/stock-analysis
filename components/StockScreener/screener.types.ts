@@ -54,18 +54,6 @@ export type ETFScreenerData = {
 	}
 }
 
-export type CellString = {
-	cell: {
-		value: string
-	}
-}
-
-export type CellNumber = {
-	cell: {
-		value: number
-	}
-}
-
 export type FilterProps = {
 	name: string
 	id: DataId
