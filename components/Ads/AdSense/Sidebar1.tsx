@@ -1,6 +1,5 @@
 import { useAuthState } from 'hooks/useAuthState'
 import { useNavState } from 'hooks/useNavState'
-import Script from 'next/script'
 import { useEffect } from 'react'
 import { noAds } from '../noAds'
 
@@ -55,19 +54,12 @@ export function Sidebar1() {
 
 	if (!checked || (checked && !isPro)) {
 		return (
-			<>
-				<ins
-					className="adsbygoogle sb-1"
-					data-ad-client="ca-pub-7702053427535735"
-					data-ad-slot="8582549443"
-					data-full-width-responsive="false"
-				></ins>
-				<Script
-					id="adsense-script"
-					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7702053427535735"
-					crossOrigin="anonymous"
-				/>
-			</>
+			<ins
+				className="adsbygoogle sb-1"
+				data-ad-client="ca-pub-7702053427535735"
+				data-ad-slot="8582549443"
+				data-full-width-responsive="false"
+			></ins>
 		)
 	}
 
