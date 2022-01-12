@@ -58,12 +58,6 @@ export function Sidebar1() {
 			<>
 				<ins
 					className="adsbygoogle sb-1"
-					style={{
-						display: 'block',
-						width: '300px',
-						height: '250px',
-						margin: '0 auto'
-					}}
 					data-ad-client="ca-pub-7702053427535735"
 					data-ad-slot="8582549443"
 					data-full-width-responsive="false"
