@@ -32,12 +32,28 @@
 		white-space: nowrap;
 	}
 
+	.symbol-table.two-left tr > *:nth-child(n + 3) {
+		text-align: right;
+	}
+
 	.symbol-table tr:nth-child(odd) {
 		background-color: #f6f7f8;
 	}
 
 	.symbol-table tr:hover td {
 		background-color: #f2f9ff !important;
+	}
+
+	.right-green {
+		@apply text-right text-[green];
+	}
+
+	.right-red {
+		@apply text-right text-[red];
+	}
+
+	.right-gray {
+		@apply text-right text-gray-800;
 	}
 
 	@media screen and (max-width: 1200px) {

@@ -2,7 +2,11 @@ import { DataId } from 'types/Data'
 import { FormatFunction } from 'types/Tables'
 
 type Props = {
-	[key in DataId]: { name: string; format?: FormatFunction }
+	[key in DataId]: {
+		name: string
+		columnName?: string
+		format?: FormatFunction
+	}
 }
 
 /**
@@ -11,16 +15,20 @@ type Props = {
 export const DataPoints: Props = {
 	s: { name: 'Symbol', format: 'linkSymbol' },
 	n: { name: 'Name' },
-	marketCap: { name: 'Market Cap' },
-	price: { name: 'Stock Price' },
-	change: { name: 'Price Change 1D' },
-	volume: { name: 'Volume' },
+	marketCap: { name: 'Market Cap', format: 'abbreviate' },
+	price: { name: 'Stock Price', columnName: 'Price', format: 'format2dec' },
+	change: {
+		name: 'Price Change 1D',
+		columnName: 'Change 1D',
+		format: 'colorPercentage'
+	},
+	volume: { name: 'Volume', format: 'formatInteger' },
 	enterpriseValue: { name: 'Enterprise Value' },
 	industry: { name: 'Industry' },
 	peRatio: { name: 'PE Ratio' },
 	peForward: { name: 'Forward PE' },
 	exchange: { name: 'Exchange' },
-	dividendYield: { name: 'Dividend Yield' },
+	dividendYield: { name: 'Dividend Yield', format: 'formatPercentage' },
 	sector: { name: 'Sector' },
 	ch1m: { name: 'Price Change 1M' },
 	ch6m: { name: 'Price Change 6M' },

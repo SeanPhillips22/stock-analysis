@@ -52,7 +52,7 @@ export function StockTable({ _data, _columns, config }: Props) {
 				/>
 			</div>
 			<div className="overflow-x-auto">
-				<table className="symbol-table index" id="stock-table">
+				<table className="symbol-table two-left" id="stock-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

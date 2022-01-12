@@ -2,25 +2,25 @@ import { DataPoints } from 'data/StockDataPoints'
 import { DataId } from 'types/Data'
 import { formatCell } from 'functions/tables/tableFormat'
 
+/**
+ * This function formats the columns for react-table
+ * @param cols
+ * @returns
+ */
 export function getColumns(cols: DataId[]) {
 	const columns = cols.map((col) => {
-		let { name, format } = DataPoints[col]
+		// destructure the data points
+		let { name, columnName, format } = DataPoints[col]
 
-		// If a format function is defined, use it
-		if (format) {
-			return {
-				Header: name,
-				accessor: col,
-				Cell: (props: any) => {
-					return format ? formatCell(format, props, 'stocks') : null
-				}
-			}
-		}
-
-		// Otherwise, use the default format
+		// Header: the name of the column, shown
+		// accessor: the id of the column, not shown
+		// Cell: how to format the values of the cells in the column
 		return {
-			Header: name,
-			accessor: col
+			Header: columnName || name,
+			accessor: col,
+			Cell: (props: any) => {
+				return format ? formatCell(format, props, 'stocks') : props.value
+			}
 		}
 	})
 

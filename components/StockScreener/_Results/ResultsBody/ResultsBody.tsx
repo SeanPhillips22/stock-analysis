@@ -1,16 +1,9 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { CellString, CellNumber } from 'types/Tables'
+import { CellNumber } from 'types/Tables'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
-import { formatNum } from 'components/StockScreener/functions/formatNum'
 import { ResultsTable } from './ResultsTable'
 import { COLUMNS_MAP } from 'components/StockScreener/maps/allColumns.map'
-import { formatDateClean } from 'functions/datetime/formatDates'
-import { formatSymbol } from 'functions/tables/tableFormat'
-
-const format0dec = new Intl.NumberFormat('en-US', {
-	minimumFractionDigits: 0,
-	maximumFractionDigits: 0
-})
+import { formatCell } from 'functions/tables/tableFormat'
 
 const format2dec = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
@@ -33,94 +26,45 @@ function formatColumns() {
 			switch (column.format) {
 				case 'linkSymbol': {
 					header = column.Header
-					cell = (props: any) => formatSymbol(props, type)
+					cell = (props: any) => formatCell('linkSymbol', props, type)
 					sortInverted = false
 					break
 				}
 
 				case 'string': {
 					header = column.Header
-					cell = function FormatCell({ cell: { value } }: any) {
-						return value || null
-					}
+					cell = (props: any) => props.value || null
 					sortInverted = false
 					break
 				}
 
 				case 'abbreviate': {
 					header = formatHeader(column.Header)
-					cell = function FormatCell({ cell: { value } }: CellNumber) {
-						return (
-							<div className="text-right">
-								{abbreviate(value, format2dec)}
-							</div>
-						)
-					}
-
+					cell = (props: any) => formatCell('abbreviate', props)
 					break
 				}
 
 				case 'changePcColor': {
 					header = formatHeader(column.Header)
-					cell = function FormatCell({ cell: { value } }: CellNumber) {
-						if (!value) {
-							return <div className="text-right">-</div>
-						}
-						const formatted = formatNum(value, format2dec) + '%'
-						if (value > 0) {
-							return (
-								<div className="text-right text-[green]">
-									{formatted}
-								</div>
-							)
-						} else if (value < 0) {
-							return (
-								<div className="text-right text-[red]">{formatted}</div>
-							)
-						} else {
-							return (
-								<div className="text-right text-gray-800">
-									{formatted}
-								</div>
-							)
-						}
-					}
+					cell = (props: any) => formatCell('colorPercentage', props)
 					break
 				}
 
 				case 'format2dec': {
 					header = formatHeader(column.Header)
-					cell = function FormatCell({ cell: { value } }: CellNumber) {
-						return (
-							<div className="text-right">
-								{formatNum(value, format2dec)}
-							</div>
-						)
-					}
+					cell = (props: any) => formatCell('format2dec', props, type)
 					break
 				}
 
 				case 'format0dec': {
 					header = formatHeader(column.Header)
-					cell = function FormatCell({ cell: { value } }: CellNumber) {
-						return (
-							<div className="text-right">
-								{formatNum(value, format0dec)}
-							</div>
-						)
-					}
+					cell = (props: any) => formatCell('formatInteger', props, type)
 					break
 				}
 
 				case 'amount': {
 					header = formatHeader(column.Header)
-					cell = function FormatCell({ cell: { value } }: CellNumber) {
-						return (
-							<div className="text-right">
-								{formatNum(value, format2dec)}
-							</div>
-						)
-					}
+					cell = (props: any) => formatCell('format2dec', props, type)
 					break
 				}
 
@@ -134,26 +78,13 @@ function formatColumns() {
 
 				case 'percentage': {
 					header = formatHeader(column.Header)
-					cell = function FormatCell({ cell: { value } }: CellNumber) {
-						return (
-							<div className="text-right">
-								{formatNum(value, format2dec, '%')}
-							</div>
-						)
-					}
+					cell = (props: any) => formatCell('formatPercentage', props)
 					break
 				}
 
 				case 'date': {
 					header = formatHeader(column.Header)
-					cell = function FormatCell({ cell: { value } }: CellString) {
-						if (!value) {
-							return <div className="text-right">-</div>
-						}
-						return (
-							<div className="text-right">{formatDateClean(value)}</div>
-						)
-					}
+					cell = (props: any) => formatCell('formatDate', props)
 					break
 				}
 
@@ -181,9 +112,7 @@ function formatColumns() {
 
 				default:
 					header = column.Header
-					cell = function FormatCell({ cell: { value } }: any) {
-						return value
-					}
+					cell = (props: any) => props.value
 					break
 			}
 

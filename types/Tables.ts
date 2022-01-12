@@ -10,4 +10,11 @@ export type CellNumber = {
 	}
 }
 
-export type FormatFunction = 'linkSymbol'
+export type FormatFunction =
+	| 'linkSymbol'
+	| 'format2dec'
+	| 'formatInteger'
+	| 'formatPercentage'
+	| 'colorPercentage'
+	| 'abbreviate'
+	| 'formatDate'
