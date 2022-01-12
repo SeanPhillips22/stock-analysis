@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { getAdsForPage } from './Loading/getAdsForPage'
 import { useNavState } from 'hooks/useNavState'
 import { useLoadAds } from './Loading/_useLoadAds'
+import { noAds } from '../noAds'
 
 export function LoadAds() {
 	const [ads, setAds] = useState<string[]>([])
@@ -17,7 +18,8 @@ export function LoadAds() {
 	if (
 		typeof window === 'undefined' ||
 		process.env.NODE_ENV === 'development' ||
-		ads.length === 0
+		ads.length === 0 ||
+		noAds(path.one)
 	) {
 		return null
 	}
