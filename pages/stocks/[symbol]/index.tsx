@@ -12,11 +12,36 @@ import { NewsArea } from 'components/Overview/NewsArea'
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget'
 import { AnalystWidget } from 'components/Overview/AnalystWidget'
 import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
+import { Chart } from 'components/AnalystChart/AnalystChart'
 
 interface Props {
 	info: Info
 	data: Overview
 	news: { data: News[]; updated: number }
+}
+
+const chartData = {
+	price: [
+		{ t: '2020-12-1', c: '132.69' },
+		{ t: '2021-01-1', c: '131.96' },
+		{ t: '2021-02-1', c: '121.26' },
+		{ t: '2021-03-1', c: '122.15' },
+		{ t: '2021-04-1', c: '131.46' },
+		{ t: '2021-05-1', c: '124.61' },
+		{ t: '2021-06-1', c: '136.96' },
+		{ t: '2021-07-1', c: '145.86' },
+		{ t: '2021-08-1', c: '151.83' },
+		{ t: '2021-09-1', c: '141.50' },
+		{ t: '2021-10-1', c: '149.80' },
+		{ t: '2021-11-1', c: '165.30' },
+		{ t: '2021-12-1', c: '177.57' },
+		{ t: '2022-12-1', c: undefined }
+	],
+	targets: {
+		low: '90',
+		average: '175.28',
+		high: '210'
+	}
 }
 
 const StockOverview = ({ info, data, news }: Props) => {
@@ -36,6 +61,11 @@ const StockOverview = ({ info, data, news }: Props) => {
 				description={description}
 				canonical={`/stocks/${symbol}`}
 			/>
+			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-8 mt-8">
+				<div className="order-1 h-[240px] sm:h-[200px] flex-grow overflow-auto">
+					<Chart chartData={chartData} />
+				</div>
+			</div>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
 					<PriceChart info={info} />
@@ -45,6 +75,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 					<QuoteTable data={data} info={info} />
 				</div>
 			</div>
+
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10">
 				<div className="px-4 lg:pt-1 md:px-0 lg:order-2 space-y-6">
 					<Sidebar1Overview news={news.data} />
