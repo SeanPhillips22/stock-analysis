@@ -13,13 +13,27 @@ declare global {
 export function Sidebar1Adsense() {
 	// const path = navState((state) => state.path)
 
-	useEffect(() => {
-		if (window.adsbygoogle) {
-			console.log('adsbygoogle loaded, pushing')
-			window.adsbygoogle.push()
-		} else {
-			console.log('adsbygoogle not loaded')
+	// Fill the slot with an AdSense ad
+	function loadAdsense() {
+		try {
+			let adsbygoogle = window.adsbygoogle
+			console.log({ adsbygoogle })
+			adsbygoogle.push({})
+		} catch (e) {
+			console.error(e)
 		}
+	}
+
+	// Check if AdSense script is loaded every 300ms
+	useEffect(() => {
+		let interval = setInterval(() => {
+			if (window.adsbygoogle) {
+				loadAdsense()
+				clearInterval(interval)
+			}
+		}, 300)
+
+		return () => clearInterval(interval)
 	}, [])
 
 	const { checked, isPro } = useAuthState()
@@ -33,7 +47,7 @@ export function Sidebar1Adsense() {
 						style={{ display: 'block' }}
 						data-ad-client="ca-pub-7702053427535735"
 						data-ad-slot="8582549443"
-						data-ad-format="auto"
+						data-ad-format="rectangle"
 						data-full-width-responsive="true"
 					></ins>
 				</div>
