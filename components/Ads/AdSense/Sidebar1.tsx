@@ -56,9 +56,15 @@ export function Sidebar1() {
 	if (!checked || (checked && !isPro)) {
 		return (
 			<>
-				<div id="ad-banner" className="sb1-wrap">
+				<div id="ad-banner" className="mx-auto text-center hidden lg:block">
 					<ins
-						className="adsbygoogle sb1"
+						className="adsbygoogle"
+						style={{
+							display: 'block',
+							width: '300px',
+							height: '250px',
+							margin: '0 auto'
+						}}
 						data-ad-client="ca-pub-7702053427535735"
 						data-ad-slot="8582549443"
 					></ins>
