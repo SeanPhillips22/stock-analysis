@@ -1,39 +1,46 @@
 import { useAuthState } from 'hooks/useAuthState'
+import { useNavState } from 'hooks/useNavState'
 import Script from 'next/script'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { noAds } from '../noAds'
 
+// declare adsbygoogle to prevent type error
 declare global {
 	interface Window {
 		adsbygoogle: any
 	}
 }
 
-export function Sidebar1() {
-	const [count, setCount] = useState(0)
-
-	// Fill the slot with an AdSense ad
-	function loadAdsense() {
-		try {
-			const adsbygoogle = window.adsbygoogle || []
-			adsbygoogle.push({})
-		} catch (e) {
-			console.error(e)
-		}
+// fill the slot with an AdSense ad
+function loadAdsense() {
+	try {
+		const adsbygoogle = window.adsbygoogle || []
+		adsbygoogle.push({})
+	} catch (e) {
+		console.error(e)
 	}
+}
 
-	// Check if AdSense script is loaded every 300ms
+export function Sidebar1() {
+	const { path } = useNavState()
+
 	useEffect(() => {
-		let interval = setInterval(() => {
-			setCount((count) => count + 1)
+		if (noAds(path.one)) return // no ads for this page
 
-			console.log('count', count)
+		// check if AdSense script is loaded every 300ms
+		let count = 0 // count attempts
+		let interval = setInterval(() => {
+			count++
+
+			// if adsbygoogle is defined, then the script is loaded
 			if (window.adsbygoogle) {
-				console.log('load')
 				loadAdsense()
 				clearInterval(interval)
 			}
 
-			if (count === 6) clearInterval(interval)
+			// stop after 20 attempts (6 seconds)
+			// usually this works on the first attempt
+			if (count === 20) clearInterval(interval)
 		}, 300)
 
 		return () => clearInterval(interval)
@@ -42,13 +49,22 @@ export function Sidebar1() {
 
 	const { checked, isPro } = useAuthState()
 
+	if (noAds(path.one)) {
+		return null
+	}
+
 	if (!checked || (checked && !isPro)) {
 		return (
 			<>
 				<div id="ad-banner" className="mx-auto text-center hidden lg:block">
 					<ins
 						className="adsbygoogle"
-						style={{ display: 'block', width: '300px', height: '250px' }}
+						style={{
+							display: 'block',
+							width: '300px',
+							height: '250px',
+							margin: '0 auto'
+						}}
 						data-ad-client="ca-pub-7702053427535735"
 						data-ad-slot="8582549443"
 					></ins>
