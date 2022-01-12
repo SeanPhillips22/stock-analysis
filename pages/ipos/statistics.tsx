@@ -10,8 +10,9 @@ import { StatsChartMonthly } from 'components/IPOs/StatsChartMonthly'
 import Link from 'next/link'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+// import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Layout } from 'components/Layout/_Layout'
+import { Sidebar1Adsense } from 'components/Ads/Snigel/Sidebar1Adsense'
 
 interface Props {
 	data: {
@@ -115,7 +116,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
 							<RecentTableMin recent={recent} />
-							<Sidebar1 />
+							<Sidebar1Adsense />
 							<NewsWidget
 								title="IPO News"
 								news={news}
