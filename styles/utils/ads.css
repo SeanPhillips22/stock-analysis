@@ -11,12 +11,4 @@
 	.fullwidth .header-ad {
 		@apply bg-gray-100 -mb-4;
 	}
-
-	.sb1-wrap {
-		@apply mx-auto text-center hidden lg:block;
-	}
-
-	.sb-1 {
-		@apply block w-[300px] h-[250px] mx-auto;
-	}
 }
