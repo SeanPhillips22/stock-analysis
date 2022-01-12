@@ -6,8 +6,7 @@ const NO_ADS = [
 	'privacy-policy',
 	'terms-of-use',
 	'apis',
-	'subscribe',
-	'trending'
+	'subscribe'
 ]
 
 const NO_ADS_RELAXED = [
@@ -16,8 +15,7 @@ const NO_ADS_RELAXED = [
 	'contact',
 	'terms-of-use',
 	'apis',
-	'subscribe',
-	'trending'
+	'subscribe'
 ]
 
 export function noAds(path: string | null) {
