@@ -7,7 +7,7 @@ import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { StatsWidget } from 'components/StatsWidget/_StatsWidget'
 import { Button } from 'components/Buttons/Button'
 import { MAP_STATISTICS } from 'data/financials/map_statistics'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 
 interface Props {

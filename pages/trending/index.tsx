@@ -8,9 +8,9 @@ import { StockLink } from 'components/Links'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 // import { useRouter } from 'next/router';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Features } from 'components/Layout/Sidebar/Features'
 import { Layout } from 'components/Layout/_Layout'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 
 interface Props {
 	timestamp: string

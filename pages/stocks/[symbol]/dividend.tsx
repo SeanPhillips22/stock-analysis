@@ -10,7 +10,7 @@ import { InfoTable } from 'components/Dividend/InfoTable'
 import { HistoryTable } from 'components/Dividend/HistoryTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { DividendChart } from 'components/Dividend/DividendChart'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 

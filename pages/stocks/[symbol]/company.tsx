@@ -10,7 +10,7 @@ import { ProfileContact } from 'components/ProfilePage/ProfileContact'
 import { ProfileDetails } from 'components/ProfilePage/ProfileDetails'
 import { ProfileExecutives } from 'components/ProfilePage/ProfileExecutives'
 import { ProfileSECfilings } from 'components/ProfilePage/ProfileSECfilings'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 
 interface Props {

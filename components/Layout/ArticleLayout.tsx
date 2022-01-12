@@ -4,7 +4,6 @@ import { Byline } from './Article/Byline'
 import { Header } from 'components/Layout/Header/_Header'
 import { Footer } from 'components/Layout/Footer/_Footer'
 import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
-import { HeaderAd } from 'components/Ads/Snigel/HeaderAd'
 
 interface Meta {
 	title: string
@@ -31,9 +30,6 @@ export const ArticleLayout = ({ meta, children }: Props) => {
 		<>
 			<Header />
 			<main id="main">
-				<div id="ad-wrap" className="-mb-5 md:mb-0">
-					<HeaderAd />
-				</div>
 				<div className="contain lg:max-w-[1150px] mt-2 mb-6 mx-auto">
 					<div className="lg:right-sidebar">
 						<article className="text-page md:px-6">
