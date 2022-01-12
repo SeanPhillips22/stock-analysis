@@ -15,7 +15,10 @@ export function Sidebar1Adsense() {
 
 	useEffect(() => {
 		if (window.adsbygoogle) {
+			console.log('adsbygoogle loaded, pushing')
 			window.adsbygoogle.push()
+		} else {
+			console.log('adsbygoogle not loaded')
 		}
 	}, [])
 
