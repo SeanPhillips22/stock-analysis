@@ -8,9 +8,9 @@ import { StockLink } from 'components/Links'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 // import { useRouter } from 'next/router';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Features } from 'components/Layout/Sidebar/Features'
 import { Layout } from 'components/Layout/_Layout'
+import { Sidebar1Adsense } from 'components/Ads/Snigel/Sidebar1Adsense'
 
 interface Props {
 	timestamp: string
@@ -186,7 +186,7 @@ export default function Trending({ timestamp, data }: Props) {
 							</div>
 						</div>
 						<aside className="py-0 space-y-8">
-							<Sidebar1 />
+							<Sidebar1Adsense />
 							<Features />
 						</aside>
 					</div>
