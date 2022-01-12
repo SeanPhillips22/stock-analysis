@@ -56,20 +56,18 @@ export function Sidebar1() {
 	if (!checked || (checked && !isPro)) {
 		return (
 			<>
-				<div className="mx-auto text-center">
-					<ins
-						className="adsbygoogle"
-						style={{
-							display: 'block',
-							width: '300px',
-							height: '250px',
-							margin: '0 auto'
-						}}
-						data-ad-client="ca-pub-7702053427535735"
-						data-ad-slot="8582549443"
-						data-full-width-responsive="false"
-					></ins>
-				</div>
+				<ins
+					className="adsbygoogle sb-1"
+					style={{
+						display: 'block',
+						width: '300px',
+						height: '250px',
+						margin: '0 auto'
+					}}
+					data-ad-client="ca-pub-7702053427535735"
+					data-ad-slot="8582549443"
+					data-full-width-responsive="false"
+				></ins>
 				<Script
 					id="adsense-script"
 					src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7702053427535735"
