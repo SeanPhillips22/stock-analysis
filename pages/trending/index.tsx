@@ -10,7 +10,7 @@ import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { Features } from 'components/Layout/Sidebar/Features'
 import { Layout } from 'components/Layout/_Layout'
-import { Sidebar1Adsense } from 'components/Ads/Snigel/Sidebar1Adsense'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 
 interface Props {
 	timestamp: string
@@ -186,7 +186,7 @@ export default function Trending({ timestamp, data }: Props) {
 							</div>
 						</div>
 						<aside className="py-0 space-y-8">
-							<Sidebar1Adsense />
+							<Sidebar1 />
 							<Features />
 						</aside>
 					</div>

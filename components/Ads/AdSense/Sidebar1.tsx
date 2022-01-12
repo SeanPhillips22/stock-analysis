@@ -1,8 +1,6 @@
 import { useAuthState } from 'hooks/useAuthState'
 import Script from 'next/script'
 import { useEffect, useState } from 'react'
-// import { navState } from 'state/navState'
-// import { noAds } from 'components/Ads/noAds'
 
 declare global {
 	interface Window {
@@ -10,9 +8,8 @@ declare global {
 	}
 }
 
-export function Sidebar1Adsense() {
+export function Sidebar1() {
 	const [count, setCount] = useState(0)
-	// const path = navState((state) => state.path)
 
 	// Fill the slot with an AdSense ad
 	function loadAdsense() {

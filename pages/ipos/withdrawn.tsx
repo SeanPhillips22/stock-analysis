@@ -8,7 +8,7 @@ import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
 import { Layout } from 'components/Layout/_Layout'
 

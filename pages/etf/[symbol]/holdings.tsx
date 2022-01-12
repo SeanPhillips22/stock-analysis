@@ -8,7 +8,7 @@ import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { HoldingsTable } from 'components/Holdings/_HoldingsTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
 
 interface Props {
