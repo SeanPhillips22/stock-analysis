@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next/types'
-import { StockTable } from 'components/StockTable/_StockTable'
+import { StockTable } from 'components/StockTable/__StockTable'
 import { MarketsLayout } from 'components/Markets/_MarkeysLayout'
 import { PageConfig } from 'types/PageConfig'
 import { DataId } from 'types/Data'
@@ -47,7 +47,7 @@ export default function GainersPage({ data }: { data: any[] }) {
 
 	return (
 		<MarketsLayout config={config}>
-			<StockTable _data={data} _columns={columns} config={config} />
+			<StockTable _data={data} config={config} />
 		</MarketsLayout>
 	)
 }

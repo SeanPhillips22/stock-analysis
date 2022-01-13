@@ -32,7 +32,11 @@ export const DataPoints: Props = {
 		format: 'colorPercentage'
 	},
 	volume: { id: 'volume', name: 'Volume', format: 'formatInteger' },
-	enterpriseValue: { id: 'enterpriseValue', name: 'Enterprise Value' },
+	enterpriseValue: {
+		id: 'enterpriseValue',
+		name: 'Enterprise Value',
+		format: 'abbreviate'
+	},
 	industry: { id: 'industry', name: 'Industry' },
 	peRatio: { id: 'peRatio', name: 'PE Ratio' },
 	peForward: { id: 'peForward', name: 'Forward PE' },

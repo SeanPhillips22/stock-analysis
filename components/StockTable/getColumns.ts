@@ -19,7 +19,11 @@ export function getColumns(cols: DataId[]) {
 			Header: columnName || name,
 			accessor: col,
 			Cell: (props: any) => {
-				return format ? formatCell(format, props, 'stocks') : props.value
+				return format
+					? formatCell(format, props, 'stocks')
+					: props.value
+					? props.value
+					: '-'
 			}
 		}
 	})

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next/types'
 import { getSSR } from 'functions/apis/callBackEnd'
-import { StockTable } from 'components/StockTable/_StockTable'
+import { StockTable } from 'components/StockTable/__StockTable'
 import { MarketsLayout } from 'components/Markets/_MarkeysLayout'
 import { PageConfig } from 'types/PageConfig'
 import { DataId } from 'types/Data'
@@ -21,10 +21,10 @@ const config: PageConfig = {
 	metaTitle: "Today's Top Stock Losers"
 }
 
-export default function GainersPage({ data }: { data: any[] }) {
+export default function LosersPage({ data }: { data: any[] }) {
 	return (
 		<MarketsLayout config={config}>
-			<StockTable _data={data} _columns={columns} config={config} />
+			<StockTable _data={data} config={config} />
 		</MarketsLayout>
 	)
 }

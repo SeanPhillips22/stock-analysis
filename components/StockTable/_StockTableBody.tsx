@@ -4,33 +4,21 @@ import {
 	useGlobalFilter,
 	useAsyncDebounce
 } from 'react-table'
-import { useMemo } from 'react'
-import { getColumns } from './getColumns'
-import { TableControls } from './Controls/_TableControls'
-import { PageConfig } from 'types/PageConfig'
 import { DataId } from 'types/Data'
-import { useTableData } from './useTableData'
+import { PageConfig } from 'types/PageConfig'
+import { TableControls } from './Controls/_TableControls'
 
 type Props = {
-	_data: any[]
-	_columns: DataId[]
+	data: any[]
+	columns: {
+		Header: string
+		accessor: DataId
+		Cell: (props: any) => any
+	}[]
 	config: PageConfig
 }
 
-/**
- * A re-usable screener mechanism that can output a table of stocks with specific properties
- * Customizable columns, export, filtering, sorting, and pagination
- * TODO make the columns update when new data is fetched
- */
-export function StockTable({ _data, _columns, config }: Props) {
-	// add react query hook, pass data as initialData, then memoize the state from RQ
-	// When columns change, react query makes a new api call and updates the table
-
-	const query = useTableData(_data, config.path)
-
-	const data = useMemo(() => query.data, [query.data])
-	const columns = useMemo(() => getColumns(_columns), [_columns])
-
+export function StockTableBody({ data, columns, config }: Props) {
 	const {
 		headerGroups,
 		prepareRow,
@@ -87,5 +75,3 @@ export function StockTable({ _data, _columns, config }: Props) {
 		</div>
 	)
 }
-
-// ? Needs a backend component, maybe a Screener object?
