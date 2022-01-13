@@ -7,16 +7,18 @@ import { DataId } from 'types/Data'
 
 const columns: DataId[] = ['s', 'n', 'price', 'change', 'volume', 'marketCap']
 const config: PageConfig = {
+	path: '/markets/losers/',
 	title: 'Top Stock Losers',
 	parentTitle: 'Market Movers',
 	active: 'losers',
 	controls: {
 		range: true,
 		results: true,
-		filter: true,
+		filter: false,
 		export: true,
 		columns: true
-	}
+	},
+	metaTitle: "Today's Top Stock Losers"
 }
 
 export default function GainersPage({ data }: { data: any[] }) {

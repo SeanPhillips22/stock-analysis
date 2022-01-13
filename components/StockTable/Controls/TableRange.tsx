@@ -1,7 +1,7 @@
 import { CheckIcon } from '@heroicons/react/outline'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
-import { classNames } from 'functions/helpers/classNames'
+import { cn } from 'functions/helpers/classNames'
 import { tabActive } from 'functions/helpers/tabActive'
 import { useAuthState } from 'hooks/useAuthState'
 
@@ -54,7 +54,7 @@ export function TableRange() {
 				/* One Dropdown Item */
 				<div
 					key={item.id}
-					className={classNames('dd-option', tabActive(item.id, curr))}
+					className={cn('dd-option', tabActive(item.id, curr))}
 					title={
 						item.restricted
 							? 'Upgrade to Pro to select this option'

@@ -4,7 +4,7 @@ import { formatCell } from 'functions/tables/tableFormat'
 
 /**
  * This function formats the columns for react-table
- * @param cols
+ * @param cols an array of data point names
  * @returns
  */
 export function getColumns(cols: DataId[]) {

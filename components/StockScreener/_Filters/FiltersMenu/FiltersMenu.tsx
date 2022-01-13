@@ -3,7 +3,7 @@ import { FiltersMenuItem } from 'components/StockScreener/_Filters/FiltersMenu/F
 import { FiltersMenuHeader } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuHeader'
 import { FilterSearch } from './FilterSearch'
 import { FiltersMenuActive } from './FiltersMenuActive'
-import { classNames } from 'functions/helpers/classNames'
+import { cn } from 'functions/helpers/classNames'
 
 export function FiltersMenu() {
 	const type = screenerState((state) => state.type)
@@ -12,7 +12,7 @@ export function FiltersMenu() {
 	return (
 		<>
 			<div
-				className={classNames(
+				className={cn(
 					filtersShown ? 'border-b border-gray-300' : '',
 					'grid grid-cols-2 xl:flex justify-between items-end whitespace-nowrap overflow-x-auto'
 				)}
@@ -24,7 +24,7 @@ export function FiltersMenu() {
 					<FilterSearch />
 				</div>
 				<div
-					className={classNames(
+					className={cn(
 						filtersShown ? 'hidden xl:block' : '',
 						'col-span-2 xl:order-2 border-t border-gray-200 pt-2 xl:pt-0 xl:border-0'
 					)}

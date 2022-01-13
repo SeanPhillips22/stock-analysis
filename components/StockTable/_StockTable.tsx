@@ -9,6 +9,7 @@ import { getColumns } from './getColumns'
 import { TableControls } from './Controls/_TableControls'
 import { PageConfig } from 'types/PageConfig'
 import { DataId } from 'types/Data'
+import { useTableData } from './useTableData'
 
 type Props = {
 	_data: any[]
@@ -19,12 +20,15 @@ type Props = {
 /**
  * A re-usable screener mechanism that can output a table of stocks with specific properties
  * Customizable columns, export, filtering, sorting, and pagination
+ * TODO make the columns update when new data is fetched
  */
 export function StockTable({ _data, _columns, config }: Props) {
 	// add react query hook, pass data as initialData, then memoize the state from RQ
 	// When columns change, react query makes a new api call and updates the table
 
-	const data = useMemo(() => _data, [_data])
+	const query = useTableData(_data, config.path)
+
+	const data = useMemo(() => query.data, [query.data])
 	const columns = useMemo(() => getColumns(_columns), [_columns])
 
 	const {

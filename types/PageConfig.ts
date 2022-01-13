@@ -1,4 +1,5 @@
 export type PageConfig = {
+	path: string
 	title: string
 	parentTitle?: string
 	active?: string
@@ -9,4 +10,5 @@ export type PageConfig = {
 		export?: boolean
 		columns?: boolean
 	}
+	metaTitle: string
 }
