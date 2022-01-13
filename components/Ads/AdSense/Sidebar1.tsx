@@ -1,6 +1,6 @@
 import { useAuthState } from 'hooks/useAuthState'
-import { useNavState } from 'hooks/useNavState'
 import { useEffect } from 'react'
+import { navState } from 'state/navState'
 import { noAds } from '../noAds'
 
 // declare adsbygoogle to prevent type error
@@ -21,7 +21,7 @@ function loadAdsense() {
 }
 
 export function Sidebar1() {
-	const { path } = useNavState()
+	const path = navState((state) => state.path)
 
 	useEffect(() => {
 		if (noAds(path.one) || isPro) return // no ads for this page
