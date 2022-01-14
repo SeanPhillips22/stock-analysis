@@ -15,14 +15,12 @@ export function Sidebar1Overview() {
 
 	if (!checked || (checked && !isPro)) {
 		return (
-			<div id="ad">
-				<ins
-					className="adsbygoogle sb-1o"
-					data-ad-client="ca-pub-7702053427535735"
-					data-ad-slot="8582549443"
-					data-full-width-responsive="false"
-				></ins>
-			</div>
+			<ins
+				className="adsbygoogle sb-1o"
+				data-ad-client="ca-pub-7702053427535735"
+				data-ad-slot="8582549443"
+				data-full-width-responsive="false"
+			></ins>
 		)
 	}
 
