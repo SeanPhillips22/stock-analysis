@@ -217,7 +217,8 @@ export const screenerState = create<ScreenerState>((set) => ({
 		{ id: 'marketCap', desc: false },
 		{ id: 'aum', desc: false }
 	],
-	setSort: (newSort: SortObject[]) => set({ sort: newSort }),
+	setSort: (newSort: SortObject[]) =>
+		set((state) => ({ ...state, sort: newSort })),
 	resetSort: false,
 	setResetSort: (reset: boolean) =>
 		set((state) => ({ ...state, resetSort: reset })),

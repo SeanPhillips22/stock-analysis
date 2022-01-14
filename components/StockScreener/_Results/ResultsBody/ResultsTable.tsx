@@ -15,6 +15,7 @@ import { TablePagination } from './TablePagination'
 import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
 import { useSortReset } from 'components/StockScreener/functions/sort/useSortReset'
+import { useSortState } from 'components/StockScreener/functions/sort/useSortState'
 
 export function ResultsTable({ cols }: { cols: any }) {
 	const type = screenerState((state) => state.type)
@@ -27,6 +28,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const showColumns = screenerState((state) => state.showColumns)
 	const fetching = screenerState((state) => state.fetching)
 	const setResultsCount = screenerState((state) => state.setResultsCount)
+	const { updateSortState } = useSortState()
 	const resetSort = useSortReset()
 
 	// Memoize data and settings for the table
@@ -111,7 +113,10 @@ export function ResultsTable({ cols }: { cols: any }) {
 										})}
 										key={index}
 									>
-										<span className="flex flex-row items-center">
+										<span
+											className="flex flex-row items-center"
+											onClick={() => updateSortState(column)}
+										>
 											{column.render('Header')}
 											{column.isSorted ? (
 												column.isSortedDesc ? (
