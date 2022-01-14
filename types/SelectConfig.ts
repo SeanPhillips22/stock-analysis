@@ -8,7 +8,7 @@ export type SelectConfig = {
 	type: SymbolTypes
 
 	// The main column to sort by
-	main: string
+	main: DataId
 
 	// The number of symbols to show
 	count: number

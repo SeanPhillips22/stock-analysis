@@ -13,6 +13,7 @@ export type DataId =
 	| 'exchange' // Exchange
 	| 'dividendYield' // Dividend Yield
 	| 'sector' // Sector
+	| 'ch1w' // Price Change 1W
 	| 'ch1m' // Price Change 1M
 	| 'ch6m' // Price Change 6M
 	| 'chYTD' // Price Change YTD

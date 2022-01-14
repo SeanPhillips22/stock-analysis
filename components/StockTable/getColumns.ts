@@ -7,8 +7,13 @@ import { formatCell } from 'functions/tables/tableFormat'
  * @param cols an array of data point names
  * @returns
  */
-export function getColumns(cols: DataId[]) {
-	const columns = cols.map((col) => {
+export function getColumns(cols: DataId[], main: DataId) {
+	const newCols = [...cols]
+
+	// Add the "main" column to the front of the array
+	if (!newCols.includes(main)) newCols.splice(2, 0, main)
+
+	const columns = newCols.map(col => {
 		// destructure the data points
 		let { name, columnName, format } = DataPoints[col]
 

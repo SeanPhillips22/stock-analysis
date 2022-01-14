@@ -1,3 +1,4 @@
+import { HeaderCell } from 'components/Tables/HeaderCell'
 import {
 	useTable,
 	useSortBy,
@@ -44,16 +45,12 @@ export function StockTableBody({ data, columns, config }: Props) {
 				/>
 			</div>
 			<div className="overflow-x-auto">
-				<table className="symbol-table two-left" id="stock-table">
+				<table className="symbol-table stock-table" id="stock-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<th key={index}>
-										<span className="inline-flex flex-row items-center">
-											{column.render('Header')}
-										</span>
-									</th>
+									<HeaderCell key={index} column={column} />
 								))}
 							</tr>
 						))}

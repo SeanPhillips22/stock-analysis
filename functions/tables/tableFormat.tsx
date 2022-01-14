@@ -21,6 +21,11 @@ function format(value: number, decimals: 0 | 2) {
 	return decimals === 0 ? dec0.format(value) : dec2.format(value)
 }
 
+export function formatHeader(fn: Fn, value: string) {
+	if (value === 'Price') return <div className="text-right">{value}</div>
+	return value
+}
+
 export function formatCell(fn: Fn, cell: Cell, type: Type = 'stocks') {
 	if (fn === 'linkSymbol') return formatSymbol(cell as CellString, type)
 	if (fn === 'format2dec') return format2dec(cell as CellNumber)

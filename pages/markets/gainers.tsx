@@ -25,7 +25,7 @@ const config: PageConfig = {
 }
 
 // the initial columns to show in the table
-const columns: DataId[] = ['s', 'n', 'price', 'change', 'volume', 'marketCap']
+const columns: DataId[] = ['s', 'n', 'price', 'volume', 'marketCap']
 
 // the initial config for the page data
 // this will be fetched from the select endpoint on the backend
@@ -38,7 +38,7 @@ const selectConfig: SelectConfig = {
 }
 
 export default function GainersPage({ data }: { data: any[] }) {
-	const resetTableState = stockTableState((state) => state.resetTableState)
+	const resetTableState = stockTableState(state => state.resetTableState)
 
 	// reset the stable when the page is loaded
 	useEffect(() => {
@@ -52,7 +52,7 @@ export default function GainersPage({ data }: { data: any[] }) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const data = await getSelect(selectConfig, true)
 	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 

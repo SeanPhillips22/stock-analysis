@@ -8,8 +8,12 @@ import { respondSSR } from './callBackEnd'
 export async function getSelect(config: SelectConfig, ssr?: boolean) {
 	// destructure the props and create the URL
 	let { type, main, count, sort, columns } = config
-	console.log(columns)
+
+	// turn the columns array into a string
 	let cols = columns.join(',')
+	if (!columns.includes(main)) cols = cols + ',' + main // add main if not included
+
+	// create the url
 	let url = `select?type=${type}&main=${main}&count=${count}&sort=${sort}&columns=${cols}`
 
 	// fetch the data from the back-end

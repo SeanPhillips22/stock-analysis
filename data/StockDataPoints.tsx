@@ -47,12 +47,48 @@ export const DataPoints: Props = {
 		format: 'formatPercentage'
 	},
 	sector: { id: 'sector', name: 'Sector' },
-	ch1m: { id: 'ch1m', name: 'Price Change 1M' },
-	ch6m: { id: 'ch6m', name: 'Price Change 6M' },
-	chYTD: { id: 'chYTD', name: 'Price Change YTD' },
-	ch1y: { id: 'ch1y', name: 'Price Change 1Y' },
-	ch3y: { id: 'ch3y', name: 'Price Change 3Y' },
-	ch5y: { id: 'ch5y', name: 'Price Change 5Y' },
+	ch1w: {
+		id: 'ch1w',
+		name: 'Price Change 1W',
+		columnName: 'Change 1W',
+		format: 'colorPercentage'
+	},
+	ch1m: {
+		id: 'ch1m',
+		name: 'Price Change 1M',
+		columnName: 'Change 1M',
+		format: 'colorPercentage'
+	},
+	ch6m: {
+		id: 'ch6m',
+		name: 'Price Change 6M',
+		columnName: 'Change 6M',
+		format: 'colorPercentage'
+	},
+	chYTD: {
+		id: 'chYTD',
+		name: 'Price Change YTD',
+		columnName: 'Change YTD',
+		format: 'colorPercentage'
+	},
+	ch1y: {
+		id: 'ch1y',
+		name: 'Price Change 1Y',
+		columnName: 'Change 1Y',
+		format: 'colorPercentage'
+	},
+	ch3y: {
+		id: 'ch3y',
+		name: 'Price Change 3Y',
+		columnName: 'Change 3Y',
+		format: 'colorPercentage'
+	},
+	ch5y: {
+		id: 'ch5y',
+		name: 'Price Change 5Y',
+		columnName: 'Change 5Y',
+		format: 'colorPercentage'
+	},
 	analystRatings: { id: 'analystRatings', name: 'Analyst Rating' },
 	analystCount: { id: 'analystCount', name: 'Analyst Count' },
 	priceTarget: { id: 'priceTarget', name: 'Price Target' },

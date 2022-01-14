@@ -32,10 +32,6 @@
 		white-space: nowrap;
 	}
 
-	.symbol-table.two-left tr > *:nth-child(n + 3) {
-		text-align: right;
-	}
-
 	.symbol-table tr:nth-child(odd) {
 		background-color: #f6f7f8;
 	}

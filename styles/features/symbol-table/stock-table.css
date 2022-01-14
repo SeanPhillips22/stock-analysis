@@ -1,0 +1,10 @@
+/*
+* Stock Table
+* A more advanced table than the previous symbol table
+*/
+
+@layer components {
+	.stock-table tr > * {
+		@apply whitespace-nowrap;
+	}
+}

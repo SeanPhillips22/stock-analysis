@@ -17,6 +17,7 @@
 @import './features/financials';
 @import './features/definitions';
 @import './features/symbol-table/_symbol-table';
+@import './features/symbol-table/stock-table';
 @import './features/symbol-table/screener';
 @import './features/symbol-table/holdings';
 @import './features/symbol-table/index';

@@ -7,14 +7,13 @@ import {
 	useGlobalFilter,
 	useAsyncDebounce
 } from 'react-table'
-import { SortUpIcon } from 'components/Icons/SortUp'
-import { SortDownIcon } from 'components/Icons/SortDown'
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu'
 import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
 import { useSortReset } from 'components/StockScreener/functions/sort/useSortReset'
+import { ColumnSort } from 'components/Tables/ColumnSort'
 
 export function ResultsTable({ cols }: { cols: any }) {
 	const type = screenerState((state) => state.type)
@@ -113,15 +112,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 									>
 										<span className="flex flex-row items-center">
 											{column.render('Header')}
-											{column.isSorted ? (
-												column.isSortedDesc ? (
-													<SortDownIcon classes="h-4 w-4 text-gray-800" />
-												) : (
-													<SortUpIcon classes="h-4 w-4 text-gray-800" />
-												)
-											) : (
-												''
-											)}
+											<ColumnSort column={column} />
 										</span>
 									</th>
 								))}

@@ -4,7 +4,7 @@ import create from 'zustand'
 
 interface StockTableState extends SelectConfig {
 	setType: (newType: SymbolTypes) => void
-	setMain: (newMain: string) => void
+	setMain: (newMain: DataId) => void
 	setCount: (newCount: number) => void
 	setSort: (newSort: SortTypes) => void
 	setColumns: (newcols: DataId[]) => void
@@ -14,14 +14,14 @@ interface StockTableState extends SelectConfig {
 	toggleColumn: (id: DataId) => void
 }
 
-export const stockTableState = create<StockTableState>((set) => ({
+export const stockTableState = create<StockTableState>(set => ({
 	// The symbol type
 	type: 'stocks',
 	setType: (newType: SymbolTypes) => set({ type: newType }),
 
 	// The main column to sort by
-	main: '',
-	setMain: (newMain: string) => set({ main: newMain }),
+	main: 'change',
+	setMain: (newMain: DataId) => set({ main: newMain }),
 
 	// The number of symbols to show
 	count: 20,
@@ -35,26 +35,33 @@ export const stockTableState = create<StockTableState>((set) => ({
 	columns: [],
 	setColumns: (newcols: DataId[]) => set({ columns: newcols }),
 	addColumn: (newcol: DataId) =>
-		set((state) => ({
-			...state,
-			columns: [...state.columns, newcol]
-		})),
+		set(state => {
+			if (!state.columns.includes(newcol)) {
+				return {
+					...state,
+					columns: [...state.columns, newcol]
+				}
+			} else {
+				return state
+			}
+		}),
+
 	removeColumn: (col: DataId) =>
-		set((state) => ({
+		set(state => ({
 			...state,
-			columns: state.columns.filter((c) => c !== col)
+			columns: state.columns.filter(c => c !== col)
 		})),
 	toggleColumn: (col: DataId) =>
-		set((state) => ({
+		set(state => ({
 			...state,
 			columns: state.columns.includes(col)
-				? state.columns.filter((c) => c !== col)
+				? state.columns.filter(c => c !== col)
 				: [...state.columns, col]
 		})),
 
 	// Reset the table state when switching to another page
 	resetTableState: (conf: SelectConfig) =>
-		set((state) => ({
+		set(state => ({
 			...state,
 			type: conf.type,
 			main: conf.main,
