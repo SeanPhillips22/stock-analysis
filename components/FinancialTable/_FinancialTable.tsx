@@ -52,7 +52,7 @@ export const FinancialTable = ({
 	const [dataRows, setDataRows] = useState(financials)
 
 	// Check if financial data is paywalled
-	const paywall = range === 'annual' ? 9 : 30
+	const paywall = range === 'annual' ? 11 : 38
 	const fullcount = count // The total number of years/quarters available
 	const showcount = !isPro && fullcount > paywall ? paywall : fullcount // How many years/quarter to show
 	const paywalled = showcount < fullcount ? 'true' : false

@@ -15,4 +15,8 @@
 	.sb-1 {
 		@apply w-[300px] h-[250px] hidden lg:block mx-auto;
 	}
+
+	.sb-1o {
+		@apply w-[300px] h-[250px] bp:w-[336px] bp:h-[280px] block mt-8 mx-auto;
+	}
 }
