@@ -2,20 +2,11 @@ import { DataPoints } from 'data/StockDataPoints'
 import { DataId } from 'types/Data'
 import { ColumnSort } from './ColumnSort'
 
-type Props = {
-	column: {
-		Header: string
-		id: DataId
-		getSortByToggleProps: any
-		render: any
-	}
-}
-
 /**
  * Render a Header cell element with sort functionality
  */
-export function HeaderCell({ column }: Props) {
-	let { Header, id } = column
+export function HeaderCell({ column }: { column: any }) {
+	let { Header, id }: { Header: any; id: DataId } = column
 	let { format } = DataPoints[id]
 
 	let css =
