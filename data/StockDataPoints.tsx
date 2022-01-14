@@ -17,7 +17,7 @@ type Props = {
  */
 export const DataPoints: Props = {
 	s: { id: 's', name: 'Symbol', format: 'linkSymbol' },
-	n: { id: 'n', name: 'Name' },
+	n: { id: 'n', name: 'Name', format: 'string' },
 	marketCap: { id: 'marketCap', name: 'Market Cap', format: 'abbreviate' },
 	price: {
 		id: 'price',
@@ -31,22 +31,22 @@ export const DataPoints: Props = {
 		columnName: 'Change 1D',
 		format: 'colorPercentage'
 	},
-	volume: { id: 'volume', name: 'Volume', format: 'formatInteger' },
+	volume: { id: 'volume', name: 'Volume', format: 'integer' },
 	enterpriseValue: {
 		id: 'enterpriseValue',
 		name: 'Enterprise Value',
 		format: 'abbreviate'
 	},
-	industry: { id: 'industry', name: 'Industry' },
-	peRatio: { id: 'peRatio', name: 'PE Ratio' },
-	peForward: { id: 'peForward', name: 'Forward PE' },
-	exchange: { id: 'exchange', name: 'Exchange' },
+	industry: { id: 'industry', name: 'Industry', format: 'string' },
+	peRatio: { id: 'peRatio', name: 'PE Ratio', format: 'format2dec' },
+	peForward: { id: 'peForward', name: 'Forward PE', format: 'format2dec' },
+	exchange: { id: 'exchange', name: 'Exchange', format: 'string' },
 	dividendYield: {
 		id: 'dividendYield',
 		name: 'Dividend Yield',
 		format: 'formatPercentage'
 	},
-	sector: { id: 'sector', name: 'Sector' },
+	sector: { id: 'sector', name: 'Sector', format: 'string' },
 	ch1w: {
 		id: 'ch1w',
 		name: 'Price Change 1W',
@@ -89,116 +89,342 @@ export const DataPoints: Props = {
 		columnName: 'Change 5Y',
 		format: 'colorPercentage'
 	},
-	analystRatings: { id: 'analystRatings', name: 'Analyst Rating' },
-	analystCount: { id: 'analystCount', name: 'Analyst Count' },
-	priceTarget: { id: 'priceTarget', name: 'Price Target' },
-	priceTargetChange: { id: 'priceTargetChange', name: 'Price Target (%)' },
-	country: { id: 'country', name: 'Country' },
-	employees: { id: 'employees', name: 'Employees' },
-	founded: { id: 'founded', name: 'Founded' },
-	ipoDate: { id: 'ipoDate', name: 'IPO Date' },
-	revenue: { id: 'revenue', name: 'Revenue' },
-	revenueGrowth: { id: 'revenueGrowth', name: 'Revenue Growth' },
-	revenueGrowthQ: { id: 'revenueGrowthQ', name: 'Revenue Growth (Q)' },
-	grossProfit: { id: 'grossProfit', name: 'Gross Profit' },
-	grossProfitGrowth: { id: 'grossProfitGrowth', name: 'Gross Profit Growth' },
-	operatingIncome: { id: 'operatingIncome', name: 'Op. Income' },
+	analystRatings: {
+		id: 'analystRatings',
+		name: 'Analyst Rating',
+		format: 'string'
+	},
+	analystCount: {
+		id: 'analystCount',
+		name: 'Analyst Count',
+		format: 'integer'
+	},
+	priceTarget: {
+		id: 'priceTarget',
+		name: 'Price Target',
+		format: 'format2dec'
+	},
+	priceTargetChange: {
+		id: 'priceTargetChange',
+		name: 'Price Target (%)',
+		format: 'formatPercentage'
+	},
+	country: { id: 'country', name: 'Country', format: 'string' },
+	employees: { id: 'employees', name: 'Employees', format: 'integer' },
+	founded: { id: 'founded', name: 'Founded', format: 'string' },
+	ipoDate: { id: 'ipoDate', name: 'IPO Date', format: 'formatDate' },
+	revenue: { id: 'revenue', name: 'Revenue', format: 'abbreviate' },
+	revenueGrowth: {
+		id: 'revenueGrowth',
+		name: 'Revenue Growth',
+		format: 'formatPercentage'
+	},
+	revenueGrowthQ: {
+		id: 'revenueGrowthQ',
+		name: 'Revenue Growth (Q)',
+		format: 'formatPercentage'
+	},
+	grossProfit: {
+		id: 'grossProfit',
+		name: 'Gross Profit',
+		format: 'abbreviate'
+	},
+	grossProfitGrowth: {
+		id: 'grossProfitGrowth',
+		name: 'Gross Profit Growth',
+		format: 'formatPercentage'
+	},
+	operatingIncome: {
+		id: 'operatingIncome',
+		name: 'Op. Income',
+		format: 'abbreviate'
+	},
 	operatingIncomeGrowth: {
 		id: 'operatingIncomeGrowth',
-		name: 'Op. Income Growth'
+		name: 'Op. Income Growth',
+		format: 'formatPercentage'
 	},
-	netIncome: { id: 'netIncome', name: 'Net Income' },
-	netIncomeGrowth: { id: 'netIncomeGrowth', name: 'Net Inc. Growth' },
-	eps: { id: 'eps', name: 'EPS' },
-	epsGrowth: { id: 'epsGrowth', name: 'EPS Growth' },
-	ebit: { id: 'ebit', name: 'EBIT' },
-	ebitda: { id: 'ebitda', name: 'EBITDA' },
-	operatingCF: { id: 'operatingCF', name: 'Op. Cash Flow' },
-	investingCF: { id: 'investingCF', name: 'Investing Cash Flow' },
-	financingCF: { id: 'financingCF', name: 'Financing Cash Flow' },
-	netCF: { id: 'netCF', name: 'Net Cash Flow' },
-	capex: { id: 'capex', name: 'Capital expenditures' },
-	fcf: { id: 'fcf', name: 'Free Cash Flow' },
-	fcfGrowth: { id: 'fcfGrowth', name: 'FCF Growth' },
-	fcfPerShare: { id: 'fcfPerShare', name: 'FCF / Share' },
-	assets: { id: 'assets', name: 'Assets' },
-	cash: { id: 'cash', name: 'Total Cash' },
-	debt: { id: 'debt', name: 'Total Debt' },
-	netCash: { id: 'netCash', name: 'Net Cash / Debt' },
-	netCashGrowth: { id: 'netCashGrowth', name: 'Net Cash Growth' },
+	netIncome: { id: 'netIncome', name: 'Net Income', format: 'abbreviate' },
+	netIncomeGrowth: {
+		id: 'netIncomeGrowth',
+		name: 'Net Inc. Growth',
+		format: 'formatPercentage'
+	},
+	eps: { id: 'eps', name: 'EPS', format: 'format2dec' },
+	epsGrowth: {
+		id: 'epsGrowth',
+		name: 'EPS Growth',
+		format: 'formatPercentage'
+	},
+	ebit: { id: 'ebit', name: 'EBIT', format: 'abbreviate' },
+	ebitda: { id: 'ebitda', name: 'EBITDA', format: 'abbreviate' },
+	operatingCF: {
+		id: 'operatingCF',
+		name: 'Op. Cash Flow',
+		format: 'abbreviate'
+	},
+	investingCF: {
+		id: 'investingCF',
+		name: 'Investing Cash Flow',
+		format: 'abbreviate'
+	},
+	financingCF: {
+		id: 'financingCF',
+		name: 'Financing Cash Flow',
+		format: 'abbreviate'
+	},
+	netCF: { id: 'netCF', name: 'Net Cash Flow', format: 'abbreviate' },
+	capex: { id: 'capex', name: 'Capital expenditures', format: 'abbreviate' },
+	fcf: { id: 'fcf', name: 'Free Cash Flow', format: 'abbreviate' },
+	fcfGrowth: {
+		id: 'fcfGrowth',
+		name: 'FCF Growth',
+		format: 'formatPercentage'
+	},
+	fcfPerShare: {
+		id: 'fcfPerShare',
+		name: 'FCF / Share',
+		format: 'format2dec'
+	},
+	assets: { id: 'assets', name: 'Assets', format: 'abbreviate' },
+	cash: { id: 'cash', name: 'Total Cash', format: 'abbreviate' },
+	debt: { id: 'debt', name: 'Total Debt', format: 'abbreviate' },
+	netCash: { id: 'netCash', name: 'Net Cash / Debt', format: 'abbreviate' },
+	netCashGrowth: {
+		id: 'netCashGrowth',
+		name: 'Net Cash Growth',
+		format: 'formatPercentage'
+	},
 	netCashByMarketCap: {
 		id: 'netCashByMarketCap',
-		name: 'Net Cash / Market Cap'
+		name: 'Net Cash / Market Cap',
+		format: 'formatPercentage'
 	},
-	grossMargin: { id: 'grossMargin', name: 'Gross Margin' },
-	operatingMargin: { id: 'operatingMargin', name: 'Operating Margin' },
-	profitMargin: { id: 'profitMargin', name: 'Profit Margin' },
-	fcfMargin: { id: 'fcfMargin', name: 'FCF Margin' },
-	ebitdaMargin: { id: 'ebitdaMargin', name: 'EBITDA Margin' },
-	ebitMargin: { id: 'ebitMargin', name: 'EBIT Margin' },
-	psRatio: { id: 'psRatio', name: 'PS Ratio' },
-	pbRatio: { id: 'pbRatio', name: 'PB Ratio' },
-	pFcfRatio: { id: 'pFcfRatio', name: 'P/FCF Ratio' },
-	pegRatio: { id: 'pegRatio', name: 'PEG Ratio' },
-	evSales: { id: 'evSales', name: 'EV/Sales' },
-	evEarnings: { id: 'evEarnings', name: 'EV/Earnings' },
-	evEbitda: { id: 'evEbitda', name: 'EV/EBITDA' },
-	evEbit: { id: 'evEbit', name: 'EV/EBIT' },
-	evFcf: { id: 'evFcf', name: 'EV/FCF' },
-	earningsYield: { id: 'earningsYield', name: 'Earnings Yield' },
-	fcfYield: { id: 'fcfYield', name: 'FCF Yield' },
-	dps: { id: 'dps', name: 'Dividend ($)' },
-	dividendGrowth: { id: 'dividendGrowth', name: 'Div. Growth' },
-	payoutRatio: { id: 'payoutRatio', name: 'Payout Ratio' },
-	payoutFrequency: { id: 'payoutFrequency', name: 'Payout Frequency' },
-	buybackYield: { id: 'buybackYield', name: 'Buyback Yield' },
-	totalReturn: { id: 'totalReturn', name: 'Total Return' },
-	averageVolume: { id: 'averageVolume', name: 'Average Volume' },
-	beta: { id: 'beta', name: 'Beta (1Y)' },
-	shortFloat: { id: 'shortFloat', name: 'Short % Float' },
-	shortShares: { id: 'shortShares', name: 'Short % Shares' },
-	shortRatio: { id: 'shortRatio', name: 'Short Ratio' },
-	sharesOut: { id: 'sharesOut', name: 'Shares Out' },
-	float: { id: 'float', name: 'Float' },
-	sharesYoY: { id: 'sharesYoY', name: 'Shares Ch. (YoY)' },
-	sharesQoQ: { id: 'sharesQoQ', name: 'Shares Ch. (QoQ)' },
-	sharesInsiders: { id: 'sharesInsiders', name: 'Shares Insiders' },
-	sharesInstitutions: { id: 'sharesInstitutions', name: 'Shares Institut.' },
-	earningsDate: { id: 'earningsDate', name: 'Earnings Date' },
-	exDivDate: { id: 'exDivDate', name: 'Ex-Div Date' },
-	nextDivDate: { id: 'nextDivDate', name: 'Next Ex-Div' },
-	roe: { id: 'roe', name: 'Return on Equity' },
-	roa: { id: 'roa', name: 'Return on Assets' },
-	roic: { id: 'roic', name: 'Return on Capital' },
-	revPerEmployee: { id: 'revPerEmployee', name: 'Rev / Employee' },
-	profitPerEmployee: { id: 'profitPerEmployee', name: 'Prof. / Employee' },
-	assetTurnover: { id: 'assetTurnover', name: 'Asset Turnover' },
-	inventoryTurnover: { id: 'inventoryTurnover', name: 'Inv. Turnover' },
-	currentRatio: { id: 'currentRatio', name: 'Current Ratio' },
-	quickRatio: { id: 'quickRatio', name: 'Quick Ratio' },
-	debtEquity: { id: 'debtEquity', name: 'Debt / Equity' },
-	debtEbitda: { id: 'debtEbitda', name: 'Debt / EBITDA' },
-	debtFcf: { id: 'debtFcf', name: 'Debt / FCF' },
-	taxRate: { id: 'taxRate', name: 'Eff. Tax Rate' },
-	taxByRevenue: { id: 'taxByRevenue', name: 'Tax / Revenue' },
-	equity: { id: 'equity', name: 'Shareh. Equity' },
-	workingCapital: { id: 'workingCapital', name: 'Working Capital' },
-	lastSplitType: { id: 'lastSplitType', name: 'Last Stock Split' },
-	lastSplitDate: { id: 'lastSplitDate', name: 'Last Split Date' },
-	liabilities: { id: 'liabilities', name: 'Liabilities' },
-	ipoPriceRange: { id: 'ipoPriceRange', name: 'IPO Price Range' },
+	grossMargin: {
+		id: 'grossMargin',
+		name: 'Gross Margin',
+		format: 'formatPercentage'
+	},
+	operatingMargin: {
+		id: 'operatingMargin',
+		name: 'Operating Margin',
+		format: 'formatPercentage'
+	},
+	profitMargin: {
+		id: 'profitMargin',
+		name: 'Profit Margin',
+		format: 'formatPercentage'
+	},
+	fcfMargin: {
+		id: 'fcfMargin',
+		name: 'FCF Margin',
+		format: 'formatPercentage'
+	},
+	ebitdaMargin: {
+		id: 'ebitdaMargin',
+		name: 'EBITDA Margin',
+		format: 'formatPercentage'
+	},
+	ebitMargin: {
+		id: 'ebitMargin',
+		name: 'EBIT Margin',
+		format: 'formatPercentage'
+	},
+	psRatio: { id: 'psRatio', name: 'PS Ratio', format: 'format2dec' },
+	pbRatio: { id: 'pbRatio', name: 'PB Ratio', format: 'format2dec' },
+	pFcfRatio: { id: 'pFcfRatio', name: 'P/FCF Ratio', format: 'format2dec' },
+	pegRatio: { id: 'pegRatio', name: 'PEG Ratio', format: 'format2dec' },
+	evSales: { id: 'evSales', name: 'EV/Sales', format: 'format2dec' },
+	evEarnings: { id: 'evEarnings', name: 'EV/Earnings', format: 'format2dec' },
+	evEbitda: { id: 'evEbitda', name: 'EV/EBITDA', format: 'format2dec' },
+	evEbit: { id: 'evEbit', name: 'EV/EBIT', format: 'format2dec' },
+	evFcf: { id: 'evFcf', name: 'EV/FCF', format: 'format2dec' },
+	earningsYield: {
+		id: 'earningsYield',
+		name: 'Earnings Yield',
+		format: 'formatPercentage'
+	},
+	fcfYield: { id: 'fcfYield', name: 'FCF Yield', format: 'formatPercentage' },
+	dps: { id: 'dps', name: 'Dividend ($)', format: 'format2dec' },
+	dividendGrowth: {
+		id: 'dividendGrowth',
+		name: 'Div. Growth',
+		format: 'formatPercentage'
+	},
+	payoutRatio: {
+		id: 'payoutRatio',
+		name: 'Payout Ratio',
+		format: 'formatPercentage'
+	},
+	payoutFrequency: {
+		id: 'payoutFrequency',
+		name: 'Payout Frequency',
+		format: 'string'
+	},
+	buybackYield: {
+		id: 'buybackYield',
+		name: 'Buyback Yield',
+		format: 'formatPercentage'
+	},
+	totalReturn: {
+		id: 'totalReturn',
+		name: 'Total Return',
+		format: 'formatPercentage'
+	},
+	averageVolume: {
+		id: 'averageVolume',
+		name: 'Average Volume',
+		format: 'integer'
+	},
+	beta: { id: 'beta', name: 'Beta (1Y)', format: 'format2dec' },
+	shortFloat: {
+		id: 'shortFloat',
+		name: 'Short % Float',
+		format: 'formatPercentage'
+	},
+	shortShares: {
+		id: 'shortShares',
+		name: 'Short % Shares',
+		format: 'formatPercentage'
+	},
+	shortRatio: { id: 'shortRatio', name: 'Short Ratio', format: 'format2dec' },
+	sharesOut: { id: 'sharesOut', name: 'Shares Out', format: 'abbreviate' },
+	float: { id: 'float', name: 'Float', format: 'abbreviate' },
+	sharesYoY: {
+		id: 'sharesYoY',
+		name: 'Shares Ch. (YoY)',
+		format: 'formatPercentage'
+	},
+	sharesQoQ: {
+		id: 'sharesQoQ',
+		name: 'Shares Ch. (QoQ)',
+		format: 'formatPercentage'
+	},
+	sharesInsiders: {
+		id: 'sharesInsiders',
+		name: 'Shares Insiders',
+		format: 'formatPercentage'
+	},
+	sharesInstitutions: {
+		id: 'sharesInstitutions',
+		name: 'Shares Institut.',
+		format: 'formatPercentage'
+	},
+	earningsDate: {
+		id: 'earningsDate',
+		name: 'Earnings Date',
+		format: 'formatDate'
+	},
+	exDivDate: { id: 'exDivDate', name: 'Ex-Div Date', format: 'formatDate' },
+	nextDivDate: {
+		id: 'nextDivDate',
+		name: 'Next Ex-Div',
+		format: 'formatDate'
+	},
+	roe: { id: 'roe', name: 'Return on Equity', format: 'formatPercentage' },
+	roa: { id: 'roa', name: 'Return on Assets', format: 'formatPercentage' },
+	roic: { id: 'roic', name: 'Return on Capital', format: 'formatPercentage' },
+	revPerEmployee: {
+		id: 'revPerEmployee',
+		name: 'Rev / Employee',
+		format: 'abbreviate'
+	},
+	profitPerEmployee: {
+		id: 'profitPerEmployee',
+		name: 'Prof. / Employee',
+		format: 'abbreviate'
+	},
+	assetTurnover: {
+		id: 'assetTurnover',
+		name: 'Asset Turnover',
+		format: 'format2dec'
+	},
+	inventoryTurnover: {
+		id: 'inventoryTurnover',
+		name: 'Inv. Turnover',
+		format: 'format2dec'
+	},
+	currentRatio: {
+		id: 'currentRatio',
+		name: 'Current Ratio',
+		format: 'format2dec'
+	},
+	quickRatio: { id: 'quickRatio', name: 'Quick Ratio', format: 'format2dec' },
+	debtEquity: {
+		id: 'debtEquity',
+		name: 'Debt / Equity',
+		format: 'format2dec'
+	},
+	debtEbitda: {
+		id: 'debtEbitda',
+		name: 'Debt / EBITDA',
+		format: 'format2dec'
+	},
+	debtFcf: { id: 'debtFcf', name: 'Debt / FCF', format: 'format2dec' },
+	taxRate: {
+		id: 'taxRate',
+		name: 'Eff. Tax Rate',
+		format: 'formatPercentage'
+	},
+	taxByRevenue: {
+		id: 'taxByRevenue',
+		name: 'Tax / Revenue',
+		format: 'formatPercentage'
+	},
+	equity: { id: 'equity', name: 'Shareh. Equity', format: 'abbreviate' },
+	workingCapital: {
+		id: 'workingCapital',
+		name: 'Working Capital',
+		format: 'abbreviate'
+	},
+	lastSplitType: {
+		id: 'lastSplitType',
+		name: 'Last Stock Split',
+		format: 'string'
+	},
+	lastSplitDate: {
+		id: 'lastSplitDate',
+		name: 'Last Split Date',
+		format: 'formatDate'
+	},
+	liabilities: {
+		id: 'liabilities',
+		name: 'Liabilities',
+		format: 'abbreviate'
+	},
+	ipoPriceRange: {
+		id: 'ipoPriceRange',
+		name: 'IPO Price Range',
+		format: 'string'
+	},
 	isSpac: { id: 'isSpac', name: 'Is SPAC' },
-	sharesOffered: { id: 'sharesOffered', name: 'Shares Offered' },
-	aum: { id: 'aum', name: 'Assets Under Management' },
-	etfPeRatio: { id: 'etfPeRatio', name: 'PE Ratio' },
-	assetClass: { id: 'assetClass', name: 'Asset Class' },
-	expenseRatio: { id: 'expenseRatio', name: 'Expense Ratio' },
-	holdings: { id: 'holdings', name: 'Holdings' },
-	inceptionDate: { id: 'inceptionDate', name: 'Inception Date' },
-	etfSector: { id: 'etfSector', name: 'Sector' },
-	etfRegion: { id: 'etfRegion', name: 'Region' },
-	issuer: { id: 'issuer', name: 'Issuer' },
-	etfIndex: { id: 'etfIndex', name: 'Index' }
+	sharesOffered: {
+		id: 'sharesOffered',
+		name: 'Shares Offered',
+		format: 'integer'
+	},
+	aum: { id: 'aum', name: 'Assets Under Management', format: 'abbreviate' },
+	etfPeRatio: { id: 'etfPeRatio', name: 'PE Ratio', format: 'format2dec' },
+	assetClass: {
+		id: 'assetClass',
+		name: 'Asset Class',
+		format: 'string'
+	},
+	expenseRatio: {
+		id: 'expenseRatio',
+		name: 'Expense Ratio',
+		format: 'formatPercentage'
+	},
+	holdings: { id: 'holdings', name: 'Holdings', format: 'integer' },
+	inceptionDate: {
+		id: 'inceptionDate',
+		name: 'Inception Date',
+		format: 'formatDate'
+	},
+	etfSector: { id: 'etfSector', name: 'Sector', format: 'string' },
+	etfRegion: { id: 'etfRegion', name: 'Region', format: 'string' },
+	issuer: { id: 'issuer', name: 'Issuer', format: 'string' },
+	etfIndex: { id: 'etfIndex', name: 'Index', format: 'string' }
 }
 
 export const DataPointArray: DataId[] = [

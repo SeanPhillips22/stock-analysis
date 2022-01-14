@@ -1,20 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { DataPointArray, DataPoints, DataPointType } from 'data/StockDataPoints'
+import { DataPoints, DataPointType } from 'data/StockDataPoints'
 import { useMemo } from 'react'
 import { DataId } from 'types/Data'
 import { ColumnItem } from './ColumnItem'
 
 type Props = {
 	_active: DataId[]
+	options: DataId[]
 	search: string
 }
 
-export function ColumnList({ _active, search }: Props) {
+export function ColumnList({ _active, options, search }: Props) {
 	let active: DataPointType[] = []
 	let inactive: DataPointType[] = []
 
 	// check which data points are active vs. inactive
-	DataPointArray.forEach(item => {
+	options.forEach(item => {
 		let { id, name } = DataPoints[item]
 		if (id !== 's' && id !== 'n') {
 			if (_active.includes(item)) active.push({ id, name })

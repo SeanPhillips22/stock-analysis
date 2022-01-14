@@ -13,8 +13,9 @@ export type CellNumber = {
 export type FormatFunction =
 	| 'linkSymbol'
 	| 'format2dec'
-	| 'formatInteger'
+	| 'integer'
 	| 'formatPercentage'
 	| 'colorPercentage'
 	| 'abbreviate'
 	| 'formatDate'
+	| 'string'

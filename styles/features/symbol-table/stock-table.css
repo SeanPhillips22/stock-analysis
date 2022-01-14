@@ -7,4 +7,12 @@
 	.stock-table tr > * {
 		@apply whitespace-nowrap;
 	}
+
+	.stock-table tr th .head-left {
+		@apply inline-flex flex-row items-center;
+	}
+
+	.stock-table tr th .head-right {
+		@apply flex flex-row items-center justify-end;
+	}
 }

@@ -59,6 +59,9 @@ export const stockTableState = create<StockTableState>(set => ({
 				: [...state.columns, col]
 		})),
 
+	// The columns that can be selected
+	columnOptions: [],
+
 	// Reset the table state when switching to another page
 	resetTableState: (conf: SelectConfig) =>
 		set(state => ({
@@ -67,6 +70,7 @@ export const stockTableState = create<StockTableState>(set => ({
 			main: conf.main,
 			count: conf.count,
 			sort: conf.sort,
-			columns: conf.columns
+			columns: conf.columns,
+			columnOptions: conf.columnOptions
 		}))
 }))

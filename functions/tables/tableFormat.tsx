@@ -29,10 +29,11 @@ export function formatHeader(fn: Fn, value: string) {
 export function formatCell(fn: Fn, cell: Cell, type: Type = 'stocks') {
 	if (fn === 'linkSymbol') return formatSymbol(cell as CellString, type)
 	if (fn === 'format2dec') return format2dec(cell as CellNumber)
-	if (fn === 'formatInteger') return formatInteger(cell as CellNumber)
+	if (fn === 'integer') return formatInteger(cell as CellNumber)
 	if (fn === 'formatPercentage') return formatPercentage(cell as CellNumber)
 	if (fn === 'colorPercentage') return colorPercentage(cell as CellNumber)
 	if (fn === 'abbreviate') return abbreviate(cell as CellNumber)
+	if (fn === 'string') return formatString(cell as CellString)
 	return null
 }
 
@@ -112,4 +113,10 @@ export function formatDate(cell: CellString) {
 	})
 
 	return <div className="text-right">{date}</div>
+}
+
+// Format a string
+export function formatString(cell: CellString) {
+	let { value } = cell.cell
+	return <div className="text-left">{value}</div>
 }

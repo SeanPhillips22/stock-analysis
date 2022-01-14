@@ -7,6 +7,7 @@ import { getSelect } from 'functions/apis/getSelect'
 import { SelectConfig } from 'types/SelectConfig'
 import { useEffect } from 'react'
 import { stockTableState } from 'components/StockTable/stockTableState'
+import { MoverColumns } from 'data/column-groups/movers.columns'
 
 // the page's config and settings
 const config: PageConfig = {
@@ -34,7 +35,8 @@ const selectConfig: SelectConfig = {
 	main: 'change',
 	count: 20,
 	sort: 'desc',
-	columns: columns
+	columns: columns,
+	columnOptions: MoverColumns
 }
 
 export default function GainersPage({ data }: { data: any[] }) {
