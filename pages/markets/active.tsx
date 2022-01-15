@@ -8,6 +8,8 @@ import { SelectConfig } from 'types/SelectConfig'
 import { useEffect } from 'react'
 import { stockTableState } from 'components/StockTable/stockTableState'
 import { MoverColumns } from 'data/column-groups/movers.columns'
+import { TableContextProvider } from 'components/StockTable/TableContext'
+import { TableTimestamp } from 'types/Tables'
 
 // the page's config and settings
 const config: PageConfig = {
@@ -40,7 +42,12 @@ const selectConfig: SelectConfig = {
 	filters: ['price-over-1', 'close-over-1']
 }
 
-export default function ActivePage({ data }: { data: any[] }) {
+type Props = {
+	data: any[]
+	updated: TableTimestamp
+}
+
+export default function ActivePage({ data, updated }: Props) {
 	const resetTableState = stockTableState(state => state.resetTableState)
 
 	// reset the stable when the page is loaded
@@ -50,7 +57,9 @@ export default function ActivePage({ data }: { data: any[] }) {
 
 	return (
 		<MarketsLayout config={config}>
-			<StockTable _data={data} config={config} />
+			<TableContextProvider value={{ config, updated }}>
+				<StockTable _data={data} />
+			</TableContextProvider>
 		</MarketsLayout>
 	)
 }
