@@ -11,10 +11,10 @@ import { MoverColumns } from 'data/column-groups/movers.columns'
 
 // the page's config and settings
 const config: PageConfig = {
-	path: '/markets/gainers/',
-	title: 'Top Stock Gainers',
+	path: '/markets/active/',
+	title: 'Most Active Stocks',
 	parentTitle: 'Market Movers',
-	active: 'gainers',
+	active: 'active',
 	controls: {
 		range: true,
 		results: true,
@@ -22,25 +22,25 @@ const config: PageConfig = {
 		export: true,
 		columns: true
 	},
-	metaTitle: "Today's Top Stock Gainers"
+	metaTitle: "Today's Most Active Stocks"
 }
 
 // the initial columns to show in the table
-const columns: DataId[] = ['s', 'n', 'price', 'volume', 'marketCap']
+const columns: DataId[] = ['s', 'n', 'change', 'price', 'marketCap']
 
 // the initial config for the page data
 // this will be fetched from the select endpoint on the backend
 const selectConfig: SelectConfig = {
 	type: 'stocks',
-	main: 'change',
+	main: 'volume',
 	count: 20,
 	sort: 'desc',
 	columns: columns,
 	columnOptions: MoverColumns,
-	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
+	filters: ['price-over-1', 'close-over-1']
 }
 
-export default function GainersPage({ data }: { data: any[] }) {
+export default function ActivePage({ data }: { data: any[] }) {
 	const resetTableState = stockTableState(state => state.resetTableState)
 
 	// reset the stable when the page is loaded

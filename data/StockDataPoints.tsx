@@ -4,7 +4,7 @@ import { FormatFunction } from 'types/Tables'
 export type DataPointType = {
 	id: DataId
 	name: string
-	columnName?: string
+	colName?: string
 	format?: FormatFunction
 }
 
@@ -22,19 +22,32 @@ export const DataPoints: Props = {
 	price: {
 		id: 'price',
 		name: 'Stock Price',
-		columnName: 'Price',
+		colName: 'Price',
+		format: 'format2dec'
+	},
+	chg: {
+		id: 'chg',
+		name: 'Price Change',
+		colName: 'Change ($)',
 		format: 'format2dec'
 	},
 	change: {
 		id: 'change',
 		name: 'Price Change 1D',
-		columnName: 'Change 1D',
+		colName: 'Change 1D',
 		format: 'colorPercentage'
 	},
 	volume: { id: 'volume', name: 'Volume', format: 'integer' },
+	close: {
+		id: 'close',
+		name: 'Previous Close',
+		colName: 'Close',
+		format: 'format2dec'
+	},
 	enterpriseValue: {
 		id: 'enterpriseValue',
 		name: 'Enterprise Value',
+		colName: 'Ent. Value',
 		format: 'abbreviate'
 	},
 	industry: { id: 'industry', name: 'Industry', format: 'string' },
@@ -44,49 +57,50 @@ export const DataPoints: Props = {
 	dividendYield: {
 		id: 'dividendYield',
 		name: 'Dividend Yield',
+		colName: 'Div. Yield',
 		format: 'formatPercentage'
 	},
 	sector: { id: 'sector', name: 'Sector', format: 'string' },
 	ch1w: {
 		id: 'ch1w',
 		name: 'Price Change 1W',
-		columnName: 'Change 1W',
+		colName: 'Change 1W',
 		format: 'colorPercentage'
 	},
 	ch1m: {
 		id: 'ch1m',
 		name: 'Price Change 1M',
-		columnName: 'Change 1M',
+		colName: 'Change 1M',
 		format: 'colorPercentage'
 	},
 	ch6m: {
 		id: 'ch6m',
 		name: 'Price Change 6M',
-		columnName: 'Change 6M',
+		colName: 'Change 6M',
 		format: 'colorPercentage'
 	},
 	chYTD: {
 		id: 'chYTD',
 		name: 'Price Change YTD',
-		columnName: 'Change YTD',
+		colName: 'Change YTD',
 		format: 'colorPercentage'
 	},
 	ch1y: {
 		id: 'ch1y',
 		name: 'Price Change 1Y',
-		columnName: 'Change 1Y',
+		colName: 'Change 1Y',
 		format: 'colorPercentage'
 	},
 	ch3y: {
 		id: 'ch3y',
 		name: 'Price Change 3Y',
-		columnName: 'Change 3Y',
+		colName: 'Change 3Y',
 		format: 'colorPercentage'
 	},
 	ch5y: {
 		id: 'ch5y',
 		name: 'Price Change 5Y',
-		columnName: 'Change 5Y',
+		colName: 'Change 5Y',
 		format: 'colorPercentage'
 	},
 	analystRatings: {
@@ -117,11 +131,13 @@ export const DataPoints: Props = {
 	revenueGrowth: {
 		id: 'revenueGrowth',
 		name: 'Revenue Growth',
+		colName: 'Rev. Growth',
 		format: 'formatPercentage'
 	},
 	revenueGrowthQ: {
 		id: 'revenueGrowthQ',
 		name: 'Revenue Growth (Q)',
+		colName: 'Rev. Growth (Q)',
 		format: 'formatPercentage'
 	},
 	grossProfit: {
@@ -132,6 +148,7 @@ export const DataPoints: Props = {
 	grossProfitGrowth: {
 		id: 'grossProfitGrowth',
 		name: 'Gross Profit Growth',
+		colName: 'GP Growth',
 		format: 'formatPercentage'
 	},
 	operatingIncome: {
@@ -142,12 +159,13 @@ export const DataPoints: Props = {
 	operatingIncomeGrowth: {
 		id: 'operatingIncomeGrowth',
 		name: 'Op. Income Growth',
+		colName: 'OpInc. Growth',
 		format: 'formatPercentage'
 	},
 	netIncome: { id: 'netIncome', name: 'Net Income', format: 'abbreviate' },
 	netIncomeGrowth: {
 		id: 'netIncomeGrowth',
-		name: 'Net Inc. Growth',
+		name: 'NetInc. Growth',
 		format: 'formatPercentage'
 	},
 	eps: { id: 'eps', name: 'EPS', format: 'format2dec' },
@@ -161,21 +179,39 @@ export const DataPoints: Props = {
 	operatingCF: {
 		id: 'operatingCF',
 		name: 'Op. Cash Flow',
+		colName: 'Operating CF',
 		format: 'abbreviate'
 	},
 	investingCF: {
 		id: 'investingCF',
 		name: 'Investing Cash Flow',
+		colName: 'Investing CF',
 		format: 'abbreviate'
 	},
 	financingCF: {
 		id: 'financingCF',
 		name: 'Financing Cash Flow',
+		colName: 'Financing CF',
 		format: 'abbreviate'
 	},
-	netCF: { id: 'netCF', name: 'Net Cash Flow', format: 'abbreviate' },
-	capex: { id: 'capex', name: 'Capital expenditures', format: 'abbreviate' },
-	fcf: { id: 'fcf', name: 'Free Cash Flow', format: 'abbreviate' },
+	netCF: {
+		id: 'netCF',
+		name: 'Net Cash Flow',
+		colName: 'Net CF',
+		format: 'abbreviate'
+	},
+	capex: {
+		id: 'capex',
+		name: 'Capital expenditures',
+		colName: 'CapEx',
+		format: 'abbreviate'
+	},
+	fcf: {
+		id: 'fcf',
+		name: 'Free Cash Flow',
+		colName: 'FCF',
+		format: 'abbreviate'
+	},
 	fcfGrowth: {
 		id: 'fcfGrowth',
 		name: 'FCF Growth',
@@ -198,6 +234,7 @@ export const DataPoints: Props = {
 	netCashByMarketCap: {
 		id: 'netCashByMarketCap',
 		name: 'Net Cash / Market Cap',
+		colName: 'Cash / M.Cap',
 		format: 'formatPercentage'
 	},
 	grossMargin: {
@@ -208,6 +245,7 @@ export const DataPoints: Props = {
 	operatingMargin: {
 		id: 'operatingMargin',
 		name: 'Operating Margin',
+		colName: 'Oper. Margin',
 		format: 'formatPercentage'
 	},
 	profitMargin: {
@@ -248,7 +286,8 @@ export const DataPoints: Props = {
 	dps: { id: 'dps', name: 'Dividend ($)', format: 'format2dec' },
 	dividendGrowth: {
 		id: 'dividendGrowth',
-		name: 'Div. Growth',
+		name: 'Dividend Growth',
+		colName: 'Div. Growth',
 		format: 'formatPercentage'
 	},
 	payoutRatio: {
@@ -259,6 +298,7 @@ export const DataPoints: Props = {
 	payoutFrequency: {
 		id: 'payoutFrequency',
 		name: 'Payout Frequency',
+		colName: 'Payout Freq.',
 		format: 'string'
 	},
 	buybackYield: {
@@ -274,6 +314,7 @@ export const DataPoints: Props = {
 	averageVolume: {
 		id: 'averageVolume',
 		name: 'Average Volume',
+		colName: 'Avg. Volume',
 		format: 'integer'
 	},
 	beta: { id: 'beta', name: 'Beta (1Y)', format: 'format2dec' },
@@ -321,9 +362,24 @@ export const DataPoints: Props = {
 		name: 'Next Ex-Div',
 		format: 'formatDate'
 	},
-	roe: { id: 'roe', name: 'Return on Equity', format: 'formatPercentage' },
-	roa: { id: 'roa', name: 'Return on Assets', format: 'formatPercentage' },
-	roic: { id: 'roic', name: 'Return on Capital', format: 'formatPercentage' },
+	roe: {
+		id: 'roe',
+		name: 'Return on Equity',
+		colName: 'ROE',
+		format: 'formatPercentage'
+	},
+	roa: {
+		id: 'roa',
+		name: 'Return on Assets',
+		colName: 'ROA',
+		format: 'formatPercentage'
+	},
+	roic: {
+		id: 'roic',
+		name: 'Return on Capital',
+		colName: 'ROIC',
+		format: 'formatPercentage'
+	},
 	revPerEmployee: {
 		id: 'revPerEmployee',
 		name: 'Rev / Employee',

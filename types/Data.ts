@@ -4,8 +4,10 @@ export type DataId =
 	| 'n' // Name
 	| 'marketCap' // Market Cap
 	| 'price' // Stock Price
+	| 'chg' // Stock Price Change
 	| 'change' // Price Change 1D
 	| 'volume' // Volume
+	| 'close' // Previous Close
 	| 'enterpriseValue' // Enterprise Value
 	| 'industry' // Industry
 	| 'peRatio' // PE Ratio

@@ -15,4 +15,8 @@
 	.stock-table tr th .head-right {
 		@apply flex flex-row items-center justify-end;
 	}
+
+	.stock-table .string-left {
+		@apply text-left max-w-[240px] truncate;
+	}
 }

@@ -6,8 +6,8 @@ import { ColumnSort } from './ColumnSort'
  * Render a Header cell element with sort functionality
  */
 export function HeaderCell({ column }: { column: any }) {
-	let { Header, id }: { Header: any; id: DataId } = column
-	let { format } = DataPoints[id]
+	let { id }: { id: DataId } = column
+	let { format, name } = DataPoints[id]
 
 	let css =
 		format && ['string', 'linkSymbol'].includes(format)
@@ -17,7 +17,7 @@ export function HeaderCell({ column }: { column: any }) {
 	return (
 		<th
 			{...column.getSortByToggleProps({
-				title: `Sort by: ${Header}`
+				title: name
 			})}
 		>
 			<div className={css}>

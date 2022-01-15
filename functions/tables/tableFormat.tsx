@@ -33,6 +33,7 @@ export function formatCell(fn: Fn, cell: Cell, type: Type = 'stocks') {
 	if (fn === 'formatPercentage') return formatPercentage(cell as CellNumber)
 	if (fn === 'colorPercentage') return colorPercentage(cell as CellNumber)
 	if (fn === 'abbreviate') return abbreviate(cell as CellNumber)
+	if (fn === 'formatDate') return formatDate(cell as CellString)
 	if (fn === 'string') return formatString(cell as CellString)
 	return null
 }
@@ -118,5 +119,5 @@ export function formatDate(cell: CellString) {
 // Format a string
 export function formatString(cell: CellString) {
 	let { value } = cell.cell
-	return <div className="text-left">{value}</div>
+	return <div className="string-left">{value || '-'}</div>
 }

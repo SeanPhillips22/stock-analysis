@@ -15,8 +15,8 @@ function formatHeader(text: string) {
 }
 
 function formatColumns() {
-	const columns = COLUMNS_MAP.map((column) => {
-		const type = screenerState((state) => state.type)
+	const columns = COLUMNS_MAP.map(column => {
+		const type = screenerState(state => state.type)
 
 		// If column has a "format" property, use it to format the value
 		if (column.format) {
@@ -58,7 +58,7 @@ function formatColumns() {
 
 				case 'format0dec': {
 					header = formatHeader(column.Header)
-					cell = (props: any) => formatCell('formatInteger', props, type)
+					cell = (props: any) => formatCell('integer', props, type)
 					break
 				}
 
@@ -137,7 +137,7 @@ function formatColumns() {
 }
 
 export function ResultsBody() {
-	const showColumns = screenerState((state) => state.showColumns)
+	const showColumns = screenerState(state => state.showColumns)
 
 	const columns = formatColumns()
 

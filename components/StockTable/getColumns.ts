@@ -15,13 +15,13 @@ export function getColumns(cols: DataId[], main: DataId) {
 
 	const columns = newCols.map(col => {
 		// destructure the data points
-		let { name, columnName, format } = DataPoints[col]
+		let { name, colName, format } = DataPoints[col]
 
 		// Header: the name of the column, shown
 		// accessor: the id of the column, not shown
 		// Cell: how to format the values of the cells in the column
 		return {
-			Header: columnName || name,
+			Header: colName || name,
 			accessor: col,
 			Cell: (props: any) => {
 				return format

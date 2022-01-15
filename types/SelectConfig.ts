@@ -20,7 +20,10 @@ export type SelectConfig = {
 	columns: DataId[]
 
 	// The columns available to select
-	columnOptions: DataId[]
+	columnOptions?: DataId[]
+
+	// The filters to apply
+	filters?: string[]
 
 	// Reset the table state when switching to another page
 	resetTableState?: (conf: SelectConfig) => void

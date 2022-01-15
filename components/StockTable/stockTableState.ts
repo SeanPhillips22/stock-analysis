@@ -62,6 +62,9 @@ export const stockTableState = create<StockTableState>(set => ({
 	// The columns that can be selected
 	columnOptions: [],
 
+	// The filters to apply
+	filters: [],
+
 	// Reset the table state when switching to another page
 	resetTableState: (conf: SelectConfig) =>
 		set(state => ({
@@ -71,6 +74,7 @@ export const stockTableState = create<StockTableState>(set => ({
 			count: conf.count,
 			sort: conf.sort,
 			columns: conf.columns,
-			columnOptions: conf.columnOptions
+			columnOptions: conf.columnOptions,
+			filters: conf.filters
 		}))
 }))
