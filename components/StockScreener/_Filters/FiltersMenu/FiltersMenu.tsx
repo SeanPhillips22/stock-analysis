@@ -25,7 +25,7 @@ export function FiltersMenu() {
 				</div>
 				<div
 					className={classNames(
-						filtersShown ? 'hidden xl:block' : '',
+						filtersShown ? 'block' : 'hidden xl:block',
 						'col-span-2 xl:order-2 border-t border-gray-200 pt-2 xl:pt-0 xl:border-0'
 					)}
 				>
