@@ -25,7 +25,7 @@ export function PaywallHeaderCell({ range, diff, last }: PropsHeaderCell) {
 		)
 	}
 
-	return <th className="lockhead">+${diff} Quarters</th>
+	return <th className="lockhead">+{diff} Quarters</th>
 }
 
 type PropsBodyCell = {

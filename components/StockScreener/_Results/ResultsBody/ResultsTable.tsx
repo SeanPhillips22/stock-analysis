@@ -14,18 +14,20 @@ import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
 import { useSortReset } from 'components/StockScreener/functions/sort/useSortReset'
 import { ColumnSort } from 'components/Tables/ColumnSort'
+import { useSortState } from 'components/StockScreener/functions/sort/useSortState'
 
 export function ResultsTable({ cols }: { cols: any }) {
-	const type = screenerState((state) => state.type)
-	const datarows = screenerState((state) => state.data)
-	const loaded = screenerState((state) => state.loaded)
-	const filters = screenerState((state) => state.filters)
-	const sort = screenerState((state) => state.sort)
-	const tablePage = screenerState((state) => state.tablePage)
-	const tableSize = screenerState((state) => state.tableSize)
-	const showColumns = screenerState((state) => state.showColumns)
-	const fetching = screenerState((state) => state.fetching)
-	const setResultsCount = screenerState((state) => state.setResultsCount)
+	const type = screenerState(state => state.type)
+	const datarows = screenerState(state => state.data)
+	const loaded = screenerState(state => state.loaded)
+	const filters = screenerState(state => state.filters)
+	const sort = screenerState(state => state.sort)
+	const tablePage = screenerState(state => state.tablePage)
+	const tableSize = screenerState(state => state.tableSize)
+	const showColumns = screenerState(state => state.showColumns)
+	const fetching = screenerState(state => state.fetching)
+	const setResultsCount = screenerState(state => state.setResultsCount)
+	const { updateSortState } = useSortState()
 	const resetSort = useSortReset()
 
 	// Memoize data and settings for the table
@@ -110,7 +112,10 @@ export function ResultsTable({ cols }: { cols: any }) {
 										})}
 										key={index}
 									>
-										<span className="flex flex-row items-center">
+										<span
+											className="flex flex-row items-center"
+											onClick={() => updateSortState(column)}
+										>
 											{column.render('Header')}
 											<ColumnSort column={column} />
 										</span>

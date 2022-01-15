@@ -775,6 +775,11 @@ export const TOOLTIP_MAP: MapProps = [
 		tooltip: 'The geographic region that the ETF primarily invests in.'
 	},
 	{
+		id: 'etfSector',
+		title: 'ETF Sector',
+		tooltip: 'The sector or category that the ETF primarily invests in.'
+	},
+	{
 		id: 'issuer',
 		title: 'ETF Issuer',
 		tooltip:
