@@ -7,7 +7,7 @@ export function TableColumns() {
 	const columnOptions = stockTableState(state => state.columnOptions)
 
 	let cols = columns.filter(c => c !== main)
-	let colOptions = columnOptions.filter(c => c !== main)
+	let colOptions = columnOptions?.filter(c => c !== main)
 
-	return <SelectColumns active={cols} options={colOptions} />
+	return <SelectColumns active={cols} options={colOptions || cols} />
 }
