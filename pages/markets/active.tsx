@@ -18,13 +18,15 @@ const config: PageConfig = {
 	parentTitle: 'Market Movers',
 	active: 'active',
 	controls: {
-		range: true,
+		range: false,
 		results: true,
 		filter: false,
 		export: true,
 		columns: true
 	},
-	metaTitle: "Today's Most Active Stocks"
+	metaTitle: "Today's Most Active Stocks",
+	metaDescription:
+		'A list of the stocks with the highest trading volume today. See stock price, price changes, market cap and more.'
 }
 
 // the initial columns to show in the table

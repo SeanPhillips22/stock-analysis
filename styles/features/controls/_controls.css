@@ -10,8 +10,24 @@
 		@apply flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1;
 	}
 
+	.controls.groups {
+		@apply block lg:flex space-x-0 lg:space-x-6;
+	}
+
 	.controls h2 {
-		@apply mr-auto text-xl bp:text-2xl font-semibold whitespace-nowrap;
+		@apply text-xl bp:text-2xl font-semibold whitespace-nowrap;
+	}
+
+	.controls .title-group {
+		@apply flex items-end space-x-4 mr-auto;
+	}
+
+	.controls .controls-timestamp {
+		@apply text-gray-600 font-semibold text-sm mb-1;
+	}
+
+	.controls .btn-group {
+		@apply flex lg:ml-auto lg:space-x-6;
 	}
 
 	.controls-btn {

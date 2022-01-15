@@ -6,16 +6,18 @@ type Props = {
 
 export function TableExport({ tableId }: Props) {
 	return (
-		<Export
-			buttons={[
-				{
-					title: 'Export to Excel',
-					type: 'xlsx',
-					restricted: true
-				},
-				{ title: 'Export to CSV', type: 'csv', restricted: true }
-			]}
-			tableId={tableId}
-		/>
+		<div className="hidden lg:block">
+			<Export
+				buttons={[
+					{
+						title: 'Export to Excel',
+						type: 'xlsx',
+						restricted: true
+					},
+					{ title: 'Export to CSV', type: 'csv', restricted: true }
+				]}
+				tableId={tableId}
+			/>
+		</div>
 	)
 }

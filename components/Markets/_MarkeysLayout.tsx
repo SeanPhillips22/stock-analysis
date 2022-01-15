@@ -11,7 +11,11 @@ type Props = {
 export function MarketsLayout({ config, children }: Props) {
 	return (
 		<Layout>
-			<SEO title={config.metaTitle} canonical={config.path} />
+			<SEO
+				title={config.metaTitle}
+				description={config?.metaDescription}
+				canonical={config.path}
+			/>
 			<div className="contain">
 				<h1 className="hh1">{config.parentTitle || config.title}</h1>
 				<MarketsNavigation active={config.active || 'inactive'} />

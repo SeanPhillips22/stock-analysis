@@ -11,4 +11,5 @@ export type PageConfig = {
 		columns?: boolean
 	}
 	metaTitle: string
+	metaDescription?: string
 }

@@ -24,7 +24,9 @@ const config: PageConfig = {
 		export: true,
 		columns: true
 	},
-	metaTitle: "Today's Top Stock Gainers"
+	metaTitle: "Today's Top Stock Gainers",
+	metaDescription:
+		'A list of the stocks with the highest percentage gain today. See stock price, volume, market cap and more.'
 }
 
 // the initial columns to show in the table

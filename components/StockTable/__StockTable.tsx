@@ -15,16 +15,16 @@ type Props = {
  */
 export function StockTable({ _data }: Props) {
 	const context = useContext(TableContext)
-
 	const _columns = stockTableState(state => state.columns)
 	const main = stockTableState(state => state.main)
-	// add react query hook, pass data as initialData, then memoize the state from RQ
-	// When columns change, react query makes a new api call and updates the table
 
+	// pass initial data into react query
 	const query = useTableData(_data, context.config.path)
 
-	const data = useMemo(() => query.data, [query.data])
+	// memoize the data and columns
+	const data = useMemo(() => query.data.data || query.data, [query.data])
 	const columns = useMemo(() => getColumns(_columns, main), [_columns, main])
 
+	// pass the data and columns into react table
 	return <StockTableBody data={data} columns={columns} />
 }

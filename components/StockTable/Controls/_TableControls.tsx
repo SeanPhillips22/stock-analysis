@@ -6,6 +6,7 @@ import { TableResults } from './TableResults'
 import { TableRange } from './TableRange'
 import { useContext } from 'react'
 import { TableContext } from 'components/StockTable/TableContext'
+import { TableTimestamp } from './TableTimestamp'
 
 type Props = {
 	filter: FilterObject
@@ -13,28 +14,30 @@ type Props = {
 }
 
 export function TableControls({ filter, tableId }: Props) {
-	const context = useContext(TableContext)
+	const c = useContext(TableContext)
 
 	return (
-		<div className="controls">
-			{/* Table Title */}
-			<h2>{context?.config.title}</h2>
-			{context?.updated.last}
+		<div className="controls groups">
+			<div className="title-group">
+				{/* Table Title */}
+				<h2>{c?.config.title}</h2>
+				{/* Updated timestamp*/}
+				{c?.updated && <TableTimestamp timestamp={c?.updated} />}
+			</div>
 
-			{/* Time Range */}
-			{context?.config.controls?.range && <TableRange />}
-
-			{/* Results Count */}
-			{context?.config.controls?.results && <TableResults />}
-
-			{/* Search Filter */}
-			{context?.config.controls?.filter && <TableFilter filter={filter} />}
-
-			{/* Export Button */}
-			{context?.config.controls?.export && <TableExport tableId={tableId} />}
-
-			{/* Select Columns */}
-			{context?.config.controls?.columns && <TableColumns />}
+			{/* Button group */}
+			<div className="btn-group">
+				{/* Time Range */}
+				{c?.config.controls?.range && <TableRange />}
+				{/* Results Count */}
+				{c?.config.controls?.results && <TableResults />}
+				{/* Search Filter */}
+				{c?.config.controls?.filter && <TableFilter filter={filter} />}
+				{/* Export Button */}
+				{c?.config.controls?.export && <TableExport tableId={tableId} />}
+				{/* Select Columns */}
+				{c?.config.controls?.columns && <TableColumns />}
+			</div>
 		</div>
 	)
 }
