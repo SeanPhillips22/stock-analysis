@@ -19,3 +19,13 @@ export type FormatFunction =
 	| 'abbreviate'
 	| 'formatDate'
 	| 'string'
+
+/**
+ * Timestamps for a stock table
+ * last: the last date that the market was open
+ * premarket: the last premarket date
+ */
+export type TableTimestamp = {
+	last: string
+	premarket: string
+}

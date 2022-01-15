@@ -6,7 +6,6 @@ import {
 	useAsyncDebounce
 } from 'react-table'
 import { DataId } from 'types/Data'
-import { PageConfig } from 'types/PageConfig'
 import { TableControls } from './Controls/_TableControls'
 
 type Props = {
@@ -16,10 +15,9 @@ type Props = {
 		accessor: DataId
 		Cell: (props: any) => any
 	}[]
-	config: PageConfig
 }
 
-export function StockTableBody({ data, columns, config }: Props) {
+export function StockTableBody({ data, columns }: Props) {
 	const {
 		headerGroups,
 		prepareRow,
@@ -39,7 +37,6 @@ export function StockTableBody({ data, columns, config }: Props) {
 		<div>
 			<div className="mt-3 sm:mt-0">
 				<TableControls
-					config={config}
 					tableId="stock-table"
 					filter={{ useAsyncDebounce, setGlobalFilter, globalFilter }}
 				/>

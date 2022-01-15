@@ -1,37 +1,40 @@
-import { PageConfig } from 'types/PageConfig'
 import { TableExport } from './TableExport'
 import { FilterObject } from 'types/Filters'
 import { TableFilter } from './TableFilter'
 import { TableColumns } from './TableColumns'
 import { TableResults } from './TableResults'
 import { TableRange } from './TableRange'
+import { useContext } from 'react'
+import { TableContext } from 'components/StockTable/TableContext'
 
 type Props = {
-	config: PageConfig
 	filter: FilterObject
 	tableId: string
 }
 
-export function TableControls({ config, filter, tableId }: Props) {
+export function TableControls({ filter, tableId }: Props) {
+	const context = useContext(TableContext)
+
 	return (
 		<div className="controls">
 			{/* Table Title */}
-			<h2>{config.title}</h2>
+			<h2>{context?.config.title}</h2>
+			{context?.updated.last}
 
 			{/* Time Range */}
-			{config.controls?.range && <TableRange />}
+			{context?.config.controls?.range && <TableRange />}
 
 			{/* Results Count */}
-			{config.controls?.results && <TableResults />}
+			{context?.config.controls?.results && <TableResults />}
 
 			{/* Search Filter */}
-			{config.controls?.filter && <TableFilter filter={filter} />}
+			{context?.config.controls?.filter && <TableFilter filter={filter} />}
 
 			{/* Export Button */}
-			{config.controls?.export && <TableExport tableId={tableId} />}
+			{context?.config.controls?.export && <TableExport tableId={tableId} />}
 
 			{/* Select Columns */}
-			{config.controls?.columns && <TableColumns />}
+			{context?.config.controls?.columns && <TableColumns />}
 		</div>
 	)
 }

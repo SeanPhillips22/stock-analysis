@@ -28,5 +28,5 @@ export async function getSelect(config: SelectConfig, ssr?: boolean) {
 	}
 
 	// if not, then return the data
-	return response.data.data
+	return response.data
 }
