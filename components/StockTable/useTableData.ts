@@ -4,11 +4,11 @@ import { stockTableState } from './stockTableState'
 
 /**
  * Handle the data for the stock table via react-query
- * TODO reduce unnecesssary refetching
  */
 export function useTableData(_data: any[], path: string) {
 	// Get the params from the table state
-	const { type, main, count, sort, columns, filters } = stockTableState()
+	const { type, main, count, sort, columns, filters, fetch } =
+		stockTableState()
 
 	// Add the params into an array to tell react-query when to update
 	const queryObject = { type, main, count, sort, columns, filters }
@@ -18,7 +18,7 @@ export function useTableData(_data: any[], path: string) {
 		async () => await getSelect(queryObject),
 		{
 			initialData: _data,
-			enabled: columns.length ? true : false, // only fetch if columns are defined
+			enabled: fetch, // only fetch if columns are defined
 			refetchOnWindowFocus: false
 		}
 	)

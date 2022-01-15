@@ -12,34 +12,42 @@ interface StockTableState extends SelectConfig {
 	addColumn: (id: DataId) => void
 	removeColumn: (id: DataId) => void
 	toggleColumn: (id: DataId) => void
+	fetch: boolean
+	setFetch: () => void
 }
 
 export const stockTableState = create<StockTableState>(set => ({
 	// The symbol type
 	type: 'stocks',
-	setType: (newType: SymbolTypes) => set({ type: newType }),
+	setType: (newType: SymbolTypes) =>
+		set(state => ({ ...state, type: newType, fetch: true })),
 
 	// The main column to sort by
 	main: 'change',
-	setMain: (newMain: DataId) => set({ main: newMain }),
+	setMain: (newMain: DataId) =>
+		set(state => ({ ...state, main: newMain, fetch: true })),
 
 	// The number of symbols to show
 	count: 20,
-	setCount: (newCount: number) => set({ count: newCount }),
+	setCount: (newCount: number) =>
+		set(state => ({ ...state, count: newCount, fetch: true })),
 
 	// The sort order
 	sort: 'desc',
-	setSort: (newSort: SortTypes) => set({ sort: newSort }),
+	setSort: (newSort: SortTypes) =>
+		set(state => ({ ...state, sort: newSort, fetch: true })),
 
 	// The columns to show
 	columns: [],
-	setColumns: (newcols: DataId[]) => set({ columns: newcols }),
+	setColumns: (newcols: DataId[]) =>
+		set(state => ({ ...state, columns: newcols, fetch: true })),
 	addColumn: (newcol: DataId) =>
 		set(state => {
 			if (!state.columns.includes(newcol)) {
 				return {
 					...state,
-					columns: [...state.columns, newcol]
+					columns: [...state.columns, newcol],
+					fetch: true
 				}
 			} else {
 				return state
@@ -49,14 +57,16 @@ export const stockTableState = create<StockTableState>(set => ({
 	removeColumn: (col: DataId) =>
 		set(state => ({
 			...state,
-			columns: state.columns.filter(c => c !== col)
+			columns: state.columns.filter(c => c !== col),
+			fetch: true
 		})),
 	toggleColumn: (col: DataId) =>
 		set(state => ({
 			...state,
 			columns: state.columns.includes(col)
 				? state.columns.filter(c => c !== col)
-				: [...state.columns, col]
+				: [...state.columns, col],
+			fetch: true
 		})),
 
 	// The columns that can be selected
@@ -75,6 +85,11 @@ export const stockTableState = create<StockTableState>(set => ({
 			sort: conf.sort,
 			columns: conf.columns,
 			columnOptions: conf.columnOptions,
-			filters: conf.filters
-		}))
+			filters: conf.filters,
+			fetch: false
+		})),
+
+	// Enable react-query data fetching
+	fetch: false,
+	setFetch: () => set({ fetch: true })
 }))
