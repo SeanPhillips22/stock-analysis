@@ -7,27 +7,26 @@ import {
 	useGlobalFilter,
 	useAsyncDebounce
 } from 'react-table'
-import { SortUpIcon } from 'components/Icons/SortUp'
-import { SortDownIcon } from 'components/Icons/SortDown'
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu'
 import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
 import { useSortReset } from 'components/StockScreener/functions/sort/useSortReset'
+import { ColumnSort } from 'components/Tables/ColumnSort'
 import { useSortState } from 'components/StockScreener/functions/sort/useSortState'
 
 export function ResultsTable({ cols }: { cols: any }) {
-	const type = screenerState((state) => state.type)
-	const datarows = screenerState((state) => state.data)
-	const loaded = screenerState((state) => state.loaded)
-	const filters = screenerState((state) => state.filters)
-	const sort = screenerState((state) => state.sort)
-	const tablePage = screenerState((state) => state.tablePage)
-	const tableSize = screenerState((state) => state.tableSize)
-	const showColumns = screenerState((state) => state.showColumns)
-	const fetching = screenerState((state) => state.fetching)
-	const setResultsCount = screenerState((state) => state.setResultsCount)
+	const type = screenerState(state => state.type)
+	const datarows = screenerState(state => state.data)
+	const loaded = screenerState(state => state.loaded)
+	const filters = screenerState(state => state.filters)
+	const sort = screenerState(state => state.sort)
+	const tablePage = screenerState(state => state.tablePage)
+	const tableSize = screenerState(state => state.tableSize)
+	const showColumns = screenerState(state => state.showColumns)
+	const fetching = screenerState(state => state.fetching)
+	const setResultsCount = screenerState(state => state.setResultsCount)
 	const { updateSortState } = useSortState()
 	const resetSort = useSortReset()
 
@@ -118,15 +117,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 											onClick={() => updateSortState(column)}
 										>
 											{column.render('Header')}
-											{column.isSorted ? (
-												column.isSortedDesc ? (
-													<SortDownIcon classes="h-4 w-4 text-gray-800" />
-												) : (
-													<SortUpIcon classes="h-4 w-4 text-gray-800" />
-												)
-											) : (
-												''
-											)}
+											<ColumnSort column={column} />
 										</span>
 									</th>
 								))}

@@ -10,12 +10,7 @@ import { StockLink, ETFLink } from 'components/Links'
 import { useAuthState } from 'hooks/useAuthState'
 import { getPageDataFull } from 'functions/apis/callBackEnd'
 import { Controls } from 'components/Controls/_Controls'
-
-type CellString = {
-	cell: {
-		value: string
-	}
-}
+import { CellString } from 'types/Tables'
 
 interface Props {
 	symbol: string

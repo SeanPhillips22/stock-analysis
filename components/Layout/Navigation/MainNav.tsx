@@ -6,7 +6,8 @@ import {
 	AdjustmentsIcon,
 	TrendingUpIcon,
 	NewspaperIcon,
-	ArchiveIcon
+	ArchiveIcon,
+	FireIcon
 } from '@heroicons/react/outline'
 import { matchParentPath } from 'functions/helpers/matchPath'
 import { useEffect } from 'react'
@@ -52,6 +53,25 @@ const navigation = [
 		icon: TrendingUpIcon
 	},
 	{
+		name: 'Market Movers',
+		href: '/markets/gainers/',
+		icon: FireIcon,
+		children: [
+			{
+				name: 'Top Gainers',
+				href: '/markets/gainers/'
+			},
+			{
+				name: 'Top Losers',
+				href: '/markets/losers/'
+			},
+			{
+				name: 'Most Active',
+				href: '/markets/active/'
+			}
+		]
+	},
+	{
 		name: 'Screener',
 		href: '/screener/stock/',
 		icon: AdjustmentsIcon,
@@ -78,17 +98,17 @@ const navigation = [
 ]
 
 export function MainNav() {
-	const setIsOpen = navMenuState((state) => state.setIsOpen)
-	const initial = navMenuState((state) => state.initial)
-	const setInitial = navMenuState((state) => state.setInitial)
-	const path = navState((state) => state.path)
+	const setIsOpen = navMenuState(state => state.setIsOpen)
+	const initial = navMenuState(state => state.initial)
+	const setInitial = navMenuState(state => state.setInitial)
+	const path = navState(state => state.path)
 
 	// Set the initial open state for the menu
 	useEffect(() => {
 		if (initial && path.one) {
 			setInitial(false)
 			if (path) {
-				navigation.map((item) => {
+				navigation.map(item => {
 					if (item.children) {
 						if (matchParentPath(path, item.href)) {
 							setIsOpen({ [item.name]: true })
@@ -103,7 +123,7 @@ export function MainNav() {
 	return (
 		<div className="leftnav">
 			<nav className="nav-col">
-				{navigation.map((item) =>
+				{navigation.map(item =>
 					!item.children ? (
 						<SingleNavItem key={item.name} item={item} path={path} />
 					) : (

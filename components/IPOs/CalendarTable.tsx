@@ -12,12 +12,7 @@ import { Export } from 'components/Controls/Export'
 import { Filter } from 'components/Controls//Filter'
 import { SortUpIcon } from 'components/Icons/SortUp'
 import { SortDownIcon } from 'components/Icons/SortDown'
-
-type CellString = {
-	cell: {
-		value: string
-	}
-}
+import { CellString } from 'types/Tables'
 
 const columns: Column[] = [
 	{

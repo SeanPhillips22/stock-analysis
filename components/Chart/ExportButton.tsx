@@ -12,7 +12,7 @@ type Button = {
 	active?: boolean
 }
 
-interface Props {
+type Props = {
 	buttons: Button[]
 	data: any
 	setData: any

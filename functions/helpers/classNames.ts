@@ -1,3 +1,3 @@
-export function classNames(...args: string[]): string {
+export function cn(...args: string[]): string {
 	return args.filter(Boolean).join(' ')
 }

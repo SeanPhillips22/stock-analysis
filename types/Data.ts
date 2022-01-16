@@ -4,8 +4,10 @@ export type DataId =
 	| 'n' // Name
 	| 'marketCap' // Market Cap
 	| 'price' // Stock Price
+	| 'chg' // Stock Price Change
 	| 'change' // Price Change 1D
 	| 'volume' // Volume
+	| 'close' // Previous Close
 	| 'enterpriseValue' // Enterprise Value
 	| 'industry' // Industry
 	| 'peRatio' // PE Ratio
@@ -13,6 +15,7 @@ export type DataId =
 	| 'exchange' // Exchange
 	| 'dividendYield' // Dividend Yield
 	| 'sector' // Sector
+	| 'ch1w' // Price Change 1W
 	| 'ch1m' // Price Change 1M
 	| 'ch6m' // Price Change 6M
 	| 'chYTD' // Price Change YTD

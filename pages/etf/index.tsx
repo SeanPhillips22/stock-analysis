@@ -5,6 +5,7 @@ import { LayoutSidebar } from 'components/Layout/LayoutSidebar'
 import { SEO } from 'components/SEO'
 import { SymbolTable } from 'components/Tables/SymbolTable'
 import Link from 'next/link'
+import { CellNumber, CellString } from 'types/Tables'
 
 const formatter = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
@@ -32,24 +33,12 @@ interface IEtfs {
 	stocks: IStock[]
 }
 
-interface ICellString {
-	cell: {
-		value: string
-	}
-}
-
-interface ICellNumber {
-	cell: {
-		value: number
-	}
-}
-
 export default function StocksIndexPage({ stocks }: IEtfs) {
 	const columns: Column[] = [
 		{
 			Header: 'Symbol',
 			accessor: 's',
-			Cell: function FormatCell({ cell: { value } }: ICellString) {
+			Cell: function FormatCell({ cell: { value } }: CellString) {
 				return (
 					<Link href={`/etf/${value.toLowerCase()}/`} prefetch={false}>
 						<a>{value}</a>
@@ -68,7 +57,7 @@ export default function StocksIndexPage({ stocks }: IEtfs) {
 		{
 			Header: 'Assets',
 			accessor: 'a',
-			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
+			Cell: function FormatCell({ cell: { value } }: CellNumber) {
 				return abbreviate(value * 1000)
 			}
 		}

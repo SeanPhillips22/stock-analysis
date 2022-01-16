@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { FilterValue } from 'react-table'
 import { CloseIcon } from 'components/Icons/Close'
+import 'regenerator-runtime/runtime'
 
 interface Props {
 	useAsyncDebounce: (value: any, wait: number) => any
@@ -25,7 +26,7 @@ export function Filter({
 	}, [onChange, value])
 
 	return (
-		<div className="min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px] relative flex items-center">
+		<div className="filter">
 			<label htmlFor="filter" className="sr-only">
 				Filter results
 			</label>
@@ -33,9 +34,8 @@ export function Filter({
 				type="text"
 				name="filter"
 				id="filter"
-				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md"
 				value={value || ''}
-				onChange={(e) => {
+				onChange={e => {
 					setValue(e.target.value)
 					onChange(e.target.value)
 				}}
@@ -51,7 +51,7 @@ export function Filter({
 							setValue('')
 							onChange('')
 						}}
-						onKeyPress={(e) => {
+						onKeyPress={e => {
 							if (e.key === 'Enter') {
 								setValue('')
 								onChange('')

@@ -1,0 +1,22 @@
+/*
+* Stock Table
+* A more advanced table than the previous symbol table
+*/
+
+@layer components {
+	.stock-table tr > * {
+		@apply whitespace-nowrap;
+	}
+
+	.stock-table tr th .head-left {
+		@apply inline-flex flex-row items-center;
+	}
+
+	.stock-table tr th .head-right {
+		@apply flex flex-row items-center justify-end;
+	}
+
+	.stock-table .string-left {
+		@apply text-left max-w-[130px] xs:max-w-[150px] lg:max-w-[240px] truncate;
+	}
+}
