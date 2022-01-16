@@ -29,7 +29,11 @@ export function getColumns(cols: DataId[], main: DataId) {
 					: props.value
 					? props.value
 					: '-'
-			}
+			},
+			sortInverted:
+				col !== main && format !== 'string' && format !== 'linkSymbol'
+					? true
+					: false
 		}
 	})
 

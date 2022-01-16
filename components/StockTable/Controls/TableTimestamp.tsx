@@ -5,5 +5,9 @@ type Props = {
 }
 
 export function TableTimestamp({ timestamp }: Props) {
-	return <div className="controls-timestamp">Updated {timestamp.last}</div>
+	return (
+		<div className="controls-timestamp">
+			<span>Updated</span> {timestamp.last}
+		</div>
+	)
 }

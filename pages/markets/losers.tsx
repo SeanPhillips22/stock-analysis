@@ -14,8 +14,8 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 // the page's config and settings
 const config: PageConfig = {
 	path: '/markets/losers/',
-	title: 'Top Stock Losers',
-	parentTitle: 'Market Movers',
+	title: 'Losers Today',
+	parentTitle: 'Top Stock Losers',
 	active: 'losers',
 	controls: {
 		range: true,
@@ -36,6 +36,7 @@ const columns: DataId[] = ['s', 'n', 'price', 'volume', 'marketCap']
 // this will be fetched from the select endpoint on the backend
 const selectConfig: SelectConfig = {
 	type: 'stocks',
+	active: 'losers',
 	main: 'change',
 	count: 20,
 	sort: 'asc',

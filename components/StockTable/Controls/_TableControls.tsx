@@ -7,6 +7,7 @@ import { TableRange } from './TableRange'
 import { useContext } from 'react'
 import { TableContext } from 'components/StockTable/TableContext'
 import { TableTimestamp } from './TableTimestamp'
+import { TableTitle } from './TableTitle'
 
 type Props = {
 	filter: FilterObject
@@ -20,7 +21,7 @@ export function TableControls({ filter, tableId }: Props) {
 		<div className="controls groups">
 			<div className="title-group">
 				{/* Table Title */}
-				<h2>{c?.config.title}</h2>
+				<TableTitle title={c.config.title} active={c.config.active} />
 				{/* Updated timestamp*/}
 				{c?.updated && <TableTimestamp timestamp={c?.updated} />}
 			</div>
@@ -29,10 +30,10 @@ export function TableControls({ filter, tableId }: Props) {
 			<div className="btn-group">
 				{/* Time Range */}
 				{c?.config.controls?.range && <TableRange />}
-				{/* Results Count */}
-				{c?.config.controls?.results && <TableResults />}
 				{/* Search Filter */}
 				{c?.config.controls?.filter && <TableFilter filter={filter} />}
+				{/* Results Count */}
+				{c?.config.controls?.results && <TableResults />}
 				{/* Export Button */}
 				{c?.config.controls?.export && <TableExport tableId={tableId} />}
 				{/* Select Columns */}

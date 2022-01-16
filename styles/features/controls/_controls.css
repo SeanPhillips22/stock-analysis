@@ -1,37 +1,45 @@
 @import './columns';
+@import './filter';
 
-/*
-* Controls
-* Buttons, dropdowns and more for control elements
-*/
+/* Buttons, dropdowns and more for control elements */
+/* Export buttons and such */
+/* Usually placed above tables */
 
 @layer components {
+	/* the generic controls */
 	.controls {
 		@apply flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1;
 	}
 
+	/* when the controls are is split into groups -- title group and button group */
 	.controls.groups {
-		@apply block lg:flex space-x-0 lg:space-x-6;
+		@apply block md:flex space-x-0 md:space-x-6 border-0 md:border-t;
 	}
 
 	.controls h2 {
 		@apply text-xl bp:text-2xl font-semibold whitespace-nowrap;
 	}
 
+	/* The div that contains the title and timestamp */
 	.controls .title-group {
-		@apply flex items-end space-x-4 mr-auto;
+		@apply flex items-end justify-between md:space-x-4 mr-auto pb-1.5 md:pb-0 mb-1.5 md:mb-0 border-b border-gray-200 md:border-0;
 	}
 
+	/* The timestamp in the controls area */
 	.controls .controls-timestamp {
-		@apply text-gray-600 font-semibold text-sm mb-1;
+		@apply text-gray-600 font-semibold text-sm mb-0 md:mb-1 whitespace-nowrap;
+	}
+
+	.controls-timestamp span {
+		@apply hidden lg:inline;
 	}
 
 	.controls .btn-group {
-		@apply flex lg:ml-auto lg:space-x-6;
+		@apply flex justify-between md:ml-auto md:space-x-2 lg:space-x-6;
 	}
 
 	.controls-btn {
-		@apply inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-2 xs:px-3 sm:px-4 py-1.5 sm:py-2 bg-white text-xs bp:text-sm font-semibold hover:bg-gray-50 noring;
+		@apply inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-2 xs:px-3 sm:px-4 py-1.5 sm:py-2 bg-white text-xs bp:text-sm font-semibold hover:bg-gray-50 noring whitespace-nowrap;
 	}
 
 	.controls-btn.active {
@@ -44,6 +52,10 @@
 
 	.dropdown {
 		@apply origin-top-right absolute right-0 mt-2 min-w-[160px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none py-1 z-50;
+	}
+
+	.dropdown.dd-right {
+		@apply left-0 lg:right-0;
 	}
 
 	.dropdown.wide {

@@ -34,7 +34,7 @@ export const DataPoints: Props = {
 	change: {
 		id: 'change',
 		name: 'Price Change 1D',
-		colName: 'Change 1D',
+		colName: '% Change',
 		format: 'colorPercentage'
 	},
 	volume: { id: 'volume', name: 'Volume', format: 'integer' },

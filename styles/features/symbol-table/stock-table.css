@@ -17,6 +17,6 @@
 	}
 
 	.stock-table .string-left {
-		@apply text-left max-w-[240px] truncate;
+		@apply text-left max-w-[130px] xs:max-w-[150px] lg:max-w-[240px] truncate;
 	}
 }

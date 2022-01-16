@@ -14,13 +14,13 @@ import { TableTimestamp } from 'types/Tables'
 // the page's config and settings
 const config: PageConfig = {
 	path: '/markets/active/',
-	title: 'Most Active Stocks',
-	parentTitle: 'Market Movers',
+	title: 'Active Today',
+	parentTitle: 'Most Active Stocks',
 	active: 'active',
 	controls: {
 		range: false,
 		results: true,
-		filter: false,
+		filter: true,
 		export: true,
 		columns: true
 	},
@@ -36,6 +36,7 @@ const columns: DataId[] = ['s', 'n', 'change', 'price', 'marketCap']
 // this will be fetched from the select endpoint on the backend
 const selectConfig: SelectConfig = {
 	type: 'stocks',
+	active: 'active',
 	main: 'volume',
 	count: 20,
 	sort: 'desc',

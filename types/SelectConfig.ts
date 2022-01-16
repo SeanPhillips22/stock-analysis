@@ -7,6 +7,9 @@ export type SelectConfig = {
 	// The symbol type
 	type: SymbolTypes
 
+	// The stock table that is active
+	active: string
+
 	// The main column to sort by
 	main: DataId
 

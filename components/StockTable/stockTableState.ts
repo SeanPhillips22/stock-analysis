@@ -17,10 +17,13 @@ interface StockTableState extends SelectConfig {
 }
 
 export const stockTableState = create<StockTableState>(set => ({
-	// The symbol type
+	// The symbol type (stocks or etfs)
 	type: 'stocks',
 	setType: (newType: SymbolTypes) =>
 		set(state => ({ ...state, type: newType, fetch: true })),
+
+	// The stock table that is active (gainers, losers, etc)
+	active: '',
 
 	// The main column to sort by
 	main: 'change',
@@ -77,17 +80,24 @@ export const stockTableState = create<StockTableState>(set => ({
 
 	// Reset the table state when switching to another page
 	resetTableState: (conf: SelectConfig) =>
-		set(state => ({
-			...state,
-			type: conf.type,
-			main: conf.main,
-			count: conf.count,
-			sort: conf.sort,
-			columns: conf.columns,
-			columnOptions: conf.columnOptions,
-			filters: conf.filters,
-			fetch: false
-		})),
+		set(state => {
+			if (state.active !== conf.active) {
+				return {
+					...state,
+					type: conf.type,
+					active: conf.active,
+					main: conf.main,
+					count: conf.count,
+					sort: conf.sort,
+					columns: conf.columns,
+					columnOptions: conf.columnOptions,
+					filters: conf.filters,
+					fetch: false
+				}
+			} else {
+				return state
+			}
+		}),
 
 	// Enable react-query data fetching
 	fetch: false,

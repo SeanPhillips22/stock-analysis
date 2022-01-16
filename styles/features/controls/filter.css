@@ -1,0 +1,11 @@
+/* The filter input to filter the results of a table */
+
+@layer components {
+	.filter {
+		@apply min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px] relative flex items-center;
+	}
+
+	.filter input {
+		@apply shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md py-1.5 sm:py-2;
+	}
+}

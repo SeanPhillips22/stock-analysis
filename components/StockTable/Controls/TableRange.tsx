@@ -81,6 +81,7 @@ export function TableRange() {
 		<Dropdown
 			title={getLabel(main) || 'Range'}
 			hoverTitle="Change date range"
+			classes="dd-right"
 		>
 			{OPTIONS.map(i => (
 				/* One Dropdown Item */
