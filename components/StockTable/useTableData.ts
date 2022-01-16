@@ -7,11 +7,11 @@ import { stockTableState } from './stockTableState'
  */
 export function useTableData(_data: any[], path: string) {
 	// Get the params from the table state
-	const { type, main, count, sort, columns, filters, fetch } =
+	const { type, active, main, count, sort, columns, filters, fetch } =
 		stockTableState()
 
 	// Add the params into an array to tell react-query when to update
-	const queryObject = { type, main, count, sort, columns, filters }
+	const queryObject = { type, active, main, count, sort, columns, filters }
 
 	const { data, isLoading, error } = useQuery(
 		[path, queryObject],
