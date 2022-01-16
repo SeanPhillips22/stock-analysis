@@ -7,7 +7,7 @@ import {
 	TrendingUpIcon,
 	NewspaperIcon,
 	ArchiveIcon,
-	FireIcon
+	ChartSquareBarIcon
 } from '@heroicons/react/outline'
 import { matchParentPath } from 'functions/helpers/matchPath'
 import { useEffect } from 'react'
@@ -55,7 +55,7 @@ const navigation = [
 	{
 		name: 'Market Movers',
 		href: '/markets/gainers/',
-		icon: FireIcon,
+		icon: ChartSquareBarIcon,
 		children: [
 			{
 				name: 'Top Gainers',
