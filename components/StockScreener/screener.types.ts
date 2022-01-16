@@ -109,3 +109,8 @@ export type SortObject = {
 	id: DataId
 	desc?: boolean
 }
+
+export type SortProps = {
+	defaultSort?: SortObject[]
+	setSort: (sort: SortObject[]) => void
+}

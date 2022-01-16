@@ -1,3 +1,4 @@
+import { SortObject } from 'components/StockScreener/screener.types'
 import { DataId } from './Data'
 
 export type SymbolTypes = 'stocks' | 'etf'
@@ -18,6 +19,8 @@ export type SelectConfig = {
 
 	// The sort order
 	sort: SortTypes
+	sorted?: SortObject[]
+	defaultSort?: SortObject[]
 
 	// The columns to show
 	columns: DataId[]

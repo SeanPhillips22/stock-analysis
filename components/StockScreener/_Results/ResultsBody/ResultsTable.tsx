@@ -14,7 +14,7 @@ import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
 import { useSortReset } from 'components/StockScreener/functions/sort/useSortReset'
 import { ColumnSort } from 'components/Tables/ColumnSort'
-import { useSortState } from 'components/StockScreener/functions/sort/useSortState'
+import { useSortState } from 'hooks/useSortState'
 
 export function ResultsTable({ cols }: { cols: any }) {
 	const type = screenerState(state => state.type)
@@ -27,7 +27,12 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const showColumns = screenerState(state => state.showColumns)
 	const fetching = screenerState(state => state.fetching)
 	const setResultsCount = screenerState(state => state.setResultsCount)
-	const { updateSortState } = useSortState()
+	const setSort = screenerState(state => state.setSort)
+	const defaultSort = screenerState(state => state.defaultSort)
+	const { updateSortState } = useSortState({
+		defaultSort,
+		setSort
+	})
 	const resetSort = useSortReset()
 
 	// Memoize data and settings for the table

@@ -17,6 +17,9 @@ export function StockTable({ _data }: Props) {
 	const context = useContext(TableContext)
 	const _columns = stockTableState(state => state.columns)
 	const main = stockTableState(state => state.main)
+	const defaultSort = stockTableState(state => state.defaultSort)
+	const sorted = stockTableState(state => state.sorted)
+	const setSorted = stockTableState(state => state.setSorted)
 
 	// pass initial data into react query
 	const query = useTableData(_data, context.config.path)
@@ -25,6 +28,15 @@ export function StockTable({ _data }: Props) {
 	const data = useMemo(() => query.data.data || query.data, [query.data])
 	const columns = useMemo(() => getColumns(_columns, main), [_columns, main])
 
+	const sortProps = { defaultSort, setSort: setSorted }
+
 	// pass the data and columns into react table
-	return <StockTableBody data={data} columns={columns} />
+	return (
+		<StockTableBody
+			data={data}
+			columns={columns}
+			sorted={sorted}
+			sortProps={sortProps}
+		/>
+	)
 }

@@ -8,6 +8,10 @@
 		@apply whitespace-nowrap;
 	}
 
+	.stock-table tr > th {
+		@apply font-semibold;
+	}
+
 	.stock-table tr th .head-left {
 		@apply inline-flex flex-row items-center;
 	}

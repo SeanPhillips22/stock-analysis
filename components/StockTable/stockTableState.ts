@@ -1,3 +1,4 @@
+import { SortObject } from 'components/StockScreener/screener.types'
 import { DataId } from 'types/Data'
 import { SelectConfig, SymbolTypes, SortTypes } from 'types/SelectConfig'
 import create from 'zustand'
@@ -14,6 +15,7 @@ interface StockTableState extends SelectConfig {
 	toggleColumn: (id: DataId) => void
 	fetch: boolean
 	setFetch: () => void
+	setSorted: (newSorted: SortObject[]) => void
 }
 
 export const stockTableState = create<StockTableState>(set => ({
@@ -39,6 +41,10 @@ export const stockTableState = create<StockTableState>(set => ({
 	sort: 'desc',
 	setSort: (newSort: SortTypes) =>
 		set(state => ({ ...state, sort: newSort, fetch: true })),
+	defaultSort: [],
+	sorted: [],
+	setSorted: (newSorted: SortObject[]) =>
+		set(state => ({ ...state, sorted: newSorted })),
 
 	// The columns to show
 	columns: [],
@@ -89,6 +95,8 @@ export const stockTableState = create<StockTableState>(set => ({
 					main: conf.main,
 					count: conf.count,
 					sort: conf.sort,
+					sorted: conf.defaultSort,
+					defaultSort: conf.defaultSort,
 					columns: conf.columns,
 					columnOptions: conf.columnOptions,
 					filters: conf.filters,

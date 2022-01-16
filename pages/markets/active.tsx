@@ -40,6 +40,7 @@ const selectConfig: SelectConfig = {
 	main: 'volume',
 	count: 20,
 	sort: 'desc',
+	defaultSort: [{ id: 'volume', desc: true }],
 	columns: columns,
 	columnOptions: MoverColumns,
 	filters: ['price-over-1', 'close-over-1']
