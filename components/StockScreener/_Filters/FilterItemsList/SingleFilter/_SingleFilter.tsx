@@ -9,17 +9,17 @@ import { StringFilter } from './FilterTypes/StringFilter'
 import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters'
 
 /**
- * FilterBody
+ * SingleFilter
  * The wrapper component for an individual filter with button + dropdown (such as PE ratio)
  * @param {FilterProps} filter The properties for the filter
  * @return Component
  */
 
-export function FilterBody({ filter }: { filter: FilterProps }) {
+export function SingleFilter({ filter }: { filter: FilterProps }) {
 	const ref = useRef<HTMLDivElement>(null)
-	const filters = screenerState((state) => state.filters)
-	const openFilter = screenerState((state) => state.openFilter)
-	const setOpenFilter = screenerState((state) => state.setOpenFilter)
+	const filters = screenerState(state => state.filters)
+	const openFilter = screenerState(state => state.openFilter)
+	const setOpenFilter = screenerState(state => state.setOpenFilter)
 	const { remove } = useModifyFilters()
 
 	const { id, filterType } = filter
@@ -60,7 +60,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 						title="Clear Filter"
 						tabIndex={0}
 						onClick={() => remove(id)}
-						onKeyPress={(e) => e.key === 'Enter' && remove(id)}
+						onKeyPress={e => e.key === 'Enter' && remove(id)}
 					>
 						<CloseCircleIcon classes="w-[1.2rem] h-[1.2rem]" />
 					</div>
@@ -74,7 +74,7 @@ export function FilterBody({ filter }: { filter: FilterProps }) {
 						? ' visible opacity-100 transform translate-y-0'
 						: ' invisible opacity-0 transform -translate-y-2'
 				}`}
-				onKeyDown={(e) => e.key === 'Escape' && setOpenFilter('')}
+				onKeyDown={e => e.key === 'Escape' && setOpenFilter('')}
 			>
 				<Filter filter={filter} active={active} />
 			</div>

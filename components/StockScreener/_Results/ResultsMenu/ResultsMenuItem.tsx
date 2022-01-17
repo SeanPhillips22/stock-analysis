@@ -12,9 +12,9 @@ type Props = {
 }
 
 export function ResultsMenuItem({ name, type }: Props) {
-	const filters = screenerState((state) => state.filters)
-	const resultsMenu = screenerState((state) => state.resultsMenu)
-	const setResultsMenu = screenerState((state) => state.setResultsMenu)
+	const filters = screenerState(state => state.filters)
+	const resultsMenu = screenerState(state => state.resultsMenu)
+	const setResultsMenu = screenerState(state => state.setResultsMenu)
 	const { fetchManyColumns } = useModifyColumns()
 
 	let display = name.toString()
@@ -51,7 +51,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 				className="py-1 px-2 hover:bg-gray-100 hover:rounded-md cursor-pointer focus:outline-none"
 				data-title={dataTitle}
 				onClick={() => setResultsMenu(name)}
-				onKeyPress={(e) => {
+				onKeyPress={e => {
 					e.key === 'Enter' && setResultsMenu(name)
 				}}
 				onMouseOver={() => handleHover(name)}
