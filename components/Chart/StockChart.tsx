@@ -71,7 +71,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this)
 		this.state = {
 			maxValue: 0,
-			margin: { left: 0, right: 62, top: 70, bottom: 24 },
+			margin: { left: 0, right: 62, top: 10, bottom: 24 },
 			counter: 0,
 			screenWidth: window.innerWidth
 		}
@@ -112,41 +112,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		const isBrowser: boolean = this.state.screenWidth >= 768
 		const { data: initialData, height, ratio, width, type, time } = this.props
 
-		const maxValueCallback = (data: number) => {
-			if (this.state.maxValue != data && this.state.counter == 0) {
-				if (data >= 100 && data < 1000) {
-					this.setState({
-						maxValue: data,
-						margin: { left: 0, right: 47, top: 7, bottom: 24 },
-						counter: this.state.counter + 1
-					})
-				} else if (data < 100 && data >= 10) {
-					this.setState({
-						maxValue: data,
-						margin: { left: 0, right: 40, top: 7, bottom: 24 },
-						counter: this.state.counter + 1
-					})
-				} else if (data >= 1000 && data < 10000) {
-					this.setState({
-						maxValue: data,
-						margin: { left: 0, right: 100, top: 7, bottom: 24 },
-						counter: this.state.counter + 1
-					})
-				} else if (data >= 10000) {
-					this.setState({
-						maxValue: data,
-						margin: { left: 0, right: 64, top: 7, bottom: 24 },
-						counter: this.state.counter + 1
-					})
-				} else if (data >= 1 && data < 10) {
-					this.setState({
-						maxValue: data,
-						margin: { left: 0, right: 40, top: 7, bottom: 24 },
-						counter: this.state.counter + 1
-					})
-				}
-			}
-		}
 		const disablePan = false
 		const disableZoom = false
 
@@ -300,9 +265,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 					min = xAccessor(data[i])
 				}
 			}
-			/* } else if (time == '1D' || '5D') {
-			min = xAccessor(data[Math.max(0, data.length - 100)]);
-		*/
 		} else {
 			max = max + 6
 			min = 0
@@ -343,8 +305,8 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							<BarSeries
 								widthRatio={0.5}
 								clip={true}
-								yAccessor={(d) => d.volume}
-								fillStyle={(d) =>
+								yAccessor={d => d.volume}
+								fillStyle={d =>
 									d.close > d.open
 										? 'rgba(38, 166, 154, 0.8)'
 										: 'rgba(239, 83, 80, 0.8)'
@@ -352,7 +314,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							/>
 							<EdgeIndicator
 								itemType="last"
-								rectWidth={margin.right - 1.05}
 								rectHeight={15}
 								fill={volumeColor}
 								orient="right"
@@ -373,18 +334,17 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							<YAxis
 								showGridLines={true}
 								tickFormat={this.yAxisTickDisplay}
-								getMaxTicks={maxValueCallback}
 							/>
 							{type == 'candlestick' ? (
 								<CandlestickSeries {...candlesAppearance} />
 							) : (
 								<>
 									<LineSeries
-										yAccessor={(d) => d.close}
+										yAccessor={d => d.close}
 										strokeStyle={'#000000'}
 									/>
 									<CurrentCoordinate
-										yAccessor={(d) => d.close}
+										yAccessor={d => d.close}
 										fillStyle={priceOrCandleStickColor}
 									/>
 								</>
@@ -392,19 +352,19 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							{time != '1D' && time != '5D' ? (
 								<>
 									<LineSeries
-										yAccessor={(d) => d.ma1}
+										yAccessor={d => d.ma1}
 										strokeStyle={ma1color}
 									/>
 									<CurrentCoordinate
-										yAccessor={(d) => d.ma1}
+										yAccessor={d => d.ma1}
 										fillStyle={ma1color}
 									/>
 									<LineSeries
-										yAccessor={(d) => d.ma2}
+										yAccessor={d => d.ma2}
 										strokeStyle={ma2color}
 									/>
 									<CurrentCoordinate
-										yAccessor={(d) => d.ma2}
+										yAccessor={d => d.ma2}
 										fillStyle={ma2color}
 									/>
 								</>
@@ -413,7 +373,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							)}
 							{isBrowser == true ? (
 								<MouseCoordinateY
-									rectWidth={margin.right / 1.01225}
 									displayFormat={this.pricesDisplayFormat}
 								/>
 							) : (
@@ -424,7 +383,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								<>
 									<EdgeIndicator
 										itemType="last"
-										rectWidth={margin.right / 1.05}
 										rectHeight={15}
 										fill={ma2color}
 										orient="right"
@@ -436,7 +394,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 									/>
 									<EdgeIndicator
 										itemType="last"
-										rectWidth={margin.right / 1.05}
 										rectHeight={15}
 										hideLine={true}
 										fill={ma1color}
@@ -454,7 +411,6 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 
 							<EdgeIndicator
 								itemType="last"
-								rectWidth={margin.right / 1.01225}
 								fill={priceOrCandleStickColor}
 								lineStroke={priceOrCandleStickColor}
 								displayFormat={priceFormatDecider}
