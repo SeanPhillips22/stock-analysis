@@ -29,10 +29,10 @@ interface Props {
 }
 
 export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
-	const tablePage = tableState((state) => state.tablePage)
-	const setTablePage = tableState((state) => state.setTablePage)
-	const tableSize = tableState((state) => state.tableSize)
-	const setTableSize = tableState((state) => state.setTableSize)
+	const tablePage = tableState(state => state.tablePage)
+	const setTablePage = tableState(state => state.setTablePage)
+	const tableSize = tableState(state => state.tableSize)
+	const setTableSize = tableState(state => state.setTableSize)
 	const columns = useMemo(() => columndata, [columndata])
 	const data = useMemo(() => rowdata, [rowdata])
 
@@ -80,10 +80,10 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
 									<th
+										key={index}
 										{...column.getSortByToggleProps({
 											title: `Sort by: ${column.Header}`
 										})}
-										key={index}
 									>
 										<span className="inline-flex flex-row items-center">
 											{column.render('Header')}
@@ -135,7 +135,7 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 					</span>
 					<select
 						value={pageSize}
-						onChange={(e) => {
+						onChange={e => {
 							setPageSize(Number(e.target.value))
 							setTableSize(Number(e.target.value))
 							setTablePage(0)
