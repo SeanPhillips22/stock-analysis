@@ -16,6 +16,8 @@ interface StockTableState extends SelectConfig {
 	fetch: boolean
 	setFetch: () => void
 	setSorted: (newSorted: SortObject[]) => void
+	search: string
+	setSearch: (newSearch: string) => void
 }
 
 export const stockTableState = create<StockTableState>(set => ({
@@ -100,12 +102,17 @@ export const stockTableState = create<StockTableState>(set => ({
 					columns: conf.columns,
 					columnOptions: conf.columnOptions,
 					filters: conf.filters,
+					search: '',
 					fetch: false
 				}
 			} else {
 				return state
 			}
 		}),
+
+	// Search filter
+	search: '',
+	setSearch: (newSearch: string) => set({ search: newSearch }),
 
 	// Enable react-query data fetching
 	fetch: false,

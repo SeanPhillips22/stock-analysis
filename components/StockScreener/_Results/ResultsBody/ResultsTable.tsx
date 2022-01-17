@@ -29,6 +29,8 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const setResultsCount = screenerState(state => state.setResultsCount)
 	const setSort = screenerState(state => state.setSort)
 	const defaultSort = screenerState(state => state.defaultSort)
+	const searchFilter = screenerState(state => state.searchFilter)
+	const setFilterState = screenerState(state => state.setSearchFilter)
 	const { updateSortState } = useSortState({
 		defaultSort,
 		setSort
@@ -60,7 +62,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 		rows,
 		setPageSize,
 		setGlobalFilter,
-		state: { pageIndex, pageSize, globalFilter }
+		state: { pageIndex, pageSize }
 	} = useTable(
 		{
 			columns,
@@ -96,8 +98,9 @@ export function ResultsTable({ cols }: { cols: any }) {
 				count={rows.length}
 				title="Matches"
 				useAsyncDebounce={useAsyncDebounce}
-				globalFilter={globalFilter}
+				globalFilter={searchFilter}
 				setGlobalFilter={setGlobalFilter}
+				setFilterState={setFilterState}
 				tableId="screener-table"
 			/>
 			<div className="overflow-x-auto">

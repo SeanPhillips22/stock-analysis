@@ -53,6 +53,10 @@ interface ScreenerState {
 	filterSearch: string
 	setFilterSearch: (newSearch: string) => void
 
+	// Search filter
+	searchFilter: string
+	setSearchFilter: (newSearch: string) => void
+
 	// Results
 	resultsMenu: ColumnName
 	setResultsMenu: (newMenu: ColumnName) => void
@@ -175,6 +179,10 @@ export const screenerState = create<ScreenerState>(set => ({
 			variableFilters: [...state.variableFilters, { id, options }]
 		})),
 	clearVarFilters: () => set({ variableFilters: [] }),
+
+	// Search filter
+	searchFilter: '',
+	setSearchFilter: (newSearch: string) => set({ searchFilter: newSearch }),
 
 	// Results Menu
 	resultsMenu: 'General',

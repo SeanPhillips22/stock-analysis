@@ -7,6 +7,7 @@ interface Props {
 	useAsyncDebounce: (value: any, wait: number) => any
 	globalFilter: any
 	setGlobalFilter: (filterValue: FilterValue) => void
+	setFilterState?: (filterValue: FilterValue) => void
 	filterText?: string
 }
 
@@ -14,16 +15,21 @@ export function Filter({
 	useAsyncDebounce,
 	globalFilter,
 	setGlobalFilter,
+	setFilterState,
 	filterText = 'Filter...'
 }: Props) {
-	const [value, setValue] = useState(globalFilter)
-	const onChange = useAsyncDebounce((value: any) => {
-		setGlobalFilter(value || undefined)
+	const [value, setValue] = useState<string | undefined>(
+		globalFilter || undefined
+	)
+
+	const setFilterValues = useAsyncDebounce((value: string | undefined) => {
+		if (setGlobalFilter) setGlobalFilter(value)
+		if (setFilterState) setFilterState(value)
 	}, 100)
 
 	useEffect(() => {
-		if (value) onChange(value)
-	}, [onChange, value])
+		if (value) setFilterValues(value)
+	}, [setFilterValues, value])
 
 	return (
 		<div className="filter">
@@ -37,7 +43,7 @@ export function Filter({
 				value={value || ''}
 				onChange={e => {
 					setValue(e.target.value)
-					onChange(e.target.value)
+					setFilterValues(e.target.value)
 				}}
 				placeholder={filterText}
 			/>
@@ -49,12 +55,12 @@ export function Filter({
 						tabIndex={0}
 						onClick={() => {
 							setValue('')
-							onChange('')
+							setFilterValues('')
 						}}
 						onKeyPress={e => {
 							if (e.key === 'Enter') {
 								setValue('')
-								onChange('')
+								setFilterValues('')
 							}
 						}}
 					>

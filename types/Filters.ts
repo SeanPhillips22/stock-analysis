@@ -4,4 +4,5 @@ export type FilterObject = {
 	useAsyncDebounce?: (value: any, wait: number) => any
 	globalFilter?: any
 	setGlobalFilter?: (filterValue: FilterValue) => void
+	setFilterState?: (filterValue: FilterValue) => void
 }

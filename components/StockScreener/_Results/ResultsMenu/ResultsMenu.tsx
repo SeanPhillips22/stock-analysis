@@ -12,6 +12,7 @@ interface Props {
 	useAsyncDebounce: (value: any, wait: number) => any
 	globalFilter: any
 	setGlobalFilter: (filterValue: FilterValue) => void
+	setFilterState: (filterValue: FilterValue) => void
 	tableId: string
 	append?: string
 	type: ScreenerTypes
@@ -22,6 +23,7 @@ export function ResultsMenu({
 	useAsyncDebounce,
 	globalFilter,
 	setGlobalFilter,
+	setFilterState,
 	tableId,
 	type
 }: Props) {
@@ -38,6 +40,7 @@ export function ResultsMenu({
 						useAsyncDebounce={useAsyncDebounce}
 						globalFilter={globalFilter}
 						setGlobalFilter={setGlobalFilter}
+						setFilterState={setFilterState}
 						filterText="Search..."
 					/>
 				</div>

@@ -8,6 +8,7 @@ import {
 } from 'react-table'
 import { DataId } from 'types/Data'
 import { TableControls } from './Controls/_TableControls'
+import { stockTableState } from './stockTableState'
 
 type Props = {
 	data: any[]
@@ -21,13 +22,10 @@ type Props = {
 }
 
 export function StockTableBody({ data, columns, sorted, sortProps }: Props) {
-	const {
-		headerGroups,
-		prepareRow,
-		rows,
-		setGlobalFilter,
-		state: { globalFilter }
-	} = useTable(
+	const search = stockTableState(state => state.search)
+	const setSearch = stockTableState(state => state.setSearch)
+
+	const { headerGroups, prepareRow, rows, setGlobalFilter } = useTable(
 		{
 			columns,
 			data,
@@ -44,7 +42,12 @@ export function StockTableBody({ data, columns, sorted, sortProps }: Props) {
 			<div className="mt-3 sm:mt-0">
 				<TableControls
 					tableId="stock-table"
-					filter={{ useAsyncDebounce, setGlobalFilter, globalFilter }}
+					filter={{
+						useAsyncDebounce,
+						setGlobalFilter,
+						setFilterState: setSearch,
+						globalFilter: search
+					}}
 				/>
 			</div>
 			<div className="overflow-x-auto">
