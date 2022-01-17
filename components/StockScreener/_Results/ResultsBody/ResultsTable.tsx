@@ -110,12 +110,12 @@ export function ResultsTable({ cols }: { cols: any }) {
 							<tr key={index}>
 								{headerGroup.headers.map((column: any, index) => (
 									<th
+										key={index}
 										{...column.getSortByToggleProps({
 											title: `Sort by: ${
 												column.name || column.Header
 											}`
 										})}
-										key={index}
 									>
 										<span
 											className="flex flex-row items-center"

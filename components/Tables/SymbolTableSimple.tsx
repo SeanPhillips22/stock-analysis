@@ -59,10 +59,10 @@ export function SymbolTableSimple({
 							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
 									<th
+										key={index}
 										{...column.getSortByToggleProps({
 											title: `Sort by: ${column.Header}`
 										})}
-										key={index}
 									>
 										<span className="inline-flex flex-row items-center">
 											{column.render('Header')}
