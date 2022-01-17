@@ -21,7 +21,7 @@ export const NewsFeed = ({ data, related, paywalled }: Props) => {
 				if (item.type === 'Video') {
 					return (
 						<NewsVideo
-							key={`item.title + ${index}`}
+							key={`${item.title} + ${index}`}
 							index={index}
 							item={item}
 							related={related}
@@ -31,7 +31,7 @@ export const NewsFeed = ({ data, related, paywalled }: Props) => {
 				} else {
 					return (
 						<NewsArticle
-							key={`item.title + ${index}`}
+							key={`${item.title} + ${index}`}
 							index={index}
 							item={item}
 							related={related}
