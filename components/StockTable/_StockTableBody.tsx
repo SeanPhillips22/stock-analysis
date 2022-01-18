@@ -1,5 +1,6 @@
 import { SortObject, SortProps } from 'components/StockScreener/screener.types'
 import { HeaderCell } from 'components/Tables/HeaderCell'
+import { useSort } from 'hooks/useSort'
 import {
 	useTable,
 	useSortBy,
@@ -17,20 +18,22 @@ type Props = {
 		accessor: DataId
 		Cell: (props: any) => any
 	}[]
-	sorted?: SortObject[]
+	sort?: SortObject[]
 	sortProps: SortProps
 }
 
-export function StockTableBody({ data, columns, sorted, sortProps }: Props) {
+export function StockTableBody({ data, columns, sort, sortProps }: Props) {
+	const sorted = stockTableState(state => state.sorted)
 	const search = stockTableState(state => state.search)
 	const setSearch = stockTableState(state => state.setSearch)
+	const { updateSort } = useSort(sortProps)
 
 	const { headerGroups, prepareRow, rows, setGlobalFilter } = useTable(
 		{
 			columns,
 			data,
 			initialState: {
-				sortBy: sorted
+				sortBy: sorted && sorted.length ? sorted : sort
 			}
 		},
 		useGlobalFilter,
@@ -59,7 +62,7 @@ export function StockTableBody({ data, columns, sorted, sortProps }: Props) {
 									<HeaderCell
 										key={index}
 										column={column}
-										sortProps={sortProps}
+										updateSort={updateSort}
 									/>
 								))}
 							</tr>

@@ -4,11 +4,11 @@ import { SortProps } from 'components/StockScreener/screener.types'
  * Prevent table sort state from resetting after clicking a stock and going back
  * Needs two properties: the default sort object and the setsort function
  */
-export function useSortState(sortProps: SortProps) {
+export function useSort(sortProps: SortProps) {
 	const { defaultSort, setSort } = sortProps
 	// update the sort state
 	// but wait for 100ms before setting the state to allow the "column" to be updated
-	function updateSortState(column: any) {
+	function updateSort(column: any) {
 		setTimeout(() => {
 			if (column.isSorted) {
 				setSort([
@@ -24,5 +24,5 @@ export function useSortState(sortProps: SortProps) {
 		}, 200)
 	}
 
-	return { updateSortState }
+	return { updateSort }
 }

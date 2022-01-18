@@ -8,6 +8,9 @@ export type DataId =
 	| 'change' // Price Change 1D
 	| 'volume' // Volume
 	| 'close' // Previous Close
+	| 'premarketPrice' // Pre-Market Price
+	| 'premarketChange' // Pre-Market Change
+	| 'premarketChangePercent' // Pre-Market Percentage Change
 	| 'enterpriseValue' // Enterprise Value
 	| 'industry' // Industry
 	| 'peRatio' // PE Ratio
