@@ -62,7 +62,7 @@ export default function GainersPage({ data, updated }: Props) {
 	return (
 		<MarketsLayout config={config}>
 			<TableContextProvider value={{ config, updated }}>
-				<StockTable _data={data} />
+				<StockTable _data={data} sort={selectConfig?.defaultSort} />
 			</TableContextProvider>
 		</MarketsLayout>
 	)

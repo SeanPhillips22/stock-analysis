@@ -8,6 +8,7 @@ import { useContext } from 'react'
 import { TableContext } from 'components/StockTable/TableContext'
 import { TableTimestamp } from './TableTimestamp'
 import { TableTitle } from './TableTitle'
+import { TableMoverType } from './TableMoverType'
 
 type Props = {
 	filter: FilterObject
@@ -28,6 +29,8 @@ export function TableControls({ filter, tableId }: Props) {
 
 			{/* Button group */}
 			<div className="btn-group">
+				{/* MoverType Select */}
+				{c?.config.controls?.moverType && <TableMoverType />}
 				{/* Time Range */}
 				{c?.config.controls?.range && <TableRange />}
 				{/* Search Filter */}

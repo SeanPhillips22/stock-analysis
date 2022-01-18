@@ -14,7 +14,7 @@ import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
 import { useSortReset } from 'components/StockScreener/functions/sort/useSortReset'
 import { ColumnSort } from 'components/Tables/ColumnSort'
-import { useSortState } from 'hooks/useSortState'
+import { useSort } from 'hooks/useSort'
 
 export function ResultsTable({ cols }: { cols: any }) {
 	const type = screenerState(state => state.type)
@@ -31,7 +31,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const defaultSort = screenerState(state => state.defaultSort)
 	const searchFilter = screenerState(state => state.searchFilter)
 	const setFilterState = screenerState(state => state.setSearchFilter)
-	const { updateSortState } = useSortState({
+	const { updateSort } = useSort({
 		defaultSort,
 		setSort
 	})
@@ -122,7 +122,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 									>
 										<span
 											className="flex flex-row items-center"
-											onClick={() => updateSortState(column)}
+											onClick={() => updateSort(column)}
 										>
 											{column.render('Header')}
 											<ColumnSort column={column} />

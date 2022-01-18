@@ -9,6 +9,7 @@ export type PageConfig = {
 		filter?: boolean
 		export?: boolean
 		columns?: boolean
+		moverType?: boolean
 	}
 	metaTitle: string
 	metaDescription?: string

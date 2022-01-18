@@ -1,19 +1,16 @@
 import { DataPoints } from 'data/StockDataPoints'
 import { DataId } from 'types/Data'
 import { ColumnSort } from './ColumnSort'
-import { useSortState } from 'hooks/useSortState'
-import { SortProps } from 'components/StockScreener/screener.types'
 
 type Props = {
 	column: any
-	sortProps: SortProps
+	updateSort: (column: any) => void
 }
 
 /**
  * Render a Header cell element with sort functionality
  */
-export function HeaderCell({ column, sortProps }: Props) {
-	const { updateSortState } = useSortState(sortProps)
+export function HeaderCell({ column, updateSort }: Props) {
 	const { id }: { id: DataId } = column
 	const { format, name } = DataPoints[id]
 
@@ -28,7 +25,7 @@ export function HeaderCell({ column, sortProps }: Props) {
 				title: name
 			})}
 		>
-			<div className={css} onClick={() => updateSortState(column)}>
+			<div className={css} onClick={() => updateSort(column)}>
 				{column.render('Header')}
 				<ColumnSort column={column} />
 			</div>

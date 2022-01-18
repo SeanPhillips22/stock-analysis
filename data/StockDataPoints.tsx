@@ -44,6 +44,24 @@ export const DataPoints: Props = {
 		colName: 'Close',
 		format: 'format2dec'
 	},
+	premarketPrice: {
+		id: 'premarketPrice',
+		name: 'Premarket Price',
+		colName: 'Price',
+		format: 'format2dec'
+	},
+	premarketChange: {
+		id: 'premarketChange',
+		name: 'Premarket Change',
+		colName: 'Change',
+		format: 'format2dec'
+	},
+	premarketChangePercent: {
+		id: 'premarketChangePercent',
+		name: 'Premarket % Change',
+		colName: '% Change',
+		format: 'colorPercentage'
+	},
 	enterpriseValue: {
 		id: 'enterpriseValue',
 		name: 'Enterprise Value',

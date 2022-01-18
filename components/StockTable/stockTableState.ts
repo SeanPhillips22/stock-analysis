@@ -97,7 +97,7 @@ export const stockTableState = create<StockTableState>(set => ({
 					main: conf.main,
 					count: conf.count,
 					sort: conf.sort,
-					sorted: conf.defaultSort,
+					sorted: [],
 					defaultSort: conf.defaultSort,
 					columns: conf.columns,
 					columnOptions: conf.columnOptions,

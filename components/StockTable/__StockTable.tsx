@@ -4,21 +4,22 @@ import { useTableData } from './useTableData'
 import { StockTableBody } from './_StockTableBody'
 import { stockTableState } from './stockTableState'
 import { TableContext } from './TableContext'
+import { SortObject } from 'components/StockScreener/screener.types'
 
 type Props = {
 	_data: any[]
+	sort?: SortObject[]
 }
 
 /**
  * A re-usable screener mechanism that can output a table of stocks with specific properties
  * Customizable columns, export, filtering, sorting, and pagination
  */
-export function StockTable({ _data }: Props) {
+export function StockTable({ _data, sort }: Props) {
 	const context = useContext(TableContext)
 	const _columns = stockTableState(state => state.columns)
 	const main = stockTableState(state => state.main)
 	const defaultSort = stockTableState(state => state.defaultSort)
-	const sorted = stockTableState(state => state.sorted)
 	const setSorted = stockTableState(state => state.setSorted)
 
 	// pass initial data into react query
@@ -35,7 +36,7 @@ export function StockTable({ _data }: Props) {
 		<StockTableBody
 			data={data}
 			columns={columns}
-			sorted={sorted}
+			sort={sort}
 			sortProps={sortProps}
 		/>
 	)
