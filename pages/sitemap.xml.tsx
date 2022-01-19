@@ -19,6 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'etf/',
 		'ipos/',
 		'ipos/calendar/',
+		'ipos/2022/',
 		'ipos/2021/',
 		'ipos/2020/',
 		'ipos/2019/',
