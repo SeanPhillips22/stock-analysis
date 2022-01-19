@@ -12,7 +12,7 @@ type Props = {
 }
 
 export function PresetChoice({ option, filter }: Props) {
-	const setOpenFilter = screenerState((state) => state.setOpenFilter)
+	const setOpenFilter = screenerState(state => state.setOpenFilter)
 	const { id, filterType, numberType } = filter
 	const { add } = useModifyFilters()
 
@@ -42,7 +42,7 @@ export function PresetChoice({ option, filter }: Props) {
 			<div
 				className="block px-4 py-2 text-sm text-gray-700 focus:outline-none hover:bg-gray-100 focus:bg-blue-100 hover:text-gray-900 focus:text-gray-900 cursor-pointer"
 				onClick={() => handleSelection(option.name, option.value)}
-				onKeyDown={(e) => handleKeyPress(e)}
+				onKeyDown={e => handleKeyPress(e)}
 				tabIndex={0}
 			>
 				{option.name}

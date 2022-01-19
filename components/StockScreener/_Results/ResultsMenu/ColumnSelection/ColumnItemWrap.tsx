@@ -1,11 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { screenerState } from 'components/StockScreener/screener.state'
 import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns'
-import {
-	FiltersMap,
-	IPOFiltersMap,
-	ETFFiltersMap
-} from 'components/StockScreener/maps/filters.map'
+import { getDataPoints } from 'components/StockScreener/maps/dataPoints'
 import { DataId } from 'types/DataId'
 import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { ColumnItem } from './ColumnItem'
@@ -28,21 +24,12 @@ type Props = {
 export function ColumnItemWrap({ search, type }: Props) {
 	const { isShowing } = useModifyColumns()
 	const columnDropdownOpen = screenerState(state => state.columnDropdownOpen)
+	const DataPoints = getDataPoints(type)
 
 	const activeArray: ColumnProperties[] = []
 	const inactiveArray: ColumnProperties[] = []
 
-	let filters = []
-
-	if (type == 'stocks') {
-		filters = FiltersMap
-	} else if (type == 'ipo') {
-		filters = IPOFiltersMap
-	} else {
-		filters = ETFFiltersMap
-	}
-
-	filters.forEach(filter => {
+	DataPoints.map(filter => {
 		if (isShowing(filter.id)) {
 			if (search === '' || filter.name.toLowerCase().includes(search)) {
 				activeArray.push({ id: filter.id, name: filter.name })
