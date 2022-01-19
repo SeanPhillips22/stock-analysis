@@ -14,7 +14,7 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 // the page's config and settings
 const config: PageConfig = {
 	path: '/markets/premarket/',
-	title: 'Premarket Movers',
+	title: 'Top Gainers',
 	parentTitle: 'Premarket Movers',
 	active: 'premarket',
 	controls: {
@@ -27,7 +27,7 @@ const config: PageConfig = {
 	},
 	metaTitle: "Today's Premarket Stock Movers",
 	metaDescription:
-		'Stocks that are moving in the premarket trading period from 4:00 AM to 9:30 AM. See top gainers, top losers, and most active by volume.'
+		'Stocks that are moving in the premarket trading period from 4:00 AM to 9:30 AM. See top gainers and top losers.'
 }
 
 // the initial columns to show in the table

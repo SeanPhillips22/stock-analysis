@@ -68,6 +68,10 @@ const navigation = [
 			{
 				name: 'Most Active',
 				href: '/markets/active/'
+			},
+			{
+				name: 'Premarket',
+				href: '/markets/premarket/'
 			}
 		]
 	},

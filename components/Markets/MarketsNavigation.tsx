@@ -24,11 +24,11 @@ export function MarketsNavigation({ active }: Props) {
 					title="Active"
 					css={tabActive(active, 'active')}
 				/>
-				{/* <NavTab
+				<NavTab
 					url="/markets/premarket/"
 					title="Premarket"
 					css={tabActive(active, 'premarket')}
-				/> */}
+				/>
 			</ul>
 		</nav>
 	)

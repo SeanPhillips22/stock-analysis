@@ -7,6 +7,7 @@ type Props = {
 
 export function TableTitle({ title, active }: Props) {
 	const main = stockTableState(state => state.main)
+	const sort = stockTableState(state => state.sort)
 	let printTitle = title
 
 	// Change the title from "Today" if a different time range is selected
@@ -15,6 +16,10 @@ export function TableTitle({ title, active }: Props) {
 			/Today/,
 			main.replace(/ch/, '').toUpperCase()
 		)
+	}
+
+	if (active === 'premarket' && sort === 'asc') {
+		printTitle = printTitle.replace('Gainers', 'Losers')
 	}
 
 	return <h2>{printTitle}</h2>
