@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { createLabelFromString } from 'components/StockScreener/functions/filterString/createLabelFromString'
 
@@ -9,12 +9,12 @@ type Props = {
 }
 
 export function FilterButton({ active, id }: Props) {
-	const filters = screenerState((state) => state.filters)
-	const openFilter = screenerState((state) => state.openFilter)
-	const setOpenFilter = screenerState((state) => state.setOpenFilter)
+	const filters = screenerState(state => state.filters)
+	const openFilter = screenerState(state => state.openFilter)
+	const setOpenFilter = screenerState(state => state.setOpenFilter)
 
 	function findName() {
-		const filter = filters.find((filter) => filter.id === id)
+		const filter = filters.find(filter => filter.id === id)
 		const value = filter?.value
 
 		if (

@@ -1,6 +1,6 @@
 import { stockTableState } from 'components/StockTable/stockTableState'
 import { useState } from 'react'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 
 type Props = {
 	id: DataId
@@ -13,7 +13,7 @@ type Props = {
  */
 export function ColumnItem({ id, name, checked }: Props) {
 	const [check, setCheck] = useState(checked)
-	const toggleColumn = stockTableState((state) => state.toggleColumn)
+	const toggleColumn = stockTableState(state => state.toggleColumn)
 
 	return (
 		<div className="column-items">

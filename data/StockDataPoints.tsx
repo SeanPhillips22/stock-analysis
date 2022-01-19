@@ -1,4 +1,4 @@
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { FormatFunction } from 'types/Tables'
 
 export type DataPointType = {

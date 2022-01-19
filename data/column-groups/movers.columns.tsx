@@ -1,4 +1,4 @@
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 
 export const MoverColumns: DataId[] = [
 	's',

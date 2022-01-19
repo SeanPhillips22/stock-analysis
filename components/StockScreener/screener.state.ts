@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import {
 	ScreenerTypes,
 	SingleStock,

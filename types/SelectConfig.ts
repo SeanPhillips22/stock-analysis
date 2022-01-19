@@ -1,5 +1,5 @@
 import { SortObject } from 'components/StockScreener/screener.types'
-import { DataId } from './Data'
+import { DataId } from './DataId'
 
 export type SymbolTypes = 'stocks' | 'etf'
 export type SortTypes = 'asc' | 'desc'

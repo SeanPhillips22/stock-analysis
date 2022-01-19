@@ -1,4 +1,4 @@
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { ScreenerTypes } from '../screener.types'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { getData } from 'functions/apis/API'
@@ -9,13 +9,13 @@ import { getScreenerUrl } from './getScreenerUrl'
  * @return {functions}
  */
 export function useModifyColumns() {
-	const showColumns = screenerState((state) => state.showColumns)
-	const setShowColumns = screenerState((state) => state.setShowColumns)
-	const fetchedColumns = screenerState((state) => state.fetchedColumns)
-	const addFetchedColumn = screenerState((state) => state.addFetchedColumn)
-	const addDataColumn = screenerState((state) => state.addDataColumn)
-	const addFetching = screenerState((state) => state.addFetching)
-	const removeFetching = screenerState((state) => state.removeFetching)
+	const showColumns = screenerState(state => state.showColumns)
+	const setShowColumns = screenerState(state => state.setShowColumns)
+	const fetchedColumns = screenerState(state => state.fetchedColumns)
+	const addFetchedColumn = screenerState(state => state.addFetchedColumn)
+	const addDataColumn = screenerState(state => state.addDataColumn)
+	const addFetching = screenerState(state => state.addFetching)
+	const removeFetching = screenerState(state => state.removeFetching)
 
 	// Fetch a new data column
 	async function fetchColumn(id: DataId, type: ScreenerTypes) {
@@ -30,7 +30,7 @@ export function useModifyColumns() {
 
 	// Fetch many data columns at a time
 	async function fetchManyColumns(columns: DataId[], type: ScreenerTypes) {
-		columns.forEach(async (id) => {
+		columns.forEach(async id => {
 			if (!fetchedColumns.includes(id)) {
 				fetchColumn(id, type)
 			}
@@ -45,7 +45,7 @@ export function useModifyColumns() {
 	// Toggle a column to either show or hide
 	function toggle(id: DataId, type: ScreenerTypes) {
 		if (showColumns.includes(id)) {
-			setShowColumns(showColumns.filter((filter) => filter !== id))
+			setShowColumns(showColumns.filter(filter => filter !== id))
 		} else {
 			if (!isFetched(id)) {
 				fetchColumn(id, type)

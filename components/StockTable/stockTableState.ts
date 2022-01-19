@@ -1,5 +1,5 @@
 import { SortObject } from 'components/StockScreener/screener.types'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { SelectConfig, SymbolTypes, SortTypes } from 'types/SelectConfig'
 import create from 'zustand'
 

@@ -2,8 +2,8 @@ import { screenerState } from 'components/StockScreener/screener.state'
 import { CellNumber } from 'types/Tables'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 import { ResultsTable } from './ResultsTable'
-import { COLUMNS_MAP } from 'components/StockScreener/maps/allColumns.map'
 import { formatCell } from 'functions/tables/tableFormat'
+import { getDataPoints } from 'components/StockScreener/maps/dataPoints'
 
 const format2dec = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
@@ -15,9 +15,12 @@ function formatHeader(text: string) {
 }
 
 function formatColumns() {
-	const columns = COLUMNS_MAP.map(column => {
-		const type = screenerState(state => state.type)
+	// get the data points to use
+	const type = screenerState(state => state.type)
+	const DataPoints = getDataPoints(type)
 
+	// loop through the data points to configure the settings for each column
+	const columns = DataPoints.map(column => {
 		// If column has a "format" property, use it to format the value
 		if (column.format) {
 			let header
@@ -25,51 +28,51 @@ function formatColumns() {
 			let sortInverted
 			switch (column.format) {
 				case 'linkSymbol': {
-					header = column.Header
+					header = column.columnName || column.name
 					cell = (props: any) => formatCell('linkSymbol', props, type)
 					sortInverted = false
 					break
 				}
 
 				case 'string': {
-					header = column.Header
+					header = column.columnName || column.name
 					cell = (props: any) => props.value || null
 					sortInverted = false
 					break
 				}
 
 				case 'abbreviate': {
-					header = formatHeader(column.Header)
+					header = formatHeader(column.columnName || column.name)
 					cell = (props: any) => formatCell('abbreviate', props)
 					break
 				}
 
 				case 'changePcColor': {
-					header = formatHeader(column.Header)
+					header = formatHeader(column.columnName || column.name)
 					cell = (props: any) => formatCell('colorPercentage', props)
 					break
 				}
 
 				case 'format2dec': {
-					header = formatHeader(column.Header)
+					header = formatHeader(column.columnName || column.name)
 					cell = (props: any) => formatCell('format2dec', props, type)
 					break
 				}
 
 				case 'format0dec': {
-					header = formatHeader(column.Header)
+					header = formatHeader(column.columnName || column.name)
 					cell = (props: any) => formatCell('integer', props, type)
 					break
 				}
 
 				case 'amount': {
-					header = formatHeader(column.Header)
+					header = formatHeader(column.columnName || column.name)
 					cell = (props: any) => formatCell('format2dec', props, type)
 					break
 				}
 
 				case 'align': {
-					header = formatHeader(column.Header)
+					header = formatHeader(column.columnName || column.name)
 					cell = function FormatCell({ cell: { value } }: CellNumber) {
 						return <div className="text-right">{value}</div>
 					}
@@ -77,19 +80,23 @@ function formatColumns() {
 				}
 
 				case 'percentage': {
-					header = formatHeader(column.Header)
+					header = formatHeader(column.columnName || column.name)
 					cell = (props: any) => formatCell('formatPercentage', props)
 					break
 				}
 
 				case 'date': {
-					header = formatHeader(column.Header)
+					header = formatHeader(column.columnName || column.name)
 					cell = (props: any) => formatCell('formatDate', props)
 					break
 				}
 
 				case 'marketcap': {
-					header = <div className="ml-auto">{column.Header}</div>
+					header = (
+						<div className="ml-auto">
+							{column.columnName || column.name}
+						</div>
+					)
 					cell = function FormatCell({ cell: { value } }: CellNumber) {
 						return (
 							<div className="text-right mr-3">
@@ -102,7 +109,9 @@ function formatColumns() {
 				}
 
 				case 'padleft': {
-					header = <div className="ml-1">{column.Header}</div>
+					header = (
+						<div className="ml-1">{column.columnName || column.name}</div>
+					)
 					cell = function FormatCell({ cell: { value } }: CellNumber) {
 						return <div className="ml-1">{value}</div>
 					}
@@ -111,15 +120,15 @@ function formatColumns() {
 				}
 
 				default:
-					header = column.Header
+					header = column.columnName || column.name
 					cell = (props: any) => props.value
 					break
 			}
 
 			return {
 				Header: header,
-				accessor: column.accessor,
-				name: column.Header,
+				accessor: column.id,
+				name: column.columnName || column.name,
 				Cell: cell,
 				sortType: column.sortType || 'basic',
 				sortInverted: sortInverted ?? true
@@ -128,8 +137,8 @@ function formatColumns() {
 
 		// If no format specified, just return plain Header/accessor pair
 		return {
-			Header: column.Header,
-			accessor: column.accessor
+			Header: column.columnName || column.name,
+			accessor: column.id
 		}
 	})
 

@@ -1,11 +1,8 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import {
-	FiltersMap,
-	IPOFiltersMap,
-	ETFFiltersMap
-} from 'components/StockScreener/maps/filters.map'
+import { getDataPoints } from 'components/StockScreener/maps/dataPoints'
 import { ClearFiltersButton } from '../ClearFiltersButton'
 import { FilterWrap } from './FilterWrap'
+import { DataId } from 'types/DataId'
 
 export function FiltersList() {
 	const type = screenerState(state => state.type)
@@ -13,28 +10,36 @@ export function FiltersList() {
 	const filterMenu = screenerState(state => state.filterMenu)
 	const filterSearch = screenerState(state => state.filterSearch)
 	const filtersShown = screenerState(state => state.filtersShown)
+	const DataPoints = getDataPoints(type)
 
 	if (!filtersShown) {
 		return null
 	}
-	let filterMap = []
-
-	if (type == 'stocks') {
-		filterMap = FiltersMap
-	} else if (type == 'ipo') {
-		filterMap = IPOFiltersMap
-	} else {
-		filterMap = ETFFiltersMap
-	}
 
 	if (filterSearch.length > 0) {
+		let searched: DataId[] = []
+
+		DataPoints.map(f => {
+			if (
+				f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
+				f.id.toLowerCase().includes(filterSearch.toLowerCase())
+			) {
+				searched.push(f.id)
+			}
+		})
+
+		if (!searched.length) {
+			return (
+				<div className="pt-1.5 pl-1">
+					No filters found that matched {`"${filterSearch}"`}
+				</div>
+			)
+		}
+
 		return (
 			<div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2.5 pt-1">
-				{filterMap.map(f => {
-					if (
-						f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
-						f.id.toLowerCase().includes(filterSearch.toLowerCase())
-					) {
+				{DataPoints.map(f => {
+					if (searched.includes(f.id)) {
 						return <FilterWrap f={f} key={f.id} />
 					}
 					return null
@@ -57,7 +62,7 @@ export function FiltersList() {
 
 		return (
 			<div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2.5 pt-1">
-				{filterMap.map(f => {
+				{DataPoints.map(f => {
 					if (active.includes(f.id)) {
 						return <FilterWrap f={f} key={f.id} />
 					}
@@ -73,7 +78,7 @@ export function FiltersList() {
 			<div
 				className={`sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-x-2.5 pt-1`}
 			>
-				{filterMap.map(f => {
+				{DataPoints.map(f => {
 					if (f.category?.includes(filterMenu) || filterMenu === 'All') {
 						return <FilterWrap f={f} key={f.id} />
 					}

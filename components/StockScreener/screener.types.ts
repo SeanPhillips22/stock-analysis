@@ -1,4 +1,4 @@
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 export type ScreenerTypes = 'stocks' | 'ipo' | 'etf' | ''
 
 // Results columns
@@ -57,11 +57,30 @@ export type ETFScreenerData = {
 export type FilterProps = {
 	name: string
 	id: DataId
-	category: string[]
+	columnName?: string
+	category?: string[]
 	options: FilterOption[]
 	filterType: FilterType
 	numberType?: NumberType
 	variable?: boolean
+	format?:
+		| 'string'
+		| 'linkSymbol'
+		| 'amount'
+		| 'align'
+		| 'abbreviate'
+		| 'format0dec'
+		| 'format2dec'
+		| 'changePcColor'
+		| 'percentage'
+		| 'date'
+		| 'marketcap'
+		| 'padleft'
+	sortType?: any
+	sortInverted?: string
+	tooltipTitle?: any
+	tooltipText?: string
+	tooltipFormula?: string
 }
 
 export type FilterOption = {
@@ -96,6 +115,7 @@ export type FilterType =
 	| 'dateYear'
 	| 'numericRange'
 	| 'isSpac'
+	| 'none'
 
 export type NumberType = 'percentage'
 export type ComparisonOption =

@@ -5,7 +5,7 @@ import { cn } from 'functions/helpers/classNames'
 import { tabActive } from 'functions/helpers/tabActive'
 import { useRouter } from 'next/router'
 import { authState } from 'state/authState'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { stockTableState } from '../stockTableState'
 
 const OPTIONS: {

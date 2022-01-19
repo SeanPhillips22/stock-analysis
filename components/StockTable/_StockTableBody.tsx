@@ -7,7 +7,7 @@ import {
 	useGlobalFilter,
 	useAsyncDebounce
 } from 'react-table'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { TableControls } from './Controls/_TableControls'
 import { stockTableState } from './stockTableState'
 
