@@ -57,6 +57,7 @@ export function TableRange() {
 	const isPro = authState(state => state.isPro)
 	const main = stockTableState(state => state.main)
 	const setMain = stockTableState(state => state.setMain)
+	const setSorted = stockTableState(state => state.setSorted)
 
 	// decide which title to show on hover
 	function hoverTitle(id: DataId, pro?: boolean) {
@@ -69,6 +70,7 @@ export function TableRange() {
 		if (pro && !isPro) router.push('/pro/')
 		else {
 			setMain(id)
+			setSorted([{ id, desc: true }])
 		}
 	}
 
