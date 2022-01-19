@@ -1,5 +1,5 @@
 import { DataPoints } from 'data/StockDataPoints'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { ColumnSort } from './ColumnSort'
 
 type Props = {

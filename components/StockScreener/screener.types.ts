@@ -1,4 +1,4 @@
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 export type ScreenerTypes = 'stocks' | 'ipo' | 'etf' | ''
 
 // Results columns

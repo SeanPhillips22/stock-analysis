@@ -1,10 +1,10 @@
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { TOOLTIP_MAP } from 'components/StockScreener/maps/tooltip.map'
 import { screenerState } from 'components/StockScreener/screener.state'
 
 export function TooltipContent({ id }: { id: DataId }) {
-	const type = screenerState((state) => state.type)
-	const data = TOOLTIP_MAP.find((item) => item.id === id)
+	const type = screenerState(state => state.type)
+	const data = TOOLTIP_MAP.find(item => item.id === id)
 
 	if (!data) {
 		return null

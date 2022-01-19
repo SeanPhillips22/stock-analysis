@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { DataPoints, DataPointType } from 'data/StockDataPoints'
 import { useMemo } from 'react'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { ColumnItem } from './ColumnItem'
 
 type Props = {

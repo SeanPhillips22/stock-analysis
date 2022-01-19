@@ -6,7 +6,7 @@ import {
 	IPOFiltersMap,
 	ETFFiltersMap
 } from 'components/StockScreener/maps/filters.map'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { ColumnItem } from './ColumnItem'
 import { useMemo } from 'react'
@@ -27,7 +27,7 @@ type Props = {
  */
 export function ColumnItemWrap({ search, type }: Props) {
 	const { isShowing } = useModifyColumns()
-	const columnDropdownOpen = screenerState((state) => state.columnDropdownOpen)
+	const columnDropdownOpen = screenerState(state => state.columnDropdownOpen)
 
 	const activeArray: ColumnProperties[] = []
 	const inactiveArray: ColumnProperties[] = []
@@ -42,7 +42,7 @@ export function ColumnItemWrap({ search, type }: Props) {
 		filters = ETFFiltersMap
 	}
 
-	filters.forEach((filter) => {
+	filters.forEach(filter => {
 		if (isShowing(filter.id)) {
 			if (search === '' || filter.name.toLowerCase().includes(search)) {
 				activeArray.push({ id: filter.id, name: filter.name })
@@ -59,7 +59,7 @@ export function ColumnItemWrap({ search, type }: Props) {
 
 	return (
 		<div className="max-h-80 overflow-y-auto overscroll-contain thin-scroll text-sm p-2 space-y-2">
-			{active.map((item) => (
+			{active.map(item => (
 				<ColumnItem
 					key={item.id}
 					id={item.id}
@@ -67,7 +67,7 @@ export function ColumnItemWrap({ search, type }: Props) {
 					type={type}
 				/>
 			))}
-			{inactive.map((item) => (
+			{inactive.map(item => (
 				<ColumnItem
 					key={item.id}
 					id={item.id}

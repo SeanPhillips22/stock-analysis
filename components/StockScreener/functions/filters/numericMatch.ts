@@ -1,4 +1,4 @@
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { SingleStock } from 'components/StockScreener/screener.types'
 import { getFilterFromString } from '../filterString/getFilterFromString'
 

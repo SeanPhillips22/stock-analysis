@@ -1,6 +1,6 @@
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { useState } from 'react'
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { ColumnList } from './ColumnList'
 import { ColumnSearch } from './ColumnSearch'
 

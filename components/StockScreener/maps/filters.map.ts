@@ -407,6 +407,38 @@ export const FiltersMap: FilterProps[] = [
 		]
 	},
 	{
+		name: 'Previous Close',
+		id: 'close',
+		category: ['Other'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 10', value: 'over-10' },
+			{ name: 'Over 5', value: 'over-5' },
+			{ name: 'Over 2', value: 'over-2' },
+			{ name: 'Over 1', value: 'over-1' },
+			{ name: 'Under 1', value: 'under-1' },
+			{ name: 'Under 2', value: 'under-2' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 10', value: 'under-10' }
+		]
+	},
+	{
+		name: 'Premarket Price',
+		id: 'premarketPrice',
+		category: ['Other'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 10', value: 'over-10' },
+			{ name: 'Over 5', value: 'over-5' },
+			{ name: 'Over 2', value: 'over-2' },
+			{ name: 'Over 1', value: 'over-1' },
+			{ name: 'Under 1', value: 'under-1' },
+			{ name: 'Under 2', value: 'under-2' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 10', value: 'under-10' }
+		]
+	},
+	{
 		name: 'Country',
 		id: 'country',
 		category: ['Company'],

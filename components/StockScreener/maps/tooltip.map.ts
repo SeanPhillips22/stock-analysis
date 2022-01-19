@@ -723,6 +723,18 @@ export const TOOLTIP_MAP: MapProps = [
 			'There are two types of stock splits: Forward and Reverse. Forward means that the share count increases and the stock price goes down. Reverse means that the stock count decreases and the stock price goes up.'
 	},
 	{
+		id: 'close',
+		title: 'Previous Close',
+		tooltip:
+			'The closing price of the previous trading day. This is used to calculate the change in price on the current trading day.'
+	},
+	{
+		id: 'premarketPrice',
+		title: 'Premarket Price',
+		tooltip:
+			'The price of the stock during premarket trading hours, from 4:00 am until 9:30 am Eastern Time.'
+	},
+	{
 		id: 'ipoPriceRange',
 		title: 'IPO Price',
 		tooltip:

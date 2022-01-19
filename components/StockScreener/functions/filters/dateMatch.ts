@@ -1,4 +1,4 @@
-import { DataId } from 'types/Data'
+import { DataId } from 'types/DataId'
 import { SingleStock } from 'components/StockScreener/screener.types'
 
 function changeDate(date: Date, abbr: string) {
