@@ -11,6 +11,11 @@ export function RecentNavigation({ path }: { path: string }) {
 						css={path === '' ? 'active' : 'inactive'}
 					/>
 					<NavTab
+						url="/ipos/2022/"
+						title="2022"
+						css={path === '2022' ? 'active' : 'inactive'}
+					/>
+					<NavTab
 						url="/ipos/2021/"
 						title="2021"
 						css={path === '2021' ? 'active' : 'inactive'}

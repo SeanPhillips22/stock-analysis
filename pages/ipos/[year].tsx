@@ -26,13 +26,13 @@ interface Props {
 
 export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 	const title =
-		year === '2021'
-			? 'All 2021 IPOs (so far)'
+		year === '2022'
+			? 'All 2022 IPOs (so far)'
 			: `All ${year} IPOs - A Complete List`
 
 	const description =
-		year === '2021'
-			? 'A list of all the stocks that have gone public with an IPO on the US stock market in the year 2021, so far.'
+		year === '2022'
+			? 'A list of all the stocks that have gone public with an IPO on the US stock market in the year 2022, so far.'
 			: `A list of all the initial public offerings (IPOs) on the US stock market in the year ${year}. Includes detailed information about each stock.`
 
 	return (
@@ -77,10 +77,10 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 
 export default IpoYear
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const year = context?.params?.year as string
 
-	if (year != '2021' && year != '2020' && year != '2019') {
+	if (Number(year) > 2022 || Number(year) < 2019) {
 		return {
 			notFound: true
 		}
