@@ -36,6 +36,19 @@ export function LoadAds() {
 				}}
 			/>
 			<Script
+				id="snigel-initial-ads"
+				strategy="afterInteractive"
+				dangerouslySetInnerHTML={{
+					__html: `window.addEventListener("adnginLoaderReady", function() {
+          adngin.queue.push(function() {
+            googletag.cmd.push(function(){
+              googletag.pubads().set("page_url", "stockanalysis.com");
+            });
+          });
+        });`
+				}}
+			/>
+			<Script
 				id="snigel-script"
 				strategy="afterInteractive"
 				src="https://cdn.snigelweb.com/adengine/stockanalysis.com/loader.js"
