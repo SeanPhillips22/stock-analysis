@@ -43,7 +43,7 @@ const columns: Column[] = [
 		}
 	},
 	{
-		Header: 'Name',
+		Header: 'Company Name',
 		accessor: 'name',
 		sortType: (a, b) => {
 			const ad = a.values.name.toUpperCase()

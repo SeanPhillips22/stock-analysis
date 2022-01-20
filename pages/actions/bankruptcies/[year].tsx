@@ -81,7 +81,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	// Generate paths for all the years with existing data
-	const current = 2021
+	const current = 2022
 	const last = 1998
 	const diff = current - last
 

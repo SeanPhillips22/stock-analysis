@@ -11,7 +11,7 @@ import { ActionsPaywall } from 'components/Actions/ActionsPaywall'
 
 export const ActionsAllYear = ({ year, data }: ActionProps) => {
 	if (Number(year) === new Date().getFullYear()) {
-		data.data = data.data.filter((d) => d.date.slice(-4) === year)
+		data.data = data.data.filter(d => d.date.slice(-4) === year)
 	}
 
 	const columns = [
@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	// Generate paths for all the years with existing data
-	const current = 2021
+	const current = 2022
 	const last = 1998
 	const diff = current - last
 
