@@ -32,14 +32,9 @@ export function LoadAds() {
 				dangerouslySetInnerHTML={{
 					__html: `window.snigelPubConf = { "adengine": { "activeAdUnits": ${JSON.stringify(
 						ads
-					)} } }`
-				}}
-			/>
-			<Script
-				id="snigel-initial-ads"
-				strategy="afterInteractive"
-				dangerouslySetInnerHTML={{
-					__html: `window.addEventListener("adnginLoaderReady", function() {
+					)} } }
+					
+					window.addEventListener("adnginLoaderReady", function() {
           adngin.queue.push(function() {
             googletag.cmd.push(function(){
               googletag.pubads().set("page_url", "stockanalysis.com");
