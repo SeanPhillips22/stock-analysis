@@ -38,11 +38,19 @@
 		padding-right: 0.8rem;
 	}
 
-	.ipotable tr > *:nth-child(n + 2) {
+	.ipotable tr > *:nth-child(n + 4) {
 		text-align: right;
 	}
 
-	.ipotable tr > *:nth-child(n + 2) span {
+	.ipotable tr > *:nth-child(n + 4) span {
+		justify-content: end;
+	}
+
+	.ipotable.calendar tr > *:nth-child(n + 3) {
+		text-align: right;
+	}
+
+	.ipotable.calendar tr > *:nth-child(n + 3) span {
 		justify-content: end;
 	}
 
@@ -54,9 +62,17 @@
 		background-color: #f6f7f8;
 	}
 
+	.weekof {
+		@apply inline-block leading-[1.15];
+	}
+
 	.weekof::before {
 		@apply block text-[0.6rem] leading-none text-gray-600 -mt-0.5;
-		content: 'Week of';
+		content: 'week of';
+	}
+
+	.ipotable.calendar a {
+		@apply bll;
 	}
 
 	@media screen and (max-width: 1350px) {

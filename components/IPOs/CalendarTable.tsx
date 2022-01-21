@@ -5,14 +5,14 @@ import {
 	useAsyncDebounce,
 	useSortBy
 } from 'react-table'
-import { StockLink } from 'components/Links'
 import { IpoUpcoming } from 'types/Ipos'
 import 'regenerator-runtime/runtime'
 import { Export } from 'components/Controls/Export'
 import { Filter } from 'components/Controls//Filter'
 import { SortUpIcon } from 'components/Icons/SortUp'
 import { SortDownIcon } from 'components/Icons/SortDown'
-import { CellString } from 'types/Tables'
+import { formatCell } from 'functions/tables/tableFormat'
+import { formatDateUSA } from 'functions/datetime/formatDates'
 
 const columns: Column[] = [
 	{
@@ -35,9 +35,7 @@ const columns: Column[] = [
 	{
 		Header: 'Symbol',
 		accessor: 'symbol',
-		Cell: function DateCell({ cell: { value } }: CellString) {
-			return <StockLink symbol={value} />
-		}
+		Cell: (props: any) => formatCell('linkSymbol', props)
 	},
 	{
 		Header: 'Expected Date',
@@ -45,9 +43,11 @@ const columns: Column[] = [
 		Cell: (props: any) => {
 			if (props.value) {
 				if (props.data[props.row.id].weekOf)
-					return <div className="weekof">{props.value}</div>
+					return (
+						<span className="weekof">{formatDateUSA(props.value)}</span>
+					)
 			}
-			return props.value || 'Pending'
+			return formatDateUSA(props.value)
 		},
 		sortType: (a, b) => {
 			const ad = new Date(a.values.date).getTime()
@@ -64,7 +64,9 @@ const columns: Column[] = [
 	},
 	{
 		Header: 'Shares',
-		accessor: 'shares'
+		accessor: 'shares',
+		Cell: (props: any) =>
+			props.value === 'n/a' ? 'n/a' : formatCell('integer', props)
 	},
 	{
 		Header: 'Exchange',
@@ -117,7 +119,6 @@ export const CalendarTable = ({
 	filter
 }: Props) => {
 	const initialState = !data[0]?.date ? { hiddenColumns: ['date'] } : {}
-	console.log(data)
 
 	const tableInstance = useTable(
 		{ columns, data, initialState },
@@ -146,7 +147,9 @@ export const CalendarTable = ({
 				}`}
 			>
 				<h2 className="hh2 font-semibold text-[1.4rem] text-gray-800 mb-0 lg:mb-0.5 mr-auto">
-					{`${title} · ${count} IPOs`}
+					{title === 'This Week' || title === 'Next Week'
+						? `${title} · ${count} IPOs`
+						: title}
 				</h2>
 				<div className="hidden sm:block">
 					<Export
