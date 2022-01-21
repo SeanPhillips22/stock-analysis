@@ -16,14 +16,11 @@ import { CellString } from 'types/Tables'
 
 const columns: Column[] = [
 	{
-		Header: 'IPO Date',
-		accessor: 'date',
-		Cell: function DateCell({ cell: { value } }: CellString) {
-			return value || 'Pending'
-		},
+		Header: 'Company Name',
+		accessor: 'name',
 		sortType: (a, b) => {
-			const ad = new Date(a.values.date).getTime()
-			const bd = new Date(b.values.date).getTime()
+			const ad = a.values.name.toUpperCase()
+			const bd = b.values.name.toUpperCase()
 			if (ad < bd) {
 				return 1
 			}
@@ -43,34 +40,35 @@ const columns: Column[] = [
 		}
 	},
 	{
-		Header: 'Company Name',
-		accessor: 'name',
+		Header: 'Expected Date',
+		accessor: 'date',
+		Cell: (props: any) => {
+			if (props.value) {
+				if (props.data[props.row.id].weekOf)
+					return <div className="weekof">{props.value}</div>
+			}
+			return props.value || 'Pending'
+		},
 		sortType: (a, b) => {
-			const ad = a.values.name.toUpperCase()
-			const bd = b.values.name.toUpperCase()
-			if (ad < bd) {
-				return 1
-			}
-			if (ad > bd) {
-				return -1
-			} else {
-				return 0
-			}
+			const ad = new Date(a.values.date).getTime()
+			const bd = new Date(b.values.date).getTime()
+			if (ad < bd) return 1
+			if (ad > bd) return -1
+			else return 0
 		},
 		sortInverted: true
-	},
-	{
-		Header: 'Exchange',
-		accessor: 'exchange'
 	},
 	{
 		Header: 'Price Range',
 		accessor: 'price'
 	},
-
 	{
 		Header: 'Shares',
 		accessor: 'shares'
+	},
+	{
+		Header: 'Exchange',
+		accessor: 'exchange'
 	}
 ]
 
@@ -119,6 +117,7 @@ export const CalendarTable = ({
 	filter
 }: Props) => {
 	const initialState = !data[0]?.date ? { hiddenColumns: ['date'] } : {}
+	console.log(data)
 
 	const tableInstance = useTable(
 		{ columns, data, initialState },
@@ -146,8 +145,8 @@ export const CalendarTable = ({
 					border ? ' pt-1.5 border-t' : ''
 				}`}
 			>
-				<h2 className="hh2 text-[1.4rem] text-gray-800 mb-0 lg:mb-0.5 mr-auto">
-					{title}
+				<h2 className="hh2 font-semibold text-[1.4rem] text-gray-800 mb-0 lg:mb-0.5 mr-auto">
+					{`${title} · ${count} IPOs`}
 				</h2>
 				<div className="hidden sm:block">
 					<Export
@@ -177,7 +176,7 @@ export const CalendarTable = ({
 				)}
 			</div>
 			<div className="overflow-x-auto">
-				<table className="ipotable" id={tableId}>
+				<table className="ipotable calendar" id={tableId}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

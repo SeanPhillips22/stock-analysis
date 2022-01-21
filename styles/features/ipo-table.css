@@ -25,6 +25,11 @@
 		text-overflow: ellipsis;
 	}
 
+	.ipotable.calendar tr td {
+		padding-top: 0.6rem;
+		padding-bottom: 0.6rem;
+	}
+
 	.ipotable tr > *:first-child {
 		padding-left: 0.8rem;
 	}
@@ -33,11 +38,11 @@
 		padding-right: 0.8rem;
 	}
 
-	.ipotable tr > *:nth-child(n + 4) {
+	.ipotable tr > *:nth-child(n + 2) {
 		text-align: right;
 	}
 
-	.ipotable tr > *:nth-child(n + 4) span {
+	.ipotable tr > *:nth-child(n + 2) span {
 		justify-content: end;
 	}
 
@@ -47,6 +52,11 @@
 
 	.ipotable tr:nth-child(odd) {
 		background-color: #f6f7f8;
+	}
+
+	.weekof::before {
+		@apply block text-[0.6rem] leading-none text-gray-600 -mt-0.5;
+		content: 'Week of';
 	}
 
 	@media screen and (max-width: 1350px) {
