@@ -12,9 +12,32 @@ import { Filter } from 'components/Controls//Filter'
 import { SortUpIcon } from 'components/Icons/SortUp'
 import { SortDownIcon } from 'components/Icons/SortDown'
 import { formatCell } from 'functions/tables/tableFormat'
-import { formatDateUSA } from 'functions/datetime/formatDates'
 
 const columns: Column[] = [
+	{
+		Header: 'IPO Date',
+		accessor: 'date',
+		Cell: (props: any) => {
+			if (props.value) {
+				if (props.data[props.row.id].weekOf)
+					return <span className="weekof">{props.value}</span>
+			}
+			return props.value
+		},
+		sortType: (a, b) => {
+			const ad = new Date(a.values.date).getTime()
+			const bd = new Date(b.values.date).getTime()
+			if (ad < bd) return 1
+			if (ad > bd) return -1
+			else return 0
+		},
+		sortInverted: true
+	},
+	{
+		Header: 'Symbol',
+		accessor: 'symbol',
+		Cell: (props: any) => formatCell('linkSymbol', props)
+	},
 	{
 		Header: 'Company Name',
 		accessor: 'name',
@@ -33,30 +56,8 @@ const columns: Column[] = [
 		sortInverted: true
 	},
 	{
-		Header: 'Symbol',
-		accessor: 'symbol',
-		Cell: (props: any) => formatCell('linkSymbol', props)
-	},
-	{
-		Header: 'Expected Date',
-		accessor: 'date',
-		Cell: (props: any) => {
-			if (props.value) {
-				if (props.data[props.row.id].weekOf)
-					return (
-						<span className="weekof">{formatDateUSA(props.value)}</span>
-					)
-			}
-			return formatDateUSA(props.value)
-		},
-		sortType: (a, b) => {
-			const ad = new Date(a.values.date).getTime()
-			const bd = new Date(b.values.date).getTime()
-			if (ad < bd) return 1
-			if (ad > bd) return -1
-			else return 0
-		},
-		sortInverted: true
+		Header: 'Exchange',
+		accessor: 'exchange'
 	},
 	{
 		Header: 'Price Range',
@@ -67,21 +68,17 @@ const columns: Column[] = [
 		accessor: 'shares',
 		Cell: (props: any) =>
 			props.value === 'n/a' ? 'n/a' : formatCell('integer', props)
-	},
-	{
-		Header: 'Exchange',
-		accessor: 'exchange'
 	}
 ]
 
 const NoIpos = ({ title }: { title: string }) => {
 	switch (title) {
-		case 'IPOs This Week': {
+		case 'This Week': {
 			return (
 				<div>
-					<h2 className="hh2 mb-2">{title}</h2>
+					<h2 className="hh2 font-semibold mb-2 text-gray-800">{`${title} · 0 IPOs`}</h2>
 					<p className="text-lg text-gray-900">
-						There are no upcoming IPOs remaining for the current week.
+						There are no upcoming IPOs remaining for this week.
 					</p>
 				</div>
 			)
@@ -90,9 +87,9 @@ const NoIpos = ({ title }: { title: string }) => {
 		case 'Next Week': {
 			return (
 				<div>
-					<h2 className="hh2">{title}</h2>
+					<h2 className="hh2 font-semibold text-gray-800">{`${title} · 0 IPOs`}</h2>
 					<p className="text-lg text-gray-900">
-						There are no upcoming IPOs scheduled for next week.
+						There are no IPOs scheduled for next week.
 					</p>
 				</div>
 			)

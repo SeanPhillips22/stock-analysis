@@ -25,11 +25,6 @@
 		text-overflow: ellipsis;
 	}
 
-	.ipotable.calendar tr td {
-		padding-top: 0.6rem;
-		padding-bottom: 0.6rem;
-	}
-
 	.ipotable tr > *:first-child {
 		padding-left: 0.8rem;
 	}
@@ -46,14 +41,6 @@
 		justify-content: end;
 	}
 
-	.ipotable.calendar tr > *:nth-child(n + 3) {
-		text-align: right;
-	}
-
-	.ipotable.calendar tr > *:nth-child(n + 3) span {
-		justify-content: end;
-	}
-
 	.ipotable tr:hover td {
 		background-color: #f2f9ff !important;
 	}
@@ -63,15 +50,15 @@
 	}
 
 	.weekof {
-		@apply inline-block leading-[1.15];
+		@apply inline-block leading-none;
 	}
 
 	.weekof::before {
-		@apply block text-[0.6rem] leading-none text-gray-600 -mt-0.5;
+		@apply block text-[0.6rem] leading-none text-gray-600 text-right;
 		content: 'week of';
 	}
 
-	.ipotable.calendar a {
+	.ipotable a {
 		@apply bll;
 	}
 
