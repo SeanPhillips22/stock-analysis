@@ -1,20 +1,12 @@
-import { useContext } from 'react'
-import { TableTimestamp } from 'types/Tables'
-import { TableContext } from '../TableContext'
+import { usePageContext } from '../PageContext'
 
-type Props = {
-	timestamp: TableTimestamp
-}
-
-export function TableTimestamp({ timestamp }: Props) {
-	const c = useContext(TableContext)
+export function TableTimestamp() {
+	const { page, updated } = usePageContext()
 
 	return (
 		<div className="controls-timestamp">
 			<span>Updated</span>{' '}
-			{c.config.active === 'premarket'
-				? timestamp.premarket
-				: timestamp.last}
+			{page.active === 'premarket' ? updated.premarket : updated.last}
 		</div>
 	)
 }

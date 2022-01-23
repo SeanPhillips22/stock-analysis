@@ -1,18 +1,17 @@
 import { GetServerSideProps } from 'next/types'
 import { StockTable } from 'components/StockTable/__StockTable'
-import { MarketsLayout } from 'components/Markets/_MarkeysLayout'
+import { MarketsLayout } from 'components/Markets/_MarketsLayout'
 import { PageConfig } from 'types/PageConfig'
-import { DataId } from 'types/DataId'
 import { getSelect } from 'functions/apis/getSelect'
 import { SelectConfig } from 'types/SelectConfig'
 import { useEffect } from 'react'
 import { stockTableState } from 'components/StockTable/stockTableState'
 import { MoverColumns } from 'data/column-groups/movers.columns'
 import { TableTimestamp } from 'types/Tables'
-import { TableContextProvider } from 'components/StockTable/TableContext'
+import { PageContextProvider } from 'components/StockTable/PageContext'
 
 // the page's config and settings
-const config: PageConfig = {
+const page: PageConfig = {
 	path: '/markets/premarket/',
 	title: 'Top Gainers',
 	parentTitle: 'Premarket Movers',
@@ -30,15 +29,6 @@ const config: PageConfig = {
 		'Stocks that are moving in the premarket trading period from 4:00 AM to 9:30 AM. See top gainers and top losers.'
 }
 
-// the initial columns to show in the table
-const columns: DataId[] = [
-	's',
-	'n',
-	'premarketChange',
-	'premarketPrice',
-	'marketCap'
-]
-
 // the initial config for the page data
 // this will be fetched from the select endpoint on the backend
 const selectConfig: SelectConfig = {
@@ -48,7 +38,7 @@ const selectConfig: SelectConfig = {
 	count: 20,
 	sort: 'desc',
 	defaultSort: [{ id: 'premarketChangePercent', desc: true }],
-	columns: columns,
+	columns: ['s', 'n', 'premarketChange', 'premarketPrice', 'marketCap'],
 	columnOptions: MoverColumns,
 	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
 }
@@ -67,11 +57,11 @@ export default function PreMarketPage({ data, updated }: Props) {
 	}, [resetTableState])
 
 	return (
-		<MarketsLayout config={config}>
-			<TableContextProvider value={{ config, updated }}>
+		<PageContextProvider value={{ page, updated }}>
+			<MarketsLayout>
 				<StockTable _data={data} sort={selectConfig?.defaultSort} />
-			</TableContextProvider>
-		</MarketsLayout>
+			</MarketsLayout>
+		</PageContextProvider>
 	)
 }
 

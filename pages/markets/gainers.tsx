@@ -1,18 +1,17 @@
 import { GetServerSideProps } from 'next/types'
 import { StockTable } from 'components/StockTable/__StockTable'
-import { MarketsLayout } from 'components/Markets/_MarkeysLayout'
+import { MarketsLayout } from 'components/Markets/_MarketsLayout'
 import { PageConfig } from 'types/PageConfig'
-import { DataId } from 'types/DataId'
 import { getSelect } from 'functions/apis/getSelect'
 import { SelectConfig } from 'types/SelectConfig'
 import { useEffect } from 'react'
 import { stockTableState } from 'components/StockTable/stockTableState'
 import { MoverColumns } from 'data/column-groups/movers.columns'
 import { TableTimestamp } from 'types/Tables'
-import { TableContextProvider } from 'components/StockTable/TableContext'
+import { PageContextProvider } from 'components/StockTable/PageContext'
 
 // the page's config and settings
-const config: PageConfig = {
+const page: PageConfig = {
 	path: '/markets/gainers/',
 	title: 'Gainers Today',
 	parentTitle: 'Top Stock Gainers',
@@ -29,9 +28,6 @@ const config: PageConfig = {
 		'A list of the stocks with the highest percentage gain today. See stock price, volume, market cap and more.'
 }
 
-// the initial columns to show in the table
-const columns: DataId[] = ['s', 'n', 'price', 'volume', 'marketCap']
-
 // the initial config for the page data
 // this will be fetched from the select endpoint on the backend
 const selectConfig: SelectConfig = {
@@ -41,7 +37,7 @@ const selectConfig: SelectConfig = {
 	count: 20,
 	sort: 'desc',
 	defaultSort: [{ id: 'change', desc: true }],
-	columns: columns,
+	columns: ['s', 'n', 'price', 'volume', 'marketCap'],
 	columnOptions: MoverColumns,
 	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
 }
@@ -60,11 +56,11 @@ export default function GainersPage({ data, updated }: Props) {
 	}, [resetTableState])
 
 	return (
-		<MarketsLayout config={config}>
-			<TableContextProvider value={{ config, updated }}>
+		<PageContextProvider value={{ page, updated }}>
+			<MarketsLayout>
 				<StockTable _data={data} sort={selectConfig?.defaultSort} />
-			</TableContextProvider>
-		</MarketsLayout>
+			</MarketsLayout>
+		</PageContextProvider>
 	)
 }
 

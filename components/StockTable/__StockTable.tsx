@@ -1,9 +1,9 @@
-import { useContext, useMemo } from 'react'
+import { useMemo } from 'react'
 import { getColumns } from './getColumns'
 import { useTableData } from './useTableData'
 import { StockTableBody } from './_StockTableBody'
 import { stockTableState } from './stockTableState'
-import { TableContext } from './TableContext'
+import { usePageContext } from './PageContext'
 import { SortObject } from 'components/StockScreener/screener.types'
 
 type Props = {
@@ -16,14 +16,14 @@ type Props = {
  * Customizable columns, export, filtering, sorting, and pagination
  */
 export function StockTable({ _data, sort }: Props) {
-	const context = useContext(TableContext)
+	const { page } = usePageContext()
 	const _columns = stockTableState(state => state.columns)
 	const main = stockTableState(state => state.main)
 	const defaultSort = stockTableState(state => state.defaultSort)
 	const setSorted = stockTableState(state => state.setSorted)
 
 	// pass initial data into react query
-	const query = useTableData(_data, context.config.path)
+	const query = useTableData(_data, page.path)
 
 	// memoize the data and columns
 	const data = useMemo(() => query.data.data || query.data, [query.data])

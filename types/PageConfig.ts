@@ -12,5 +12,5 @@ export type PageConfig = {
 		moverType?: boolean
 	}
 	metaTitle: string
-	metaDescription?: string
+	metaDescription: string
 }

@@ -8,7 +8,7 @@ import {
 	useAsyncDebounce
 } from 'react-table'
 import { DataId } from 'types/DataId'
-import { TableControls } from './Controls/_TableControls'
+import { StockTableControls } from './_StockTableControls'
 import { stockTableState } from './stockTableState'
 
 type Props = {
@@ -43,7 +43,7 @@ export function StockTableBody({ data, columns, sort, sortProps }: Props) {
 	return (
 		<div>
 			<div className="mt-3 sm:mt-0">
-				<TableControls
+				<StockTableControls
 					tableId="stock-table"
 					filter={{
 						useAsyncDebounce,
