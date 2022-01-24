@@ -1,13 +1,17 @@
-import { SelectConfig } from 'types/SelectConfig'
+import { TableDynamic } from 'components/StockTable/TableTypes'
 import { getData } from './API'
 import { respondSSR } from './callBackEnd'
 
 /**
  * Fetch data from the select endpoint on the backend
  */
-export async function getSelect(config: SelectConfig, ssr?: boolean) {
+export async function getSelect(
+	config: TableDynamic,
+	type: 'stocks' | 'etf',
+	ssr?: boolean
+) {
 	// destructure the props and create the URL
-	let { type, main, count, sort, columns } = config
+	let { main, count, sortDirection, columns } = config
 
 	// turn the columns array into a string
 	let cols = columns.join(',')
@@ -17,7 +21,7 @@ export async function getSelect(config: SelectConfig, ssr?: boolean) {
 	let filters = config.filters ? config.filters.join(',') : ''
 
 	// create the url
-	let url = `select?type=${type}&main=${main}&count=${count}&sort=${sort}&columns=${cols}&filters=${filters}`
+	let url = `select?type=${type}&main=${main}&count=${count}&sort=${sortDirection}&columns=${cols}&filters=${filters}`
 
 	// fetch the data from the back-end
 	let response = await getData(url)

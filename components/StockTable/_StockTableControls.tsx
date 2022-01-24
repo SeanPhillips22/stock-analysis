@@ -4,10 +4,11 @@ import { TableFilter } from './Controls/TableFilter'
 import { TableColumns } from './Controls/TableColumns'
 import { TableResults } from './Controls/TableResults'
 import { TableRange } from './Controls/TableRange'
-import { usePageContext } from 'components/StockTable/PageContext'
+import { usePageContext } from 'components/Markets/PageContext'
 import { TableTimestamp } from './Controls/TableTimestamp'
 import { TableTitle } from './Controls/TableTitle'
 import { TableMoverType } from './Controls/TableMoverType'
+import { useTableContext } from './TableContext'
 
 type Props = {
 	filter: FilterObject
@@ -15,6 +16,7 @@ type Props = {
 }
 
 export function StockTableControls({ filter, tableId }: Props) {
+	const { fixed } = useTableContext()
 	const { page, updated } = usePageContext()
 
 	return (
@@ -29,17 +31,17 @@ export function StockTableControls({ filter, tableId }: Props) {
 			{/* Button group */}
 			<div className="btn-group">
 				{/* MoverType Select */}
-				{page.controls?.moverType && <TableMoverType />}
+				{fixed.controls?.moverType && <TableMoverType />}
 				{/* Time Range */}
-				{page.controls?.range && <TableRange />}
+				{fixed.controls?.range && <TableRange />}
 				{/* Search Filter */}
-				{page.controls?.filter && <TableFilter filter={filter} />}
+				{fixed.controls?.filter && <TableFilter filter={filter} />}
 				{/* Results Count */}
-				{page.controls?.results && <TableResults />}
+				{fixed.controls?.results && <TableResults />}
 				{/* Export Button */}
-				{page.controls?.export && <TableExport tableId={tableId} />}
+				{fixed.controls?.export && <TableExport tableId={tableId} />}
 				{/* Select Columns */}
-				{page.controls?.columns && <TableColumns />}
+				{fixed.controls?.columns && <TableColumns />}
 			</div>
 		</div>
 	)

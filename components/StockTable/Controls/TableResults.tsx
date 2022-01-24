@@ -5,7 +5,7 @@ import { cn } from 'functions/helpers/classNames'
 import { tabActive } from 'functions/helpers/tabActive'
 import { useRouter } from 'next/router'
 import { authState } from 'state/authState'
-import { stockTableState } from '../stockTableState'
+import { useTableContext } from '../TableContext'
 
 const OPTIONS = [
 	{
@@ -30,8 +30,8 @@ const OPTIONS = [
 export function TableResults() {
 	const router = useRouter()
 	const isPro = authState(state => state.isPro)
-	const count = stockTableState(state => state.count)
-	const setCount = stockTableState(state => state.setCount)
+	const { dynamic, setState } = useTableContext()
+	const { count } = dynamic
 
 	// decide which title to show on hover
 	function hoverTitle(value: number, pro?: boolean) {
@@ -42,7 +42,7 @@ export function TableResults() {
 	// when a new count is selected, either update the state or redirect to Pro page
 	function handleClick(value: number, pro?: boolean) {
 		if (pro && !isPro) router.push('/pro/')
-		setCount(value)
+		setState({ count: value })
 	}
 
 	// the text on the dropdown button

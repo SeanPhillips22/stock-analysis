@@ -1,6 +1,6 @@
 import { Layout } from 'components/Layout/_Layout'
 import { SEO } from 'components/SEO'
-import { usePageContext } from 'components/StockTable/PageContext'
+import { usePageContext } from 'components/Markets/PageContext'
 import { MarketsNavigation } from './MarketsNavigation'
 
 type Props = {

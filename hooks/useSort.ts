@@ -7,7 +7,7 @@ import { SortProps } from 'components/StockScreener/screener.types'
 export function useSort(sortProps: SortProps) {
 	const { defaultSort, setSort } = sortProps
 	// update the sort state
-	// but wait for 100ms before setting the state to allow the "column" to be updated
+	// but wait for 200ms before setting the state to allow the "column" to be updated
 	function updateSort(column: any) {
 		setTimeout(() => {
 			if (column.isSorted) {

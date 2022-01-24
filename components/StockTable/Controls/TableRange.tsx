@@ -6,7 +6,7 @@ import { tabActive } from 'functions/helpers/tabActive'
 import { useRouter } from 'next/router'
 import { authState } from 'state/authState'
 import { DataId } from 'types/DataId'
-import { stockTableState } from '../stockTableState'
+import { useTableContext } from '../TableContext'
 
 const OPTIONS: {
 	id: DataId
@@ -55,9 +55,8 @@ const OPTIONS: {
 export function TableRange() {
 	const router = useRouter()
 	const isPro = authState(state => state.isPro)
-	const main = stockTableState(state => state.main)
-	const setMain = stockTableState(state => state.setMain)
-	const setSorted = stockTableState(state => state.setSorted)
+	const { dynamic, setState } = useTableContext()
+	const { main } = dynamic
 
 	// decide which title to show on hover
 	function hoverTitle(id: DataId, pro?: boolean) {
@@ -69,8 +68,7 @@ export function TableRange() {
 	function handleClick(id: DataId, pro?: boolean) {
 		if (pro && !isPro) router.push('/pro/')
 		else {
-			setMain(id)
-			setSorted([{ id, desc: true }])
+			setState({ main: id, sort: [{ id, desc: true }] })
 		}
 	}
 

@@ -1,4 +1,4 @@
-import { stockTableState } from '../stockTableState'
+import { useTableContext } from '../TableContext'
 
 type Props = {
 	title: string
@@ -6,8 +6,9 @@ type Props = {
 }
 
 export function TableTitle({ title, active }: Props) {
-	const main = stockTableState(state => state.main)
-	const sort = stockTableState(state => state.sort)
+	const { dynamic } = useTableContext()
+	const { main, sortDirection } = dynamic
+
 	let printTitle = title
 
 	// Change the title from "Today" if a different time range is selected
@@ -18,7 +19,7 @@ export function TableTitle({ title, active }: Props) {
 		)
 	}
 
-	if (active === 'premarket' && sort === 'asc') {
+	if (active === 'premarket' && sortDirection === 'asc') {
 		printTitle = printTitle.replace('Gainers', 'Losers')
 	}
 
