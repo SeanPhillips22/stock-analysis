@@ -9,7 +9,8 @@ export function useTableData(
 	tableId: string,
 	type: 'stocks' | 'etf',
 	dynamic: TableDynamic,
-	_data: any[]
+	_data: any[],
+	enabled?: boolean
 ) {
 	// The params that  tell react-query when to update
 	const { main, count, columns, filters, sortDirection } = dynamic
@@ -28,7 +29,7 @@ export function useTableData(
 		async () => await getSelect(dynamic, type, false),
 		{
 			initialData: _data,
-			enabled: typeof window !== 'undefined', // only fetch if columns are defined
+			enabled: enabled,
 			refetchOnWindowFocus: false,
 			notifyOnChangeProps: 'tracked'
 		}

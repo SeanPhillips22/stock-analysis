@@ -1,3 +1,4 @@
+import { objString } from 'functions/helpers/objString'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { TableDynamic, TableFixed } from './TableTypes'
 
@@ -10,6 +11,7 @@ interface InitialProps {
 
 interface ContextProps extends InitialProps {
 	setState: (newState: Partial<TableDynamic>) => void // Set the table state
+	enabled: boolean // Whether react-query fetching is enabled
 }
 
 export const TableContext = createContext({} as ContextProps)
@@ -28,10 +30,12 @@ let parsed: {
 }
 
 export function TableContextProvider({ value, children }: ProviderProps) {
+	const initialState = value.dynamic
+	const [enabled, setEnabled] = useState(false)
 	const [dynamic, setDynamic] = useState(
 		value.tableId === parsed.tableId && parsed.stored
 			? parsed.stored
-			: value.dynamic
+			: initialState
 	)
 
 	// Recover the state from localStorage, if it exists
@@ -40,19 +44,32 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 		if (stored) {
 			let obj = JSON.parse(stored)
 			if (obj) {
+				// // check if the objects dynamic and obj are equal
+				// if (JSON.stringify(obj.dynamic) === JSON.stringify(dynamic)) {
 				parsed.tableId = value.tableId
 				parsed.stored = obj
 				setDynamic(obj)
+				setEnabled(true)
 			}
 		}
-	}, [value.tableId])
+	}, [initialState, value.tableId])
 
 	// Update the table state
 	// Then save it in localStorage
 	function setState(newState: Partial<TableDynamic>) {
 		let combined = { ...dynamic, ...newState }
+
 		setDynamic(combined)
-		localStorage.setItem(value.tableId, JSON.stringify(combined))
+
+		let stringified = objString(combined)
+		// If both objects are equal, delete the entry from localStorage
+		if (stringified === objString(initialState)) {
+			localStorage.removeItem(value.tableId)
+			// If they are not equal, save current state to localStorage
+		} else {
+			setEnabled(true)
+			localStorage.setItem(value.tableId, stringified)
+		}
 	}
 
 	// The full state to pass as context
@@ -61,7 +78,8 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 		tableId: value.tableId,
 		fixed: value.fixed,
 		dynamic,
-		setState
+		setState,
+		enabled
 	}
 
 	return (

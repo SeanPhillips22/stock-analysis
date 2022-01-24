@@ -30,4 +30,6 @@ export type TableDynamic = {
 	columns: DataId[] // The columns to show
 
 	filters?: string[] // The filters to apply
+
+	fetched?: boolean // Whether the original data has been fetched
 }

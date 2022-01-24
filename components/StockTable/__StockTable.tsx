@@ -10,18 +10,15 @@ import { useTableContext } from './TableContext'
  */
 export function StockTable({ _data }: { _data: any[] }) {
 	// Get the table contexts
-	const { type, tableId, fixed, dynamic, setState } = useTableContext()
+	const { type, tableId, fixed, dynamic, setState, enabled } =
+		useTableContext()
 
 	// Get the props
 	const { defaultSort } = fixed
 	const { columns: _columns, main, sort } = dynamic
 
-	// const setSort = (sort: any[]) => {
-	// 	setState({ sort })
-	// }
-
 	// pass initial data into react query
-	const query = useTableData(tableId, type, dynamic, _data)
+	const query = useTableData(tableId, type, dynamic, _data, enabled)
 
 	// memoize the data and columns
 	const data = useMemo(() => query.data.data || query.data, [query.data])

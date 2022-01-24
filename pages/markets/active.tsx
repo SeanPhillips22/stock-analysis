@@ -24,6 +24,7 @@ const page: PageConfig = {
 const query: TableDynamic = {
 	main: 'volume',
 	count: 20,
+	sort: [{ id: 'volume', desc: true }],
 	sortDirection: 'desc',
 	columns: ['s', 'n', 'change', 'price', 'marketCap'],
 	filters: ['price-over-1', 'close-over-1']
@@ -43,7 +44,7 @@ export default function ActivePage({ data, updated }: Props) {
 						type: 'stocks',
 						tableId: 'active',
 						fixed: {
-							defaultSort: [{ id: query.main, desc: true }],
+							defaultSort: query.sort,
 							controls: {
 								range: false,
 								results: true,

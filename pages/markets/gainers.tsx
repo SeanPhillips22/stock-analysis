@@ -24,6 +24,7 @@ const page: PageConfig = {
 const query: TableDynamic = {
 	main: 'change',
 	count: 20,
+	sort: [{ id: 'change', desc: true }],
 	sortDirection: 'desc',
 	columns: ['s', 'n', 'price', 'volume', 'marketCap'],
 	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
@@ -43,7 +44,7 @@ export default function GainersPage({ data, updated }: Props) {
 						type: 'stocks',
 						tableId: 'gainers',
 						fixed: {
-							defaultSort: [{ id: query.main, desc: true }],
+							defaultSort: query.sort,
 							controls: {
 								range: true,
 								results: true,

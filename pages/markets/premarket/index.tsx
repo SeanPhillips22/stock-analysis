@@ -24,6 +24,7 @@ const page: PageConfig = {
 const query: TableDynamic = {
 	main: 'premarketChangePercent',
 	count: 20,
+	sort: [{ id: 'premarketChangePercent', desc: true }],
 	sortDirection: 'desc',
 	columns: ['s', 'n', 'premarketChange', 'premarketPrice', 'marketCap'],
 	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
@@ -43,7 +44,7 @@ export default function PreMarket({ data, updated }: Props) {
 						type: 'stocks',
 						tableId: 'premarket',
 						fixed: {
-							defaultSort: [{ id: query.main, desc: true }],
+							defaultSort: query.sort,
 							controls: {
 								range: false,
 								results: true,
