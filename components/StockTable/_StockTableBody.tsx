@@ -38,8 +38,6 @@ export function StockTableBody({ data, columns, sortProps, sort }: Props) {
 		useSortBy
 	)
 
-	console.log('hello')
-
 	return (
 		<div>
 			<div className="mt-3 sm:mt-0">

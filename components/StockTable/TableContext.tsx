@@ -44,8 +44,6 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 		if (stored) {
 			let obj = JSON.parse(stored)
 			if (obj) {
-				// // check if the objects dynamic and obj are equal
-				// if (JSON.stringify(obj.dynamic) === JSON.stringify(dynamic)) {
 				parsed.tableId = value.tableId
 				parsed.stored = obj
 				setDynamic(obj)

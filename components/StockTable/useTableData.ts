@@ -30,6 +30,7 @@ export function useTableData(
 		{
 			initialData: _data,
 			enabled: enabled,
+			staleTime: 60000,
 			refetchOnWindowFocus: false,
 			notifyOnChangeProps: 'tracked'
 		}
