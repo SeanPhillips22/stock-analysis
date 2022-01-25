@@ -28,10 +28,11 @@ export function useTableData(
 		[tableId, queryObject],
 		async () => await getSelect(dynamic, type, false),
 		{
-			initialData: _data,
+			placeholderData: _data,
 			enabled: enabled,
-			staleTime: 60000,
 			refetchOnWindowFocus: false,
+			refetchOnMount: false,
+			staleTime: 60000,
 			notifyOnChangeProps: 'tracked'
 		}
 	)

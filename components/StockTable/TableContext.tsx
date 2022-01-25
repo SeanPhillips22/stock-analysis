@@ -63,10 +63,14 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 		// If both objects are equal, delete the entry from localStorage
 		if (stringified === objString(initialState)) {
 			localStorage.removeItem(value.tableId)
+			parsed.tableId = value.tableId
+			parsed.stored = null
 			// If they are not equal, save current state to localStorage
 		} else {
 			setEnabled(true)
 			localStorage.setItem(value.tableId, stringified)
+			parsed.tableId = value.tableId
+			parsed.stored = combined
 		}
 	}
 
