@@ -1,4 +1,4 @@
-import { usePageContext } from '../PageContext'
+import { usePageContext } from '../../Markets/PageContext'
 
 export function TableTimestamp() {
 	const { page, updated } = usePageContext()

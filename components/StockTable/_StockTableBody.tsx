@@ -9,7 +9,7 @@ import {
 } from 'react-table'
 import { DataId } from 'types/DataId'
 import { StockTableControls } from './_StockTableControls'
-import { stockTableState } from './stockTableState'
+import { useState } from 'react'
 
 type Props = {
 	data: any[]
@@ -18,14 +18,12 @@ type Props = {
 		accessor: DataId
 		Cell: (props: any) => any
 	}[]
-	sort?: SortObject[]
 	sortProps: SortProps
+	sort?: SortObject[]
 }
 
-export function StockTableBody({ data, columns, sort, sortProps }: Props) {
-	const sorted = stockTableState(state => state.sorted)
-	const search = stockTableState(state => state.search)
-	const setSearch = stockTableState(state => state.setSearch)
+export function StockTableBody({ data, columns, sortProps, sort }: Props) {
+	const [search, setSearch] = useState('')
 	const { updateSort } = useSort(sortProps)
 
 	const { headerGroups, prepareRow, rows, setGlobalFilter } = useTable(
@@ -33,7 +31,7 @@ export function StockTableBody({ data, columns, sort, sortProps }: Props) {
 			columns,
 			data,
 			initialState: {
-				sortBy: sorted && sorted.length ? sorted : sort
+				sortBy: sort && sort.length ? sort : sortProps.defaultSort
 			}
 		},
 		useGlobalFilter,

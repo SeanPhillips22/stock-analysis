@@ -2,11 +2,10 @@ import { CheckIcon } from '@heroicons/react/outline'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { cn } from 'functions/helpers/classNames'
 import { tabActive } from 'functions/helpers/tabActive'
-import { SortTypes } from 'types/SelectConfig'
-import { stockTableState } from '../stockTableState'
+import { useTableContext } from '../TableContext'
 
 const OPTIONS: {
-	sort: SortTypes
+	sort: 'desc' | 'asc'
 	long: string
 }[] = [
 	{
@@ -23,22 +22,22 @@ const OPTIONS: {
  * Dropdown to select the type of mover to show in the table
  */
 export function TableMoverType() {
-	const sort = stockTableState(state => state.sort)
-	const setSort = stockTableState(state => state.setSort)
+	const { dynamic, setState } = useTableContext()
+	const { sortDirection } = dynamic
 
 	// when a new count is selected, either update the state or redirect to Pro page
-	function handleClick(sort: SortTypes) {
-		setSort(sort)
+	function handleClick(sort: 'desc' | 'asc') {
+		setState({ sortDirection: sort })
 	}
 
 	// the text on the dropdown option
-	function getLabel(sort: SortTypes) {
+	function getLabel(sort: 'desc' | 'asc') {
 		return OPTIONS.find(i => i.sort === sort)?.long
 	}
 
 	return (
 		<Dropdown
-			title={getLabel(sort) || 'Range'}
+			title={getLabel(sortDirection) || 'Range'}
 			hoverTitle="Change mover type"
 			classes="dd-right"
 		>
@@ -46,7 +45,7 @@ export function TableMoverType() {
 				/* One Dropdown Item */
 				<div
 					key={i.sort}
-					className={cn('dd-option', tabActive(i.sort, sort))}
+					className={cn('dd-option', tabActive(i.sort, sortDirection))}
 					title={i.long}
 					onClick={() => handleClick(i.sort)}
 				>
@@ -54,7 +53,7 @@ export function TableMoverType() {
 					{i.long}
 
 					{/* Icon - if option selected */}
-					{i.sort === sort && (
+					{i.sort === sortDirection && (
 						<CheckIcon className="h-5 w-5" aria-hidden="true" />
 					)}
 				</div>

@@ -1,4 +1,3 @@
-import { stockTableState } from 'components/StockTable/stockTableState'
 import { useState } from 'react'
 import { DataId } from 'types/DataId'
 
@@ -6,14 +5,14 @@ type Props = {
 	id: DataId
 	name: string
 	checked: boolean
+	toggle: (id: DataId) => void
 }
 
 /**
  * A checkbox that activates/deactivates a column for the stock table
  */
-export function ColumnItem({ id, name, checked }: Props) {
+export function ColumnItem({ id, name, checked, toggle }: Props) {
 	const [check, setCheck] = useState(checked)
-	const toggleColumn = stockTableState(state => state.toggleColumn)
 
 	return (
 		<div className="column-items">
@@ -21,7 +20,7 @@ export function ColumnItem({ id, name, checked }: Props) {
 				type="checkbox"
 				checked={check}
 				onChange={() => {
-					toggleColumn(id)
+					toggle(id)
 					setCheck(!check)
 				}}
 			/>

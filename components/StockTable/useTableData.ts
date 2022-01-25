@@ -1,31 +1,43 @@
 import { getSelect } from 'functions/apis/getSelect'
 import { useQuery } from 'react-query'
-import { stockTableState } from './stockTableState'
+import { TableDynamic } from './TableTypes'
 
 /**
  * Handle the data for the stock table via react-query
  */
-export function useTableData(_data: any[], path: string) {
-	// Get the params from the table state
-	const { type, active, main, count, sort, columns, filters, fetch } =
-		stockTableState()
+export function useTableData(
+	tableId: string,
+	type: 'stocks' | 'etf',
+	dynamic: TableDynamic,
+	_data: any[],
+	enabled?: boolean
+) {
+	// The params that  tell react-query when to update
+	const { main, count, columns, filters, sortDirection } = dynamic
+	const queryObject = {
+		main,
+		count,
+		columns,
+		filters,
+		sortDirection,
+		type,
+		tableId
+	}
 
-	// Add the params into an array to tell react-query when to update
-	const queryObject = { type, active, main, count, sort, columns, filters }
-
-	const { data, isLoading, error } = useQuery(
-		[path, queryObject],
-		async () => await getSelect(queryObject),
+	const { data } = useQuery(
+		[tableId, queryObject],
+		async () => await getSelect(dynamic, type, false),
 		{
-			initialData: _data,
-			enabled: fetch, // only fetch if columns are defined
-			refetchOnWindowFocus: false
+			placeholderData: _data,
+			enabled: enabled,
+			refetchOnWindowFocus: false,
+			refetchOnMount: false,
+			staleTime: 60000,
+			notifyOnChangeProps: 'tracked'
 		}
 	)
 
 	return {
-		data,
-		isLoading,
-		error
+		data
 	}
 }

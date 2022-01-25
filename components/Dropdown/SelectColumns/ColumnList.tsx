@@ -8,9 +8,10 @@ type Props = {
 	_active: DataId[]
 	options: DataId[]
 	search: string
+	toggle: (id: DataId) => void
 }
 
-export function ColumnList({ _active, options, search }: Props) {
+export function ColumnList({ _active, options, search, toggle }: Props) {
 	let active: DataPointType[] = []
 	let inactive: DataPointType[] = []
 
@@ -37,11 +38,23 @@ export function ColumnList({ _active, options, search }: Props) {
 		<div className="column-list">
 			{/* render the active items (box is checked) */}
 			{activeItems.map(i => (
-				<ColumnItem key={i.id} id={i.id} name={i.name} checked={true} />
+				<ColumnItem
+					key={i.id}
+					id={i.id}
+					name={i.name}
+					checked={true}
+					toggle={toggle}
+				/>
 			))}
 			{/* render the inactive items */}
 			{inactiveItems.map(i => (
-				<ColumnItem key={i.id} id={i.id} name={i.name} checked={false} />
+				<ColumnItem
+					key={i.id}
+					id={i.id}
+					name={i.name}
+					checked={false}
+					toggle={toggle}
+				/>
 			))}
 		</div>
 	)
