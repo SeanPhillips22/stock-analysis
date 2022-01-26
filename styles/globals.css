@@ -10,6 +10,7 @@
 @import './features/navmenu';
 @import './features/news';
 @import './features/price-chart';
+@import './features/quote';
 @import './features/top-table';
 @import './features/ipo-table';
 @import './features/controls/_controls';

@@ -1,17 +1,19 @@
 import { useQuote } from 'hooks/useQuote'
 import { Info } from 'types/Info'
 import { changeColor } from '../quote.functions'
+import { usePulsingQuote } from '../usePulsingQuote'
 
 export function RegularQuote({ info }: { info: Info }) {
 	const quote = useQuote(info)
 	const color = changeColor(Number(quote.c))
 	const market = quote.ms == 'open' ? 'Market open' : 'Market closed'
+	const { animation } = usePulsingQuote(quote.p)
 
 	return (
-		<div>
-			<span className="text-4xl font-bold">{quote.pd}</span>{' '}
-			<span className="text-2xl font-semibold">
-				<span className={color}>{`${quote.c || '0.00'} (${
+		<div className="quote">
+			<span className={`price${animation}`}>{quote.pd}</span>{' '}
+			<span className={`priceChange ${color}`}>
+				<span className={`${color}${animation}`}>{`${quote.c || '0.00'} (${
 					quote.cp || '0.00'
 				}%)`}</span>
 			</span>

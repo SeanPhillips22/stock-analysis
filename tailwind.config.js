@@ -65,6 +65,20 @@ module.exports = {
 				gray: {
 					light: 'rgba(246, 247, 248, 1)'
 				}
+			},
+			keyframes: {
+				pulseup: {
+					'0%': { color: 'rgba(0, 128, 0)' },
+					'100%': { color: 'inherit' }
+				},
+				pulsedown: {
+					'0%': { color: 'rgba(139, 0, 0)' },
+					'100%': { color: 'inherit' }
+				}
+			},
+			animation: {
+				pulseup: 'pulseup 0.8s linear 0s',
+				pulsedown: 'pulsedown 0.8s linear 0s'
 			}
 		}
 	},
