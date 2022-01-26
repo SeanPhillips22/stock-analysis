@@ -5,7 +5,8 @@ import Axios from 'axios'
 import { Unavailable } from 'components/Unavailable'
 
 const parseDate = timeParse('%Y-%m-%d')
-const parseDate1D5D = timeParse('%b %d, %Y %H:%M')
+// const parseDate1D5D = timeParse('%b %d, %Y %H:%M')
+const parseDate1D5D = timeParse('%Y-%m-%d %H:%M:%S') // change chart data source for 1D/5D
 
 const parseData = () => {
 	return (d: any) => {
@@ -121,7 +122,7 @@ export function withOHLCData() {
 					Axios.get(
 						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
 					)
-						.then((res) => {
+						.then(res => {
 							const forDateParse = res.data.map(fixDataHeaders)
 							data = forDateParse.map(parseData())
 
@@ -134,7 +135,7 @@ export function withOHLCData() {
 								this.props.setData(data)
 							}
 						})
-						.catch((error) => {
+						.catch(error => {
 							console.error(
 								'Error: There was an error loading the data for the chart |',
 								error
@@ -154,7 +155,7 @@ export function withOHLCData() {
 					Axios.get(
 						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
 					)
-						.then((res) => {
+						.then(res => {
 							const forDateParse = res.data.map(fixDataHeaders1D5D)
 							data = forDateParse.map(parseData1D5D())
 							this.setState({ data })
@@ -163,7 +164,7 @@ export function withOHLCData() {
 								loading(false)
 							}, 0)
 						})
-						.catch((error) => {
+						.catch(error => {
 							console.error(
 								'Error: There was an error loading the data for the chart |',
 								error
@@ -187,7 +188,7 @@ export function withOHLCData() {
 					Axios.get(
 						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}&f=candles`
 					)
-						.then((res) => {
+						.then(res => {
 							setTimeout(function () {
 								loading(false)
 							}, 0)
@@ -198,7 +199,7 @@ export function withOHLCData() {
 								this.props.setData(data)
 							}
 						})
-						.catch((error) => {
+						.catch(error => {
 							console.error(
 								'Error: There was an error loading the data for the chart |',
 								error
@@ -220,7 +221,7 @@ export function withOHLCData() {
 						Axios.get(
 							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
 						)
-							.then((res) => {
+							.then(res => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
 								this.setState({ data })
@@ -229,7 +230,7 @@ export function withOHLCData() {
 									loading(false)
 								}, 0)
 							})
-							.catch((error) => {
+							.catch(error => {
 								console.error(
 									'Error: There was an error loading the data for the chart |',
 									error
@@ -244,7 +245,7 @@ export function withOHLCData() {
 						Axios.get(
 							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
 						)
-							.then((res) => {
+							.then(res => {
 								const forDateParse = res.data.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
 								this.setState({ data })
@@ -256,7 +257,7 @@ export function withOHLCData() {
 									this.props.setData(data)
 								}
 							})
-							.catch((error) => {
+							.catch(error => {
 								console.error(
 									'Error: There was an error loading the data for the chart |',
 									error
@@ -273,7 +274,7 @@ export function withOHLCData() {
 						Axios.get(
 							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
 						)
-							.then((res) => {
+							.then(res => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
 								this.setState({ data })
@@ -282,7 +283,7 @@ export function withOHLCData() {
 									loading(false)
 								}, 0)
 							})
-							.catch((error) => {
+							.catch(error => {
 								console.error(
 									'Error: There was an error loading the data for the chart |',
 									error
@@ -297,7 +298,7 @@ export function withOHLCData() {
 						Axios.get(
 							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
 						)
-							.then((res) => {
+							.then(res => {
 								const forDateParse = res.data.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
 								this.setState({ data })
@@ -309,7 +310,7 @@ export function withOHLCData() {
 									this.props.setData(data)
 								}
 							})
-							.catch((error) => {
+							.catch(error => {
 								console.error(
 									'Error: There was an error loading the data for the chart |',
 									error
