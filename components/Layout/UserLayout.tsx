@@ -1,12 +1,15 @@
-import { FC } from 'react'
 import { Logo } from '../Logo'
 import Link from 'next/link'
-import { FocusedLayout } from './FocusedLayout'
+import { Layout } from './_Layout'
 
-export const UserLayout: FC = ({ children }) => {
+type Props = {
+	children: React.ReactNode
+}
+
+export function UserLayout({ children }: Props) {
 	return (
 		<>
-			<FocusedLayout>
+			<Layout fullWidth={true}>
 				<div className="max-w-[850px] mx-auto px-6 py-8 sm:py-20 sm:px-0 space-y-6">
 					<Link href="/" prefetch={false}>
 						<a>
@@ -15,7 +18,7 @@ export const UserLayout: FC = ({ children }) => {
 					</Link>
 					<div className="max-w-md mx-auto">{children}</div>
 				</div>
-			</FocusedLayout>
+			</Layout>
 		</>
 	)
 }
