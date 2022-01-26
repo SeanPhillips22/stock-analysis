@@ -116,6 +116,7 @@ export function useAuth() {
 	async function signIn(email: string) {
 		const { error } = await supabase.auth.signIn({
 			email,
+			// @ts-ignore
 			create_user: false
 		})
 		return { error }
