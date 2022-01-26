@@ -8,10 +8,10 @@ import {
 	useSortBy,
 	Column
 } from 'react-table'
-import { SortUpIcon } from 'components/Icons/SortUp'
-import { SortDownIcon } from 'components/Icons/SortDown'
 import { tableState } from 'state/tableState'
 import { Controls } from 'components/Controls/_Controls'
+import { useSort } from 'hooks/useSort'
+import { ColumnSort } from './ColumnSort'
 
 interface StockType {
 	s: string
@@ -33,8 +33,14 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 	const setTablePage = tableState(state => state.setTablePage)
 	const tableSize = tableState(state => state.tableSize)
 	const setTableSize = tableState(state => state.setTableSize)
+	const sort = tableState(state => state.sort)
+	const setSort = tableState(state => state.setSort)
 	const columns = useMemo(() => columndata, [columndata])
 	const data = useMemo(() => rowdata, [rowdata])
+	const { updateSort } = useSort({
+		defaultSort: [{ id: 's', desc: true }],
+		setSort
+	})
 
 	const {
 		headerGroups,
@@ -55,7 +61,8 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 			data,
 			initialState: {
 				pageIndex: tablePage,
-				pageSize: tableSize
+				pageSize: tableSize,
+				sortBy: sort
 			}
 		},
 		useGlobalFilter,
@@ -85,17 +92,13 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 											title: `Sort by: ${column.Header}`
 										})}
 									>
-										<span className="inline-flex flex-row items-center">
+										<span
+											className="inline-flex flex-row items-center"
+											onClick={() => updateSort(column)}
+										>
 											{column.render('Header')}
-
-											{column.isSorted ? (
-												column.isSortedDesc ? (
-													<SortDownIcon classes="h-5 w-5 text-gray-800" />
-												) : (
-													<SortUpIcon classes="h-5 w-5 text-gray-800" />
-												)
-											) : (
-												''
+											{column.Header !== 'Symbol' && (
+												<ColumnSort column={column} />
 											)}
 										</span>
 									</th>

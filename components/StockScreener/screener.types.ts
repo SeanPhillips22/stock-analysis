@@ -126,7 +126,7 @@ export type ComparisonOption =
 	| 'notzero'
 
 export type SortObject = {
-	id: DataId
+	id: DataId | 'm' | 'a'
 	desc?: boolean
 }
 
