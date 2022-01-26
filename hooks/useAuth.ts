@@ -5,17 +5,17 @@ import { authState } from 'state/authState'
 import { navState } from 'state/navState'
 
 export function useAuth() {
-	const user = authState((state) => state.user)
-	const setUser = authState((state) => state.setUser)
-	const isLoggedIn = authState((state) => state.isLoggedIn)
-	const setIsLoggedIn = authState((state) => state.setIsLoggedIn)
-	const isPro = authState((state) => state.isPro)
-	const setIsPro = authState((state) => state.setIsPro)
-	const checked = authState((state) => state.checked)
-	const setChecked = authState((state) => state.setChecked)
-	const checking = authState((state) => state.checking)
-	const setChecking = authState((state) => state.setChecking)
-	const route = navState((state) => state.route)
+	const user = authState(state => state.user)
+	const setUser = authState(state => state.setUser)
+	const isLoggedIn = authState(state => state.isLoggedIn)
+	const setIsLoggedIn = authState(state => state.setIsLoggedIn)
+	const isPro = authState(state => state.isPro)
+	const setIsPro = authState(state => state.setIsPro)
+	const checked = authState(state => state.checked)
+	const setChecked = authState(state => state.setChecked)
+	const checking = authState(state => state.checking)
+	const setChecking = authState(state => state.setChecking)
+	const route = navState(state => state.route)
 
 	useEffect(() => {
 		// subscribe to login and logout events
@@ -114,7 +114,10 @@ export function useAuth() {
 	}
 
 	async function signIn(email: string) {
-		const { error } = await supabase.auth.signIn({ email })
+		const { error } = await supabase.auth.signIn({
+			email,
+			create_user: false
+		})
 		return { error }
 	}
 
