@@ -12,11 +12,11 @@ export function RegularQuote({ info }: { info: Info }) {
 	return (
 		<div className="quote">
 			<span className={`price${animation}`}>{quote.pd}</span>{' '}
-			<span className={`priceChange ${color}`}>
+			<div className={`priceChange ${color}`}>
 				<span className={`${color}${animation}`}>{`${quote.c || '0.00'} (${
 					quote.cp || '0.00'
 				}%)`}</span>
-			</span>
+			</div>
 			<div className="text-sm text-gray-700 flex items-center mt-1">
 				{`${quote.u} - ${market}`}
 			</div>

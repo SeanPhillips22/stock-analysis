@@ -9,7 +9,7 @@
 	}
 
 	.quote .priceChange {
-		@apply text-2xl font-semibold;
+		@apply text-2xl font-semibold inline-block;
 	}
 
 	/* EXTENDED */
