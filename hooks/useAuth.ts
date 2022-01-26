@@ -113,12 +113,12 @@ export function useAuth() {
 		}
 	}
 
+	/*
+		// @ts-ignore
+		create_user: false
+	*/
 	async function signIn(email: string) {
-		const { error } = await supabase.auth.signIn({
-			email,
-			// @ts-ignore
-			create_user: false
-		})
+		const { error } = await supabase.auth.signIn({ email })
 		return { error }
 	}
 
