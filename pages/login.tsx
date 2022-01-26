@@ -12,7 +12,7 @@ export default function Login() {
 	const [loading, setLoading] = useState(false)
 	const [submitted, setSubmitted] = useState('')
 	const [errorMsg, setErrorMsg] = useState('')
-	const route = navState((state) => state.route)
+	const route = navState(state => state.route)
 
 	useEffect(() => {
 		if (route === '/login/?error=Login+failed') {
@@ -30,7 +30,14 @@ export default function Login() {
 		setLoading(false)
 
 		if (error) {
-			setErrorMsg(error.message)
+			if (
+				error.message ===
+				'You must provide either an email, phone number or a third-party provider.'
+			) {
+				setErrorMsg('You must provide a valid email address.')
+			} else {
+				setErrorMsg(error.message)
+			}
 		} else {
 			setSubmitted(email)
 		}

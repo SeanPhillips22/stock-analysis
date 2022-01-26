@@ -14,8 +14,8 @@ type Props = {
  * @returns
  */
 export function FocusedLayout({ children, hideTrial }: Props) {
-	const visible = navMenuState((state) => state.visible)
-	const close = navMenuState((state) => state.close)
+	const visible = navMenuState(state => state.visible)
+	const close = navMenuState(state => state.close)
 
 	// If visible, close the menu because it's not shown in the focused layout
 	useEffect(() => {
