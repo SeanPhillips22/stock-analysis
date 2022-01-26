@@ -5,8 +5,7 @@ import Axios from 'axios'
 import { Unavailable } from 'components/Unavailable'
 
 const parseDate = timeParse('%Y-%m-%d')
-// const parseDate1D5D = timeParse('%b %d, %Y %H:%M')
-const parseDate1D5D = timeParse('%Y-%m-%d %H:%M:%S') // change chart data source for 1D/5D
+const parseDate1D5D = timeParse('%b %d, %Y %H:%M')
 
 const parseData = () => {
 	return (d: any) => {
