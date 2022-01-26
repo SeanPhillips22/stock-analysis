@@ -65,11 +65,11 @@ module.exports = {
 			keyframes: {
 				pulseup: {
 					'0%': { color: 'rgba(0, 128, 0)' },
-					'100%': { color: 'rgba(17, 24, 39)' }
+					'100%': { color: 'inherit' }
 				},
 				pulsedown: {
 					'0%': { color: 'rgba(139, 0, 0)' },
-					'100%': { color: 'rgba(17, 24, 39)' }
+					'100%': { color: 'inherit' }
 				}
 			},
 			animation: {

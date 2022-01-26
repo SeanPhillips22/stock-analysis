@@ -12,7 +12,7 @@
 		@apply text-green-700;
 	}
 
-	.green-quote::before {
+	span.green-quote::before {
 		content: '+';
 	}
 

@@ -1,7 +1,27 @@
-.quote .price {
-	@apply text-4xl font-bold;
-}
+/*
+* Quotes
+* Stock prices in stock header
+*/
 
-.quote .priceChange {
-	@apply text-2xl font-semibold;
+@layer components {
+	.quote .price {
+		@apply text-4xl font-bold;
+	}
+
+	.quote .priceChange {
+		@apply text-2xl font-semibold;
+	}
+
+	/* EXTENDED */
+	.quote.ext {
+		@apply border-l border-gray-200 pl-5;
+	}
+
+	.quote .price-ext {
+		@apply block sm:inline text-[1.7rem] leading-5 font-semibold text-gray-700;
+	}
+
+	.quote .priceChange-ext {
+		@apply block sm:inline text-sm xs:text-base sm:text-lg mt-1.5 sm:mt-0;
+	}
 }
