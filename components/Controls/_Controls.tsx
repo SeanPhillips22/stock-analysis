@@ -18,6 +18,7 @@ interface Props {
 	tableId: string
 	append?: string
 	setColumnFilter?: (columId: string, updater: any) => void
+	setFilterState?: (filterValue: FilterValue) => void
 }
 
 export const Controls = ({
@@ -28,6 +29,7 @@ export const Controls = ({
 	setGlobalFilter,
 	tableId,
 	setColumnFilter,
+	setFilterState,
 	append = ''
 }: Props) => {
 	return (
@@ -57,6 +59,7 @@ export const Controls = ({
 						useAsyncDebounce={useAsyncDebounce}
 						globalFilter={globalFilter}
 						setGlobalFilter={setGlobalFilter}
+						setFilterState={setFilterState}
 					/>
 				</div>
 			)}

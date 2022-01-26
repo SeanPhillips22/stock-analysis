@@ -64,7 +64,7 @@ export function Filter({
 							}
 						}}
 					>
-						<CloseIcon classes="h-4 w-4 xs:h-4 xs:w-5 text-gray-600 hover:text-blue-500" />
+						<CloseIcon classes="h-4 w-4 xs:h-5 xs:w-5 text-gray-600 hover:text-blue-500" />
 					</span>
 				</div>
 			)}

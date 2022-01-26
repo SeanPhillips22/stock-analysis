@@ -28,13 +28,15 @@ interface Props {
 	rowdata: StockType[]
 }
 
-export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
+export function SymbolTable({ title, columndata, rowdata }: Props) {
 	const tablePage = tableState(state => state.tablePage)
 	const setTablePage = tableState(state => state.setTablePage)
 	const tableSize = tableState(state => state.tableSize)
 	const setTableSize = tableState(state => state.setTableSize)
 	const sort = tableState(state => state.sort)
 	const setSort = tableState(state => state.setSort)
+	const filter = tableState(state => state.filter)
+	const setFilter = tableState(state => state.setFilter)
 	const columns = useMemo(() => columndata, [columndata])
 	const data = useMemo(() => rowdata, [rowdata])
 	const { updateSort } = useSort({
@@ -54,7 +56,7 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 		rows,
 		setPageSize,
 		setGlobalFilter,
-		state: { pageIndex, pageSize, globalFilter }
+		state: { pageIndex, pageSize }
 	} = useTable(
 		{
 			columns,
@@ -76,8 +78,9 @@ export const SymbolTable = ({ title, columndata, rowdata }: Props) => {
 				count={rows.length}
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
-				globalFilter={globalFilter}
+				globalFilter={filter}
 				setGlobalFilter={setGlobalFilter}
+				setFilterState={setFilter}
 				tableId="symbol-table"
 			/>
 			<div className="overflow-x-auto">
