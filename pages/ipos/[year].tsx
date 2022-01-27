@@ -80,7 +80,7 @@ export default IpoYear
 export const getServerSideProps: GetServerSideProps = async context => {
 	const year = context?.params?.year as string
 
-	if (Number(year) > 2022 || Number(year) < 2019) {
+	if (year.length !== 4 || Number(year) > 2022 || Number(year) < 2019) {
 		return {
 			notFound: true
 		}
