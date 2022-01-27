@@ -18,9 +18,7 @@ type Props = {
 }
 
 export const PriceChart = ({ info }: Props) => {
-	const [chartTime, setChartTime] = useState(
-		info.isOTC || info.ticker === 'BRK.A' ? '1Y' : '1D'
-	)
+	const [chartTime, setChartTime] = useState('1D')
 	const [message, setMessage] = useState('')
 
 	const quote = useQuote(info)
