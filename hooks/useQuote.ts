@@ -26,7 +26,8 @@ export function useQuote(info: Info) {
 		initialData: info.quote,
 		initialDataUpdatedAt: Date.now() - 60000,
 		enabled: info.state !== 'upcomingipo' && !info.archived,
-		notifyOnChangeProps: 'tracked'
+		notifyOnChangeProps: 'tracked',
+		retry: false
 	})
 
 	return data as Quote

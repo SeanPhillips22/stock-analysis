@@ -18,7 +18,8 @@ export function useChart(info: Info, time: string) {
 		{
 			refetchOnWindowFocus: false,
 			enabled: info.state !== 'upcomingipo' && !info.archived,
-			notifyOnChangeProps: 'tracked'
+			notifyOnChangeProps: 'tracked',
+			retry: false
 		}
 	)
 

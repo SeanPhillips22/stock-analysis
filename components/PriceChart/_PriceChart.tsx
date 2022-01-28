@@ -20,6 +20,7 @@ type Props = {
 export const PriceChart = ({ info }: Props) => {
 	const [chartTime, setChartTime] = useState('1D')
 	const [message, setMessage] = useState('')
+	const [initialFetch, setInitialFetch] = useState(true)
 
 	const quote = useQuote(info)
 	const { data, isFetching } = useChart(info, chartTime)
@@ -28,10 +29,17 @@ export const PriceChart = ({ info }: Props) => {
 		setMessage('')
 		if (info.state === 'upcomingipo') return
 
-		if (!isFetching && (!data || !data.length)) {
+		// If the 1D data fails on the first request, try the 1Y chart instead
+		if (!isFetching && initialFetch && (!data || !data.length)) {
+			setChartTime('1Y')
+			setInitialFetch(false)
+		}
+
+		// If it is not the initial 1D request but fails, show an error message
+		if (!isFetching && !initialFetch && (!data || !data.length)) {
 			setMessage(`No ${translateTime(chartTime)} chart data available`)
 		}
-	}, [data, chartTime, info.state, isFetching])
+	}, [data, chartTime, info.state, isFetching, initialFetch])
 
 	const changeProps = getChartColor(data, chartTime, quote)
 
