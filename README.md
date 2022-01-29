@@ -29,23 +29,24 @@ If you help drive significant improvements to the site, then you will get a free
 You can easily download the code and run the site on your own computer by cloning the repository and running "npm install" and "npm run dev".
 
 **Here are the steps to do it:**
-1. Install [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/)
-2. Clone the repository: `git clone https://github.com/stockanalysisdev/stock-analysis.git`
-3. `cd stock-analysis`
-4. Install dependencies: `npm install`
-5. Create a file called `.env` and copy the contents of `example.env` to `.env` file
-6. Follow [Supabase Instructions](https://github.com/stockanalysisdev/stock-analysis#supabase-instructions) to to setup your backend and get values needed in `.env` file
-7. Start development server: `npm run dev`
-8. Open URL in browser: `http://localhost:3001`
 
+1. First, make sure you have [Visual Studio Code](https://code.visualstudio.com/), [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/) installed (they're all free)
+2. Create a folder on your desktop called "StockAnalysis"
+3. Open Visual Studio Code. Click "File" and "Open Folder" -- then find the folder you created and click "Select Folder"
+4. Hit CMD+J or CTRL+J to open the terminal in VS Code
+5. Write this exact command and hit enter: `git clone https://github.com/stockanalysisdev/stock-analysis.git .` (make sure to include the period at the end)
+6. Write this command and hit enter: `npm install` (installs dependencies)
+7. Follow [Supabase Instructions](https://github.com/stockanalysisdev/stock-analysis#supabase-instructions) to to setup your backend and get values needed in `.env` file
+8. Write this command and hit enter: `npm run dev` (starts development server)
+9. You should now be able to open the site in your web browser with this URL: `http://localhost:3001`
 
 ### Supabase Instructions
 
-Supabase is a collection of tools that helps developers build projects more quickly by automatically handling a whole lot of the behind-the-scenes work and wiring.
+Supabase is a service that we use on the back-end.
 
 **Here are the steps to set it up:**
-- Go to [subpabase website](https://app.supabase.io/)
-- Sign in with github
+- Go to the [Subpabase website](https://app.supabase.io/)
+- Sign in with GitHub
 - Click on `Authorize Supabase`
 - Click on `New project`
 - Give it a name (for example: stock-analysis)
@@ -55,7 +56,7 @@ Supabase is a collection of tools that helps developers build projects more quic
 - Click on Create new project (will take a few minutes to complete setup)
 - Once created, under `Project Configuration`, copy URL and paste in `.env` for `NEXT_PUBLIC_SUPABASE_URL`
 - under `Project API keys`, copy `anon` `public` key and paste in `.env` for `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- You are done! You have now successfully setup your backend with supabase. Continue last steps in [How to start](https://github.com/stockanalysisdev/stock-analysis#how-to-start) section.
+- You are done! Continue last steps in [How to start](https://github.com/stockanalysisdev/stock-analysis#how-to-start) section.
 
 Congrats! 🎉 You now have the site running locally on your own computer, with the site's code ready to edit from Visual Studio Code.
 
