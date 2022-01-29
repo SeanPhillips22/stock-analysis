@@ -39,13 +39,6 @@ export default async function handler(
 	// Get the user email and webhook type from the request body
 	const { alert_name, email } = req.body
 
-	// Ignore webhook for this user email
-	if (email === 'tomas-ferreira@hotmail.com') {
-		return res
-			.status(200)
-			.json({ success: 'Webhook received and processed successfully' })
-	}
-
 	const emailLookup: string = email
 		? email.toLowerCase()
 		: req.body.customer_email_address?.toLowerCase()
