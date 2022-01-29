@@ -17,7 +17,7 @@ const formatPageTitle = (word: string) => {
 		return split[0].charAt(0).toUpperCase() + split[0].slice(1)
 	} else {
 		let newstr = ''
-		split.forEach((element) => {
+		split.forEach(element => {
 			newstr += element.charAt(0).toUpperCase() + element.slice(1) + ' '
 		})
 		return newstr.trim()

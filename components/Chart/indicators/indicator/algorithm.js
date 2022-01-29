@@ -12,21 +12,21 @@ export default function Algorithm() {
 		const newData = calculator(data)
 		return newData
 	}
-	algorithm.accumulator = (newAccumulator) => {
+	algorithm.accumulator = newAccumulator => {
 		if (newAccumulator === undefined) {
 			return accumulator
 		}
 		accumulator = newAccumulator
 		return algorithm
 	}
-	algorithm.windowSize = (newWindowSize) => {
+	algorithm.windowSize = newWindowSize => {
 		if (newWindowSize === undefined) {
 			return windowSize
 		}
 		windowSize = newWindowSize
 		return algorithm
 	}
-	algorithm.merge = (newMerge) => {
+	algorithm.merge = newMerge => {
 		if (newMerge === undefined) {
 			return mergeAs
 		}

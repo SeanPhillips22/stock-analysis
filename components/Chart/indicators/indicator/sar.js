@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'SMA'
 export default function Sar() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.sar)
+		.accessor(d => d.sar)
 	const underlyingAlgorithm = sar()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

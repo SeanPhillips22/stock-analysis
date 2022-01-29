@@ -88,7 +88,7 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 						</tr>
 					</thead>
 					<tbody>
-						{entries.map((entry) => {
+						{entries.map(entry => {
 							return (
 								<tr
 									key={entry['url']}

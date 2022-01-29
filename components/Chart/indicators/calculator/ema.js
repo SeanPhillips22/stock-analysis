@@ -28,7 +28,7 @@ import { path } from '../utils'
 import { EMA as defaultOptions } from './defaultOptionsForComputation'
 export default function Ema() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { windowSize, sourcePath } = options
 		const source = path(sourcePath)
 		const alpha = 2 / (windowSize + 1)
@@ -59,7 +59,7 @@ export default function Ema() {
 		const { windowSize } = options
 		return windowSize - 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

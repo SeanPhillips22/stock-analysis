@@ -46,7 +46,7 @@ export function SelectComparison({ compare, setCompare }: Props) {
 							leaveTo="opacity-0"
 						>
 							<Listbox.Options className="absolute z-10 mt-1 w-[6rem] bg-white shadow-lg max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-								{options.map((option) => (
+								{options.map(option => (
 									<Listbox.Option
 										key={option}
 										className={({ active }) =>

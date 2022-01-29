@@ -30,7 +30,7 @@ import ema from './ema'
 import { BollingerBand as defaultOptions } from './defaultOptionsForComputation'
 export default function Bollingerband() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { windowSize, multiplier, movingAverageType, sourcePath } = options
 		const source = path(sourcePath)
 		const meanAlgorithm =
@@ -38,13 +38,13 @@ export default function Bollingerband() {
 				? ema().options({ windowSize, sourcePath })
 				: slidingWindow()
 						.windowSize(windowSize)
-						.accumulator((values) => mean(values))
+						.accumulator(values => mean(values))
 						.sourcePath(sourcePath)
 		const bollingerBandAlgorithm = slidingWindow()
 			.windowSize(windowSize)
-			.accumulator((values) => {
+			.accumulator(values => {
 				const avg = values[values.length - 1].mean
-				const stdDev = deviation(values, (each) => source(each.datum))
+				const stdDev = deviation(values, each => source(each.datum))
 				if (stdDev === undefined) {
 					return undefined
 				}
@@ -65,7 +65,7 @@ export default function Bollingerband() {
 		const { windowSize } = options
 		return windowSize - 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

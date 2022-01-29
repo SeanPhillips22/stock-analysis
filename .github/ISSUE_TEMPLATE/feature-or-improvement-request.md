@@ -4,7 +4,6 @@ about: Suggest an idea or improvement
 title: FEATURE
 labels: enhancement
 assignees: ''
-
 ---
 
 **Describe your idea**

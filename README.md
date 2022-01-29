@@ -45,18 +45,19 @@ You can easily download the code and run the site on your own computer by clonin
 Supabase is a service that we use on the back-end.
 
 **Here are the steps to set it up:**
-- Go to the [Subpabase website](https://app.supabase.io/)
-- Sign in with GitHub
-- Click on `Authorize Supabase`
-- Click on `New project`
-- Give it a name (for example: stock-analysis)
-- Enter a Database Password
-- For Region, you can leave it as default or select another region that is closest to you
-- Select **Free tier** Pricing Plan
-- Click on Create new project (will take a few minutes to complete setup)
-- Once created, under `Project Configuration`, copy URL and paste in `.env` for `NEXT_PUBLIC_SUPABASE_URL`
-- under `Project API keys`, copy `anon` `public` key and paste in `.env` for `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- You are done! Continue last steps in [How to start](https://github.com/stockanalysisdev/stock-analysis#how-to-start) section.
+
+-  Go to the [Subpabase website](https://app.supabase.io/)
+-  Sign in with GitHub
+-  Click on `Authorize Supabase`
+-  Click on `New project`
+-  Give it a name (for example: stock-analysis)
+-  Enter a Database Password
+-  For Region, you can leave it as default or select another region that is closest to you
+-  Select **Free tier** Pricing Plan
+-  Click on Create new project (will take a few minutes to complete setup)
+-  Once created, under `Project Configuration`, copy URL and paste in `.env` for `NEXT_PUBLIC_SUPABASE_URL`
+-  under `Project API keys`, copy `anon` `public` key and paste in `.env` for `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+-  You are done! Continue last steps in [How to start](https://github.com/stockanalysisdev/stock-analysis#how-to-start) section.
 
 Congrats! 🎉 You now have the site running locally on your own computer, with the site's code ready to edit from Visual Studio Code.
 

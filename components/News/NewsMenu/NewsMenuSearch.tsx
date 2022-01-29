@@ -63,11 +63,11 @@ export function NewsMenuSearch({
 				id="tag-feat-news-search"
 				placeholder="Search news..."
 				value={query}
-				onChange={(e) => {
+				onChange={e => {
 					setError('')
 					setQuery(e.target.value)
 				}}
-				onKeyDown={(e) => e.key === 'Enter' && !searching && doSearch()}
+				onKeyDown={e => e.key === 'Enter' && !searching && doSearch()}
 			/>
 			<div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
 				{searching ? (

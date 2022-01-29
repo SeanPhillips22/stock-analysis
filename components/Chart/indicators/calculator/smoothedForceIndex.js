@@ -7,7 +7,7 @@ import sma from './sma'
 export default function SmoothedForceIndexComponent() {
 	const underlyingAlgorithm = forceIndex()
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { smoothingType, smoothingWindow } = options
 		const { sourcePath, volumePath } = options
 		const algo = underlyingAlgorithm.options({ sourcePath, volumePath })
@@ -20,7 +20,7 @@ export default function SmoothedForceIndexComponent() {
 		})
 		// @ts-ignore
 		const smoothed = forceMA(force)
-		return zip(force, smoothed).map((d) => ({
+		return zip(force, smoothed).map(d => ({
 			force: d[0],
 			smoothed: d[1]
 		}))
@@ -29,7 +29,7 @@ export default function SmoothedForceIndexComponent() {
 		const { smoothingWindow } = options
 		return underlyingAlgorithm.undefinedLength() + smoothingWindow - 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

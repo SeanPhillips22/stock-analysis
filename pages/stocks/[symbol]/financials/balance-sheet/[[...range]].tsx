@@ -36,7 +36,7 @@ export default function BalanceSheet({ info, data, count, range }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const range = (context?.params?.range as Range) || 'annual'
 	const data = await getStockFinancialsSSR('balance-sheet', symbol, range)

@@ -29,7 +29,7 @@ import { MACD as defaultOptions } from './defaultOptionsForComputation'
 import ema from './ema'
 export default function Macd() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { fast, slow, signal, sourcePath } = options
 		const fastEMA = ema().options({ windowSize: fast, sourcePath })
 		const slowEMA = ema().options({ windowSize: slow, sourcePath })
@@ -37,11 +37,11 @@ export default function Macd() {
 			windowSize: signal,
 			sourcePath: undefined
 		})
-		const diff = zip(fastEMA(data), slowEMA(data)).map((d) =>
+		const diff = zip(fastEMA(data), slowEMA(data)).map(d =>
 			d[0] !== undefined && d[1] !== undefined ? d[0] - d[1] : undefined
 		)
 		const averageDiff = signalEMA(diff)
-		return zip(diff, averageDiff).map((d) => ({
+		return zip(diff, averageDiff).map(d => ({
 			macd: d[0],
 			signal: d[1],
 			divergence:
@@ -52,7 +52,7 @@ export default function Macd() {
 		const { slow, signal } = options
 		return slow + signal - 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

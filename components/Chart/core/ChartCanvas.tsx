@@ -29,7 +29,7 @@ import evaluator from './utils/evaluator'
 const CANDIDATES_FOR_RESET = ['seriesName']
 
 const shouldResetChart = (thisProps: any, nextProps: any) => {
-	return !CANDIDATES_FOR_RESET.every((key) => {
+	return !CANDIDATES_FOR_RESET.every(key => {
 		const result = shallowEqual(thisProps[key], nextProps[key])
 		return result
 	})
@@ -228,8 +228,8 @@ const updateChart = (
 		const dx = initialXScale(lastXItem) - initialXScale.range()[1]
 		const [newStart, newEnd] = initialXScale
 			.range()
-			.map((x) => x + dx)
-			.map((x) => initialXScale.invert(x))
+			.map(x => x + dx)
+			.map(x => initialXScale.invert(x))
 
 		const response = filterData(
 			fullData,
@@ -600,11 +600,11 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 	}
 
 	public unsubscribe = (id: string) => {
-		this.subscriptions = this.subscriptions.filter((each) => each.id !== id)
+		this.subscriptions = this.subscriptions.filter(each => each.id !== id)
 	}
 
 	public getAllPanConditions = () => {
-		return this.subscriptions.map((each) => each.getPanConditions())
+		return this.subscriptions.map(each => each.getPanConditions())
 	}
 
 	public setCursorClass = (className: string) => {
@@ -613,7 +613,7 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 
 	public amIOnTop = (id: string) => {
 		const dragableComponents = this.subscriptions.filter(
-			(each) => each.getPanConditions().draggable
+			each => each.getPanConditions().draggable
 		)
 
 		return dragableComponents.length > 0 && last(dragableComponents).id === id
@@ -845,8 +845,8 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 		const c = zoomDirection > 0 ? 1 * zoomMultiplier : 1 / zoomMultiplier
 		const newDomain = initialXScale!
 			.range()
-			.map((x) => cx + (x - cx) * c)
-			.map((x) => initialXScale.invert(x))
+			.map(x => cx + (x - cx) * c)
+			.map(x => initialXScale.invert(x))
 
 		const { xScale, plotData, chartConfig } =
 			this.calculateStateForDomain(newDomain)
@@ -967,7 +967,7 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 	}
 
 	public triggerEvent(type: any, props?: any, e?: any) {
-		this.subscriptions.forEach((each) => {
+		this.subscriptions.forEach(each => {
 			const state = {
 				...this.state,
 				fullData: this.fullData,
@@ -978,7 +978,7 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 	}
 
 	public draw = (props: any) => {
-		this.subscriptions.forEach((each) => {
+		this.subscriptions.forEach(each => {
 			if (isDefined(each.draw)) {
 				each.draw(props)
 			}
@@ -1010,8 +1010,8 @@ export class ChartCanvas<TXAxis extends number | Date> extends React.Component<
 
 		const newDomain = initialXScale
 			.range()
-			.map((x) => x - dx)
-			.map((x) => initialXScale.invert(x))
+			.map(x => x - dx)
+			.map(x => initialXScale.invert(x))
 
 		const { plotData: beforePlotData, domain } = filterData(
 			fullData,

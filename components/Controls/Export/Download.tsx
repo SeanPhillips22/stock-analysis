@@ -21,7 +21,7 @@ export default function Download({
 	fileName,
 	returnData
 }: Props) {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 
 	let fn = fileName
 		? fileName

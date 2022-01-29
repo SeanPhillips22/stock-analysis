@@ -130,7 +130,7 @@ export const HoverChart = ({
 	// Format dates as years if annual
 	let xdatadraft: Array<number | string> = data.datekey.slice(0, count)
 	if (range === 'annual') {
-		xdatadraft = xdatadraft.map((item) => {
+		xdatadraft = xdatadraft.map(item => {
 			return formatYear(item)
 		})
 	}

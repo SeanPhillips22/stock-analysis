@@ -67,7 +67,7 @@ export const Chart = ({
 
 	const timeAxis = useMemo(
 		() =>
-			chartData.map((item) => {
+			chartData.map(item => {
 				return item.t
 			}),
 		[chartData]
@@ -75,7 +75,7 @@ export const Chart = ({
 
 	const priceAxis = useMemo(
 		() =>
-			chartData.map((item) => {
+			chartData.map(item => {
 				return item.c
 			}),
 		[chartData]

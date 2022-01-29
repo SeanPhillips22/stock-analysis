@@ -15,9 +15,9 @@ type Props = {
 }
 
 export function StringFilter({ filter, active }: Props) {
-	const type = screenerState((state) => state.type)
-	const variableFilters = screenerState((state) => state.variableFilters)
-	const addVariableFilter = screenerState((state) => state.addVariableFilter)
+	const type = screenerState(state => state.type)
+	const variableFilters = screenerState(state => state.variableFilters)
+	const addVariableFilter = screenerState(state => state.addVariableFilter)
 	const [search, setSearch] = useState('')
 	const [options, setOptions] = useState<FilterOption[]>(filter.options)
 	const [count, setCount] = useState(filter.options.length)
@@ -56,7 +56,7 @@ export function StringFilter({ filter, active }: Props) {
 	useEffect(() => {
 		if (filterType === 'stringmatch') {
 			if (search.length > 0) {
-				const filtered = filter.options.filter((option) =>
+				const filtered = filter.options.filter(option =>
 					option.name.toLowerCase().includes(search.toLowerCase())
 				)
 				setOptions(filtered)
@@ -84,12 +84,12 @@ export function StringFilter({ filter, active }: Props) {
 					className="border-0 border-b border-gray-200 w-full focus:ring-0 focus:border-gray-200"
 					placeholder="Search..."
 					value={search}
-					onChange={(e) => setSearch(e.target.value)}
+					onChange={e => setSearch(e.target.value)}
 				/>
 			)}
 			<div className="max-h-[300px] lg:max-h-[400px] overflow-y-auto overflow-x-hidden overscroll-contain thin-scroll">
 				{options &&
-					options.map((option) => (
+					options.map(option => (
 						<PresetChoice
 							key={option.value}
 							option={option}

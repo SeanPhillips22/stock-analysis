@@ -3,8 +3,8 @@ import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { financialsState } from 'state/financialsState'
 
 export function SelectFormat() {
-	const divider = financialsState((state) => state.divider)
-	const setDivider = financialsState((state) => state.setDivider)
+	const divider = financialsState(state => state.divider)
+	const setDivider = financialsState(state => state.setDivider)
 
 	const DIVIDER_MAP = [
 		{
@@ -25,14 +25,15 @@ export function SelectFormat() {
 		}
 	]
 
-	let active = DIVIDER_MAP.find((item) => item.value === divider)
+	let active = DIVIDER_MAP.find(item => item.value === divider)
 
 	return (
 		<Dropdown
 			title={active ? active.title : 'Format'}
 			hoverTitle="Change number units"
+			active={divider !== 1000000}
 		>
-			{DIVIDER_MAP.map((item) => (
+			{DIVIDER_MAP.map(item => (
 				<div
 					key={item.value}
 					className={

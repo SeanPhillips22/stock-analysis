@@ -38,7 +38,7 @@ export function Features() {
 
 	return (
 		<div className="space-y-3">
-			{FeaturesMap.map((feature) => {
+			{FeaturesMap.map(feature => {
 				if (isPro && feature.tagId === 'tag-upgr-nav-widget') {
 					return null
 				}

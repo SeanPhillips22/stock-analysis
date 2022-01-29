@@ -6,8 +6,8 @@ import { FiltersMenuActive } from './FiltersMenuActive'
 import { cn } from 'functions/helpers/classNames'
 
 export function FiltersMenu() {
-	const type = screenerState((state) => state.type)
-	const filtersShown = screenerState((state) => state.filtersShown)
+	const type = screenerState(state => state.type)
+	const filtersShown = screenerState(state => state.filtersShown)
 
 	return (
 		<>

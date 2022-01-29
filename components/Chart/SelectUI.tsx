@@ -24,7 +24,7 @@ export const SelectPeriod = (props: SelectPeriodProps) => {
 		<div>
 			<select
 				disabled={props.time === '1D' || props.time === '5D' ? true : false}
-				onChange={(e) => {
+				onChange={e => {
 					props.dispatcher(e.target.value)
 				}}
 				id="period"
@@ -46,7 +46,7 @@ export const SelectType = (props: SelectTypeProps) => {
 	return (
 		<div>
 			<select
-				onChange={(e) => props.dispatcher(e.target.value)}
+				onChange={e => props.dispatcher(e.target.value)}
 				id="type"
 				name="type"
 				className="block pl-2 tiny:pl-3 border-0 sm:border-l border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
@@ -70,7 +70,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 	return (
 		<>
 			<select
-				onChange={(e) => dispatch(e.target.value)}
+				onChange={e => dispatch(e.target.value)}
 				id="range"
 				name="range"
 				className="block lg:hidden pl-2 tiny:pl-3 border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"

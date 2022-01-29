@@ -9,7 +9,7 @@ export default function Macd() {
 		.type(ALGORITHM_TYPE)
 		.fill(appearanceOptions.fill)
 		.stroke(appearanceOptions.stroke)
-		.accessor((d) => d.macd)
+		.accessor(d => d.macd)
 	const underlyingAlgorithm = macd()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

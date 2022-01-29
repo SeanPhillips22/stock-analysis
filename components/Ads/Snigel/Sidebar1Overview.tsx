@@ -4,7 +4,7 @@ import { noAds } from 'components/Ads/noAds'
 import { News } from 'types/News'
 
 export function Sidebar1Overview({ news }: { news: News[] }) {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 
 	const { checked, isPro } = useAuthState()
 

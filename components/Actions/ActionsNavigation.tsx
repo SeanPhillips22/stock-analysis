@@ -4,10 +4,10 @@ import { navState } from 'state/navState'
 import { actionsState } from 'state/actionsState'
 
 export const ActionsNavigation = () => {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 	const menuref = useRef<HTMLUListElement>(null)
-	const pos = actionsState((state) => state.pos)
-	const setPos = actionsState((state) => state.setPos)
+	const pos = actionsState(state => state.pos)
+	const setPos = actionsState(state => state.setPos)
 
 	function handleScroll(e: UIEvent<HTMLUListElement>) {
 		if (e && e.currentTarget.scrollLeft !== pos) {
@@ -52,7 +52,7 @@ export const ActionsNavigation = () => {
 						</a>
 					</Link>
 				</li>
-				{tabs.map((tab) => {
+				{tabs.map(tab => {
 					let append = ''
 					const last = path.three ?? path.two ?? path.one
 					if (

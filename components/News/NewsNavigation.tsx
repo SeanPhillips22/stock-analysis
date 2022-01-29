@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { navState } from 'state/navState'
 
 export const NewsNavigation = () => {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 
 	const active =
 		'py-1.5 px-2.5 xs:px-3.5 sm:px-5 block bg-[#eee] font-semibold text-gray-900 whitespace-nowrap'

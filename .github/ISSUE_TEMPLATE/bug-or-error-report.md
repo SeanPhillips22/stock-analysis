@@ -4,7 +4,6 @@ about: Let us know about bugs, errors or other problems
 title: BUG / ERROR
 labels: bug
 assignees: ''
-
 ---
 
 **What is the issue?**

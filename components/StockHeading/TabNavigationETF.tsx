@@ -6,7 +6,7 @@ type Props = {
 }
 
 export const TabNavigationETF = ({ symbol }: Props) => {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 
 	return (
 		<nav className="border-b-2 border-blue-brand_sharp w-full">

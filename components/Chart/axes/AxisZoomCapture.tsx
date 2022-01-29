@@ -157,7 +157,7 @@ export class AxisZoomCapture extends React.Component<
 
 			const tempRange = startScale
 				.range()
-				.map((d) =>
+				.map(d =>
 					inverted
 						? d - sign(d - center) * diff
 						: d + sign(d - center) * diff

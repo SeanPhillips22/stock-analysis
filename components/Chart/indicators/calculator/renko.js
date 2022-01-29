@@ -4,16 +4,17 @@ import atr from './atr'
 import { Renko as defaultOptions } from './defaultOptionsForComputation'
 export default function RenkoComponent() {
 	let options = defaultOptions
-	let dateAccessor = (d) => d.date
+	let dateAccessor = d => d.date
 	let dateMutator = (d, date) => {
 		d.date = date
 	}
-	const calculator = (rawData) => {
+	const calculator = rawData => {
 		const { reversalType, fixedBrickSize, sourcePath, windowSize } = options
+		// prettier-ignore
 		const source =
 			sourcePath === 'high/low'
-				? (d) => ({ high: d.high, low: d.low })
-				: (d) => ({ high: d.close, low: d.close })
+				? (d => ({ high: d.high, low: d.low }))
+				: (d => ({ high: d.close, low: d.close }))
 		const pricingMethod = source
 		let brickSize
 		if (reversalType === 'ATR') {
@@ -24,7 +25,7 @@ export default function RenkoComponent() {
 					d['atr' + windowSize] = c
 				})
 			atrCalculator(rawData)
-			brickSize = (d) => d['atr' + windowSize]
+			brickSize = d => d['atr' + windowSize]
 		} else {
 			brickSize = functor(fixedBrickSize)
 		}
@@ -148,21 +149,21 @@ export default function RenkoComponent() {
 		})
 		return renkoData
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}
 		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
 		return calculator
 	}
-	calculator.dateMutator = (newDateMutator) => {
+	calculator.dateMutator = newDateMutator => {
 		if (newDateMutator === undefined) {
 			return dateMutator
 		}
 		dateMutator = newDateMutator
 		return calculator
 	}
-	calculator.dateAccessor = (newDateAccessor) => {
+	calculator.dateAccessor = newDateAccessor => {
 		if (newDateAccessor === undefined) {
 			return dateAccessor
 		}

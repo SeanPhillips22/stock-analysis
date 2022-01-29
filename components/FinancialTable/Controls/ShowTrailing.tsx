@@ -7,10 +7,10 @@ type Props = {
 }
 
 export function ShowTrailing({ range, statement }: Props) {
-	const trailing = financialsState((state) => state.trailing)
-	const toggleTrailing = financialsState((state) => state.toggleTrailing)
-	const current = financialsState((state) => state.current)
-	const toggleCurrent = financialsState((state) => state.toggleCurrent)
+	const trailing = financialsState(state => state.trailing)
+	const toggleTrailing = financialsState(state => state.toggleTrailing)
+	const current = financialsState(state => state.current)
+	const toggleCurrent = financialsState(state => state.toggleCurrent)
 
 	if (range === 'annual' && statement !== 'ratios') {
 		return (

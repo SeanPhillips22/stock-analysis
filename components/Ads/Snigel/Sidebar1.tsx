@@ -3,7 +3,7 @@ import { navState } from 'state/navState'
 import { noAds } from 'components/Ads/noAds'
 
 export function Sidebar1() {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 
 	const { checked, isPro } = useAuthState()
 

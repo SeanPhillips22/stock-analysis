@@ -40,7 +40,7 @@ export default function SlidingWindow() {
 	let source
 	let skipInitial = 0
 	let misc
-	const slidingWindow = (data) => {
+	const slidingWindow = data => {
 		const sourceFunction = source || path(sourcePath)
 		// @ts-ignore
 		const size = functor(windowSize).apply(this, arguments)

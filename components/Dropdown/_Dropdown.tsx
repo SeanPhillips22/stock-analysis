@@ -9,12 +9,23 @@ type Props = {
 	hoverTitle?: string
 	id?: string
 	classes?: string
+	active?: boolean // if non-default is selected
 }
 
-export function Dropdown({ title, children, hoverTitle, id, classes }: Props) {
+export function Dropdown({
+	title,
+	children,
+	hoverTitle,
+	id,
+	classes,
+	active
+}: Props) {
 	return (
 		<Menu as="div" className="controls-menu" id={id}>
-			<Menu.Button className="controls-btn" title={hoverTitle}>
+			<Menu.Button
+				className={cn('controls-btn', active ? 'active' : '')}
+				title={hoverTitle}
+			>
 				{title}
 				<ChevronDownIcon className="controls-icon" aria-hidden="true" />
 			</Menu.Button>

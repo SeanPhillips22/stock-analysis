@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { SavedDropdown } from './SavedDropdown'
 
 export function SavedFilters() {
-	const type = screenerState((state) => state.type)
+	const type = screenerState(state => state.type)
 	const [open, setOpen] = useState(false)
 	const ref = useRef<HTMLDivElement>(null)
 

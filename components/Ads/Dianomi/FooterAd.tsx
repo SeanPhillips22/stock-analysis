@@ -11,7 +11,7 @@ declare global {
 
 // Dianomi ad in the footer
 export default function FooterAd() {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 
 	useEffect(() => {
 		if (typeof window.dianomiReloadContext !== 'undefined') {

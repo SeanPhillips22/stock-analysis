@@ -17,11 +17,11 @@ interface NavStateInterface {
 	setViews: (newViews: number) => void
 }
 
-export const navState = create<NavStateInterface>((set) => ({
+export const navState = create<NavStateInterface>(set => ({
 	path: {} as PathObject,
-	setPath: (newPath) => set({ path: newPath }),
+	setPath: newPath => set({ path: newPath }),
 	route: '',
-	setRoute: (newRoute) => set({ route: newRoute }),
+	setRoute: newRoute => set({ route: newRoute }),
 	views: 0,
-	setViews: (newViews) => set({ views: newViews })
+	setViews: newViews => set({ views: newViews })
 }))

@@ -19,7 +19,7 @@ interface Years {
 
 export const makeYearArray = (years: Years, current: number) => {
 	return Object.keys(years)
-		.flatMap((year) => {
+		.flatMap(year => {
 			return Number(year) < current - 2 && Number(year) > 1997 ? [year] : []
 		})
 		.reverse()
@@ -32,7 +32,7 @@ export const leastMost = (years: any, current?: number) => {
 	let largest = 0
 	let largestYear = ''
 
-	Object.keys(years).forEach((year) => {
+	Object.keys(years).forEach(year => {
 		if (Number(years[year]) < smallest && Number(year) !== current) {
 			smallest = Number(years[year])
 			smallestYear = year

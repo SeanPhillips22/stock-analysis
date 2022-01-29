@@ -14,7 +14,7 @@ interface Props {
 // Count how many data points are not zero, hide dividend growth chart if 0-1 data points
 function countNotZero(yData: number[]) {
 	let count = 0
-	yData.forEach((y) => {
+	yData.forEach(y => {
 		if (y !== 0) {
 			count++
 		}

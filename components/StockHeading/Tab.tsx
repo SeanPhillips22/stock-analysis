@@ -8,7 +8,7 @@ interface TabI {
 }
 
 export function Tab({ symbol, title, append }: TabI) {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 
 	return (
 		<li>

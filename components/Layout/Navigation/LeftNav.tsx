@@ -4,8 +4,8 @@ import { MainNav } from './MainNav'
 import { MobileNav } from './MobileNav'
 
 export function LeftNav() {
-	const visible = navMenuState((state) => state.visible)
-	const expanded = navMenuState((state) => state.expanded)
+	const visible = navMenuState(state => state.visible)
+	const expanded = navMenuState(state => state.expanded)
 
 	return (
 		<>

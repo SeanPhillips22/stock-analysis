@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'TMA'
 export default function Tma() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.tma)
+		.accessor(d => d.tma)
 	const underlyingAlgorithm = tma()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

@@ -159,7 +159,7 @@ const calculateTooltipSize = (
 
 const sumSizes = (...sizes: any[]) => {
 	return {
-		width: Math.max(...sizes.map((size) => size.width)),
+		width: Math.max(...sizes.map(size => size.width)),
 		height: sum(sizes, (d: any) => d.height)
 	}
 }

@@ -30,22 +30,22 @@ import ema from './ema'
 import { ElderRay as defaultOptions } from './defaultOptionsForComputation'
 export default function ElderRayComponent() {
 	let options = defaultOptions
-	let ohlc = (d) => ({
+	let ohlc = d => ({
 		open: d.open,
 		high: d.high,
 		low: d.low,
 		close: d.close
 	})
-	const calculator = (data) => {
+	const calculator = data => {
 		const { windowSize, sourcePath, movingAverageType } = options
 		const meanAlgorithm =
 			movingAverageType === 'ema'
 				? ema().options({ windowSize, sourcePath })
 				: slidingWindow()
 						.windowSize(windowSize)
-						.accumulator((values) => mean(values))
+						.accumulator(values => mean(values))
 						.sourcePath(sourcePath)
-		return zip(data, meanAlgorithm(data)).map((d) => {
+		return zip(data, meanAlgorithm(data)).map(d => {
 			const datum = d[0]
 			const meanValue = d[1]
 			const bullPower =
@@ -59,14 +59,14 @@ export default function ElderRayComponent() {
 		const { windowSize } = options
 		return windowSize - 1
 	}
-	calculator.ohlc = (ohlcAccessor) => {
+	calculator.ohlc = ohlcAccessor => {
 		if (ohlcAccessor === undefined) {
 			return ohlc
 		}
 		ohlc = ohlcAccessor
 		return calculator
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

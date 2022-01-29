@@ -32,9 +32,9 @@ export function TableTitle({ info, statement, range }: Props) {
 			break
 	}
 
-	const divider = financialsState((state) => state.divider)
-	const controls = financialsState((state) => state.controls)
-	const toggleControls = financialsState((state) => state.toggleControls)
+	const divider = financialsState(state => state.divider)
+	const controls = financialsState(state => state.controls)
+	const toggleControls = financialsState(state => state.toggleControls)
 	const dividerText = getDivider(divider)
 	const dividerTextDesktop = dividerText ? dividerText + ' ' : ''
 	const dividerTextMobile = dividerText ? capitalize(dividerText) + ' ' : ''

@@ -25,9 +25,9 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 	const [first, setFirst] = useState<string>('')
 	const [second, setSecond] = useState<string>('')
 	const [active, setActive] = useState<string | false>()
-	const filters = screenerState((state) => state.filters)
-	const openFilter = screenerState((state) => state.openFilter)
-	const setOpenFilter = screenerState((state) => state.setOpenFilter)
+	const filters = screenerState(state => state.filters)
+	const openFilter = screenerState(state => state.openFilter)
+	const setOpenFilter = screenerState(state => state.setOpenFilter)
 	const { add } = useModifyFilters()
 
 	// Extract the filter values in order to populate the custom choice inputs
@@ -95,8 +95,8 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 						type="text"
 						placeholder="Value"
 						value={first}
-						onChange={(e) => setFirst(e.target.value)}
-						onKeyDown={(e) => handleKeyDown(e, 'first')}
+						onChange={e => setFirst(e.target.value)}
+						onKeyDown={e => handleKeyDown(e, 'first')}
 						tabIndex={0}
 						className="shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]"
 					/>
@@ -125,8 +125,8 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 					type="text"
 					placeholder="Value"
 					value={second}
-					onChange={(e) => setSecond(e.target.value)}
-					onKeyDown={(e) => handleKeyDown(e, 'second')}
+					onChange={e => setSecond(e.target.value)}
+					onKeyDown={e => handleKeyDown(e, 'second')}
 					tabIndex={0}
 					className={`shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]${
 						compare === 'between' ? ' block' : ' hidden'

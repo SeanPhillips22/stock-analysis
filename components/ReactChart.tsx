@@ -50,7 +50,7 @@ export const ReactChart = ({
 	}, [data, options])
 
 	const nodeRef = useCallback<(instance: HTMLCanvasElement | null) => void>(
-		(node) => {
+		node => {
 			chartInstance.current.destroy()
 
 			if (node) {

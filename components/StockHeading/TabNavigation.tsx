@@ -10,8 +10,8 @@ export const TabNavigation = ({
 	hideChart: boolean
 }) => {
 	const menuref = useRef<HTMLUListElement>(null)
-	const pos = menuState((state) => state.pos)
-	const setPos = menuState((state) => state.setPos)
+	const pos = menuState(state => state.pos)
+	const setPos = menuState(state => state.setPos)
 
 	function handleScroll(e: UIEvent<HTMLUListElement>) {
 		if (e && e.currentTarget.scrollLeft !== pos) {

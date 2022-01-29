@@ -136,7 +136,7 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 
 export default CandleStickStockChart
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('chartpage', symbol, 'etf')
 

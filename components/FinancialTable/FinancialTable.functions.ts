@@ -295,7 +295,7 @@ export function sliceData(
 	const sliced = {} as FinancialReport
 
 	if (data) {
-		Object.keys(data).forEach((key) => {
+		Object.keys(data).forEach(key => {
 			sliced[key] = data[key].slice(0, showcount)
 		})
 
@@ -308,7 +308,7 @@ export function sliceData(
 export function reverseData(data: FinancialReport) {
 	const reversed = {} as FinancialReport
 
-	Object.keys(data).forEach((key) => {
+	Object.keys(data).forEach(key => {
 		reversed[key] = data[key].reverse()
 	})
 

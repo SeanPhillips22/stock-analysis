@@ -3,9 +3,9 @@ import { PresetFilters } from './PresetFilters'
 import { SavedFilters } from './SavedFilters/_SavedFilters'
 
 export function AboveScreener() {
-	const type = screenerState((state) => state.type)
-	const filters = screenerState((state) => state.filters)
-	const resultsCount = screenerState((state) => state.resultsCount)
+	const type = screenerState(state => state.type)
+	const filters = screenerState(state => state.filters)
+	const resultsCount = screenerState(state => state.resultsCount)
 
 	const filterCount = filters.length
 

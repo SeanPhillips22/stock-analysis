@@ -4,19 +4,19 @@ import { slidingWindow } from '../utils'
 import { SMA as defaultOptions } from './defaultOptionsForComputation'
 export default function Sma() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { windowSize, sourcePath } = options
 		const average = slidingWindow()
 			.windowSize(windowSize)
 			.sourcePath(sourcePath)
-			.accumulator((values) => mean(values))
+			.accumulator(values => mean(values))
 		return average(data)
 	}
 	calculator.undefinedLength = () => {
 		const { windowSize } = options
 		return windowSize - 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

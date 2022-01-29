@@ -4,9 +4,9 @@ import { noAds } from '../noAds'
 import { useLoadAdsense } from './useLoadAdsense'
 
 export function Sidebar1Overview() {
-	const path = navState((state) => state.path)
-	const checked = authState((state) => state.checked)
-	const isPro = authState((state) => state.isPro)
+	const path = navState(state => state.path)
+	const checked = authState(state => state.checked)
+	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
 
 	if (noAds(path.one)) {

@@ -16,7 +16,7 @@ function calc(prev, now) {
 }
 export default function Sar() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { accelerationFactor, maxAccelerationFactor } = options
 		const algorithm = mappedSlidingWindow()
 			.windowSize(2)
@@ -84,13 +84,13 @@ export default function Sar() {
 					sar: use === 'falling' ? current.fallingSar : current.risingSar
 				})
 			})
-		const calculatedData = algorithm(data).map((d) => d.sar)
+		const calculatedData = algorithm(data).map(d => d.sar)
 		return calculatedData
 	}
 	calculator.undefinedLength = () => {
 		return 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

@@ -11,7 +11,7 @@ export function SaveScreen({ type }: { type: ScreenerTypes }) {
 	const { add, msg, err, setErr, clearMessages } = useSavedScreens(type)
 	const router = useRouter()
 	const [name, setName] = useState('')
-	const filters = screenerState((state) => state.filters)
+	const filters = screenerState(state => state.filters)
 
 	async function handleSubmit(name: string) {
 		clearMessages()
@@ -37,11 +37,11 @@ export function SaveScreen({ type }: { type: ScreenerTypes }) {
 					placeholder="Enter screen name"
 					className="border-gray-200 focus:ring-0 focus:border-blue-300 text-gray-700 text-sm flex-grow"
 					value={name}
-					onChange={(e) => {
+					onChange={e => {
 						setName(e.target.value)
 						clearMessages()
 					}}
-					onKeyPress={(e) => {
+					onKeyPress={e => {
 						if (e.key === 'Enter') {
 							handleSubmit(name)
 						}

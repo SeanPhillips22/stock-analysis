@@ -36,7 +36,7 @@ export default function IncomeStatement({ info, data, count, range }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const range = context?.params?.range as Range
 	const data = await getStockFinancialsSSR('income-statement', symbol, range)

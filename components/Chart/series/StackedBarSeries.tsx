@@ -171,7 +171,7 @@ const doStuff = (
 }
 
 export const rotateXY = (array: any[]) =>
-	array.map((each) => {
+	array.map(each => {
 		return {
 			...each,
 			x: each.y,
@@ -198,7 +198,7 @@ export const drawOnCanvas2 = (
 		}
 		ctx.fillStyle = key
 
-		values.forEach((d) => {
+		values.forEach(d => {
 			if (d.width <= 1) {
 				ctx.fillRect(d.x - 0.5, d.y, 1, d.height)
 			} else {
@@ -240,7 +240,7 @@ export function getBars(
 
 	const offset = barWidth === 1 ? 0 : 0.5 * width
 
-	const ds = plotData.map((each) => {
+	const ds = plotData.map(each => {
 		const d = {
 			appearance: {},
 			x: xAccessor(each)
@@ -280,7 +280,7 @@ export function getBars(
 	})
 
 	const bars = merge<any>(newData)
-		.map((d) => {
+		.map(d => {
 			let y = yScale(d[1])
 			let h = getBase(xScale, yScale, d.data) - yScale(d[1] - d[0])
 			if (h < 0) {
@@ -304,7 +304,7 @@ export function getBars(
 				width: barWidth
 			}
 		})
-		.filter((bar) => !isNaN(bar.y))
+		.filter(bar => !isNaN(bar.y))
 
 	return after(bars)
 }

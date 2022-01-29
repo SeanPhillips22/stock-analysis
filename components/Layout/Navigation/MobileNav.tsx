@@ -5,7 +5,7 @@ import { MainNav } from './MainNav'
 import { NavLogin } from './NavLogin'
 
 export function MobileNav() {
-	const close = navMenuState((state) => state.toggle)
+	const close = navMenuState(state => state.toggle)
 	const menuRef = useRef<HTMLDivElement>(null)
 
 	// Close menu if clicked outside of it

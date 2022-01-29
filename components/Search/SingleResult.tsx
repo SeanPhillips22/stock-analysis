@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const SingleResult = ({ index, result, setOpen }: Props) => {
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 	const symbol = result.s
 	const name = result.n
 	const type = result.t

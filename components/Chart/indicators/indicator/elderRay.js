@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'ElderRay'
 export default function ElderRay() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.elderRay)
+		.accessor(d => d.elderRay)
 	const underlyingAlgorithm = elderRay()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

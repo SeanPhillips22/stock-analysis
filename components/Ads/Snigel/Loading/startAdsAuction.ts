@@ -20,10 +20,10 @@ export function startAdsAuction(url: string) {
 		// Remove unnecessary ads on desktop/mobile
 		if (window.innerWidth) {
 			if (window.innerWidth >= 768) {
-				ads = ads.filter((ad) => ad !== 'in-content_1_mobile')
+				ads = ads.filter(ad => ad !== 'in-content_1_mobile')
 			} else {
 				ads = ads.filter(
-					(ad) => ad === 'in-content_1_mobile' || ad === 'top_leaderboard'
+					ad => ad === 'in-content_1_mobile' || ad === 'top_leaderboard'
 				)
 			}
 		}

@@ -43,10 +43,10 @@ export const FinancialTable = ({
 	count,
 	range
 }: Props) => {
-	const divider = financialsState((state) => state.divider)
-	const reversed = financialsState((state) => state.reversed)
-	const trailing = financialsState((state) => state.trailing)
-	const current = financialsState((state) => state.current)
+	const divider = financialsState(state => state.divider)
+	const reversed = financialsState(state => state.reversed)
+	const trailing = financialsState(state => state.trailing)
+	const current = financialsState(state => state.current)
 	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
 	const [dataRows, setDataRows] = useState(financials)
@@ -289,7 +289,7 @@ export const FinancialTable = ({
 							/>
 						</Tooltip>
 						<TooltipChart
-							render={(attrs) => (
+							render={attrs => (
 								<div
 									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-20"
 									tabIndex={-1}

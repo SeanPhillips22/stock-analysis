@@ -21,8 +21,8 @@ function loadAdsense() {
 }
 
 export function useLoadAdsense() {
-	const path = navState((state) => state.path)
-	const isPro = authState((state) => state.isPro)
+	const path = navState(state => state.path)
+	const isPro = authState(state => state.isPro)
 
 	useEffect(() => {
 		if (noAds(path.one) || isPro) return // no ads for this page

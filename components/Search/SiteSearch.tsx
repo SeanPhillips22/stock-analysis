@@ -178,7 +178,7 @@ export const SiteSearch = ({ classes }: Props) => {
 				placeholder="Company or stock symbol..."
 				ref={inputRef}
 				value={query}
-				onChange={(e) => setQuery(e.target.value)}
+				onChange={e => setQuery(e.target.value)}
 				onMouseEnter={() => {
 					!fetched && fetchIndex()
 				}}
@@ -197,7 +197,7 @@ export const SiteSearch = ({ classes }: Props) => {
 						title="Clear"
 						tabIndex={0}
 						onClick={clearInput}
-						onKeyPress={(e) => {
+						onKeyPress={e => {
 							if (e.key === 'Enter') {
 								clearInput(e)
 							}

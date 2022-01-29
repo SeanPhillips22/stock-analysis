@@ -62,7 +62,7 @@ const EtfOverview = ({ info, data, news }: Props) => {
 }
 export default EtfOverview
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('overview', symbol, 'etf')
 

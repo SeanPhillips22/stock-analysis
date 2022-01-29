@@ -9,7 +9,7 @@ interface Props {
 
 export default function SplitsFilter({ setColumnFilter }: Props) {
 	const [title, setTitle] = useState('All Splits')
-	const setIsFiltered = actionsState((state) => state.setIsFiltered)
+	const setIsFiltered = actionsState(state => state.setIsFiltered)
 
 	useEffect(() => {
 		return () => {

@@ -37,7 +37,7 @@ export const LiteYouTubeEmbed = ({ id, title }: Props) => {
 		<>
 			<div
 				onClick={addIframe}
-				onKeyDown={(event) => {
+				onKeyDown={event => {
 					if (event.key === 'Enter') {
 						addIframe()
 					}

@@ -185,7 +185,7 @@ const StatisticsPage = ({ info, data }: Props) => {
 }
 export default StatisticsPage
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('statistics', symbol)
 

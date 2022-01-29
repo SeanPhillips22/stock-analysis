@@ -15,9 +15,9 @@ type Props = {
 }
 
 export function FinancialsControls({ info, statement, range }: Props) {
-	const reversed = financialsState((state) => state.reversed)
-	const toggleReversed = financialsState((state) => state.toggleReversed)
-	const controls = financialsState((state) => state.controls)
+	const reversed = financialsState(state => state.reversed)
+	const toggleReversed = financialsState(state => state.toggleReversed)
+	const controls = financialsState(state => state.controls)
 	const [fetchBulk, setFetchBulk] = useState(false)
 	const data = useFetchBulk(info.symbol, fetchBulk)
 

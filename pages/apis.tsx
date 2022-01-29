@@ -115,7 +115,7 @@ export default function ApisPage() {
 							</div>
 							<div className="mt-12 lg:mt-0 lg:col-span-2">
 								<dl className="space-y-12">
-									{faqs.map((faq) => (
+									{faqs.map(faq => (
 										<div key={faq.question}>
 											<dt className="text-lg leading-6 font-medium text-gray-900">
 												{faq.question}

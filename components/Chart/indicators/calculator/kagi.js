@@ -4,11 +4,11 @@ import atr from './atr'
 import { Kagi as defaultOptions } from './defaultOptionsForComputation'
 export default function KagiComponent() {
 	let options = defaultOptions
-	let dateAccessor = (d) => d.date
+	let dateAccessor = d => d.date
 	let dateMutator = (d, date) => {
 		d.date = date
 	}
-	const calculator = (data) => {
+	const calculator = data => {
 		const { reversalType, windowSize, reversal, sourcePath } = options
 		const source = path(sourcePath)
 		let reversalThreshold
@@ -20,7 +20,7 @@ export default function KagiComponent() {
 					d['atr' + windowSize] = c
 				})
 			atrCalculator(data)
-			reversalThreshold = (d) => d['atr' + windowSize]
+			reversalThreshold = d => d['atr' + windowSize]
 		} else {
 			reversalThreshold = functor(reversal)
 		}
@@ -182,21 +182,21 @@ export default function KagiComponent() {
 		}
 		return kagiData
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}
 		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
 		return calculator
 	}
-	calculator.dateMutator = (newDateMutator) => {
+	calculator.dateMutator = newDateMutator => {
 		if (newDateMutator === undefined) {
 			return dateMutator
 		}
 		dateMutator = newDateMutator
 		return calculator
 	}
-	calculator.dateAccessor = (newDateAccessor) => {
+	calculator.dateAccessor = newDateAccessor => {
 		if (newDateAccessor === undefined) {
 			return dateAccessor
 		}

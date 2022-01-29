@@ -31,9 +31,9 @@ export const ActionsTable = ({
 	year
 }: Props) => {
 	const [dataRows, setDataRows] = useState(rowdata)
-	const filter = actionsState((state) => state.filter)
-	const setParamFilter = actionsState((state) => state.setFilter)
-	const isFiltered = actionsState((state) => state.isFiltered)
+	const filter = actionsState(state => state.filter)
+	const setParamFilter = actionsState(state => state.setFilter)
+	const isFiltered = actionsState(state => state.isFiltered)
 	const { isPro } = useAuthState()
 
 	const count = rowdata.length

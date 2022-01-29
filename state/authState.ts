@@ -17,25 +17,25 @@ interface AuthState {
 	setChecking: (newChecking: boolean) => void
 }
 
-export const authState = create<AuthState>((set) => ({
+export const authState = create<AuthState>(set => ({
 	// If pro status has been checked
 	checked: false,
-	setChecked: (newChecked) => set({ checked: newChecked }),
+	setChecked: newChecked => set({ checked: newChecked }),
 
 	// If user is logged in
 	isLoggedIn: false,
-	setIsLoggedIn: (newIsLoggedIn) => set({ isLoggedIn: newIsLoggedIn }),
+	setIsLoggedIn: newIsLoggedIn => set({ isLoggedIn: newIsLoggedIn }),
 
 	// If user is pro
 	isPro: false,
-	setIsPro: (newIsPro) => set({ isPro: newIsPro }),
+	setIsPro: newIsPro => set({ isPro: newIsPro }),
 
 	// User details
 	user: null,
-	setUser: (newUser) => set({ user: newUser }),
+	setUser: newUser => set({ user: newUser }),
 
 	// Whether pro status is being checked
 	checking: false,
-	setChecking: (newChecking) =>
-		set((state) => ({ ...state, checking: newChecking }))
+	setChecking: newChecking =>
+		set(state => ({ ...state, checking: newChecking }))
 }))

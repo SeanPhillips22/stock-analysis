@@ -7,8 +7,8 @@ import { navMenuState } from 'components/Layout/Navigation/navMenuState'
  * @returns {JSX.Element}
  */
 export function HeaderMenuToggle() {
-	const visible = navMenuState((state) => state.visible)
-	const toggle = navMenuState((state) => state.toggle)
+	const visible = navMenuState(state => state.visible)
+	const toggle = navMenuState(state => state.toggle)
 
 	return (
 		<div className="hd-menu" onClick={() => toggle()}>

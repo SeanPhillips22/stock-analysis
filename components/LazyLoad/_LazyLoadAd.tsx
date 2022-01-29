@@ -12,7 +12,7 @@ export function LazyLoadAd({ children, offset }: Props) {
 	const { checked, isPro } = useAuthState()
 
 	// Check the nav state
-	const path = navState((state) => state.path)
+	const path = navState(state => state.path)
 
 	// Only load the observer if: a) not pro user and b) not on an excluded page
 	return (

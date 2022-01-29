@@ -131,7 +131,7 @@ export class GenericComponent extends React.Component<
 	}
 
 	public updateMoreProps(moreProps: any) {
-		Object.keys(moreProps).forEach((key) => {
+		Object.keys(moreProps).forEach(key => {
 			this.moreProps[key] = moreProps[key]
 		})
 	}

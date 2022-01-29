@@ -6,11 +6,11 @@ interface Props {
 }
 
 export const StatsChartMonthly = ({ title, data }: Props) => {
-	const x = data.map((month) => {
+	const x = data.map(month => {
 		return month[0]
 	})
 
-	const y = data.map((month) => {
+	const y = data.map(month => {
 		return month[1]
 	})
 

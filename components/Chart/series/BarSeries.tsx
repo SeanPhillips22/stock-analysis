@@ -100,7 +100,7 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 				}
 				ctx.fillStyle = key
 
-				values.forEach((d) => {
+				values.forEach(d => {
 					if (d.width <= 1) {
 						ctx.fillRect(d.x - 0.5, d.y, 1, d.height)
 					} else {
@@ -142,7 +142,7 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 		const offset = Math.floor(0.5 * barWidth)
 
 		return plotData
-			.map((d) => {
+			.map(d => {
 				const yValue = yAccessor(d)
 				if (yValue === undefined) {
 					return undefined
@@ -167,6 +167,6 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 					fillStyle: getFill(d)
 				}
 			})
-			.filter((d) => d !== undefined) as IBar[]
+			.filter(d => d !== undefined) as IBar[]
 	}
 }

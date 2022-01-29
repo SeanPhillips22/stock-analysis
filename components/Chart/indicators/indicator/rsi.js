@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'RSI'
 export default function Rsi() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.rsi)
+		.accessor(d => d.rsi)
 	const underlyingAlgorithm = rsi()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

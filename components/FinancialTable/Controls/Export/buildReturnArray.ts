@@ -20,10 +20,10 @@ export function buildReturnArray(data: any) {
 
 	let extracted: any = []
 
-	ranges.forEach((key) => {
+	ranges.forEach(key => {
 		let range = data[key]
 		if (range) {
-			Object.keys(range).forEach((statement) => {
+			Object.keys(range).forEach(statement => {
 				let statementObj = range[statement]
 				if (statementObj.count > 0) {
 					let d = statementObj.data

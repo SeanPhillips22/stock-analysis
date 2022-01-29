@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'ForceIndex'
 export default function ForceIndex() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.forceIndex)
+		.accessor(d => d.forceIndex)
 	const underlyingAlgorithm = forceIndex()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

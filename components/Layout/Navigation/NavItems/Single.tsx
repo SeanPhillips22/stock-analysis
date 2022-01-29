@@ -4,8 +4,8 @@ import { matchPath } from 'functions/helpers/matchPath'
 import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 
 export function SingleNavItem({ item, path }: NavItemProps) {
-	const close = navMenuState((state) => state.close)
-	const setIsOpen = navMenuState((state) => state.setIsOpen)
+	const close = navMenuState(state => state.close)
+	const setIsOpen = navMenuState(state => state.setIsOpen)
 
 	return (
 		<Link href={item.href} prefetch={false}>

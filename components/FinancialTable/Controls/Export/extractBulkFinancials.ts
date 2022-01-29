@@ -107,7 +107,7 @@ const KEYS: any = {
 export function extractFinancials(data: any, statement: string, range: string) {
 	let financials: any = []
 	const keys = Object.keys(data)
-	keys.forEach((key) => {
+	keys.forEach(key => {
 		if (statement === 'cash-flow-statement' && key === 'revenue') {
 			// Do nothing
 		} else {
