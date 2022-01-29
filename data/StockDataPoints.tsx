@@ -1,15 +1,34 @@
 import { DataId } from 'types/DataId'
 import { FormatFunction } from 'types/Tables'
 
+type SymbolType = 'stocks' | 'ipo' | 'etf'
+
 export type DataPointType = {
 	id: DataId
 	name: string
 	colName?: string
 	format?: FormatFunction
+	only?: SymbolType
 }
 
 type Props = {
 	[key in DataId]: DataPointType
+}
+
+// Get a list of data point IDs to use for a table
+export function getDataPointsArray(type: SymbolType, exclude?: DataId[]) {
+	// get all the matching IDs from the DataPoints array of objects
+	let ids = Object.values(DataPoints)
+		.filter(f => !f.only || f.only === type)
+		.map(f => f.id)
+
+	// remove any IDs that are in the exclude array
+	if (exclude) {
+		ids = ids.filter(id => !exclude.includes(id))
+	}
+
+	// return the IDs
+	return ids
 }
 
 /**
@@ -469,150 +488,64 @@ export const DataPoints: Props = {
 	ipoPriceRange: {
 		id: 'ipoPriceRange',
 		name: 'IPO Price Range',
-		format: 'string'
+		format: 'string',
+		only: 'ipo'
 	},
 	isSpac: { id: 'isSpac', name: 'Is SPAC' },
 	sharesOffered: {
 		id: 'sharesOffered',
 		name: 'Shares Offered',
-		format: 'integer'
+		format: 'integer',
+		only: 'ipo'
 	},
-	aum: { id: 'aum', name: 'Assets Under Management', format: 'abbreviate' },
-	etfPeRatio: { id: 'etfPeRatio', name: 'PE Ratio', format: 'format2dec' },
+	aum: {
+		id: 'aum',
+		name: 'Assets Under Management',
+		format: 'abbreviate',
+		only: 'etf'
+	},
+	etfPeRatio: {
+		id: 'etfPeRatio',
+		name: 'PE Ratio',
+		format: 'format2dec',
+		only: 'etf'
+	},
 	assetClass: {
 		id: 'assetClass',
 		name: 'Asset Class',
-		format: 'string'
+		format: 'string',
+		only: 'etf'
 	},
 	expenseRatio: {
 		id: 'expenseRatio',
 		name: 'Expense Ratio',
-		format: 'formatPercentage'
+		format: 'formatPercentage',
+		only: 'etf'
 	},
-	holdings: { id: 'holdings', name: 'Holdings', format: 'integer' },
+	holdings: {
+		id: 'holdings',
+		name: 'Holdings',
+		format: 'integer',
+		only: 'etf'
+	},
 	inceptionDate: {
 		id: 'inceptionDate',
 		name: 'Inception Date',
-		format: 'formatDate'
+		format: 'formatDate',
+		only: 'etf'
 	},
-	etfSector: { id: 'etfSector', name: 'Sector', format: 'string' },
-	etfRegion: { id: 'etfRegion', name: 'Region', format: 'string' },
-	issuer: { id: 'issuer', name: 'Issuer', format: 'string' },
-	etfIndex: { id: 'etfIndex', name: 'Index', format: 'string' }
+	etfSector: {
+		id: 'etfSector',
+		name: 'Sector',
+		format: 'string',
+		only: 'etf'
+	},
+	etfRegion: {
+		id: 'etfRegion',
+		name: 'Region',
+		format: 'string',
+		only: 'etf'
+	},
+	issuer: { id: 'issuer', name: 'Issuer', format: 'string', only: 'etf' },
+	etfIndex: { id: 'etfIndex', name: 'Index', format: 'string', only: 'etf' }
 }
-
-export const DataPointArray: DataId[] = [
-	's',
-	'n',
-	'marketCap',
-	'price',
-	'change',
-	'volume',
-	'enterpriseValue',
-	'industry',
-	'peRatio',
-	'peForward',
-	'exchange',
-	'dividendYield',
-	'sector',
-	'ch1m',
-	'ch6m',
-	'chYTD',
-	'ch1y',
-	'ch3y',
-	'ch5y',
-	'analystRatings',
-	'analystCount',
-	'priceTarget',
-	'priceTargetChange',
-	'country',
-	'employees',
-	'founded',
-	'ipoDate',
-	'revenue',
-	'revenueGrowth',
-	'revenueGrowthQ',
-	'grossProfit',
-	'grossProfitGrowth',
-	'operatingIncome',
-	'operatingIncomeGrowth',
-	'netIncome',
-	'netIncomeGrowth',
-	'eps',
-	'epsGrowth',
-	'ebit',
-	'ebitda',
-	'operatingCF',
-	'investingCF',
-	'financingCF',
-	'netCF',
-	'capex',
-	'fcf',
-	'fcfGrowth',
-	'fcfPerShare',
-	'assets',
-	'cash',
-	'debt',
-	'netCash',
-	'netCashGrowth',
-	'netCashByMarketCap',
-	'grossMargin',
-	'operatingMargin',
-	'profitMargin',
-	'fcfMargin',
-	'ebitdaMargin',
-	'ebitMargin',
-	'psRatio',
-	'pbRatio',
-	'pFcfRatio',
-	'pegRatio',
-	'evSales',
-	'evEarnings',
-	'evEbitda',
-	'evEbit',
-	'evFcf',
-	'earningsYield',
-	'fcfYield',
-	'dps',
-	'dividendGrowth',
-	'payoutRatio',
-	'payoutFrequency',
-	'buybackYield',
-	'totalReturn',
-	'averageVolume',
-	'beta',
-	'shortFloat',
-	'shortShares',
-	'shortRatio',
-	'sharesOut',
-	'float',
-	'sharesYoY',
-	'sharesQoQ',
-	'sharesInsiders',
-	'sharesInstitutions',
-	'earningsDate',
-	'exDivDate',
-	'nextDivDate',
-	'roe',
-	'roa',
-	'roic',
-	'revPerEmployee',
-	'profitPerEmployee',
-	'assetTurnover',
-	'inventoryTurnover',
-	'currentRatio',
-	'quickRatio',
-	'debtEquity',
-	'debtEbitda',
-	'debtFcf',
-	'taxRate',
-	'taxByRevenue',
-	'equity',
-	'workingCapital',
-	'lastSplitType',
-	'lastSplitDate',
-	'liabilities',
-	'ipoPriceRange',
-	'isSpac',
-	'sharesOffered'
-]

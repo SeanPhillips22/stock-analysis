@@ -3,8 +3,6 @@ import { DataId } from 'types/DataId'
 
 // The table's fixed properties
 export type TableFixed = {
-	columnOptions?: DataId[] // The columns available to select
-
 	defaultSort?: SortObject[] // The default sort order
 
 	// The controls options to show
@@ -16,6 +14,9 @@ export type TableFixed = {
 		columns?: boolean // Columns dropdown
 		moverType?: boolean // Switch between gainers and losers
 	}
+
+	columnOptions?: DataId[] // The columns available to select
+	excludeColumns?: DataId[] // Columns to exclude
 }
 
 // Dynamic data that becomes state and is used to modify the table

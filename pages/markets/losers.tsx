@@ -3,7 +3,6 @@ import { StockTable } from 'components/StockTable/__StockTable'
 import { MarketsLayout } from 'components/Markets/_MarketsLayout'
 import { PageConfig } from 'types/PageConfig'
 import { getSelect } from 'functions/apis/getSelect'
-import { MoverColumns } from 'data/column-groups/movers.columns'
 import { TableTimestamp } from 'types/Tables'
 import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
@@ -52,7 +51,7 @@ export default function LosersPage({ data, updated }: Props) {
 								export: true,
 								columns: true
 							},
-							columnOptions: MoverColumns
+							excludeColumns: ['ch3y', 'ch5y']
 						},
 						dynamic: query
 					}}

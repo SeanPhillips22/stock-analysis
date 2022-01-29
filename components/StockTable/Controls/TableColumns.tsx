@@ -1,14 +1,19 @@
 import { SelectColumns } from 'components/Dropdown/SelectColumns/_SelectColumns'
+import { getDataPointsArray } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
 import { useTableContext } from '../TableContext'
 
 export function TableColumns() {
-	const { fixed, dynamic, setState } = useTableContext()
-	const { columnOptions } = fixed
+	const { type, fixed, dynamic, setState } = useTableContext()
+	const { columnOptions, excludeColumns } = fixed
 	const { main, columns } = dynamic
 
 	let cols = columns.filter(c => c !== main)
-	let colOptions = columnOptions?.filter(c => c !== main)
+	let colSelect = columnOptions
+		? columnOptions?.filter(c => c !== main)
+		: excludeColumns
+		? getDataPointsArray(type, [main, ...excludeColumns])
+		: cols
 
 	function toggle(id: DataId) {
 		setState({
@@ -18,11 +23,5 @@ export function TableColumns() {
 		})
 	}
 
-	return (
-		<SelectColumns
-			active={cols}
-			options={colOptions || cols}
-			toggle={toggle}
-		/>
-	)
+	return <SelectColumns active={cols} options={colSelect} toggle={toggle} />
 }
