@@ -19,7 +19,7 @@ gi0mjSwdgb75x7akc9HMEJ0CAwEAAQ==
 -----END PUBLIC KEY-----`
 
 function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms))
+	return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export default async function handler(
@@ -38,6 +38,13 @@ export default async function handler(
 
 	// Get the user email and webhook type from the request body
 	const { alert_name, email } = req.body
+
+	// Ignore webhook for this user email
+	if (email === 'tomas-ferreira@hotmail.com') {
+		return res
+			.status(200)
+			.json({ success: 'Webhook received and processed successfully' })
+	}
 
 	const emailLookup: string = email
 		? email.toLowerCase()

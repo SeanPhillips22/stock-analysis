@@ -2,7 +2,7 @@ import { screenerState } from 'components/StockScreener/screener.state'
 import { CellNumber } from 'types/Tables'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
 import { ResultsTable } from './ResultsTable'
-import { formatCell } from 'functions/tables/tableFormat'
+import { formatCells } from 'functions/tables/formatCells'
 import { getDataPoints } from 'components/StockScreener/maps/dataPoints'
 
 const format2dec = new Intl.NumberFormat('en-US', {
@@ -29,7 +29,7 @@ function formatColumns() {
 			switch (column.format) {
 				case 'linkSymbol': {
 					header = column.columnName || column.name
-					cell = (props: any) => formatCell('linkSymbol', props, type)
+					cell = (props: any) => formatCells('linkSymbol', props, type)
 					sortInverted = false
 					break
 				}
@@ -43,37 +43,37 @@ function formatColumns() {
 
 				case 'abbreviate': {
 					header = formatHeader(column.columnName || column.name)
-					cell = (props: any) => formatCell('abbreviate', props)
+					cell = (props: any) => formatCells('abbreviate', props)
 					break
 				}
 
 				case 'changePcColor': {
 					header = formatHeader(column.columnName || column.name)
-					cell = (props: any) => formatCell('colorPercentage', props)
+					cell = (props: any) => formatCells('colorPercentage', props)
 					break
 				}
 
 				case 'format2dec': {
 					header = formatHeader(column.columnName || column.name)
-					cell = (props: any) => formatCell('format2dec', props, type)
+					cell = (props: any) => formatCells('format2dec', props, type)
 					break
 				}
 
 				case 'format0dec': {
 					header = formatHeader(column.columnName || column.name)
-					cell = (props: any) => formatCell('integer', props, type)
+					cell = (props: any) => formatCells('integer', props, type)
 					break
 				}
 
 				case 'amount': {
 					header = formatHeader(column.columnName || column.name)
-					cell = (props: any) => formatCell('format2dec', props, type)
+					cell = (props: any) => formatCells('format2dec', props, type)
 					break
 				}
 
 				case 'align': {
 					header = formatHeader(column.columnName || column.name)
-					cell = function FormatCell({ cell: { value } }: CellNumber) {
+					cell = function formatCells({ cell: { value } }: CellNumber) {
 						return <div className="text-right">{value}</div>
 					}
 					break
@@ -81,13 +81,13 @@ function formatColumns() {
 
 				case 'percentage': {
 					header = formatHeader(column.columnName || column.name)
-					cell = (props: any) => formatCell('formatPercentage', props)
+					cell = (props: any) => formatCells('formatPercentage', props)
 					break
 				}
 
 				case 'date': {
 					header = formatHeader(column.columnName || column.name)
-					cell = (props: any) => formatCell('formatDate', props)
+					cell = (props: any) => formatCells('formatDate', props)
 					break
 				}
 

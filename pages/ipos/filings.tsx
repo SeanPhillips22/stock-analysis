@@ -19,7 +19,7 @@ interface Props {
 	recent: IpoRecent[]
 }
 
-export const IpoFilings = ({ data, news, recent }: Props) => {
+export function IpoFilings({ data, news, recent }: Props) {
 	const count = data.length
 
 	return (

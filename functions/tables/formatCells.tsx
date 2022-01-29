@@ -26,7 +26,7 @@ export function formatHeader(fn: Fn, value: string) {
 	return value
 }
 
-export function formatCell(fn: Fn, cell: Cell, type: Type = 'stocks') {
+export function formatCells(fn: Fn, cell: Cell, type: Type = 'stocks') {
 	if (fn === 'linkSymbol') return formatSymbol(cell as CellString, type)
 	if (fn === 'format2dec') return format2dec(cell as CellNumber)
 	if (fn === 'integer') return formatInteger(cell as CellNumber)

@@ -4,7 +4,7 @@ import { Column } from 'react-table'
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar'
 import { SEO } from 'components/SEO'
 import { SymbolTable } from 'components/Tables/SymbolTable'
-import { formatCell } from 'functions/tables/tableFormat'
+import { formatCells } from 'functions/tables/formatCells'
 
 type Props = {
 	stocks: {
@@ -20,7 +20,7 @@ export default function StocksIndexPage({ stocks }: Props) {
 		{
 			Header: 'Symbol',
 			accessor: 's',
-			Cell: (props: any) => formatCell('linkSymbol', props, 'etf'),
+			Cell: (props: any) => formatCells('linkSymbol', props, 'etf'),
 			sortInverted: true
 		},
 		{
@@ -35,7 +35,7 @@ export default function StocksIndexPage({ stocks }: Props) {
 		{
 			Header: 'Assets',
 			accessor: 'm',
-			Cell: (props: any) => formatCell('abbreviate', props),
+			Cell: (props: any) => formatCells('abbreviate', props),
 			sortInverted: true
 		}
 	]

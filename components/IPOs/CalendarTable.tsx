@@ -11,7 +11,7 @@ import { Export } from 'components/Controls/Export'
 import { Filter } from 'components/Controls//Filter'
 import { SortUpIcon } from 'components/Icons/SortUp'
 import { SortDownIcon } from 'components/Icons/SortDown'
-import { formatCell } from 'functions/tables/tableFormat'
+import { formatCells } from 'functions/tables/formatCells'
 
 const columns: Column[] = [
 	{
@@ -36,7 +36,7 @@ const columns: Column[] = [
 	{
 		Header: 'Symbol',
 		accessor: 'symbol',
-		Cell: (props: any) => formatCell('linkSymbol', props)
+		Cell: (props: any) => formatCells('linkSymbol', props)
 	},
 	{
 		Header: 'Company Name',
@@ -67,7 +67,7 @@ const columns: Column[] = [
 		Header: 'Shares',
 		accessor: 'shares',
 		Cell: (props: any) =>
-			props.value === 'n/a' ? 'n/a' : formatCell('integer', props)
+			props.value === 'n/a' ? 'n/a' : formatCells('integer', props)
 	}
 ]
 
@@ -108,13 +108,7 @@ interface Props {
 	filter?: boolean
 }
 
-export const CalendarTable = ({
-	title,
-	data,
-	tableId,
-	border,
-	filter
-}: Props) => {
+export function CalendarTable({ title, data, tableId, border, filter }: Props) {
 	const initialState = !data[0]?.date ? { hiddenColumns: ['date'] } : {}
 
 	const tableInstance = useTable(

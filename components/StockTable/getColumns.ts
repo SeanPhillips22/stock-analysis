@@ -1,6 +1,6 @@
 import { DataPoints } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
-import { formatCell } from 'functions/tables/tableFormat'
+import { formatCells } from 'functions/tables/formatCells'
 
 /**
  * This function formats the columns for react-table
@@ -25,7 +25,7 @@ export function getColumns(cols: DataId[], main: DataId) {
 			accessor: col,
 			Cell: (props: any) => {
 				return format
-					? formatCell(format, props, 'stocks')
+					? formatCells(format, props, 'stocks')
 					: props.value
 					? props.value
 					: '-'
