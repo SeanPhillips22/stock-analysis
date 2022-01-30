@@ -11,8 +11,7 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 // the page's config and settings
 const page: PageConfig = {
 	path: '/markets/losers/',
-	title: 'Losers Today',
-	parentTitle: 'Top Stock Losers',
+	pageTitle: 'Top Stock Losers',
 	active: 'losers',
 	metaTitle: "Today's Top Stock Losers",
 	metaDescription:
@@ -41,6 +40,7 @@ export default function LosersPage({ data, updated }: Props) {
 				<TableContextProvider
 					value={{
 						type: 'stocks',
+						title: 'Losers Today',
 						tableId: 'losers',
 						fixed: {
 							defaultSort: query.sort,

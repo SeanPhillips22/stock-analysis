@@ -28,6 +28,7 @@ export function formatHeader(fn: Fn, value: string) {
 
 export function formatCells(fn: Fn, cell: Cell, type: Type = 'stocks') {
 	if (fn === 'linkSymbol') return formatSymbol(cell as CellString, type)
+	if (fn === 'linkName') return formatName(cell as CellString, type)
 	if (fn === 'format2dec') return format2dec(cell as CellNumber)
 	if (fn === 'integer') return formatInteger(cell as CellNumber)
 	if (fn === 'formatPercentage') return formatPercentage(cell as CellNumber)
@@ -49,6 +50,23 @@ export function formatSymbol(cell: CellString, type: ScreenerTypes) {
 		<Link href={url} prefetch={false}>
 			<a>{value}</a>
 		</Link>
+	)
+}
+
+// Turn a symbol into a link to the overview page
+export function formatName(cell: any, type: ScreenerTypes) {
+	let urlPath = type === 'etf' ? 'etf' : 'stocks'
+	let { value } = cell.cell
+	let ticker = cell.row.values.s
+	let symbol = ticker.includes('.') ? ticker : `${ticker}/`
+	let url = `/${urlPath}/${symbol.toLowerCase()}`
+
+	return (
+		<div className="string-left">
+			<Link href={url} prefetch={false}>
+				<a>{value}</a>
+			</Link>
+		</div>
 	)
 }
 

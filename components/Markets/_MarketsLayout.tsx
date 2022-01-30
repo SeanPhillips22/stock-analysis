@@ -18,7 +18,7 @@ export function MarketsLayout({ children }: Props) {
 				canonical={page.path}
 			/>
 			<div className="contain">
-				<h1 className="hh1">{page.parentTitle || page.title}</h1>
+				<h1 className="hh1">{page.pageTitle}</h1>
 				<MarketsNavigation active={page.active || 'inactive'} />
 				{children}
 			</div>

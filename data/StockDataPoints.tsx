@@ -1,5 +1,6 @@
 import { DataId } from 'types/DataId'
 import { FormatFunction } from 'types/Tables'
+import { dateSort } from 'components/StockScreener/functions/sort/sortFunctions'
 
 type SymbolType = 'stocks' | 'ipo' | 'etf'
 
@@ -9,6 +10,7 @@ export type DataPointType = {
 	colName?: string
 	format?: FormatFunction
 	only?: SymbolType
+	sort?: any
 }
 
 type Props = {
@@ -36,7 +38,7 @@ export function getDataPointsArray(type: SymbolType, exclude?: DataId[]) {
  */
 export const DataPoints: Props = {
 	s: { id: 's', name: 'Symbol', format: 'linkSymbol' },
-	n: { id: 'n', name: 'Name', format: 'string' },
+	n: { id: 'n', name: 'Company Name', format: 'string' },
 	marketCap: { id: 'marketCap', name: 'Market Cap', format: 'abbreviate' },
 	price: {
 		id: 'price',
@@ -163,7 +165,12 @@ export const DataPoints: Props = {
 	country: { id: 'country', name: 'Country', format: 'string' },
 	employees: { id: 'employees', name: 'Employees', format: 'integer' },
 	founded: { id: 'founded', name: 'Founded', format: 'string' },
-	ipoDate: { id: 'ipoDate', name: 'IPO Date', format: 'formatDate' },
+	ipoDate: {
+		id: 'ipoDate',
+		name: 'IPO Date',
+		format: 'formatDate',
+		sort: dateSort
+	},
 	revenue: { id: 'revenue', name: 'Revenue', format: 'abbreviate' },
 	revenueGrowth: {
 		id: 'revenueGrowth',

@@ -4,6 +4,7 @@ import { TableDynamic, TableFixed } from './TableTypes'
 
 interface InitialProps {
 	type: 'stocks' | 'etf' // The symbol type
+	title: string // The title of the table
 	tableId: string // The unique ID for the table
 	fixed: TableFixed // Table data that does not change
 	dynamic: TableDynamic // Table data that becomes state and changes
@@ -77,6 +78,7 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 	// The full state to pass as context
 	const state = {
 		type: value.type,
+		title: value.title,
 		tableId: value.tableId,
 		fixed: value.fixed,
 		dynamic,

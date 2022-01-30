@@ -14,7 +14,7 @@ export function StockTable({ _data }: { _data: any[] }) {
 		useTableContext()
 
 	// Get the props
-	const { defaultSort } = fixed
+	const { defaultSort, columnOrder } = fixed
 	const { columns: _columns, main, sort } = dynamic
 
 	// pass initial data into react query
@@ -36,6 +36,8 @@ export function StockTable({ _data }: { _data: any[] }) {
 			columns={columns}
 			sortProps={sortProps}
 			sort={sort}
+			columnOrder={columnOrder}
+			tableId={tableId}
 		/>
 	)
 }

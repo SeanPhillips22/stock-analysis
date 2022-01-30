@@ -5,7 +5,8 @@ import {
 	useTable,
 	useSortBy,
 	useGlobalFilter,
-	useAsyncDebounce
+	useAsyncDebounce,
+	useColumnOrder
 } from 'react-table'
 import { DataId } from 'types/DataId'
 import { StockTableControls } from './_StockTableControls'
@@ -20,9 +21,18 @@ type Props = {
 	}[]
 	sortProps: SortProps
 	sort?: SortObject[]
+	tableId: string
+	columnOrder?: DataId[]
 }
 
-export function StockTableBody({ data, columns, sortProps, sort }: Props) {
+export function StockTableBody({
+	data,
+	columns,
+	sortProps,
+	sort,
+	tableId,
+	columnOrder
+}: Props) {
 	const [search, setSearch] = useState('')
 	const { updateSort } = useSort(sortProps)
 
@@ -31,18 +41,19 @@ export function StockTableBody({ data, columns, sortProps, sort }: Props) {
 			columns,
 			data,
 			initialState: {
-				sortBy: sort && sort.length ? sort : sortProps.defaultSort
+				sortBy: sort && sort.length ? sort : sortProps.defaultSort,
+				columnOrder: columnOrder || []
 			}
 		},
 		useGlobalFilter,
-		useSortBy
+		useSortBy,
+		useColumnOrder
 	)
 
 	return (
 		<div>
 			<div className="mt-3 sm:mt-0">
 				<StockTableControls
-					tableId="stock-table"
 					filter={{
 						useAsyncDebounce,
 						setGlobalFilter,
@@ -52,7 +63,7 @@ export function StockTableBody({ data, columns, sortProps, sort }: Props) {
 				/>
 			</div>
 			<div className="overflow-x-auto">
-				<table className="symbol-table stock-table" id="stock-table">
+				<table className="symbol-table stock-table" id={tableId}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>

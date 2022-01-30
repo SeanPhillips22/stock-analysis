@@ -4,6 +4,10 @@
 */
 
 @layer components {
+	.stock-table a {
+		@apply py-0.5;
+	}
+
 	.stock-table tr > * {
 		@apply whitespace-nowrap;
 	}
@@ -12,12 +16,17 @@
 		@apply font-semibold;
 	}
 
-	.stock-table tr th .head-left {
+	.stock-table tr th .head-left,
+	.stock-table tr th:first-child .head-right {
 		@apply inline-flex flex-row items-center;
 	}
 
-	.stock-table tr th .head-right {
+	.stock-table tr th:not(:first-child) .head-right {
 		@apply flex flex-row items-center justify-end;
+	}
+
+	.stock-table tr > td:first-child {
+		@apply flex flex-row justify-start;
 	}
 
 	.stock-table .string-left {

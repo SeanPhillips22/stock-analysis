@@ -8,7 +8,8 @@ import { respondSSR } from './callBackEnd'
 export async function getSelect(
 	config: TableDynamic,
 	type: 'stocks' | 'etf',
-	ssr?: boolean
+	ssr?: boolean,
+	extras?: string[]
 ) {
 	// destructure the props and create the URL
 	let { main, count, sortDirection, columns } = config
@@ -22,6 +23,11 @@ export async function getSelect(
 
 	// create the url
 	let url = `select?type=${type}&main=${main}&count=${count}&sort=${sortDirection}&columns=${cols}&filters=${filters}`
+
+	// request extra data
+	if (extras) {
+		url += `&extras=${extras.join(',')}`
+	}
 
 	// fetch the data from the back-end
 	let response = await getData(url)

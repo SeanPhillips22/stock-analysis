@@ -1,7 +1,6 @@
 export type PageConfig = {
 	path: string
-	title: string
-	parentTitle?: string
+	pageTitle?: string
 	active?: string
 	metaTitle: string
 	metaDescription: string

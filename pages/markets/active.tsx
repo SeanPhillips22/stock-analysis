@@ -11,8 +11,7 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 // the page's config and settings
 const page: PageConfig = {
 	path: '/markets/active/',
-	title: 'Active Today',
-	parentTitle: 'Most Active Stocks',
+	pageTitle: 'Most Active Stocks',
 	active: 'active',
 	metaTitle: "Today's Most Active Stocks",
 	metaDescription:
@@ -41,6 +40,7 @@ export default function ActivePage({ data, updated }: Props) {
 				<TableContextProvider
 					value={{
 						type: 'stocks',
+						title: 'Active Today',
 						tableId: 'active',
 						fixed: {
 							defaultSort: query.sort,

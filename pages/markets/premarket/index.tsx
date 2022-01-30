@@ -11,8 +11,7 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 // the page's config and settings
 const page: PageConfig = {
 	path: '/markets/premarket/',
-	title: 'Top Gainers',
-	parentTitle: 'Premarket Movers',
+	pageTitle: 'Premarket Movers',
 	active: 'premarket',
 	metaTitle: "Today's Premarket Stock Movers",
 	metaDescription:
@@ -41,6 +40,7 @@ export default function PreMarket({ data, updated }: Props) {
 				<TableContextProvider
 					value={{
 						type: 'stocks',
+						title: 'Top Gainers',
 						tableId: 'premarket',
 						fixed: {
 							defaultSort: query.sort,
