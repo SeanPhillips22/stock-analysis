@@ -8,8 +8,8 @@ const NewsAd2 = dynamic(() => import('components/Ads/Dianomi/NewsAd2'), {
 
 import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd'
 
-export function NewsAds({ index, count }: { index: number; count: number }) {
-	if (index === 2 || (count < 3 && count === index + 1)) {
+export function NewsAds({ ad }: { ad: number }) {
+	if (ad === 1) {
 		return (
 			<LazyLoadAd offset={300}>
 				<div className="news-spns" id="ad-banner">
@@ -17,7 +17,7 @@ export function NewsAds({ index, count }: { index: number; count: number }) {
 				</div>
 			</LazyLoadAd>
 		)
-	} else if (index === 7) {
+	} else if (ad === 2) {
 		return (
 			<LazyLoadAd offset={400}>
 				<div className="news-spns" id="ad-banner">

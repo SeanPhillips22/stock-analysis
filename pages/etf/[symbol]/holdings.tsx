@@ -9,7 +9,7 @@ import { HoldingsTable } from 'components/Holdings/_HoldingsTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Sidebar2 } from 'components/Ads/AdSense/Sidebar2'
 
 interface Props {
 	info: Info

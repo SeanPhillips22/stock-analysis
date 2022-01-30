@@ -119,7 +119,12 @@ export function withOHLCData() {
 				) {
 					loading(true)
 					Axios.get(
-						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
+						`${
+							process.env.NEXT_PUBLIC_API_URL ||
+							'https://api.stockanalysis.com/wp-json/sa'
+						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${
+							newProps.period
+						}&r=MAX`
 					)
 						.then(res => {
 							const forDateParse = res.data.map(fixDataHeaders)
@@ -152,7 +157,12 @@ export function withOHLCData() {
 				) {
 					loading(true)
 					Axios.get(
-						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
+						`${
+							process.env.NEXT_PUBLIC_API_URL ||
+							'https://api.stockanalysis.com/wp-json/sa'
+						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${
+							newProps.time
+						}`
 					)
 						.then(res => {
 							const forDateParse = res.data.map(fixDataHeaders1D5D)
@@ -185,7 +195,12 @@ export function withOHLCData() {
 				) {
 					loading(true)
 					Axios.get(
-						`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}&f=candles`
+						`${
+							process.env.NEXT_PUBLIC_API_URL ||
+							'https://api.stockanalysis.com/wp-json/sa'
+						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${
+							newProps.time
+						}&f=candles`
 					)
 						.then(res => {
 							setTimeout(function () {
@@ -218,7 +233,12 @@ export function withOHLCData() {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
 						Axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
+							`${
+								process.env.NEXT_PUBLIC_API_URL ||
+								'https://api.stockanalysis.com/wp-json/sa'
+							}/chart?s=${newProps.stockSymbol}&t=${
+								newProps.stockType
+							}&r=${newProps.time}`
 						)
 							.then(res => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D)
@@ -242,7 +262,12 @@ export function withOHLCData() {
 					} else {
 						loading(true)
 						Axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
+							`${
+								process.env.NEXT_PUBLIC_API_URL ||
+								'https://api.stockanalysis.com/wp-json/sa'
+							}/chart?s=${newProps.stockSymbol}&t=${
+								newProps.stockType
+							}&p=${newProps.period}&r=MAX`
 						)
 							.then(res => {
 								const forDateParse = res.data.map(fixDataHeaders)
@@ -271,7 +296,12 @@ export function withOHLCData() {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
 						Axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${newProps.time}`
+							`${
+								process.env.NEXT_PUBLIC_API_URL ||
+								'https://api.stockanalysis.com/wp-json/sa'
+							}/chart?s=${newProps.stockSymbol}&t=${
+								newProps.stockType
+							}&r=${newProps.time}`
 						)
 							.then(res => {
 								const forDateParse = res.data.map(fixDataHeaders1D5D)
@@ -295,7 +325,12 @@ export function withOHLCData() {
 					} else {
 						loading(true)
 						Axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${newProps.period}&r=MAX`
+							`${
+								process.env.NEXT_PUBLIC_API_URL ||
+								'https://api.stockanalysis.com/wp-json/sa'
+							}/chart?s=${newProps.stockSymbol}&t=${
+								newProps.stockType
+							}&p=${newProps.period}&r=MAX`
 						)
 							.then(res => {
 								const forDateParse = res.data.map(fixDataHeaders)

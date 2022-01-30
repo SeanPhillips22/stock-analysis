@@ -4,14 +4,14 @@ import { Tickers } from './Tickers'
 import { NewsAds } from './NewsAds'
 import { useState } from 'react'
 
-interface Props {
-	index: number
+type Props = {
 	item: News
 	related?: string
-	count: number
+	ad: number
+	loadAds: boolean
 }
 
-export const NewsArticle = ({ index, item, related, count }: Props) => {
+export function NewsArticle({ item, related, ad, loadAds }: Props) {
 	const [imgSrc, setImgSrc] = useState<string | undefined>(item.image)
 	const onError = () => setImgSrc('/blank.png')
 
@@ -57,9 +57,7 @@ export const NewsArticle = ({ index, item, related, count }: Props) => {
 					</div>
 				</div>
 			</div>
-			{(index === 2 ||
-				(count < 3 && count === index + 1) ||
-				index === 7) && <NewsAds index={index} count={count} />}
+			{loadAds && <NewsAds ad={ad} />}
 		</>
 	)
 }

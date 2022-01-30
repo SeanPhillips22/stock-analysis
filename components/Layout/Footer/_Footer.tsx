@@ -247,13 +247,6 @@ export const Footer = () => {
 						</a>
 						. Other market data may be delayed by 15 minutes or more.
 					</div>
-					<div
-						id="ccpa"
-						className="text-center text-gray-300 cursor-pointer"
-						style={{ display: 'none' }}
-					>
-						Do not share my personal information.
-					</div>
 				</div>
 			</footer>
 		</>
