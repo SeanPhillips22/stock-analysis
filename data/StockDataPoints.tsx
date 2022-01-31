@@ -171,6 +171,23 @@ export const DataPoints: Props = {
 		format: 'formatDate',
 		sort: dateSort
 	},
+	ipp: {
+		id: 'ipp',
+		name: 'IPO Price',
+		format: 'price'
+	},
+	ippc: {
+		id: 'ippc',
+		name: 'Current Price',
+		colName: 'Current',
+		format: 'price'
+	},
+	ipr: {
+		id: 'ipr',
+		colName: 'Return',
+		name: 'Return Since IPO',
+		format: 'colorPercentage'
+	},
 	revenue: { id: 'revenue', name: 'Revenue', format: 'abbreviate' },
 	revenueGrowth: {
 		id: 'revenueGrowth',

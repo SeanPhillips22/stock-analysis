@@ -5,7 +5,7 @@
 
 @layer components {
 	.stock-table a {
-		@apply py-0.5;
+		@apply py-px;
 	}
 
 	.stock-table tr > * {
@@ -23,10 +23,6 @@
 
 	.stock-table tr th:not(:first-child) .head-right {
 		@apply flex flex-row items-center justify-end;
-	}
-
-	.stock-table tr > td:first-child {
-		@apply flex flex-row justify-start;
 	}
 
 	.stock-table .string-left {

@@ -30,6 +30,7 @@ export function formatCells(fn: Fn, cell: Cell, type: Type = 'stocks') {
 	if (fn === 'linkSymbol') return formatSymbol(cell as CellString, type)
 	if (fn === 'linkName') return formatName(cell as CellString, type)
 	if (fn === 'format2dec') return format2dec(cell as CellNumber)
+	if (fn === 'price') return formatPrice(cell as CellNumber)
 	if (fn === 'integer') return formatInteger(cell as CellNumber)
 	if (fn === 'formatPercentage') return formatPercentage(cell as CellNumber)
 	if (fn === 'colorPercentage') return colorPercentage(cell as CellNumber)
@@ -43,6 +44,7 @@ export function formatCells(fn: Fn, cell: Cell, type: Type = 'stocks') {
 export function formatSymbol(cell: CellString, type: ScreenerTypes) {
 	let urlPath = type === 'etf' ? 'etf' : 'stocks'
 	let { value } = cell.cell
+	if (value.startsWith('=')) return value.slice(1)
 	let symbol = value.includes('.') ? value : `${value}/`
 	let url = `/${urlPath}/${symbol.toLowerCase()}`
 
@@ -74,6 +76,12 @@ export function formatName(cell: any, type: ScreenerTypes) {
 export function format2dec(cell: CellNumber) {
 	let { value } = cell.cell
 	return <div className="text-right">{format(value, 2)}</div>
+}
+
+// Format a number with comma and 2 decimal points
+export function formatPrice(cell: CellNumber) {
+	let { value } = cell.cell
+	return value ? <div className="text-right">${format(value, 2)}</div> : 'n/a'
 }
 
 // Format an integer with comma and 0 decimal points
@@ -131,7 +139,7 @@ export function formatDate(cell: CellString) {
 		month: 'short'
 	})
 
-	return <div className="text-right">{date}</div>
+	return date
 }
 
 // Format a string

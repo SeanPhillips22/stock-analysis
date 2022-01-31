@@ -30,12 +30,12 @@ const query: TableDynamic = {
 
 type Props = {
 	data: any[]
-	updated: TableTimestamp
+	tradingTimestamps: TableTimestamp
 }
 
-export default function LosersPage({ data, updated }: Props) {
+export default function LosersPage({ data, tradingTimestamps }: Props) {
 	return (
-		<PageContextProvider value={{ page, updated }}>
+		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout>
 				<TableContextProvider
 					value={{
@@ -64,7 +64,8 @@ export default function LosersPage({ data, updated }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-	const data = await getSelect(query, 'stocks', true)
+	let extras = ['tradingTimestamps']
+	const data = await getSelect(query, 'stocks', true, extras)
 	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 	return data
 }

@@ -27,7 +27,7 @@ const query: TableDynamic = {
 	count: 200,
 	sort: [{ id: 'ipoDate', desc: true }],
 	sortDirection: 'asc',
-	columns: ['s', 'n', 'price', 'volume', 'marketCap']
+	columns: ['s', 'n', 'ipp', 'ippc', 'ipr']
 }
 
 export default function RecentIpos(props: Props) {
@@ -39,7 +39,7 @@ export default function RecentIpos(props: Props) {
 				canonical="/ipos/"
 			/>
 			<Layout>
-				<div className="contain">
+				<div className="contain ipos-recent">
 					<Breadcrumbs url="/ipos/" />
 					<h1 className="hh1">Recent IPOs</h1>
 					<IPONavigation path="" />
@@ -64,9 +64,9 @@ export default function RecentIpos(props: Props) {
 											'ipoDate',
 											's',
 											'n',
-											'price',
-											'volume',
-											'marketCap'
+											'ipp',
+											'ippc',
+											'ipr'
 										]
 									},
 									dynamic: query

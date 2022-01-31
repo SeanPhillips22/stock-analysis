@@ -1,16 +1,29 @@
 // All possible data points
 export type DataId =
+	// > Symbol and name always included
 	| 's' // Symbol
 	| 'n' // Name
-	| 'marketCap' // Market Cap
+	// > Quotes - regular trading hours
 	| 'price' // Stock Price
 	| 'chg' // Stock Price Change
 	| 'change' // Price Change 1D
 	| 'volume' // Volume
 	| 'close' // Previous Close
+	// > Quotes - premarket
 	| 'premarketPrice' // Pre-Market Price
 	| 'premarketChange' // Pre-Market Change
 	| 'premarketChangePercent' // Pre-Market Percentage Change
+	// > IPO details
+	// TODO add to screener
+	| 'ipoDate' // IPO Date
+	| 'ipp' // IPO Price
+	| 'ippc' // IPO Price
+	| 'ipr' // IPO Return
+	// TODO open price
+	// TODO return from open
+	// TODO ipo deal size
+	// ...
+	| 'marketCap' // Market Cap
 	| 'enterpriseValue' // Enterprise Value
 	| 'industry' // Industry
 	| 'peRatio' // PE Ratio
@@ -32,7 +45,6 @@ export type DataId =
 	| 'country' // Country
 	| 'employees' // Employees
 	| 'founded' // Founded
-	| 'ipoDate' // IPO Date
 	| 'revenue' // Revenue
 	| 'revenueGrowth' // Revenue Growth
 	| 'revenueGrowthQ' // Revenue Growth (Quarterly)

@@ -15,6 +15,7 @@ export type FormatFunction =
 	| 'linkSymbol'
 	| 'linkName'
 	| 'format2dec'
+	| 'price'
 	| 'integer'
 	| 'formatPercentage'
 	| 'colorPercentage'
