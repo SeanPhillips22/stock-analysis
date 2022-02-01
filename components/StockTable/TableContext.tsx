@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { TableDynamic, TableFixed } from './TableTypes'
 
 interface InitialProps {
-	type: 'stocks' | 'etf' // The symbol type
+	type: 'stocks' | 'etf' | 'histip' // The stock index type (more specific is faster)
 	title: string // The title of the table
 	tableId: string // The unique ID for the table
 	fixed: TableFixed // Table data that does not change

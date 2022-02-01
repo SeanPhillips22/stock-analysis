@@ -49,7 +49,7 @@ export default function RecentIpos(props: Props) {
 							<RecentNavigation path="" />
 							<TableContextProvider
 								value={{
-									type: 'stocks',
+									type: 'histip',
 									tableId: 'ipos-recent',
 									title: 'Last 200 IPOs',
 									fixed: {
@@ -97,7 +97,7 @@ export default function RecentIpos(props: Props) {
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	let extras = ['getIpoCalendarDataMin', 'getIpoNewsMin']
-	const response = await getSelect(query, 'stocks', true, extras)
+	const response = await getSelect(query, 'histip', true, extras)
 
 	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 	return response

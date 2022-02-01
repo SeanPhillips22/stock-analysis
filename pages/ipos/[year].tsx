@@ -33,7 +33,6 @@ const query: TableDynamic = {
 }
 
 export default function IpoYear(props: Props) {
-	console.log(props.data)
 	const { year } = props
 
 	const title =
@@ -66,7 +65,7 @@ export default function IpoYear(props: Props) {
 							</div>
 							<TableContextProvider
 								value={{
-									type: 'stocks',
+									type: 'histip',
 									tableId: 'ipos-recent',
 									title: props.data.length + ' IPOs',
 									fixed: {
@@ -122,7 +121,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	ssrQuery.filters = [ssrFilter]
 
 	// Fetch the data
-	const response = await getSelect(ssrQuery, 'stocks', true, extras)
+	const response = await getSelect(ssrQuery, 'histip', true, extras)
 	response.props.year = year
 	response.props.info = response.props[extraFn]
 	delete response.props[extraFn]

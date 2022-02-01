@@ -7,7 +7,7 @@ import { respondSSR } from './callBackEnd'
  */
 export async function getSelect(
 	config: TableDynamic,
-	type: 'stocks' | 'etf',
+	type: 'stocks' | 'etf' | 'histip',
 	ssr?: boolean,
 	extras?: string[]
 ) {
