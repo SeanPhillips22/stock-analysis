@@ -28,7 +28,7 @@ export const StatsChartAnnual = ({ title, data }: Props) => {
 		255,
 		232,
 		480,
-		1058,
+		1035,
 		data
 	]
 	const x = [

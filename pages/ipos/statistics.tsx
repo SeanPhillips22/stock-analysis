@@ -55,7 +55,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								<p className="text-base sm:text-lg text-gray-900">
 									{`There have been ${data.total.toLocaleString(
 										'en-US'
-									)} IPOs between 2000 and 2022. The least was in 2009 with only 62. The full year 2021 was an all-time record with 1058 IPOs, beating the previous record of 480 in the year 2020.`}
+									)} IPOs between 2000 and 2022. The least was in 2009 with only 62. The full year 2021 was an all-time record with 1035 IPOs, beating the previous record of 480 in the year 2020.`}
 								</p>
 								<StatsChartAnnual
 									title="Annual IPOs, 2000-2022"
@@ -82,7 +82,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 									2021 Initial Public Offerings
 								</h2>
 								<p className="text-base sm:text-lg text-gray-900">
-									There were 1058 IPOs in 2021, which was an all-time
+									There were 1035 IPOs in 2021, which was an all-time
 									record. March had the most with a total of 151, while
 									August had the fewest with only 43 IPOs.{' '}
 									<Link href="/ipos/2021/">
