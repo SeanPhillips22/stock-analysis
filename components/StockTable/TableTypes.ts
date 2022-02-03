@@ -17,13 +17,14 @@ export type TableFixed = {
 
 	columnOptions?: DataId[] // The columns available to select
 	excludeColumns?: DataId[] // Columns to exclude
+	columnOrder?: DataId[] // The order of the columns
 }
 
 // Dynamic data that becomes state and is used to modify the table
 export type TableDynamic = {
 	main: DataId // The main column to sort by
 
-	count: number // The number of symbols to show
+	count?: number // The number of symbols to show -- if empty, show all
 
 	sort?: SortObject[] // What is currently sorted by
 	sortDirection: 'desc' | 'asc' // The sort order

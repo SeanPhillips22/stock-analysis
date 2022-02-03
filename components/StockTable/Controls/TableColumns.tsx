@@ -4,7 +4,8 @@ import { DataId } from 'types/DataId'
 import { useTableContext } from '../TableContext'
 
 export function TableColumns() {
-	const { type, fixed, dynamic, setState } = useTableContext()
+	const { type, fixed, dynamic, setState, clearState, enabled } =
+		useTableContext()
 	const { columnOptions, excludeColumns } = fixed
 	const { main, columns } = dynamic
 
@@ -23,5 +24,13 @@ export function TableColumns() {
 		})
 	}
 
-	return <SelectColumns active={cols} options={colSelect} toggle={toggle} />
+	return (
+		<SelectColumns
+			active={cols}
+			options={colSelect}
+			toggle={toggle}
+			clear={clearState}
+			enabled={enabled}
+		/>
+	)
 }

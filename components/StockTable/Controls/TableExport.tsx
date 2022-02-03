@@ -6,7 +6,7 @@ type Props = {
 
 export function TableExport({ tableId }: Props) {
 	return (
-		<div className="hidden md:block">
+		<div className="controls-export">
 			<Export
 				buttons={[
 					{

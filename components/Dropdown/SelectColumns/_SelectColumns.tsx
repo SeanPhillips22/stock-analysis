@@ -1,6 +1,7 @@
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { useState } from 'react'
 import { DataId } from 'types/DataId'
+import { ClearColumns } from './ClearColumns'
 import { ColumnList } from './ColumnList'
 import { ColumnSearch } from './ColumnSearch'
 
@@ -8,9 +9,17 @@ type Props = {
 	active: DataId[]
 	options: DataId[]
 	toggle: (id: DataId) => void
+	clear: () => void
+	enabled: boolean
 }
 
-export function SelectColumns({ active, options, toggle }: Props) {
+export function SelectColumns({
+	active,
+	options,
+	toggle,
+	clear,
+	enabled
+}: Props) {
 	const [search, setSearch] = useState<string>('')
 
 	return (
@@ -22,6 +31,7 @@ export function SelectColumns({ active, options, toggle }: Props) {
 				search={search}
 				toggle={toggle}
 			/>
+			{enabled && <ClearColumns clear={clear} />}
 		</Dropdown>
 	)
 }

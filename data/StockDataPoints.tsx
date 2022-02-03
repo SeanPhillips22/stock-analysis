@@ -1,5 +1,9 @@
 import { DataId } from 'types/DataId'
-import { FormatFunction } from 'types/Tables'
+import { FormatFunction, IndexType } from 'types/Tables'
+import {
+	number,
+	dateSort
+} from 'components/StockScreener/functions/sort/sortFunctions'
 
 type SymbolType = 'stocks' | 'ipo' | 'etf'
 
@@ -9,6 +13,7 @@ export type DataPointType = {
 	colName?: string
 	format?: FormatFunction
 	only?: SymbolType
+	sort?: any
 }
 
 type Props = {
@@ -16,7 +21,7 @@ type Props = {
 }
 
 // Get a list of data point IDs to use for a table
-export function getDataPointsArray(type: SymbolType, exclude?: DataId[]) {
+export function getDataPointsArray(type: IndexType, exclude?: DataId[]) {
 	// get all the matching IDs from the DataPoints array of objects
 	let ids = Object.values(DataPoints)
 		.filter(f => !f.only || f.only === type)
@@ -36,7 +41,7 @@ export function getDataPointsArray(type: SymbolType, exclude?: DataId[]) {
  */
 export const DataPoints: Props = {
 	s: { id: 's', name: 'Symbol', format: 'linkSymbol' },
-	n: { id: 'n', name: 'Name', format: 'string' },
+	n: { id: 'n', name: 'Company Name', format: 'string' },
 	marketCap: { id: 'marketCap', name: 'Market Cap', format: 'abbreviate' },
 	price: {
 		id: 'price',
@@ -54,7 +59,8 @@ export const DataPoints: Props = {
 		id: 'change',
 		name: 'Price Change 1D',
 		colName: '% Change',
-		format: 'colorPercentage'
+		format: 'colorPercentage',
+		sort: number
 	},
 	volume: { id: 'volume', name: 'Volume', format: 'integer' },
 	close: {
@@ -79,7 +85,8 @@ export const DataPoints: Props = {
 		id: 'premarketChangePercent',
 		name: 'Premarket % Change',
 		colName: '% Change',
-		format: 'colorPercentage'
+		format: 'colorPercentage',
+		sort: number
 	},
 	enterpriseValue: {
 		id: 'enterpriseValue',
@@ -157,13 +164,42 @@ export const DataPoints: Props = {
 	},
 	priceTargetChange: {
 		id: 'priceTargetChange',
-		name: 'Price Target (%)',
-		format: 'formatPercentage'
+		name: 'Price Target Diff. (%)',
+		colName: 'PT Diff. (%)',
+		format: 'colorPercentage'
 	},
 	country: { id: 'country', name: 'Country', format: 'string' },
 	employees: { id: 'employees', name: 'Employees', format: 'integer' },
 	founded: { id: 'founded', name: 'Founded', format: 'string' },
-	ipoDate: { id: 'ipoDate', name: 'IPO Date', format: 'formatDate' },
+	/* IPO INFO */
+	ipoDate: {
+		id: 'ipoDate',
+		name: 'IPO Date',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	ipp: {
+		id: 'ipp',
+		name: 'IPO Price',
+		format: 'price'
+	},
+	ippc: {
+		id: 'ippc',
+		name: 'Current Price',
+		colName: 'Current',
+		format: 'price'
+	},
+	ipr: {
+		id: 'ipr',
+		colName: 'Return',
+		name: 'Return Since IPO',
+		format: 'colorPercentage'
+	},
+	sharesOffered: {
+		id: 'sharesOffered',
+		name: 'Shares Offered',
+		format: 'integer'
+	},
 	revenue: { id: 'revenue', name: 'Revenue', format: 'abbreviate' },
 	revenueGrowth: {
 		id: 'revenueGrowth',
@@ -492,12 +528,6 @@ export const DataPoints: Props = {
 		only: 'ipo'
 	},
 	isSpac: { id: 'isSpac', name: 'Is SPAC' },
-	sharesOffered: {
-		id: 'sharesOffered',
-		name: 'Shares Offered',
-		format: 'integer',
-		only: 'ipo'
-	},
 	aum: {
 		id: 'aum',
 		name: 'Assets Under Management',

@@ -1,4 +1,12 @@
 import { Row } from 'react-table'
+import { DataId } from 'types/DataId'
+
+export function number(a: Row, b: Row, id: DataId) {
+	let aa = Math.abs(a.values[id])
+	let bb = Math.abs(b.values[id])
+
+	return aa - bb
+}
 
 export const priceSort = (a: Row, b: Row) => {
 	const splitA = a.values.ipoPriceRange.split(/(\s+)/)

@@ -14,14 +14,14 @@ export function StockTable({ _data }: { _data: any[] }) {
 		useTableContext()
 
 	// Get the props
-	const { defaultSort } = fixed
+	const { defaultSort, columnOrder } = fixed
 	const { columns: _columns, main, sort } = dynamic
 
 	// pass initial data into react query
 	const query = useTableData(tableId, type, dynamic, _data, enabled)
 
 	// memoize the data and columns
-	const data = useMemo(() => query.data.data || query.data, [query.data])
+	const data = useMemo(() => query?.data?.data || query?.data, [query.data])
 	const columns = useMemo(() => getColumns(_columns, main), [_columns, main])
 
 	const sortProps = useMemo(
@@ -36,6 +36,8 @@ export function StockTable({ _data }: { _data: any[] }) {
 			columns={columns}
 			sortProps={sortProps}
 			sort={sort}
+			columnOrder={columnOrder}
+			tableId={tableId}
 		/>
 	)
 }

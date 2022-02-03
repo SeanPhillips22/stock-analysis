@@ -46,7 +46,7 @@ export function TableResults() {
 	}
 
 	// the text on the dropdown button
-	let title = count.toString() + ' Rows'
+	let title = count ? count.toString() + ' Rows' : 'Rows'
 
 	return (
 		<Dropdown title={title} hoverTitle="Change results count">
@@ -54,7 +54,7 @@ export function TableResults() {
 				/* One Dropdown Item */
 				<div
 					key={i.value}
-					className={cn('dd-option', tabActive(i.value, count))}
+					className={cn('dd-option', tabActive(i.value, count || 0))}
 					title={hoverTitle(i.value, i.pro)}
 					onClick={() => handleClick(i.value, i.pro)}
 				>

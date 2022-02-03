@@ -12,18 +12,17 @@ import { useTableContext } from './TableContext'
 
 type Props = {
 	filter: FilterObject
-	tableId: string
 }
 
-export function StockTableControls({ filter, tableId }: Props) {
-	const { fixed } = useTableContext()
-	const { page, updated } = usePageContext()
+export function StockTableControls({ filter }: Props) {
+	const { fixed, tableId, title } = useTableContext()
+	const { updated } = usePageContext()
 
 	return (
 		<div className="controls groups">
 			<div className="title-group">
 				{/* Table Title */}
-				<TableTitle title={page.title} active={page.active} />
+				<TableTitle title={title} tableId={tableId} />
 				{/* Updated timestamp*/}
 				{updated && <TableTimestamp />}
 			</div>

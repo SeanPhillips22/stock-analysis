@@ -11,8 +11,7 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 // the page's config and settings
 const page: PageConfig = {
 	path: '/markets/premarket/',
-	title: 'Top Gainers',
-	parentTitle: 'Premarket Movers',
+	pageTitle: 'Premarket Movers',
 	active: 'premarket',
 	metaTitle: "Today's Premarket Stock Movers",
 	metaDescription:
@@ -31,16 +30,17 @@ const query: TableDynamic = {
 
 type Props = {
 	data: any[]
-	updated: TableTimestamp
+	tradingTimestamps: TableTimestamp
 }
 
-export default function PreMarket({ data, updated }: Props) {
+export default function PreMarket({ data, tradingTimestamps }: Props) {
 	return (
-		<PageContextProvider value={{ page, updated }}>
+		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout>
 				<TableContextProvider
 					value={{
 						type: 'stocks',
+						title: 'Top Gainers',
 						tableId: 'premarket',
 						fixed: {
 							defaultSort: query.sort,
@@ -65,7 +65,8 @@ export default function PreMarket({ data, updated }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-	const data = await getSelect(query, 'stocks', true)
+	let extras = ['tradingTimestamps']
+	const data = await getSelect(query, 'stocks', true, extras)
 	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 	return data
 }

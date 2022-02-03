@@ -11,8 +11,7 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 // the page's config and settings
 const page: PageConfig = {
 	path: '/markets/active/',
-	title: 'Active Today',
-	parentTitle: 'Most Active Stocks',
+	pageTitle: 'Most Active Stocks',
 	active: 'active',
 	metaTitle: "Today's Most Active Stocks",
 	metaDescription:
@@ -31,16 +30,17 @@ const query: TableDynamic = {
 
 type Props = {
 	data: any[]
-	updated: TableTimestamp
+	tradingTimestamps: TableTimestamp
 }
 
-export default function ActivePage({ data, updated }: Props) {
+export default function ActivePage({ data, tradingTimestamps }: Props) {
 	return (
-		<PageContextProvider value={{ page, updated }}>
+		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout>
 				<TableContextProvider
 					value={{
 						type: 'stocks',
+						title: 'Active Today',
 						tableId: 'active',
 						fixed: {
 							defaultSort: query.sort,
@@ -64,7 +64,8 @@ export default function ActivePage({ data, updated }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-	const data = await getSelect(query, 'stocks', true)
+	let extras = ['tradingTimestamps']
+	const data = await getSelect(query, 'stocks', true, extras)
 	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
 	return data
 }

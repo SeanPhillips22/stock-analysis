@@ -15,7 +15,7 @@ export function getColumns(cols: DataId[], main: DataId) {
 
 	const columns = newCols.map(col => {
 		// destructure the data points
-		let { name, colName, format } = DataPoints[col]
+		let { name, colName, format, sort } = DataPoints[col]
 
 		// Header: the name of the column, shown
 		// accessor: the id of the column, not shown
@@ -30,6 +30,7 @@ export function getColumns(cols: DataId[], main: DataId) {
 					? props.value
 					: '-'
 			},
+			sortType: sort || 'basic',
 			sortInverted:
 				col !== main && format !== 'string' && format !== 'linkSymbol'
 					? true
