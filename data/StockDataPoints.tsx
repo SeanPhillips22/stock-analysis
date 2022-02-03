@@ -164,7 +164,7 @@ export const DataPoints: Props = {
 	},
 	priceTargetChange: {
 		id: 'priceTargetChange',
-		name: 'Price Target Difference (%)',
+		name: 'Price Target Diff. (%)',
 		colName: 'PT Diff. (%)',
 		format: 'colorPercentage'
 	},
