@@ -53,7 +53,7 @@ export default function IpoYear(props: Props) {
 				canonical={`/ipos/${year}/`}
 			/>
 			<Layout>
-				<div className="contain">
+				<div className="contain ipos-recent">
 					<Breadcrumbs url={`/ipos/${year}/`} />
 					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation path="" />
