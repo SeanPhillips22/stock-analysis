@@ -84,7 +84,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								<p className="text-base sm:text-lg text-gray-900">
 									There were 1035 IPOs in 2021, which was an all-time
 									record. March had the most with a total of 151, while
-									August had the fewest with only 43 IPOs.{' '}
+									August had the fewest with only 40 IPOs.{' '}
 									<Link href="/ipos/2021/">
 										<a className="bll">View all 2021 IPOs.</a>
 									</Link>
