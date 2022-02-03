@@ -1,5 +1,6 @@
 import { getSelect } from 'functions/apis/getSelect'
 import { useQuery } from 'react-query'
+import { IndexType } from 'types/Tables'
 import { TableDynamic } from './TableTypes'
 
 /**
@@ -7,7 +8,7 @@ import { TableDynamic } from './TableTypes'
  */
 export function useTableData(
 	tableId: string,
-	type: 'stocks' | 'etf',
+	type: IndexType,
 	dynamic: TableDynamic,
 	_data: any[],
 	enabled?: boolean

@@ -21,7 +21,7 @@ export function StockTable({ _data }: { _data: any[] }) {
 	const query = useTableData(tableId, type, dynamic, _data, enabled)
 
 	// memoize the data and columns
-	const data = useMemo(() => query.data.data || query.data, [query.data])
+	const data = useMemo(() => query?.data?.data || query?.data, [query.data])
 	const columns = useMemo(() => getColumns(_columns, main), [_columns, main])
 
 	const sortProps = useMemo(

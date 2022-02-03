@@ -10,6 +10,10 @@ export type CellNumber = {
 	}
 }
 
+// The type of index to select for the stock table
+// The narrower/smaller, the better the performance
+export type IndexType = 'stocks' | 'etf' | 'histip'
+
 // Names of functions that format table cells
 export type FormatFunction =
 	| 'linkSymbol'

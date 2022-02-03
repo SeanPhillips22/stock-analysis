@@ -1,6 +1,9 @@
 import { DataId } from 'types/DataId'
-import { FormatFunction } from 'types/Tables'
-import { dateSort } from 'components/StockScreener/functions/sort/sortFunctions'
+import { FormatFunction, IndexType } from 'types/Tables'
+import {
+	number,
+	dateSort
+} from 'components/StockScreener/functions/sort/sortFunctions'
 
 type SymbolType = 'stocks' | 'ipo' | 'etf'
 
@@ -18,7 +21,7 @@ type Props = {
 }
 
 // Get a list of data point IDs to use for a table
-export function getDataPointsArray(type: SymbolType, exclude?: DataId[]) {
+export function getDataPointsArray(type: IndexType, exclude?: DataId[]) {
 	// get all the matching IDs from the DataPoints array of objects
 	let ids = Object.values(DataPoints)
 		.filter(f => !f.only || f.only === type)
@@ -56,7 +59,8 @@ export const DataPoints: Props = {
 		id: 'change',
 		name: 'Price Change 1D',
 		colName: '% Change',
-		format: 'colorPercentage'
+		format: 'colorPercentage',
+		sort: number
 	},
 	volume: { id: 'volume', name: 'Volume', format: 'integer' },
 	close: {
@@ -81,7 +85,8 @@ export const DataPoints: Props = {
 		id: 'premarketChangePercent',
 		name: 'Premarket % Change',
 		colName: '% Change',
-		format: 'colorPercentage'
+		format: 'colorPercentage',
+		sort: number
 	},
 	enterpriseValue: {
 		id: 'enterpriseValue',
@@ -159,12 +164,14 @@ export const DataPoints: Props = {
 	},
 	priceTargetChange: {
 		id: 'priceTargetChange',
-		name: 'Price Target (%)',
-		format: 'formatPercentage'
+		name: 'Price Target Difference (%)',
+		colName: 'PT Diff. (%)',
+		format: 'colorPercentage'
 	},
 	country: { id: 'country', name: 'Country', format: 'string' },
 	employees: { id: 'employees', name: 'Employees', format: 'integer' },
 	founded: { id: 'founded', name: 'Founded', format: 'string' },
+	/* IPO INFO */
 	ipoDate: {
 		id: 'ipoDate',
 		name: 'IPO Date',
@@ -187,6 +194,11 @@ export const DataPoints: Props = {
 		colName: 'Return',
 		name: 'Return Since IPO',
 		format: 'colorPercentage'
+	},
+	sharesOffered: {
+		id: 'sharesOffered',
+		name: 'Shares Offered',
+		format: 'integer'
 	},
 	revenue: { id: 'revenue', name: 'Revenue', format: 'abbreviate' },
 	revenueGrowth: {
@@ -516,12 +528,6 @@ export const DataPoints: Props = {
 		only: 'ipo'
 	},
 	isSpac: { id: 'isSpac', name: 'Is SPAC' },
-	sharesOffered: {
-		id: 'sharesOffered',
-		name: 'Shares Offered',
-		format: 'integer',
-		only: 'ipo'
-	},
 	aum: {
 		id: 'aum',
 		name: 'Assets Under Management',

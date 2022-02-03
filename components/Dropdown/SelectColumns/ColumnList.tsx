@@ -18,7 +18,7 @@ export function ColumnList({ _active, options, search, toggle }: Props) {
 	// check which data points are active vs. inactive
 	options.forEach(item => {
 		let { id, name } = DataPoints[item]
-		if (id !== 's' && id !== 'n') {
+		if (id !== 's') {
 			if (_active.includes(item)) active.push({ id, name })
 			else inactive.push({ id, name })
 		}

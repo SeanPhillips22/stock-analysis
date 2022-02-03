@@ -66,7 +66,7 @@ export default function IpoYear(props: Props) {
 							<TableContextProvider
 								value={{
 									type: 'histip',
-									tableId: 'ipos-recent',
+									tableId: 'ipos-' + year,
 									title: props.data.length + ' IPOs',
 									fixed: {
 										defaultSort: query.sort,
@@ -85,7 +85,10 @@ export default function IpoYear(props: Props) {
 											'ipr'
 										]
 									},
-									dynamic: query
+									dynamic: {
+										...query,
+										filters: ['ipoDate-year-' + year]
+									}
 								}}
 							>
 								<StockTable _data={props.data} />
@@ -116,9 +119,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const year = context?.params?.year as string
 	let extraFn = 'getIpoInfo' + year
 	let extras = ['getIpoCalendarDataMin', 'getIpoNewsMin', extraFn]
-	let ssrFilter = 'ipoDate-year-' + year
 	let ssrQuery = query
-	ssrQuery.filters = [ssrFilter]
+	ssrQuery.filters = ['ipoDate-year-' + year]
 
 	// Fetch the data
 	const response = await getSelect(ssrQuery, 'histip', true, extras)
