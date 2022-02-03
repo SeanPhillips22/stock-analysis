@@ -14,6 +14,7 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { StockTable } from 'components/StockTable/__StockTable'
 import { getSelect } from 'functions/apis/getSelect'
 import { TableDynamic } from 'components/StockTable/TableTypes'
+import { RecentIpoDataPoints } from 'data/DataPointGroups/RecentIpoDataPoints'
 
 type Props = {
 	data: IpoRecent[]
@@ -59,7 +60,7 @@ export default function RecentIpos(props: Props) {
 											export: true,
 											columns: true
 										},
-										excludeColumns: ['ch3y', 'ch5y'],
+										columnOptions: RecentIpoDataPoints,
 										columnOrder: [
 											'ipoDate',
 											's',

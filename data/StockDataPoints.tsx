@@ -192,13 +192,30 @@ export const DataPoints: Props = {
 	ipr: {
 		id: 'ipr',
 		colName: 'Return',
-		name: 'Return Since IPO',
+		name: 'Return From IPO Price',
 		format: 'colorPercentage'
 	},
 	sharesOffered: {
 		id: 'sharesOffered',
 		name: 'Shares Offered',
 		format: 'integer'
+	},
+	ds: {
+		id: 'ds',
+		name: 'Deal Size',
+		format: 'abbreviate'
+	},
+	fop: {
+		id: 'fop',
+		name: 'First Open Price',
+		colName: 'Open Price',
+		format: 'price'
+	},
+	iprfo: {
+		id: 'iprfo',
+		name: 'Return From Open Price',
+		colName: 'Return (Open)',
+		format: 'colorPercentage'
 	},
 	revenue: { id: 'revenue', name: 'Revenue', format: 'abbreviate' },
 	revenueGrowth: {

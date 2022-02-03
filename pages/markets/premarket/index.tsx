@@ -7,6 +7,7 @@ import { TableTimestamp } from 'types/Tables'
 import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
+import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -52,7 +53,7 @@ export default function PreMarket({ data, tradingTimestamps }: Props) {
 								columns: true,
 								moverType: true
 							},
-							excludeColumns: ['ch3y', 'ch5y', 'volume']
+							columnOptions: MoverDataPoints
 						},
 						dynamic: query
 					}}

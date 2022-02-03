@@ -7,6 +7,7 @@ import { TableTimestamp } from 'types/Tables'
 import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
+import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -51,7 +52,12 @@ export default function LosersPage({ data, tradingTimestamps }: Props) {
 								export: true,
 								columns: true
 							},
-							excludeColumns: ['ch3y', 'ch5y']
+							columnOptions: MoverDataPoints,
+							excludeColumns: [
+								'premarketPrice',
+								'premarketChange',
+								'premarketChangePercent'
+							]
 						},
 						dynamic: query
 					}}

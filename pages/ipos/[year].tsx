@@ -15,6 +15,7 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { StockTable } from 'components/StockTable/__StockTable'
 import { getSelect } from 'functions/apis/getSelect'
+import { RecentIpoDataPoints } from 'data/DataPointGroups/RecentIpoDataPoints'
 
 type Props = {
 	year: string
@@ -75,7 +76,7 @@ export default function IpoYear(props: Props) {
 											export: true,
 											columns: true
 										},
-										excludeColumns: ['ch3y', 'ch5y'],
+										columnOptions: RecentIpoDataPoints,
 										columnOrder: [
 											'ipoDate',
 											's',

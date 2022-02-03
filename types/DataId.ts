@@ -19,9 +19,11 @@ export type DataId =
 	| 'ipp' // IPO Price
 	| 'ippc' // IPO Price
 	| 'ipr' // IPO Return
-	// TODO open price
-	// TODO return from open
-	// TODO ipo deal size
+	| 'ds' // IPO Deal Size
+	| 'fop' // First open price
+	| 'iprfo' // Return from first open price
+	| 'sharesOffered' // Shares Offered
+	| 'ipoPriceRange' // IPO Price Range
 	// ...
 	| 'marketCap' // Market Cap
 	| 'enterpriseValue' // Enterprise Value
@@ -128,9 +130,7 @@ export type DataId =
 	| 'lastSplitType' // Last Stock Split
 	| 'lastSplitDate' // Last Split Date
 	| 'liabilities' // Liabilities
-	| 'ipoPriceRange' // IPO Price Range
 	| 'isSpac' // Is SPAC
-	| 'sharesOffered' // Shares Offered
 	| 'aum' // ETF assets
 	| 'etfPeRatio' // ETF PE Ratio
 	| 'assetClass' // ETF Asset Class
