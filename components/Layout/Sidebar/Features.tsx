@@ -21,7 +21,7 @@ const FeaturesMap = [
 		title: 'Stock Screener',
 		description:
 			'Filter, sort and analyze all stocks to find your next investment.',
-		url: '/stock-screener/',
+		url: '/screener/stock/',
 		tagId: 'tag-feat-nav-widget-screener'
 	},
 	{
