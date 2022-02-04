@@ -8,7 +8,7 @@ declare global {
 	}
 }
 
-export default function NewsAd1() {
+export default function NewsAd2() {
 	useEffect(() => {
 		if (typeof window.dianomiReloadContext !== 'undefined') {
 			window.dianomiReloadContext()
