@@ -49,6 +49,11 @@ module.exports = {
 				source: '/screener/',
 				destination: '/screener/stock/',
 				permanent: true
+			},
+			{
+				source: '/author/krisgunnars/',
+				destination: '/about/',
+				permanent: true
 			}
 		]
 	},
