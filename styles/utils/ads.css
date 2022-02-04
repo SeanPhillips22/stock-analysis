@@ -14,7 +14,7 @@
 
 	/* Sidebar 1 */
 	.sb-1 {
-		@apply w-[300px] h-[250px] hidden lg:block mx-auto bg-blue-100;
+		@apply w-[300px] h-[250px] hidden lg:block mx-auto;
 	}
 
 	/* Show on all devices
@@ -23,7 +23,7 @@
 	Mobile: Rectangle 
 	*/
 	.sb-1a {
-		@apply w-[300px] h-[250px] bp:w-[336px] bp:h-[280px] md:w-[728px] md:h-[90px] lg:w-[336px] lg:h-[280px] block mt-8 mx-auto bg-blue-100;
+		@apply w-[300px] h-[250px] bp:w-[336px] bp:h-[280px] md:w-[728px] md:h-[90px] lg:w-[336px] lg:h-[280px] block mt-8 mx-auto;
 	}
 
 	/* Sidebar 2 - 300x600 */
@@ -33,6 +33,6 @@
 
 	/* Mobile 1 */
 	.m-1 {
-		@apply w-[300px] h-[250px] bp:w-[336px] bp:h-[280px] md:w-[728px] md:h-[90px] lg:hidden mx-auto bg-blue-100;
+		@apply w-[300px] h-[250px] bp:w-[336px] bp:h-[280px] md:w-[728px] md:h-[90px] lg:hidden mx-auto;
 	}
 }
