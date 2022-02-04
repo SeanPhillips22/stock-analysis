@@ -3,7 +3,13 @@ import { navState } from 'state/navState'
 import { noAds } from '../noAds'
 import { useLoadAdsense } from './useLoadAdsense'
 
-export function Sidebar1Overview() {
+/**
+ * Sidebar unit that shows on all devices
+ * mobile: rectangle
+ * tablet: leaderboard
+ * desktop: rectangle
+ */
+export function Sidebar1All() {
 	const path = navState(state => state.path)
 	const checked = authState(state => state.checked)
 	const isPro = authState(state => state.isPro)
@@ -16,7 +22,7 @@ export function Sidebar1Overview() {
 	if (!checked || (checked && !isPro)) {
 		return (
 			<ins
-				className="adsbygoogle sb-1o"
+				className="adsbygoogle sb-1a"
 				data-ad-client="ca-pub-7702053427535735"
 				data-ad-slot="8582549443"
 				data-full-width-responsive="false"

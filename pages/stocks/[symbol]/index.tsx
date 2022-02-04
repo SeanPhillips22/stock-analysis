@@ -11,7 +11,7 @@ import { Profile } from 'components/Overview/ProfileWidget'
 import { NewsArea } from 'components/Overview/NewsArea'
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget'
 import { AnalystWidget } from 'components/Overview/AnalystWidget'
-import { Sidebar1Overview } from 'components/Ads/AdSense/Sidebar1Overview'
+import { Sidebar1All } from 'components/Ads/AdSense/Sidebar1All'
 
 interface Props {
 	info: Info
@@ -47,7 +47,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10">
 				<div className="px-4 lg:pt-1 md:px-0 lg:order-2 space-y-6">
-					{news.data.length > 5 && <Sidebar1Overview />}
+					{news.data.length > 5 && <Sidebar1All />}
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />

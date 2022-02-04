@@ -41,7 +41,7 @@ export default function StatisticsPage({ info, data }: Props) {
 						/>
 					</div>
 
-					<div className="pb-1">
+					<div className="pb-2">
 						<StatsWidget
 							title="Share Statistics"
 							data={data.shares}

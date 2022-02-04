@@ -10,8 +10,7 @@ import { ProfileContact } from 'components/ProfilePage/ProfileContact'
 import { ProfileDetails } from 'components/ProfilePage/ProfileDetails'
 import { ProfileExecutives } from 'components/ProfilePage/ProfileExecutives'
 import { ProfileSECfilings } from 'components/ProfilePage/ProfileSECfilings'
-import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
-import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
+import { Sidebar1All } from 'components/Ads/AdSense/Sidebar1All'
 
 type Props = {
 	info: Info
@@ -31,14 +30,9 @@ export default function SymbolStatistics({ info, data }: Props) {
 					<ProfileDescription text={data.description} />
 				</div>
 
-				<div className="float-none lg:float-right lg:max-w-[336px]">
+				<div className="float-none lg:float-right lg:w-[336px]">
 					<ProfileInfo info={data.info} logo={data.logo} />
-					<div className="hidden lg:block lg:mt-8">
-						<Sidebar1 />
-					</div>
-					<div className="block mt-8 lg:hidden">
-						<Mobile1 />
-					</div>
+					<Sidebar1All />
 					<ProfileContact contact={data.contact} />
 					<ProfileDetails details={data.stockDetails} />
 				</div>
