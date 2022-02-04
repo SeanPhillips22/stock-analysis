@@ -11,14 +11,14 @@ import { ProfileDetails } from 'components/ProfilePage/ProfileDetails'
 import { ProfileExecutives } from 'components/ProfilePage/ProfileExecutives'
 import { ProfileSECfilings } from 'components/ProfilePage/ProfileSECfilings'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
+import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
 
-interface Props {
+type Props = {
 	info: Info
 	data: Company
 }
 
-const SymbolStatistics = ({ info, data }: Props) => {
+export default function SymbolStatistics({ info, data }: Props) {
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/company/`}>
 			<SEO
@@ -36,7 +36,7 @@ const SymbolStatistics = ({ info, data }: Props) => {
 					<div className="hidden lg:block lg:mt-8">
 						<Sidebar1 />
 					</div>
-					<div className="block mt-8 sm:hidden sm:mt-0">
+					<div className="block mt-8 lg:hidden">
 						<Mobile1 />
 					</div>
 					<ProfileContact contact={data.contact} />
@@ -57,7 +57,6 @@ const SymbolStatistics = ({ info, data }: Props) => {
 		</Stock>
 	)
 }
-export default SymbolStatistics
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string

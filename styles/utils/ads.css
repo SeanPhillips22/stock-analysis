@@ -23,4 +23,8 @@
 	.sb-2 {
 		@apply w-[300px] h-[600px] hidden lg:block mx-auto;
 	}
+
+	.m-1 {
+		@apply w-[300px] h-[250px] bp:w-[336px] bp:h-[280px] md:w-[728px] md:h-[90px] lg:hidden mx-auto;
+	}
 }

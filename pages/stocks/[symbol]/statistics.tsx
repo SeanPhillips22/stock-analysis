@@ -8,14 +8,14 @@ import { StatsWidget } from 'components/StatsWidget/_StatsWidget'
 import { Button } from 'components/Buttons/Button'
 import { MAP_STATISTICS } from 'data/financials/map_statistics'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
+import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
 
-interface Props {
+type Props = {
 	info: Info
 	data: Statistics
 }
 
-const StatisticsPage = ({ info, data }: Props) => {
+export default function StatisticsPage({ info, data }: Props) {
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/statistics/`}>
 			<SEO
@@ -41,7 +41,7 @@ const StatisticsPage = ({ info, data }: Props) => {
 						/>
 					</div>
 
-					<div>
+					<div className="pb-1">
 						<StatsWidget
 							title="Share Statistics"
 							data={data.shares}
@@ -183,7 +183,6 @@ const StatisticsPage = ({ info, data }: Props) => {
 		</Stock>
 	)
 }
-export default StatisticsPage
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
