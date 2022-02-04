@@ -4,15 +4,35 @@
 */
 
 @layer components {
+	.search-input {
+		@apply border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-1.5 md:py-2 pl-7 tiny:pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none focus:shadow-lg rounded-sm;
+	}
+
+	.hd-inner .search-input {
+		@apply hover:bg-white bg-gray-50 focus:bg-white w-full;
+	}
+
+	.home-hero .search-input {
+		@apply lg:text-[17px];
+	}
+
 	.dropd {
-		@apply max-h-[265px] w-full bg-white absolute top-9 md:top-10 border border-gray-200 overflow-y-auto shadow-lg opacity-0 transition-opacity duration-150;
+		@apply w-full bg-white absolute top-9 md:top-10 border border-gray-200 shadow-lg opacity-0 transition-opacity duration-150;
 	}
 
 	.dropd.active {
 		@apply opacity-100;
 	}
 
-	.dropd .activeresult {
+	.activebg {
 		background-color: #f3f4f6;
+	}
+
+	.dropd .activeresult {
+		@apply activebg;
+	}
+
+	.results-wrap {
+		@apply max-h-[265px] overflow-y-auto;
 	}
 }

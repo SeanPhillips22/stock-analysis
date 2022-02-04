@@ -30,6 +30,7 @@ module.exports = {
 			tiny: '320px',
 			xs: '350px',
 			bp: '380px',
+			diabp: '513px',
 			xsm: '600px',
 			sm: '640px',
 			md: '768px',

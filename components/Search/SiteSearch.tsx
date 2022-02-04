@@ -7,11 +7,7 @@ import { CloseIcon } from 'components/Icons/Close'
 import { useDebounce } from 'hooks/useDebounce'
 import { useSearch } from './useSearch'
 
-type Props = {
-	classes: string
-}
-
-export const SiteSearch = ({ classes }: Props) => {
+export function SiteSearch() {
 	const router = useRouter()
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [query, setQuery] = useState('')
@@ -125,11 +121,11 @@ export const SiteSearch = ({ classes }: Props) => {
 
 	function mouseClick(e: MouseEvent) {
 		const formref = inputRef.current ?? null
-		const resultsdoc = document.querySelector('.searchresults') ?? null
+		const results = document.querySelector('.results-wrap') ?? null
 
 		if (
 			(formref && formref.contains(e.target as Node)) ||
-			(resultsdoc && resultsdoc.contains(e.target as Node))
+			(results && results.contains(e.target as Node))
 		) {
 			return
 		}
@@ -165,7 +161,7 @@ export const SiteSearch = ({ classes }: Props) => {
 		<>
 			<SearchIcon />
 			<input
-				className={classes}
+				className="search-input"
 				type="text"
 				aria-label="Search"
 				role="combobox"
@@ -209,34 +205,37 @@ export const SiteSearch = ({ classes }: Props) => {
 			)}
 			<div className={`dropd ${open ? 'active' : 'inactive'}`}>
 				{open && !error && (
-					<>
-						<div className="searchresults">
-							{!loading && query.length === 0 && (
-								<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
-									Trending
-								</h4>
-							)}
-							{results.length ? (
-								<ul role="listbox" id="owned_listbox">
-									{results.map((item, index) => (
-										<SingleResult
-											key={index}
-											index={index}
-											result={item}
-											setOpen={setOpen}
-										/>
-									))}
-								</ul>
-							) : (
-								!loading &&
-								!filtering && (
-									<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
-										No results found.
-									</h4>
-								)
-							)}
-						</div>
-					</>
+					<div className="results-wrap">
+						{!loading && query.length === 0 && (
+							<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
+								Trending
+							</h4>
+						)}
+						{results.length ? (
+							<ul role="listbox" id="owned_listbox">
+								{results.map((item, index) => (
+									<SingleResult
+										key={index}
+										index={index}
+										result={item}
+										setOpen={setOpen}
+									/>
+								))}
+							</ul>
+						) : (
+							!loading &&
+							!filtering && (
+								<div className="text-lg py-1.5 px-2 sm:px-3 activebg">
+									<a
+										href={`/search?q=${query}`}
+										className="hover:text-blue-link"
+									>
+										No results found. Click to try a full text search.
+									</a>
+								</div>
+							)
+						)}
+					</div>
 				)}
 			</div>
 		</>
