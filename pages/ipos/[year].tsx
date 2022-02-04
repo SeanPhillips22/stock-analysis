@@ -116,8 +116,14 @@ export default function IpoYear(props: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async context => {
-	// Assemble the SSR request
 	const year = context?.params?.year as string
+	if (!['2022', '2021', '2020', '2019'].includes(year)) {
+		return {
+			notFound: true
+		}
+	}
+
+	// Assemble the SSR request
 	let extraFn = 'getIpoInfo' + year
 	let extras = ['getIpoCalendarDataMin', 'getIpoNewsMin', extraFn]
 	let ssrQuery = query
