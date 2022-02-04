@@ -36,10 +36,10 @@ export const ActionsBankruptcies = ({ data }: ActionProps) => {
 				description="A list of recent and historical bankruptcy liquidations of public companies listed on the US stock market."
 				canonical="/actions/bankruptcies/"
 			/>
-			<ActionsLayout title="Bankruptcies" url="/actions/bankruptcies/">
+			<ActionsLayout>
 				<ActionsTable
 					key="Bankruptcies"
-					title="Bankruptcies"
+					title="Recent Bankruptcies"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

@@ -13,7 +13,7 @@
 
 	/* when the controls are is split into groups -- title group and button group */
 	.controls.groups {
-		@apply block md:flex space-x-0 md:space-x-6 border-0 md:border-t;
+		@apply block md:flex space-x-0 md:space-x-6 border-0 md:border-t pt-0 pb-1.5 md:py-2;
 	}
 
 	.controls h2 {
@@ -40,6 +40,15 @@
 
 	.controls-btn {
 		@apply inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-2 xs:px-3 sm:px-4 py-1.5 sm:py-2 bg-white text-xs bp:text-sm font-semibold hover:bg-gray-50 noring whitespace-nowrap;
+	}
+
+	/* Stretch the button to fill space */
+	.btn-stretch {
+		@apply space-x-4;
+	}
+
+	.btn-stretch .controls-btn {
+		@apply px-4;
 	}
 
 	.controls-btn.active {
@@ -72,6 +81,10 @@
 
 	.controls-icon {
 		@apply -mr-1 ml-1 xs:ml-2 w-5 h-5;
+	}
+
+	.btn-stretch .controls-icon {
+		@apply ml-3;
 	}
 
 	.controls-export {

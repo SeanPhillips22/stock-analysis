@@ -48,13 +48,10 @@ export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 				description={`A list of all stock ticker symbol changes in ${year}, including all public companies listed on the main US exchanges.`}
 				canonical={`/actions/changes/${year}/`}
 			/>
-			<ActionsLayout
-				title={`${year} Symbol Changes`}
-				url={`/actions/changes/${year}/`}
-			>
+			<ActionsLayout>
 				<ActionsTable
 					key={`Changes-${year}`}
-					title="Changes"
+					title={`${year} Stock Symbol Changes`}
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

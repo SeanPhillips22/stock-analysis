@@ -64,13 +64,10 @@ export const ActionsAcquisitionsYear = ({ year, data }: ActionProps) => {
 				description={`A list of all public company mergers and acquisitions on the US stock market in the year ${year}.`}
 				canonical={`/actions/acquisitions/${year}/`}
 			/>
-			<ActionsLayout
-				title={`${year} Mergers & Acquisitions`}
-				url={`/actions/acquisitions/${year}/`}
-			>
+			<ActionsLayout>
 				<ActionsTable
 					key={`Acquisitions-${year}`}
-					title="Acquisitions"
+					title={`${year} Mergers & Acquisitions`}
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

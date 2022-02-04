@@ -46,13 +46,10 @@ export const ActionsSplitsYear = ({ year, data }: ActionProps) => {
 				description={`A list of all stock splits on the US stock market in ${year}, including both regular (forward) and reverse splits.`}
 				canonical={`/actions/splits/${year}/`}
 			/>
-			<ActionsLayout
-				title={`${year} Stock Splits`}
-				url={`/actions/splits/${year}/`}
-			>
+			<ActionsLayout>
 				<ActionsTable
 					key={`Splits-${year}`}
-					title="Splits"
+					title={`${year} Stock Splits`}
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

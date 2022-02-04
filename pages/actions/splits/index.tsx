@@ -44,10 +44,10 @@ export const ActionsSplits = ({ data }: ActionProps) => {
 				description="The most recent stock splits on the US stock market, including both regular (forward) splits and reverse splits."
 				canonical="/actions/splits/"
 			/>
-			<ActionsLayout title="Stock Splits" url="/actions/splits/">
+			<ActionsLayout>
 				<ActionsTable
 					key="Splits"
-					title="Splits"
+					title="Recent Stock Splits"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

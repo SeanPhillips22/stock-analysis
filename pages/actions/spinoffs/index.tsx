@@ -56,10 +56,10 @@ export const ActionsSpinoffs = ({ data }: ActionProps) => {
 				description="Recent and historical spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new, independent company."
 				canonical="/actions/spinoffs/"
 			/>
-			<ActionsLayout title="Stock Spinoffs" url="/actions/spinoffs/">
+			<ActionsLayout>
 				<ActionsTable
 					key="Spinoffs"
-					title="Spinoffs"
+					title="Recent Stock Spinoffs"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

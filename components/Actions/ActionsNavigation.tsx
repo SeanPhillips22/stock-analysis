@@ -1,7 +1,8 @@
-import { useRef, UIEvent, useEffect } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
 import { navState } from 'state/navState'
 import { actionsState } from 'state/actionsState'
+import { Router } from 'next/router'
 
 export const ActionsNavigation = () => {
 	const path = navState(state => state.path)
@@ -9,18 +10,15 @@ export const ActionsNavigation = () => {
 	const pos = actionsState(state => state.pos)
 	const setPos = actionsState(state => state.setPos)
 
-	function handleScroll(e: UIEvent<HTMLUListElement>) {
-		if (e && e.currentTarget.scrollLeft !== pos) {
-			setPos(e.currentTarget.scrollLeft)
-		}
-	}
+	Router.events.on('routeChangeStart', () => {
+		setPos(menuref.current?.scrollLeft || 0)
+	})
 
-	useEffect(() => {
-		if (menuref.current && menuref.current.scrollLeft !== pos) {
-			menuref.current.scrollLeft = pos
+	Router.events.on('routeChangeComplete', () => {
+		if (menuref.current) {
+			menuref.current.scrollLeft = pos || 0
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	})
 
 	const tabs = [
 		'listed',
@@ -34,7 +32,7 @@ export const ActionsNavigation = () => {
 
 	return (
 		<nav className="border-b-[3px] border-blue-brand_sharp">
-			<ul className="navmenu" ref={menuref} onScroll={handleScroll}>
+			<ul className="navmenu" ref={menuref}>
 				<li>
 					<Link
 						href={`/actions/${path.three ? `${path.three}/` : ''}`}
