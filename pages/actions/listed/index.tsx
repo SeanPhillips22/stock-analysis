@@ -39,7 +39,7 @@ export const ActionsListed = ({ data }: ActionProps) => {
 			<ActionsLayout>
 				<ActionsTable
 					key="listings"
-					title="Recently Listed"
+					title="Recently Listed Stocks"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}
