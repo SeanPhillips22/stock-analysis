@@ -14,7 +14,7 @@ export function ColumnSearch({ search, setSearch }: Props) {
 				value={search}
 				onChange={e => setSearch(e.target.value.toLowerCase())}
 			/>
-			<CloseInput search={''} setSearch={() => null} />
+			<CloseInput search={search} setSearch={setSearch} />
 		</div>
 	)
 }

@@ -8,9 +8,10 @@ import {
 	useAsyncDebounce,
 	useColumnOrder
 } from 'react-table'
-import { DataId } from 'types/DataId'
 import { StockTableControls } from './_StockTableControls'
 import { useState } from 'react'
+import { DataPoints as DP } from 'data/StockDataPoints'
+import { DataId } from 'types/DataId'
 
 type Props = {
 	data: any[]
@@ -83,7 +84,16 @@ export function StockTableBody({
 							return (
 								<tr key={index}>
 									{row.cells.map((cell, index) => {
-										return <td key={index}>{cell.render('Cell')}</td>
+										return (
+											<td
+												key={index}
+												className={
+													DP[cell.column.id as DataId].class
+												}
+											>
+												{cell.render('Cell')}
+											</td>
+										)
 									})}
 								</tr>
 							)

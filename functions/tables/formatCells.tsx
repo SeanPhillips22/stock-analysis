@@ -81,8 +81,7 @@ export function format2dec(cell: CellNumber) {
 // Format a number with comma and 2 decimal points
 export function formatPrice(cell: CellNumber) {
 	let { value } = cell.cell
-	let formatted = value ? '$' + format(value, 2) : '-'
-	return <div className="text-right">{formatted}</div>
+	return value ? '$' + format(value, 2) : '-'
 }
 
 // Format an integer with comma and 0 decimal points

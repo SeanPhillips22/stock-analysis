@@ -16,6 +16,7 @@ export type DataPointType = {
 	format?: FormatFunction
 	only?: SymbolType
 	sort?: any
+	class?: string
 }
 
 type Props = {
@@ -46,8 +47,8 @@ export const DataPoints: Props = {
 	n: {
 		id: 'n',
 		name: 'Company Name',
-		format: 'string',
-		sort: stringIgnoreCase
+		sort: stringIgnoreCase,
+		class: 'sl'
 	},
 	marketCap: { id: 'marketCap', name: 'Market Cap', format: 'abbreviate' },
 	price: {
@@ -188,13 +189,15 @@ export const DataPoints: Props = {
 	ipp: {
 		id: 'ipp',
 		name: 'IPO Price',
-		format: 'price'
+		format: 'price',
+		class: 'tr'
 	},
 	ippc: {
 		id: 'ippc',
 		name: 'Current Price',
 		colName: 'Current',
-		format: 'price'
+		format: 'price',
+		class: 'tr'
 	},
 	ipr: {
 		id: 'ipr',
