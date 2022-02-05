@@ -29,20 +29,23 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 				</thead>
 				<tbody>
 					{ipos.map((item, index) => {
-						return (
-							<tr
-								key={index}
-								className="border-b border-gray-200 hover:bg-gray-50"
-							>
-								<td className="py-1.5 px-2 border-r border-gray-200 whitespace-nowrap">
-									{item.date}
-								</td>
-								<td className="py-1.5 px-2 border-r border-gray-200">
-									<StockLink symbol={item.symbol} className="bll" />
-								</td>
-								<td className="py-1.5 px-2">{item.name}</td>
-							</tr>
-						)
+						if (item.symbol) {
+							return (
+								<tr
+									key={index}
+									className="border-b border-gray-200 hover:bg-gray-50"
+								>
+									<td className="py-1.5 px-2 border-r border-gray-200 whitespace-nowrap">
+										{item.date}
+									</td>
+									<td className="py-1.5 px-2 border-r border-gray-200">
+										<StockLink symbol={item.symbol} className="bll" />
+									</td>
+									<td className="py-1.5 px-2">{item.name}</td>
+								</tr>
+							)
+						}
+						return null
 					})}
 				</tbody>
 			</table>

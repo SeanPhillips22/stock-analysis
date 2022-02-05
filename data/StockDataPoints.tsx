@@ -1,8 +1,10 @@
 import { DataId } from 'types/DataId'
 import { FormatFunction, IndexType } from 'types/Tables'
 import {
-	number,
-	dateSort
+	numberAbsolute,
+	percentage,
+	dateSort,
+	stringIgnoreCase
 } from 'components/StockScreener/functions/sort/sortFunctions'
 
 type SymbolType = 'stocks' | 'ipo' | 'etf'
@@ -41,7 +43,12 @@ export function getDataPointsArray(type: IndexType, exclude?: DataId[]) {
  */
 export const DataPoints: Props = {
 	s: { id: 's', name: 'Symbol', format: 'linkSymbol' },
-	n: { id: 'n', name: 'Company Name', format: 'string' },
+	n: {
+		id: 'n',
+		name: 'Company Name',
+		format: 'string',
+		sort: stringIgnoreCase
+	},
 	marketCap: { id: 'marketCap', name: 'Market Cap', format: 'abbreviate' },
 	price: {
 		id: 'price',
@@ -60,7 +67,7 @@ export const DataPoints: Props = {
 		name: 'Price Change 1D',
 		colName: '% Change',
 		format: 'colorPercentage',
-		sort: number
+		sort: numberAbsolute
 	},
 	volume: { id: 'volume', name: 'Volume', format: 'integer' },
 	close: {
@@ -86,7 +93,7 @@ export const DataPoints: Props = {
 		name: 'Premarket % Change',
 		colName: '% Change',
 		format: 'colorPercentage',
-		sort: number
+		sort: numberAbsolute
 	},
 	enterpriseValue: {
 		id: 'enterpriseValue',
@@ -193,7 +200,8 @@ export const DataPoints: Props = {
 		id: 'ipr',
 		colName: 'Return',
 		name: 'Return From IPO Price',
-		format: 'colorPercentage'
+		format: 'colorPercentage',
+		sort: percentage
 	},
 	sharesOffered: {
 		id: 'sharesOffered',

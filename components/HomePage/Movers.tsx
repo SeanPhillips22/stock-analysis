@@ -30,36 +30,43 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 
 		return (
 			<>
-				{items.map((item, index) => (
-					<tr
-						key={index}
-						className="border-b border-gray-200 hover:bg-gray-50 transition duration-100"
-					>
-						<td className={cellStyles + ' text-left border-r'}>
-							<StockLink symbol={item.s} />
-						</td>
-						<td
-							className={
-								cellStyles +
-								' text-left border-r max-w-[90px] xs:max-w-[170px] md:max-w-[350px] xl:whitespace-nowrap overflow-hidden overflow-ellipsis'
-							}
-						>
-							{item.n}
-						</td>
+				{items.map((item, index) => {
+					if (item.s) {
+						return (
+							<tr
+								key={index}
+								className="border-b border-gray-200 hover:bg-gray-50 transition duration-100"
+							>
+								<td className={cellStyles + ' text-left border-r'}>
+									<StockLink symbol={item.s} />
+								</td>
+								<td
+									className={
+										cellStyles +
+										' text-left border-r max-w-[90px] xs:max-w-[170px] md:max-w-[350px] xl:whitespace-nowrap overflow-hidden overflow-ellipsis'
+									}
+								>
+									{item.n}
+								</td>
 
-						<td
-							className={
-								cellStyles +
-								' text-right border-r hidden tiny:table-cell'
-							}
-						>
-							${item.p}
-						</td>
-						<td className={cellStyles + ' text-right ' + redOrGreen}>
-							{item.c}%
-						</td>
-					</tr>
-				))}
+								<td
+									className={
+										cellStyles +
+										' text-right border-r hidden tiny:table-cell'
+									}
+								>
+									${item.p}
+								</td>
+								<td
+									className={cellStyles + ' text-right ' + redOrGreen}
+								>
+									{item.c}%
+								</td>
+							</tr>
+						)
+					}
+					return null
+				})}
 			</>
 		)
 	}

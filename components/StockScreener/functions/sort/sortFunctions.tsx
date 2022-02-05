@@ -1,11 +1,29 @@
 import { Row } from 'react-table'
 import { DataId } from 'types/DataId'
 
-export function number(a: Row, b: Row, id: DataId) {
+// Sort a number by absolute value
+// this ignores negative/positive
+export function numberAbsolute(a: Row, b: Row, id: DataId) {
 	let aa = Math.abs(a.values[id])
 	let bb = Math.abs(b.values[id])
 
 	return aa - bb
+}
+
+// Sort a percentage number
+export function percentage(a: Row, b: Row, id: DataId) {
+	let aa = a.values[id]
+	let bb = b.values[id]
+
+	return aa - bb
+}
+
+// Sort a string but ignore case
+export function stringIgnoreCase(a: Row, b: Row, id: DataId) {
+	let aa = a.values[id].toLowerCase()
+	let bb = b.values[id].toLowerCase()
+
+	return aa.localeCompare(bb)
 }
 
 export const priceSort = (a: Row, b: Row) => {
