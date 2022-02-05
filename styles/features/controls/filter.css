@@ -12,4 +12,11 @@
 	.filter input {
 		@apply shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md py-1.5 sm:py-2;
 	}
+
+	/* iOS fix for zoom on input field */
+	@supports (-webkit-touch-callout: none) {
+		.filter input {
+			@apply text-base py-1 sm:py-1.5;
+		}
+	}
 }

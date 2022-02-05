@@ -27,11 +27,4 @@
 	.noring {
 		@apply focus:ring-0 focus:ring-offset-0;
 	}
-
-	/* iOS fix for zoom on input field */
-	@supports (-webkit-touch-callout: none) {
-		input[type='text'] {
-			@apply text-base py-1 sm:py-1.5;
-		}
-	}
 }

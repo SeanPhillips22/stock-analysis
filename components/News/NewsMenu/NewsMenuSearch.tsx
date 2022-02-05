@@ -54,10 +54,9 @@ export function NewsMenuSearch({
 	}
 
 	return (
-		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px]">
+		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px] filter">
 			<input
 				ref={inputRef}
-				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md pr-9"
 				type="text"
 				name="newssearch"
 				id="tag-feat-news-search"
