@@ -153,7 +153,7 @@ export default IpoStatistics
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, news, recent } = await getIpoData('statistics')
 
-	res.setHeader('Cache-Control', 'public, max-age=600')
+	res.setHeader('Cache-Control', 'public, max-age=3600')
 
 	return {
 		props: {

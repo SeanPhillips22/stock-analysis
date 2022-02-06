@@ -135,7 +135,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	response.props.info = response.props[extraFn]
 	delete response.props[extraFn]
 
+	// Cache on the edge
+	let cache = year === '2022' ? 'public, max-age=300' : 'public, max-age=1800'
+	context.res.setHeader('Cache-Control', cache)
+
 	// Return the data to the page
-	context.res.setHeader('Cache-Control', 'public, max-age=60')
 	return response
 }

@@ -54,7 +54,7 @@ export default IpoNews
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, upcoming, recent } = await getIpoData('news')
 
-	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	res.setHeader('Cache-Control', 'public, max-age=60')
 
 	return {
 		props: {
