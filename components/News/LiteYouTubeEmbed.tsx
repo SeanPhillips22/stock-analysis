@@ -1,31 +1,32 @@
 // Adapted from here: https://github.com/ibrahimcesar/react-lite-youtube-embed
 import { useState } from 'react'
+import useInView from 'react-cool-inview'
 
-interface Props {
+type Props = {
 	id: string
 	title: string
 }
 
-export const LiteYouTubeEmbed = ({ id, title }: Props) => {
+export function LiteYouTubeEmbed({ id, title }: Props) {
 	const [iframe, setIframe] = useState(false)
 	const videoId = encodeURIComponent(id)
 
+	// Lazy load the background image
+	// When the div comes into focus, inView becomes true
+	const { observe, inView } = useInView({
+		rootMargin: '300px',
+		unobserveOnEnter: true
+	})
+
 	const videoTitle = title
-	const posterImp = 'hqdefault'
-	const paramsImp = ''
-	const posterUrl = `https://i.ytimg.com/vi/${videoId}/${posterImp}.jpg`
+	const posterUrl = inView
+		? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+		: ''
 
-	const ytUrl = 'https://www.youtube-nocookie.com'
-
-	const iframeSrc = `${ytUrl}/embed/${videoId}?autoplay=1${paramsImp}`
-
-	const onIframeAdded = function () {
-		/* Do Nothing */
-	}
+	const iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`
 
 	const addIframe = () => {
 		if (iframe) return
-		onIframeAdded()
 		setIframe(true)
 	}
 
@@ -34,32 +35,31 @@ export const LiteYouTubeEmbed = ({ id, title }: Props) => {
 	const active = 'yt-lite lyt-activated'
 
 	return (
-		<>
-			<div
-				onClick={addIframe}
-				onKeyDown={event => {
-					if (event.key === 'Enter') {
-						addIframe()
-					}
-				}}
-				className={iframe ? active : inactive}
-				data-title={videoTitle}
-				style={{ backgroundImage: `url(${posterUrl})` }}
-				tabIndex={0}
-			>
-				<div className="lty-playbtn"></div>
-				{iframe && (
-					<iframe
-						title={videoTitle}
-						width="560"
-						height="315"
-						frameBorder="0"
-						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-						allowFullScreen
-						src={iframeSrc}
-					></iframe>
-				)}
-			</div>
-		</>
+		<div
+			ref={observe}
+			onClick={addIframe}
+			onKeyDown={event => {
+				if (event.key === 'Enter') {
+					addIframe()
+				}
+			}}
+			className={iframe ? active : inactive}
+			data-title={videoTitle}
+			style={{ backgroundImage: `url(${posterUrl})` }}
+			tabIndex={0}
+		>
+			<div className="lty-playbtn"></div>
+			{iframe && (
+				<iframe
+					title={videoTitle}
+					width="560"
+					height="315"
+					frameBorder="0"
+					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+					allowFullScreen
+					src={iframeSrc}
+				></iframe>
+			)}
+		</div>
 	)
 }
