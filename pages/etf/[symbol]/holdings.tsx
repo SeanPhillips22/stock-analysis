@@ -9,7 +9,6 @@ import { HoldingsTable } from 'components/Holdings/_HoldingsTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
-import { Sidebar2 } from 'components/Ads/AdSense/Sidebar2'
 
 interface Props {
 	info: Info
@@ -63,7 +62,6 @@ const Holdings = ({ info, data, news }: Props) => {
 								url: `/etf/${info.symbol}/`
 							}}
 						/>
-						{data && data.count > 35 && news?.length > 4 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>

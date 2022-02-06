@@ -18,13 +18,6 @@ class MyDocument extends Document {
 							}}
 						/>
 					)}
-					{/* {process.env.NEXT_PUBLIC_GTM_ID && (
-						<script
-							async
-							src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7702053427535735"
-							crossOrigin="anonymous"
-						></script>
-					)} */}
 				</Head>
 				<body>
 					{process.env.NEXT_PUBLIC_GTM_ID && (

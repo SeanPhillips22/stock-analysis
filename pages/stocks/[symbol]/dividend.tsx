@@ -11,7 +11,6 @@ import { HistoryTable } from 'components/Dividend/HistoryTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { DividendChart } from 'components/Dividend/DividendChart'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
-import { Sidebar2 } from 'components/Ads/AdSense/Sidebar2'
 import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
 
 interface Props {
@@ -66,7 +65,6 @@ export default function Dividend({ info, data, news }: Props) {
 								url: `/stocks/${info.symbol}/`
 							}}
 						/>
-						{data.history.length > 15 && news?.length > 4 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>

@@ -9,7 +9,6 @@ import { InfoBox } from 'components/InfoBox'
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
-import { Sidebar2 } from 'components/Ads/AdSense/Sidebar2'
 import { Layout } from 'components/Layout/_Layout'
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { TableContextProvider } from 'components/StockTable/TableContext'
@@ -106,7 +105,6 @@ export default function IpoYear(props: Props) {
 									url: '/ipos/news/'
 								}}
 							/>
-							<Sidebar2 />
 						</aside>
 					</div>
 				</div>
