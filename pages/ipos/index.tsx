@@ -100,6 +100,6 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	let extras = ['getIpoCalendarDataMin', 'getIpoNewsMin']
 	const response = await getSelect(query, 'histip', true, extras)
 
-	res.setHeader('Cache-Control', 'public, max-age=300')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=300')
 	return response
 }

@@ -81,7 +81,7 @@ export default IpoCalendar
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, recent, filings } = await getIpoData('calendar')
 
-	res.setHeader('Cache-Control', 'public, max-age=60')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

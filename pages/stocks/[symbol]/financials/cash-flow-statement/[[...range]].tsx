@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 		range
 	)
 
-	context.res.setHeader('Cache-Control', 'public, max-age=1800')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 
 	return data
 }

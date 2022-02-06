@@ -72,6 +72,6 @@ export default function GainersPage({ data, tradingTimestamps }: Props) {
 export const getServerSideProps: GetServerSideProps = async context => {
 	let extras = ['tradingTimestamps']
 	const data = await getSelect(query, 'stocks', true, extras)
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 	return data
 }

@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const range = context?.params?.range as Range
 	const data = await getStockFinancialsSSR('income-statement', symbol, range)
 
-	context.res.setHeader('Cache-Control', 'public, max-age=1800')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 
 	return data
 }
