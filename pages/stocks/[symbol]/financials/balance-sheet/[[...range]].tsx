@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const range = (context?.params?.range as Range) || 'annual'
 	const data = await getStockFinancialsSSR('balance-sheet', symbol, range)
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=1800')
 
 	return data
 }
