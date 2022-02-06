@@ -147,7 +147,7 @@ export const FinancialTable = ({
 
 	const RowTitle = forwardRef<HTMLSpanElement, RowTitleProps>((props, ref) => {
 		const { title, indent } = props
-		const margin = indent ? ' ml-3' : ''
+		const margin = indent ? 'ml-3' : ''
 
 		return (
 			<span ref={ref} className={margin}>
@@ -222,15 +222,6 @@ export const FinancialTable = ({
 				const prev = format === 'growth' ? rowdata[index + offset] : null
 				const rev = format === 'margin' ? revenuedata[index] : null
 
-				const titleTag = formatCell({
-					type: row.format || 'standard',
-					current: cell,
-					previous: prev,
-					revenue: rev,
-					divider: 1,
-					isTTMcolumn
-				})
-
 				const cellContent = formatCell({
 					type: row.format || 'standard',
 					current: cell,
@@ -240,24 +231,18 @@ export const FinancialTable = ({
 					isTTMcolumn
 				})
 
-				const cellClass = () => {
-					if (format === 'growth' && cellContent) {
-						return redOrGreen(cellContent, id)
-					}
-					return ''
-				}
+				const cellClass =
+					format === 'growth' && cellContent
+						? redOrGreen(cellContent, id)
+						: undefined
 
 				if (cell != 0 && cellContent != '-') {
 					total++
 				}
 
 				return (
-					<td key={index} className={cellClass()}>
-						{cellContent !== '-' ? (
-							<span title={titleTag}>{cellContent}</span>
-						) : (
-							'-'
-						)}
+					<td key={index} className={cellClass}>
+						{cellContent}
 					</td>
 				)
 			} else {

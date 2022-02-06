@@ -136,6 +136,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	delete response.props[extraFn]
 
 	// Return the data to the page
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=60')
 	return response
 }
