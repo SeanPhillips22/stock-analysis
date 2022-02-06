@@ -1,6 +1,7 @@
 import { authState } from 'state/authState'
 import { navState } from 'state/navState'
 import { noAds } from '../noAds'
+import { AdsenseScript } from './AdsenseScript'
 import { useLoadAdsense } from './useLoadAdsense'
 
 export function Sidebar2() {
@@ -15,12 +16,15 @@ export function Sidebar2() {
 
 	if (!checked || (checked && !isPro)) {
 		return (
-			<ins
-				className="adsbygoogle sb-2"
-				data-ad-client="ca-pub-7702053427535735"
-				data-ad-slot="4508581254"
-				data-full-width-responsive="false"
-			></ins>
+			<>
+				<ins
+					className="adsbygoogle sb-2"
+					data-ad-client="ca-pub-7702053427535735"
+					data-ad-slot="4508581254"
+					data-full-width-responsive="false"
+				></ins>
+				<AdsenseScript />
+			</>
 		)
 	}
 

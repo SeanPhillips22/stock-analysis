@@ -1,6 +1,7 @@
 import { authState } from 'state/authState'
 import { navState } from 'state/navState'
 import { noAds } from '../noAds'
+import { AdsenseScript } from './AdsenseScript'
 import { useLoadAdsense } from './useLoadAdsense'
 
 export function Mobile1() {
@@ -15,12 +16,15 @@ export function Mobile1() {
 
 	if (!checked || (checked && !isPro)) {
 		return (
-			<ins
-				className="adsbygoogle m-1"
-				data-ad-client="ca-pub-7702053427535735"
-				data-ad-slot="9694172988"
-				data-full-width-responsive="false"
-			></ins>
+			<>
+				<ins
+					className="adsbygoogle m-1"
+					data-ad-client="ca-pub-7702053427535735"
+					data-ad-slot="9694172988"
+					data-full-width-responsive="false"
+				></ins>
+				<AdsenseScript />
+			</>
 		)
 	}
 
