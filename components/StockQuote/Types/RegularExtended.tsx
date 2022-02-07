@@ -1,9 +1,11 @@
-import { useQuote } from 'hooks/useQuote'
-import { Info } from 'types/Info'
+import { Quote } from 'types/Quote'
 import { changeColor } from '../quote.functions'
 
-export function RegularExtended({ info }: { info: Info }) {
-	const quote = useQuote(info)
+type Props = {
+	quote: Quote
+}
+
+export function RegularExtended({ quote }: Props) {
 	const color = changeColor(Number(quote.c))
 
 	return (

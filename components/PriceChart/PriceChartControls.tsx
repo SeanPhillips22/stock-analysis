@@ -1,17 +1,23 @@
 import { Dispatch, SetStateAction } from 'react'
 
-interface Props {
+type Props = {
 	chartTime: string
 	setChartTime: Dispatch<SetStateAction<string>>
+	setInitialFetch: Dispatch<SetStateAction<boolean>>
 }
 
-export const Controls = ({ chartTime, setChartTime }: Props) => {
+export function Controls({ chartTime, setChartTime, setInitialFetch }: Props) {
+	function change(range: string) {
+		setChartTime(range)
+		setInitialFetch(false)
+	}
+
 	return (
 		<ul className="price-chart">
 			<li>
 				<button
 					className={chartTime === '1D' ? 'active' : 'inactive'}
-					onClick={() => setChartTime('1D')}
+					onClick={() => change('1D')}
 				>
 					<span>1D</span>
 					<span>1 Day</span>
@@ -20,7 +26,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 			<li>
 				<button
 					className={chartTime === '5D' ? 'active' : 'inactive'}
-					onClick={() => setChartTime('5D')}
+					onClick={() => change('5D')}
 				>
 					<span>5D</span>
 					<span>5 Days</span>
@@ -29,7 +35,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 			<li>
 				<button
 					className={chartTime === '1M' ? 'active' : 'inactive'}
-					onClick={() => setChartTime('1M')}
+					onClick={() => change('1M')}
 				>
 					<span>1M</span>
 					<span>1 Month</span>
@@ -38,7 +44,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 			<li>
 				<button
 					className={chartTime === 'YTD' ? 'active' : 'inactive'}
-					onClick={() => setChartTime('YTD')}
+					onClick={() => change('YTD')}
 				>
 					YTD
 				</button>
@@ -46,7 +52,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 			<li>
 				<button
 					className={chartTime === '1Y' ? 'active' : 'inactive'}
-					onClick={() => setChartTime('1Y')}
+					onClick={() => change('1Y')}
 				>
 					<span>1Y</span>
 					<span>1 Year</span>
@@ -55,7 +61,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 			<li>
 				<button
 					className={chartTime === '5Y' ? 'active' : 'inactive'}
-					onClick={() => setChartTime('5Y')}
+					onClick={() => change('5Y')}
 				>
 					<span>5Y</span>
 					<span>5 Years</span>
@@ -64,7 +70,7 @@ export const Controls = ({ chartTime, setChartTime }: Props) => {
 			<li>
 				<button
 					className={chartTime === 'MAX' ? 'active' : 'inactive'}
-					onClick={() => setChartTime('MAX')}
+					onClick={() => change('MAX')}
 				>
 					Max
 				</button>

@@ -1,12 +1,14 @@
-import { useQuote } from 'hooks/useQuote'
-import { Info } from 'types/Info'
 import { changeColor } from '../quote.functions'
 import { MoonIcon } from 'components/Icons/Moon'
 import { SunIcon } from 'components/Icons/Sun'
 import { usePulsingQuote } from '../usePulsingQuote'
+import { Quote } from 'types/Quote'
 
-export function ExtendedQuote({ info }: { info: Info }) {
-	const quote = useQuote(info)
+type Props = {
+	quote: Quote
+}
+
+export function ExtendedQuote({ quote }: Props) {
 	const color = changeColor(Number(quote.ec))
 	const { animation } = usePulsingQuote(quote.ep)
 

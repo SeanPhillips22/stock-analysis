@@ -1,10 +1,12 @@
-import { useQuote } from 'hooks/useQuote'
-import { Info } from 'types/Info'
+import { Quote } from 'types/Quote'
 import { changeColor } from '../quote.functions'
 import { usePulsingQuote } from '../usePulsingQuote'
 
-export function RegularQuote({ info }: { info: Info }) {
-	const quote = useQuote(info)
+type Props = {
+	quote: Quote
+}
+
+export function RegularQuote({ quote }: Props) {
 	const color = changeColor(Number(quote.c))
 	const market = quote.ms == 'open' ? 'Market open' : 'Market closed'
 	const { animation } = usePulsingQuote(quote.p)

@@ -12,14 +12,16 @@ import { NewsArea } from 'components/Overview/NewsArea'
 import { HoldingsWidget } from 'components/Overview/HoldingsWidget'
 import { DividendWidget } from 'components/Overview/DividendWidget'
 import { Sidebar1All } from 'components/Ads/AdSense/Sidebar1All'
+import { InitialData } from 'types/Charts'
 
-interface Props {
+type Props = {
 	info: Info
 	data: Overview
 	news: { data: News[]; updated: number }
+	chart: InitialData
 }
 
-const EtfOverview = ({ info, data, news }: Props) => {
+export default function EtfOverview({ info, data, news, chart }: Props) {
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/`}>
 			<SEO
@@ -29,7 +31,7 @@ const EtfOverview = ({ info, data, news }: Props) => {
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
-					<PriceChart info={info} />
+					<PriceChart info={info} initial={chart} />
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">
 					<InfoTable data={data} />
@@ -60,7 +62,6 @@ const EtfOverview = ({ info, data, news }: Props) => {
 		</Stock>
 	)
 }
-export default EtfOverview
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string

@@ -65,30 +65,13 @@ export const Chart = ({
 		}
 	}, [chartData, chartTime, quote])
 
-	const timeAxis = useMemo(
-		() =>
-			chartData.map(item => {
-				return item.t
-			}),
-		[chartData]
-	)
-
-	const priceAxis = useMemo(
-		() =>
-			chartData.map(item => {
-				return item.c
-			}),
-		[chartData]
-	)
-
-	const changeWithoutComma = Number(quote.cl.replace(',', ''))
+	const timeAxis = useMemo(() => chartData.map(item => item.t), [chartData])
+	const priceAxis = useMemo(() => chartData.map(item => item.c), [chartData])
+	const prevClose = Number(quote.cl.replace(',', ''))
 
 	const prevCloseLine = useMemo(
-		() =>
-			chartData.map(() => {
-				return changeWithoutComma
-			}),
-		[chartData, changeWithoutComma]
+		() => chartData.map(() => prevClose),
+		[chartData, prevClose]
 	)
 
 	// Chart.js causes critical errors on older Safari versions

@@ -10,15 +10,15 @@ export function LiveQuote({ info }: { info: Info }) {
 	if (quote.e) {
 		return (
 			<section className="mb-5 flex flex-row items-end space-x-6 lg:space-x-4">
-				<RegularExtended info={info} />
-				<ExtendedQuote info={info} />
+				<RegularExtended quote={quote} />
+				<ExtendedQuote quote={quote} />
 			</section>
 		)
 	}
 
 	return (
 		<section className="mb-5">
-			<RegularQuote info={info} />
+			<RegularQuote quote={quote} />
 		</section>
 	)
 }
