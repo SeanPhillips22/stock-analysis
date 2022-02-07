@@ -1,3 +1,4 @@
+import { ChartDataPoint } from 'types/Charts'
 import { Info } from 'types/Info'
 
 // Make API url
@@ -61,4 +62,12 @@ export function UnavailableIpo({ info }: { info: Info }) {
 			</div>
 		</div>
 	)
+}
+
+export function getPriceChange(data?: ChartDataPoint[]) {
+	if (!data) return 0
+	const first = data[0]?.c
+	const last = data[data.length - 1]?.c
+
+	return first ? last / first - 1 : 0
 }

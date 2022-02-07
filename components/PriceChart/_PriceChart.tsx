@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Controls } from './PriceChartControls'
 import { PriceChange } from './PriceChange'
 import { Info } from 'types/Info'
-import { translateTime, UnavailableIpo } from './PriceChart.functions'
+import {
+	getPriceChange,
+	translateTime,
+	UnavailableIpo
+} from './PriceChart.functions'
 import { Unavailable } from 'components/Unavailable'
 import { useChart } from 'hooks/useChart'
 import { useQuote } from 'hooks/useQuote'
@@ -54,6 +58,11 @@ export function PriceChart({ info, initial }: Props) {
 		}
 	}, [data, initialFetch, isFetching])
 
+	const change = useMemo(() => {
+		if (chartTime === '1D') return quote.cdr
+		else return getPriceChange(data)
+	}, [data, quote.cdr, chartTime])
+
 	if (info.state === 'upcomingipo') {
 		return <UnavailableIpo info={info} />
 	}
@@ -88,7 +97,7 @@ export function PriceChart({ info, initial }: Props) {
 						time={chartTime}
 						symbol={info.symbol}
 						close={quote.cl}
-						change={quote.cdr}
+						change={change}
 					/>
 				) : (
 					<div className="pt-1.5 h-full">

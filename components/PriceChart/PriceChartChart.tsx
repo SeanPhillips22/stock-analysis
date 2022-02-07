@@ -44,7 +44,7 @@ ReactChart.defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 export function Chart({ data, time, symbol, close, change }: Props) {
-	const [count] = useState(data.length)
+	const count = data.length
 	const [lineColor] = useState(
 		change > 0
 			? 'rgba(4, 120, 87, 1)'
