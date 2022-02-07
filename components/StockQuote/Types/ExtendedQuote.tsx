@@ -3,29 +3,31 @@ import { MoonIcon } from 'components/Icons/Moon'
 import { SunIcon } from 'components/Icons/Sun'
 import { usePulsingQuote } from '../usePulsingQuote'
 import { Quote } from 'types/Quote'
+import { useState } from 'react'
 
 type Props = {
 	quote: Quote
 }
 
 export function ExtendedQuote({ quote }: Props) {
-	const color = changeColor(Number(quote.ec))
-	const { animation } = usePulsingQuote(quote.ep)
+	const [q] = useState(quote)
+	const color = changeColor(Number(q.ec))
+	const { animation } = usePulsingQuote(q.ep)
 
 	return (
 		<div className="quote ext">
-			<div className={`price-ext${animation}`}>{quote.epd}</div>{' '}
-			<div className={`priceChange-ext ${color}`}>
+			<div className={`p-ext${animation}`}>{q.epd}</div>{' '}
+			<div className={`pc-ext ${color}`}>
 				<span
 					className={`${color}${animation}`}
-				>{`${quote.ec} (${quote.ecp}%)`}</span>
+				>{`${q.ec} (${q.ecp}%)`}</span>
 			</div>
-			<div className="mt-1 text-gray-700 sm:flex text-xxs xs:text-tiny">
-				<span className="flex items-center">
-					{quote.es === 'Pre-market' ? <SunIcon /> : <MoonIcon />}{' '}
-					<span className="ml-1 font-semibold">{quote.es}:</span>
+			<div className="und">
+				<span className="sp1">
+					{q.es === 'Pre-market' ? <SunIcon /> : <MoonIcon />}{' '}
+					<span className="sp2">{q.es}:</span>
 				</span>
-				<span className="sm:ml-1">{quote.eu}</span>
+				<span className="sp3">{q.eu}</span>
 			</div>
 		</div>
 	)

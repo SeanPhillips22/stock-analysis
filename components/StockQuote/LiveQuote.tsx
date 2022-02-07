@@ -9,16 +9,16 @@ export function LiveQuote({ info }: { info: Info }) {
 
 	if (quote.e) {
 		return (
-			<section className="mb-5 flex flex-row items-end space-x-6 lg:space-x-4">
+			<div className="ext-wrap">
 				<RegularExtended quote={quote} />
 				<ExtendedQuote quote={quote} />
-			</section>
+			</div>
 		)
 	}
 
 	return (
-		<section className="mb-5">
+		<div className="mb-5">
 			<RegularQuote quote={quote} />
-		</section>
+		</div>
 	)
 }

@@ -4,24 +4,68 @@
 */
 
 @layer components {
-	.quote .price {
+	.quote .p {
 		@apply text-4xl font-bold;
 	}
 
-	.quote .priceChange {
+	.quote .pc {
 		@apply text-2xl font-semibold inline-block;
 	}
 
+	.quote .u {
+		@apply text-sm text-gray-700 flex items-center mt-1;
+	}
+
 	/* EXTENDED */
+	/* Wrap the regular and extended quote */
+	.ext-wrap {
+		@apply mb-5 flex flex-row items-end space-x-6 lg:space-x-4;
+	}
+
 	.quote.ext {
 		@apply border-l border-gray-200 pl-5;
 	}
 
-	.quote .price-ext {
+	.quote .p-ext {
 		@apply block sm:inline text-[1.7rem] leading-5 font-semibold text-gray-700;
 	}
 
-	.quote .priceChange-ext {
+	.quote .pc-ext {
 		@apply block sm:inline text-sm xs:text-base sm:text-lg mt-1.5 sm:mt-0;
+	}
+
+	.quote.ext .und {
+		@apply mt-1 text-gray-700 sm:flex text-xxs xs:text-tiny;
+	}
+
+	.quote.ext .sp1 {
+		@apply flex items-center;
+	}
+	.quote.ext .sp2 {
+		@apply ml-1 font-semibold;
+	}
+	.quote.ext .sp3 {
+		@apply sm:ml-1;
+	}
+
+	/* Extended regular */
+	.quote.er {
+		@apply max-w-[50%];
+	}
+
+	.quote.er .pd {
+		@apply block sm:inline text-4xl font-bold;
+	}
+
+	.quote.er .pc {
+		@apply block sm:inline sm:ml-1 text-lg xs:text-xl sm:text-2xl font-semibold;
+	}
+
+	.quote.er .und {
+		@apply text-xxs xs:text-tiny bp:text-sm text-gray-700 mt-0.5;
+	}
+
+	.quote.er .und span {
+		@apply block sm:inline font-semibold;
 	}
 }
