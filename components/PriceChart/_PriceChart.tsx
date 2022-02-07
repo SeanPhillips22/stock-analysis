@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Controls } from './PriceChartControls'
 import { PriceChange } from './PriceChange'
-import { Chart } from './PriceChartChart'
 import { Info } from 'types/Info'
-import {
-	translateTime,
-	UnavailableIpo,
-	getChartColor
-} from './PriceChart.functions'
+import { translateTime, UnavailableIpo } from './PriceChart.functions'
 import { Unavailable } from 'components/Unavailable'
 import { useChart } from 'hooks/useChart'
 import { useQuote } from 'hooks/useQuote'
 import { LoadingLight } from 'components/Loading/LoadingLight'
 import { InitialData } from 'types/Charts'
+import { DisplayChart } from './DisplayChart'
 
 type Props = {
 	info: Info
@@ -23,11 +19,14 @@ export function PriceChart({ info, initial }: Props) {
 	const [chartTime, setChartTime] = useState('1D')
 	const [message, setMessage] = useState('')
 	const [initialFetch, setInitialFetch] = useState(true)
+	const [spinner, setSpinner] = useState(false)
 
 	const quote = useQuote(info)
 	const { data, isFetching } = useChart(info, chartTime, initial)
 
 	// Handle cases when the chart is unavailable
+	// if 1D fails, try 1Y chart data instead
+	// if fails completely, show unavailable message
 	useEffect(() => {
 		setMessage('')
 		if (info.state === 'upcomingipo') return
@@ -44,40 +43,19 @@ export function PriceChart({ info, initial }: Props) {
 		}
 	}, [data, chartTime, info.state, isFetching, initialFetch])
 
-	const changeProps = getChartColor(data, chartTime, quote)
+	// Decide whether to show spinner, chart or unavailable message
+	// no spinner on first load if initialData was passed to the chart
+	useEffect(() => {
+		if (isFetching) {
+			if (initialFetch && data && data.length) setSpinner(false)
+			else setSpinner(true)
+		} else if (data && data.length) {
+			setSpinner(false)
+		}
+	}, [data, initialFetch, isFetching])
 
 	if (info.state === 'upcomingipo') {
 		return <UnavailableIpo info={info} />
-	}
-
-	// Display the chart
-	function DisplayChart() {
-		return (
-			<Chart
-				key={Date.now()}
-				chartData={data}
-				chartTime={chartTime}
-				info={info}
-				quote={quote}
-				changeProps={changeProps}
-			/>
-		)
-	}
-
-	// Decide whether to show the chart, spinner or error message
-	function ChartOrSpinner() {
-		if (isFetching) {
-			if (initialFetch && data && data.length) return <DisplayChart />
-			else return <LoadingLight />
-		}
-
-		if (data && data.length) return <DisplayChart />
-		else
-			return (
-				<div className="pt-1.5 h-full">
-					<Unavailable message="No data available" />
-				</div>
-			)
 	}
 
 	return (
@@ -102,7 +80,21 @@ export function PriceChart({ info, initial }: Props) {
 						<Unavailable message={message} />
 					</div>
 				)}
-				<ChartOrSpinner />
+				{spinner ? (
+					<LoadingLight />
+				) : data?.length ? (
+					<DisplayChart
+						data={data}
+						time={chartTime}
+						symbol={info.symbol}
+						close={quote.cl}
+						change={quote.cdr}
+					/>
+				) : (
+					<div className="pt-1.5 h-full">
+						<Unavailable message="No data available" />
+					</div>
+				)}
 			</div>
 		</div>
 	)

@@ -3,6 +3,7 @@ export interface Quote {
 	pd: string // price formatted for display
 	c: string // price change
 	cp: string // price change percentage
+	cdr: number // price change direction
 	cl: string // previous close
 	o: string // day's open
 	h: string // day's high

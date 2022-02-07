@@ -4,6 +4,24 @@
 */
 
 @layer components {
+	/* Colors */
+	.qg {
+		@apply text-green-700;
+	}
+
+	span.qg::before {
+		content: '+';
+	}
+
+	.qr {
+		@apply text-red-600;
+	}
+
+	.qgr {
+		@apply text-gray-800;
+	}
+
+	/* Regular hours quote */
 	.quote .p {
 		@apply text-4xl font-bold;
 	}
