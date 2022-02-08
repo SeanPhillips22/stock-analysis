@@ -28,6 +28,7 @@ export default function EtfOverview({ info, data, news, chart }: Props) {
 				title={`${info.ticker} ETF Stock Price, Quote & Overview`}
 				description={`Get a real-time stock price quote for ${info.ticker} (${info.name}). Also includes news, ETF details and other investing information.`}
 				canonical={`/etf/${info.symbol}/`}
+				preconnect="https://api.stockanalysis.com"
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
