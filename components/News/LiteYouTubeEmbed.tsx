@@ -20,7 +20,7 @@ export function LiteYouTubeEmbed({ id, title }: Props) {
 
 	const videoTitle = title
 	const posterUrl = inView
-		? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+		? `https://img.stockanalysis.com/vi/${videoId}/hqdefault.jpg`
 		: ''
 
 	const iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`
