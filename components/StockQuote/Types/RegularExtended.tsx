@@ -1,12 +1,18 @@
 import { Quote } from 'types/Quote'
-import { useQuoteColor } from '../useQuoteColor'
 
 type Props = {
 	quote: Quote
 }
 
+/* The regular quote price when the extended price is also showing */
 export function RegularExtended({ quote }: Props) {
-	const color = useQuoteColor(Number(quote.ec))
+	// Decide which color to show
+	let change = Number(quote.c)
+	let color = 'qgr'
+	if (!isNaN(change)) {
+		if (change > 0) color = 'qg'
+		else if (change < 0) color = 'qr'
+	}
 
 	return (
 		<div className="quote er">
