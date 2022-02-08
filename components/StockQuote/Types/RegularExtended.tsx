@@ -16,10 +16,8 @@ export function RegularExtended({ quote }: Props) {
 
 	return (
 		<div className="quote er">
-			<div className="pd">{quote.pd}</div>
-			<div className="pc">
-				<span className={color}>{`${quote.c} (${quote.cp}%)`}</span>
-			</div>
+			<div className="p">{quote.pd}</div>
+			<div className={`pc ${color}`}>{`${quote.c} (${quote.cp}%)`}</div>
 			<div className="und">
 				<span>At close:</span> {quote.u}
 			</div>
