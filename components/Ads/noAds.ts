@@ -9,25 +9,7 @@ const NO_ADS = [
 	'subscribe'
 ]
 
-const NO_ADS_RELAXED = [
-	'login',
-	'pro',
-	'contact',
-	'terms-of-use',
-	'apis',
-	'subscribe'
-]
-
 export function noAds(path: string | null) {
-	if (typeof window === 'undefined') return true
 	if (process.env.NODE_ENV === 'development') return true
-
 	return path ? NO_ADS.includes(path) : false
-}
-
-export function noAdsRelaxed(path: string | null) {
-	if (typeof window === 'undefined') return true
-	if (process.env.NODE_ENV === 'development') return true
-
-	return path ? NO_ADS_RELAXED.includes(path) : false
 }
