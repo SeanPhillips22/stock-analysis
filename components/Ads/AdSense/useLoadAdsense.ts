@@ -38,10 +38,10 @@ export function useLoadAdsense() {
 				clearInterval(interval)
 			}
 
-			// stop after 20 attempts (6 seconds)
+			// stop after 20 attempts (4 seconds)
 			// usually this works on the first attempt
 			if (count === 20) clearInterval(interval)
-		}, 300)
+		}, 200)
 
 		return () => clearInterval(interval)
 		// eslint-disable-next-line react-hooks/exhaustive-deps

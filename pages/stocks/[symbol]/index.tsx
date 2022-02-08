@@ -37,6 +37,7 @@ export default function StockOverview({ info, data, news, chart }: Props) {
 				title={`${info.nameFull} (${info.ticker}) Stock Price, Quote & News`}
 				description={description}
 				canonical={`/stocks/${symbol}`}
+				preconnect={info.isIPO ? null : 'https://api.stockanalysis.com'}
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
