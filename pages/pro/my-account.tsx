@@ -59,7 +59,7 @@ export default function MyAccount() {
 		<>
 			<SEO title="My Account" canonical="/pro/my-account/" noindex={true} />
 			<CrispChat />
-			<Layout>
+			<Layout url="/pro/my-account/">
 				<div className="max-w-3xl mx-auto px-4 xs:px-6 py-8 xs:py-12 space-y-6 xs:space-y-8">
 					{isLoggedIn ? (
 						<>

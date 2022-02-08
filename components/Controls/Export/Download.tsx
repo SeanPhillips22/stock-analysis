@@ -1,5 +1,5 @@
 import ExcellentExport from 'excellentexport'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import {
 	extractFinancialValues,
 	extractTextFromHTML,
@@ -21,7 +21,7 @@ export default function Download({
 	fileName,
 	returnData
 }: Props) {
-	const path = navState(state => state.path)
+	const { path } = useLayoutContext()
 
 	let fn = fileName
 		? fileName

@@ -22,7 +22,7 @@ export const AllPressReleases = ({ data, other }: Props) => {
 				description="Press releases for publicly traded companies on the US stock market. Includes important company events, earnings releases and more."
 				canonical="/news/press-releases/"
 			/>
-			<Layout>
+			<Layout url="/news/press-releases/">
 				<div className="contain pb-0">
 					<Breadcrumbs url="/news/press-releases/" />
 					<h1 className="hh1">Press Releases</h1>

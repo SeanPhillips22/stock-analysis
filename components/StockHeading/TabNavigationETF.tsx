@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 
 type Props = {
 	symbol: string
 }
 
 export const TabNavigationETF = ({ symbol }: Props) => {
-	const path = navState(state => state.path)
+	const { path } = useLayoutContext()
 
 	return (
 		<nav className="border-b-2 border-blue-brand_sharp w-full">

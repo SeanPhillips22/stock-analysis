@@ -44,7 +44,7 @@ export default function StockScreenerPage() {
 				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
 				canonical="/screener/stock/"
 			/>
-			<ScreenerLayout>
+			<ScreenerLayout url="/screener/stock/">
 				<Screener />
 			</ScreenerLayout>
 		</>

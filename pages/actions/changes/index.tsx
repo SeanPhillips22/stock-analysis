@@ -46,7 +46,7 @@ export const ActionsChanges = ({ data }: ActionProps) => {
 				description="A list of recent and historical stock ticker symbol changes. It is updated daily, with history that goes all the way back to 1998."
 				canonical="/actions/changes/"
 			/>
-			<ActionsLayout>
+			<ActionsLayout url="/actions/changes/">
 				<ActionsTable
 					key="Changes"
 					title="Recent Stock Symbol Changes"

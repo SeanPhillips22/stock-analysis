@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { authState } from 'state/authState'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { noAds } from '../noAds'
 
 // declare adsbygoogle to prevent type error
@@ -21,7 +21,7 @@ function loadAdsense() {
 }
 
 export function useLoadAdsense() {
-	const path = navState(state => state.path)
+	const { path } = useLayoutContext()
 	const isPro = authState(state => state.isPro)
 
 	useEffect(() => {

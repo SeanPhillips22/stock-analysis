@@ -1,5 +1,5 @@
 import { authState } from 'state/authState'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { noAds } from '../noAds'
 import { AdsenseScript } from './AdsenseScript'
 import { useLoadAdsense } from './useLoadAdsense'
@@ -11,7 +11,7 @@ import { useLoadAdsense } from './useLoadAdsense'
  * desktop: rectangle
  */
 export function Sidebar1All() {
-	const path = navState(state => state.path)
+	const { path } = useLayoutContext()
 	const checked = authState(state => state.checked)
 	const isPro = authState(state => state.isPro)
 	useLoadAdsense()

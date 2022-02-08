@@ -38,7 +38,7 @@ export default function RecentIpos(props: Props) {
 				description="Detailed information the last 200 IPOs (initial public offerings) on the stock market. Includes IPO prices, dates, total returns and more."
 				canonical="/ipos/"
 			/>
-			<Layout>
+			<Layout url="/ipos/">
 				<div className="contain ipos-recent">
 					<Breadcrumbs url="/ipos/" />
 					<h1 className="hh1">Recent IPOs</h1>

@@ -28,7 +28,7 @@ export function IpoFilings({ data, news, recent }: Props) {
 				description="A list of all stocks that have filed for an initial public offering (IPO) on the US stock market, but have not set an estimated IPO date yet."
 				canonical="/ipos/filings/"
 			/>
-			<Layout>
+			<Layout url="/ipos/filings/">
 				<div className="contain">
 					<Breadcrumbs url="/ipos/filings/" />
 					<h1 className="hh1">IPO Filings</h1>

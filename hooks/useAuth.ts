@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { supabase } from 'functions/supabase'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { authState } from 'state/authState'
-import { navState } from 'state/navState'
 
 export function useAuth() {
 	const user = authState(state => state.user)
@@ -15,7 +15,7 @@ export function useAuth() {
 	const setChecked = authState(state => state.setChecked)
 	const checking = authState(state => state.checking)
 	const setChecking = authState(state => state.setChecking)
-	const route = navState(state => state.route)
+	const router = useRouter()
 
 	useEffect(() => {
 		// subscribe to login and logout events
@@ -127,7 +127,7 @@ export function useAuth() {
 	}
 
 	// If there is a login error, redirect to the login page and show an error message
-	if (route === '/#error_code=404&error_description=User+not+found') {
+	if (router.asPath === '/#error_code=404&error_description=User+not+found') {
 		if (typeof window !== 'undefined') {
 			window.location.href = '/login/?error=Login+failed'
 		}

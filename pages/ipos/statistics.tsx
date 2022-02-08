@@ -34,7 +34,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 				description="Statistics and charts for initial public offerings (IPOs) on the US stock market. Annual data is available from 2000-2022 and monthly data for 2019-2022."
 				canonical="/ipos/statistics/"
 			/>
-			<Layout>
+			<Layout url="/ipos/statistics/">
 				<div className="contain">
 					<Breadcrumbs url="/ipos/statistics/" />
 					<h1 className="hh1">IPO Statistics</h1>

@@ -22,7 +22,7 @@ export const AllStockNews = ({ data, other }: Props) => {
 				description="The latest news on individual stocks on the US stock market, gathered from trusted finance and investing websites."
 				canonical="/news/all-stocks/"
 			/>
-			<Layout>
+			<Layout url="/news/all-stocks/">
 				<div className="contain pb-0">
 					<Breadcrumbs url="/news/all-stocks/" />
 					<h1 className="hh1">All Stock News</h1>

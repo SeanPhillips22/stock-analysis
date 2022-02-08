@@ -11,7 +11,7 @@ export function MarketsLayout({ children }: Props) {
 	const { page } = usePageContext()
 
 	return (
-		<Layout>
+		<Layout url={page.path}>
 			<SEO
 				title={page.metaTitle}
 				description={page.metaDescription}

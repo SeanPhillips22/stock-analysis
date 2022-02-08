@@ -6,12 +6,13 @@ import { Layout } from 'components/Layout/_Layout'
 
 type Props = {
 	children: ReactNode
+	url: string
 }
 
-export function ActionsLayout({ children }: Props) {
+export function ActionsLayout({ children, url }: Props) {
 	return (
 		<>
-			<Layout>
+			<Layout url={url}>
 				<div className="contain py-5 xs:py-6">
 					<h1 className="hh1">Corporate Actions</h1>
 					<ActionsNavigation />

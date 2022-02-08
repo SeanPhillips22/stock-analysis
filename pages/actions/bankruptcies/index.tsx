@@ -36,7 +36,7 @@ export const ActionsBankruptcies = ({ data }: ActionProps) => {
 				description="A list of recent and historical bankruptcy liquidations of public companies listed on the US stock market."
 				canonical="/actions/bankruptcies/"
 			/>
-			<ActionsLayout>
+			<ActionsLayout url="/actions/bankruptcies/">
 				<ActionsTable
 					key="Bankruptcies"
 					title="Recent Bankruptcies"

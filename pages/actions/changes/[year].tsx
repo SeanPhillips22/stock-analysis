@@ -48,7 +48,7 @@ export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 				description={`A list of all stock ticker symbol changes in ${year}, including all public companies listed on the main US exchanges.`}
 				canonical={`/actions/changes/${year}/`}
 			/>
-			<ActionsLayout>
+			<ActionsLayout url={`/actions/changes/${year}/`}>
 				<ActionsTable
 					key={`Changes-${year}`}
 					title={`${year} Stock Symbol Changes`}

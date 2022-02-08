@@ -58,7 +58,7 @@ export const ActionsSpinoffsYear = ({ year, data }: ActionProps) => {
 				description={`A list of all US-listed public company stock spinoffs in the year 2021. It includes common shares listed on the NYSE and NASDAQ.`}
 				canonical={`/actions/spinoffs/${year}/`}
 			/>
-			<ActionsLayout>
+			<ActionsLayout url={`/actions/spinoffs/${year}/`}>
 				<ActionsTable
 					key={`Spinoffs-${year}`}
 					title={`${year} Stock Spinoffs`}

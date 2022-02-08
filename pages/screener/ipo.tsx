@@ -44,7 +44,7 @@ export default function IpoScreenerPage() {
 				description="An IPO screening tool to search, filter and compare all upcoming IPOs on the US stock market."
 				canonical="/screener/ipo/"
 			/>
-			<ScreenerLayout>
+			<ScreenerLayout url="/screener/ipo/">
 				<Screener />
 			</ScreenerLayout>
 		</>

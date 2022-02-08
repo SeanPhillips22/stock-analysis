@@ -23,8 +23,10 @@ export function FinancialsLayout({
 	statement,
 	range
 }: Props) {
+	let rangePath = range !== 'annual' ? `${range}/` : ''
+
 	return (
-		<Stock info={info} url={url}>
+		<Stock info={info} url={url + rangePath}>
 			<SEO title={title} description={description} canonical={url} />
 			<div className="px-4 lg:px-6 mx-auto">
 				<FinancialsNavigation

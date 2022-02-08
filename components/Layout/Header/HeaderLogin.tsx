@@ -1,7 +1,7 @@
 import { Button } from 'components/Buttons/Button'
 import { ButtonWhite } from 'components/Buttons/ButtonWhite'
 import { useAuth } from 'hooks/useAuth'
-import { useNavState } from 'hooks/useNavState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 
 type Props = {
 	hideTrial?: boolean
@@ -9,7 +9,7 @@ type Props = {
 
 export function HeaderLogin({ hideTrial }: Props) {
 	const { isLoggedIn, signOut } = useAuth()
-	const { route } = useNavState()
+	const { url } = useLayoutContext()
 
 	if (isLoggedIn) {
 		return (
@@ -19,7 +19,7 @@ export function HeaderLogin({ hideTrial }: Props) {
 					onClick={signOut}
 					className="mt-0 py-1 border-0 shadow-none cursor-pointer"
 				/>
-				{route !== '/pro/my-account/' && (
+				{url !== '/pro/my-account/' && (
 					<ButtonWhite
 						text="My Account"
 						url="/pro/my-account/"

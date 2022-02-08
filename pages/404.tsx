@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 export default function Custom404() {
 	return (
-		<UserLayout>
+		<UserLayout url="/404/">
 			<Head>
 				<title>404 - Page not found | Stock Analysis</title>
 			</Head>

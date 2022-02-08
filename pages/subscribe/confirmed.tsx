@@ -9,7 +9,7 @@ export default function ThankYou() {
 				canonical="/subscribe/confirmed/"
 				noindex={true}
 			/>
-			<FocusedLayout>
+			<FocusedLayout url="/subscribe/confirmed/">
 				<div className="py-20 max-w-screen-md mx-auto px-6">
 					<h1 className="hh1 text-4xl mb-5">Confirmed!</h1>
 					<p className="text-base md:text-xl mb-5">

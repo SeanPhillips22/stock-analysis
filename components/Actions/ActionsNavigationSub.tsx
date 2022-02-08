@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { actionsState } from 'state/actionsState'
 
 export const ActionsNavigationSub = () => {
-	const path = navState(state => state.path)
+	const { path } = useLayoutContext()
 	const all = actionsState(state => state.all)
 	const setAll = actionsState(state => state.setAll)
 	const [count, setCount] = useState<number>(2)

@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 import Link from 'next/link'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { actionsState } from 'state/actionsState'
 import { Router } from 'next/router'
 
 export const ActionsNavigation = () => {
-	const path = navState(state => state.path)
+	const { path } = useLayoutContext()
 	const menuref = useRef<HTMLUListElement>(null)
 	const pos = actionsState(state => state.pos)
 	const setPos = actionsState(state => state.setPos)

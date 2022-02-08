@@ -36,7 +36,7 @@ export const ActionsDelisted = ({ data }: ActionProps) => {
 				description="Stocks that have been delisted from the US stock market. Some have gone bankrupt or been acquired, others have been delisted for other reasons."
 				canonical="/actions/delisted/"
 			/>
-			<ActionsLayout>
+			<ActionsLayout url="/actions/delisted/">
 				<ActionsTable
 					key="Delistings"
 					title="Recently Delisted Stocks"

@@ -44,7 +44,7 @@ export default function ETFScreenerPage() {
 				description="An ETF screening tool to search, filter and compare all ETFs listed on the US stock market."
 				canonical="/screener/etf/"
 			/>
-			<ScreenerLayout>
+			<ScreenerLayout url="/screener/etf/">
 				<Screener />
 			</ScreenerLayout>
 		</>

@@ -66,7 +66,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 					]
 				}}
 			/>
-			<Layout fullWidth={true}>
+			<Layout fullWidth={true} url="/">
 				<Hero trending={data.trending} />
 				<Movers
 					date={data.date}

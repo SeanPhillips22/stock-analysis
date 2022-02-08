@@ -38,7 +38,7 @@ export const ActionsDelistedYear = ({ year, data }: ActionProps) => {
 				description={`A list of stocks that were delisted in the year ${year}. The list includes public companies trading on the main US exchanges (NYSE and NASDAQ).`}
 				canonical={`/actions/delisted/${year}/`}
 			/>
-			<ActionsLayout>
+			<ActionsLayout url={`/actions/delisted/${year}/`}>
 				<ActionsTable
 					key={`Delistings-${year}`}
 					title={`Stocks Delisted in ${year}`}

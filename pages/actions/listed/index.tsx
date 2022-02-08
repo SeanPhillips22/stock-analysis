@@ -36,7 +36,7 @@ export const ActionsListed = ({ data }: ActionProps) => {
 				description="Recent and historical listings on the US stock market. Includes both IPOs and stocks listed for other reasons."
 				canonical="/actions/listed/"
 			/>
-			<ActionsLayout>
+			<ActionsLayout url="/actions/listed/">
 				<ActionsTable
 					key="listings"
 					title="Recently Listed Stocks"

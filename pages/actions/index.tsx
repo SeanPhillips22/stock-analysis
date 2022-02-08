@@ -40,7 +40,7 @@ export default function ActionsAll({ data }: ActionProps) {
 				description="A comprehensive list of recent and historical corporate actions and stock changes for companies listed on the US stock market."
 				canonical="/actions/"
 			/>
-			<ActionsLayout>
+			<ActionsLayout url="/actions/">
 				<ActionsTable
 					key="Actions"
 					title="Recent Corporate Actions"

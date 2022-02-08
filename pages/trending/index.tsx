@@ -148,7 +148,7 @@ export default function Trending({ timestamp, data }: Props) {
 				description="A list of the top 20 most popular stocks today based on pageviews. The list is updated multiple times per day."
 				canonical="/trending/"
 			/>
-			<Layout>
+			<Layout url="/trending/">
 				<div className="contain py-5 xs:py-6">
 					<Breadcrumbs url="/trending/" />
 					<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-0">

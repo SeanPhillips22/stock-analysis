@@ -28,7 +28,7 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 				description="A list of companies that have withdrawn their U.S. stock market IPO within the last year."
 				canonical="/ipos/withdrawn/"
 			/>
-			<Layout>
+			<Layout url="/ipos/withdrawn/">
 				<div className="contain">
 					<Breadcrumbs url="/ipos/withdrawn/" />
 					<h1 className="hh1">Withdrawn IPOs</h1>

@@ -25,7 +25,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 				description="The latest news about initial public offerings (IPOs) on the stock market, including both recent and upcoming IPOs."
 				canonical="/ipos/news/"
 			/>
-			<Layout>
+			<Layout url="/ipos/news/">
 				<div className="contain pb-0">
 					<Breadcrumbs url="/ipos/news/" />
 					<h1 className="hh1">IPO News</h1>

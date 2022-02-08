@@ -1,5 +1,5 @@
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import Link from 'next/link'
-import { navState } from 'state/navState'
 
 interface TabI {
 	symbol: string
@@ -8,7 +8,7 @@ interface TabI {
 }
 
 export function Tab({ symbol, title, append }: TabI) {
-	const path = navState(state => state.path)
+	const { path } = useLayoutContext()
 
 	return (
 		<li>

@@ -4,12 +4,13 @@ import { Layout } from './_Layout'
 
 type Props = {
 	children: React.ReactNode
+	url: string
 }
 
-export function UserLayout({ children }: Props) {
+export function UserLayout({ children, url }: Props) {
 	return (
 		<>
-			<Layout fullWidth={true}>
+			<Layout fullWidth={true} url={url}>
 				<div className="max-w-[850px] mx-auto px-6 py-8 sm:py-20 sm:px-0 space-y-6">
 					<Link href="/" prefetch={false}>
 						<a>

@@ -62,7 +62,7 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 				description={`A list of recent and historical mergers and acquisitions on the US stock market, including detailed history from 1998 to ${new Date().getFullYear()}.`}
 				canonical="/actions/acquisitions/"
 			/>
-			<ActionsLayout>
+			<ActionsLayout url="/actions/acquisitions/">
 				<ActionsTable
 					key="Acquisitions"
 					title="Recent Mergers & Acquisitions"

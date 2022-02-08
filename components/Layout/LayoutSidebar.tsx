@@ -11,7 +11,7 @@ interface Props {
 
 export const LayoutSidebar = ({ heading, children, url }: Props) => {
 	return (
-		<Layout>
+		<Layout url={url}>
 			<div className="contain py-5 xs:py-6">
 				<Breadcrumbs url={url} />
 				<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-0">

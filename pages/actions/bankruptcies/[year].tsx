@@ -38,7 +38,7 @@ export const ActionsBankruptciesYear = ({ year, data }: ActionProps) => {
 				description={`A list of ${year} public company bankruptcies. It includes companies who had their stock listed on the US stock market.`}
 				canonical={`/actions/bankruptcies/${year}/`}
 			/>
-			<ActionsLayout>
+			<ActionsLayout url={`/actions/bankruptcies/${year}/`}>
 				<ActionsTable
 					key={`Bankruptcies-${year}`}
 					title={`${year} Bankruptcies`}

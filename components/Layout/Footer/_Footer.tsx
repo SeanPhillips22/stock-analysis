@@ -1,4 +1,3 @@
-import { useNavState } from 'hooks/useNavState'
 import Link from 'next/link'
 
 const navigation = {
@@ -20,9 +19,6 @@ const navigation = {
 }
 
 export const Footer = () => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { path } = useNavState()
-
 	return (
 		<>
 			<footer className="bg-gray-800 clear-both">

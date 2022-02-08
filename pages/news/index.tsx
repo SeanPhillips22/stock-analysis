@@ -22,7 +22,7 @@ export const MarketNews = ({ data, other }: Props) => {
 				description="Get the latest stock market news and breaking stories from the world's best finance and investing websites."
 				canonical="/news/"
 			/>
-			<Layout>
+			<Layout url="/news/">
 				<div className="contain pb-0">
 					<Breadcrumbs url="/news/" />
 					<h1 className="hh1">Stock Market News</h1>

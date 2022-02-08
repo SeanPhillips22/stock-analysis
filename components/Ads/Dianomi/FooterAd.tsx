@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import Script from 'next/script'
 
 declare global {
@@ -11,7 +11,7 @@ declare global {
 
 // Dianomi ad in the footer
 export default function FooterAd() {
-	const path = navState(state => state.path)
+	const { path } = useLayoutContext()
 
 	useEffect(() => {
 		if (typeof window.dianomiReloadContext !== 'undefined') {
