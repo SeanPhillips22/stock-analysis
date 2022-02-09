@@ -10,7 +10,7 @@ export function Sidebar2() {
 	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
 
-	if (noAds(path.one)) {
+	if (noAds(path)) {
 		return null
 	}
 

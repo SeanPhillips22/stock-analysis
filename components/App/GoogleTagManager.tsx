@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import Script from 'next/script'
 
 /**
@@ -5,11 +6,13 @@ import Script from 'next/script'
  */
 export function GoogleTagManager() {
 	const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID
+	const router = useRouter()
 
 	// If GTM_ID is not defined as an environment variable,
 	// then don't render the script tag so that it doesn't load
 	// in localhost or preview deployments
 	if (!GTM_ID) return null
+	if (router.asPath === '/stocks/t/') return null // Disable on /stocks/t/ -- to benchmark performance
 
 	return (
 		<Script

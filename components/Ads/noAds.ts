@@ -1,3 +1,5 @@
+import { PathType } from 'types/Path'
+
 const NO_ADS = [
 	'about',
 	'login',
@@ -9,7 +11,8 @@ const NO_ADS = [
 	'subscribe'
 ]
 
-export function noAds(path: string | null) {
+export function noAds(path: PathType) {
 	if (process.env.NODE_ENV === 'development') return true
-	return path ? NO_ADS.includes(path) : false
+	if (path.one === 'stocks' && path.two === 't') return true // exclude ads on T, for benchmarking purposes
+	return path.one ? NO_ADS.includes(path.one) : false
 }

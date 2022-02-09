@@ -17,7 +17,7 @@ export function LazyLoadAd({ children, offset }: Props) {
 	// Only load the observer if: a) not pro user and b) not on an excluded page
 	return (
 		<>
-			{checked && !isPro && !noAds(path.one) && (
+			{checked && !isPro && !noAds(path) && (
 				<Observer offset={offset}>{children}</Observer>
 			)}
 		</>

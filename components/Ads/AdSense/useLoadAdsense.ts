@@ -25,7 +25,7 @@ export function useLoadAdsense() {
 	const isPro = authState(state => state.isPro)
 
 	useEffect(() => {
-		if (noAds(path.one) || isPro) return // no ads for this page
+		if (noAds(path) || isPro) return // no ads for this page
 
 		// check if AdSense script is loaded every 200ms
 		let count = 0 // count attempts
