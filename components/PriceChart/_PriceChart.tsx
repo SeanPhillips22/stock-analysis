@@ -37,11 +37,7 @@ export function PriceChart({ info, initial }: Props) {
 
 		// If the 1D data fails on the first request, try the 1Y chart instead
 		// also consider it a fail if there is only one data point
-		if (
-			!isFetching &&
-			initialFetch &&
-			(!data || !data.length || data.length === 1)
-		) {
+		if (!isFetching && initialFetch && (!data || !data.length)) {
 			setChartTime('1Y')
 			setInitialFetch(false)
 		}
@@ -85,6 +81,7 @@ export function PriceChart({ info, initial }: Props) {
 						chartData={data}
 						chartTime={chartTime}
 						info={info}
+						show={!spinner}
 					/>
 				)}
 			</div>

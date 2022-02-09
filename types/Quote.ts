@@ -22,4 +22,5 @@ export interface Quote {
 	ecp: string // extended hours price change percentage
 	eu: string // extended hours last updated timestamp
 	es: string // extended hours market status (Pre-market/After-hours)
+	lf: number // last fetch timestamp (epoch time)
 }

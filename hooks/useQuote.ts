@@ -24,7 +24,9 @@ export function useQuote(info: Info) {
 		refetchInterval: tradingHours ? 5000 : false,
 		refetchOnWindowFocus: tradingHours ? true : false,
 		initialData: info.quote,
-		initialDataUpdatedAt: Date.now() - 60000,
+		initialDataUpdatedAt: info.quote.lf
+			? info.quote.lf + 5000
+			: Date.now() - 60000,
 		enabled: info.state !== 'upcomingipo' && !info.archived,
 		notifyOnChangeProps: 'tracked',
 		retry: false
