@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'WMA'
 export default function Wma() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.wma)
+		.accessor(d => d.wma)
 	const underlyingAlgorithm = wma()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

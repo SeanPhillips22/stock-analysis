@@ -1,8 +1,8 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { mappedSlidingWindow } from '../utils'
 export default function HeikinAshi() {
-	let source = (x) => x
-	const calculator = (data) => {
+	let source = x => x
+	const calculator = data => {
 		const algorithm = mappedSlidingWindow()
 			.windowSize(2)
 			.undefinedValue(({ open, high, low, close }) => {
@@ -19,7 +19,7 @@ export default function HeikinAshi() {
 			})
 		return algorithm(data)
 	}
-	calculator.source = (newSource) => {
+	calculator.source = newSource => {
 		if (newSource === undefined) {
 			return source
 		}

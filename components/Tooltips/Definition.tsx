@@ -3,7 +3,7 @@ import { DEFINITIONS } from './DEFINITIONS'
 import { InfoIcon } from 'components/Icons/Info'
 
 export function Definition({ id }: { id: string }) {
-	const data = DEFINITIONS.find((item) => item.id === id)
+	const data = DEFINITIONS.find(item => item.id === id)
 	if (!data) return null
 
 	const Content = () => (

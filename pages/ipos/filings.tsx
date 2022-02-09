@@ -8,8 +8,7 @@ import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
 import { Layout } from 'components/Layout/_Layout'
 
@@ -19,7 +18,7 @@ interface Props {
 	recent: IpoRecent[]
 }
 
-export const IpoFilings = ({ data, news, recent }: Props) => {
+export function IpoFilings({ data, news, recent }: Props) {
 	const count = data.length
 
 	return (
@@ -29,7 +28,7 @@ export const IpoFilings = ({ data, news, recent }: Props) => {
 				description="A list of all stocks that have filed for an initial public offering (IPO) on the US stock market, but have not set an estimated IPO date yet."
 				canonical="/ipos/filings/"
 			/>
-			<Layout>
+			<Layout url="/ipos/filings/">
 				<div className="contain">
 					<Breadcrumbs url="/ipos/filings/" />
 					<h1 className="hh1">IPO Filings</h1>
@@ -58,7 +57,6 @@ export const IpoFilings = ({ data, news, recent }: Props) => {
 									url: '/ipos/news/'
 								}}
 							/>
-							<Sidebar2 />
 						</aside>
 					</div>
 				</div>
@@ -72,7 +70,7 @@ export default IpoFilings
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, news, recent } = await getIpoData('filings')
 
-	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=600')
 
 	return {
 		props: {

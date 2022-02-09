@@ -5,7 +5,8 @@ import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
 import { ParsedUrlQuery } from 'querystring'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 import { ActionsPaywall } from 'components/Actions/ActionsPaywall'
 
 export const ActionsBankruptciesYear = ({ year, data }: ActionProps) => {
@@ -37,13 +38,10 @@ export const ActionsBankruptciesYear = ({ year, data }: ActionProps) => {
 				description={`A list of ${year} public company bankruptcies. It includes companies who had their stock listed on the US stock market.`}
 				canonical={`/actions/bankruptcies/${year}/`}
 			/>
-			<ActionsLayout
-				title={`${year} Bankruptcies`}
-				url={`/actions/bankruptcies/${year}/`}
-			>
+			<ActionsLayout url={`/actions/bankruptcies/${year}/`}>
 				<ActionsTable
 					key={`Bankruptcies-${year}`}
-					title="Bankruptcies"
+					title={`${year} Bankruptcies`}
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}
@@ -80,7 +78,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	// Generate paths for all the years with existing data
-	const current = 2021
+	const current = 2022
 	const last = 1998
 	const diff = current - last
 

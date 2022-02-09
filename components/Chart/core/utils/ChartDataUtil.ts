@@ -79,7 +79,7 @@ export function getNewChartConfig(
 	children: any,
 	existingChartConfig: any[] = []
 ) {
-	return React.Children.map(children, (each) => {
+	return React.Children.map(children, each => {
 		if (each !== undefined && each !== null && isChartProps(each.props)) {
 			const chartProps = {
 				...Chart.defaultProps,
@@ -110,7 +110,7 @@ export function getNewChartConfig(
 				  )
 				: undefined
 
-			const prevChartConfig = existingChartConfig.find((d) => d.id === id)
+			const prevChartConfig = existingChartConfig.find(d => d.id === id)
 
 			if (isArraySize2AndNumber(yExtentsProp)) {
 				if (

@@ -5,7 +5,7 @@ interface MenuState {
 	setPos: (newPos: number) => void
 }
 
-export const menuState = create<MenuState>((set) => ({
+export const menuState = create<MenuState>(set => ({
 	pos: 0,
-	setPos: (newPos) => set({ pos: newPos })
+	setPos: newPos => set({ pos: newPos })
 }))

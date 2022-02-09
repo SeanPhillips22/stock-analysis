@@ -10,7 +10,7 @@ type Props = {
 
 export function Stock({ children, info, url }: Props) {
 	return (
-		<Layout>
+		<Layout url={url}>
 			<div className="pt-5 sm:pt-6">
 				<StockHeading info={info} url={url} />
 				{children}

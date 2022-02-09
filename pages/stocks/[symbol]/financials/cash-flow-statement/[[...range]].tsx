@@ -36,7 +36,7 @@ export default function CashFlowStatement({ info, data, count, range }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const range = (context?.params?.range as Range) || 'annual'
 	const data = await getStockFinancialsSSR(
@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		range
 	)
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 
 	return data
 }

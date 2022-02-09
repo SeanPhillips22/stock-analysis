@@ -8,19 +8,7 @@
 		text-align: right;
 	}
 
-	.symbol-table.index tr td:not(:nth-child(2)) {
-		white-space: nowrap;
-	}
-
-	@media screen and (max-width: 600px) {
-		.symbol-table.index tr td:nth-child(2) {
-			max-width: 280px;
-		}
-	}
-
-	@media screen and (max-width: 400px) {
-		.symbol-table.index tr td:nth-child(2) {
-			max-width: 260px;
-		}
+	.symbol-table.index tr td {
+		@apply whitespace-nowrap truncate max-w-[260px] lg:max-w-[220px] xl:max-w-[260px] xxxl:max-w-[300px];
 	}
 }

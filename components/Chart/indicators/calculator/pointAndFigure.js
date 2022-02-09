@@ -61,16 +61,17 @@ function updateColumns(columnData, dateAccessor, dateMutator) {
 }
 export default function PointAndFigureComponent() {
 	let options = defaultOptions
-	let dateAccessor = (d) => d.date
+	let dateAccessor = d => d.date
 	let dateMutator = (d, date) => {
 		d.date = date
 	}
-	const calculator = (rawData) => {
+	const calculator = rawData => {
 		const { reversal, boxSize, sourcePath } = options
+		// prettier-ignore
 		const source =
 			sourcePath === 'high/low'
-				? (d) => ({ high: d.high, low: d.low })
-				: (d) => ({ high: d.close, low: d.close })
+				? (d => ({ high: d.high, low: d.low }))
+				: (d => ({ high: d.close, low: d.close }))
 		const pricingMethod = source
 		const columnData = []
 		// @ts-ignore
@@ -209,21 +210,21 @@ export default function PointAndFigureComponent() {
 		updateColumns(columnData, dateAccessor, dateMutator)
 		return columnData
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}
 		options = Object.assign(Object.assign({}, defaultOptions), newOptions)
 		return calculator
 	}
-	calculator.dateMutator = (newDateMutator) => {
+	calculator.dateMutator = newDateMutator => {
 		if (newDateMutator === undefined) {
 			return dateMutator
 		}
 		dateMutator = newDateMutator
 		return calculator
 	}
-	calculator.dateAccessor = (newDateAccessor) => {
+	calculator.dateAccessor = newDateAccessor => {
 		if (newDateAccessor === undefined) {
 			return dateAccessor
 		}

@@ -4,73 +4,39 @@ import { Column } from 'react-table'
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar'
 import { SEO } from 'components/SEO'
 import { SymbolTable } from 'components/Tables/SymbolTable'
-import Link from 'next/link'
+import { formatCells } from 'functions/tables/formatCells'
 
-const formatter = new Intl.NumberFormat('en-US', {
-	minimumFractionDigits: 2,
-	maximumFractionDigits: 2
-})
-
-const abbreviate = (num: number) => {
-	if (num > 1000000000) {
-		return formatter.format(num / 1000000000) + 'B'
-	} else if (num > 1000000) {
-		return formatter.format(num / 1000000) + 'M'
-	} else {
-		return formatter.format(num)
-	}
+type Props = {
+	stocks: {
+		s: string
+		n: string
+		i: string
+		m: number
+	}[]
 }
 
-interface IStock {
-	s: string
-	n: string
-	cls: string
-	aum: number
-}
-
-interface IEtfs {
-	stocks: IStock[]
-}
-
-interface ICellString {
-	cell: {
-		value: string
-	}
-}
-
-interface ICellNumber {
-	cell: {
-		value: number
-	}
-}
-
-export default function StocksIndexPage({ stocks }: IEtfs) {
+export default function StocksIndexPage({ stocks }: Props) {
 	const columns: Column[] = [
 		{
 			Header: 'Symbol',
 			accessor: 's',
-			Cell: function FormatCell({ cell: { value } }: ICellString) {
-				return (
-					<Link href={`/etf/${value.toLowerCase()}/`} prefetch={false}>
-						<a>{value}</a>
-					</Link>
-				)
-			}
+			Cell: (props: any) => formatCells('linkSymbol', props, 'etf'),
+			sortInverted: true
 		},
 		{
 			Header: 'Fund Name',
-			accessor: 'n'
+			accessor: 'n',
+			sortType: 'string'
 		},
 		{
 			Header: 'Asset Class',
-			accessor: 'c'
+			accessor: 'i'
 		},
 		{
 			Header: 'Assets',
-			accessor: 'a',
-			Cell: function FormatCell({ cell: { value } }: ICellNumber) {
-				return abbreviate(value * 1000)
-			}
+			accessor: 'm',
+			Cell: (props: any) => formatCells('abbreviate', props),
+			sortInverted: true
 		}
 	]
 

@@ -49,6 +49,19 @@
 		background-color: #f6f7f8;
 	}
 
+	.weekof {
+		@apply inline-block leading-none;
+	}
+
+	.weekof::before {
+		@apply block text-[0.6rem] leading-none text-gray-600 text-right;
+		content: 'week of';
+	}
+
+	.ipotable a {
+		@apply bll;
+	}
+
 	@media screen and (max-width: 1350px) {
 		.ipotable tr > * {
 			padding: 0.5em 0.4em;

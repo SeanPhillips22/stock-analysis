@@ -23,7 +23,7 @@ const initialState = {
  */
 export function useSavedScreens(type: ScreenerTypes) {
 	const { user } = useAuthState()
-	const filters = screenerState((state) => state.filters)
+	const filters = screenerState(state => state.filters)
 	const [msg, setMsg] = useState('')
 	const [err, setErr] = useState('')
 	const queryClient = useQueryClient()
@@ -59,7 +59,7 @@ export function useSavedScreens(type: ScreenerTypes) {
 	async function addScreen(name: string) {
 		clearMessages()
 
-		let save = filters.map((filter) => {
+		let save = filters.map(filter => {
 			return { id: filter.id, value: filter.value }
 		})
 

@@ -5,7 +5,8 @@ import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
 import { ParsedUrlQuery } from 'querystring'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 import { ActionsPaywall } from 'components/Actions/ActionsPaywall'
 
 export const ActionsChangesYear = ({ year, data }: ActionProps) => {
@@ -47,13 +48,10 @@ export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 				description={`A list of all stock ticker symbol changes in ${year}, including all public companies listed on the main US exchanges.`}
 				canonical={`/actions/changes/${year}/`}
 			/>
-			<ActionsLayout
-				title={`${year} Symbol Changes`}
-				url={`/actions/changes/${year}/`}
-			>
+			<ActionsLayout url={`/actions/changes/${year}/`}>
 				<ActionsTable
 					key={`Changes-${year}`}
-					title="Changes"
+					title={`${year} Stock Symbol Changes`}
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}
@@ -89,7 +87,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	// Generate paths for all the years with existing data
-	const current = 2021
+	const current = 2022
 	const last = 1998
 	const diff = current - last
 

@@ -1,5 +1,8 @@
 import { getData } from 'functions/apis/API'
-import { isTradingHours } from 'functions/datetime/isTradingHours'
+import {
+	isTradingHours,
+	isTradingHoursOpen
+} from 'functions/datetime/isTradingHours'
 import { useQuery } from 'react-query'
 import { Info } from 'types/Info'
 import { Quote } from 'types/Quote'
@@ -15,15 +18,18 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 }
 
 export function useQuote(info: Info) {
-	const tradingHours = isTradingHours()
+	const tradingHours = info.isOTC ? isTradingHoursOpen() : isTradingHours()
 
 	const { data } = useQuery(['q', info.symbol, info.type], queryQuote, {
 		refetchInterval: tradingHours ? 5000 : false,
 		refetchOnWindowFocus: tradingHours ? true : false,
 		initialData: info.quote,
-		initialDataUpdatedAt: Date.now() - 60000,
+		initialDataUpdatedAt: info.quote.lf
+			? info.quote.lf + 5000
+			: Date.now() - 60000,
 		enabled: info.state !== 'upcomingipo' && !info.archived,
-		notifyOnChangeProps: 'tracked'
+		notifyOnChangeProps: 'tracked',
+		retry: false
 	})
 
 	return data as Quote

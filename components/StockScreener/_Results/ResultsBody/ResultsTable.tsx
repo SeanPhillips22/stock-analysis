@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import {
 	useTable,
 	useSortBy,
@@ -7,34 +7,48 @@ import {
 	useGlobalFilter,
 	useAsyncDebounce
 } from 'react-table'
-import { SortUpIcon } from 'components/Icons/SortUp'
-import { SortDownIcon } from 'components/Icons/SortDown'
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu'
 import { TablePagination } from './TablePagination'
 
 import { filterItems } from 'components/StockScreener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
 import { useSortReset } from 'components/StockScreener/functions/sort/useSortReset'
+import { ColumnSort } from 'components/Tables/ColumnSort'
+import { useSort } from 'hooks/useSort'
 
 export function ResultsTable({ cols }: { cols: any }) {
-	const type = screenerState((state) => state.type)
-	const datarows = screenerState((state) => state.data)
-	const loaded = screenerState((state) => state.loaded)
-	const filters = screenerState((state) => state.filters)
-	const sort = screenerState((state) => state.sort)
-	const tablePage = screenerState((state) => state.tablePage)
-	const tableSize = screenerState((state) => state.tableSize)
-	const showColumns = screenerState((state) => state.showColumns)
-	const fetching = screenerState((state) => state.fetching)
+	const type = screenerState(state => state.type)
+	const datarows = screenerState(state => state.data)
+	const loaded = screenerState(state => state.loaded)
+	const filters = screenerState(state => state.filters)
+	const sort = screenerState(state => state.sort)
+	const tablePage = screenerState(state => state.tablePage)
+	const tableSize = screenerState(state => state.tableSize)
+	const showColumns = screenerState(state => state.showColumns)
+	const fetching = screenerState(state => state.fetching)
+	const setResultsCount = screenerState(state => state.setResultsCount)
+	const setSort = screenerState(state => state.setSort)
+	const defaultSort = screenerState(state => state.defaultSort)
+	const searchFilter = screenerState(state => state.searchFilter)
+	const setFilterState = screenerState(state => state.setSearchFilter)
+	const { updateSort } = useSort({
+		defaultSort,
+		setSort
+	})
 	const resetSort = useSortReset()
 
+	// Memoize data and settings for the table
 	const data = useMemo(
 		() => filterItems(datarows, filters),
 		[datarows, filters]
 	)
 	const columns = useMemo(() => cols, [cols])
-
 	const sortResultsBy = useMemo(() => sort, [sort])
+
+	// Add the results count into global state
+	useEffect(() => {
+		setResultsCount(data.length)
+	}, [data, setResultsCount])
 
 	const {
 		headerGroups,
@@ -48,7 +62,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 		rows,
 		setPageSize,
 		setGlobalFilter,
-		state: { pageIndex, pageSize, globalFilter }
+		state: { pageIndex, pageSize }
 	} = useTable(
 		{
 			columns,
@@ -61,7 +75,8 @@ export function ResultsTable({ cols }: { cols: any }) {
 					.map((col: any) => col.accessor),
 				sortBy: sortResultsBy
 			},
-			autoResetSortBy: resetSort
+			autoResetSortBy: resetSort,
+			autoResetGlobalFilter: false
 		},
 		useGlobalFilter,
 		useSortBy,
@@ -83,8 +98,9 @@ export function ResultsTable({ cols }: { cols: any }) {
 				count={rows.length}
 				title="Matches"
 				useAsyncDebounce={useAsyncDebounce}
-				globalFilter={globalFilter}
+				globalFilter={searchFilter}
 				setGlobalFilter={setGlobalFilter}
+				setFilterState={setFilterState}
 				tableId="screener-table"
 			/>
 			<div className="overflow-x-auto">
@@ -97,24 +113,19 @@ export function ResultsTable({ cols }: { cols: any }) {
 							<tr key={index}>
 								{headerGroup.headers.map((column: any, index) => (
 									<th
+										key={index}
 										{...column.getSortByToggleProps({
 											title: `Sort by: ${
 												column.name || column.Header
 											}`
 										})}
-										key={index}
 									>
-										<span className="flex flex-row items-center">
+										<span
+											className="flex flex-row items-center"
+											onClick={() => updateSort(column)}
+										>
 											{column.render('Header')}
-											{column.isSorted ? (
-												column.isSortedDesc ? (
-													<SortDownIcon classes="h-4 w-4 text-gray-800" />
-												) : (
-													<SortUpIcon classes="h-4 w-4 text-gray-800" />
-												)
-											) : (
-												''
-											)}
+											<ColumnSort column={column} />
 										</span>
 									</th>
 								))}

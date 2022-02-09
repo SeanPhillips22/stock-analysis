@@ -9,11 +9,11 @@ export const MAP_INCOME_STATEMENT = [
 	{
 		id: 'revenuegrowth',
 		data: 'revenue',
-		title: 'Revenue Growth',
+		title: 'Revenue Growth (YoY)',
 		tooltipTitle: 'Revenue Growth (YoY)',
 		format: 'growth',
 		tooltip:
-			"Revenue growth is how much a company's revenue has increased compared to a previous time period, expressed as a percentage.",
+			"Year-over-year (YoY) revenue growth is how much a company's revenue has increased compared to the same time period one year ago.",
 		formula:
 			'Revenue Growth = ((Current Revenue / Previous Revenue) - 1) * 100%',
 		indent: true

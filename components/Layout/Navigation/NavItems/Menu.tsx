@@ -1,7 +1,7 @@
 import { NavArrowIcon } from 'components/Icons/NavArrow'
 import Link from 'next/link'
 import { NavItemProps } from './NavItems.types'
-import { navMenuState } from 'state/navMenuState'
+import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 import { matchPath, matchParentPath } from 'functions/helpers/matchPath'
 
 /**
@@ -11,11 +11,11 @@ import { matchPath, matchParentPath } from 'functions/helpers/matchPath'
  * @returns
  */
 export function MenuNavItem({ item, path }: NavItemProps) {
-	const isOpen = navMenuState((state) => state.isOpen)
-	const setIsOpen = navMenuState((state) => state.setIsOpen)
-	const close = navMenuState((state) => state.toggle)
-	const expanded = navMenuState((state) => state.expanded)
-	const expand = navMenuState((state) => state.expand)
+	const isOpen = navMenuState(state => state.isOpen)
+	const setIsOpen = navMenuState(state => state.setIsOpen)
+	const close = navMenuState(state => state.close)
+	const expanded = navMenuState(state => state.expanded)
+	const expand = navMenuState(state => state.expand)
 
 	function openClose() {
 		let openClosed = isOpen[item.name] ? true : false
@@ -30,7 +30,9 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 						? 'nav-menu-wrap current group'
 						: 'nav-menu-wrap group'
 				}
-				onClick={expand}
+				onClick={() => {
+					if (!expanded) expand()
+				}}
 			>
 				<Link href={item.href} prefetch={false}>
 					<a
@@ -40,6 +42,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 								: 'nav-item parent'
 						}
 						title={item.name}
+						onClick={() => setIsOpen({ [item.name]: true })}
 					>
 						<item.icon
 							className="nav-icon"
@@ -59,7 +62,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 
 			{item.children && isOpen[item.name] && expanded && (
 				<div className="space-y-0.5">
-					{item.children.map((subItem) => (
+					{item.children.map(subItem => (
 						<Link key={subItem.name} href={subItem.href} prefetch={false}>
 							<a
 								className={
@@ -67,7 +70,10 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 										? 'nav-item current subitem'
 										: 'nav-item subitem'
 								}
-								onClick={close}
+								onClick={() => {
+									close()
+									setIsOpen({ [item.name]: true })
+								}}
 								title={subItem.name}
 							>
 								<span className="nav-label">{subItem.name}</span>

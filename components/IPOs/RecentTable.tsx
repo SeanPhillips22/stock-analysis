@@ -11,14 +11,7 @@ import { SortUpIcon } from 'components/Icons/SortUp'
 import { SortDownIcon } from 'components/Icons/SortDown'
 import { IpoRecent } from 'types/Ipos'
 import { Controls } from 'components/Controls/_Controls'
-
-interface CellString {
-	cell: { value: string }
-}
-
-interface CellNumber {
-	cell: { value: number }
-}
+import { CellNumber, CellString } from 'types/Tables'
 
 export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 	const columns: Column[] = useMemo(
@@ -151,10 +144,10 @@ export const RecentTable = ({ rawdata }: { rawdata: IpoRecent[] }) => {
 							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
 									<th
+										key={index}
 										{...column.getSortByToggleProps({
 											title: `Sort by: ${column.Header}`
 										})}
-										key={index}
 									>
 										<span className="inline-flex flex-row items-center">
 											{column.render('Header')}

@@ -29,7 +29,7 @@ import { path, slidingWindow } from '../utils'
 import { RSI as defaultOptions } from './defaultOptionsForComputation'
 export default function Rsi() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { windowSize, sourcePath } = options
 		// @ts-ignore
 		const source = path(sourcePath)
@@ -37,13 +37,13 @@ export default function Rsi() {
 		let prevAvgLoss
 		const rsiAlgorithm = slidingWindow()
 			.windowSize(windowSize)
-			.accumulator((values) => {
+			.accumulator(values => {
 				const avgGain =
 					prevAvgGain !== undefined
 						? (prevAvgGain * (windowSize - 1) +
 								values[values.length - 1].gain) /
 						  windowSize
-						: mean(values, (each) => each.gain)
+						: mean(values, each => each.gain)
 				if (avgGain === undefined) {
 					return undefined
 				}
@@ -52,7 +52,7 @@ export default function Rsi() {
 						? (prevAvgLoss * (windowSize - 1) +
 								values[values.length - 1].loss) /
 						  windowSize
-						: mean(values, (each) => each.loss)
+						: mean(values, each => each.loss)
 				if (avgLoss === undefined) {
 					return undefined
 				}
@@ -65,7 +65,7 @@ export default function Rsi() {
 		const gainsAndLossesCalculator = slidingWindow()
 			.windowSize(2)
 			.undefinedValue(() => [0, 0])
-			.accumulator((tuple) => {
+			.accumulator(tuple => {
 				const prev = tuple[0]
 				const now = tuple[1]
 				const change = source(now) - source(prev)
@@ -82,7 +82,7 @@ export default function Rsi() {
 		const { windowSize } = options
 		return windowSize - 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

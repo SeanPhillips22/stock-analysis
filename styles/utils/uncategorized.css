@@ -8,14 +8,6 @@
 		width: calc(100% - 336px - 40px);
 	}
 
-	.green-quote {
-		@apply text-green-700;
-	}
-
-	.green-quote::before {
-		content: '+';
-	}
-
 	.profile-table tr:not(:last-child) {
 		@apply border-b border-gray-200;
 	}

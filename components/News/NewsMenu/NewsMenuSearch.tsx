@@ -54,20 +54,19 @@ export function NewsMenuSearch({
 	}
 
 	return (
-		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px]">
+		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px] filter">
 			<input
 				ref={inputRef}
-				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md pr-9"
 				type="text"
 				name="newssearch"
 				id="tag-feat-news-search"
 				placeholder="Search news..."
 				value={query}
-				onChange={(e) => {
+				onChange={e => {
 					setError('')
 					setQuery(e.target.value)
 				}}
-				onKeyDown={(e) => e.key === 'Enter' && !searching && doSearch()}
+				onKeyDown={e => e.key === 'Enter' && !searching && doSearch()}
 			/>
 			<div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
 				{searching ? (

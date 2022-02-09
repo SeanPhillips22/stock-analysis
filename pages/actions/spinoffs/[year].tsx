@@ -5,7 +5,8 @@ import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
 import { ParsedUrlQuery } from 'querystring'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 import { ActionsPaywall } from 'components/Actions/ActionsPaywall'
 
 export const ActionsSpinoffsYear = ({ year, data }: ActionProps) => {
@@ -57,13 +58,10 @@ export const ActionsSpinoffsYear = ({ year, data }: ActionProps) => {
 				description={`A list of all US-listed public company stock spinoffs in the year 2021. It includes common shares listed on the NYSE and NASDAQ.`}
 				canonical={`/actions/spinoffs/${year}/`}
 			/>
-			<ActionsLayout
-				title={`${year} Stock Spinoffs`}
-				url={`/actions/spinoffs/${year}/`}
-			>
+			<ActionsLayout url={`/actions/spinoffs/${year}/`}>
 				<ActionsTable
 					key={`Spinoffs-${year}`}
-					title="Spinoffs"
+					title={`${year} Stock Spinoffs`}
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}
@@ -100,7 +98,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	// Generate paths for all the years with existing data
-	const current = 2021
+	const current = 2022
 	const last = 1998
 	const diff = current - last
 

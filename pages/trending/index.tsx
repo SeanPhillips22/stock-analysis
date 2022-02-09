@@ -6,29 +6,14 @@ import { getData } from 'functions/apis/API'
 import { Column } from 'react-table'
 import { StockLink } from 'components/Links'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
-// import { useRouter } from 'next/router';
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Features } from 'components/Layout/Sidebar/Features'
 import { Layout } from 'components/Layout/_Layout'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 
-interface Props {
+type Props = {
 	timestamp: string
 	data: TrendingAll[]
-}
-
-const IPO = () => {
-	return <span title="Upcoming IPO">IPO</span>
-	// const router = useRouter();
-	// return (
-	// 	<div
-	// 		className="cursor-pointer"
-	// 		onClick={() => router.push('/ipos/calendar/')}
-	// 		title="This is an upcoming IPO. Click to see the calendar."
-	// 	>
-	// 		IPO
-	// 	</div>
-	// );
 }
 
 export default function Trending({ timestamp, data }: Props) {
@@ -129,7 +114,7 @@ export default function Trending({ timestamp, data }: Props) {
 			sortType: 'alphanumeric',
 			Cell: function FormatCell({ cell: { value } }: any) {
 				if (value === 'IPO') {
-					return <IPO />
+					return <span title="Upcoming IPO">IPO</span>
 				}
 				const fixed = value ? value + '%' : 'n/a'
 
@@ -148,7 +133,7 @@ export default function Trending({ timestamp, data }: Props) {
 			accessor: 'volume',
 			Cell: function FormatCell({ cell: { value } }: any) {
 				if (value === 'IPO') {
-					return <IPO />
+					return <span title="Upcoming IPO">IPO</span>
 				}
 				return format0dec.format(value)
 			},
@@ -163,7 +148,7 @@ export default function Trending({ timestamp, data }: Props) {
 				description="A list of the top 20 most popular stocks today based on pageviews. The list is updated multiple times per day."
 				canonical="/trending/"
 			/>
-			<Layout>
+			<Layout url="/trending/">
 				<div className="contain py-5 xs:py-6">
 					<Breadcrumbs url="/trending/" />
 					<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-0">
@@ -200,7 +185,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const raw = await getData('trending?q=trendingAll')
 	const { timestamp, data } = raw
 
-	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

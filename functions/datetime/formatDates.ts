@@ -68,3 +68,9 @@ export const formatDateYear = (string: string) => {
 	const dateNum = parseInt(date)
 	return dateNum
 }
+
+export const formatDateUSA = (string: string) => {
+	const datetime = new Date(string)
+	const date = datetime.toLocaleDateString('en-US')
+	return date
+}

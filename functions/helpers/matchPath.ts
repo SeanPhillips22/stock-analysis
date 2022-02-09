@@ -1,4 +1,4 @@
-import { PathObject } from 'state/navState'
+import { PathType } from 'types/Path'
 
 /**
  * This function checks whether the current path matches a particular nav item
@@ -6,7 +6,7 @@ import { PathObject } from 'state/navState'
  * @param checkHref the url to check against the current path
  * @returns
  */
-export function matchPath(path: PathObject, checkHref: string) {
+export function matchPath(path: PathType, checkHref: string) {
 	if (checkHref === '/' && !path.one) return true // Match home
 
 	// Match full path
@@ -18,7 +18,7 @@ export function matchPath(path: PathObject, checkHref: string) {
 	return false
 }
 
-export function matchParentPath(path: PathObject, checkHref: string) {
+export function matchParentPath(path: PathType, checkHref: string) {
 	let parentHref = checkHref.split('/')[1]
 
 	// Match full path

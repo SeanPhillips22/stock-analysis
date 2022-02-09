@@ -1,5 +1,5 @@
 import { SVGProps } from 'react'
-import { PathObject } from 'state/navState'
+import { PathType } from 'types/Path'
 
 export type NavItemChild = {
 	name: string
@@ -13,5 +13,5 @@ export type NavItemProps = {
 		icon: (props: SVGProps<SVGSVGElement>) => JSX.Element
 		children?: NavItemChild[]
 	}
-	path: PathObject
+	path: PathType
 }

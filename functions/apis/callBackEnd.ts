@@ -3,7 +3,7 @@ import { Range, Statement } from 'types/Financials'
 
 const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null
 
-interface Response {
+type Response = {
 	status: number
 	data: any
 }
@@ -13,9 +13,14 @@ export function respondSSR(response: Response) {
 		return {
 			props: response.data
 		}
-	} else {
-		return response.data
 	}
+
+	return response.data
+}
+
+export async function getSSR(page: string) {
+	const response = await getData(page)
+	return respondSSR(response)
 }
 
 export async function getPageDataSSR(

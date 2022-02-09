@@ -1,10 +1,10 @@
-import { FiltersMap } from 'components/StockScreener/maps/filters.map'
 import { useModifyFilters } from '../../functions/useModifyFilters'
 import { useModifyColumns } from '../../functions/useModifyColumns'
 import { screenerState } from '../../screener.state'
 import { useSavedScreens } from './useSavedScreens'
 import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { XIcon } from '@heroicons/react/solid'
+import { getDataPoints } from 'components/StockScreener/maps/dataPoints'
 
 type Props = {
 	name: string
@@ -12,31 +12,31 @@ type Props = {
 }
 
 export function SavedItem({ name, type }: Props) {
+	const setFilterMenu = screenerState(state => state.setFilterMenu)
 	const { data, del } = useSavedScreens(type)
-	const setFilterMenu = screenerState((state) => state.setFilterMenu)
 	const { add, clear } = useModifyFilters()
 	const { fetchColumn } = useModifyColumns()
 
 	function renderPresetFilters(value: string) {
+		const DataPoints = getDataPoints(type)
 		clear()
 		setFilterMenu('Active')
 
 		let screens = data.screeners[type]
-		Object.keys(screens).forEach((key) => {
+		Object.keys(screens).forEach(key => {
 			if (screens[key].name === value) {
 				screens[key].filters.map((filter: any) => {
-					FiltersMap.map((mapItem) => {
-						if (mapItem.id === filter.id) {
-							add(
-								filter.id,
-								mapItem.name,
-								filter.value,
-								mapItem.filterType,
-								mapItem.numberType
-							)
-							fetchColumn(filter.id, type)
-						}
-					})
+					let dp = DataPoints.find(item => item.id === filter.id)
+					if (dp) {
+						add(
+							filter.id,
+							dp.name,
+							filter.value,
+							dp.filterType,
+							dp.numberType
+						)
+						fetchColumn(filter.id, type)
+					}
 				})
 			}
 		})
@@ -51,7 +51,7 @@ export function SavedItem({ name, type }: Props) {
 			<div
 				className="py-2 pl-2 pr-5 block cursor-pointer hover:font-medium focus:font-medium"
 				onClick={() => renderPresetFilters(name)}
-				onKeyPress={(e) => {
+				onKeyPress={e => {
 					if (e.key === 'Enter') {
 						renderPresetFilters(name)
 					}

@@ -1,19 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { supabase } from 'functions/supabase'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { authState } from 'state/authState'
-import { navState } from 'state/navState'
 
 export function useAuth() {
-	const user = authState((state) => state.user)
-	const setUser = authState((state) => state.setUser)
-	const isLoggedIn = authState((state) => state.isLoggedIn)
-	const setIsLoggedIn = authState((state) => state.setIsLoggedIn)
-	const isPro = authState((state) => state.isPro)
-	const setIsPro = authState((state) => state.setIsPro)
-	const checked = authState((state) => state.checked)
-	const setChecked = authState((state) => state.setChecked)
-	const route = navState((state) => state.route)
+	const user = authState(state => state.user)
+	const setUser = authState(state => state.setUser)
+	const isLoggedIn = authState(state => state.isLoggedIn)
+	const setIsLoggedIn = authState(state => state.setIsLoggedIn)
+	const isPro = authState(state => state.isPro)
+	const setIsPro = authState(state => state.setIsPro)
+	const checked = authState(state => state.checked)
+	const setChecked = authState(state => state.setChecked)
+	const checking = authState(state => state.checking)
+	const setChecking = authState(state => state.setChecking)
+	const router = useRouter()
 
 	useEffect(() => {
 		// subscribe to login and logout events
@@ -30,16 +32,19 @@ export function useAuth() {
 					setIsLoggedIn(false)
 				}
 				// set a cookie in order to use server-side rendered features
-				fetch('/api/auth', {
-					method: 'POST',
-					headers: new Headers({ 'Content-Type': 'application/json' }),
-					credentials: 'same-origin',
-					body: JSON.stringify({ event, session })
-				})
+				// fetch('/api/auth/', {
+				// 	method: 'POST',
+				// 	headers: new Headers({ 'Content-Type': 'application/json' }),
+				// 	credentials: 'same-origin',
+				// 	body: JSON.stringify({ event, session })
+				// })
 			}
 		)
 
-		checkUser()
+		if (!checking) {
+			setChecking(true)
+			checkUser()
+		}
 
 		return () => authListener?.unsubscribe()
 	}, [])
@@ -108,6 +113,10 @@ export function useAuth() {
 		}
 	}
 
+	/*
+		// @ts-ignore
+		create_user: false
+	*/
 	async function signIn(email: string) {
 		const { error } = await supabase.auth.signIn({ email })
 		return { error }
@@ -118,7 +127,7 @@ export function useAuth() {
 	}
 
 	// If there is a login error, redirect to the login page and show an error message
-	if (route === '/#error_code=404&error_description=User+not+found') {
+	if (router.asPath === '/#error_code=404&error_description=User+not+found') {
 		if (typeof window !== 'undefined') {
 			window.location.href = '/login/?error=Login+failed'
 		}

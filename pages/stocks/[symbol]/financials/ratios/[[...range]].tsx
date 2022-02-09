@@ -14,8 +14,6 @@ type Props = {
 }
 
 export default function Ratios({ info, data, count, range }: Props) {
-	console.log({ count, data })
-
 	return (
 		<FinancialsLayout
 			info={info}
@@ -38,12 +36,12 @@ export default function Ratios({ info, data, count, range }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const range = (context?.params?.range as Range) || 'annual'
 	const data = await getStockFinancialsSSR('ratios', symbol, range)
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 
 	return data
 }

@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'HeikinAshi'
 export default function HeikinAshi() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.ha)
+		.accessor(d => d.ha)
 	const underlyingAlgorithm = heikinAshi()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

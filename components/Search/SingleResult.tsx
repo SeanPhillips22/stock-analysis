@@ -1,4 +1,4 @@
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import Link from 'next/link'
 import { SearchItem } from './search.types'
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const SingleResult = ({ index, result, setOpen }: Props) => {
-	const path = navState((state) => state.path)
+	const { path } = useLayoutContext()
 	const symbol = result.s
 	const name = result.n
 	const type = result.t

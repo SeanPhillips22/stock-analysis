@@ -19,7 +19,7 @@ export function ColumnSearch({ search, setSearch }: Props) {
 				className="border-0 border-b border-gray-200 w-full focus:ring-0 focus:border-gray-200"
 				placeholder="Search..."
 				value={search}
-				onChange={(e) => setSearch(e.target.value.toLowerCase())}
+				onChange={e => setSearch(e.target.value.toLowerCase())}
 			/>
 			<CloseInput search={search} setSearch={setSearch} />
 		</div>

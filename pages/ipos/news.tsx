@@ -8,8 +8,7 @@ import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { NewsFeed } from 'components/News/_NewsFeed'
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
@@ -26,7 +25,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 				description="The latest news about initial public offerings (IPOs) on the stock market, including both recent and upcoming IPOs."
 				canonical="/ipos/news/"
 			/>
-			<Layout>
+			<Layout url="/ipos/news/">
 				<div className="contain pb-0">
 					<Breadcrumbs url="/ipos/news/" />
 					<h1 className="hh1">IPO News</h1>
@@ -41,7 +40,6 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 						<CalendarTableMin upcoming={upcoming} />
 						<Sidebar1 />
 						<RecentTableMin recent={recent} />
-						<Sidebar2 />
 					</aside>
 				</div>
 			</Layout>
@@ -54,7 +52,7 @@ export default IpoNews
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, upcoming, recent } = await getIpoData('news')
 
-	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

@@ -26,9 +26,9 @@ export function TablePagination({
 	canNextPage
 }: Props) {
 	const { isPro } = useAuthState()
-	const tablePage = screenerState((state) => state.tablePage)
-	const setTablePage = screenerState((state) => state.setTablePage)
-	const setTableSize = screenerState((state) => state.setTableSize)
+	const tablePage = screenerState(state => state.tablePage)
+	const setTablePage = screenerState(state => state.setTablePage)
+	const setTableSize = screenerState(state => state.setTableSize)
 
 	const selectOptions = [
 		{ value: 20, name: '20 Rows' },

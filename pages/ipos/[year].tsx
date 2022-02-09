@@ -2,37 +2,47 @@ import { GetServerSideProps } from 'next'
 import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
-import { getIpoData } from 'functions/apis/callBackEnd'
-import { RecentTable } from 'components/IPOs/RecentTable'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { InfoBox } from 'components/InfoBox'
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Layout } from 'components/Layout/_Layout'
+import { TableDynamic } from 'components/StockTable/TableTypes'
+import { TableContextProvider } from 'components/StockTable/TableContext'
+import { StockTable } from 'components/StockTable/__StockTable'
+import { getSelect } from 'functions/apis/getSelect'
+import { RecentIpoDataPoints } from 'data/DataPointGroups/RecentIpoDataPoints'
 
-interface Props {
+type Props = {
 	year: string
-	data: {
-		info: string
-		data: IpoRecent[]
-	}
-	news: News[]
-	upcoming: IpoUpcoming[]
+	data: IpoRecent[]
+	info: string
+	getIpoNewsMin: News[]
+	getIpoCalendarDataMin: IpoUpcoming[]
 }
 
-export const IpoYear = ({ year, data, news, upcoming }: Props) => {
+// the initial config for the select endpoint to fetch data
+const query: TableDynamic = {
+	main: 'ipoDate',
+	sort: [{ id: 'ipoDate', desc: true }],
+	sortDirection: 'asc',
+	columns: ['s', 'n', 'ipp', 'ippc', 'ipr']
+}
+
+export default function IpoYear(props: Props) {
+	const { year } = props
+
 	const title =
-		year === '2021'
-			? 'All 2021 IPOs (so far)'
+		year === '2022'
+			? 'All 2022 IPOs (so far)'
 			: `All ${year} IPOs - A Complete List`
 
 	const description =
-		year === '2021'
-			? 'A list of all the stocks that have gone public with an IPO on the US stock market in the year 2021, so far.'
+		year === '2022'
+			? 'A list of all the stocks that have gone public with an IPO on the US stock market in the year 2022, so far.'
 			: `A list of all the initial public offerings (IPOs) on the US stock market in the year ${year}. Includes detailed information about each stock.`
 
 	return (
@@ -42,8 +52,8 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 				description={description}
 				canonical={`/ipos/${year}/`}
 			/>
-			<Layout>
-				<div className="contain">
+			<Layout url={`/ipos/${year}/`}>
+				<div className="contain ipos-recent">
 					<Breadcrumbs url={`/ipos/${year}/`} />
 					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation path="" />
@@ -51,22 +61,50 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 						<div>
 							<RecentNavigation path={year} />
 							<div className="mt-4 mb-2 lg:mb-3">
-								<InfoBox text={data.info} />
+								<InfoBox text={props.info} />
 							</div>
-							<RecentTable rawdata={data.data} />
+							<TableContextProvider
+								value={{
+									type: 'histip',
+									tableId: 'ipos-' + year,
+									title: props.data.length + ' IPOs',
+									fixed: {
+										defaultSort: query.sort,
+										controls: {
+											filter: true,
+											export: true,
+											columns: true
+										},
+										columnOptions: RecentIpoDataPoints,
+										columnOrder: [
+											'ipoDate',
+											's',
+											'n',
+											'ipp',
+											'ippc',
+											'ipr'
+										]
+									},
+									dynamic: {
+										...query,
+										filters: ['ipoDate-year-' + year]
+									}
+								}}
+							>
+								<StockTable _data={props.data} />
+							</TableContextProvider>
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
-							<CalendarTableMin upcoming={upcoming} />
+							<CalendarTableMin upcoming={props.getIpoCalendarDataMin} />
 							<Sidebar1 />
 							<NewsWidget
 								title="IPO News"
-								news={news}
+								news={props.getIpoNewsMin}
 								button={{
 									text: 'More IPO News',
 									url: '/ipos/news/'
 								}}
 							/>
-							<Sidebar2 />
 						</aside>
 					</div>
 				</div>
@@ -75,27 +113,33 @@ export const IpoYear = ({ year, data, news, upcoming }: Props) => {
 	)
 }
 
-export default IpoYear
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const year = context?.params?.year as string
-
-	if (year != '2021' && year != '2020' && year != '2019') {
+	if (!['2022', '2021', '2020', '2019'].includes(year)) {
 		return {
 			notFound: true
 		}
 	}
 
-	const { data, news, upcoming } = await getIpoData(year)
+	// Assemble the SSR request
+	let extraFn = 'getIpoInfo' + year
+	let extras = ['getIpoCalendarDataMin', 'getIpoNewsMin', extraFn]
+	let ssrQuery = query
+	ssrQuery.filters = ['ipoDate-year-' + year]
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	// Fetch the data
+	const response = await getSelect(ssrQuery, 'histip', true, extras)
+	response.props.year = year
+	response.props.info = response.props[extraFn]
+	delete response.props[extraFn]
 
-	return {
-		props: {
-			year,
-			data,
-			news,
-			upcoming
-		}
-	}
+	// Cache on the edge
+	let cache =
+		year === '2022'
+			? 'public, max-age=0, s-max-age=300'
+			: 'public, max-age=0, s-max-age=1800'
+	context.res.setHeader('Cache-Control', cache)
+
+	// Return the data to the page
+	return response
 }

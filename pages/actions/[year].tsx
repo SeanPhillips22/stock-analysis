@@ -5,12 +5,13 @@ import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
 import { ParsedUrlQuery } from 'querystring'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 import { ActionsPaywall } from 'components/Actions/ActionsPaywall'
 
 export const ActionsAllYear = ({ year, data }: ActionProps) => {
 	if (Number(year) === new Date().getFullYear()) {
-		data.data = data.data.filter((d) => d.date.slice(-4) === year)
+		data.data = data.data.filter(d => d.date.slice(-4) === year)
 	}
 
 	const columns = [
@@ -45,13 +46,10 @@ export const ActionsAllYear = ({ year, data }: ActionProps) => {
 				description={`A list of all corporate actions in the year ${year}. It includes public companies with stocks listed on the main US exchanges.`}
 				canonical={`/actions/${year}/`}
 			/>
-			<ActionsLayout
-				title={`${year} Corporate Actions`}
-				url={`/actions/${year}/`}
-			>
+			<ActionsLayout url={`/actions/${year}/`}>
 				<ActionsTable
 					key={`Actions-${year}`}
-					title="Actions"
+					title={`${year} Corporate Actions`}
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}
@@ -87,7 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	// Generate paths for all the years with existing data
-	const current = 2021
+	const current = 2022
 	const last = 1998
 	const diff = current - last
 

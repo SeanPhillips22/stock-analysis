@@ -1,13 +1,11 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import {
-	FilterId,
-	ScreenerTypes
-} from 'components/StockScreener/screener.types'
+import { DataId } from 'types/DataId'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns'
 
 type Props = {
 	name: string
-	id: FilterId
+	id: DataId
 	type: ScreenerTypes
 }
 
@@ -17,7 +15,7 @@ type Props = {
  */
 export function ColumnItem({ name, id, type }: Props): JSX.Element {
 	const { fetchColumn, toggle, isShowing } = useModifyColumns()
-	const setOpen = screenerState((state) => state.setColumnDropdownOpen)
+	const setOpen = screenerState(state => state.setColumnDropdownOpen)
 
 	function handleKeyDown(e: React.KeyboardEvent) {
 		if (e.key === 'Enter') toggle(id, type)

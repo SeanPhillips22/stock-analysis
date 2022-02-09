@@ -4,7 +4,8 @@ import { getActionsData } from 'functions/apis/callBackEnd'
 import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 
 export const ActionsSpinoffs = ({ data }: ActionProps) => {
 	const columns = [
@@ -55,10 +56,10 @@ export const ActionsSpinoffs = ({ data }: ActionProps) => {
 				description="Recent and historical spinoffs on the US stock market. A spinoff happens when a company splits part of itself into a new, independent company."
 				canonical="/actions/spinoffs/"
 			/>
-			<ActionsLayout title="Stock Spinoffs" url="/actions/spinoffs/">
+			<ActionsLayout url="/actions/spinoffs/">
 				<ActionsTable
 					key="Spinoffs"
-					title="Spinoffs"
+					title="Recent Stock Spinoffs"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

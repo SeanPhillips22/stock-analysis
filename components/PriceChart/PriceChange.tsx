@@ -7,13 +7,14 @@ type ChartDataType = {
 	o?: number
 }
 
-interface Props {
+type Props = {
 	chartData: ChartDataType[]
 	chartTime: string
 	info: Info
+	show: boolean
 }
 
-export const PriceChange = ({ chartData, chartTime, info }: Props) => {
+export const PriceChange = ({ chartData, chartTime, info, show }: Props) => {
 	const quote = useQuote(info)
 
 	let raw: number | null
@@ -47,6 +48,9 @@ export const PriceChange = ({ chartData, chartTime, info }: Props) => {
 			? 'text-red-600'
 			: 'text-gray-600'
 		: 'text-gray-600'
+
+	// Don't show while chart is loading
+	if (!show) return null
 
 	return (
 		<div className="flex flex-row space-x-1 text-smaller sm:text-base pr-1">

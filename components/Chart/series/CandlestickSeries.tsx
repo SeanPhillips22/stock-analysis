@@ -88,11 +88,11 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 
 		const candleData = this.getCandleData(xAccessor, xScale, yScale, plotData)
 
-		const wickNest = group(candleData, (d) => d.wick.stroke)
+		const wickNest = group(candleData, d => d.wick.stroke)
 
 		wickNest.forEach((values, key) => {
 			ctx.fillStyle = key
-			values.forEach((each) => {
+			values.forEach(each => {
 				const d = each.wick
 
 				ctx.fillRect(d.x - 0.5, d.y1, 1, d.y2 - d.y1)
@@ -102,9 +102,9 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 
 		const candleNest = group(
 			candleData,
-			(d) => d.stroke,
+			d => d.stroke,
 			// @ts-ignore typings are incorrect for d3-array
-			(d) => d.fill
+			d => d.fill
 		)
 
 		candleNest.forEach((strokeValues, strokeKey) => {
@@ -118,7 +118,7 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 				ctx.fillStyle = key
 
 				// @ts-ignore
-				values.forEach((d) => {
+				values.forEach(d => {
 					if (d.width <= 1) {
 						ctx.fillRect(d.x - 0.5, d.y, 1, d.height)
 					} else if (d.height === 0) {
@@ -164,8 +164,8 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 			trueOffset > 0.7 ? Math.round(trueOffset) : Math.floor(trueOffset)
 
 		return plotData
-			.filter((d) => d.close !== undefined)
-			.map((d) => {
+			.filter(d => d.close !== undefined)
+			.map(d => {
 				const ohlc = yAccessor(d)
 				if (ohlc === undefined) {
 					return undefined
@@ -197,6 +197,6 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 					direction: ohlc.close - ohlc.open
 				}
 			})
-			.filter((d) => d !== undefined) as ICandle[]
+			.filter(d => d !== undefined) as ICandle[]
 	}
 }

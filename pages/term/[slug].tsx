@@ -37,7 +37,7 @@ export default function Page({ content, meta, slug }: Props) {
 				image={meta.image}
 				type="article"
 			/>
-			<ArticleLayout meta={meta}>
+			<ArticleLayout meta={meta} url={`/term/${slug}/`}>
 				<div>
 					<MDXRemote {...content} components={components} />
 				</div>

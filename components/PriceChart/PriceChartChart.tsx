@@ -30,68 +30,37 @@ import {
 	formatDateYear
 } from 'functions/datetime/formatDates'
 import { Unavailable } from 'components/Unavailable'
-import { Info } from 'types/Info'
 import { ChartDataPoint } from 'types/Charts'
-import { useEffect, useMemo, useState } from 'react'
-import { getChartColor } from './PriceChart.functions'
-import { Quote } from 'types/Quote'
+import { useMemo, useState } from 'react'
 
-interface Props {
-	chartData: ChartDataPoint[]
-	chartTime: string
-	info: Info
-	quote: Quote
-	changeProps: any
+type Props = {
+	data: ChartDataPoint[]
+	time: string
+	symbol: string
+	close: string
+	change: number
 }
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-export const Chart = ({
-	chartData,
-	chartTime,
-	info,
-	quote,
-	changeProps
-}: Props) => {
-	const [change, setChange] = useState(changeProps.change)
-	const [lineColor, setLineColor] = useState(changeProps.lineColor)
-	const [count] = useState(chartData.length)
-
-	// Refresh the change and line color
-	useEffect(() => {
-		const fresh = getChartColor(chartData, chartTime, quote)
-		if (fresh) {
-			setChange(fresh.change)
-			setLineColor(fresh.lineColor)
-		}
-	}, [chartData, chartTime, quote])
-
-	const timeAxis = useMemo(
-		() =>
-			chartData.map((item) => {
-				return item.t
-			}),
-		[chartData]
+export function Chart({ data, time, symbol, close, change }: Props) {
+	const count = data.length
+	const [lineColor] = useState(
+		change > 0
+			? 'rgba(4, 120, 87, 1)'
+			: change < 0
+			? 'rgba(220, 38, 38, 1)'
+			: 'rgba(100, 100, 100, 1)'
 	)
 
-	const priceAxis = useMemo(
-		() =>
-			chartData.map((item) => {
-				return item.c
-			}),
-		[chartData]
-	)
+	// X and Y axes
+	const timeAxis = useMemo(() => data.map(item => item.t), [data])
+	const priceAxis = useMemo(() => data.map(item => item.c), [data])
 
-	const changeWithoutComma = Number(quote.cl.replace(',', ''))
-
-	const prevCloseLine = useMemo(
-		() =>
-			chartData.map(() => {
-				return changeWithoutComma
-			}),
-		[chartData, changeWithoutComma]
-	)
+	// Previous close line
+	const prev = Number(close.replace(',', ''))
+	const prevCloseLine = useMemo(() => data.map(() => prev), [data, prev])
 
 	// Chart.js causes critical errors on older Safari versions
 	if (
@@ -106,7 +75,7 @@ export const Chart = ({
 		)
 	}
 
-	let data: any[] = [
+	let d: any[] = [
 		{
 			label: 'Stock Price',
 			data: priceAxis,
@@ -137,9 +106,9 @@ export const Chart = ({
 	]
 
 	// Add previous close label to 1D charts
-	if (chartTime === '1D') {
-		data = [
-			...data,
+	if (time === '1D') {
+		d = [
+			...d,
 			{
 				label: 'Previous Close',
 				data: prevCloseLine,
@@ -154,14 +123,14 @@ export const Chart = ({
 		]
 	}
 
-	let id = info.symbol + '-' + chartTime
+	let id = symbol + '-' + time
 
 	return (
 		<Line
 			id={id}
 			data={{
 				labels: timeAxis,
-				datasets: data
+				datasets: d
 			}}
 			plugins={[
 				{
@@ -243,13 +212,9 @@ export const Chart = ({
 									index = parseInt(index)
 								}
 
-								if (
-									chartTime === '1Y' ||
-									chartTime === '6M' ||
-									chartTime === 'YTD'
-								) {
+								if (time === '1Y' || time === '6M' || time === 'YTD') {
 									return formatDateMonth(timeAxis[index])
-								} else if (chartTime === '1D') {
+								} else if (time === '1D') {
 									const lbl = formatDateMinute(timeAxis[index])
 									// Remove leftmost ticks to prevent chart being pushed from the left
 									if (
@@ -269,11 +234,11 @@ export const Chart = ({
 										}
 									}
 									return formatDateMinute(timeAxis[index])
-								} else if (chartTime === '5D') {
+								} else if (time === '5D') {
 									return formatDateDay(timeAxis[index])
-								} else if (chartTime === '1M') {
+								} else if (time === '1M') {
 									return formatDateDay(timeAxis[index])
-								} else if (chartTime === '5Y' || chartTime === 'MAX') {
+								} else if (time === '5Y' || time === 'MAX') {
 									return formatDateYear(timeAxis[index])
 								} else {
 									return formatDateClean(timeAxis[index])
@@ -287,7 +252,7 @@ export const Chart = ({
 							autoSkipPadding: 20,
 							maxRotation: 0,
 							minRotation: 0,
-							maxTicksLimit: ['5D', '5Y', 'MAX'].includes(chartTime)
+							maxTicksLimit: ['5D', '5Y', 'MAX'].includes(time)
 								? 5
 								: undefined
 						}
@@ -336,11 +301,11 @@ export const Chart = ({
 						displayColors: false,
 						callbacks: {
 							title: function (tooltipItem: { label: string }[]) {
-								if (chartTime === '1Y') {
+								if (time === '1Y') {
 									return formatDateClean(tooltipItem[0].label)
-								} else if (chartTime === '1D' || chartTime === '5D') {
+								} else if (time === '1D' || time === '5D') {
 									return formatDateTimestamp(tooltipItem[0].label)
-								} else if (chartTime === '5Y' || chartTime === 'MAX') {
+								} else if (time === '5Y' || time === 'MAX') {
 									return (
 										'Week of ' + formatDateClean(tooltipItem[0].label)
 									)
@@ -361,7 +326,7 @@ export const Chart = ({
 										currlabel = 'Latest Price: ' + value
 									} else {
 										let label =
-											chartTime === '1D' || chartTime === '5D'
+											time === '1D' || time === '5D'
 												? 'Price'
 												: 'Closing Price'
 										currlabel = label + ': ' + value

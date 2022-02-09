@@ -257,7 +257,7 @@ const tickHelper = (
 		const y2 = sign * innerTickSize
 		const labelY = sign * tickSpacing
 
-		ticks = tickValues.map((d) => {
+		ticks = tickValues.map(d => {
 			const x = Math.round(scale(d))
 			return {
 				value: d,
@@ -271,7 +271,7 @@ const tickHelper = (
 		})
 
 		if (showTicks) {
-			const nodes = ticks.map((d) => ({
+			const nodes = ticks.map(d => ({
 				id: d.value,
 				value: d.value,
 				fy: d.y2,
@@ -279,7 +279,7 @@ const tickHelper = (
 			}))
 
 			const simulation = forceSimulation(nodes)
-				.force('x', forceX<any>((d) => d.origX).strength(1))
+				.force('x', forceX<any>(d => d.origX).strength(1))
 				.force('collide', forceCollide(22))
 				.stop()
 
@@ -288,7 +288,7 @@ const tickHelper = (
 			}
 
 			// @ts-ignore
-			ticks = zip(ticks, nodes).map((d) => {
+			ticks = zip(ticks, nodes).map(d => {
 				const a: any = d[0]
 				const b: any = d[1]
 
@@ -303,7 +303,7 @@ const tickHelper = (
 			})
 		}
 	} else {
-		ticks = tickValues.map((d) => {
+		ticks = tickValues.map(d => {
 			const y = Math.round(scale(d))
 			const x2 = sign * innerTickSize
 			const labelX = sign * tickSpacing

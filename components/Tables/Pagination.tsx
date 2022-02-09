@@ -35,7 +35,7 @@ export const Pagination = ({
 				</span>
 				<select
 					value={pageSize}
-					onChange={(e) => {
+					onChange={e => {
 						setPageSize(Number(e.target.value))
 					}}
 					name="perpage"

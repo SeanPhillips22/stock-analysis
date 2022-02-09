@@ -9,8 +9,10 @@ export interface Info {
 	nameFull: string
 	exchange: string
 	isOTC: boolean // Is it an over the counter stock (short for exchange === 'OTCMKTS')
+	isIPO: boolean // Is it an upcoming IPO?
 	quote: Quote
 	fiscalYear: string
+	fiscalYearShort: string
 	currency: string
 	state: string
 	daysSince?: number
@@ -21,7 +23,6 @@ export interface Info {
 	cik?: string
 	exceptions: {
 		hideTTM: boolean
-		hideRatios: boolean
 		hideChart: boolean
 		overrideChart: boolean
 	}

@@ -1,11 +1,11 @@
 import { Transition } from '@headlessui/react'
-import { navMenuState } from 'state/navMenuState'
+import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 import { MainNav } from './MainNav'
 import { MobileNav } from './MobileNav'
 
 export function LeftNav() {
-	const visible = navMenuState((state) => state.visible)
-	const expanded = navMenuState((state) => state.expanded)
+	const visible = navMenuState(state => state.visible)
+	const expanded = navMenuState(state => state.expanded)
 
 	return (
 		<>

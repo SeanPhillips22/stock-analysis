@@ -343,8 +343,8 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							<BarSeries
 								widthRatio={0.5}
 								clip={true}
-								yAccessor={(d) => d.volume}
-								fillStyle={(d) =>
+								yAccessor={d => d.volume}
+								fillStyle={d =>
 									d.close > d.open
 										? 'rgba(38, 166, 154, 0.8)'
 										: 'rgba(239, 83, 80, 0.8)'
@@ -380,11 +380,11 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							) : (
 								<>
 									<LineSeries
-										yAccessor={(d) => d.close}
+										yAccessor={d => d.close}
 										strokeStyle={'#000000'}
 									/>
 									<CurrentCoordinate
-										yAccessor={(d) => d.close}
+										yAccessor={d => d.close}
 										fillStyle={priceOrCandleStickColor}
 									/>
 								</>
@@ -392,19 +392,19 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 							{time != '1D' && time != '5D' ? (
 								<>
 									<LineSeries
-										yAccessor={(d) => d.ma1}
+										yAccessor={d => d.ma1}
 										strokeStyle={ma1color}
 									/>
 									<CurrentCoordinate
-										yAccessor={(d) => d.ma1}
+										yAccessor={d => d.ma1}
 										fillStyle={ma1color}
 									/>
 									<LineSeries
-										yAccessor={(d) => d.ma2}
+										yAccessor={d => d.ma2}
 										strokeStyle={ma2color}
 									/>
 									<CurrentCoordinate
-										yAccessor={(d) => d.ma2}
+										yAccessor={d => d.ma2}
 										fillStyle={ma2color}
 									/>
 								</>

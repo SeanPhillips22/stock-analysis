@@ -1,5 +1,4 @@
 import { FormEvent, useState } from 'react'
-import { ArticleLayout } from 'components/Layout/ArticleLayout'
 import { SEO } from 'components/SEO'
 import { Success } from 'components/Alerts/Success'
 import { Error } from 'components/Alerts/Error'
@@ -7,6 +6,8 @@ import { Warning } from 'components/Alerts/Warning'
 import Axios from 'axios'
 import { SpinnerIcon } from 'components/Icons/Spinner'
 import { validateEmailAddress, validateLength } from 'functions/validation'
+import { CrispChat } from 'components/Scripts/CrispChat'
+import { LayoutSidebar } from 'components/Layout/LayoutSidebar'
 
 interface MessageData {
 	[key: string]: string
@@ -20,34 +21,19 @@ export default function Contact() {
 				description="This page contains a contact form. Use this form if you have questions or suggestions about the content on this site."
 				canonical="/contact/"
 			/>
-			<ArticleLayout
-				meta={{
-					title: 'Contact Us',
-					description:
-						'This page contains a contact form. Use this form if you have questions or suggestions about the content on this site.'
-				}}
-			>
+			<CrispChat />
+			<LayoutSidebar heading="Contact Us" url="/contact/">
 				<p>
 					We would love to hear from you. Please submit a message using the
 					contact form below and we will get back to you as soon as
 					possible. You can also send an email directly to{' '}
-					<a href="mailto:contact@stockanalysis.com">
+					<a className="bll" href="mailto:contact@stockanalysis.com">
 						contact@stockanalysis.com
 					</a>
 					.
 				</p>
 				<ContactForm />
-				<h2 className="mt-16">Mailing Address</h2>
-				<p>
-					Vefir ehf.
-					<br />
-					Austurkor 102,
-					<br />
-					203 Kopavogur,
-					<br />
-					Iceland
-				</p>
-			</ArticleLayout>
+			</LayoutSidebar>
 		</>
 	)
 }
@@ -134,7 +120,7 @@ function ContactForm() {
 									autoComplete="given-name"
 									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
 									value={name}
-									onChange={(event) => setName(event.target.value)}
+									onChange={event => setName(event.target.value)}
 								/>
 							</div>
 						</div>
@@ -154,7 +140,7 @@ function ContactForm() {
 									required
 									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
 									value={email}
-									onChange={(event) => setEmail(event.target.value)}
+									onChange={event => setEmail(event.target.value)}
 								/>
 							</div>
 						</div>
@@ -174,7 +160,7 @@ function ContactForm() {
 									autoComplete="off"
 									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
 									value={subject}
-									onChange={(event) => setSubject(event.target.value)}
+									onChange={event => setSubject(event.target.value)}
 								/>
 							</div>
 						</div>
@@ -194,7 +180,7 @@ function ContactForm() {
 									rows={4}
 									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
 									value={message}
-									onChange={(event) => setMessage(event.target.value)}
+									onChange={event => setMessage(event.target.value)}
 								/>
 							</div>
 						</div>

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { FilterValue } from 'react-table'
 import { CloseIcon } from 'components/Icons/Close'
+import 'regenerator-runtime/runtime'
 
 interface Props {
 	useAsyncDebounce: (value: any, wait: number) => any
 	globalFilter: any
 	setGlobalFilter: (filterValue: FilterValue) => void
+	setFilterState?: (filterValue: FilterValue) => void
 	filterText?: string
 }
 
@@ -13,19 +15,24 @@ export function Filter({
 	useAsyncDebounce,
 	globalFilter,
 	setGlobalFilter,
+	setFilterState,
 	filterText = 'Filter...'
 }: Props) {
-	const [value, setValue] = useState(globalFilter)
-	const onChange = useAsyncDebounce((value: any) => {
-		setGlobalFilter(value || undefined)
+	const [value, setValue] = useState<string | undefined>(
+		globalFilter || undefined
+	)
+
+	const setFilterValues = useAsyncDebounce((value: string | undefined) => {
+		if (setGlobalFilter) setGlobalFilter(value)
+		if (setFilterState) setFilterState(value)
 	}, 100)
 
 	useEffect(() => {
-		if (value) onChange(value)
-	}, [onChange, value])
+		if (value) setFilterValues(value)
+	}, [setFilterValues, value])
 
 	return (
-		<div className="min-w-[80px] max-w-[100px] xs:max-w-[130px] sm:max-w-[150px] relative flex items-center">
+		<div className="filter">
 			<label htmlFor="filter" className="sr-only">
 				Filter results
 			</label>
@@ -33,11 +40,10 @@ export function Filter({
 				type="text"
 				name="filter"
 				id="filter"
-				className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-sm border-gray-300 rounded-md"
 				value={value || ''}
-				onChange={(e) => {
+				onChange={e => {
 					setValue(e.target.value)
-					onChange(e.target.value)
+					setFilterValues(e.target.value)
 				}}
 				placeholder={filterText}
 			/>
@@ -49,16 +55,16 @@ export function Filter({
 						tabIndex={0}
 						onClick={() => {
 							setValue('')
-							onChange('')
+							setFilterValues('')
 						}}
-						onKeyPress={(e) => {
+						onKeyPress={e => {
 							if (e.key === 'Enter') {
 								setValue('')
-								onChange('')
+								setFilterValues('')
 							}
 						}}
 					>
-						<CloseIcon classes="h-4 w-4 xs:h-4 xs:w-5 text-gray-600 hover:text-blue-500" />
+						<CloseIcon classes="h-4 w-4 xs:h-5 xs:w-5 text-gray-600 hover:text-blue-500" />
 					</span>
 				</div>
 			)}

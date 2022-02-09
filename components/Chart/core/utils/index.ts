@@ -39,7 +39,7 @@ export function getClosestValue(inputValue: any, currentValue: any) {
 	const values = Array.isArray(inputValue) ? inputValue : [inputValue]
 
 	const diff = values
-		.map((each) => each - currentValue)
+		.map(each => each - currentValue)
 		.reduce((diff1, diff2) =>
 			Math.abs(diff1) < Math.abs(diff2) ? diff1 : diff2
 		)
@@ -144,7 +144,7 @@ export function clearCanvas(
 	canvasList: CanvasRenderingContext2D[],
 	ratio: number
 ) {
-	canvasList.forEach((each) => {
+	canvasList.forEach(each => {
 		each.setTransform(1, 0, 0, 1, 0, 0)
 		each.clearRect(-1, -1, each.canvas.width + 2, each.canvas.height + 2)
 		each.scale(ratio, ratio)

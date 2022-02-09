@@ -12,18 +12,30 @@ interface FinancialsState {
 
 	trailing: boolean
 	toggleTrailing: () => void
+
+	current: boolean
+	toggleCurrent: () => void
+
+	controls: boolean
+	toggleControls: () => void
 }
 
-export const financialsState = create<FinancialsState>((set) => ({
+export const financialsState = create<FinancialsState>(set => ({
 	range: 'annual',
-	setRange: (newRange) => set({ range: newRange }),
+	setRange: newRange => set({ range: newRange }),
 
 	divider: 1000000,
-	setDivider: (newDivider) => set({ divider: newDivider }),
+	setDivider: newDivider => set({ divider: newDivider }),
 
 	reversed: false,
-	toggleReversed: () => set((state) => ({ reversed: !state.reversed })),
+	toggleReversed: () => set(state => ({ reversed: !state.reversed })),
 
 	trailing: false,
-	toggleTrailing: () => set((state) => ({ trailing: !state.trailing }))
+	toggleTrailing: () => set(state => ({ trailing: !state.trailing })),
+
+	current: true,
+	toggleCurrent: () => set(state => ({ current: !state.current })),
+
+	controls: false,
+	toggleControls: () => set(state => ({ controls: !state.controls }))
 }))

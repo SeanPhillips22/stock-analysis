@@ -3,7 +3,7 @@ import { slidingWindow } from '../utils'
 import { Change as defaultOptions } from './defaultOptionsForComputation'
 export default function ChangeComponent() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { sourcePath } = options
 		const algo = slidingWindow()
 			.windowSize(2)
@@ -19,7 +19,7 @@ export default function ChangeComponent() {
 	calculator.undefinedLength = () => {
 		return 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

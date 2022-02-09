@@ -7,15 +7,15 @@ import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { StatsWidget } from 'components/StatsWidget/_StatsWidget'
 import { Button } from 'components/Buttons/Button'
 import { MAP_STATISTICS } from 'data/financials/map_statistics'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
+import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
 
-interface Props {
+type Props = {
 	info: Info
 	data: Statistics
 }
 
-const StatisticsPage = ({ info, data }: Props) => {
+export default function StatisticsPage({ info, data }: Props) {
 	return (
 		<Stock info={info} url={`/stocks/${info.symbol}/statistics/`}>
 			<SEO
@@ -41,7 +41,7 @@ const StatisticsPage = ({ info, data }: Props) => {
 						/>
 					</div>
 
-					<div>
+					<div className="pb-2">
 						<StatsWidget
 							title="Share Statistics"
 							data={data.shares}
@@ -57,12 +57,10 @@ const StatisticsPage = ({ info, data }: Props) => {
 							data={data.ratios}
 							map={MAP_STATISTICS}
 						/>
-						{!info.exceptions.hideRatios && (
-							<Button
-								text="Financial Ratio History"
-								url={`/stocks/${info.symbol}/financials/ratios/`}
-							/>
-						)}
+						<Button
+							text="Financial Ratio History"
+							url={`/stocks/${info.symbol}/financials/ratios/`}
+						/>
 					</div>
 
 					<div>
@@ -185,13 +183,12 @@ const StatisticsPage = ({ info, data }: Props) => {
 		</Stock>
 	)
 }
-export default StatisticsPage
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('statistics', symbol)
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 
 	return data
 }

@@ -6,7 +6,7 @@ import { useLoadAdsense } from './useLoadAdsense'
 
 export function Sidebar1() {
 	const { path } = useLayoutContext()
-	const isPro = authState((state) => state.isPro)
+	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
 
 	if (noAds(path.one) || isPro) {

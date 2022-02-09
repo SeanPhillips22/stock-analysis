@@ -9,12 +9,13 @@ import {
 	redOrGreen,
 	getPeriodLabel,
 	getPeriodTooltip,
-	sliceData
+	sliceData,
+	getRowStyles
 } from './FinancialTable.functions'
 import { HoverChartIcon } from 'components/Icons/HoverChart'
 import { TableTitle } from './TableTitle'
 import { FinancialsControls } from './Controls/FinancialsControls'
-import Paywall from './Paywall'
+import { PaywallHeaderCell, PaywallBodyCell } from './Paywall'
 import dynamic from 'next/dynamic'
 import { Tooltip } from './Tooltip'
 import { TooltipChart } from './TooltipChart'
@@ -42,20 +43,26 @@ export const FinancialTable = ({
 	count,
 	range
 }: Props) => {
-	// const range = financialsState((state) => state.range)
-	const divider = financialsState((state) => state.divider)
-	const reversed = financialsState((state) => state.reversed)
-	const trailing = financialsState((state) => state.trailing)
+	const divider = financialsState(state => state.divider)
+	const reversed = financialsState(state => state.reversed)
+	const trailing = financialsState(state => state.trailing)
+	const current = financialsState(state => state.current)
 	const { isPro } = useAuthState()
 	const [hover, setHover] = useState(false)
-	const [fullData, setFullData] = useState<FinancialReport>()
 	const [dataRows, setDataRows] = useState(financials)
 
 	// Check if financial data is paywalled
-	const paywall = range === 'annual' ? 10 : 40
+	const paywall = range === 'annual' ? 11 : 38
 	const fullcount = count // The total number of years/quarters available
 	const showcount = !isPro && fullcount > paywall ? paywall : fullcount // How many years/quarter to show
 	const paywalled = showcount < fullcount ? 'true' : false
+
+	let showTTM =
+		range === 'annual' && statement !== 'ratios' && trailing
+			? true
+			: statement === 'ratios' && current
+			? true
+			: false
 
 	useEffect(() => {
 		setDataRows(financials)
@@ -64,23 +71,17 @@ export const FinancialTable = ({
 	// If pro user and data is limited, fetch the full data
 	useEffect(() => {
 		async function fetchFullFinancials() {
-			const res = fullData
-				? fullData
-				: await getStockFinancialsFull(statement, info.symbol, range)
+			const res = await getStockFinancialsFull(statement, info.symbol, range)
 			if (res && res?.datekey?.length > paywall) {
-				setFullData(res)
 				setDataRows(res)
-			} else {
-				throw new Error(
-					'Unable to fetch full data, response was invalid or empty array'
-				)
 			}
 		}
 
 		if (isPro && fullcount > paywall) {
 			fetchFullFinancials()
 		}
-	}, [info.symbol, isPro, fullcount, paywall, statement, range, fullData])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [info.symbol, isPro, statement, range])
 
 	let data = useMemo(
 		() => sliceData(dataRows, showcount, reversed),
@@ -88,28 +89,18 @@ export const FinancialTable = ({
 	)
 
 	// If count is empty, show message
-	if (
-		showcount === 0 ||
-		(statement === 'ratios' && info.exceptions.hideRatios)
-	) {
+	if (showcount === 0) {
 		return (
-			<>
-				<div className="">
-					<TableTitle
-						statement={statement}
-						currency={info.currency}
-						fiscalYear={info.fiscalYear}
-						range={range}
-					/>
-					<Unavailable
-						message={`No ${range} ${statement.replace(
-							/-/g,
-							' '
-						)} data available for this stock.`}
-						classes="min-h-[300px] lg:min-h-[500px]"
-					/>
-				</div>
-			</>
+			<div>
+				<TableTitle info={info} statement={statement} range={range} />
+				<Unavailable
+					message={`No ${range} ${statement.replace(
+						/-/g,
+						' '
+					)} data available for this stock.`}
+					classes="min-h-[300px] lg:min-h-[500px]"
+				/>
+			</div>
 		)
 	}
 
@@ -122,8 +113,8 @@ export const FinancialTable = ({
 	const headerRow = () => {
 		const headerdata = data.datekey
 
-		return headerdata.map((cell, index) => {
-			if (cell === 'TTM' && !trailing) return // Do not show trailing if not enabled
+		return headerdata?.map((cell, index) => {
+			if (cell === 'TTM' && !showTTM) return // Do not show trailing if not enabled
 
 			let cellBody =
 				range === 'annual'
@@ -156,7 +147,7 @@ export const FinancialTable = ({
 
 	const RowTitle = forwardRef<HTMLSpanElement, RowTitleProps>((props, ref) => {
 		const { title, indent } = props
-		const margin = indent ? ' ml-3' : ''
+		const margin = indent ? 'ml-3' : ''
 
 		return (
 			<span ref={ref} className={margin}>
@@ -194,7 +185,7 @@ export const FinancialTable = ({
 		let offs = 4
 		if (
 			row.format === 'growth' &&
-			(range === 'quarterly' || range === 'trailing') &&
+			['quarterly', 'trailing'].includes(range) &&
 			showcount === 6
 		) {
 			if (data?.datekey?.length === 6) {
@@ -225,7 +216,7 @@ export const FinancialTable = ({
 
 		const dataRows = rowdata.map((cell, index) => {
 			let isTTMcolumn = data.datekey[index] === 'TTM' ? true : false
-			if (isTTMcolumn && !trailing) return // Do not show trailing if not enabled
+			if (isTTMcolumn && !showTTM) return // Do not show trailing if not enabled
 
 			if (typeof cell === 'number') {
 				const prev = format === 'growth' ? rowdata[index + offset] : null
@@ -249,19 +240,17 @@ export const FinancialTable = ({
 					isTTMcolumn
 				})
 
-				const cellClass = () => {
-					if (format === 'growth' && cellContent) {
-						return redOrGreen(cellContent, id)
-					}
-					return ''
-				}
+				const cellClass =
+					format === 'growth' && cellContent
+						? redOrGreen(cellContent, id)
+						: undefined
 
 				if (cell != 0 && cellContent != '-') {
 					total++
 				}
 
 				return (
-					<td key={index} className={cellClass()}>
+					<td key={index} className={cellClass}>
 						{cellContent !== '-' ? (
 							<span title={titleTag}>{cellContent}</span>
 						) : (
@@ -274,29 +263,12 @@ export const FinancialTable = ({
 			}
 		})
 
-		const getRowStyles = () => {
-			const styles = []
-			if (row.format === 'growth' || row.border) {
-				styles.push(
-					'border-b-2 border-gray-300 text-[0.85rem] sm:text-[0.95rem]'
-				)
-			}
-			if (row.bold) {
-				styles.push('font-semibold text-gray-800')
-			}
-			if (row.extrabold) {
-				styles.push('font-bold text-gray-700')
-			}
-
-			return styles.join(' ')
-		}
-
 		if (total == 0) {
 			return null
 		}
 		return (
 			<>
-				<tr className={getRowStyles()}>
+				<tr className={getRowStyles(row)}>
 					<td
 						className="flex flex-row justify-between items-center"
 						onTouchStart={() => !hover && setHover(true)}
@@ -306,7 +278,7 @@ export const FinancialTable = ({
 						<Tooltip
 							content={<IndicatorTooltip row={row} />}
 							theme="light"
-							delay={100}
+							delay={300}
 							className="bigTooltipText"
 						>
 							<RowTitle
@@ -315,7 +287,7 @@ export const FinancialTable = ({
 							/>
 						</Tooltip>
 						<TooltipChart
-							render={(attrs) => (
+							render={attrs => (
 								<div
 									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-20"
 									tabIndex={-1}
@@ -330,13 +302,13 @@ export const FinancialTable = ({
 											ticker={info.ticker}
 											divider={divider}
 											reversed={reversed}
-											trailing={trailing}
 											statement={statement}
+											showTTM={showTTM}
 										/>
 									)}
 								</div>
 							)}
-							delay={100}
+							delay={200}
 							interactive={true}
 							offset={[150, -1]}
 							popperOptions={{
@@ -349,6 +321,13 @@ export const FinancialTable = ({
 						</TooltipChart>
 					</td>
 					{dataRows}
+					{paywalled && !isPro && (
+						<PaywallBodyCell
+							range={range}
+							showcount={showcount}
+							fullcount={fullcount}
+						/>
+					)}
 				</tr>
 			</>
 		)
@@ -356,13 +335,8 @@ export const FinancialTable = ({
 
 	return (
 		<div>
-			<div className="flex flex-row justify-between items-end">
-				<TableTitle
-					statement={statement}
-					currency={info.currency}
-					fiscalYear={info.fiscalYear}
-					range={range}
-				/>
+			<div className="md:flex md:flex-row md:justify-between md:items-end">
+				<TableTitle info={info} statement={statement} range={range} />
 				<FinancialsControls
 					info={info}
 					statement={statement}
@@ -392,6 +366,13 @@ export const FinancialTable = ({
 								</Tooltip>
 							</th>
 							{headerRow()}
+							{paywalled && !isPro && (
+								<PaywallHeaderCell
+									range={range}
+									diff={fullcount - showcount}
+									last={data.datekey[data.datekey.length - 1]}
+								/>
+							)}
 						</tr>
 					</thead>
 					<tbody>
@@ -400,13 +381,6 @@ export const FinancialTable = ({
 						})}
 					</tbody>
 				</table>
-				{paywalled && !isPro && (
-					<Paywall
-						range={range}
-						fullcount={fullcount}
-						showcount={showcount}
-					/>
-				)}
 			</div>
 			<FinancialSource info={info} />
 		</div>

@@ -136,11 +136,11 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 
 export default CandleStickStockChart
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('chartpage', symbol, 'etf')
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=3600')
 
 	return data
 }

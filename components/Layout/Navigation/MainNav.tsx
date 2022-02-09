@@ -6,18 +6,18 @@ import {
 	AdjustmentsIcon,
 	TrendingUpIcon,
 	NewspaperIcon,
-	ArchiveIcon
+	ArchiveIcon,
+	ChartSquareBarIcon
 } from '@heroicons/react/outline'
 import { matchParentPath } from 'functions/helpers/matchPath'
-import { useEffect } from 'react'
-import { navMenuState } from 'state/navMenuState'
-import { navState } from 'state/navState'
+import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 import { Collapse } from './Collapse'
 import { MenuNavItem } from './NavItems/Menu'
 import { SingleNavItem } from './NavItems/Single'
+import { useLayoutContext } from '../LayoutContext'
 
 const navigation = [
-	{ name: 'Home', href: '/', icon: HomeIcon, current: true },
+	{ name: 'Home', href: '/', icon: HomeIcon },
 	{
 		name: 'Stocks',
 		href: '/stocks/',
@@ -52,6 +52,29 @@ const navigation = [
 		icon: TrendingUpIcon
 	},
 	{
+		name: 'Market Movers',
+		href: '/markets/gainers/',
+		icon: ChartSquareBarIcon,
+		children: [
+			{
+				name: 'Top Gainers',
+				href: '/markets/gainers/'
+			},
+			{
+				name: 'Top Losers',
+				href: '/markets/losers/'
+			},
+			{
+				name: 'Most Active',
+				href: '/markets/active/'
+			},
+			{
+				name: 'Premarket',
+				href: '/markets/premarket/'
+			}
+		]
+	},
+	{
 		name: 'Screener',
 		href: '/screener/stock/',
 		icon: AdjustmentsIcon,
@@ -78,13 +101,16 @@ const navigation = [
 ]
 
 export function MainNav() {
-	const setIsOpen = navMenuState((state) => state.setIsOpen)
-	const path = navState((state) => state.path)
+	const setIsOpen = navMenuState(state => state.setIsOpen)
+	const initial = navMenuState(state => state.initial)
+	const setInitial = navMenuState(state => state.setInitial)
+	const { path } = useLayoutContext()
 
-	useEffect(() => {
+	// Set the initial open state for the menu
+	if (initial && path.one) {
+		setInitial(false)
 		if (path) {
-			setIsOpen({})
-			navigation.map((item) => {
+			navigation.map(item => {
 				if (item.children) {
 					if (matchParentPath(path, item.href)) {
 						setIsOpen({ [item.name]: true })
@@ -92,13 +118,12 @@ export function MainNav() {
 				}
 			})
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [path])
+	}
 
 	return (
 		<div className="leftnav">
 			<nav className="nav-col">
-				{navigation.map((item) =>
+				{navigation.map(item =>
 					!item.children ? (
 						<SingleNavItem key={item.name} item={item} path={path} />
 					) : (

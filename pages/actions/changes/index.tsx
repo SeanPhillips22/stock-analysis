@@ -4,7 +4,8 @@ import { getActionsData } from 'functions/apis/callBackEnd'
 import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 
 export const ActionsChanges = ({ data }: ActionProps) => {
 	const columns = [
@@ -45,10 +46,10 @@ export const ActionsChanges = ({ data }: ActionProps) => {
 				description="A list of recent and historical stock ticker symbol changes. It is updated daily, with history that goes all the way back to 1998."
 				canonical="/actions/changes/"
 			/>
-			<ActionsLayout title="Stock Symbol Changes" url="/actions/changes/">
+			<ActionsLayout url="/actions/changes/">
 				<ActionsTable
 					key="Changes"
-					title="Changes"
+					title="Recent Stock Symbol Changes"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

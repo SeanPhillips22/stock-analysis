@@ -34,7 +34,7 @@ export default function Merge() {
 	let merge = () => {
 		/** Do Nothing */
 	}
-	const mergeCompute = (data) => {
+	const mergeCompute = data => {
 		const zip = zipper().combine((datum, indicator) => {
 			const result =
 				skipUndefined && indicator === undefined
@@ -46,21 +46,21 @@ export default function Merge() {
 		// @ts-ignore
 		return zip(data, algorithm(data))
 	}
-	mergeCompute.algorithm = (newAlgorithm) => {
+	mergeCompute.algorithm = newAlgorithm => {
 		if (newAlgorithm === undefined) {
 			return algorithm
 		}
 		algorithm = newAlgorithm
 		return mergeCompute
 	}
-	mergeCompute.merge = (newMerge) => {
+	mergeCompute.merge = newMerge => {
 		if (newMerge === undefined) {
 			return merge
 		}
 		merge = newMerge
 		return mergeCompute
 	}
-	mergeCompute.skipUndefined = (newSkipUndefined) => {
+	mergeCompute.skipUndefined = newSkipUndefined => {
 		if (newSkipUndefined === undefined) {
 			return skipUndefined
 		}

@@ -38,7 +38,6 @@ export function SelectRange({ info, statement, range }: Props) {
 							<Link
 								href={`/stocks/${info.symbol}/financials/${statementPath}${path}`}
 								prefetch={false}
-								scroll={false}
 							>
 								<a
 									className={range === id ? 'active' : 'inactive'}

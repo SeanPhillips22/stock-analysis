@@ -19,7 +19,7 @@ gi0mjSwdgb75x7akc9HMEJ0CAwEAAQ==
 -----END PUBLIC KEY-----`
 
 function sleep(ms: number) {
-	return new Promise((resolve) => setTimeout(resolve, ms))
+	return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export default async function handler(

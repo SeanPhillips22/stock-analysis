@@ -3,7 +3,7 @@ import { path, slidingWindow } from '../utils'
 import { ForceIndex as defaultOptions } from './defaultOptionsForComputation'
 export default function ForceIndexComponent() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { sourcePath, volumePath } = options
 		const source = path(sourcePath)
 		const volume = path(volumePath)
@@ -18,7 +18,7 @@ export default function ForceIndexComponent() {
 	calculator.undefinedLength = () => {
 		return 2
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

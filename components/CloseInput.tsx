@@ -25,7 +25,7 @@ export function CloseInput({ search, setSearch }: Props) {
 				onClick={() => {
 					setSearch('')
 				}}
-				onKeyPress={(e) => {
+				onKeyPress={e => {
 					if (e.key === 'Enter') {
 						setSearch('')
 					}

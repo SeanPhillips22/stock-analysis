@@ -7,8 +7,8 @@ import { ScreenerTypes } from '../screener.types'
  * @param type the type of screener to fetch data for
  */
 export function useFetchFullData() {
-	const setLoaded = screenerState((state) => state.setLoaded)
-	const setData = screenerState((state) => state.setData)
+	const setLoaded = screenerState(state => state.setLoaded)
+	const setData = screenerState(state => state.setData)
 
 	async function fetchFullData(type: ScreenerTypes) {
 		const screenerType =

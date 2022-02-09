@@ -91,7 +91,7 @@ export class GenericChartComponent extends GenericComponent {
 
 		if (chartConfigList && Array.isArray(chartConfigList)) {
 			const { chartId } = this.context
-			const chartConfig = chartConfigList.find((each) => each.id === chartId)
+			const chartConfig = chartConfigList.find(each => each.id === chartId)
 			this.moreProps.chartConfig = chartConfig
 		}
 		if (isDefined(this.moreProps.chartConfig)) {

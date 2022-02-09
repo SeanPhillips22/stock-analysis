@@ -98,7 +98,7 @@ export default function Page({ content, meta, slug }: Props) {
 				schema={schema}
 				type="article"
 			/>
-			<ArticleLayout meta={meta}>
+			<ArticleLayout meta={meta} url={`/${slug}/`}>
 				<div>
 					<MDXRemote
 						{...content}

@@ -6,7 +6,8 @@ import { ActionsTable } from 'components/Actions/ActionsTable'
 import Link from 'next/link'
 import { StockLink } from 'components/Links'
 import { ParsedUrlQuery } from 'querystring'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 import { ActionsPaywall } from 'components/Actions/ActionsPaywall'
 
 export const ActionsAcquisitionsYear = ({ year, data }: ActionProps) => {
@@ -63,13 +64,10 @@ export const ActionsAcquisitionsYear = ({ year, data }: ActionProps) => {
 				description={`A list of all public company mergers and acquisitions on the US stock market in the year ${year}.`}
 				canonical={`/actions/acquisitions/${year}/`}
 			/>
-			<ActionsLayout
-				title={`${year} Mergers & Acquisitions`}
-				url={`/actions/acquisitions/${year}/`}
-			>
+			<ActionsLayout url={`/actions/acquisitions/${year}/`}>
 				<ActionsTable
 					key={`Acquisitions-${year}`}
-					title="Acquisitions"
+					title={`${year} Mergers & Acquisitions`}
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}
@@ -106,7 +104,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	// Generate paths for all the years with existing data
-	const current = 2021
+	const current = 2022
 	const last = 1998
 	const diff = current - last
 

@@ -69,7 +69,7 @@ export class CrossHairCursor extends React.Component<CrossHairCursorProps> {
 		ctx.scale(ratio, ratio)
 		ctx.translate(originX, originY)
 
-		lines.forEach((line) => {
+		lines.forEach(line => {
 			const dashArray = getStrokeDasharrayCanvas(line.strokeDasharray)
 
 			ctx.strokeStyle = line.strokeStyle

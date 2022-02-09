@@ -1,4 +1,4 @@
-import { FinancialReport } from 'types/Financials'
+import { FinancialReport, FinancialsMapType } from 'types/Financials'
 import { formatNumber } from 'functions/numbers/formatNumber'
 
 export const getPeriodLabel = (range: string) => {
@@ -69,7 +69,8 @@ export const formatY = (
 
 	if (
 		format === 'reduce_precision' &&
-		(value > 10000000 || value < -10000000)
+		((ymax && (ymax > 1000000 || ymax < -1000000)) ||
+			(ymin && (ymin > 1000000 || ymin < -1000000)))
 	) {
 		return formatNumber(value / 1000000, 0, 0) // new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
@@ -93,6 +94,7 @@ type FormatCell = {
 	revenue: number | null
 	divider: number
 	isTTMcolumn: boolean
+	isHover?: boolean
 }
 
 // Format the number in the cells
@@ -102,7 +104,8 @@ export function formatCell({
 	previous,
 	revenue,
 	divider,
-	isTTMcolumn
+	isTTMcolumn,
+	isHover
 }: FormatCell) {
 	const decimals = divider === 1 ? 3 : 2
 
@@ -151,8 +154,11 @@ export function formatCell({
 		}
 
 		case 'ratio': {
+			if (current === 0) return '0'
 			if (current) {
-				return current.toFixed(decimals)
+				return divider === 1 || isHover
+					? (Math.round(current * 1000) / 1000).toFixed(3)
+					: (Math.round(current * 100) / 100).toFixed(2)
 			}
 			return '-'
 		}
@@ -289,7 +295,7 @@ export function sliceData(
 	const sliced = {} as FinancialReport
 
 	if (data) {
-		Object.keys(data).forEach((key) => {
+		Object.keys(data).forEach(key => {
 			sliced[key] = data[key].slice(0, showcount)
 		})
 
@@ -302,9 +308,25 @@ export function sliceData(
 export function reverseData(data: FinancialReport) {
 	const reversed = {} as FinancialReport
 
-	Object.keys(data).forEach((key) => {
+	Object.keys(data).forEach(key => {
 		reversed[key] = data[key].reverse()
 	})
 
 	return reversed
+}
+
+// Get the css for the individual financial table rows
+export function getRowStyles(row: FinancialsMapType) {
+	const styles = []
+	if (row.format === 'growth' || row.border) {
+		styles.push('border-b-2 border-gray-300 text-[0.85rem] sm:text-[0.95rem]')
+	}
+	if (row.bold) {
+		styles.push('font-semibold text-gray-800')
+	}
+	if (row.extrabold) {
+		styles.push('font-bold text-gray-700')
+	}
+
+	return styles.join(' ')
 }

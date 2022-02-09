@@ -73,7 +73,11 @@
 		@apply text-gray-900 bg-[#eee] font-semibold;
 	}
 
-	.navmenu.darkbg li span.active {
+	.navmenu.screener-filter-nav li span {
+		@apply lg:px-4 xxxl:px-5;
+	}
+
+	.navmenu.screener-filter-nav li span.active {
 		@apply bg-gray-200;
 	}
 
@@ -82,7 +86,7 @@
 		@apply bll hover:bg-gray-100 transition duration-100 cursor-pointer;
 	}
 
-	.navmenu.darkbg li span.inactive {
+	.navmenu.screener-filter-nav li span.inactive {
 		@apply hover:bg-gray-200;
 	}
 

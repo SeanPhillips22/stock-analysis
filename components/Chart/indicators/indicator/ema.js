@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'EMA'
 export default function Ema() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.ema)
+		.accessor(d => d.ema)
 	const underlyingAlgorithm = ema()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

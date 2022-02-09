@@ -7,6 +7,8 @@ interface Props {
 }
 
 export const CalendarTableMin = ({ upcoming }: Props) => {
+	if (!upcoming.length) return null
+
 	return (
 		<div>
 			<h3 className="hh3">Upcoming IPOs</h3>

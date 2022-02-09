@@ -1,0 +1,30 @@
+/*
+* Stock Title
+* The title of the stock and the byline
+*/
+
+@layer components {
+	.symbol-title {
+		@apply text-2xl sm:text-[26px] font-bold text-gray-900;
+	}
+
+	.sh-notice {
+		@apply text-base text-gray-700 mt-3;
+	}
+
+	.sh-notice-ipo {
+		@apply text-base sm:text-lg text-gray-800 mt-2;
+	}
+
+	.sh-info {
+		@apply h-4 xs:h-5 w-4 xs:w-5 text-blue-400 inline mb-1 mr-1;
+	}
+
+	.sh-info-ipo {
+		@apply h-4 xs:h-5 sm:h-6 w-4 xs:w-5 sm:w-6 text-blue-400 inline mb-1 mr-1;
+	}
+
+	.sh-details {
+		@apply text-tiny text-gray-600 mt-[1px];
+	}
+}

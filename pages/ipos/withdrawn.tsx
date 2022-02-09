@@ -8,7 +8,7 @@ import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
 import { Layout } from 'components/Layout/_Layout'
 
@@ -28,7 +28,7 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 				description="A list of companies that have withdrawn their U.S. stock market IPO within the last year."
 				canonical="/ipos/withdrawn/"
 			/>
-			<Layout>
+			<Layout url="/ipos/withdrawn/">
 				<div className="contain">
 					<Breadcrumbs url="/ipos/withdrawn/" />
 					<h1 className="hh1">Withdrawn IPOs</h1>
@@ -70,7 +70,7 @@ export default IposWithdrawn
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, news, recent } = await getIpoData('withdrawn')
 
-	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=3600')
 
 	return {
 		props: {

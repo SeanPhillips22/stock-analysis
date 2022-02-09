@@ -4,7 +4,8 @@ import { getActionsData } from 'functions/apis/callBackEnd'
 import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 
 export default function ActionsAll({ data }: ActionProps) {
 	const columns = [
@@ -39,10 +40,10 @@ export default function ActionsAll({ data }: ActionProps) {
 				description="A comprehensive list of recent and historical corporate actions and stock changes for companies listed on the US stock market."
 				canonical="/actions/"
 			/>
-			<ActionsLayout title="Corporate Actions" url="/actions/">
+			<ActionsLayout url="/actions/">
 				<ActionsTable
 					key="Actions"
-					title="Actions"
+					title="Recent Corporate Actions"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

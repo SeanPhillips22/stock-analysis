@@ -3,6 +3,7 @@ export interface Quote {
 	pd: string // price formatted for display
 	c: string // price change
 	cp: string // price change percentage
+	cdr: number // price change direction
 	cl: string // previous close
 	o: string // day's open
 	h: string // day's high
@@ -21,4 +22,5 @@ export interface Quote {
 	ecp: string // extended hours price change percentage
 	eu: string // extended hours last updated timestamp
 	es: string // extended hours market status (Pre-market/After-hours)
+	lf: number // last fetch timestamp (epoch time)
 }

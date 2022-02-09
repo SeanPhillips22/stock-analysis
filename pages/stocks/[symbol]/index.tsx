@@ -11,14 +11,16 @@ import { Profile } from 'components/Overview/ProfileWidget'
 import { NewsArea } from 'components/Overview/NewsArea'
 import { FinancialsWidget } from 'components/Overview/FinancialsWidget'
 import { AnalystWidget } from 'components/Overview/AnalystWidget'
-import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
 import { Chart } from 'components/AnalystChart/AnalystChart'
 import { Donut } from 'components/DonutChart/Donut'
+import { Sidebar1All } from 'components/Ads/AdSense/Sidebar1All'
+import { InitialData } from 'types/Charts'
 
-interface Props {
+type Props = {
 	info: Info
 	data: Overview
 	news: { data: News[]; updated: number }
+	chart: InitialData
 }
 
 const chartData = {
@@ -45,7 +47,7 @@ const chartData = {
 	}
 }
 
-const StockOverview = ({ info, data, news }: Props) => {
+export default function StockOverview({ info, data, news, chart }: Props) {
 	let description = `Get a real-time ${info.nameFull} (${info.ticker}) stock price quote with breaking news, financials, statistics, charts and more.`
 	if (info.state == 'upcomingipo') {
 		description = `Get the latest ${info.nameFull} (${info.ticker}) stock price quote with news, financials, IPO details and other important investing information.`
@@ -61,6 +63,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 				title={`${info.nameFull} (${info.ticker}) Stock Price, Quote & News`}
 				description={description}
 				canonical={`/stocks/${symbol}`}
+				preconnect={info.isIPO ? null : 'https://api.stockanalysis.com'}
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-8 mt-8">
 				<div className="order-1 h-[240px] sm:h-[200px] flex-grow overflow-auto">
@@ -69,7 +72,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 			</div>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
-					<PriceChart info={info} />
+					<PriceChart info={info} initial={chart} />
 				</div>
 				<div className="order-1 flex flex-row gap-4">
 					<InfoTable data={data} />
@@ -84,7 +87,7 @@ const StockOverview = ({ info, data, news }: Props) => {
 
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10">
 				<div className="px-4 lg:pt-1 md:px-0 lg:order-2 space-y-6">
-					<Sidebar1Overview news={news.data} />
+					{news.data.length > 5 && <Sidebar1All />}
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />
@@ -103,13 +106,12 @@ const StockOverview = ({ info, data, news }: Props) => {
 	)
 }
 
-export default StockOverview
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('overview', symbol, 'stocks')
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return data
 }

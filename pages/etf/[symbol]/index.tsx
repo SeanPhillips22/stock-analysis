@@ -11,25 +11,28 @@ import { Profile } from 'components/Overview/ProfileWidget'
 import { NewsArea } from 'components/Overview/NewsArea'
 import { HoldingsWidget } from 'components/Overview/HoldingsWidget'
 import { DividendWidget } from 'components/Overview/DividendWidget'
-import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
+import { Sidebar1All } from 'components/Ads/AdSense/Sidebar1All'
+import { InitialData } from 'types/Charts'
 
-interface Props {
+type Props = {
 	info: Info
 	data: Overview
 	news: { data: News[]; updated: number }
+	chart: InitialData
 }
 
-const EtfOverview = ({ info, data, news }: Props) => {
+export default function EtfOverview({ info, data, news, chart }: Props) {
 	return (
 		<Stock info={info} url={`/etf/${info.symbol}/`}>
 			<SEO
 				title={`${info.ticker} ETF Stock Price, Quote & Overview`}
 				description={`Get a real-time stock price quote for ${info.ticker} (${info.name}). Also includes news, ETF details and other investing information.`}
 				canonical={`/etf/${info.symbol}/`}
+				preconnect="https://api.stockanalysis.com"
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
 				<div className="order-3 flex-grow overflow-auto">
-					<PriceChart info={info} />
+					<PriceChart info={info} initial={chart} />
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">
 					<InfoTable data={data} />
@@ -38,7 +41,7 @@ const EtfOverview = ({ info, data, news }: Props) => {
 			</div>
 			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10">
 				<div className="px-4 md:px-0 lg:order-2 space-y-7">
-					<Sidebar1Overview news={news.data} />
+					{news.data.length > 5 && <Sidebar1All />}
 					<Profile info={info} data={data} />
 					{data.holdingsTable && (
 						<HoldingsWidget
@@ -60,13 +63,12 @@ const EtfOverview = ({ info, data, news }: Props) => {
 		</Stock>
 	)
 }
-export default EtfOverview
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('overview', symbol, 'etf')
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return data
 }

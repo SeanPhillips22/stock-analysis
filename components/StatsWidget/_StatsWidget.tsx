@@ -20,8 +20,8 @@ export const StatsWidget = ({ title, data, map }: Props) => {
 			</p>
 			<table className={'text-sm xs:text-base ' + styles.statstable}>
 				<tbody>
-					{data.data.map((item) => {
-						const indicatorInfo = map.find((info) => info.id === item[0])
+					{data.data.map(item => {
+						const indicatorInfo = map.find(info => info.id === item[0])
 
 						return (
 							<tr key={item[0]}>

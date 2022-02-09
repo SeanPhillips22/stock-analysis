@@ -40,6 +40,7 @@ export function extractFinancialValues(value: any, row: number, col: number) {
 	if (value === '-') {
 		return ''
 	}
+
 	value = value.match(/"([^"]*)"/)[1]
 	if (value.includes(',')) {
 		return parseFloat(value.replace(/,/g, ''))

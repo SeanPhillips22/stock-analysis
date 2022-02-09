@@ -3,14 +3,14 @@ import { Tickers } from './Tickers'
 import { LiteYouTubeEmbed } from './LiteYouTubeEmbed'
 import { NewsAds } from './NewsAds'
 
-interface Props {
-	index: number
+type Props = {
 	item: News
 	related?: string
-	count: number
+	ad: number
+	loadAds: boolean
 }
 
-export const NewsVideo = ({ index, item, related, count }: Props) => {
+export function NewsVideo({ item, related, ad, loadAds }: Props) {
 	return (
 		<>
 			<div className="news-video">
@@ -29,9 +29,7 @@ export const NewsVideo = ({ index, item, related, count }: Props) => {
 					<span> - {item.source}</span>
 				</div>
 			</div>
-			{(index === 2 ||
-				(count < 3 && count === index + 1) ||
-				index === 7) && <NewsAds index={index} count={count} />}
+			{loadAds && <NewsAds ad={ad} />}
 		</>
 	)
 }

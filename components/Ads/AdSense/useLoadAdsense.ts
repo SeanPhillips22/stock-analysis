@@ -22,7 +22,11 @@ function loadAdsense() {
 
 export function useLoadAdsense() {
 	const { path } = useLayoutContext()
+<<<<<<< HEAD
 	const isPro = authState((state) => state.isPro)
+=======
+	const isPro = authState(state => state.isPro)
+>>>>>>> origin/main
 
 	useEffect(() => {
 		if (noAds(path.one) || isPro) return // no ads for this page

@@ -1,5 +1,6 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { FilterId, FilterType, NumberType } from '../screener.types'
+import { DataId } from 'types/DataId'
+import { FilterType, NumberType } from '../screener.types'
 import { isFilterSelected } from './isFilterSelected'
 
 /**
@@ -7,20 +8,20 @@ import { isFilterSelected } from './isFilterSelected'
  * @return {functions} The functions to modify the screener filters
  */
 export function useModifyFilters() {
-	const filters = screenerState((state) => state.filters)
-	const addFilter = screenerState((state) => state.addFilter)
-	const removeFilter = screenerState((state) => state.removeFilter)
-	const showColumns = screenerState((state) => state.showColumns)
-	const setShowColumns = screenerState((state) => state.setShowColumns)
-	const addFilteredColumn = screenerState((state) => state.addFilteredColumn)
+	const filters = screenerState(state => state.filters)
+	const addFilter = screenerState(state => state.addFilter)
+	const removeFilter = screenerState(state => state.removeFilter)
+	const showColumns = screenerState(state => state.showColumns)
+	const setShowColumns = screenerState(state => state.setShowColumns)
+	const addFilteredColumn = screenerState(state => state.addFilteredColumn)
 	const removeFilteredColumn = screenerState(
-		(state) => state.removeFilteredColumn
+		state => state.removeFilteredColumn
 	)
-	const resultsMenu = screenerState((state) => state.resultsMenu)
+	const resultsMenu = screenerState(state => state.resultsMenu)
 
 	// Add a filter
 	function add(
-		id: FilterId,
+		id: DataId,
 		name: string,
 		value: string,
 		filterType: FilterType,
@@ -51,16 +52,16 @@ export function useModifyFilters() {
 	}
 
 	// Remove a filter
-	function remove(id: FilterId) {
+	function remove(id: DataId) {
 		removeFilter(id)
 
 		// Remove the column from the filtered columns
-		if (id !== 'm') {
+		if (id !== 'marketCap') {
 			removeFilteredColumn(id)
 
 			// If viewing the filtered columns, force them to update right away
 			if (resultsMenu === 'Filtered') {
-				const newColumns = showColumns.filter((c) => c !== id)
+				const newColumns = showColumns.filter(c => c !== id)
 				setShowColumns(newColumns)
 			}
 		}
@@ -68,7 +69,7 @@ export function useModifyFilters() {
 
 	// Clear all filters
 	function clear() {
-		filters.map((filter) => {
+		filters.map(filter => {
 			remove(filter.id)
 		})
 	}

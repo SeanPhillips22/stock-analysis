@@ -4,7 +4,8 @@ import { getActionsData } from 'functions/apis/callBackEnd'
 import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 
 export const ActionsSplits = ({ data }: ActionProps) => {
 	const columns = [
@@ -43,10 +44,10 @@ export const ActionsSplits = ({ data }: ActionProps) => {
 				description="The most recent stock splits on the US stock market, including both regular (forward) splits and reverse splits."
 				canonical="/actions/splits/"
 			/>
-			<ActionsLayout title="Stock Splits" url="/actions/splits/">
+			<ActionsLayout url="/actions/splits/">
 				<ActionsTable
 					key="Splits"
-					title="Splits"
+					title="Recent Stock Splits"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

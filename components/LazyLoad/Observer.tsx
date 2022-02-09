@@ -7,11 +7,9 @@ type Props = {
 
 export function Observer({ children, offset }: Props) {
 	// Set the observer, disable when in view
-	const { observe, unobserve, inView } = useInView({
+	const { observe, inView } = useInView({
 		rootMargin: `${offset}px`,
-		onEnter: () => {
-			unobserve()
-		}
+		unobserveOnEnter: true
 	})
 
 	// Return a div with an inView observer, only render when a) not pro user and b) view within threshold

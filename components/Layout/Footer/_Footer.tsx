@@ -1,9 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { useNavState } from 'hooks/useNavState'
 import Link from 'next/link'
-import { noAdsRelaxed } from 'components/Ads/noAds'
-import { LoadAds } from 'components/Ads/Snigel/LoadAds'
-import { useAuthState } from 'hooks/useAuthState'
 
 const navigation = {
 	sections: [
@@ -24,12 +19,8 @@ const navigation = {
 }
 
 export const Footer = () => {
-	const { checked, isPro } = useAuthState()
-	const { path } = useNavState()
-
 	return (
 		<>
-			{checked && !isPro && !noAdsRelaxed(path.one) && <LoadAds />}
 			<footer className="bg-gray-800 clear-both">
 				<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
 					<div className="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -40,7 +31,7 @@ export const Footer = () => {
 										Sections
 									</h4>
 									<ul className="mt-4 space-y-4">
-										{navigation.sections.map((item) => (
+										{navigation.sections.map(item => (
 											<li key={item.name}>
 												<Link href={item.href} prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
@@ -86,7 +77,7 @@ export const Footer = () => {
 										Company
 									</h4>
 									<ul className="mt-4 space-y-4">
-										{navigation.company.map((item) => (
+										{navigation.company.map(item => (
 											<li key={item.name}>
 												<Link href={item.href} prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
@@ -102,7 +93,7 @@ export const Footer = () => {
 										Legal
 									</h4>
 									<ul className="mt-4 space-y-4">
-										{navigation.legal.map((item) => (
+										{navigation.legal.map(item => (
 											<li key={item.name}>
 												<Link href={item.href} prefetch={false}>
 													<a className="text-base text-gray-300 hover:text-white">
@@ -251,13 +242,6 @@ export const Footer = () => {
 							IEX Cloud
 						</a>
 						. Other market data may be delayed by 15 minutes or more.
-					</div>
-					<div
-						id="ccpa"
-						className="text-center text-gray-300 cursor-pointer"
-						style={{ display: 'none' }}
-					>
-						Do not share my personal information.
 					</div>
 				</div>
 			</footer>

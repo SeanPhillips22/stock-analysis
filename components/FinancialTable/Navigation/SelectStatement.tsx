@@ -43,7 +43,6 @@ export function SelectStatement({ info, statement, range }: Props) {
 							<Link
 								href={`/stocks/${info.symbol}/financials/${path}${rangePath}`}
 								prefetch={false}
-								scroll={false}
 							>
 								<a
 									className={statement == id ? 'active' : 'inactive'}

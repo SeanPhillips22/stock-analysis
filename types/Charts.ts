@@ -3,3 +3,8 @@ export type ChartDataPoint = {
 	c: number
 	o?: number
 }
+
+export type InitialData = {
+	data: ChartDataPoint[]
+	expiration: number | undefined
+}

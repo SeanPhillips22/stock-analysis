@@ -7,13 +7,13 @@ import {
 	useFilters
 } from 'react-table'
 import { useState, useEffect, useMemo } from 'react'
-import { Controls } from 'components/Controls/_Controls'
 import styles from './ActionsTable.module.css'
 import { useAuthState } from 'hooks/useAuthState'
 import { getActionsDataFull } from 'functions/apis/callBackEnd'
 import { actionsState } from 'state/actionsState'
+import { ActionsControls } from './ActionsControls'
 
-interface Props {
+type Props = {
 	title: string
 	columndata: Column<any>[]
 	rowdata: any[]
@@ -22,18 +22,17 @@ interface Props {
 	year?: string
 }
 
-export const ActionsTable = ({
+export function ActionsTable({
 	title,
 	columndata,
 	rowdata,
 	fullCount,
 	type,
 	year
-}: Props) => {
+}: Props) {
 	const [dataRows, setDataRows] = useState(rowdata)
-	const filter = actionsState((state) => state.filter)
-	const setParamFilter = actionsState((state) => state.setFilter)
-	const isFiltered = actionsState((state) => state.isFiltered)
+	const filter = actionsState(state => state.filter)
+	const setParamFilter = actionsState(state => state.setFilter)
 	const { isPro } = useAuthState()
 
 	const count = rowdata.length
@@ -80,8 +79,7 @@ export const ActionsTable = ({
 
 	return (
 		<>
-			<Controls
-				count={filter || isFiltered ? rows.length : fullCount}
+			<ActionsControls
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={filter}

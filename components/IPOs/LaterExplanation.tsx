@@ -4,7 +4,7 @@ import { InformationCircleIcon } from 'components/Icons/InformationCircle'
 export function LaterExplanation() {
 	return (
 		<div className="pb-1 lg:pb-0">
-			<h2 className="hh2 text-[1.4rem] text-gray-800 mb-3 lg:mb-4">
+			<h2 className="hh2 font-semibold text-[1.4rem] text-gray-800 mb-3 lg:mb-4">
 				After Next Week
 			</h2>
 			<div className="rounded bg-white border border-gray-300 p-3 sm:p-4">

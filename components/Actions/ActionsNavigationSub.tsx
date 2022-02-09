@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { actionsState } from 'state/actionsState'
 
 export const ActionsNavigationSub = () => {
-	const path = navState((state) => state.path)
-	const all = actionsState((state) => state.all)
-	const setAll = actionsState((state) => state.setAll)
+	const { path } = useLayoutContext()
+	const all = actionsState(state => state.all)
+	const setAll = actionsState(state => state.setAll)
 	const [count, setCount] = useState<number>(2)
 
 	const type =
@@ -15,6 +15,7 @@ export const ActionsNavigationSub = () => {
 			: ''
 
 	const tabs = [
+		'2022',
 		'2021',
 		'2020',
 		'2019',

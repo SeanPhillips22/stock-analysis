@@ -8,16 +8,16 @@ import { useFetchFullData } from 'components/StockScreener/functions/useFetchFul
 import { defaultColumnsStocks } from 'components/StockScreener/maps/resultColumns.map'
 
 export default function StockScreenerPage() {
-	const type = screenerState((state) => state.type)
-	const setType = screenerState((state) => state.setType)
-	const setData = screenerState((state) => state.setData)
-	const setLoaded = screenerState((state) => state.setLoaded)
-	const clearFilters = screenerState((state) => state.clearFilters)
-	const clearVarFilters = screenerState((state) => state.clearVarFilters)
-	const setResultsMenu = screenerState((state) => state.setResultsMenu)
-	const setPresets = screenerState((state) => state.setPresets)
-	const setShowColumns = screenerState((state) => state.setShowColumns)
-	const setFetchedColumns = screenerState((state) => state.setFetchedColumns)
+	const type = screenerState(state => state.type)
+	const setType = screenerState(state => state.setType)
+	const setData = screenerState(state => state.setData)
+	const setLoaded = screenerState(state => state.setLoaded)
+	const clearFilters = screenerState(state => state.clearFilters)
+	const clearVarFilters = screenerState(state => state.clearVarFilters)
+	const setResultsMenu = screenerState(state => state.setResultsMenu)
+	const setPresets = screenerState(state => state.setPresets)
+	const setShowColumns = screenerState(state => state.setShowColumns)
+	const setFetchedColumns = screenerState(state => state.setFetchedColumns)
 	const fetchFullData = useFetchFullData()
 
 	// Reset everything when switching between screeners
@@ -44,7 +44,7 @@ export default function StockScreenerPage() {
 				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
 				canonical="/screener/stock/"
 			/>
-			<ScreenerLayout>
+			<ScreenerLayout url="/screener/stock/">
 				<Screener />
 			</ScreenerLayout>
 		</>

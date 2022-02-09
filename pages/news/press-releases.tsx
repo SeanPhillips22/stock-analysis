@@ -6,8 +6,7 @@ import { NewsNavigation } from 'components/News/NewsNavigation'
 import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { NewsFeed } from 'components/News/_NewsFeed'
 import { NewsWidget } from 'components/News/NewsWidget'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Layout } from 'components/Layout/_Layout'
 
 interface Props {
@@ -23,7 +22,7 @@ export const AllPressReleases = ({ data, other }: Props) => {
 				description="Press releases for publicly traded companies on the US stock market. Includes important company events, earnings releases and more."
 				canonical="/news/press-releases/"
 			/>
-			<Layout>
+			<Layout url="/news/press-releases/">
 				<div className="contain pb-0">
 					<Breadcrumbs url="/news/press-releases/" />
 					<h1 className="hh1">Press Releases</h1>
@@ -44,7 +43,6 @@ export const AllPressReleases = ({ data, other }: Props) => {
 								url: '/news/all-stocks/'
 							}}
 						/>
-						<Sidebar2 />
 					</aside>
 				</div>
 			</Layout>
@@ -57,7 +55,7 @@ export default AllPressReleases
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, other } = await getMarketNews('press')
 
-	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

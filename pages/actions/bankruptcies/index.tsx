@@ -4,7 +4,8 @@ import { getActionsData } from 'functions/apis/callBackEnd'
 import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 
 export const ActionsBankruptcies = ({ data }: ActionProps) => {
 	const columns = [
@@ -35,10 +36,10 @@ export const ActionsBankruptcies = ({ data }: ActionProps) => {
 				description="A list of recent and historical bankruptcy liquidations of public companies listed on the US stock market."
 				canonical="/actions/bankruptcies/"
 			/>
-			<ActionsLayout title="Bankruptcies" url="/actions/bankruptcies/">
+			<ActionsLayout url="/actions/bankruptcies/">
 				<ActionsTable
 					key="Bankruptcies"
-					title="Bankruptcies"
+					title="Recent Bankruptcies"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}

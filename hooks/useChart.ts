@@ -1,8 +1,8 @@
 import { getData } from 'functions/apis/API'
-import { isTradingHoursOpen } from 'functions/datetime/isTradingHours'
 import { useQuery } from 'react-query'
 import { Info } from 'types/Info'
 import { getChartUrl } from 'components/PriceChart/PriceChart.functions'
+import { InitialData } from 'types/Charts'
 
 async function queryChart(symbol: string, type: string, time: string) {
 	if (!time) return
@@ -12,17 +12,17 @@ async function queryChart(symbol: string, type: string, time: string) {
 	return await getData(url)
 }
 
-export function useChart(info: Info, time: string) {
-	const tradingHours = isTradingHoursOpen()
-
+export function useChart(info: Info, time: string, initial: InitialData) {
 	const { data, isFetching } = useQuery(
-		['c', info.symbol, info.type, time],
+		['change', info.symbol, info.type, time],
 		() => queryChart(info.symbol, info.type, time),
 		{
-			refetchInterval: tradingHours ? 60000 : false,
-			refetchOnWindowFocus: tradingHours ? true : false,
+			initialData: initial.data,
+			initialDataUpdatedAt: initial.expiration,
+			refetchOnWindowFocus: false,
 			enabled: info.state !== 'upcomingipo' && !info.archived,
-			notifyOnChangeProps: 'tracked'
+			notifyOnChangeProps: 'tracked',
+			retry: false
 		}
 	)
 

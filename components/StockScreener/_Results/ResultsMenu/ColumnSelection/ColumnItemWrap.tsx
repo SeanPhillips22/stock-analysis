@@ -1,20 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { screenerState } from 'components/StockScreener/screener.state'
 import { useModifyColumns } from 'components/StockScreener/functions/useModifyColumns'
-import {
-	FiltersMap,
-	IPOFiltersMap,
-	ETFFiltersMap
-} from 'components/StockScreener/maps/filters.map'
-import {
-	FilterId,
-	ScreenerTypes
-} from 'components/StockScreener/screener.types'
+import { getDataPoints } from 'components/StockScreener/maps/dataPoints'
+import { DataId } from 'types/DataId'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { ColumnItem } from './ColumnItem'
 import { useMemo } from 'react'
 
 type ColumnProperties = {
-	id: FilterId
+	id: DataId
 	name: string
 }
 
@@ -29,22 +23,13 @@ type Props = {
  */
 export function ColumnItemWrap({ search, type }: Props) {
 	const { isShowing } = useModifyColumns()
-	const columnDropdownOpen = screenerState((state) => state.columnDropdownOpen)
+	const columnDropdownOpen = screenerState(state => state.columnDropdownOpen)
+	const DataPoints = getDataPoints(type)
 
 	const activeArray: ColumnProperties[] = []
 	const inactiveArray: ColumnProperties[] = []
 
-	let filters = []
-
-	if (type == 'stocks') {
-		filters = FiltersMap
-	} else if (type == 'ipo') {
-		filters = IPOFiltersMap
-	} else {
-		filters = ETFFiltersMap
-	}
-
-	filters.forEach((filter) => {
+	DataPoints.map(filter => {
 		if (isShowing(filter.id)) {
 			if (search === '' || filter.name.toLowerCase().includes(search)) {
 				activeArray.push({ id: filter.id, name: filter.name })
@@ -61,7 +46,7 @@ export function ColumnItemWrap({ search, type }: Props) {
 
 	return (
 		<div className="max-h-80 overflow-y-auto overscroll-contain thin-scroll text-sm p-2 space-y-2">
-			{active.map((item) => (
+			{active.map(item => (
 				<ColumnItem
 					key={item.id}
 					id={item.id}
@@ -69,7 +54,7 @@ export function ColumnItemWrap({ search, type }: Props) {
 					type={type}
 				/>
 			))}
-			{inactive.map((item) => (
+			{inactive.map(item => (
 				<ColumnItem
 					key={item.id}
 					id={item.id}

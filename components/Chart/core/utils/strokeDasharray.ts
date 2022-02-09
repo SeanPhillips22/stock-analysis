@@ -18,7 +18,7 @@ export const getStrokeDasharrayCanvas = (type?: strokeDashTypes) => {
 		return []
 	}
 
-	return a.map((d) => Number(d))
+	return a.map(d => Number(d))
 }
 
 export const getStrokeDasharray = (type?: strokeDashTypes) => {

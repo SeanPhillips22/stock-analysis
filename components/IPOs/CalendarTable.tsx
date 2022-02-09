@@ -5,50 +5,41 @@ import {
 	useAsyncDebounce,
 	useSortBy
 } from 'react-table'
-import { StockLink } from 'components/Links'
 import { IpoUpcoming } from 'types/Ipos'
 import 'regenerator-runtime/runtime'
 import { Export } from 'components/Controls/Export'
 import { Filter } from 'components/Controls//Filter'
 import { SortUpIcon } from 'components/Icons/SortUp'
 import { SortDownIcon } from 'components/Icons/SortDown'
-
-type CellString = {
-	cell: {
-		value: string
-	}
-}
+import { formatCells } from 'functions/tables/formatCells'
 
 const columns: Column[] = [
 	{
 		Header: 'IPO Date',
 		accessor: 'date',
-		Cell: function DateCell({ cell: { value } }: CellString) {
-			return value || 'Pending'
+		Cell: (props: any) => {
+			if (props.value) {
+				if (props.data[props.row.id].weekOf)
+					return <span className="weekof">{props.value}</span>
+			}
+			return props.value
 		},
 		sortType: (a, b) => {
 			const ad = new Date(a.values.date).getTime()
 			const bd = new Date(b.values.date).getTime()
-			if (ad < bd) {
-				return 1
-			}
-			if (ad > bd) {
-				return -1
-			} else {
-				return 0
-			}
+			if (ad < bd) return 1
+			if (ad > bd) return -1
+			else return 0
 		},
 		sortInverted: true
 	},
 	{
 		Header: 'Symbol',
 		accessor: 'symbol',
-		Cell: function DateCell({ cell: { value } }: CellString) {
-			return <StockLink symbol={value} />
-		}
+		Cell: (props: any) => formatCells('linkSymbol', props)
 	},
 	{
-		Header: 'Name',
+		Header: 'Company Name',
 		accessor: 'name',
 		sortType: (a, b) => {
 			const ad = a.values.name.toUpperCase()
@@ -72,21 +63,22 @@ const columns: Column[] = [
 		Header: 'Price Range',
 		accessor: 'price'
 	},
-
 	{
 		Header: 'Shares',
-		accessor: 'shares'
+		accessor: 'shares',
+		Cell: (props: any) =>
+			props.value === 'n/a' ? 'n/a' : formatCells('integer', props)
 	}
 ]
 
 const NoIpos = ({ title }: { title: string }) => {
 	switch (title) {
-		case 'IPOs This Week': {
+		case 'This Week': {
 			return (
 				<div>
-					<h2 className="hh2 mb-2">{title}</h2>
+					<h2 className="hh2 font-semibold mb-2 text-gray-800">{`${title} · 0 IPOs`}</h2>
 					<p className="text-lg text-gray-900">
-						There are no upcoming IPOs remaining for the current week.
+						There are no upcoming IPOs remaining for this week.
 					</p>
 				</div>
 			)
@@ -95,9 +87,9 @@ const NoIpos = ({ title }: { title: string }) => {
 		case 'Next Week': {
 			return (
 				<div>
-					<h2 className="hh2">{title}</h2>
+					<h2 className="hh2 font-semibold text-gray-800">{`${title} · 0 IPOs`}</h2>
 					<p className="text-lg text-gray-900">
-						There are no upcoming IPOs scheduled for next week.
+						There are no IPOs scheduled for next week.
 					</p>
 				</div>
 			)
@@ -116,13 +108,7 @@ interface Props {
 	filter?: boolean
 }
 
-export const CalendarTable = ({
-	title,
-	data,
-	tableId,
-	border,
-	filter
-}: Props) => {
+export function CalendarTable({ title, data, tableId, border, filter }: Props) {
 	const initialState = !data[0]?.date ? { hiddenColumns: ['date'] } : {}
 
 	const tableInstance = useTable(
@@ -151,8 +137,10 @@ export const CalendarTable = ({
 					border ? ' pt-1.5 border-t' : ''
 				}`}
 			>
-				<h2 className="hh2 text-[1.4rem] text-gray-800 mb-0 lg:mb-0.5 mr-auto">
-					{title}
+				<h2 className="hh2 font-semibold text-[1.4rem] text-gray-800 mb-0 lg:mb-0.5 mr-auto">
+					{title === 'This Week' || title === 'Next Week'
+						? `${title} · ${count} IPOs`
+						: title}
 				</h2>
 				<div className="hidden sm:block">
 					<Export
@@ -182,16 +170,16 @@ export const CalendarTable = ({
 				)}
 			</div>
 			<div className="overflow-x-auto">
-				<table className="ipotable" id={tableId}>
+				<table className="ipotable calendar" id={tableId}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
 									<th
+										key={index}
 										{...column.getSortByToggleProps({
 											title: `Sort by: ${column.Header}`
 										})}
-										key={index}
 									>
 										<span className="inline-flex flex-row items-center">
 											{column.render('Header')}

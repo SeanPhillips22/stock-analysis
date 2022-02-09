@@ -6,9 +6,10 @@ import { HeaderSearch } from './HeaderSearch'
 
 type Props = {
 	hideNav?: boolean
+	hideTrial?: boolean
 }
 
-export function Header({ hideNav }: Props) {
+export function Header({ hideNav, hideTrial }: Props) {
 	return (
 		<header className="hd-wrap">
 			<div className={hideNav ? 'hd-inner hidenav' : 'hd-inner'}>
@@ -25,7 +26,7 @@ export function Header({ hideNav }: Props) {
 				<HeaderSearch />
 
 				{/* Login */}
-				<HeaderLogin />
+				<HeaderLogin hideTrial={hideTrial} />
 			</div>
 		</header>
 	)

@@ -49,8 +49,8 @@ interface Props {
 	ticker: string
 	divider: number
 	reversed: boolean
-	trailing: boolean
 	statement: Statement
+	showTTM: boolean
 }
 
 export const HoverChart = ({
@@ -61,8 +61,8 @@ export const HoverChart = ({
 	ticker,
 	divider,
 	reversed,
-	trailing,
-	statement
+	statement,
+	showTTM
 }: Props) => {
 	if (
 		typeof window !== 'undefined' &&
@@ -119,7 +119,8 @@ export const HoverChart = ({
 						previous,
 						revenue,
 						divider,
-						isTTMcolumn
+						isTTMcolumn,
+						isHover: true
 				  })
 				: current
 
@@ -131,7 +132,7 @@ export const HoverChart = ({
 	// Format dates as years if annual
 	let xdatadraft: Array<number | string> = data.datekey.slice(0, count)
 	if (range === 'annual') {
-		xdatadraft = xdatadraft.map((item) => {
+		xdatadraft = xdatadraft.map(item => {
 			return formatYear(item)
 		})
 	}
@@ -144,7 +145,7 @@ export const HoverChart = ({
 	// If ttm/latest is disabled, remove those values from the X and Y data
 	let l = xaxis.length - 1
 	if (xaxis[l] === 'TTM') {
-		if (!trailing || type === 'growth') {
+		if (!showTTM || type === 'growth') {
 			xaxis = xaxis.slice(0, l)
 			yaxis = yaxis.slice(0, l)
 		} else if (statement === 'ratios') {
@@ -174,7 +175,8 @@ export const HoverChart = ({
 	const bgColor =
 		chartType === 'line' ? 'rgba(44, 98, 136, 0.4)' : 'rgba(44, 98, 136, 1)'
 
-	const padding = chartType == 'line' ? 15 : 0
+	let padding = chartType == 'line' ? 15 : 0
+	if (xaxis.length === 1 && type === 'percentage') padding = 20
 
 	const options = {
 		maintainAspectRatio: false,

@@ -10,8 +10,7 @@ import { InfoTable } from 'components/Dividend/InfoTable'
 import { HistoryTable } from 'components/Dividend/HistoryTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { DividendChart } from 'components/Dividend/DividendChart'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 
 interface Props {
 	info: Info
@@ -58,7 +57,6 @@ const Dividend = ({ info, data, news }: Props) => {
 								url: `/etf/${info.symbol}/`
 							}}
 						/>
-						{data.history.length > 15 && news?.length > 4 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>
@@ -67,11 +65,11 @@ const Dividend = ({ info, data, news }: Props) => {
 }
 export default Dividend
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('dividend', symbol, 'etf')
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 
 	return data
 }

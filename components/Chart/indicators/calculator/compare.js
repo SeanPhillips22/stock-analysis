@@ -3,19 +3,19 @@ import { path } from '../utils'
 import { Change as defaultOptions } from './defaultOptionsForComputation'
 export default function Compare() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { basePath, mainKeys, compareKeys } = options
 		const base = path(basePath)
 		const first = data[0]
 		const b = base(first)
 		const firsts = {}
-		const compareData = data.map((d) => {
+		const compareData = data.map(d => {
 			const result = {}
-			mainKeys.forEach((key) => {
+			mainKeys.forEach(key => {
 				if (typeof d[key] === 'object') {
 					// @ts-ignore
 					result[key] = {}
-					Object.keys(d[key]).forEach((subkey) => {
+					Object.keys(d[key]).forEach(subkey => {
 						// @ts-ignore
 						result[key][subkey] = (d[key][subkey] - b) / b
 					})
@@ -24,7 +24,7 @@ export default function Compare() {
 					result[key] = (d[key] - b) / b
 				}
 			})
-			compareKeys.forEach((key) => {
+			compareKeys.forEach(key => {
 				if (d[key] !== undefined && firsts[key] === undefined) {
 					// @ts-ignore
 					firsts[key] = d[key]
@@ -38,7 +38,7 @@ export default function Compare() {
 		})
 		return compareData
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

@@ -9,6 +9,7 @@ interface ISEO {
 	image?: string
 	schema?: any
 	type?: string | null
+	preconnect?: string | null
 }
 
 export const SEO = ({
@@ -18,7 +19,8 @@ export const SEO = ({
 	noindex = false,
 	image,
 	schema = null,
-	type = null
+	type = null,
+	preconnect = null
 }: ISEO) => {
 	const seoTitle =
 		title === 'Stock Analysis | Free Online Stock Information for Investors'
@@ -45,6 +47,7 @@ export const SEO = ({
 			{description && <meta name="description" content={description} />}
 			<meta name="robots" content={metaRobots} />
 			<link rel="canonical" href={canonicalUrl} />
+			{preconnect && <link rel="preconnect" href={preconnect} />}
 			<meta property="og:title" content={seoTitle} />
 			{description && (
 				<meta property="og:description" content={description} />

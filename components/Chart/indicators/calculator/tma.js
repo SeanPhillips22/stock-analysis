@@ -36,14 +36,14 @@ import { slidingWindow } from '../utils'
 import { TMA as defaultOptions } from './defaultOptionsForComputation'
 export default function Tma() {
 	let options = defaultOptions
-	const calculator = (data) => {
+	const calculator = data => {
 		const { windowSize, sourcePath } = options
 		const n = Math.floor(windowSize / 2)
 		const weight = windowSize % 2 === 0 ? n * (n + 1) : (n + 1) * (n + 1)
 		const triaverage = slidingWindow()
 			.windowSize(windowSize)
 			.sourcePath(sourcePath)
-			.accumulator((values) => {
+			.accumulator(values => {
 				const total = sum(values, (v, i) => {
 					return i < n ? (i + 1) * v : (windowSize - i) * v
 				})
@@ -55,7 +55,7 @@ export default function Tma() {
 		const { windowSize } = options
 		return windowSize - 1
 	}
-	calculator.options = (newOptions) => {
+	calculator.options = newOptions => {
 		if (newOptions === undefined) {
 			return options
 		}

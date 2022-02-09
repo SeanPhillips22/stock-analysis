@@ -1,5 +1,5 @@
 import { useAuthState } from 'hooks/useAuthState'
-import { navState } from 'state/navState'
+import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { noAds } from 'components/Ads/noAds'
 import { Observer } from 'components/LazyLoad/Observer'
 
@@ -12,7 +12,7 @@ export function LazyLoadAd({ children, offset }: Props) {
 	const { checked, isPro } = useAuthState()
 
 	// Check the nav state
-	const path = navState((state) => state.path)
+	const { path } = useLayoutContext()
 
 	// Only load the observer if: a) not pro user and b) not on an excluded page
 	return (

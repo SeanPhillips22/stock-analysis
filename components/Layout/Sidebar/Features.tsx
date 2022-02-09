@@ -21,7 +21,7 @@ const FeaturesMap = [
 		title: 'Stock Screener',
 		description:
 			'Filter, sort and analyze all stocks to find your next investment.',
-		url: '/stock-screener/',
+		url: '/screener/stock/',
 		tagId: 'tag-feat-nav-widget-screener'
 	},
 	{
@@ -38,7 +38,7 @@ export function Features() {
 
 	return (
 		<div className="space-y-3">
-			{FeaturesMap.map((feature) => {
+			{FeaturesMap.map(feature => {
 				if (isPro && feature.tagId === 'tag-upgr-nav-widget') {
 					return null
 				}

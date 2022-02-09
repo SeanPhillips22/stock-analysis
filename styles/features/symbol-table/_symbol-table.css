@@ -40,6 +40,18 @@
 		background-color: #f2f9ff !important;
 	}
 
+	.right-green {
+		@apply text-right text-[green];
+	}
+
+	.right-red {
+		@apply text-right text-[red];
+	}
+
+	.right-gray {
+		@apply text-right text-gray-800;
+	}
+
 	@media screen and (max-width: 1200px) {
 		.symbol-table tr > * {
 			padding: 0.5em 0.3em;

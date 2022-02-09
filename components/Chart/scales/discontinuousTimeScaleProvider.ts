@@ -18,7 +18,7 @@ const evaluateLevel = (
 				format: formatters[eachLevel(row, date, i)]
 			}
 		})
-		.find((level) => !!level.format)
+		.find(level => !!level.format)
 }
 
 const discontinuousIndexCalculator = slidingWindow()
@@ -149,7 +149,7 @@ function createIndex(
 			.source(dateAccessor)
 			.misc({ initialIndex, formatters })
 
-		const index = calculate(data).map((each) => {
+		const index = calculate(data).map(each => {
 			const { format } = each
 			return {
 				index: each.index,
@@ -266,7 +266,7 @@ export function discontinuousTimeScaleProviderBuilder() {
 		return discontinuousTimeScaleProvider
 	}
 	discontinuousTimeScaleProvider.utc = () => {
-		realDateAccessor = (dateAccessor) => (d: any) => {
+		realDateAccessor = dateAccessor => (d: any) => {
 			const date = dateAccessor(d)
 			// The getTimezoneOffset() method returns the time-zone offset from UTC, in minutes, for the current locale.
 			const offsetInMillis = date.getTimezoneOffset() * 60 * 1000

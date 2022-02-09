@@ -22,42 +22,42 @@ export default function BaseIndicator() {
 	const baseIndicator = () => () => {
 		/** Do Nothing */
 	}
-	baseIndicator.id = (newId) => {
+	baseIndicator.id = newId => {
 		if (newId === undefined) {
 			return id
 		}
 		id = newId
 		return baseIndicator
 	}
-	baseIndicator.accessor = (newAccessor) => {
+	baseIndicator.accessor = newAccessor => {
 		if (newAccessor === undefined) {
 			return accessor
 		}
 		accessor = newAccessor
 		return baseIndicator
 	}
-	baseIndicator.stroke = (newStroke) => {
+	baseIndicator.stroke = newStroke => {
 		if (newStroke === undefined) {
 			return !stroke ? (stroke = overlayColors(id)) : stroke
 		}
 		stroke = newStroke
 		return baseIndicator
 	}
-	baseIndicator.fill = (newFill) => {
+	baseIndicator.fill = newFill => {
 		if (newFill === undefined) {
 			return !fill ? (fill = overlayColors(id)) : fill
 		}
 		fill = newFill
 		return baseIndicator
 	}
-	baseIndicator.echo = (newEcho) => {
+	baseIndicator.echo = newEcho => {
 		if (newEcho === undefined) {
 			return echo
 		}
 		echo = newEcho
 		return baseIndicator
 	}
-	baseIndicator.type = (newType) => {
+	baseIndicator.type = newType => {
 		if (newType === undefined) {
 			return type
 		}

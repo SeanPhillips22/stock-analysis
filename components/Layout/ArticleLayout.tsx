@@ -4,7 +4,8 @@ import { Byline } from './Article/Byline'
 import { Header } from 'components/Layout/Header/_Header'
 import { Footer } from 'components/Layout/Footer/_Footer'
 import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
-import { HeaderAd } from 'components/Ads/Snigel/HeaderAd'
+import { splitUrl } from 'functions/helpers/splitUrl'
+import { LayoutContextProvider } from './LayoutContext'
 
 interface Meta {
 	title: string
@@ -16,6 +17,7 @@ interface Meta {
 
 interface Props {
 	meta: Meta
+	url: string
 	children: ReactNode
 }
 
@@ -26,31 +28,30 @@ interface Props {
  * @return Component
  */
 
-export const ArticleLayout = ({ meta, children }: Props) => {
+export const ArticleLayout = ({ meta, url, children }: Props) => {
 	return (
 		<>
-			<Header />
-			<main id="main">
-				<div id="ad-wrap" className="-mb-5 md:mb-0">
-					<HeaderAd />
-				</div>
-				<div className="contain lg:max-w-[1150px] mt-2 mx-auto">
-					<div className="lg:right-sidebar">
-						<article className="text-page md:px-6">
-							<header className="article-header">
-								<h1>{meta.heading || meta.title}</h1>
-								{meta.date && <Byline date={meta.date} />}
-							</header>
-							{children}
-							<DisplayFooterAd />
-						</article>
-						<aside className="space-y-8 lg:pt-4">
-							<Sidebar />
-						</aside>
+			<LayoutContextProvider value={{ url: url, path: splitUrl(url) }}>
+				<Header />
+				<main id="main">
+					<div className="contain lg:max-w-[1150px] mt-2 mb-6 mx-auto">
+						<div className="lg:right-sidebar">
+							<article className="text-page md:px-6">
+								<header className="article-header">
+									<h1>{meta.heading || meta.title}</h1>
+									{meta.date && <Byline date={meta.date} />}
+								</header>
+								{children}
+								<DisplayFooterAd />
+							</article>
+							<aside className="space-y-8 lg:pt-4">
+								<Sidebar />
+							</aside>
+						</div>
 					</div>
-				</div>
-			</main>
-			<Footer />
+				</main>
+				<Footer />
+			</LayoutContextProvider>
 		</>
 	)
 }

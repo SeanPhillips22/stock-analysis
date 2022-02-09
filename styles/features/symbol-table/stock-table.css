@@ -1,0 +1,41 @@
+/*
+* Stock Table
+* A more advanced table than the previous symbol table
+*/
+
+@layer components {
+	.stock-table a {
+		@apply py-px;
+	}
+
+	.stock-table tr > * {
+		@apply whitespace-nowrap;
+	}
+
+	.stock-table tr > th {
+		@apply font-semibold;
+	}
+
+	.stock-table tr th .head-left,
+	.stock-table tr th:first-child .head-right {
+		@apply inline-flex flex-row items-center;
+	}
+
+	.stock-table tr th:not(:first-child) .head-right {
+		@apply flex flex-row items-center justify-end;
+	}
+
+	.stock-table .string-left {
+		@apply text-left max-w-[130px] xs:max-w-[150px] lg:max-w-[240px] truncate;
+	}
+
+	/* String Left */
+	.sl {
+		@apply text-left max-w-[130px] xs:max-w-[150px] lg:max-w-[240px] truncate;
+	}
+
+	/* Text Right */
+	.tr {
+		text-align: right;
+	}
+}

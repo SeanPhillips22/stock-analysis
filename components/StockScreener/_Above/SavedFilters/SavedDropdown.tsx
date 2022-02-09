@@ -1,13 +1,11 @@
 import { useSavedScreens } from './useSavedScreens'
-import {
-	FilterId,
-	ScreenerTypes
-} from 'components/StockScreener/screener.types'
+import { DataId } from 'types/DataId'
+import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { SavedItem } from './SavedItem'
 import { SaveScreen } from './SaveScreen'
 
 type SavedFilter = {
-	id: FilterId
+	id: DataId
 	name: string
 	value: string
 }
@@ -32,7 +30,7 @@ export function SavedDropdown({ type }: Props) {
 			{screeners && Object.keys(screeners).length > 0 ? (
 				<>
 					<div className="divide-y">
-						{Object.keys(screeners).map((key) => {
+						{Object.keys(screeners).map(key => {
 							let screen = screeners[key] as Screen
 							return (
 								<SavedItem key={key} name={screen.name} type={type} />

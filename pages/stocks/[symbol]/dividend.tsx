@@ -10,9 +10,7 @@ import { InfoTable } from 'components/Dividend/InfoTable'
 import { HistoryTable } from 'components/Dividend/HistoryTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { DividendChart } from 'components/Dividend/DividendChart'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
-import { Mobile1 } from 'components/Ads/Snigel/Mobile1'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 
 interface Props {
 	info: Info
@@ -45,11 +43,6 @@ export default function Dividend({ info, data, news }: Props) {
 						{data.history.length > 0 && (
 							<HistoryTable rawdata={data.history} disclaimer={true} />
 						)}
-						{news.length > 5 && data.history.length > 2 && (
-							<div className="mt-4 bp:mt-7 sm:mt-0 sm:hidden">
-								<Mobile1 />
-							</div>
-						)}
 						<DividendChart
 							data={data.chartData}
 							options={data.chartOptions}
@@ -66,7 +59,6 @@ export default function Dividend({ info, data, news }: Props) {
 								url: `/stocks/${info.symbol}/`
 							}}
 						/>
-						{data.history.length > 15 && news?.length > 4 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>
@@ -74,11 +66,11 @@ export default function Dividend({ info, data, news }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('dividend', symbol, 'stocks')
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 
 	return data
 }

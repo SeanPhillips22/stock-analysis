@@ -8,7 +8,7 @@ declare global {
 	}
 }
 
-export default function NewsAd1() {
+export default function NewsAd2() {
 	useEffect(() => {
 		if (typeof window.dianomiReloadContext !== 'undefined') {
 			window.dianomiReloadContext()
@@ -19,7 +19,7 @@ export default function NewsAd1() {
 		<>
 			<div
 				id="ad-banner"
-				className="dianomi_context min-h-[150px]"
+				className="dianomi_context min-h-[310px] diabp:min-h-[150px]"
 				data-dianomi-context-id="411"
 			></div>
 			<Script

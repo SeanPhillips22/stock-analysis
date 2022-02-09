@@ -66,7 +66,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 					]
 				}}
 			/>
-			<Layout fullWidth={true}>
+			<Layout fullWidth={true} url="/">
 				<Hero trending={data.trending} />
 				<Movers
 					date={data.date}
@@ -89,7 +89,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const data = await getHomePageData()
 
-	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

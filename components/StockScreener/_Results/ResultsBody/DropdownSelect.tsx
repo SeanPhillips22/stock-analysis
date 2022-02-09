@@ -7,7 +7,7 @@ function classNames(...classes: any) {
 }
 
 function getName(selected: number | string, selectOptions: SelectOption[]) {
-	const found = selectOptions.find((item) => item.value === selected)
+	const found = selectOptions.find(item => item.value === selected)
 	return found?.name
 }
 
@@ -49,7 +49,7 @@ export function DropdownSelect({
 					leaveTo="opacity-0"
 				>
 					<Listbox.Options className="absolute z-10 mt-1 max-w-[130px] bg-white shadow-lg max-h-60 rounded-md py-1 text-sm sm:text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none">
-						{selectOptions.map((option) => (
+						{selectOptions.map(option => (
 							<Listbox.Option
 								key={option.value}
 								className={({ active }) =>

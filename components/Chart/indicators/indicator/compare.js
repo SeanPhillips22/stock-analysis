@@ -6,7 +6,7 @@ const ALGORITHM_TYPE = 'Compare'
 export default function Compare() {
 	const base = baseIndicator()
 		.type(ALGORITHM_TYPE)
-		.accessor((d) => d.compare)
+		.accessor(d => d.compare)
 	const underlyingAlgorithm = compare()
 	const mergedAlgorithm = merge()
 		.algorithm(underlyingAlgorithm)

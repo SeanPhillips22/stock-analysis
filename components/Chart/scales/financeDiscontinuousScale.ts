@@ -95,7 +95,7 @@ export default function financeDiscontinuousScale(
 			) {
 				break
 			}
-			unsortedTicks = unsortedTicks.concat(selectedTicks.map((d) => d.index))
+			unsortedTicks = unsortedTicks.concat(selectedTicks.map(d => d.index))
 		}
 
 		const ticks = unsortedTicks.sort(ascending)
@@ -127,7 +127,7 @@ export default function financeDiscontinuousScale(
 			}
 
 			// @ts-ignore
-			const tickValues = [...ticksSet.values()].map((i) => parseInt(i, 10))
+			const tickValues = [...ticksSet.values()].map(i => parseInt(i, 10))
 
 			return tickValues
 		}

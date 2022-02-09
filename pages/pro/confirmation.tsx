@@ -9,7 +9,7 @@ export default function FreeTrial() {
 				canonical="/pro/confirmation/"
 				noindex={true}
 			/>
-			<UserLayout>
+			<UserLayout url="/pro/confirmation/">
 				<div className="space-y-5 bp:space-y-6">
 					<h1 className="text-3xl bp:text-4xl font-bold mb-5 text-gray-800">
 						Free Trial Confirmed

@@ -1,33 +1,39 @@
 import { screenerState } from 'components/StockScreener/screener.state'
 import { FiltersMenuItem } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuItem'
-import { FiltersMenuActive } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuActive'
+import { FiltersMenuHeader } from 'components/StockScreener/_Filters/FiltersMenu/FiltersMenuHeader'
 import { FilterSearch } from './FilterSearch'
+import { FiltersMenuActive } from './FiltersMenuActive'
+import { cn } from 'functions/helpers/classNames'
 
 export function FiltersMenu() {
-	const type = screenerState((state) => state.type)
-	const filtersShown = screenerState((state) => state.filtersShown)
-
-	const showHideBorder = filtersShown ? ' border-b border-gray-300' : ''
-	const showHideFilters = !filtersShown ? ' hidden lg:block' : ''
+	const type = screenerState(state => state.type)
+	const filtersShown = screenerState(state => state.filtersShown)
 
 	return (
 		<>
 			<div
-				className={`grid grid-cols-2 lg:flex justify-between items-end whitespace-nowrap overflow-x-auto${showHideBorder}`}
+				className={cn(
+					filtersShown ? 'border-b border-gray-300' : '',
+					'grid grid-cols-2 xl:flex justify-between items-end whitespace-nowrap overflow-x-auto'
+				)}
 			>
-				<div className="lg:order-1">
-					<FiltersMenuActive />
+				<div className="xl:order-1">
+					<FiltersMenuHeader />
 				</div>
-				<div className="ml-auto lg:ml-0 lg:order-3">
+				<div className="ml-auto xl:ml-0 xl:order-3">
 					<FilterSearch />
 				</div>
 				<div
-					className={`col-span-2 lg:order-2 border-t border-gray-200 pt-2 lg:pt-0 lg:border-0${showHideFilters}`}
+					className={cn(
+						filtersShown ? 'block' : 'hidden xl:block',
+						'col-span-2 xl:order-2 border-t border-gray-200 pt-2 xl:pt-0 xl:border-0'
+					)}
 				>
 					<nav>
-						<ul className="navmenu darkbg bg-gray-50 noshadow">
+						<ul className="navmenu screener-filter-nav bg-gray-50 noshadow">
 							{(type == 'stocks' && (
 								<>
+									<FiltersMenuActive />
 									<FiltersMenuItem name="Popular" />
 									<FiltersMenuItem name="Company" />
 									<FiltersMenuItem name="Financials" />
@@ -39,6 +45,7 @@ export function FiltersMenu() {
 							)) ||
 								(type == 'ipo' && (
 									<>
+										<FiltersMenuActive />
 										<FiltersMenuItem name="General" />
 										<FiltersMenuItem name="Income" />
 										<FiltersMenuItem name="Balance Sheet" />
@@ -48,6 +55,7 @@ export function FiltersMenu() {
 								)) ||
 								(type == 'etf' && (
 									<>
+										<FiltersMenuActive />
 										<FiltersMenuItem name="Popular" />
 										<FiltersMenuItem name="Dividends" />
 										<FiltersMenuItem name="Performance" />

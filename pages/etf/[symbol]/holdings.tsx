@@ -8,8 +8,7 @@ import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { HoldingsTable } from 'components/Holdings/_HoldingsTable'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { HoldingsPaywall } from 'components/Holdings/HoldingsPaywall'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
-import { Sidebar2 } from 'components/Ads/Snigel/Sidebar2'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 
 interface Props {
 	info: Info
@@ -63,7 +62,6 @@ const Holdings = ({ info, data, news }: Props) => {
 								url: `/etf/${info.symbol}/`
 							}}
 						/>
-						{data && data.count > 35 && news?.length > 4 && <Sidebar2 />}
 					</aside>
 				</div>
 			</div>
@@ -72,11 +70,11 @@ const Holdings = ({ info, data, news }: Props) => {
 }
 export default Holdings
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('holdings', symbol)
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=3600')
 
 	return data
 }

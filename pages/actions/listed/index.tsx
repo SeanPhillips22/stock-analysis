@@ -4,7 +4,8 @@ import { getActionsData } from 'functions/apis/callBackEnd'
 import { ActionsLayout } from 'components/Actions/ActionsLayout'
 import { ActionsTable } from 'components/Actions/ActionsTable'
 import { StockLink } from 'components/Links'
-import { CellString, ActionProps } from 'components/Actions/actions.types'
+import { ActionProps } from 'components/Actions/actions.types'
+import { CellString } from 'types/Tables'
 
 export const ActionsListed = ({ data }: ActionProps) => {
 	const columns = [
@@ -35,10 +36,10 @@ export const ActionsListed = ({ data }: ActionProps) => {
 				description="Recent and historical listings on the US stock market. Includes both IPOs and stocks listed for other reasons."
 				canonical="/actions/listed/"
 			/>
-			<ActionsLayout title="Listed Stocks" url="/actions/listed/">
+			<ActionsLayout url="/actions/listed/">
 				<ActionsTable
 					key="listings"
-					title="Listings"
+					title="Recently Listed Stocks"
 					columndata={columns}
 					rowdata={data.data}
 					fullCount={data.fullCount}
