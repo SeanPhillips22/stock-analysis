@@ -3,7 +3,7 @@
 }
 
 .actionstable a {
-	@apply bll;
+	@apply text-blue-link hover:text-gray-900;
 }
 
 .actionstable tr > * {
