@@ -1,4 +1,4 @@
-import { SearchIcon } from '@heroicons/react/solid'
+import { SearchIcon } from 'components/Icons/SearchIcon'
 import { SpinnerIcon } from 'components/Icons/Spinner'
 import { getData } from 'functions/apis/API'
 import { useRef, useState } from 'react'

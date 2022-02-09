@@ -1,4 +1,4 @@
-import { InformationCircleIcon } from '@heroicons/react/solid'
+import { InformationCircleIcon } from 'components/Icons/InformationCircle'
 
 interface Props {
 	message: string
@@ -14,7 +14,7 @@ export const Information = ({ message, classes }: Props) => {
 			<div className="flex flex-row items-center">
 				<div className="flex-shrink-0">
 					<InformationCircleIcon
-						className="h-5 w-5 text-blue-400"
+						classes="h-5 w-5 text-blue-400"
 						aria-hidden="true"
 					/>
 				</div>

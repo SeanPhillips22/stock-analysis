@@ -1,6 +1,6 @@
 import { screenerState } from 'components/StockScreener/screener.state'
 import { DataId } from 'types/DataId'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { createLabelFromString } from 'components/StockScreener/functions/filterString/createLabelFromString'
 
 type Props = {

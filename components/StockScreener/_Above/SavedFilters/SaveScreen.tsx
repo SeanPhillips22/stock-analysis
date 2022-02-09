@@ -1,4 +1,4 @@
-import { LockClosedIcon } from '@heroicons/react/solid'
+import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { useAuthState } from 'hooks/useAuthState'

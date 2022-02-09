@@ -1,7 +1,7 @@
 import { DropdownSelect } from 'components/StockScreener/_Results/ResultsBody/DropdownSelect'
 import { screenerState } from 'components/StockScreener/screener.state'
-import { ChevronLeftIcon } from '@heroicons/react/solid'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronLeftIcon } from 'components/Icons/ChevronLeftIcon'
+import { ChevronRightIcon } from 'components/Icons/ChevronRightIcon'
 import { useAuthState } from 'hooks/useAuthState'
 
 interface Props {

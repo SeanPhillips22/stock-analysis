@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { cn } from 'functions/helpers/classNames'
 
 type Props = {

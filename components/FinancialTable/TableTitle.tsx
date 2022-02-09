@@ -1,4 +1,5 @@
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
+import { ChevronUpIcon } from 'components/Icons/ChevronUpIcon'
 import { capitalize } from 'functions/helpers/capitalize'
 import { financialsState } from 'state/financialsState'
 import { Range } from 'types/Financials'

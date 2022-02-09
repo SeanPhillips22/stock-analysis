@@ -11,8 +11,8 @@ import { createFilterString } from 'components/StockScreener/functions/filterStr
 import { useModifyFilters } from 'components/StockScreener/functions/useModifyFilters'
 import { incrementFilter } from 'components/StockScreener/functions/filterString/incrementFilter'
 import { decrementFilter } from 'components/StockScreener/functions/filterString/decrementFilter'
-import { ChevronUpIcon } from '@heroicons/react/outline'
-import { ChevronDownIcon } from '@heroicons/react/outline'
+import { ChevronUpIcon } from 'components/Icons/ChevronUpIcon'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 
 /**
  * Screener component that renders the custom filter where it is possible to select your own comparison. Over/Under/Between plus values.

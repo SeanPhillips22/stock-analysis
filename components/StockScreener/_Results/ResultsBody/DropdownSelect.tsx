@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import { CheckIcon } from 'components/Icons/CheckIcon'
+import { SelectorIcon } from 'components/Icons/SelectorIcon'
 
 function classNames(...classes: any) {
 	return classes.filter(Boolean).join(' ')

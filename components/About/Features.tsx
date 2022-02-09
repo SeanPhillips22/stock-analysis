@@ -1,9 +1,7 @@
-import {
-	DatabaseIcon,
-	LightningBoltIcon,
-	EmojiHappyIcon,
-	AdjustmentsIcon
-} from '@heroicons/react/outline'
+import { DatabaseIcon } from 'components/Icons/DatabaseIcon'
+import { LightningBoltIcon } from 'components/Icons/LightningBoltIcon'
+import { EmojiHappyIcon } from 'components/Icons/EmojiHappyIcon'
+import { AdjustmentsIcon } from 'components/Icons/AdjustmentsIcon'
 
 const features = [
 	{

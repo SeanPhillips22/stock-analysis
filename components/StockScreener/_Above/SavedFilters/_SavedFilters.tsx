@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { useState, useRef, useEffect } from 'react'
 import { SavedDropdown } from './SavedDropdown'
 

@@ -1,7 +1,5 @@
-import {
-	ChevronDoubleLeftIcon,
-	ChevronDoubleRightIcon
-} from '@heroicons/react/outline'
+import { ChevronDoubleLeftIcon } from 'components/Icons/ChevronDoubleLeftIcon'
+import { ChevronDoubleRightIcon } from 'components/Icons/ChevronDoubleRightIcon'
 import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 
 export function Collapse() {

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { actionsState } from 'state/actionsState'
 
 interface Props {

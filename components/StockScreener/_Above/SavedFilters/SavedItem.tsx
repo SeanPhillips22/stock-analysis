@@ -3,7 +3,7 @@ import { useModifyColumns } from '../../functions/useModifyColumns'
 import { screenerState } from '../../screener.state'
 import { useSavedScreens } from './useSavedScreens'
 import { ScreenerTypes } from 'components/StockScreener/screener.types'
-import { XIcon } from '@heroicons/react/solid'
+import { XIcon } from 'components/Icons/XIcon'
 import { getDataPoints } from 'components/StockScreener/maps/dataPoints'
 
 type Props = {

@@ -1,14 +1,12 @@
-import {
-	HomeIcon,
-	ChartBarIcon,
-	CalendarIcon,
-	CollectionIcon,
-	AdjustmentsIcon,
-	TrendingUpIcon,
-	NewspaperIcon,
-	ArchiveIcon,
-	ChartSquareBarIcon
-} from '@heroicons/react/outline'
+import { HomeIcon } from 'components/Icons/HomeIcon'
+import { ChartBarIcon } from 'components/Icons/ChartBarIcon'
+import { CalendarIcon } from 'components/Icons/CalendarIcon'
+import { CollectionIcon } from 'components/Icons/CollectionIcon'
+import { AdjustmentsIcon } from 'components/Icons/AdjustmentsIcon'
+import { TrendingUpIcon } from 'components/Icons/TrendingUpIcon'
+import { NewspaperIcon } from 'components/Icons/NewspaperIcon'
+import { ArchiveIcon } from 'components/Icons/ArchiveIcon'
+import { ChartSquareBarIcon } from 'components/Icons/ChartSquareBarIcon'
 import { matchParentPath } from 'functions/helpers/matchPath'
 import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 import { Collapse } from './Collapse'

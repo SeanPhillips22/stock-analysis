@@ -1,6 +1,6 @@
 import { Dispatch, Fragment, SetStateAction } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { ComparisonOption } from 'components/StockScreener/screener.types'
 
 function capitalize(word: string) {

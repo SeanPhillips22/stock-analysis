@@ -1,6 +1,6 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { ChevronDownIcon } from '@heroicons/react/solid'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
+import { ChevronRightIcon } from 'components/Icons/ChevronRightIcon'
 import { ClearFiltersButton } from '../ClearFiltersButton'
 
 export function FiltersMenuHeader() {
