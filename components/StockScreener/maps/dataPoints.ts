@@ -1804,7 +1804,7 @@ export const StockDataPoints: FilterProps[] = [
 			'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%'
 	},
 	{
-		name: 'Total Yield',
+		name: 'Shareholder Yield',
 		id: 'totalReturn',
 		category: ['Dividends'],
 		filterType: 'numeric',
@@ -1821,8 +1821,8 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipTitle: 'Total Shareholder Yield',
 		tooltipText:
 			'The total shareholder yield is how much the company is returning to shareholders via dividends and share buybacks combined. It is calculated by adding up the dividend yield and buyback yield',
-		tooltipFormula: 'Total Yield = Dividend Yield + Buyback Yield',
-		columnName: 'Total Return'
+		tooltipFormula: 'Shareholder Yield = Dividend Yield + Buyback Yield',
+		columnName: 'Shareh. Yield'
 	},
 	{
 		name: 'Average Volume',

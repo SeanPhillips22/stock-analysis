@@ -409,7 +409,8 @@ export const DataPoints: Props = {
 	},
 	totalReturn: {
 		id: 'totalReturn',
-		name: 'Total Return',
+		name: 'Shareholder Yield',
+		colName: 'Shareh. Yield',
 		format: 'formatPercentage'
 	},
 	averageVolume: {

@@ -10,7 +10,6 @@ interface Props {
 
 export const SingleResult = ({ index, result, setOpen }: Props) => {
 	const { path } = useLayoutContext()
-	console.log(path)
 	const symbol = result.s
 	const name = result.n
 	const type = result.t

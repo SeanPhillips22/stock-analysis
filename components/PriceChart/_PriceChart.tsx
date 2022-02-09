@@ -36,7 +36,12 @@ export function PriceChart({ info, initial }: Props) {
 		if (info.state === 'upcomingipo') return
 
 		// If the 1D data fails on the first request, try the 1Y chart instead
-		if (!isFetching && initialFetch && (!data || !data.length)) {
+		// also consider it a fail if there is only one data point
+		if (
+			!isFetching &&
+			initialFetch &&
+			(!data || !data.length || data.length === 1)
+		) {
 			setChartTime('1Y')
 			setInitialFetch(false)
 		}
