@@ -19,9 +19,11 @@ export function LiteYouTubeEmbed({ id, title }: Props) {
 	})
 
 	const videoTitle = title
-	const posterUrl = inView
-		? `https://img.stockanalysis.com/vi/${videoId}/hqdefault.jpg`
-		: ''
+	const background = inView
+		? {
+				backgroundImage: `url(https://img.stockanalysis.com/vi/${videoId}/hqdefault.jpg)`
+		  }
+		: { backgroundColor: '#EEE' }
 
 	const iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`
 
@@ -45,7 +47,7 @@ export function LiteYouTubeEmbed({ id, title }: Props) {
 			}}
 			className={iframe ? active : inactive}
 			data-title={videoTitle}
-			style={{ backgroundImage: `url(${posterUrl})` }}
+			style={background}
 			tabIndex={0}
 		>
 			<div className="lty-playbtn"></div>
