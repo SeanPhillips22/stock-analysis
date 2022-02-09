@@ -217,23 +217,17 @@ export function Chart({ data, time, symbol, close, change }: Props) {
 								} else if (time === '1D') {
 									const lbl = formatDateMinute(timeAxis[index])
 									// Remove leftmost ticks to prevent chart being pushed from the left
-									if (
-										lbl.split(':')[0] == '9' &&
-										lbl.split(':')[1] == '30 AM'
-									) {
-										return null
-									}
-									if (count > 180 && lbl.split(':')[0] === '9') {
-										return null
-									}
-									if (count > 60 && lbl.split(':')[0] == '9') {
-										let lblB = lbl.split(':')[1]
-										let lblC = lblB.split(' ')[0]
-										if (Number(lblC) < 36) {
-											return null
+									let [hour, minute] = lbl.split(':')
+									if (hour == '9') {
+										if (minute == '30 AM') return null
+										if (count > 180) return null
+										if (count > 60) {
+											if (Number(minute) < 36) {
+												return null
+											}
 										}
 									}
-									return formatDateMinute(timeAxis[index])
+									return lbl
 								} else if (time === '5D') {
 									return formatDateDay(timeAxis[index])
 								} else if (time === '1M') {
