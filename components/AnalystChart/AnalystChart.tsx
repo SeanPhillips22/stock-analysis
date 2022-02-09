@@ -1,16 +1,27 @@
+import { Line } from 'react-chartjs-2'
 import {
+	Chart as ChartJS,
 	LineController,
 	LineElement,
-	PointElement,
-	Tooltip,
 	LinearScale,
 	CategoryScale,
-	TimeScale
+	TimeScale,
+	PointElement,
+	defaults
 } from 'chart.js'
+
+ChartJS.register(
+	LineController,
+	LineElement,
+	LinearScale,
+	CategoryScale,
+	TimeScale,
+	PointElement
+)
 
 import { Unavailable } from 'components/Unavailable'
 import 'chartjs-adapter-date-fns'
-import { ReactChart } from 'components/ReactChart'
+
 import { useMemo } from 'react'
 
 interface Props {
@@ -33,17 +44,7 @@ interface AnalystChartData {
 	targets: AnalystTarget
 }
 
-ReactChart.register(
-	LineController,
-	PointElement,
-	LineElement,
-	Tooltip,
-	LinearScale,
-	CategoryScale,
-	TimeScale
-)
-
-ReactChart.defaults.font.family =
+defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 export const Chart = ({ chartData }: Props) => {
@@ -145,9 +146,8 @@ export const Chart = ({ chartData }: Props) => {
 	]
 
 	return (
-		<ReactChart
+		<Line
 			id="1"
-			type="line"
 			data={{
 				labels: timeAxis,
 				datasets: data

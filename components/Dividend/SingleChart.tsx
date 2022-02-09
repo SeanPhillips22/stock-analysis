@@ -2,15 +2,27 @@ import { useMemo } from 'react'
 import { formatDateClean } from 'functions/datetime/formatDates'
 import { format } from 'd3-format'
 import { Unavailable } from 'components/Unavailable'
+
+import { Line } from 'react-chartjs-2'
 import {
+	Chart as ChartJS,
+	BarController,
+	BarElement,
+	Tooltip,
+	LinearScale,
+	Title,
+	CategoryScale,
+	defaults
+} from 'chart.js'
+
+ChartJS.register(
 	BarController,
 	BarElement,
 	Tooltip,
 	LinearScale,
 	Title,
 	CategoryScale
-} from 'chart.js'
-import { ReactChart } from 'components/ReactChart'
+)
 
 const countZero = (cutter: number[]) => {
 	let count = 0
@@ -31,16 +43,7 @@ interface Props {
 	title: string
 }
 
-ReactChart.register(
-	BarController,
-	BarElement,
-	Tooltip,
-	LinearScale,
-	CategoryScale,
-	Title
-)
-
-ReactChart.defaults.font.family =
+defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
@@ -67,9 +70,8 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 
 	return (
 		<div className="h-72 border border-gray-200 p-0.5 xs:p-1">
-			<ReactChart
+			<Line
 				id={'1'}
-				type="bar"
 				data={{
 					labels: x,
 					datasets: [

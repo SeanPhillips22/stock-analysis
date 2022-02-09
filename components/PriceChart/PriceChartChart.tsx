@@ -1,4 +1,17 @@
+import { Line } from 'react-chartjs-2'
 import {
+	Chart as ChartJS,
+	LineController,
+	LineElement,
+	PointElement,
+	Tooltip,
+	LinearScale,
+	CategoryScale,
+	Filler,
+	defaults
+} from 'chart.js'
+
+ChartJS.register(
 	LineController,
 	LineElement,
 	PointElement,
@@ -6,7 +19,7 @@ import {
 	LinearScale,
 	CategoryScale,
 	Filler
-} from 'chart.js'
+)
 
 import {
 	formatDateTimestamp,
@@ -17,7 +30,6 @@ import {
 	formatDateYear
 } from 'functions/datetime/formatDates'
 import { Unavailable } from 'components/Unavailable'
-import { ReactChart } from 'components/ReactChart'
 import { Info } from 'types/Info'
 import { ChartDataPoint } from 'types/Charts'
 import { useEffect, useMemo, useState } from 'react'
@@ -32,17 +44,7 @@ interface Props {
 	changeProps: any
 }
 
-ReactChart.register(
-	LineController,
-	PointElement,
-	LineElement,
-	Tooltip,
-	LinearScale,
-	CategoryScale,
-	Filler
-)
-
-ReactChart.defaults.font.family =
+defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 export const Chart = ({
@@ -155,9 +157,8 @@ export const Chart = ({
 	let id = info.symbol + '-' + chartTime
 
 	return (
-		<ReactChart
+		<Line
 			id={id}
-			type="line"
 			data={{
 				labels: timeAxis,
 				datasets: data

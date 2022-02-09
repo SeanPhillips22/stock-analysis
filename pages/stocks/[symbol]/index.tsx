@@ -13,6 +13,7 @@ import { FinancialsWidget } from 'components/Overview/FinancialsWidget'
 import { AnalystWidget } from 'components/Overview/AnalystWidget'
 import { Sidebar1Overview } from 'components/Ads/Snigel/Sidebar1Overview'
 import { Chart } from 'components/AnalystChart/AnalystChart'
+import { Donut } from 'components/DonutChart/Donut'
 
 interface Props {
 	info: Info
@@ -73,6 +74,11 @@ const StockOverview = ({ info, data, news }: Props) => {
 				<div className="order-1 flex flex-row gap-4">
 					<InfoTable data={data} />
 					<QuoteTable data={data} info={info} />
+				</div>
+			</div>
+			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-8 mt-8">
+				<div className="order-1 h-[240px] sm:h-[200px] flex-grow overflow-auto">
+					<Donut chartData={chartData} />
 				</div>
 			</div>
 

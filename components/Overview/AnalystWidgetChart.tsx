@@ -1,12 +1,24 @@
+import { Bar } from 'react-chartjs-2'
 import {
+	Chart as ChartJS,
+	BarController,
+	BarElement,
+	Tooltip,
+	LinearScale,
+	Title,
+	CategoryScale,
+	defaults
+} from 'chart.js'
+
+ChartJS.register(
 	BarController,
 	BarElement,
 	Tooltip,
 	LinearScale,
 	Title,
 	CategoryScale
-} from 'chart.js'
-import { ReactChart } from 'components/ReactChart'
+)
+
 import { Unavailable } from 'components/Unavailable'
 
 interface AnalystWidgetChartI {
@@ -33,22 +45,12 @@ export function AnalystWidgetChart({ ratings }: AnalystWidgetChartI) {
 		)
 	}
 
-	ReactChart.register(
-		BarController,
-		BarElement,
-		Tooltip,
-		LinearScale,
-		CategoryScale,
-		Title
-	)
-
-	ReactChart.defaults.font.family =
+	defaults.font.family =
 		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 	return (
-		<ReactChart
+		<Bar
 			id={'1'}
-			type="bar"
 			data={{
 				labels: ['Sell', 'Underweight', 'Hold', 'Buy', 'Strong Buy'],
 				datasets: [
@@ -61,6 +63,7 @@ export function AnalystWidgetChart({ ratings }: AnalystWidgetChartI) {
 							ratings.buy,
 							ratings.strongbuy
 						],
+						//@ts-ignore
 						backgroundColor: [
 							'#FF3333',
 							'#FF3333',

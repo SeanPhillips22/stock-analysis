@@ -10,16 +10,17 @@ import { StatsChartMonthly } from 'components/IPOs/StatsChartMonthly'
 import Link from 'next/link'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
-import { Sidebar1 } from 'components/Ads/Snigel/Sidebar1'
 import { Layout } from 'components/Layout/_Layout'
+import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 
 interface Props {
 	data: {
 		total: number
-		year2021: number
+		year2022: number
 		months2019: [string, number][]
 		months2020: [string, number][]
 		months2021: [string, number][]
+		months2022: [string, number][]
 	}
 	news: News[]
 	recent: IpoRecent[]
@@ -30,10 +31,10 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 		<>
 			<SEO
 				title="IPO Statistics and Charts"
-				description="Statistics and charts for initial public offerings (IPOs) on the US stock market. Annual data is available from 2000-2021 and monthly data for 2019-2021."
+				description="Statistics and charts for initial public offerings (IPOs) on the US stock market. Annual data is available from 2000-2022 and monthly data for 2019-2022."
 				canonical="/ipos/statistics/"
 			/>
-			<Layout>
+			<Layout url="/ipos/statistics/">
 				<div className="contain">
 					<Breadcrumbs url="/ipos/statistics/" />
 					<h1 className="hh1">IPO Statistics</h1>
@@ -45,7 +46,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								<p className="text-base sm:text-lg text-gray-900">
 									This page contains statistics and charts for initial
 									public offerings (IPOs) on the US stock market.
-									Annual data is available from 2000-2021 and monthly
+									Annual data is available from 2000-2022 and monthly
 									data since 2019.
 								</p>
 							</div>
@@ -54,21 +55,36 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								<p className="text-base sm:text-lg text-gray-900">
 									{`There have been ${data.total.toLocaleString(
 										'en-US'
-									)} IPOs between 2000 and 2021. The least was in 2009 with only 62. The full year 2020 was an all-time record with 480 IPOs, but 2021 has already beat that record with ${
-										data.year2021
-									} IPOs and counting.`}
+									)} IPOs between 2000 and 2022. The least was in 2009 with only 62. The full year 2021 was an all-time record with 1035 IPOs, beating the previous record of 480 in the year 2020.`}
 								</p>
 								<StatsChartAnnual
-									title="Annual IPOs, 2000-2021"
-									data={data.year2021}
+									title="Annual IPOs, 2000-2022"
+									data={data.year2022}
 								/>
 							</div>
+							{/* <div>
+								<h2 className="hh2 mb-2">
+									2022 Initial Public Offerings
+								</h2>
+								<p className="text-base sm:text-lg text-gray-900">
+									{`There have been ${data.year2022} IPOs so far in 2021.`}{' '}
+									<Link href="/ipos/2022/">
+										<a className="bll">View all 2022 IPOs.</a>
+									</Link>
+								</p>
+								<StatsChartMonthly
+									title="2022 IPOs"
+									data={data.months2022}
+								/>
+							</div> */}
 							<div>
 								<h2 className="hh2 mb-2">
 									2021 Initial Public Offerings
 								</h2>
 								<p className="text-base sm:text-lg text-gray-900">
-									{`There have been ${data.year2021} IPOs so far in 2021.`}{' '}
+									There were 1035 IPOs in 2021, which was an all-time
+									record. March had the most with a total of 151, while
+									August had the fewest with only 40 IPOs.{' '}
 									<Link href="/ipos/2021/">
 										<a className="bll">View all 2021 IPOs.</a>
 									</Link>
@@ -137,7 +153,7 @@ export default IpoStatistics
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const { data, news, recent } = await getIpoData('statistics')
 
-	res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate')
+	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=3600')
 
 	return {
 		props: {

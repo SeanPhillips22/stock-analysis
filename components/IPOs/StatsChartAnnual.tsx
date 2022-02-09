@@ -28,6 +28,7 @@ export const StatsChartAnnual = ({ title, data }: Props) => {
 		255,
 		232,
 		480,
+		1035,
 		data
 	]
 	const x = [
@@ -52,7 +53,8 @@ export const StatsChartAnnual = ({ title, data }: Props) => {
 		'2018',
 		'2019',
 		'2020',
-		'2021'
+		'2021',
+		'2022'
 	]
 
 	return <StatsChart title={title} x={x} y={y} />
