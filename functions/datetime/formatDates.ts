@@ -57,14 +57,26 @@ export const formatDateDay = (string: string) => {
 	return date
 }
 
+const months = [
+	'Jan',
+	'Feb',
+	'Mar',
+	'Apr',
+	'May',
+	'Jun',
+	'Jul',
+	'Aug',
+	'Sep',
+	'Oct',
+	'Nov',
+	'Dec'
+]
+
+// Input: 2022-02-09
+// Output: Feb 2022
 export const formatDateMonth = (string: string) => {
-	const datetime = new Date(string)
-	const date = datetime.toLocaleString('en-US', {
-		timeZone: 'America/New_York',
-		year: 'numeric',
-		month: 'short'
-	})
-	return date
+	const dt = new Date(string)
+	return `${months[dt.getMonth()]} ${dt.getFullYear()}`
 }
 
 export const formatDateYear = (string: string) => {

@@ -37,7 +37,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 								className="border-b border-gray-200 hover:bg-gray-50 transition duration-100"
 							>
 								<td className={cellStyles + ' text-left border-r'}>
-									<StockLink symbol={item.s} />
+									<StockLink symbol={item.s} className="bll" />
 								</td>
 								<td
 									className={

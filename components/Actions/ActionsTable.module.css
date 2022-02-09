@@ -2,6 +2,10 @@
 	@apply w-full overflow-x-auto;
 }
 
+.actionstable a {
+	@apply bll;
+}
+
 .actionstable tr > * {
 	padding: 0.5rem;
 	border-bottom: 1px solid #ddd;
