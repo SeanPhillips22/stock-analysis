@@ -8,26 +8,26 @@
 @layer components {
 	/* the generic controls */
 	.controls {
-		@apply flex items-center border-t border-gray-200 space-x-4 bp:space-x-6 py-1.5 bp:py-2 px-1;
+		@apply flex items-center space-x-4 border-t border-gray-200 py-1.5 px-1 bp:space-x-6 bp:py-2;
 	}
 
 	/* when the controls are is split into groups -- title group and button group */
 	.controls.groups {
-		@apply block md:flex space-x-0 md:space-x-6 border-0 md:border-t pt-0 pb-1.5 md:py-2;
+		@apply block space-x-0 border-0 pt-0 pb-1.5 md:flex md:space-x-6 md:border-t md:py-2;
 	}
 
 	.controls h2 {
-		@apply text-xl bp:text-2xl font-semibold whitespace-nowrap;
+		@apply whitespace-nowrap text-xl font-semibold bp:text-2xl;
 	}
 
 	/* The div that contains the title and timestamp */
 	.controls .title-group {
-		@apply flex items-end justify-between md:space-x-4 mr-auto pb-1.5 md:pb-0 mb-1.5 md:mb-0 border-b border-gray-200 md:border-0;
+		@apply mr-auto mb-1.5 flex items-end justify-between border-b border-gray-200 pb-1.5 md:mb-0 md:space-x-4 md:border-0 md:pb-0;
 	}
 
 	/* The timestamp in the controls area */
 	.controls .controls-timestamp {
-		@apply text-gray-600 font-semibold text-sm mb-0 md:mb-1 whitespace-nowrap;
+		@apply mb-0 whitespace-nowrap text-sm font-semibold text-gray-600 md:mb-1;
 	}
 
 	.controls-timestamp span {
@@ -39,7 +39,7 @@
 	}
 
 	.controls-btn {
-		@apply inline-flex justify-center items-center w-full rounded-md border border-gray-300 shadow-sm px-2 xs:px-3 sm:px-4 py-1.5 sm:py-2 bg-white text-xs bp:text-sm font-semibold hover:bg-gray-50 noring whitespace-nowrap;
+		@apply noring inline-flex w-full items-center justify-center whitespace-nowrap rounded-md border border-gray-300 bg-white px-2 py-1.5 text-xs font-semibold shadow-sm hover:bg-gray-50 xs:px-3 bp:text-sm sm:px-4 sm:py-2;
 	}
 
 	/* Stretch the button to fill space */
@@ -60,7 +60,8 @@
 	}
 
 	.dropdown {
-		@apply origin-top-right absolute right-0 mt-2 min-w-[160px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none py-1 z-50;
+		@apply absolute right-0 z-50 mt-2 min-w-[160px] origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+		background-color: #ffffff;
 	}
 
 	.dropdown.dd-right {
@@ -72,7 +73,7 @@
 	}
 
 	.dd-option {
-		@apply text-gray-700 hover:bg-gray-100 px-4 py-2 text-sm cursor-pointer flex justify-between items-center;
+		@apply flex cursor-pointer items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
 	}
 
 	.dd-option.active {
@@ -80,7 +81,7 @@
 	}
 
 	.controls-icon {
-		@apply -mr-1 ml-1 xs:ml-2 w-5 h-5;
+		@apply -mr-1 ml-1 h-5 w-5 xs:ml-2;
 	}
 
 	.btn-stretch .controls-icon {

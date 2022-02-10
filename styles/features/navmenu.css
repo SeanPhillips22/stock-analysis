@@ -15,7 +15,7 @@
 	}
 
 	.navmenu {
-		@apply w-full flex flex-row whitespace-nowrap overflow-x-auto;
+		@apply flex w-full flex-row overflow-x-auto whitespace-nowrap;
 	}
 
 	@media screen and (max-width: 600px) {
@@ -47,7 +47,7 @@
 
 	.navmenu li a,
 	.navmenu li span {
-		@apply text-sm xs:text-base block py-1.5 sm:py-2 px-2 xs:px-3 sm:px-5;
+		@apply block py-1.5 px-2 text-sm xs:px-3 xs:text-base sm:py-2 sm:px-5;
 	}
 
 	.navmenu.smaller li a,
@@ -57,11 +57,11 @@
 
 	.navmenu.submenu li a,
 	.navmenu.submenu li span {
-		@apply px-2.5 bp:px-3 sm:px-4 text-sm xs:text-small bp:text-base;
+		@apply px-2.5 text-sm xs:text-small bp:px-3 bp:text-base sm:px-4;
 	}
 
 	.navmenu.submenu.tight li a {
-		@apply text-tiny xs:text-small bp:text-base px-1.5 xs:px-2 bp:px-2.5 sm:px-4;
+		@apply px-1.5 text-tiny xs:px-2 xs:text-small bp:px-2.5 bp:text-base sm:px-4;
 	}
 
 	.navmenu.submenu li span {
@@ -70,7 +70,8 @@
 
 	.navmenu li a.active,
 	.navmenu li span.active {
-		@apply text-gray-900 bg-[#eee] font-semibold;
+		@apply bg-[#eee] font-semibold text-gray-900;
+		background-color: #eee;
 	}
 
 	.navmenu.screener-filter-nav li span {
@@ -83,7 +84,7 @@
 
 	.navmenu li a.inactive,
 	.navmenu li span.inactive {
-		@apply bll hover:bg-gray-100 transition duration-100 cursor-pointer;
+		@apply bll cursor-pointer transition duration-100 hover:bg-gray-100;
 	}
 
 	.navmenu.screener-filter-nav li span.inactive {
