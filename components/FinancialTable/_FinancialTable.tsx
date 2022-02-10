@@ -56,7 +56,6 @@ export const FinancialTable = ({
 	const fullcount = count // The total number of years/quarters available
 	const showcount = !isPro && fullcount > paywall ? paywall : fullcount // How many years/quarter to show
 	const paywalled = showcount < fullcount ? 'true' : false
-	console.log(isPro)
 
 	let showTTM =
 		range === 'annual' && statement !== 'ratios' && trailing
