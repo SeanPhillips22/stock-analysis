@@ -17,7 +17,7 @@
 	.leftnav {
 		@apply xxl:sticky top-16
 		px-3 xxl:px-2 xxxl:px-5
-		py-4 flex-grow overflow-y-auto;
+		py-4 grow overflow-y-auto;
 	}
 
 	.nav-col {
@@ -44,7 +44,7 @@
 	}
 
 	.nav-arrow {
-		@apply ml-auto flex-shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150;
+		@apply ml-auto shrink-0 h-5 w-5 transform group-hover:text-gray-400 transition-colors ease-in-out duration-150;
 	}
 
 	.nav-arrow.closed {
@@ -56,7 +56,7 @@
 	}
 
 	.nav-item {
-		@apply flex flex-grow items-center 
+		@apply flex grow items-center 
 		rounded-md py-2 px-2
 		text-gray-600 hover:bg-gray-50 hover:text-gray-900 
 		text-sm font-semibold whitespace-nowrap;

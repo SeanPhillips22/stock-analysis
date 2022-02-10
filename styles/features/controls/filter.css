@@ -6,7 +6,7 @@
 	}
 
 	.btn-group.btn-stretch .filter {
-		@apply max-w-[300px] flex-grow;
+		@apply max-w-[300px] grow;
 	}
 
 	.filter input {

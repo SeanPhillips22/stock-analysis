@@ -42,7 +42,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 								<td
 									className={
 										cellStyles +
-										' text-left border-r max-w-[90px] xs:max-w-[170px] md:max-w-[350px] xl:whitespace-nowrap overflow-hidden overflow-ellipsis'
+										' text-left border-r max-w-[90px] xs:max-w-[170px] md:max-w-[350px] xl:whitespace-nowrap overflow-hidden text-ellipsis'
 									}
 								>
 									{item.n}
@@ -74,7 +74,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		const titlePrefix = marketStatus === 'premarket' ? 'Pre-Market' : 'Top'
 
 		return (
-			<div className="flex-grow">
+			<div className="grow">
 				<div className="flex flex-row justify-between items-end mb-1">
 					<h2 className="text-xl bp:text-2xl font-bold mb-0.5 bp:mb-1">
 						{titlePrefix} {type}
