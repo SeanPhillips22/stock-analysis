@@ -9,7 +9,7 @@
 	}
 
 	.text-page > * > *:not(.ad-banner) {
-		@apply md:px-2 lg:px-0;
+		@apply md:px-4 lg:px-0;
 	}
 
 	.text-page .article-header {
@@ -67,7 +67,7 @@
 	}
 
 	.text-page table tr td {
-		@apply py-2 sm:px-3;
+		@apply py-2 sm:px-3 md:px-4;
 	}
 
 	.text-page img {
