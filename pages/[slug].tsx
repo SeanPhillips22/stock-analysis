@@ -7,10 +7,12 @@ import matter from 'gray-matter'
 import { ArticleLayout } from 'components/Layout/ArticleLayout'
 import { SEO } from 'components/SEO'
 import { CustomLink, External } from 'components/CustomLink'
+import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
 
 const components = {
 	a: CustomLink,
-	External
+	External,
+	Mobile1
 }
 
 interface Props {
