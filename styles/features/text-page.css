@@ -67,7 +67,7 @@
 	}
 
 	.text-page table tr td {
-		@apply py-2 sm:px-3 md:px-4;
+		@apply py-2 sm:px-3 md:px-4 lg:px-3;
 	}
 
 	.text-page img {
