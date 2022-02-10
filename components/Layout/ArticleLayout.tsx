@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import { Sidebar } from './Sidebar/_Sidebar'
 import { Byline } from './Article/Byline'
-import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 import { Layout } from './_Layout'
 
 interface Meta {
@@ -37,7 +36,6 @@ export function ArticleLayout({ meta, url, children }: Props) {
 								{meta.date && <Byline date={meta.date} />}
 							</header>
 							{children}
-							<DisplayFooterAd />
 						</article>
 						<aside className="space-y-8 lg:pt-4">
 							<Sidebar />
