@@ -1,26 +1,11 @@
 module.exports = {
-	mode: 'jit',
-	purge: {
-		content: [
-			'./pages/**/*.{js,ts,jsx,tsx}',
-			'./components/**/*.{js,ts,jsx,tsx}',
-			'./functions/**/*.{js,ts,jsx,tsx}',
-			'./data/**/*.{js,ts,jsx,tsx}',
-			'./content/**/*.{js,ts,jsx,tsx,mdx}'
-		],
-		options: {
-			safelist: [
-				'border-gray-300',
-				'bg-blue-400',
-				'max-w-md',
-				'my-20',
-				'gap-3',
-				'block',
-				'hidden'
-			]
-		}
-	},
-	darkMode: false,
+	content: [
+		'./pages/**/*.{js,ts,jsx,tsx}',
+		'./components/**/*.{js,ts,jsx,tsx}',
+		'./functions/**/*.{js,ts,jsx,tsx}',
+		'./data/**/*.{js,ts,jsx,tsx}',
+		'./content/**/*.{js,ts,jsx,tsx,mdx}'
+	],
 	theme: {
 		container: {
 			center: true,

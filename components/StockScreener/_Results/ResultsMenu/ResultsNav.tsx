@@ -5,7 +5,7 @@ interface Props {
 }
 export function ResultsNav({ type }: Props) {
 	return (
-		<nav className="flex-grow py-3 lg:py-1">
+		<nav className="grow py-3 lg:py-1">
 			<ul className="flex flex-row items-center whitespace-nowrap space-x-0.5 text-base">
 				{(type == 'stocks' && (
 					<>

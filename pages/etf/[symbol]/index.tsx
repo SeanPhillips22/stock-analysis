@@ -31,7 +31,7 @@ export default function EtfOverview({ info, data, news, chart }: Props) {
 				preconnect="https://api.stockanalysis.com"
 			/>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
-				<div className="order-3 flex-grow overflow-auto">
+				<div className="order-3 grow overflow-auto">
 					<PriceChart info={info} initial={chart} />
 				</div>
 				<div className="order-1 flex flex-row justify-between gap-4">

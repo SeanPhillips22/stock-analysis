@@ -12,7 +12,7 @@ export const Information = ({ message, classes }: Props) => {
 	return (
 		<div className={css}>
 			<div className="flex flex-row items-center">
-				<div className="flex-shrink-0">
+				<div className="shrink-0">
 					<InformationCircleIcon
 						classes="h-5 w-5 text-blue-400"
 						aria-hidden="true"

@@ -33,7 +33,7 @@ export const RecentTableMin = ({ recent }: Props) => {
 									{item.date}
 								</td>
 								<td className="py-2 px-2 border-r border-gray-200">
-									<StockLink symbol={item.symbol} />
+									<StockLink symbol={item.symbol} className="bll" />
 								</td>
 								<td className="py-2 px-2 pr-2 lg:max-w-[150px] lg:truncate">
 									{item.name}

@@ -5,7 +5,7 @@
 
 @layer components {
 	.search-input {
-		@apply border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-1.5 md:py-2 pl-7 tiny:pl-8 xs:pl-10 flex-grow focus:ring-0 focus:border-gray-200 focus:outline-none focus:shadow-lg rounded-sm;
+		@apply border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-1.5 md:py-2 pl-7 tiny:pl-8 xs:pl-10 grow focus:ring-0 focus:border-gray-200 focus:outline-none focus:shadow-lg rounded-sm;
 	}
 
 	.hd-inner .search-input {

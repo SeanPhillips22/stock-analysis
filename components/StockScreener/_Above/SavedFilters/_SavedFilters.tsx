@@ -41,7 +41,7 @@ export function SavedFilters() {
 	}, [open, setOpen])
 
 	return (
-		<div className="flex-grow">
+		<div className="grow">
 			<label
 				htmlFor="location"
 				className="hidden md:block text-sm font-medium text-gray-700"
