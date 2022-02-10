@@ -28,7 +28,7 @@ export function ArticleLayout({ meta, url, children }: Props) {
 	return (
 		<>
 			<Layout url={url}>
-				<div className="contain mx-auto mt-2 mb-6">
+				<div className="contain mx-auto mt-2 mb-1 pb-1">
 					<div className="lg:right-sidebar">
 						<article className="text-page lg:px-6">
 							<header className="article-header">
