@@ -21,13 +21,13 @@ const navigation = {
 export const Footer = () => {
 	return (
 		<>
-			<footer className="bg-gray-800 clear-both">
-				<div className="max-w-7xl mx-auto pt-12 px-5 sm:px-6 lg:pt-16 lg:pb-8 lg:px-8">
+			<footer className="clear-both bg-gray-800">
+				<div className="mx-auto max-w-7xl px-5 pt-12 sm:px-6 lg:px-8 lg:pt-16 lg:pb-8">
 					<div className="xl:grid xl:grid-cols-3 xl:gap-8">
 						<div className="grid grid-cols-2 gap-8 xl:col-span-2">
 							<div className="md:grid md:grid-cols-2 md:gap-8">
 								<div>
-									<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
 										Sections
 									</h4>
 									<ul className="mt-4 space-y-4">
@@ -43,7 +43,7 @@ export const Footer = () => {
 									</ul>
 								</div>
 								<div className="mt-12 md:mt-0">
-									<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
 										Support
 									</h4>
 									<ul className="mt-4 space-y-4">
@@ -73,7 +73,7 @@ export const Footer = () => {
 							</div>
 							<div className="md:grid md:grid-cols-2 md:gap-8">
 								<div>
-									<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
 										Company
 									</h4>
 									<ul className="mt-4 space-y-4">
@@ -89,7 +89,7 @@ export const Footer = () => {
 									</ul>
 								</div>
 								<div className="mt-12 md:mt-0">
-									<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
 										Legal
 									</h4>
 									<ul className="mt-4 space-y-4">
@@ -107,7 +107,7 @@ export const Footer = () => {
 							</div>
 						</div>
 						<div className="mt-8 xl:mt-0">
-							<h4 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+							<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
 								Subscribe to the newsletter
 							</h4>
 							<p className="mt-4 text-base text-gray-300">
@@ -148,14 +148,14 @@ export const Footer = () => {
 									name="email"
 									id="email-footer"
 									autoComplete="email"
-									className="appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
+									className="w-full min-w-0 appearance-none rounded-md border border-transparent bg-white py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:border-white focus:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
 									placeholder="Enter your email"
 								/>
 								<div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:shrink-0">
 									<input
 										name="submit"
 										type="submit"
-										className="w-full bg-blue-brand_light border border-transparent rounded-md py-2 px-4 flex items-center justify-center text-base font-medium text-white hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-brand_sharp transition duration-200 cursor-pointer"
+										className="flex w-full cursor-pointer items-center justify-center rounded-md border border-transparent bg-blue-brand_light py-2 px-4 text-base font-medium text-white transition duration-200 hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-blue-brand_sharp focus:ring-offset-2 focus:ring-offset-gray-800"
 										value="Subscribe"
 									/>
 								</div>
@@ -175,7 +175,7 @@ export const Footer = () => {
 								<svg
 									fill="currentColor"
 									viewBox="0 0 24 24"
-									className="h-8 w-8 pointer-events-none"
+									className="pointer-events-none h-8 w-8"
 									aria-hidden="true"
 									style={{ maxWidth: '40px' }}
 								>
@@ -197,7 +197,7 @@ export const Footer = () => {
 								<svg
 									fill="currentColor"
 									viewBox="0 0 24 24"
-									className="h-8 w-8 pointer-events-none"
+									className="pointer-events-none h-8 w-8"
 									aria-hidden="true"
 									style={{ maxWidth: '40px' }}
 								>
@@ -215,7 +215,7 @@ export const Footer = () => {
 								<svg
 									fill="currentColor"
 									viewBox="0 0 24 24"
-									className="h-8 w-8 pointer-events-none"
+									className="pointer-events-none h-8 w-8"
 									aria-hidden="true"
 									style={{ maxWidth: '40px' }}
 								>
@@ -227,7 +227,7 @@ export const Footer = () => {
 								</svg>
 							</a>
 						</div>
-						<p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
+						<p className="mt-8 text-base text-gray-400 md:order-1 md:mt-0">
 							&copy; 2022 Stock Analysis. All rights reserved.
 						</p>
 					</div>
