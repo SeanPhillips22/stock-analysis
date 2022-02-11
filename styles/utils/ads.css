@@ -4,6 +4,11 @@
 */
 
 @layer utilities {
+	/* Ad placeholder to use during dev */
+	.adph {
+		@apply bg-slate-200;
+	}
+
 	.center-children div iframe {
 		@apply mx-auto text-center;
 	}
@@ -38,6 +43,16 @@
 
 	/* Mobile 1, inside article */
 	.m-1a {
-		@apply mx-auto mt-6 mb-3 text-center lg:hidden;
+		@apply m-1 mt-7 mb-4 text-center;
+	}
+
+	/* Dianomi Footer Ad */
+	.ftdia {
+		@apply mx-auto mt-10 mb-3 min-h-[310px] max-w-[970px] px-3 pb-4 xs:px-4 lg:px-0;
+	}
+
+	/* Dianomi News Feed Ad */
+	.nwsdia {
+		@apply min-h-[310px] diabp:min-h-[150px];
 	}
 }

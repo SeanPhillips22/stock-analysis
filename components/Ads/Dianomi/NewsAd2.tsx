@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import Script from 'next/script'
+import { isDev } from '../noAds'
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
@@ -15,11 +16,15 @@ export default function NewsAd2() {
 		}
 	}, [])
 
+	if (isDev()) {
+		return <div className="adph nwsdia"></div>
+	}
+
 	return (
 		<>
 			<div
 				id="ad-banner"
-				className="dianomi_context min-h-[310px] diabp:min-h-[150px]"
+				className="dianomi_context nwsdia"
 				data-dianomi-context-id="411"
 			></div>
 			<Script

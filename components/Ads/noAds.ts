@@ -12,6 +12,9 @@ const NO_ADS = [
 ]
 
 export function noAds(path: PathType) {
-	if (process.env.NODE_ENV === 'development') return true
 	return path.one ? NO_ADS.includes(path.one) : false
+}
+
+export function isDev() {
+	return process.env.NODE_ENV === 'development'
 }

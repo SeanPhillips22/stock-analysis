@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import Script from 'next/script'
+import { isDev } from '../noAds'
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
@@ -19,17 +20,15 @@ export default function FooterAd() {
 		}
 	}, [path])
 
-	if (process.env.NODE_ENV === 'development') {
-		return (
-			<div className="max-w-[970px] min-h-[280px] mx-auto px-3 xs:px-4 lg:px-0 my-10 bg-blue-100"></div>
-		)
+	if (isDev()) {
+		return <div className="adph ftdia"></div>
 	}
 
 	return (
 		<>
 			<div
 				id="ad-banner"
-				className="dianomi_context max-w-[970px] min-h-[310px] pb-4 mx-auto px-3 xs:px-4 lg:px-0 mt-10 mb-3"
+				className="dianomi_context ftdia"
 				data-dianomi-context-id="443"
 			></div>
 			<Script
