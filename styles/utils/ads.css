@@ -46,14 +46,19 @@
 		@apply mx-auto h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:hidden;
 	}
 
-	/* Mobile 1, inside article */
-	.m-1a {
+	/* Mobile 1 wrapper, inside article */
+	.m1aw {
 		@apply m-1 mt-7 mb-4 text-center;
 	}
 
 	/* Adsense Footer Ad */
 	.ftad {
-		@apply mx-auto mb-10 h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[250px] lg:w-[970px];
+		@apply mx-auto h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[250px] lg:w-[970px];
+	}
+
+	/* Adsense Footer Ad wrapper */
+	.ftadw {
+		@apply mb-9 text-center lg:mb-10;
 	}
 
 	/* Dianomi Footer Ad */

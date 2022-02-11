@@ -14,17 +14,23 @@ export default function Footer1() {
 	}
 
 	if (isDev()) {
-		return <div className="adphb ftad"></div>
+		return (
+			<div className="ad-banner ftadw">
+				<div className="adphb ftad"></div>
+			</div>
+		)
 	}
 
 	return (
 		<>
-			<ins
-				className="adsbygoogle ftad"
-				data-ad-client="ca-pub-7702053427535735"
-				data-ad-slot="4737940334"
-				data-full-width-responsive="false"
-			></ins>
+			<div className="ad-banner ftadw">
+				<ins
+					className="adsbygoogle ftad"
+					data-ad-client="ca-pub-7702053427535735"
+					data-ad-slot="4737940334"
+					data-full-width-responsive="false"
+				></ins>
+			</div>
 			<AdsenseScript />
 		</>
 	)

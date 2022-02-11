@@ -14,17 +14,23 @@ export function Mobile1Article() {
 	}
 
 	if (isDev()) {
-		return <div className="adph m-1a"></div>
+		return (
+			<div className="ad-banner m1aw">
+				<div className="adph m-1"></div>
+			</div>
+		)
 	}
 
 	return (
 		<>
-			<ins
-				className="adsbygoogle m-1a"
-				data-ad-client="ca-pub-7702053427535735"
-				data-ad-slot="9694172988"
-				data-full-width-responsive="false"
-			></ins>
+			<div className="ad-banner m1aw">
+				<ins
+					className="adsbygoogle m-1"
+					data-ad-client="ca-pub-7702053427535735"
+					data-ad-slot="9694172988"
+					data-full-width-responsive="false"
+				></ins>
+			</div>
 			<AdsenseScript />
 		</>
 	)
