@@ -115,7 +115,7 @@ export function useAuth() {
 
 	/*
 		// @ts-ignore
-		create_user: false
+		create_user: false -- waiting for gotrue-js update
 	*/
 	async function signIn(email: string) {
 		const { error } = await supabase.auth.signIn({ email })
