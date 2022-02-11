@@ -1,12 +1,24 @@
+import { Bar } from 'react-chartjs-2'
 import {
+	Chart as ChartJS,
+	BarController,
+	BarElement,
+	Tooltip,
+	LinearScale,
+	Title,
+	CategoryScale,
+	defaults
+} from 'chart.js'
+
+ChartJS.register(
 	BarController,
 	BarElement,
 	Tooltip,
 	LinearScale,
 	Title,
 	CategoryScale
-} from 'chart.js'
-import { ReactChart } from 'components/ReactChart'
+)
+
 import { Unavailable } from 'components/Unavailable'
 
 interface Props {
@@ -30,23 +42,13 @@ export const StatsChart = ({ title, x, y }: Props) => {
 		)
 	}
 
-	ReactChart.register(
-		BarController,
-		BarElement,
-		Tooltip,
-		LinearScale,
-		CategoryScale,
-		Title
-	)
-
-	ReactChart.defaults.font.family =
+	defaults.font.family =
 		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 	return (
 		<div className="mt-4 mb-3 sm:mb-4 border border-gray-200 h-[300px] sm:h-[390px] p-1 sm:p-2">
-			<ReactChart
+			<Bar
 				id={'1'}
-				type="bar"
 				data={{
 					labels: x,
 					datasets: [
@@ -161,7 +163,6 @@ export const StatsChart = ({ title, x, y }: Props) => {
 										index: number
 									) {
 										const data = y[index]
-
 										ctx.fillText(data.toString(), bar.x, bar.y - 5)
 									})
 								})

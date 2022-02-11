@@ -22,6 +22,7 @@ function loadAdsense() {
 
 export function useLoadAdsense() {
 	const { path } = useLayoutContext()
+
 	const isPro = authState(state => state.isPro)
 
 	useEffect(() => {

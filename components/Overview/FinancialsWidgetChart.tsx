@@ -1,14 +1,20 @@
+import { Unavailable } from 'components/Unavailable'
+
+import { Bar } from 'react-chartjs-2'
 import {
+	Chart as ChartJS,
 	BarController,
 	BarElement,
 	Tooltip,
 	Legend,
 	LinearScale,
 	Title,
-	CategoryScale
+	CategoryScale,
+	defaults
 } from 'chart.js'
-import { ReactChart } from 'components/ReactChart'
-import { Unavailable } from 'components/Unavailable'
+
+defaults.font.family =
+	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 interface FinancialsWidgetChartI {
 	data: {
@@ -24,21 +30,12 @@ interface FinancialsWidgetChartI {
 			}
 		}) => void
 	}
-	colorEarnings: {
-		id: string
-		beforeDraw: (chart: {
-			legend: {
-				legendItems: any
-			}
-		}) => void
-	}
 }
 
 export function FinancialsWidgetChart({
 	data,
 	colors,
-	padLegend,
-	colorEarnings
+	padLegend
 }: FinancialsWidgetChartI) {
 	if (
 		typeof window !== 'undefined' &&
@@ -51,7 +48,8 @@ export function FinancialsWidgetChart({
 			/>
 		)
 	}
-	ReactChart.register(
+
+	ChartJS.register(
 		BarController,
 		BarElement,
 		Tooltip,
@@ -59,16 +57,12 @@ export function FinancialsWidgetChart({
 		CategoryScale,
 		Title,
 		Legend,
-		padLegend,
-		colorEarnings
+		padLegend
 	)
 
-	ReactChart.defaults.font.family =
-		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 	return (
-		<ReactChart
+		<Bar
 			id={'1'}
-			type="bar"
 			data={{
 				labels: data.financialChart[0],
 				datasets: [
@@ -82,6 +76,7 @@ export function FinancialsWidgetChart({
 					{
 						label: 'Earnings',
 						backgroundColor: colors,
+						borderColor: '#2C6288',
 						data: data.financialChart[2],
 						categoryPercentage: 0.8,
 						barPercentage: 0.85
@@ -128,6 +123,7 @@ export function FinancialsWidgetChart({
 				plugins: {
 					legend: {
 						position: 'top',
+
 						align: 'start',
 						labels: {
 							font: {
