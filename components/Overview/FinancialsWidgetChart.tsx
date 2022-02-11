@@ -13,14 +13,8 @@ import {
 	defaults
 } from 'chart.js'
 
-ChartJS.register(
-	BarController,
-	BarElement,
-	Tooltip,
-	LinearScale,
-	Title,
-	CategoryScale
-)
+defaults.font.family =
+	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 interface FinancialsWidgetChartI {
 	data: {
@@ -66,8 +60,6 @@ export function FinancialsWidgetChart({
 		padLegend
 	)
 
-	defaults.font.family =
-		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 	return (
 		<Bar
 			id={'1'}
