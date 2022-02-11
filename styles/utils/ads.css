@@ -4,17 +4,27 @@
 */
 
 @layer utilities {
+	/* Ad placeholder to use during dev */
+	.adph {
+		@apply bg-slate-200;
+	}
+
+	/* Version B - for AB testing */
+	.adphb {
+		@apply bg-blue-200;
+	}
+
 	.center-children div iframe {
 		@apply mx-auto text-center;
 	}
 
 	.fullwidth .header-ad {
-		@apply bg-gray-100 -mb-4;
+		@apply -mb-4 bg-gray-100;
 	}
 
 	/* Sidebar 1 */
 	.sb-1 {
-		@apply w-[300px] h-[250px] hidden lg:block mx-auto;
+		@apply mx-auto hidden h-[250px] w-[300px] lg:block;
 	}
 
 	/* Show on all devices
@@ -23,16 +33,41 @@
 	Mobile: Rectangle 
 	*/
 	.sb-1a {
-		@apply w-[300px] h-[250px] bp:w-[336px] bp:h-[280px] md:w-[728px] md:h-[90px] lg:w-[336px] lg:h-[280px] block mt-8 mx-auto;
+		@apply mx-auto mt-8 block h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[280px] lg:w-[336px];
 	}
 
 	/* Sidebar 2 - 300x600 */
 	.sb-2 {
-		@apply w-[300px] h-[600px] hidden lg:block mx-auto;
+		@apply mx-auto hidden h-[600px] w-[300px] lg:block;
 	}
 
 	/* Mobile 1 */
 	.m-1 {
-		@apply w-[300px] h-[250px] bp:w-[336px] bp:h-[280px] md:w-[728px] md:h-[90px] lg:hidden mx-auto;
+		@apply mx-auto h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:hidden;
+	}
+
+	/* Mobile 1 wrapper, inside article */
+	.m1aw {
+		@apply m-1 mt-7 mb-4 text-center;
+	}
+
+	/* Adsense Footer Ad */
+	.ftad {
+		@apply mx-auto h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[250px] lg:w-[970px];
+	}
+
+	/* Adsense Footer Ad wrapper */
+	.ftadw {
+		@apply mb-9 text-center lg:mb-10;
+	}
+
+	/* Dianomi Footer Ad */
+	.ftdia {
+		@apply mx-auto mt-10 mb-3 min-h-[310px] max-w-[970px] px-3 pb-4 xs:px-4 lg:px-0;
+	}
+
+	/* Dianomi News Feed Ad */
+	.nwsdia {
+		@apply min-h-[310px] diabp:min-h-[150px];
 	}
 }

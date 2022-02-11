@@ -107,7 +107,7 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 					onClick={() => setOpen(false)}
 				>
 					<span className="min-w-[3rem]">{symbol}</span>
-					<span className="flex-grow">{name}</span>
+					<span className="grow">{name}</span>
 					<span className="hidden sm:block text-sm">{tag}</span>
 				</a>
 			</Link>

@@ -24,9 +24,8 @@ export function NewsVideo({ item, related, ad, loadAds }: Props) {
 						<Tickers tickers={item.tickers} intro={related} />
 					</div>
 				)}
-				<div>
-					<span title={item.timeFull}>{item.timeAgo}</span>
-					<span> - {item.source}</span>
+				<div className="news-bl" title={item.timeFull}>
+					{`${item.timeAgo} - ${item.source}`}
 				</div>
 			</div>
 			{loadAds && <NewsAds ad={ad} />}

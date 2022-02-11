@@ -51,9 +51,8 @@ export function NewsArticle({ item, related, ad, loadAds }: Props) {
 						</div>
 					)}
 
-					<div>
-						<span title={item.timeFull}>{item.timeAgo}</span>
-						<span> - {item.source}</span>
+					<div className="news-bl" title={item.timeFull}>
+						{`${item.timeAgo} - ${item.source}`}
 					</div>
 				</div>
 			</div>

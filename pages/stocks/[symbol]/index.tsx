@@ -71,7 +71,7 @@ export default function StockOverview({ info, data, news, chart }: Props) {
 				</div>
 			</div>
 			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
-				<div className="order-3 flex-grow overflow-auto">
+				<div className="order-3 grow overflow-auto">
 					<PriceChart info={info} initial={chart} />
 				</div>
 				<div className="order-1 flex flex-row gap-4">

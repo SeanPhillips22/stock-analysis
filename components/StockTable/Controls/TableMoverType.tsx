@@ -1,4 +1,4 @@
-import { CheckIcon } from '@heroicons/react/outline'
+import { CheckIcon } from 'components/Icons/CheckIcon'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { cn } from 'functions/helpers/classNames'
 import { tabActive } from 'functions/helpers/tabActive'

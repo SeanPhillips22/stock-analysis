@@ -1,4 +1,4 @@
-import { CheckIcon } from '@heroicons/react/outline'
+import { CheckIcon } from 'components/Icons/CheckIcon'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { financialsState } from 'state/financialsState'
 

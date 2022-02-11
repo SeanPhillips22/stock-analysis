@@ -15,17 +15,15 @@ export const Tickers = ({ tickers, intro }: Props) => {
 	}
 
 	return (
-		<div className="text-gray-800 inline">
-			{intro && <span className="mr-1">{intro}:</span>}
-			<span className="">
-				{tickers.map(function (ticker, index) {
-					return <SingleTicker ticker={ticker} key={index} />
-				})}
-			</span>
+		<div className="tickers">
+			{intro && <span className="mr-1">{`${intro}:`}</span>}
+			{tickers.map(function (ticker, index) {
+				return <SingleTicker ticker={ticker} key={index} />
+			})}
 		</div>
 	)
 }
 
 function SingleTicker({ ticker }: { ticker: string }) {
-	return <SymbolLink symbol={ticker} className="news-ticker" />
+	return <SymbolLink symbol={ticker} />
 }

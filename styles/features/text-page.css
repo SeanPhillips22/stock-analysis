@@ -8,20 +8,24 @@
 		@apply text-base md:text-lg;
 	}
 
+	.text-page > * > *:not(.ad-banner) {
+		@apply md:px-4 lg:px-0;
+	}
+
 	.text-page .article-header {
-		@apply mb-4 md:mb-6 border-blue-brand_sharp border-b-2 pb-3 md:pb-3;
+		@apply mb-4 border-b-2 border-blue-brand_sharp pb-3 md:mb-6 md:pb-3;
 	}
 
 	.text-page h1 {
-		@apply text-3xl md:text-4xl font-bold mb-3 text-gray-800;
+		@apply mb-3 text-3xl font-bold text-gray-800 md:text-4xl;
 	}
 
 	.text-page h2 {
-		@apply text-2xl md:text-3xl font-bold mb-5 md:mb-6;
+		@apply mb-5 text-2xl font-bold md:mb-6 md:text-3xl;
 	}
 
 	.text-page h3 {
-		@apply text-xl md:text-2xl font-bold mb-3 md:mb-4;
+		@apply mb-3 text-xl font-bold md:mb-4 md:text-2xl;
 	}
 
 	.text-page p {
@@ -38,12 +42,12 @@
 
 	.text-page ul {
 		list-style: disc;
-		@apply ml-8 md:ml-10 mb-5;
+		@apply ml-8 mb-5 md:ml-10;
 	}
 
 	.text-page ol {
 		list-style: decimal;
-		@apply ml-6 md:ml-8 mb-5;
+		@apply ml-6 mb-5 md:ml-8;
 	}
 
 	.text-page li {
@@ -55,7 +59,7 @@
 	}
 
 	.text-page table tr {
-		@apply border-b first:border-t border-gray-200;
+		@apply border-b border-gray-200 first:border-t;
 	}
 
 	.text-page table tr th {
@@ -63,11 +67,11 @@
 	}
 
 	.text-page table tr td {
-		@apply py-2 sm:px-3;
+		@apply py-2 sm:px-3 md:px-4 lg:px-3;
 	}
 
 	.text-page img {
-		@apply my-6 md:my-7 mx-auto;
+		@apply my-6 mx-auto md:my-7;
 	}
 
 	.text-page img.add-border {
@@ -75,6 +79,6 @@
 	}
 
 	.text-page .summary {
-		@apply border border-gray-300 bg-gray-50 rounded p-4 mb-6 md:mb-8;
+		@apply mb-6 rounded border border-gray-300 bg-gray-50 p-4 md:mb-8;
 	}
 }

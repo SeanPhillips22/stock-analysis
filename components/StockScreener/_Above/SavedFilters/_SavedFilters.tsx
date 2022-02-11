@@ -1,5 +1,5 @@
 import { screenerState } from 'components/StockScreener/screener.state'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { useState, useRef, useEffect } from 'react'
 import { SavedDropdown } from './SavedDropdown'
 
@@ -44,13 +44,13 @@ export function SavedFilters() {
 		<div className="flex-grow">
 			<label
 				htmlFor="location"
-				className="hidden md:block text-sm font-medium text-gray-700"
+				className="hidden text-sm font-medium text-gray-700 md:block"
 			>
 				Saved Screens
 			</label>
 			<div ref={ref} className="relative">
 				<div
-					className="inline-flex justify-between md:justify-center w-full rounded-md border border-gray-300 shadow-sm px-3 bp:px-4 py-2 bg-white text-sm text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer whitespace-nowrap"
+					className="inline-flex w-full cursor-pointer justify-between whitespace-nowrap rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-0 bp:px-4 md:justify-center"
 					onClick={() => setOpen(!open)}
 					onKeyDown={handleKeyDown}
 					tabIndex={0}
@@ -63,10 +63,10 @@ export function SavedFilters() {
 				</div>
 
 				<div
-					className={`transition duration-150 origin-top-right absolute right-2 lg:absolute lg:right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px]${
+					className={`absolute right-2 z-50 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition duration-150 focus:outline-none lg:absolute lg:right-0 w-[260px]${
 						open
-							? ' visible opacity-100 transform translate-y-0'
-							: ' invisible opacity-0 transform -translate-y-2'
+							? ' visible translate-y-0 transform opacity-100'
+							: ' invisible -translate-y-2 transform opacity-0'
 					}`}
 				>
 					<SavedDropdown type={type} />

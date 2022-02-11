@@ -132,14 +132,23 @@ export function formatDate(cell: CellString) {
 	let { value } = cell.cell
 	if (!value) return <div className="text-right">-</div>
 
-	const datetime = new Date(value)
-	const date = datetime.toLocaleString('en-US', {
-		day: 'numeric',
-		year: 'numeric',
-		month: 'short'
-	})
+	const months = [
+		'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
+		'May',
+		'Jun',
+		'Jul',
+		'Aug',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dec'
+	]
 
-	return date
+	const dt = new Date(value)
+	return `${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`
 }
 
 // Format a string

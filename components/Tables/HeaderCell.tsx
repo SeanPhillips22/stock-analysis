@@ -15,7 +15,8 @@ export function HeaderCell({ column, updateSort }: Props) {
 	const { format, name } = DataPoints[id]
 
 	let css =
-		format && ['string', 'linkSymbol', 'linkName'].includes(format)
+		id === 'n' ||
+		(format && ['string', 'linkSymbol', 'linkName'].includes(format))
 			? 'head-left'
 			: 'head-right'
 

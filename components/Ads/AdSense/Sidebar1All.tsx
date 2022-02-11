@@ -1,6 +1,6 @@
 import { authState } from 'state/authState'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
-import { noAds } from '../noAds'
+import { noAds, isDev } from '../noAds'
 import { AdsenseScript } from './AdsenseScript'
 import { useLoadAdsense } from './useLoadAdsense'
 
@@ -15,8 +15,12 @@ export function Sidebar1All() {
 	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
 
-	if (noAds(path.one) || isPro) {
+	if (noAds(path) || isPro) {
 		return null
+	}
+
+	if (isDev()) {
+		return <div className="adph sb-1a"></div>
 	}
 
 	return (

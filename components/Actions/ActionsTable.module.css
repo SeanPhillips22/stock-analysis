@@ -2,6 +2,10 @@
 	@apply w-full overflow-x-auto;
 }
 
+.actionstable a {
+	@apply text-blue-link hover:text-gray-900;
+}
+
 .actionstable tr > * {
 	padding: 0.5rem;
 	border-bottom: 1px solid #ddd;

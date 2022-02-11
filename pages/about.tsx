@@ -7,7 +7,7 @@ import { AboutTeam } from 'components/About/Team'
 import { AboutActions } from 'components/About/Actions'
 import { FocusedLayout } from 'components/Layout/FocusedLayout'
 
-export default function FrontPage() {
+export default function AboutPage() {
 	return (
 		<>
 			<SEO

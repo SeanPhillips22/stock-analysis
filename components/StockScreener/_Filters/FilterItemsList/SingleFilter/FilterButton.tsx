@@ -1,6 +1,6 @@
 import { screenerState } from 'components/StockScreener/screener.state'
 import { DataId } from 'types/DataId'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { createLabelFromString } from 'components/StockScreener/functions/filterString/createLabelFromString'
 
 type Props = {
@@ -54,7 +54,7 @@ export function FilterButton({ active, id }: Props) {
 			onKeyDown={handleKeyDown}
 			tabIndex={0}
 		>
-			<span className="overflow-hidden overflow-ellipsis">{buttonText}</span>
+			<span className="overflow-hidden text-ellipsis">{buttonText}</span>
 
 			<ChevronDownIcon
 				className="-mr-1 ml-2 h-5 w-5 pointer-events-none"

@@ -5,26 +5,37 @@
 
 @layer base {
 	body {
-		@apply text-gray-900 bg-white;
+		@apply bg-white text-gray-900;
 	}
 
 	.bll {
 		@apply text-blue-link hover:text-gray-900;
+		color: #1e73ba;
+	}
+
+	.bll:hover {
+		color: #111827;
 	}
 
 	.hh1 {
-		@apply text-3xl font-bold mb-4;
+		@apply mb-4 text-3xl font-bold;
 	}
 
 	.hh2 {
-		@apply text-2xl font-bold mb-3;
+		@apply mb-3 text-2xl font-bold;
 	}
 
 	.hh3 {
-		@apply text-xl font-bold mb-2.5 xs:mb-3;
+		@apply mb-2.5 text-xl font-bold xs:mb-3;
 	}
 
 	.text-shadow {
 		text-shadow: 0 0 0.5px #555555;
+	}
+
+	.button-blue {
+		@apply bg-blue-brand_light text-white hover:bg-blue-brand_sharp;
+		color: #ffffff;
+		background-color: #3c74d4;
 	}
 }

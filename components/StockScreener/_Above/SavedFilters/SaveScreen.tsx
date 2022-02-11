@@ -1,4 +1,4 @@
-import { LockClosedIcon } from '@heroicons/react/solid'
+import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
 import { screenerState } from 'components/StockScreener/screener.state'
 import { ScreenerTypes } from 'components/StockScreener/screener.types'
 import { useAuthState } from 'hooks/useAuthState'
@@ -35,7 +35,7 @@ export function SaveScreen({ type }: { type: ScreenerTypes }) {
 				<input
 					type="text"
 					placeholder="Enter screen name"
-					className="border-gray-200 focus:ring-0 focus:border-blue-300 text-gray-700 text-sm flex-grow"
+					className="border-gray-200 focus:ring-0 focus:border-blue-300 text-gray-700 text-sm grow"
 					value={name}
 					onChange={e => {
 						setName(e.target.value)

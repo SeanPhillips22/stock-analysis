@@ -1,4 +1,4 @@
-import { LockClosedIcon } from '@heroicons/react/solid'
+import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
 import { useRouter } from 'next/router'
 import { Range } from 'types/Financials'
 import { formatYear } from './FinancialTable.functions'

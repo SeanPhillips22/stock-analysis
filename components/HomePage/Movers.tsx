@@ -1,3 +1,4 @@
+import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
 import { StockLink } from 'components/Links'
 
 const cellStyles =
@@ -34,15 +35,15 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 						return (
 							<tr
 								key={index}
-								className="border-b border-gray-200 hover:bg-gray-50 transition duration-100"
+								className="border-b border-gray-200 transition duration-100 hover:bg-gray-50"
 							>
-								<td className={cellStyles + ' text-left border-r'}>
-									<StockLink symbol={item.s} />
+								<td className={cellStyles + ' border-r text-left'}>
+									<StockLink symbol={item.s} className="bll" />
 								</td>
 								<td
 									className={
 										cellStyles +
-										' text-left border-r max-w-[90px] xs:max-w-[170px] md:max-w-[350px] xl:whitespace-nowrap overflow-hidden overflow-ellipsis'
+										' max-w-[90px] overflow-hidden text-ellipsis border-r text-left xs:max-w-[170px] md:max-w-[350px] xl:whitespace-nowrap'
 									}
 								>
 									{item.n}
@@ -51,7 +52,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 								<td
 									className={
 										cellStyles +
-										' text-right border-r hidden tiny:table-cell'
+										' hidden border-r text-right tiny:table-cell'
 									}
 								>
 									${item.p}
@@ -74,29 +75,29 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		const titlePrefix = marketStatus === 'premarket' ? 'Pre-Market' : 'Top'
 
 		return (
-			<div className="flex-grow">
-				<div className="flex flex-row justify-between items-end mb-1">
-					<h2 className="text-xl bp:text-2xl font-bold mb-0.5 bp:mb-1">
+			<div className="grow">
+				<div className="mb-1 flex flex-row items-end justify-between">
+					<h2 className="mb-0.5 text-xl font-bold bp:mb-1 bp:pb-1.5 bp:text-2xl bp:leading-4 lg:pb-0 lg:leading-8">
 						{titlePrefix} {type}
 					</h2>
-					<span className="text-xs xs:text-sm text-gray-600">
+					<span className="text-xs text-gray-600 xs:text-sm">
 						<span className="hidden sm:inline">Updated </span>
 						{date}
 					</span>
 				</div>
-				<table className="border border-gray-200 w-full">
+				<table className="w-full border border-gray-200">
 					<thead>
 						<tr className="border-t border-b border-gray-200">
-							<th className={cellStyles + ' text-left border-r'}>
+							<th className={cellStyles + ' border-r text-left'}>
 								Symbol
 							</th>
-							<th className={cellStyles + ' text-left border-r'}>
+							<th className={cellStyles + ' border-r text-left'}>
 								Name
 							</th>
 							<th
 								className={
 									cellStyles +
-									' text-right border-r hidden tiny:table-cell'
+									' hidden border-r text-right tiny:table-cell'
 								}
 							>
 								Price
@@ -114,8 +115,9 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 
 	return (
 		<>
-			<section className="mx-auto flex flex-col lg:flex-row lg:justify-evenly space-y-7 px-3 xs:px-4 sm:px-5 py-7 lg:py-10 lg:max-w-[1200px] lg:space-y-0 lg:space-x-14">
+			<section className="mx-auto flex flex-col space-y-7 px-3 py-7 xs:px-4 sm:px-5 lg:max-w-[1200px] lg:flex-row lg:justify-evenly lg:space-y-0 lg:space-x-14 lg:py-10">
 				<Table movers={gainers} type="Gainers" />
+				<Mobile1 />
 				<Table movers={losers} type="Losers" />
 			</section>
 		</>

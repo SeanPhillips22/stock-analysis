@@ -1,5 +1,5 @@
-import { CheckIcon } from '@heroicons/react/outline'
-import { LockClosedIcon } from '@heroicons/react/solid'
+import { CheckIcon } from 'components/Icons/CheckIcon'
+import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { cn } from 'functions/helpers/classNames'
 import { tabActive } from 'functions/helpers/tabActive'

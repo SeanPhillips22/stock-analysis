@@ -28,7 +28,7 @@ export const FilingTableMin = ({ filings, count }: Props) => {
 								className="border-b last:border-0 border-gray-200"
 							>
 								<td className="py-2 px-3 border-r border-gray-200">
-									<StockLink symbol={item.symbol} />
+									<StockLink symbol={item.symbol} className="bll" />
 								</td>
 								<td className="py-2 px-2 pr-2 lg:max-w-[200px] lg:truncate">
 									{item.name}
