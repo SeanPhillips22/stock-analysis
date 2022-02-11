@@ -19,7 +19,7 @@ ChartJS.register(
 	PointElement
 )
 
-import { Unavailable } from 'components/Unavailable'
+// import { Unavailable } from 'components/Unavailable'
 import 'chartjs-adapter-date-fns'
 
 import { useMemo } from 'react'
@@ -47,6 +47,31 @@ interface AnalystChartData {
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const chartData = {
+	price: [
+		{ t: '2020-12-1', c: '132.69' },
+		{ t: '2021-01-1', c: '131.96' },
+		{ t: '2021-02-1', c: '121.26' },
+		{ t: '2021-03-1', c: '122.15' },
+		{ t: '2021-04-1', c: '131.46' },
+		{ t: '2021-05-1', c: '124.61' },
+		{ t: '2021-06-1', c: '136.96' },
+		{ t: '2021-07-1', c: '145.86' },
+		{ t: '2021-08-1', c: '151.83' },
+		{ t: '2021-09-1', c: '141.50' },
+		{ t: '2021-10-1', c: '149.80' },
+		{ t: '2021-11-1', c: '165.30' },
+		{ t: '2021-12-1', c: '177.57' },
+		{ t: '2022-12-1', c: undefined }
+	],
+	targets: {
+		low: '90',
+		average: '175.28',
+		high: '210'
+	}
+}
+
 export const Chart = ({ chartData }: Props) => {
 	const lowData = [
 		{ x: '2021-12-7', y: '177.57' },
@@ -65,7 +90,7 @@ export const Chart = ({ chartData }: Props) => {
 
 	const timeAxis = useMemo(
 		() =>
-			chartData.price.map((item) => {
+			chartData.price.map(item => {
 				return item.t
 			}),
 		[chartData]
@@ -73,7 +98,7 @@ export const Chart = ({ chartData }: Props) => {
 
 	const priceAxis = useMemo(
 		() =>
-			chartData.price.map((item) => {
+			chartData.price.map(item => {
 				return { x: item.t, y: item.c }
 			}),
 		[chartData]

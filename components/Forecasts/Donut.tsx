@@ -1,4 +1,4 @@
-import { Unavailable } from 'components/Unavailable'
+// import { Unavailable } from 'components/Unavailable'
 
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
@@ -25,7 +25,8 @@ interface AnalystChartData {
 	targets: AnalystTarget
 }
 
-export const Donut = ({ chartData }: Props) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function Donut({ chartData }: Props) {
 	let data: any[] = [
 		{
 			data: [10, 10, 10, 10, 10],
@@ -135,7 +136,7 @@ export const Donut = ({ chartData }: Props) => {
 			]}
 			options={{
 				maintainAspectRatio: false,
-				animation: false,
+				// animation: false,
 				radius: '60%',
 				cutout: '50%',
 				rotation: 270,
