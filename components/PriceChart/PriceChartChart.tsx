@@ -1,5 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Line } from 'react-chartjs-2'
 import {
+	Chart as ChartJS,
+	LineController,
+	LineElement,
+	PointElement,
+	Tooltip,
+	LinearScale,
+	CategoryScale,
+	Filler,
+	defaults
+} from 'chart.js'
+
+ChartJS.register(
 	LineController,
 	LineElement,
 	PointElement,
@@ -7,7 +19,7 @@ import {
 	LinearScale,
 	CategoryScale,
 	Filler
-} from 'chart.js'
+)
 
 import {
 	formatDateTimestamp,
@@ -18,7 +30,6 @@ import {
 	formatDateYear
 } from 'functions/datetime/formatDates'
 import { Unavailable } from 'components/Unavailable'
-import { ReactChart } from 'components/ReactChart'
 import { ChartDataPoint } from 'types/Charts'
 import { useMemo, useState } from 'react'
 
@@ -30,17 +41,7 @@ type Props = {
 	change: number
 }
 
-ReactChart.register(
-	LineController,
-	PointElement,
-	LineElement,
-	Tooltip,
-	LinearScale,
-	CategoryScale,
-	Filler
-)
-
-ReactChart.defaults.font.family =
+defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 export function Chart({ data, time, symbol, close, change }: Props) {
@@ -125,9 +126,8 @@ export function Chart({ data, time, symbol, close, change }: Props) {
 	let id = symbol + '-' + time
 
 	return (
-		<ReactChart
+		<Line
 			id={id}
-			type="line"
 			data={{
 				labels: timeAxis,
 				datasets: d

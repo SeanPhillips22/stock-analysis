@@ -38,20 +38,6 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 		}
 	}
 
-	const colorEarnings = {
-		id: 'colorEarnings',
-
-		beforeDraw: function (chart: { legend: { legendItems: any } }) {
-			if (earnings[earnings.length - 1] > 0) {
-				const legends = chart.legend.legendItems
-				legends[legends.length - 1].fillStyle = '#00853E'
-			} else {
-				const legends = chart.legend.legendItems
-				legends[legends.length - 1].fillStyle = '#CD5C5C'
-			}
-		}
-	}
-
 	return (
 		<div>
 			<h2 className="hh2 mb-2">Financial Performance</h2>
@@ -63,7 +49,6 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 					data={data}
 					colors={colors}
 					padLegend={padLegend}
-					colorEarnings={colorEarnings}
 				/>
 			</div>
 			{info.currency !== 'USD' && (
