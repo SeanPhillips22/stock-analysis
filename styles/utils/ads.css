@@ -9,6 +9,11 @@
 		@apply bg-slate-200;
 	}
 
+	/* Version B - for AB testing */
+	.adphb {
+		@apply bg-blue-200;
+	}
+
 	.center-children div iframe {
 		@apply mx-auto text-center;
 	}
@@ -44,6 +49,11 @@
 	/* Mobile 1, inside article */
 	.m-1a {
 		@apply m-1 mt-7 mb-4 text-center;
+	}
+
+	/* Adsense Footer Ad */
+	.ftad {
+		@apply mx-auto mb-10 h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[250px] lg:w-[970px];
 	}
 
 	/* Dianomi Footer Ad */
