@@ -29,7 +29,7 @@ const Dividend = ({ info, data, news }: Props) => {
 			<div className="contain-content mt-3 sm:mt-4">
 				<div className="lg:right-sidebar py-1">
 					<div>
-						<h2 className="text-xl bp:text-2xl font-bold">
+						<h2 className="text-xl font-bold bp:text-2xl">
 							{info.ticker} Dividend Information
 						</h2>
 						{data.infoBox && (
@@ -47,7 +47,7 @@ const Dividend = ({ info, data, news }: Props) => {
 							ticker={info.ticker}
 						/>
 					</div>
-					<aside className="mt-7 lg:mt-0 space-y-8">
+					<aside className="mt-7 space-y-8 lg:mt-0">
 						{data.history.length > 0 && <Sidebar1 />}
 						<NewsWidget
 							title={`${info.ticker} News`}

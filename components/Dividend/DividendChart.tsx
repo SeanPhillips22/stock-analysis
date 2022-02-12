@@ -1,5 +1,5 @@
 import { DividendChartDataType } from 'types/Dividend'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SingleChart } from './SingleChart'
 
 interface Props {
@@ -24,13 +24,8 @@ function countNotZero(yData: number[]) {
 
 export const DividendChart = ({ data, options, ticker }: Props) => {
 	const [active, setActive] = useState('all')
-	const [y1, setY1] = useState<number[]>([])
-	const [y2, setY2] = useState<number[]>([])
-
-	useEffect(() => {
-		setY1(data.amount)
-		setY2(data.growth)
-	}, [data.amount, data.growth])
+	const [y1, setY1] = useState<number[]>(data.amount)
+	const [y2, setY2] = useState<number[]>(data.growth)
 
 	const setAll = () => {
 		setActive('all')
@@ -50,8 +45,8 @@ export const DividendChart = ({ data, options, ticker }: Props) => {
 
 	return (
 		<>
-			<div className="flex flex-row justify-between items-end mb-1">
-				<h2 className="hh2 mb-1 sm:mb-2 mt-6">Dividend Charts</h2>
+			<div className="mb-1 flex flex-row items-end justify-between">
+				<h2 className="hh2 mb-1 mt-6 sm:mb-2">Dividend Charts</h2>
 				{options.trailing && data.amount.length > 1 && (
 					<div className="flex flex-row space-x-2">
 						<span
