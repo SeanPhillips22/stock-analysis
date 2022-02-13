@@ -1,10 +1,10 @@
 export function SummaryTable() {
 	return (
-		<div className="mt-5 text-center">
+		<div className="mt-2 pl-2 text-center">
 			<table className="w-full text-right text-smaller">
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">
-						<th className="text-left font-semibold">Forecast</th>
+						<th className="text-left font-semibold">Target</th>
 						<th className="font-semibold">Low</th>
 						<th className="font-semibold">Average</th>
 						<th className="font-semibold">Median</th>

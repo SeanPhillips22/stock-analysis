@@ -159,354 +159,360 @@ export function PriceTargetChart() {
 	]
 
 	return (
-		<Line
-			id="1"
-			data={{
-				labels: timeAxis,
-				datasets: datasets
-			}}
-			plugins={[
-				{
-					id: '1',
-					afterDatasetsDraw: function (chart: any) {
-						const chartInstance = chart
-						const ctx = chartInstance.ctx
-						ctx.font =
-							'bold 12px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
-						const fontSize = 12
-						ctx.textAlign = 'center'
-						ctx.textBaseline = 'bottom'
+		<div className="h-[275px]">
+			<Line
+				id="1"
+				data={{
+					labels: timeAxis,
+					datasets: datasets
+				}}
+				plugins={[
+					{
+						id: '1',
+						afterDatasetsDraw: function (chart: any) {
+							const chartInstance = chart
+							const ctx = chartInstance.ctx
+							ctx.font =
+								'bold 12px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+							const fontSize = 12
+							ctx.textAlign = 'center'
+							ctx.textBaseline = 'bottom'
 
-						const max = (arr: number[]): number => Math.max(...arr)
+							const max = (arr: number[]): number => Math.max(...arr)
 
-						const pointerHeight = fontSize + 2
-						const sideHeight = 10
-						const width =
-							max([
-								ctx.measureText(lowData[lowData.length - 1].y).width,
-								ctx.measureText(highData[highData.length - 1].y).width,
-								ctx.measureText(avgData[avgData.length - 1].y).width,
-								ctx.measureText('Average').width
-							]) + 10
+							const pointerHeight = fontSize + 2
+							const sideHeight = 10
+							const width =
+								max([
+									ctx.measureText(lowData[lowData.length - 1].y).width,
+									ctx.measureText(highData[highData.length - 1].y)
+										.width,
+									ctx.measureText(avgData[avgData.length - 1].y).width,
+									ctx.measureText('Average').width
+								]) + 10
 
-						chartInstance.data.datasets.forEach(function (
-							dataset: { data: any[]; label: string },
-							i: any
-						) {
-							if (dataset.label == 'Monthly') {
-								const meta = chartInstance.getDatasetMeta(i)
+							chartInstance.data.datasets.forEach(function (
+								dataset: { data: any[]; label: string },
+								i: any
+							) {
+								if (dataset.label == 'Monthly') {
+									const meta = chartInstance.getDatasetMeta(i)
 
-								ctx.save()
-								ctx.strokeStyle = '#000000'
-								ctx.fillStyle = '#000000'
-								ctx.lineWidth = '3.5'
-								ctx.lineJoin = 'round'
+									ctx.save()
+									ctx.strokeStyle = '#000000'
+									ctx.fillStyle = '#000000'
+									ctx.lineWidth = '3.5'
+									ctx.lineJoin = 'round'
 
-								ctx.fillText(
-									'Past 12 Months',
-									meta.iScale._gridLineItems[
-										meta.iScale._gridLineItems.length - 2
-									].tx1 - 55,
-									meta.iScale._gridLineItems[
-										meta.iScale._gridLineItems.length - 2
-									].y1
-								)
+									ctx.fillText(
+										'Past 12 Months',
+										meta.iScale._gridLineItems[
+											meta.iScale._gridLineItems.length - 2
+										].tx1 - 55,
+										meta.iScale._gridLineItems[
+											meta.iScale._gridLineItems.length - 2
+										].y1
+									)
 
-								ctx.fillText(
-									window.innerWidth > 428
-										? '12 Months Forecast'
-										: '1 Yr Forecast',
-									window.innerWidth > 428
-										? meta.iScale._gridLineItems[
-												meta.iScale._gridLineItems.length - 2
-										  ].tx1 + 65
-										: meta.iScale._gridLineItems[
-												meta.iScale._gridLineItems.length - 2
-										  ].tx1 + 45,
-									meta.iScale._gridLineItems[
-										meta.iScale._gridLineItems.length - 2
-									].y1
-								)
+									ctx.fillText(
+										window.innerWidth > 428
+											? '12 Months Forecast'
+											: '1 Yr Forecast',
+										window.innerWidth > 428
+											? meta.iScale._gridLineItems[
+													meta.iScale._gridLineItems.length - 2
+											  ].tx1 + 65
+											: meta.iScale._gridLineItems[
+													meta.iScale._gridLineItems.length - 2
+											  ].tx1 + 45,
+										meta.iScale._gridLineItems[
+											meta.iScale._gridLineItems.length - 2
+										].y1
+									)
 
-								ctx.restore()
-							}
+									ctx.restore()
+								}
 
-							if (dataset.label == 'Average') {
-								const meta = chartInstance.getDatasetMeta(i)
-								const last = meta.data.length - 1
+								if (dataset.label == 'Average') {
+									const meta = chartInstance.getDatasetMeta(i)
+									const last = meta.data.length - 1
 
-								const xPos = meta.data[last].x + 10.2
-								const yPos = meta.data[last].y - 7.6
+									const xPos = meta.data[last].x + 10.2
+									const yPos = meta.data[last].y - 7.6
 
-								const raw = dataset.data[last]
+									const raw = dataset.data[last]
 
-								const str = '$' + raw.y
+									const str = '$' + raw.y
 
-								ctx.save()
+									ctx.save()
 
-								ctx.strokeStyle = 'lightgrey'
-								ctx.fillStyle = '#000000'
-								ctx.lineWidth = '0.6'
-								ctx.lineJoin = 'round'
+									ctx.strokeStyle = 'lightgrey'
+									ctx.fillStyle = '#000000'
+									ctx.lineWidth = '0.6'
+									ctx.lineJoin = 'round'
 
-								ctx.beginPath()
-								ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-								ctx.lineTo(xPos, yPos)
+									ctx.beginPath()
+									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
+									ctx.lineTo(xPos, yPos)
 
-								ctx.moveTo(xPos - 8.7, yPos + pointerHeight / 2)
-								ctx.lineTo(xPos, yPos + pointerHeight)
-								ctx.moveTo(xPos, yPos)
-								ctx.lineTo(xPos, yPos - sideHeight)
-								ctx.lineTo(xPos + width, yPos - sideHeight)
+									ctx.moveTo(xPos - 8.7, yPos + pointerHeight / 2)
+									ctx.lineTo(xPos, yPos + pointerHeight)
+									ctx.moveTo(xPos, yPos)
+									ctx.lineTo(xPos, yPos - sideHeight)
+									ctx.lineTo(xPos + width, yPos - sideHeight)
 
-								ctx.lineTo(
-									xPos + width,
-									yPos + sideHeight + pointerHeight
-								)
-								ctx.lineTo(
-									xPos + 0.7,
-									yPos + sideHeight + pointerHeight
-								)
+									ctx.lineTo(
+										xPos + width,
+										yPos + sideHeight + pointerHeight
+									)
+									ctx.lineTo(
+										xPos + 0.7,
+										yPos + sideHeight + pointerHeight
+									)
 
-								ctx.lineTo(xPos, yPos + pointerHeight)
+									ctx.lineTo(xPos, yPos + pointerHeight)
 
-								ctx.stroke()
+									ctx.stroke()
 
-								ctx.closePath()
+									ctx.closePath()
 
-								ctx.fillStyle = 'rgba(55, 65, 81)'
-								ctx.fillText(
-									str,
-									xPos + width - width / 2,
-									yPos -
-										sideHeight +
-										(sideHeight * 2 + pointerHeight) / 2 +
-										13
-								)
-								ctx.fillText(
-									'Average',
-									xPos + width - width / 2,
-									yPos -
-										sideHeight +
-										(sideHeight * 2 + pointerHeight) / 2 -
-										1
-								)
-								ctx.restore()
-							}
+									ctx.fillStyle = 'rgba(55, 65, 81)'
+									ctx.fillText(
+										str,
+										xPos + width - width / 2,
+										yPos -
+											sideHeight +
+											(sideHeight * 2 + pointerHeight) / 2 +
+											13
+									)
+									ctx.fillText(
+										'Average',
+										xPos + width - width / 2,
+										yPos -
+											sideHeight +
+											(sideHeight * 2 + pointerHeight) / 2 -
+											1
+									)
+									ctx.restore()
+								}
 
-							if (dataset.label == 'High') {
-								const meta = chartInstance.getDatasetMeta(i)
+								if (dataset.label == 'High') {
+									const meta = chartInstance.getDatasetMeta(i)
 
-								const last = meta.data.length - 1
+									const last = meta.data.length - 1
 
-								const raw = dataset.data[last]
+									const raw = dataset.data[last]
 
-								const str = '$' + raw.y
+									const str = '$' + raw.y
 
-								ctx.save()
+									ctx.save()
 
-								ctx.strokeStyle = 'lightgrey'
-								ctx.fillStyle = '#000000' // ? not doing anything?
-								ctx.lineWidth = '1'
-								ctx.lineJoin = 'round'
+									ctx.strokeStyle = 'lightgrey'
+									ctx.fillStyle = '#000000' // ? not doing anything?
+									ctx.lineWidth = '1'
+									ctx.lineJoin = 'round'
 
-								const xPos = meta.data[last].x + 10.2
-								const yPos = meta.data[last].y - 7.6
+									const xPos = meta.data[last].x + 10.2
+									const yPos = meta.data[last].y - 7.6
 
-								ctx.beginPath()
-								ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-								ctx.lineTo(xPos, yPos)
-								ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-								ctx.lineTo(xPos, yPos + pointerHeight)
+									ctx.beginPath()
+									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
+									ctx.lineTo(xPos, yPos)
+									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
+									ctx.lineTo(xPos, yPos + pointerHeight)
 
-								ctx.moveTo(xPos, yPos)
-								ctx.lineTo(xPos, yPos - sideHeight * 2)
-								ctx.lineTo(xPos + width, yPos - sideHeight * 2)
+									ctx.moveTo(xPos, yPos)
+									ctx.lineTo(xPos, yPos - sideHeight * 2)
+									ctx.lineTo(xPos + width, yPos - sideHeight * 2)
 
-								ctx.lineTo(xPos + width, yPos + pointerHeight)
-								ctx.lineTo(xPos, yPos + pointerHeight)
+									ctx.lineTo(xPos + width, yPos + pointerHeight)
+									ctx.lineTo(xPos, yPos + pointerHeight)
 
-								ctx.stroke()
+									ctx.stroke()
 
-								ctx.closePath()
+									ctx.closePath()
 
-								ctx.fillStyle = 'rgba(4, 120, 87, 1)'
-								ctx.fillText(
-									str,
-									xPos + width - width / 2,
-									yPos -
-										sideHeight * 2 +
-										(sideHeight * 2 + pointerHeight) / 2 +
-										13
-								)
-								ctx.fillText(
-									'High',
-									xPos + width - width / 2,
-									yPos -
-										sideHeight * 2 +
-										(sideHeight * 2 + pointerHeight) / 2 -
-										1
-								)
-								ctx.restore()
-							}
+									ctx.fillStyle = 'rgba(4, 120, 87, 1)'
+									ctx.fillText(
+										str,
+										xPos + width - width / 2,
+										yPos -
+											sideHeight * 2 +
+											(sideHeight * 2 + pointerHeight) / 2 +
+											13
+									)
+									ctx.fillText(
+										'High',
+										xPos + width - width / 2,
+										yPos -
+											sideHeight * 2 +
+											(sideHeight * 2 + pointerHeight) / 2 -
+											1
+									)
+									ctx.restore()
+								}
 
-							if (dataset.label == 'Low') {
-								const meta = chartInstance.getDatasetMeta(i)
-								const last = meta.data.length - 1
+								if (dataset.label == 'Low') {
+									const meta = chartInstance.getDatasetMeta(i)
+									const last = meta.data.length - 1
 
-								const raw = dataset.data[last]
+									const raw = dataset.data[last]
 
-								const str = '$' + raw.y
+									const str = '$' + raw.y
 
-								ctx.save()
+									ctx.save()
 
-								ctx.strokeStyle = 'lightgrey'
-								ctx.fillStyle = '#ffffff' // ? not doing anything?
-								ctx.lineWidth = '1'
-								ctx.lineJoin = 'round'
+									ctx.strokeStyle = 'lightgrey'
+									ctx.fillStyle = '#ffffff' // ? not doing anything?
+									ctx.lineWidth = '1'
+									ctx.lineJoin = 'round'
 
-								const xPos = meta.data[last].x + 10.2
-								const yPos = meta.data[last].y - 7.6
+									const xPos = meta.data[last].x + 10.2
+									const yPos = meta.data[last].y - 7.6
 
-								ctx.beginPath()
-								ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-								ctx.lineTo(xPos, yPos)
+									ctx.beginPath()
+									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
+									ctx.lineTo(xPos, yPos)
 
-								ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-								ctx.lineTo(xPos, yPos + pointerHeight)
-								ctx.moveTo(xPos, yPos)
+									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
+									ctx.lineTo(xPos, yPos + pointerHeight)
+									ctx.moveTo(xPos, yPos)
 
-								ctx.lineTo(xPos + width, yPos)
+									ctx.lineTo(xPos + width, yPos)
 
-								ctx.lineTo(
-									xPos + width,
-									yPos + sideHeight * 2 + pointerHeight
-								)
+									ctx.lineTo(
+										xPos + width,
+										yPos + sideHeight * 2 + pointerHeight
+									)
 
-								ctx.lineTo(xPos, yPos + sideHeight * 2 + pointerHeight)
+									ctx.lineTo(
+										xPos,
+										yPos + sideHeight * 2 + pointerHeight
+									)
 
-								ctx.lineTo(xPos, yPos + pointerHeight)
-								ctx.stroke()
+									ctx.lineTo(xPos, yPos + pointerHeight)
+									ctx.stroke()
 
-								ctx.closePath()
+									ctx.closePath()
 
-								ctx.fillStyle = 'rgba(220, 38, 38, 1)'
-								ctx.fillText(
-									str,
-									xPos + width - width / 2,
-									yPos + (sideHeight * 2 + pointerHeight) / 2 + 13
-								)
-								ctx.fillText(
-									'Low',
-									xPos + width - width / 2,
-									yPos + (sideHeight * 2 + pointerHeight) / 2 - 1
-								)
-								ctx.restore()
-							}
-						})
+									ctx.fillStyle = 'rgba(220, 38, 38, 1)'
+									ctx.fillText(
+										str,
+										xPos + width - width / 2,
+										yPos + (sideHeight * 2 + pointerHeight) / 2 + 13
+									)
+									ctx.fillText(
+										'Low',
+										xPos + width - width / 2,
+										yPos + (sideHeight * 2 + pointerHeight) / 2 - 1
+									)
+									ctx.restore()
+								}
+							})
+						}
 					}
-				}
-			]}
-			options={{
-				maintainAspectRatio: false,
-				animation: false,
-				scales: {
-					x: {
-						afterTickToLabelConversion: function (val: any) {
-							let afterCutOff: boolean
-							afterCutOff = false
+				]}
+				options={{
+					maintainAspectRatio: false,
+					animation: false,
+					scales: {
+						x: {
+							afterTickToLabelConversion: function (val: any) {
+								let afterCutOff: boolean
+								afterCutOff = false
 
-							for (let i = 0; i < val.ticks.length; i++) {
-								if (
-									val.ticks[i].label == 'Dec 2021' ||
-									val.ticks[i].label == 'Dec 2022'
-								) {
-									val.ticks[i].major = true
-									afterCutOff = true
-								} else if (afterCutOff) {
-									val.ticks.splice(i, 1)
+								for (let i = 0; i < val.ticks.length; i++) {
+									if (
+										val.ticks[i].label == 'Dec 2021' ||
+										val.ticks[i].label == 'Dec 2022'
+									) {
+										val.ticks[i].major = true
+										afterCutOff = true
+									} else if (afterCutOff) {
+										val.ticks.splice(i, 1)
+									}
+								}
+								val.ticks.splice(0, 1)
+
+								if (window.innerWidth < 563) {
+									val.ticks.splice(0, 2)
+								}
+							},
+							type: 'time',
+							time: {
+								parser: 'yyyy-MM-dd',
+								stepSize: 4,
+								unit: 'month'
+							},
+							grid: {
+								display: true
+							},
+							ticks: {
+								align: 'end',
+								source: 'data',
+								color: '#323232',
+								font: {
+									size: 13
+								},
+								autoSkip: false,
+								autoSkipPadding: 60, // ? is this needed when autoSkip is false?
+								maxRotation: 0,
+								minRotation: 0,
+								major: {
+									enabled: true
 								}
 							}
-							val.ticks.splice(0, 1)
-
-							if (window.innerWidth < 563) {
-								val.ticks.splice(0, 2)
-							}
 						},
-						type: 'time',
-						time: {
-							parser: 'yyyy-MM-dd',
-							stepSize: 4,
-							unit: 'month'
-						},
-						grid: {
-							display: true
-						},
-						ticks: {
-							align: 'end',
-							source: 'data',
-							color: '#323232',
-							font: {
-								size: 13
+						y: {
+							position: 'left',
+							ticks: {
+								color: '#555555',
+								font: {
+									size: 12.5
+								},
+								padding: 5,
+								callback: function (value) {
+									return '$' + value
+								}
 							},
-							autoSkip: false,
-							autoSkipPadding: 60, // ? is this needed when autoSkip is false?
-							maxRotation: 0,
-							minRotation: 0,
-							major: {
-								enabled: true
+							grid: {
+								drawBorder: true,
+								color: '#efefef'
 							}
 						}
 					},
-					y: {
-						position: 'left',
-						ticks: {
-							color: '#555555',
-							font: {
-								size: 12.5
-							},
-							padding: 5,
-							callback: function (value) {
-								return '$' + value
-							}
-						},
-						grid: {
-							drawBorder: true,
-							color: '#efefef'
-						}
-					}
-				},
-				layout: {
-					padding: {
-						top: 20,
-						left: 5,
-						right: 70
-					}
-				},
-				plugins: {
-					legend: {
-						display: false
-					},
-					tooltip: {
-						enabled: true,
-						titleFont: {
-							size: 16,
-							weight: '600'
-						},
-						bodyFont: {
-							size: 14,
-							weight: '400'
-						},
+					layout: {
 						padding: {
-							top: 12,
-							right: 15,
-							bottom: 12,
-							left: 15
+							top: 20,
+							left: 5,
+							right: 70
+						}
+					},
+					plugins: {
+						legend: {
+							display: false
 						},
-						displayColors: false
+						tooltip: {
+							enabled: true,
+							titleFont: {
+								size: 16,
+								weight: '600'
+							},
+							bodyFont: {
+								size: 14,
+								weight: '400'
+							},
+							padding: {
+								top: 12,
+								right: 15,
+								bottom: 12,
+								left: 15
+							},
+							displayColors: false
+						}
 					}
-				}
-			}}
-		/>
+				}}
+			/>
+		</div>
 	)
 }

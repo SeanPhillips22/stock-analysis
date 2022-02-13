@@ -29,6 +29,7 @@ export default function Forecast({ info }: Props) {
 			<div className="contain py-2">
 				<div className="space-y-8">
 					<PriceTarget />
+					<Ratings />
 					<ContentWideAd />
 					{/* TODO this should be a stacked bar chart */}
 					<Ratings />

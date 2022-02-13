@@ -1,5 +1,5 @@
 import { AnalystWidgetChart } from 'components/Overview/AnalystWidgetChart'
-import { Donut } from './Donut'
+// import { Donut } from './Donut'
 import { RatingsTable } from './RatingsTable'
 
 export function Ratings() {
@@ -14,11 +14,11 @@ export function Ratings() {
 						this stock is likely to outperform the market over the next
 						twelve months.
 					</p>
-					<Donut />
-					<div className="text-center text-xl font-semibold">
+					{/* <Donut /> */}
+					{/* <div className="text-center text-xl font-semibold">
 						Analyst Consensus:{' '}
 						<span className="font-bold text-green-800">Strong Buy</span>
-					</div>
+					</div> */}
 				</div>
 				<div className="grow pl-4">
 					<h2 className="hh3">Recommendation Trends</h2>
