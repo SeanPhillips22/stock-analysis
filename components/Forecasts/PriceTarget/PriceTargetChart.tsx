@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Line } from 'react-chartjs-2'
 import {
 	Chart as ChartJS,
@@ -25,7 +27,7 @@ import 'chartjs-adapter-date-fns'
 import { useMemo } from 'react'
 
 interface Props {
-	chartData: AnalystChartData
+	data: AnalystChartData
 }
 
 interface AnalystPrice {
@@ -47,8 +49,7 @@ interface AnalystChartData {
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const chartData = {
+const data = {
 	price: [
 		{ t: '2020-12-1', c: '132.69' },
 		{ t: '2021-01-1', c: '131.96' },
@@ -72,7 +73,7 @@ const chartData = {
 	}
 }
 
-export const Chart = ({ chartData }: Props) => {
+export function PriceTargetChart() {
 	const lowData = [
 		{ x: '2021-12-7', y: '177.57' },
 		{ x: '2022-12-1', y: '90' }
@@ -88,50 +89,37 @@ export const Chart = ({ chartData }: Props) => {
 		{ x: '2022-12-1', y: '210' }
 	]
 
-	const timeAxis = useMemo(
-		() =>
-			chartData.price.map(item => {
-				return item.t
-			}),
-		[chartData]
-	)
+	const timeAxis = useMemo(() => data.price.map(item => item.t), [data])
 
 	const priceAxis = useMemo(
-		() =>
-			chartData.price.map(item => {
-				return { x: item.t, y: item.c }
-			}),
-		[chartData]
+		() => data.price.map(item => ({ x: item.t, y: item.c })),
+		[data]
 	)
 
 	const backgroundColorCodings = useMemo(
-		() =>
-			chartData.price.map((item, index) => {
-				return index == 12 ? '#000000' : '#ffffff'
-			}),
-		[chartData]
+		() => data.price.map((i, index) => (index == 12 ? '#000000' : '#ffffff')),
+		[data]
 	)
 
 	const pointBorderColorCodings = useMemo(
 		() =>
-			chartData.price.map((item, index) => {
-				return index == 12 ? '#000000' : '#67C8FF'
-			}),
-		[chartData]
+			data.price.map((i, index) =>
+				index == 12 ? '#000000' : 'rgba(4, 120, 87, 1)'
+			),
+		[data]
 	)
 
-	let data: any[] = [
+	let datasets: any[] = [
 		{
 			label: 'Monthly',
 			data: priceAxis,
-
 			pointHitRadius: 10,
-			pointRadius: 5,
+			pointRadius: 4,
 			pointBorderWidth: 3,
 			pointBorderColor: pointBorderColorCodings,
 			pointBackgroundColor: backgroundColorCodings,
 			tension: 0,
-			borderColor: '#007FFF',
+			borderColor: 'rgba(4, 120, 87, 1)',
 			borderWidth: 2.5,
 			spanGaps: true
 		},
@@ -141,7 +129,7 @@ export const Chart = ({ chartData }: Props) => {
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderColor: 'rgba(60, 116, 212)',
+			borderColor: 'rgba(4, 120, 87, 1)',
 			borderWidth: 2.5,
 			spanGaps: true,
 			borderDash: [5, 6]
@@ -152,7 +140,7 @@ export const Chart = ({ chartData }: Props) => {
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderColor: '#808080',
+			borderColor: 'rgba(55, 65, 81)',
 			borderWidth: 2.5,
 			spanGaps: true,
 			borderDash: [5, 6]
@@ -160,7 +148,7 @@ export const Chart = ({ chartData }: Props) => {
 		{
 			label: 'Low',
 			data: lowData,
-			borderColor: '#8b0000',
+			borderColor: 'rgba(220, 38, 38, 1)',
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
@@ -175,7 +163,7 @@ export const Chart = ({ chartData }: Props) => {
 			id="1"
 			data={{
 				labels: timeAxis,
-				datasets: data
+				datasets: datasets
 			}}
 			plugins={[
 				{
@@ -286,7 +274,7 @@ export const Chart = ({ chartData }: Props) => {
 
 								ctx.closePath()
 
-								ctx.fillStyle = '#808080'
+								ctx.fillStyle = 'rgba(55, 65, 81)'
 								ctx.fillText(
 									str,
 									xPos + width - width / 2,
@@ -318,7 +306,7 @@ export const Chart = ({ chartData }: Props) => {
 								ctx.save()
 
 								ctx.strokeStyle = 'lightgrey'
-								ctx.fillStyle = '#000000'
+								ctx.fillStyle = '#000000' // ? not doing anything?
 								ctx.lineWidth = '1'
 								ctx.lineJoin = 'round'
 
@@ -342,7 +330,7 @@ export const Chart = ({ chartData }: Props) => {
 
 								ctx.closePath()
 
-								ctx.fillStyle = 'rgba(60, 116, 212)'
+								ctx.fillStyle = 'rgba(4, 120, 87, 1)'
 								ctx.fillText(
 									str,
 									xPos + width - width / 2,
@@ -373,7 +361,7 @@ export const Chart = ({ chartData }: Props) => {
 								ctx.save()
 
 								ctx.strokeStyle = 'lightgrey'
-								ctx.fillStyle = '#ffffff'
+								ctx.fillStyle = '#ffffff' // ? not doing anything?
 								ctx.lineWidth = '1'
 								ctx.lineJoin = 'round'
 
@@ -402,7 +390,7 @@ export const Chart = ({ chartData }: Props) => {
 
 								ctx.closePath()
 
-								ctx.fillStyle = '#8b0000'
+								ctx.fillStyle = 'rgba(220, 38, 38, 1)'
 								ctx.fillText(
 									str,
 									xPos + width - width / 2,
@@ -445,15 +433,12 @@ export const Chart = ({ chartData }: Props) => {
 								val.ticks.splice(0, 2)
 							}
 						},
-
 						type: 'time',
-
 						time: {
 							parser: 'yyyy-MM-dd',
 							stepSize: 4,
 							unit: 'month'
 						},
-
 						grid: {
 							display: true
 						},
@@ -465,7 +450,7 @@ export const Chart = ({ chartData }: Props) => {
 								size: 13
 							},
 							autoSkip: false,
-							autoSkipPadding: 60,
+							autoSkipPadding: 60, // ? is this needed when autoSkip is false?
 							maxRotation: 0,
 							minRotation: 0,
 							major: {

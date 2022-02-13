@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // import { Unavailable } from 'components/Unavailable'
 
 import { Doughnut } from 'react-chartjs-2'
@@ -26,16 +27,16 @@ interface AnalystChartData {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function Donut({ chartData }: Props) {
+export function Donut() {
 	let data: any[] = [
 		{
 			data: [10, 10, 10, 10, 10],
 			backgroundColor: [
-				'rgb(0, 153, 0)',
-				'rgb(76, 153, 0)',
-				'rgb(204, 204, 0)',
+				'rgb(153, 0, 0)',
 				'rgb(153, 76, 0)',
-				'rgb(153, 0, 0)'
+				'rgb(204, 204, 0)',
+				'rgb(76, 153, 0)',
+				'rgb(0, 153, 0)'
 			],
 			borderWidth: 0,
 			hoverBackgroundColor: [
@@ -98,56 +99,58 @@ export function Donut({ chartData }: Props) {
 	}
 
 	return (
-		<Doughnut
-			id="1"
-			data={{
-				datasets: data
-			}}
-			plugins={[
-				{
-					id: '1',
-					afterDatasetsDraw: function (chart: any) {
-						const chartInstance = chart
-						const ctx = chartInstance.ctx
+		<div className="grow">
+			<Doughnut
+				id="1"
+				data={{
+					datasets: data
+				}}
+				plugins={[
+					{
+						id: '1',
+						afterDatasetsDraw: function (chart: any) {
+							const chartInstance = chart
+							const ctx = chartInstance.ctx
 
-						const radianAngle = ((calcAngle() + -180) * Math.PI) / 180
+							const radianAngle = ((calcAngle() + -180) * Math.PI) / 180
 
-						const radius = 80
-						const cw = chartInstance.chartArea.width
-						const ch = chartInstance.chartArea.height
-						const cx = cw / 2
-						const cy = ch - ch / 4 + 9
+							const radius = 80
+							const cw = chartInstance.chartArea.width
+							const ch = chartInstance.chartArea.height
+							const cx = cw / 2
+							const cy = ch - ch / 4 + 9
 
-						ctx.translate(cx, cy)
-						ctx.rotate(radianAngle)
-						ctx.beginPath()
-						ctx.moveTo(0, -5)
-						ctx.lineTo(radius, 0)
-						ctx.lineTo(0, 5)
-						ctx.fillStyle = 'rgba(64, 64,64)'
-						ctx.fill()
-						ctx.rotate(-radianAngle)
-						ctx.translate(-cx, -cy)
-						ctx.beginPath()
-						ctx.arc(cx, cy, 7, 0, Math.PI * 2)
-						ctx.fill()
+							ctx.translate(cx, cy)
+							ctx.rotate(radianAngle)
+							ctx.beginPath()
+							ctx.moveTo(0, -5)
+							ctx.lineTo(radius, 0)
+							ctx.lineTo(0, 5)
+							ctx.fillStyle = 'rgba(64, 64,64)'
+							ctx.fill()
+							ctx.rotate(-radianAngle)
+							ctx.translate(-cx, -cy)
+							ctx.beginPath()
+							ctx.arc(cx, cy, 7, 0, Math.PI * 2)
+							ctx.fill()
+						}
 					}
-				}
-			]}
-			options={{
-				maintainAspectRatio: false,
-				// animation: false,
-				radius: '60%',
-				cutout: '50%',
-				rotation: 270,
-				circumference: 180,
+				]}
+				options={{
+					maintainAspectRatio: false,
+					// animation: false,
+					radius: '70%',
+					cutout: '50%',
+					rotation: 270,
+					circumference: 180,
 
-				plugins: {
-					legend: {
-						display: false
+					plugins: {
+						legend: {
+							display: false
+						}
 					}
-				}
-			}}
-		/>
+				}}
+			/>
+		</div>
 	)
 }
