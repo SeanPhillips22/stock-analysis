@@ -1,34 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// import { Unavailable } from 'components/Unavailable'
-
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-interface Props {
-	chartData: AnalystChartData
-}
-
-interface AnalystPrice {
-	t: string
-	c?: string
-}
-
-interface AnalystTarget {
-	low: string
-	average: string
-	high: string
-}
-
-interface AnalystChartData {
-	price: AnalystPrice[]
-	targets: AnalystTarget
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function Donut() {
+export function ConsensusChart() {
 	const { data } = useSymbolContext()
 	const { angle } = data.recommendations[0]
 
@@ -42,18 +18,12 @@ export function Donut() {
 				'rgb(76, 153, 0)',
 				'rgb(0, 153, 0)'
 			],
-			borderWidth: 0,
-			hoverBackgroundColor: [
-				'rgb(255, 69, 96)',
-				'rgb(206, 148, 73)',
-				'rgb(153, 223, 89)'
-			],
-			hoverBorderWidth: 0
+			borderWidth: 0
 		}
 	]
 
 	return (
-		<div className="grow">
+		<div>
 			<Doughnut
 				id="1"
 				data={{

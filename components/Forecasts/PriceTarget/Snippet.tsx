@@ -1,7 +1,5 @@
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 
-// TODO need to validate the data to prevent errors
-// TODO need to account for missing data
 export function Snippet() {
 	const { info, data } = useSymbolContext()
 	const { symbol, name } = info
@@ -19,11 +17,7 @@ export function Snippet() {
 
 	return (
 		<p>
-			According to {total} stock analysts, the average 12-month stock price
-			forecast for {displayName} stock is ${average}, which predicts{' '}
-			{diffString} over the next year. The lowest forecast is ${low} and the
-			highest is ${high}. On average, analysts rate {displayName} stock as a{' '}
-			{consensus.toLowerCase()}.
+			{`According to ${total} stock analysts, the average 12-month stock price forecast for ${displayName} stock is $${average}, which predicts ${diffString} over the next year. The lowest forecast is $${low} and the highest is $${high}. On average, analysts rate ${displayName} stock as a ${consensus.toLowerCase()}.`}
 		</p>
 	)
 }

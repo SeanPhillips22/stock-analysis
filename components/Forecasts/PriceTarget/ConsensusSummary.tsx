@@ -1,6 +1,6 @@
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 
-export function Consensus() {
+export function ConsensusSummary() {
 	const { data } = useSymbolContext()
 
 	return (

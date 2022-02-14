@@ -1,30 +1,23 @@
-import { Consensus } from './Consensus'
-import { Donut } from './Donut'
+import { ConsensusChart } from './ConsensusChart'
+import { ConsensusSummary } from './ConsensusSummary'
 import { PriceTargetChart } from './PriceTargetChart'
-// import { PriceTargetText } from './PriceTargetText'
 import { Snippet } from './Snippet'
 import { SummaryTable } from './SummaryTable'
+import styles from './PriceTarget.module.css'
 
 export function PriceTarget() {
 	return (
 		<>
-			<div className="mt-2">
-				<div className="border border-gray-200 lg:p-4">
-					<div className="lg:flex lg:gap-x-6 lg:divide-x">
-						<div className="p-4 lg:max-w-[32%] lg:p-0">
-							<h2 className="hh3 mb-1">Stock Price Forecast</h2>
-							<Snippet />
-							<Donut />
-							<Consensus />
-						</div>
-						<div className="grow lg:pl-4">
-							{/* <PriceTargetText /> */}
-							<div className="">
-								<PriceTargetChart />
-								<SummaryTable />
-							</div>
-						</div>
-					</div>
+			<div className={styles.pt}>
+				<div className={styles.ptleft}>
+					<h2>Stock Price Forecast</h2>
+					<Snippet />
+					<ConsensusChart />
+					<ConsensusSummary />
+				</div>
+				<div className={styles.ptchart}>
+					<PriceTargetChart />
+					<SummaryTable />
 				</div>
 			</div>
 		</>
