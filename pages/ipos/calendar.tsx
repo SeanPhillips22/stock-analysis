@@ -6,7 +6,6 @@ import { CalendarTable } from 'components/IPOs/CalendarTable'
 import { LaterExplanation } from 'components/IPOs/LaterExplanation'
 import { IPOSources } from 'components/IPOs/IPOSources'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { FilingTableMin } from 'components/IPOs/FilingTableMin'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
@@ -29,13 +28,12 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 			/>
 			<Layout url="/ipos/calendar/">
 				<div className="contain">
-					<Breadcrumbs url="/ipos/calendar/" />
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation path="calendar" />
 					<div className="lg:right-sidebar">
 						<div>
 							<CalendarNavigation path="calendar" />
-							<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7 py-2 lg:py-4">
+							<div className="flex flex-col space-y-4 py-2 xs:space-y-5 sm:space-y-7 lg:py-4">
 								<CalendarTable
 									title="This Week"
 									data={data.thisweek}

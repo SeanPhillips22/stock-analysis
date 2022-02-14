@@ -2,7 +2,6 @@
 @import './sitewide';
 @import './layout/layout';
 @import './layout/header';
-@import './layout/breadcrumbs';
 @import './layout/sidenav';
 
 @import 'tailwindcss/components';

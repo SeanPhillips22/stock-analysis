@@ -4,7 +4,6 @@ import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { InfoBox } from 'components/InfoBox'
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
@@ -54,7 +53,6 @@ export default function IpoYear(props: Props) {
 			/>
 			<Layout url={`/ipos/${year}/`}>
 				<div className="contain ipos-recent">
-					<Breadcrumbs url={`/ipos/${year}/`} />
 					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation path="" />
 					<div className="lg:right-sidebar">

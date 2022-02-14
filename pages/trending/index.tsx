@@ -6,7 +6,6 @@ import { getData } from 'functions/apis/API'
 import { Column } from 'react-table'
 import { StockLink } from 'components/Links'
 import { abbreviate } from 'components/StockScreener/functions/abbreviate'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { Features } from 'components/Layout/Sidebar/Features'
 import { Layout } from 'components/Layout/_Layout'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
@@ -150,8 +149,7 @@ export default function Trending({ timestamp, data }: Props) {
 			/>
 			<Layout url="/trending/">
 				<div className="contain py-5 xs:py-6">
-					<Breadcrumbs url="/trending/" />
-					<h1 className="hh1 border-b-[3px] border-blue-brand_sharp pb-3 mb-0">
+					<h1 className="hh1 mb-0 border-b-[3px] border-blue-brand_sharp pb-3">
 						Trending Today
 					</h1>
 
@@ -163,14 +161,14 @@ export default function Trending({ timestamp, data }: Props) {
 								rowdata={data}
 								append="Top"
 							/>
-							<div className="text-sm text-gray-600 mt-1.5">
+							<div className="mt-1.5 text-sm text-gray-600">
 								Updated: {timestamp}. Stocks are sorted by pageviews
 								according to Google Analytics. For upcoming IPOs, the
 								price shown is either the estimated price or the
 								midpoint of the price range.
 							</div>
 						</div>
-						<aside className="py-0 space-y-8">
+						<aside className="space-y-8 py-0">
 							<Sidebar1 />
 							<Features />
 						</aside>

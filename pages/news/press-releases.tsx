@@ -3,7 +3,6 @@ import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { getMarketNews } from 'functions/apis/callBackEnd'
 import { NewsNavigation } from 'components/News/NewsNavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { NewsFeed } from 'components/News/_NewsFeed'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
@@ -24,7 +23,6 @@ export const AllPressReleases = ({ data, other }: Props) => {
 			/>
 			<Layout url="/news/press-releases/">
 				<div className="contain pb-0">
-					<Breadcrumbs url="/news/press-releases/" />
 					<h1 className="hh1">Press Releases</h1>
 					<NewsNavigation />
 				</div>
@@ -33,7 +31,7 @@ export const AllPressReleases = ({ data, other }: Props) => {
 					<div className="py-1 sm:pt-0 sm:pb-3">
 						<NewsFeed data={data} related="Stocks" />
 					</div>
-					<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
+					<aside className="contain sm:uncontain flex flex-col space-y-7 py-6 lg:space-y-10">
 						<Sidebar1 />
 						<NewsWidget
 							title="Stock News"

@@ -4,7 +4,6 @@ import { IpoUpcoming, IpoRecent } from 'types/Ipos'
 import { SEO } from 'components/SEO'
 import { getIpoData } from 'functions/apis/callBackEnd'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { NewsFeed } from 'components/News/_NewsFeed'
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
@@ -27,7 +26,6 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 			/>
 			<Layout url="/ipos/news/">
 				<div className="contain pb-0">
-					<Breadcrumbs url="/ipos/news/" />
 					<h1 className="hh1">IPO News</h1>
 					<IPONavigation path="news" />
 				</div>
@@ -36,7 +34,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 					<div className="py-1">
 						<NewsFeed data={data} related="Stocks" />
 					</div>
-					<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 pt-6">
+					<aside className="contain sm:uncontain flex flex-col space-y-7 pt-6 lg:space-y-10">
 						<CalendarTableMin upcoming={upcoming} />
 						<Sidebar1 />
 						<RecentTableMin recent={recent} />
