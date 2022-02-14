@@ -14,7 +14,7 @@ export default function StockHeading({
 	url: string
 }) {
 	return (
-		<div className="mx-auto px-3 xs:px-4 lg:px-6 mb-2">
+		<div className="mx-auto mb-2 px-3 xs:px-4 lg:px-6">
 			<UpgradePrompt />
 			<Breadcrumbs url={url} />
 			<Title info={info} />
