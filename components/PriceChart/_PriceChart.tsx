@@ -68,9 +68,11 @@ export function PriceChart({ info, initial }: Props) {
 		return <UnavailableIpo info={info} />
 	}
 
+	console.log(chartTime)
+
 	return (
-		<div className="border-t border-b border-gray-200 lg:border-0 py-0.5 xs:py-1 sm:py-3 sm:px-2 lg:py-0 lg:px-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0">
-			<div className="flex flex-row justify-between space-x-1 items-center py-1 sm:pt-0.5">
+		<div className="mb-4 border-t border-b border-gray-200 py-0.5 xs:py-1 sm:py-3 sm:px-2 lg:mb-0 lg:border-0 lg:border-l lg:border-gray-300 lg:py-0 lg:px-0 lg:pl-3">
+			<div className="flex flex-row items-center justify-between space-x-1 py-1 sm:pt-0.5">
 				<Controls
 					chartTime={chartTime}
 					setChartTime={setChartTime}
@@ -85,9 +87,9 @@ export function PriceChart({ info, initial }: Props) {
 					/>
 				)}
 			</div>
-			<div className="h-[240px] sm:h-[300px] overflow-x-auto hide-scroll">
+			<div className="hide-scroll h-[240px] overflow-x-auto sm:h-[300px]">
 				{message && (
-					<div className="pt-1.5 h-full">
+					<div className="h-full pt-1.5">
 						<Unavailable message={message} />
 					</div>
 				)}
@@ -102,7 +104,7 @@ export function PriceChart({ info, initial }: Props) {
 						change={change}
 					/>
 				) : (
-					<div className="pt-1.5 h-full">
+					<div className="h-full pt-1.5">
 						<Unavailable message="No data available" />
 					</div>
 				)}
