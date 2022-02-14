@@ -19,7 +19,7 @@
 	}
 
 	.ha1w {
-		@apply mt-3 -mb-2;
+		@apply mt-3 -mb-2 text-center;
 	}
 
 	/* Sidebar 1 */
