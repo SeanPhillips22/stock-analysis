@@ -29,9 +29,9 @@ export default function Forecast({ info }: Props) {
 			<div className="contain py-2">
 				<div className="space-y-8">
 					<PriceTarget />
-					<Ratings />
 					<ContentWideAd />
 					{/* TODO this should be a stacked bar chart */}
+					{/* Can limit to 6 months, enable 4 years for pro users */}
 					<Ratings />
 					<ContentMobileAd />
 					{/* IDEA: Add a financials table here with last X years plus the forecasted years */}

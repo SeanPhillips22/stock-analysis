@@ -1,6 +1,6 @@
 import { Donut } from '../Ratings/Donut'
 import { PriceTargetChart } from './PriceTargetChart'
-import { PriceTargetText } from './PriceTargetText'
+// import { PriceTargetText } from './PriceTargetText'
 import { Snippet } from './Snippet'
 import { SummaryTable } from './SummaryTable'
 
@@ -24,7 +24,7 @@ export function PriceTarget() {
 							</div>
 						</div>
 						<div className="grow lg:pl-4">
-							<PriceTargetText />
+							{/* <PriceTargetText /> */}
 							<div className="">
 								<PriceTargetChart />
 								<SummaryTable />
