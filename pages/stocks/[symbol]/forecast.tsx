@@ -26,7 +26,6 @@ export default function Forecast({ info, data }: Props) {
 			data={data}
 			url={`/stocks/${info.symbol}/forecast/`}
 			title={`${info.nameFull} (${info.ticker}) Forecast`}
-			description={`Forecast for ${info.name} (${info.ticker}), including stock price, revenue and earnings.`}
 		>
 			<div className="contain py-2">
 				<div className="space-y-8">

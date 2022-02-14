@@ -30,11 +30,10 @@ interface AnalystChartData {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function Donut() {
 	const { data } = useSymbolContext()
-	const { buy, sell, hold, strongBuy, strongSell } = data.recommendations[0]
+	const { angle } = data.recommendations[0]
 
 	let d: any[] = [
 		{
-			// data: [strongSell, sell, hold, buy, strongBuy],
 			data: [10, 10, 10, 10, 10],
 			backgroundColor: [
 				'rgb(153, 0, 0)',
@@ -53,41 +52,6 @@ export function Donut() {
 		}
 	]
 
-	const exampleDATA = [
-		{
-			category: 'Strong Buy',
-			analysts: 5
-		},
-		{
-			category: 'Buy',
-			analysts: 3
-		},
-		{
-			category: 'Hold',
-			analysts: 1
-		},
-		{
-			category: 'Sell',
-			analysts: 3
-		},
-		{
-			category: 'Strong Sell',
-			analysts: 5
-		}
-	]
-
-	const calcAngle = () => {
-		let totalAnalysts = 0
-		let totalNumber = 0
-
-		for (let i = 0; i <= exampleDATA.length - 1; i++) {
-			totalNumber = totalNumber + exampleDATA[i].analysts * i
-			totalAnalysts += exampleDATA[i].analysts
-		}
-		let avg = totalNumber / totalAnalysts
-		return (avg / 4) * 180
-	}
-
 	return (
 		<div className="grow">
 			<Doughnut
@@ -102,7 +66,7 @@ export function Donut() {
 							const chartInstance = chart
 							const ctx = chartInstance.ctx
 
-							const radianAngle = ((calcAngle() + -180) * Math.PI) / 180
+							const radianAngle = ((angle - 180) * Math.PI) / 180
 
 							const radius = 80
 							const cw = chartInstance.chartArea.width
@@ -128,7 +92,7 @@ export function Donut() {
 				]}
 				options={{
 					maintainAspectRatio: false,
-					// animation: false,
+					animation: false,
 					radius: '70%',
 					cutout: '65%',
 					rotation: 270,

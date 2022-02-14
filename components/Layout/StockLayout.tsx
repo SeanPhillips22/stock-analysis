@@ -24,12 +24,8 @@ export function Stock({
 	return (
 		<Layout url={url}>
 			{/* SEO Config */}
-			{title && description && (
-				<SEO
-					title={`${info.nameFull} (${info.ticker}) Forecast`}
-					description={`Forecast for ${info.name} (${info.ticker}), including stock price, revenue and earnings.`}
-					canonical={url}
-				/>
+			{title && (
+				<SEO title={title} description={description} canonical={url} />
 			)}
 
 			<SymbolContextProvider value={{ info, data }}>
