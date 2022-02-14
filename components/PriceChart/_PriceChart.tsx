@@ -26,7 +26,7 @@ export function PriceChart({ info, initial }: Props) {
 	const [spinner, setSpinner] = useState(false)
 
 	const quote = useQuote(info)
-	const { data, isFetching } = useChart(info, chartTime, initial)
+	const { data, isFetching } = useChart(info, chartTime, initial, initialFetch)
 
 	// Handle cases when the chart is unavailable
 	// if 1D fails, try 1Y chart data instead
@@ -67,8 +67,6 @@ export function PriceChart({ info, initial }: Props) {
 	if (info.state === 'upcomingipo') {
 		return <UnavailableIpo info={info} />
 	}
-
-	console.log(chartTime)
 
 	return (
 		<div className="mb-4 border-t border-b border-gray-200 py-0.5 xs:py-1 sm:py-3 sm:px-2 lg:mb-0 lg:border-0 lg:border-l lg:border-gray-300 lg:py-0 lg:px-0 lg:pl-3">

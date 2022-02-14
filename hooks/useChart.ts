@@ -12,13 +12,20 @@ async function queryChart(symbol: string, type: string, time: string) {
 	return await getData(url)
 }
 
-export function useChart(info: Info, time: string, initial: InitialData) {
+export function useChart(
+	info: Info,
+	time: string,
+	initial: InitialData,
+	initialFetch: boolean
+) {
+	let expiration = initialFetch ? initial.expiration : undefined
+
 	const { data, isFetching } = useQuery(
 		['change', info.symbol, info.type, time],
 		() => queryChart(info.symbol, info.type, time),
 		{
 			initialData: initial.data,
-			initialDataUpdatedAt: initial.expiration,
+			initialDataUpdatedAt: expiration,
 			refetchOnWindowFocus: false,
 			enabled: info.state !== 'upcomingipo' && !info.archived,
 			notifyOnChangeProps: 'tracked',
