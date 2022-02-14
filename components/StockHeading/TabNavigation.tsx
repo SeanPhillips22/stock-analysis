@@ -24,10 +24,11 @@ export function TabNavigation({ symbol, hideChart }: Props) {
 	})
 
 	return (
-		<nav className="border-b-2 border-blue-brand_sharp w-full">
+		<nav className="w-full border-b-2 border-blue-brand_sharp">
 			<ul className="navmenu" ref={menuref}>
 				<Tab symbol={symbol} title="Overview" append="" />
 				<Tab symbol={symbol} title="Financials" append="financials" />
+				<Tab symbol={symbol} title="Forecast" append="forecast" />
 				<Tab symbol={symbol} title="Statistics" append="statistics" />
 				<Tab symbol={symbol} title="Dividends" append="dividend" />
 				<Tab symbol={symbol} title="Profile" append="company" />

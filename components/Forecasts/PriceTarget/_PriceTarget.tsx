@@ -1,4 +1,5 @@
-import { Donut } from '../Ratings/Donut'
+import { Consensus } from './Consensus'
+import { Donut } from './Donut'
 import { PriceTargetChart } from './PriceTargetChart'
 // import { PriceTargetText } from './PriceTargetText'
 import { Snippet } from './Snippet'
@@ -13,15 +14,8 @@ export function PriceTarget() {
 						<div className="p-4 lg:max-w-[32%] lg:p-0">
 							<h2 className="hh3 mb-1">Stock Price Forecast</h2>
 							<Snippet />
-							<div className="">
-								<Donut />
-								<div className="text-center text-xl font-semibold">
-									Analyst Consensus:{' '}
-									<span className="font-bold text-green-800">
-										Strong Buy
-									</span>
-								</div>
-							</div>
+							<Donut />
+							<Consensus />
 						</div>
 						<div className="grow lg:pl-4">
 							{/* <PriceTargetText /> */}

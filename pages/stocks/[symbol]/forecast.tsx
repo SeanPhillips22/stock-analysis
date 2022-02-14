@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { Info } from 'types/Info'
 import { Stock } from 'components/Layout/StockLayout'
-import { SEO } from 'components/SEO'
 import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { Ratings } from 'components/Forecasts/Ratings/_Ratings'
 import { PriceTarget } from 'components/Forecasts/PriceTarget/_PriceTarget'
@@ -16,16 +15,18 @@ import { Surprises } from 'components/Forecasts/Surprises/Surprises'
 
 type Props = {
 	info: Info
+	data: any
 }
 
-export default function Forecast({ info }: Props) {
+export default function Forecast({ info, data }: Props) {
 	return (
-		<Stock info={info} url={`/stocks/${info.symbol}/forecast/`}>
-			<SEO
-				title={`${info.nameFull} (${info.ticker}) Forecast`}
-				description={`Forecast for ${info.name} (${info.ticker}), including stock price, revenue and earnings.`}
-				canonical={`/stocks/${info.symbol}/forecast/`}
-			/>
+		<Stock
+			info={info}
+			data={data}
+			url={`/stocks/${info.symbol}/forecast/`}
+			title={`${info.nameFull} (${info.ticker}) Forecast`}
+			description={`Forecast for ${info.name} (${info.ticker}), including stock price, revenue and earnings.`}
+		>
 			<div className="contain py-2">
 				<div className="space-y-8">
 					<PriceTarget />
@@ -64,7 +65,7 @@ export default function Forecast({ info }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
-	const data = await getPageDataSSR('dividend', symbol, 'stocks')
+	const data = await getPageDataSSR('fc', symbol, 'stocks')
 
 	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 

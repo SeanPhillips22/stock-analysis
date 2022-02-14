@@ -25,6 +25,7 @@ ChartJS.register(
 import 'chartjs-adapter-date-fns'
 
 import { useMemo } from 'react'
+import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 interface Props {
 	data: AnalystChartData
@@ -49,7 +50,7 @@ interface AnalystChartData {
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-const data = {
+const placeholderData = {
 	price: [
 		{ t: '2020-12-1', c: '132.69' },
 		{ t: '2021-01-1', c: '131.96' },
@@ -74,39 +75,48 @@ const data = {
 }
 
 export function PriceTargetChart() {
-	const lowData = [
+	const { data } = useSymbolContext()
+	const { high, average, low } = data.targets
+
+	const highData = [
 		{ x: '2021-12-7', y: '177.57' },
-		{ x: '2022-12-1', y: '90' }
+		{ x: '2022-12-1', y: high }
 	]
 
 	const avgData = [
 		{ x: '2021-12-7', y: '177.57' },
-		{ x: '2022-12-1', y: '175.28' }
+		{ x: '2022-12-1', y: average }
 	]
 
-	const highData = [
+	const lowData = [
 		{ x: '2021-12-7', y: '177.57' },
-		{ x: '2022-12-1', y: '210' }
+		{ x: '2022-12-1', y: low }
 	]
 
-	const timeAxis = useMemo(() => data.price.map(item => item.t), [data])
+	const timeAxis = useMemo(
+		() => placeholderData.price.map(item => item.t),
+		[placeholderData]
+	)
 
 	const priceAxis = useMemo(
-		() => data.price.map(item => ({ x: item.t, y: item.c })),
-		[data]
+		() => placeholderData.price.map(item => ({ x: item.t, y: item.c })),
+		[placeholderData]
 	)
 
 	const backgroundColorCodings = useMemo(
-		() => data.price.map((i, index) => (index == 12 ? '#000000' : '#ffffff')),
-		[data]
+		() =>
+			placeholderData.price.map((i, index) =>
+				index == 12 ? '#000000' : '#ffffff'
+			),
+		[placeholderData]
 	)
 
 	const pointBorderColorCodings = useMemo(
 		() =>
-			data.price.map((i, index) =>
+			placeholderData.price.map((i, index) =>
 				index == 12 ? '#000000' : 'rgba(4, 120, 87, 1)'
 			),
-		[data]
+		[placeholderData]
 	)
 
 	let datasets: any[] = [

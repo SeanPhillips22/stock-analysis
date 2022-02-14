@@ -3,6 +3,7 @@
 
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -28,8 +29,12 @@ interface AnalystChartData {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function Donut() {
-	let data: any[] = [
+	const { data } = useSymbolContext()
+	const { buy, sell, hold, strongBuy, strongSell } = data.recommendations[0]
+
+	let d: any[] = [
 		{
+			// data: [strongSell, sell, hold, buy, strongBuy],
 			data: [10, 10, 10, 10, 10],
 			backgroundColor: [
 				'rgb(153, 0, 0)',
@@ -43,21 +48,6 @@ export function Donut() {
 				'rgb(255, 69, 96)',
 				'rgb(206, 148, 73)',
 				'rgb(153, 223, 89)'
-			],
-			hoverBorderWidth: 0
-		},
-		{
-			data: [10, 10, 10, 10, 10],
-			backgroundColor: [
-				'rgb(255, 255, 255)',
-				'rgb(255, 255, 255)',
-				'rgb(255, 255, 255)'
-			],
-			borderWidth: 0,
-			hoverBackgroundColor: [
-				'rgb(255, 255, 255)',
-				'rgb(255, 255, 255)',
-				'rgb(255, 255, 255)'
 			],
 			hoverBorderWidth: 0
 		}
@@ -103,7 +93,7 @@ export function Donut() {
 			<Doughnut
 				id="1"
 				data={{
-					datasets: data
+					datasets: d
 				}}
 				plugins={[
 					{
@@ -140,7 +130,7 @@ export function Donut() {
 					maintainAspectRatio: false,
 					// animation: false,
 					radius: '70%',
-					cutout: '50%',
+					cutout: '65%',
 					rotation: 270,
 					circumference: 180,
 
