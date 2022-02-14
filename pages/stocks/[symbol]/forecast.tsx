@@ -11,6 +11,7 @@ import { Revenue } from 'components/Forecasts/Revenue/Revenue'
 import { EarningsGrowth } from 'components/Forecasts/Earnings/EarningsGrowth'
 import ContentMobileAd from 'components/Ads/Placeholders/ContentMobileAd'
 import { AnalystRatings } from 'components/Forecasts/Analysts/AnalystRatings'
+import { AnalystTrend } from 'components/Forecasts/Analysts/AnalystTrend'
 import { Surprises } from 'components/Forecasts/Surprises/Surprises'
 
 type Props = {
@@ -31,6 +32,7 @@ export default function Forecast({ info, data }: Props) {
 				<div className="space-y-8">
 					<PriceTarget />
 					<ContentWideAd />
+					<AnalystTrend />
 					{/* TODO this should be a stacked bar chart */}
 					{/* Can limit to 6 months, enable 4 years for pro users */}
 					<Ratings />
