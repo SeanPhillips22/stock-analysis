@@ -29,8 +29,6 @@ export function AnalystTrends() {
 	const { data } = useSymbolContext()
 	const months = data.recommendations
 
-	// console.log(data.recommendations)
-
 	const labelAxis = () => months.map((item: { month: any }) => item.month)
 
 	const analystAxis = (s: string) =>
@@ -42,17 +40,17 @@ export function AnalystTrends() {
 			data: analystAxis('strongSell'),
 			backgroundColor: 'rgb(153, 0, 0)',
 			barPercentage: 0.5,
-			barThickness: 35,
+			barThickness: 8,
 			grouped: true,
-			maxBarThickness: 35
+			maxBarThickness: 8
 		},
 		{
 			label: 'Sell',
 			data: analystAxis('sell'),
 			backgroundColor: 'rgb(153, 76, 0)',
 			barPercentage: 0.5,
-			barThickness: 35,
-			maxBarThickness: 35,
+			barThickness: 8,
+			maxBarThickness: 8,
 
 			grouped: true
 		},
@@ -61,8 +59,8 @@ export function AnalystTrends() {
 			data: analystAxis('hold'),
 			backgroundColor: 'rgb(204, 204, 0)',
 			barPercentage: 0.5,
-			barThickness: 35,
-			maxBarThickness: 35,
+			barThickness: 8,
+			maxBarThickness: 8,
 
 			grouped: true,
 			categoryPercentage: 1
@@ -72,8 +70,8 @@ export function AnalystTrends() {
 			data: analystAxis('buy'),
 			backgroundColor: 'rgb(76, 153, 0)',
 			barPercentage: 0.5,
-			barThickness: 35,
-			maxBarThickness: 35,
+			barThickness: 8,
+			maxBarThickness: 8,
 
 			grouped: true,
 			categoryPercentage: 0.5
@@ -83,8 +81,8 @@ export function AnalystTrends() {
 			data: analystAxis('strongBuy'),
 			backgroundColor: 'rgb(0, 153, 0)',
 			barPercentage: 0.5,
-			barThickness: 35,
-			maxBarThickness: 35,
+			barThickness: 8,
+			maxBarThickness: 8,
 
 			grouped: true,
 			categoryPercentage: 0.5
