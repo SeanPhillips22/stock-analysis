@@ -36,34 +36,13 @@ export function AnalystTrends() {
 
 	let d: any[] = [
 		{
-			label: 'Strong Sell',
-			data: analystAxis('strongSell'),
-			backgroundColor: 'rgb(153, 0, 0)',
-			barPercentage: 0.5,
-			barThickness: 8,
-			grouped: true,
-			maxBarThickness: 8
-		},
-		{
-			label: 'Sell',
-			data: analystAxis('sell'),
-			backgroundColor: 'rgb(153, 76, 0)',
+			label: 'Strong Buy',
+			data: analystAxis('strongBuy'),
+			backgroundColor: 'rgb(0, 153, 0)',
 			barPercentage: 0.5,
 			barThickness: 8,
 			maxBarThickness: 8,
-
-			grouped: true
-		},
-		{
-			label: 'Hold',
-			data: analystAxis('hold'),
-			backgroundColor: 'rgb(204, 204, 0)',
-			barPercentage: 0.5,
-			barThickness: 8,
-			maxBarThickness: 8,
-
-			grouped: true,
-			categoryPercentage: 1
+			order: 4
 		},
 		{
 			label: 'Buy',
@@ -72,20 +51,36 @@ export function AnalystTrends() {
 			barPercentage: 0.5,
 			barThickness: 8,
 			maxBarThickness: 8,
-
-			grouped: true,
-			categoryPercentage: 0.5
+			order: 3
 		},
+
 		{
-			label: 'Strong Buy',
-			data: analystAxis('strongBuy'),
-			backgroundColor: 'rgb(0, 153, 0)',
+			label: 'Hold',
+			data: analystAxis('hold'),
+			backgroundColor: 'rgb(204, 204, 0)',
 			barPercentage: 0.5,
 			barThickness: 8,
 			maxBarThickness: 8,
+			order: 2
+		},
 
-			grouped: true,
-			categoryPercentage: 0.5
+		{
+			label: 'Sell',
+			data: analystAxis('sell'),
+			backgroundColor: 'rgb(153, 76, 0)',
+			barPercentage: 0.5,
+			barThickness: 8,
+			maxBarThickness: 8,
+			order: 1
+		},
+		{
+			label: 'Strong Sell',
+			data: analystAxis('strongSell'),
+			backgroundColor: 'rgb(153, 0, 0)',
+			barPercentage: 0.5,
+			barThickness: 8,
+			maxBarThickness: 8,
+			order: 0
 		}
 	]
 
@@ -99,6 +94,10 @@ export function AnalystTrends() {
 				}}
 				options={{
 					maintainAspectRatio: false,
+					interaction: {
+						mode: 'index'
+					},
+
 					scales: {
 						x: {
 							ticks: {
@@ -109,7 +108,8 @@ export function AnalystTrends() {
 							grid: {
 								display: false
 							},
-							stacked: true
+							stacked: true,
+							reverse: true
 						},
 						y: {
 							stacked: true,
@@ -120,11 +120,24 @@ export function AnalystTrends() {
 							},
 							grid: {
 								display: true
-							}
+							},
+							position: 'left'
 						}
 					},
 
 					plugins: {
+						tooltip: {
+							itemSort: function (a, b) {
+								if (
+									a.datasetIndex !== undefined ||
+									b.datasetIndex !== undefined
+								) {
+									return a.datasetIndex < b.datasetIndex ? -1 : 1
+								}
+
+								return 0
+							}
+						},
 						legend: {
 							display: true,
 							position: 'bottom'
