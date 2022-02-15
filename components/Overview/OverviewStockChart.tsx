@@ -21,13 +21,22 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			height: 300,
 			layout: {
 				fontFamily:
-					"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
+					"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+				fontSize: 13
 			},
 			rightPriceScale: {
 				borderColor: 'rgba(197, 203, 206, 1)'
 			},
 			crosshair: {
 				mode: 0
+			},
+			grid: {
+				horzLines: {
+					color: '#EBECF0'
+				},
+				vertLines: {
+					visible: false
+				}
 			},
 			timeScale: {
 				borderColor: 'rgba(197, 203, 206, 1)',
