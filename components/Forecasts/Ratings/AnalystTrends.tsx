@@ -139,6 +139,7 @@ export function AnalystTrends() {
 							}
 						},
 						legend: {
+							reverse: true,
 							display: true,
 							position: 'bottom'
 						}
