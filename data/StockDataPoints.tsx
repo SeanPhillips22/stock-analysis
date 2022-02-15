@@ -16,7 +16,7 @@ export type DataPointType = {
 	format?: FormatFunction
 	only?: SymbolType
 	sort?: any
-	class?: string
+	css?: string
 }
 
 type Props = {
@@ -48,14 +48,15 @@ export const DataPoints: Props = {
 		id: 'n',
 		name: 'Company Name',
 		sort: stringIgnoreCase,
-		class: 'sl'
+		css: 'sl'
 	},
 	marketCap: { id: 'marketCap', name: 'Market Cap', format: 'abbreviate' },
 	price: {
 		id: 'price',
 		name: 'Stock Price',
 		colName: 'Price',
-		format: 'format2dec'
+		format: 'format2dec',
+		css: 'tr'
 	},
 	chg: {
 		id: 'chg',
@@ -70,7 +71,7 @@ export const DataPoints: Props = {
 		format: 'colorPercentage',
 		sort: numberAbsolute
 	},
-	volume: { id: 'volume', name: 'Volume', format: 'integer' },
+	volume: { id: 'volume', name: 'Volume', format: 'integer', css: 'tr' },
 	close: {
 		id: 'close',
 		name: 'Previous Close',
@@ -81,13 +82,15 @@ export const DataPoints: Props = {
 		id: 'premarketPrice',
 		name: 'Premarket Price',
 		colName: 'Price',
-		format: 'format2dec'
+		format: 'format2dec',
+		css: 'tr'
 	},
 	premarketChange: {
 		id: 'premarketChange',
 		name: 'Premarket Change',
 		colName: 'Change',
-		format: 'format2dec'
+		format: 'format2dec',
+		css: 'tr'
 	},
 	premarketChangePercent: {
 		id: 'premarketChangePercent',
@@ -190,14 +193,14 @@ export const DataPoints: Props = {
 		id: 'ipp',
 		name: 'IPO Price',
 		format: 'price',
-		class: 'tr'
+		css: 'tr'
 	},
 	ippc: {
 		id: 'ippc',
 		name: 'Current Price',
 		colName: 'Current',
 		format: 'price',
-		class: 'tr'
+		css: 'tr'
 	},
 	ipr: {
 		id: 'ipr',

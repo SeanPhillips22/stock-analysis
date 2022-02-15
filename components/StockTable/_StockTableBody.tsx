@@ -12,6 +12,7 @@ import { StockTableControls } from './_StockTableControls'
 import { useState } from 'react'
 import { DataPoints as DP } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
+import { formatTableCell } from 'functions/tables/formatTableCell'
 
 type Props = {
 	data: any[]
@@ -79,19 +80,19 @@ export function StockTableBody({
 						))}
 					</thead>
 					<tbody>
-						{rows.map((row, index) => {
+						{rows.map((row, i) => {
 							prepareRow(row)
 							return (
-								<tr key={index}>
-									{row.cells.map((cell, index) => {
+								<tr key={i}>
+									{row.cells.map((cell, ii) => {
+										let cellProps = DP[cell.column.id as DataId]
+										let { format, css } = cellProps
+										let value = cell.value
+										let uniqueKey = `${i}-${cell.column.id}-${ii}`
+
 										return (
-											<td
-												key={index}
-												className={
-													DP[cell.column.id as DataId].class
-												}
-											>
-												{cell.render('Cell')}
+											<td key={uniqueKey} className={css}>
+												{formatTableCell(format, value, 'stocks')}
 											</td>
 										)
 									})}

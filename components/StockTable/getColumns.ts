@@ -23,13 +23,6 @@ export function getColumns(cols: DataId[], main: DataId) {
 		return {
 			Header: colName || name,
 			accessor: col,
-			Cell: (props: any) => {
-				return format
-					? formatCells(format, props, 'stocks')
-					: props.value
-					? props.value
-					: '-'
-			},
 			sortType: sort || 'basic',
 			sortInverted:
 				col !== main && format !== 'string' && format !== 'linkSymbol'

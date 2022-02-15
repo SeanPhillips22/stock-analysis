@@ -16,9 +16,17 @@ const dec2 = new Intl.NumberFormat('en-US', {
 	maximumFractionDigits: 2
 })
 
-function format(value: number, decimals: 0 | 2) {
+const dec3 = new Intl.NumberFormat('en-US', {
+	minimumFractionDigits: 3,
+	maximumFractionDigits: 3
+})
+
+function format(value: number, decimals: 0 | 2 | 3) {
 	if (!value) return '-'
-	return decimals === 0 ? dec0.format(value) : dec2.format(value)
+	if (decimals === 0) return dec0.format(value)
+	if (decimals === 2) return dec2.format(value)
+	if (decimals === 3) return dec3.format(value)
+	return value
 }
 
 export function formatHeader(fn: Fn, value: string) {
@@ -93,29 +101,57 @@ export function formatInteger(cell: CellNumber) {
 // Format a percentage with comma and 2 decimal points
 export function formatPercentage(cell: CellNumber) {
 	let { value } = cell.cell
-	if (!value) return <div className="text-right">-</div>
+	if (!value)
+		return (
+			<div title="n/a" className="text-right">
+				-
+			</div>
+		)
+	let raw = format(value, 3)
 	let formatted = format(value, 2) + '%'
-	return <div className="text-right">{formatted}</div>
+	return (
+		<div title={raw.toString()} className="text-right">
+			{formatted}
+		</div>
+	)
 }
 
 // Format percentage growth, with color
 export function colorPercentage(cell: CellNumber) {
 	let { value } = cell.cell
 
-	if (!value) return <div className="text-right">-</div>
+	if (!value)
+		return (
+			<div title="n/a" className="text-right">
+				-
+			</div>
+		)
 
+	let raw = format(value, 3)
 	let formatted = format(value, 2) + '%'
 
-	if (value > 0) return <div className="right-green">{formatted}</div>
-	if (value < 0) return <div className="right-red">{formatted}</div>
-	return <div className="right-gray">{formatted}</div>
+	let divclass = 'rgr'
+	if (value > 0) divclass = 'rg'
+	else if (value < 0) divclass = 'rr'
+
+	return (
+		<div title={raw.toString()} className={divclass}>
+			{formatted}
+		</div>
+	)
 }
 
 // Abbreviate a number with B/M/K
 export function abbreviate(cell: CellNumber) {
 	let { value } = cell.cell
+	if (!value)
+		return (
+			<div title="n/a" className="text-right">
+				-
+			</div>
+		)
 
-	let num = '-'
+	let num = ''
 	if (value >= 1000000000) num = dec2.format(value / 1000000000) + 'B'
 	else if (value >= 1000000) num = dec2.format(value / 1000000) + 'M'
 	else if (value > 1000) num = dec2.format(value / 1000) + 'K'
@@ -124,7 +160,11 @@ export function abbreviate(cell: CellNumber) {
 	else if (value <= -1000) num = dec2.format(value / 1000) + 'K'
 	else num = dec2.format(value)
 
-	return <div className="text-right">{num}</div>
+	return (
+		<div title={dec0.format(value)} className="text-right">
+			{num}
+		</div>
+	)
 }
 
 // Format a date
