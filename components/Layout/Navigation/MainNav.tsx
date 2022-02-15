@@ -100,9 +100,7 @@ const navigation = [
 
 export function MainNav() {
 	const setIsOpen = navMenuState(state => state.setIsOpen)
-	const initial = navMenuState(state => state.initial)
-	const setInitial = navMenuState(state => state.setInitial)
-	const { path } = useLayoutContext()
+	const { path, initial, setInitial } = useLayoutContext()
 
 	// Set the initial open state for the menu
 	if (initial && path.one) {

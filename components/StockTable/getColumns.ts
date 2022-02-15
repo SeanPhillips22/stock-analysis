@@ -1,6 +1,5 @@
 import { DataPoints } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
-import { formatCells } from 'functions/tables/formatCells'
 
 /**
  * This function formats the columns for react-table

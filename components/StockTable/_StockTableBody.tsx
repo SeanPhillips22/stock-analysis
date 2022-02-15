@@ -19,7 +19,6 @@ type Props = {
 	columns: {
 		Header: string
 		accessor: DataId
-		Cell: (props: any) => any
 	}[]
 	sortProps: SortProps
 	sort?: SortObject[]
