@@ -1,6 +1,6 @@
 import styles from './AnalystRatings.module.css'
 
-export function AnalystRatings() {
+export function AnalystCalls() {
 	return (
 		<>
 			<h2 className="hh2">Analyst Ratings</h2>

@@ -6,7 +6,8 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 export function ConsensusChart() {
 	const { data } = useSymbolContext()
-	const { angle } = data.recommendations[0]
+	const recs = data.recommendations
+	const { angle } = recs[recs.length - 1]
 
 	let d: any[] = [
 		{
