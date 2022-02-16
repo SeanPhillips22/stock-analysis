@@ -22,7 +22,7 @@ type Props = {
 }
 
 export default function EtfOverview({ info, data, news, chart }: Props) {
-	const url = `/etf/${info.symbol}`
+	const url = `/etf/${info.symbol}/`
 
 	return (
 		<Stock info={info} url={url}>
