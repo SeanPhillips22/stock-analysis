@@ -1,6 +1,6 @@
 export type ChartDataPoint = {
 	t: string
-	c: number
+	c?: number
 	o?: number
 }
 

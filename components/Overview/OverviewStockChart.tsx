@@ -1,5 +1,11 @@
 import React, { useEffect, useRef } from 'react'
-import { createChart } from 'lightweight-charts'
+import {
+	createChart,
+	PriceLineOptions,
+	LineStyle,
+	LineData,
+	WhitespaceData
+} from 'lightweight-charts'
 import { ChartDataPoint } from 'types/Charts'
 
 type Props = {
@@ -39,20 +45,45 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 					visible: false
 				}
 			},
+
 			timeScale: {
 				borderColor: 'rgba(197, 203, 206, 1)',
-				timeVisible: true
+				timeVisible: true,
+				fixLeftEdge: true,
+				fixRightEdge: true
 			},
 			handleScroll: false,
 			handleScale: false
 		})
 
 		const areaSeries = chart.addAreaSeries({
+			autoscaleInfoProvider: () => ({
+				priceRange: {
+					minValue: 170,
+					maxValue: 176
+				}
+			}),
 			topColor: 'rgba(33, 150, 243, 0.56)',
 			bottomColor: 'rgba(33, 150, 243, 0.04)',
 			lineColor: 'rgba(33, 150, 243, 1)',
 			lineWidth: 2
 		})
+		console.log(close)
+		//@ts-ignore
+		const plOptions: PriceLineOptions = {
+			price: 176,
+			axisLabelVisible: false,
+			title: 'Previous Close',
+			color: 'rgb(100, 100, 100)',
+			lineStyle: LineStyle.SparseDotted
+		}
+
+		const pl = areaSeries.createPriceLine(plOptions)
+
+		/* pl.applyOptions({
+			price: Number(close),
+			axisLabelVisible: false
+		})*/
 
 		areaSeries.applyOptions({
 			priceLineVisible: false,
@@ -60,18 +91,31 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 		})
 
 		const format = data.map(item => {
+			const d = new Date(item.t)
+
 			return {
-				time: Math.round(new Date(item.t).getTime() / 1000),
+				time:
+					Date.UTC(
+						d.getFullYear(),
+						d.getMonth(),
+						d.getDate(),
+						d.getHours(),
+						d.getMinutes(),
+						d.getSeconds(),
+						d.getMilliseconds()
+					) / 1000,
 				value: item.c
 			}
 		})
+		console.log(format)
 		//@ts-ignore
 		areaSeries.setData(format)
 		chart.timeScale().fitContent()
+
 		return () => {
 			chart.remove()
 		}
-	}, [data])
+	}, [data, close])
 
 	return (
 		<>

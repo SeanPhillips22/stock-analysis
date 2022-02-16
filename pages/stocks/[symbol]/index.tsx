@@ -75,6 +75,5 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const data = await getPageDataSSR('overview', symbol, 'stocks')
 
 	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
-
 	return data
 }
