@@ -30,7 +30,7 @@ export default function StockOverview({ info, data, news, chart }: Props) {
 	}
 
 	const symbol = info.symbol.includes('.') ? info.symbol : `${info.symbol}/`
-	const url = `/stock/${symbol}`
+	const url = `/stocks/${symbol}`
 
 	return (
 		<Stock info={info} url={url}>
