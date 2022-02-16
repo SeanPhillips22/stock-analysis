@@ -11,7 +11,7 @@ export const NewsNavigation = () => {
 
 	return (
 		<div>
-			<nav className="border-b-[3px] border-blue-brand_sharp mb-0.5">
+			<nav className="mb-0.5 border-b-[3px] border-blue-brand_sharp">
 				<ul className="navmenu">
 					<li>
 						<Link href="/news/" prefetch={false}>

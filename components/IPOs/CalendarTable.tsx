@@ -76,7 +76,7 @@ const NoIpos = ({ title }: { title: string }) => {
 		case 'This Week': {
 			return (
 				<div>
-					<h2 className="hh2 font-semibold mb-2 text-gray-800">{`${title} · 0 IPOs`}</h2>
+					<h2 className="hh2 mb-2 font-semibold text-gray-800">{`${title} · 0 IPOs`}</h2>
 					<p className="text-lg text-gray-900">
 						There are no upcoming IPOs remaining for this week.
 					</p>
@@ -134,10 +134,10 @@ export function CalendarTable({ title, data, tableId, border, filter }: Props) {
 		<div>
 			<div
 				className={`flex items-end space-x-6 mb-1.5${
-					border ? ' pt-1.5 border-t' : ''
+					border ? ' border-t pt-1.5' : ''
 				}`}
 			>
-				<h2 className="hh2 font-semibold text-[1.4rem] text-gray-800 mb-0 lg:mb-0.5 mr-auto">
+				<h2 className="hh2 mb-0 mr-auto text-[1.4rem] font-semibold text-gray-800 lg:mb-0.5">
 					{title === 'This Week' || title === 'Next Week'
 						? `${title} · ${count} IPOs`
 						: title}

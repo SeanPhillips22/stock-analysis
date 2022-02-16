@@ -18,6 +18,7 @@ interface Props {
 }
 
 export const IposWithdrawn = ({ data, news, recent }: Props) => {
+	const url = '/ipos/withdrawn/'
 	const count = data.length
 
 	return (
@@ -25,9 +26,9 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 			<SEO
 				title="Withdrawn IPOs"
 				description="A list of companies that have withdrawn their U.S. stock market IPO within the last year."
-				canonical="/ipos/withdrawn/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/withdrawn/">
+			<Layout url={url}>
 				<div className="contain">
 					<h1 className="hh1">Withdrawn IPOs</h1>
 					<IPONavigation path="calendar" />
@@ -46,7 +47,7 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 						</div>
 						<aside className="flex flex-col space-y-8 pt-4 lg:space-y-10 lg:pt-5">
 							<RecentTableMin recent={recent} />
-							<Sidebar1 />
+							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
 								news={news}

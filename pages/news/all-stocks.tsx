@@ -14,14 +14,16 @@ interface Props {
 }
 
 export const AllStockNews = ({ data, other }: Props) => {
+	const url = '/news/all-stocks/'
+
 	return (
 		<>
 			<SEO
 				title="All Stock News"
 				description="The latest news on individual stocks on the US stock market, gathered from trusted finance and investing websites."
-				canonical="/news/all-stocks/"
+				canonical={url}
 			/>
-			<Layout url="/news/all-stocks/">
+			<Layout url={url}>
 				<div className="contain pb-0">
 					<h1 className="hh1">All Stock News</h1>
 					<NewsNavigation />
@@ -32,7 +34,7 @@ export const AllStockNews = ({ data, other }: Props) => {
 						<NewsFeed data={data} related="Stocks" />
 					</div>
 					<aside className="contain sm:uncontain flex flex-col space-y-7 py-6 lg:space-y-10">
-						<Sidebar1 />
+						<Sidebar1 key={url} />
 						<NewsWidget
 							title="Press Releases"
 							news={other}

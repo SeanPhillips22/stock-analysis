@@ -56,7 +56,7 @@ export function PaywallBodyCell({
 				id="tag-upgr-financials-table-cell"
 			>
 				<span>Upgrade</span>
-				<LockClosedIcon className="ml-1 w-3.5 h-3.5" />
+				<LockClosedIcon className="ml-1 h-3.5 w-3.5" />
 			</div>
 		</td>
 	)

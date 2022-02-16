@@ -12,13 +12,13 @@ export const ProfileContact = ({ contact }: { contact: Contact }) => {
 	return (
 		<>
 			<h2 className="hh2 mt-6 xs:mt-8">Contact Details</h2>
-			<div className="bg-gray-50 px-4 pt-4 pb-2 border border-gray-200 rounded">
+			<div className="rounded border border-gray-200 bg-gray-50 px-4 pt-4 pb-2">
 				<table className="w-full">
 					<tbody>
 						{contact.address && (
 							<tr>
 								<td colSpan={2} className="pb-3">
-									<div className="text-lg font-bold mb-2">
+									<div className="mb-2 text-lg font-bold">
 										Address:
 									</div>
 									<div

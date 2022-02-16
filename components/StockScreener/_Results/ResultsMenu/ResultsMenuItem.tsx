@@ -35,7 +35,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 		return (
 			<li>
 				<span
-					className="bg-gray-100 py-1 px-2 rounded-md font-medium focus:outline-none"
+					className="rounded-md bg-gray-100 py-1 px-2 font-medium focus:outline-none"
 					data-title={dataTitle}
 					tabIndex={0}
 				>
@@ -48,7 +48,7 @@ export function ResultsMenuItem({ name, type }: Props) {
 	return (
 		<li>
 			<span
-				className="py-1 px-2 hover:bg-gray-100 hover:rounded-md cursor-pointer focus:outline-none"
+				className="cursor-pointer py-1 px-2 hover:rounded-md hover:bg-gray-100 focus:outline-none"
 				data-title={dataTitle}
 				onClick={() => setResultsMenu(name)}
 				onKeyPress={e => {

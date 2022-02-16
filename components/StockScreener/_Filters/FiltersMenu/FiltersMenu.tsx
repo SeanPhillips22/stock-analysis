@@ -14,23 +14,23 @@ export function FiltersMenu() {
 			<div
 				className={cn(
 					filtersShown ? 'border-b border-gray-300' : '',
-					'grid grid-cols-2 xl:flex justify-between items-end whitespace-nowrap overflow-x-auto'
+					'grid grid-cols-2 items-end justify-between overflow-x-auto whitespace-nowrap xl:flex'
 				)}
 			>
 				<div className="xl:order-1">
 					<FiltersMenuHeader />
 				</div>
-				<div className="ml-auto xl:ml-0 xl:order-3">
+				<div className="ml-auto xl:order-3 xl:ml-0">
 					<FilterSearch />
 				</div>
 				<div
 					className={cn(
 						filtersShown ? 'block' : 'hidden xl:block',
-						'col-span-2 xl:order-2 border-t border-gray-200 pt-2 xl:pt-0 xl:border-0'
+						'col-span-2 border-t border-gray-200 pt-2 xl:order-2 xl:border-0 xl:pt-0'
 					)}
 				>
 					<nav>
-						<ul className="navmenu screener-filter-nav bg-gray-50 noshadow">
+						<ul className="navmenu screener-filter-nav noshadow bg-gray-50">
 							{(type == 'stocks' && (
 								<>
 									<FiltersMenuActive />

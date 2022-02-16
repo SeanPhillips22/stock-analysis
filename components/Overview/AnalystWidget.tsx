@@ -9,10 +9,10 @@ function PriceTarget({ target }: { target: string[] }) {
 	if (updown === 'upside') {
 		return (
 			<>
-				<div className="text-green-700 text-4xl text-center font-semibold mb-0.5">
+				<div className="mb-0.5 text-center text-4xl font-semibold text-green-700">
 					{priceTarget}
 				</div>
-				<div className="text-xl text-center mb-1.5">
+				<div className="mb-1.5 text-center text-xl">
 					({difference} upside)
 				</div>
 			</>
@@ -20,17 +20,17 @@ function PriceTarget({ target }: { target: string[] }) {
 	} else if (updown === 'downside') {
 		return (
 			<>
-				<div className="text-red-600 text-4xl text-center font-semibold mb-0.5">
+				<div className="mb-0.5 text-center text-4xl font-semibold text-red-600">
 					{priceTarget}
 				</div>
-				<div className="text-xl text-center mb-1.5">
+				<div className="mb-1.5 text-center text-xl">
 					({difference} downside)
 				</div>
 			</>
 		)
 	} else {
 		return (
-			<div className="text-gray-800 text-4xl text-center font-semibold mb-0.5">
+			<div className="mb-0.5 text-center text-4xl font-semibold text-gray-800">
 				{priceTarget}
 			</div>
 		)
@@ -41,14 +41,14 @@ function AnalystConsensus({ consensus }: { consensus: string }) {
 	switch (consensus) {
 		case 'Buy':
 		case 'Strong Buy':
-			return <span className="text-green-700 font-bold">{consensus}</span>
+			return <span className="font-bold text-green-700">{consensus}</span>
 
 		case 'Underweight':
 		case 'Sell':
-			return <span className="text-red-600 font-bold">{consensus}</span>
+			return <span className="font-bold text-red-600">{consensus}</span>
 
 		default:
-			return <span className="text-gray-800 font-bold">{consensus}</span>
+			return <span className="font-bold text-gray-800">{consensus}</span>
 	}
 }
 
@@ -70,12 +70,12 @@ export const AnalystWidget = ({ data }: { data: Overview }) => {
 				<p className="mb-4 text-gray-900">{data.analystIntro}</p>
 			)}
 			<div className="border border-gray-200 p-2 xs:p-3">
-				<div className="text-center m-auto text-xl font-semibold mb-2 text-gray-900">
+				<div className="m-auto mb-2 text-center text-xl font-semibold text-gray-900">
 					Price Target
 				</div>
 
 				<PriceTarget target={data.analystTarget} />
-				<div className="text-center text-lg font-semibold py-1 text-gray-900">
+				<div className="py-1 text-center text-lg font-semibold text-gray-900">
 					Analyst Consensus: <AnalystConsensus consensus={data.analysts} />
 				</div>
 

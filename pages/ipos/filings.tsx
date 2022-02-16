@@ -18,6 +18,7 @@ interface Props {
 }
 
 export function IpoFilings({ data, news, recent }: Props) {
+	const url = '/ipos/filings/'
 	const count = data.length
 
 	return (
@@ -25,9 +26,9 @@ export function IpoFilings({ data, news, recent }: Props) {
 			<SEO
 				title="IPO Filings"
 				description="A list of all stocks that have filed for an initial public offering (IPO) on the US stock market, but have not set an estimated IPO date yet."
-				canonical="/ipos/filings/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/filings/">
+			<Layout url={url}>
 				<div className="contain">
 					<h1 className="hh1">IPO Filings</h1>
 					<IPONavigation path="calendar" />
@@ -46,7 +47,7 @@ export function IpoFilings({ data, news, recent }: Props) {
 						</div>
 						<aside className="flex flex-col space-y-8 pt-4 lg:space-y-10 lg:pt-5">
 							<RecentTableMin recent={recent} />
-							<Sidebar1 />
+							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
 								news={news}

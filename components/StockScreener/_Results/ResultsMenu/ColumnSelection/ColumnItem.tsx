@@ -32,7 +32,7 @@ export function ColumnItem({ name, id, type }: Props): JSX.Element {
 				onMouseEnter={() => fetchColumn(id, type)}
 				onFocus={() => fetchColumn(id, type)}
 				onKeyDown={handleKeyDown}
-				className="focus:ring-blue-500 h-4 w-4 text-blue-600 border border-gray-500 rounded"
+				className="h-4 w-4 rounded border border-gray-500 text-blue-600 focus:ring-blue-500"
 			/>
 			<label htmlFor={id} className="ml-2 text-gray-800">
 				{name}

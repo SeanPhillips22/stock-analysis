@@ -81,13 +81,13 @@ export function StringFilter({ filter, active }: Props) {
 			{count > 6 && filterType === 'stringmatch' && (
 				<input
 					type="text"
-					className="border-0 border-b border-gray-200 w-full focus:ring-0 focus:border-gray-200"
+					className="w-full border-0 border-b border-gray-200 focus:border-gray-200 focus:ring-0"
 					placeholder="Search..."
 					value={search}
 					onChange={e => setSearch(e.target.value)}
 				/>
 			)}
-			<div className="max-h-[300px] lg:max-h-[400px] overflow-y-auto overflow-x-hidden overscroll-contain thin-scroll">
+			<div className="thin-scroll max-h-[300px] overflow-y-auto overflow-x-hidden overscroll-contain lg:max-h-[400px]">
 				{options &&
 					options.map(option => (
 						<PresetChoice

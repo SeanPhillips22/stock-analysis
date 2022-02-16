@@ -19,7 +19,7 @@ export const LayoutSidebar = ({ heading, children, url }: Props) => {
 				<div className="lg:right-sidebar mt-3 sm:mt-4 lg:mt-5">
 					<div className="">{children}</div>
 					<aside className="space-y-8 py-0">
-						<Sidebar />
+						<Sidebar url={url} />
 					</aside>
 				</div>
 			</div>

@@ -13,6 +13,7 @@ import { Collapse } from './Collapse'
 import { MenuNavItem } from './NavItems/Menu'
 import { SingleNavItem } from './NavItems/Single'
 import { useLayoutContext } from '../LayoutContext'
+import { useEffect } from 'react'
 
 const navigation = [
 	{ name: 'Home', href: '/', icon: HomeIcon },
@@ -100,20 +101,24 @@ const navigation = [
 
 export function MainNav() {
 	const setIsOpen = navMenuState(state => state.setIsOpen)
-	const { path, initial, setInitial } = useLayoutContext()
+	const initial = navMenuState(state => state.initial)
+	const setInitial = navMenuState(state => state.setInitial)
+	const { path } = useLayoutContext()
+
+	// Only run once, during server-side rendering
+	useEffect(() => {
+		setInitial(false)
+	}, [setInitial])
 
 	// Set the initial open state for the menu
 	if (initial && path.one) {
-		setInitial(false)
-		if (path) {
-			navigation.map(item => {
-				if (item.children) {
-					if (matchParentPath(path, item.href)) {
-						setIsOpen({ [item.name]: true })
-					}
+		navigation.map(item => {
+			if (item.children) {
+				if (matchParentPath(path, item.href)) {
+					setIsOpen({ [item.name]: true })
 				}
-			})
-		}
+			}
+		})
 	}
 
 	return (

@@ -19,14 +19,16 @@ interface Props {
 }
 
 export const IpoCalendar = ({ data, recent, filings }: Props) => {
+	const url = '/ipos/calendar/'
+
 	return (
 		<>
 			<SEO
 				title="IPO Calendar - All Upcoming IPOs"
 				description="An IPO calendar with all upcoming initial public offerings (IPOs) on the stock market. Includes IPO dates, prices, how many shares are offered and more."
-				canonical="/ipos/calendar/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/calendar/">
+			<Layout url={url}>
 				<div className="contain">
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation path="calendar" />
@@ -60,7 +62,7 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 						<div className="flex flex-col pt-3 lg:pt-4">
 							<aside className="space-y-8 lg:space-y-10">
 								<RecentTableMin recent={recent} />
-								<Sidebar1 />
+								<Sidebar1 key={url} />
 								<FilingTableMin
 									filings={filings}
 									count={data.counts.unscheduled}

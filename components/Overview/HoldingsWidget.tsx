@@ -14,7 +14,7 @@ export const HoldingsWidget = ({ ticker, data }: Props) => {
 
 	return (
 		<div>
-			<div className="xs:flex flex-row justify-between items-end mb-2 xs:mb-1">
+			<div className="mb-2 flex-row items-end justify-between xs:mb-1 xs:flex">
 				<h2 className="hh2 mb-0 xs:mb-1">Top 10 Holdings</h2>
 				<span className="text-smaller text-gray-800">
 					{data.top10.toFixed(2) + '% of assets'}
@@ -23,21 +23,21 @@ export const HoldingsWidget = ({ ticker, data }: Props) => {
 			<table className="w-full text-smaller xs:text-base">
 				<thead>
 					<tr className="border-t border-b border-gray-200">
-						<th className="text-left py-1.5 px-1.5 xs:px-2">Name</th>
-						<th className="text-left py-1.5 px-1.5 xs:px-2">Symbol</th>
-						<th className="text-right py-1.5 px-1.5 xs:px-2">Weight</th>
+						<th className="py-1.5 px-1.5 text-left xs:px-2">Name</th>
+						<th className="py-1.5 px-1.5 text-left xs:px-2">Symbol</th>
+						<th className="py-1.5 px-1.5 text-right xs:px-2">Weight</th>
 					</tr>
 				</thead>
 				<tbody>
 					{data.list.map((item, index) => (
 						<tr key={index} className="border-b border-gray-200">
-							<td className="text-left py-1.5 px-1.5 xs:px-2 font-semibold">
+							<td className="py-1.5 px-1.5 text-left font-semibold xs:px-2">
 								{item.name}
 							</td>
-							<td className="text-left py-1.5 px-1.5 xs:px-2">
+							<td className="py-1.5 px-1.5 text-left xs:px-2">
 								<SymbolLink symbol={item.symbol} />
 							</td>
-							<td className="text-right py-1.5 px-1.5 xs:px-2">
+							<td className="py-1.5 px-1.5 text-right xs:px-2">
 								{item.assets}
 							</td>
 						</tr>

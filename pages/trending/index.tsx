@@ -16,6 +16,7 @@ type Props = {
 }
 
 export default function Trending({ timestamp, data }: Props) {
+	const url = '/trending/'
 	const format0dec = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 0,
 		maximumFractionDigits: 0
@@ -145,9 +146,9 @@ export default function Trending({ timestamp, data }: Props) {
 			<SEO
 				title="Today's Top Trending Stocks"
 				description="A list of the top 20 most popular stocks today based on pageviews. The list is updated multiple times per day."
-				canonical="/trending/"
+				canonical={url}
 			/>
-			<Layout url="/trending/">
+			<Layout url={url}>
 				<div className="contain py-5 xs:py-6">
 					<h1 className="hh1 mb-0 border-b-[3px] border-blue-brand_sharp pb-3">
 						Trending Today
@@ -169,7 +170,7 @@ export default function Trending({ timestamp, data }: Props) {
 							</div>
 						</div>
 						<aside className="space-y-8 py-0">
-							<Sidebar1 />
+							<Sidebar1 key={url} />
 							<Features />
 						</aside>
 					</div>

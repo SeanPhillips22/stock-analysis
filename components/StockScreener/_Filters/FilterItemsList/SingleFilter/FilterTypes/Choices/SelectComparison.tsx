@@ -24,13 +24,13 @@ export function SelectComparison({ compare, setCompare }: Props) {
 			{({ open }) => (
 				<>
 					<div className="relative">
-						<Listbox.Button className="relative w-full pl-2 pr-7 py-2 text-left cursor-pointer focus:outline-none focus:ring-0 text-smaller font-semibold text-gray-800">
+						<Listbox.Button className="relative w-full cursor-pointer py-2 pl-2 pr-7 text-left text-smaller font-semibold text-gray-800 focus:outline-none focus:ring-0">
 							<span className="block truncate">
 								{compare === 'notzero'
 									? 'Not Zero'
 									: capitalize(compare)}
 							</span>
-							<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
 								<ChevronDownIcon
 									className="h-5 w-5 text-gray-700"
 									aria-hidden="true"
@@ -45,14 +45,14 @@ export function SelectComparison({ compare, setCompare }: Props) {
 							leaveFrom="opacity-100"
 							leaveTo="opacity-0"
 						>
-							<Listbox.Options className="absolute z-10 mt-1 w-[6rem] bg-white shadow-lg max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+							<Listbox.Options className="absolute z-10 mt-1 max-h-60 w-[6rem] overflow-auto rounded-sm bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
 								{options.map(option => (
 									<Listbox.Option
 										key={option}
 										className={({ active }) =>
 											classNames(
 												active ? 'bg-gray-100' : '',
-												'cursor-pointer select-none relative py-2 pl-2 pr-4 text-gray-900'
+												'relative cursor-pointer select-none py-2 pl-2 pr-4 text-gray-900'
 											)
 										}
 										value={option}

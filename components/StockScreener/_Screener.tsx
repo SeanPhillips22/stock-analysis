@@ -7,7 +7,7 @@ export function Screener() {
 	return (
 		<>
 			<AboveScreener />
-			<div className="border rounded p-2 bg-gray-50">
+			<div className="rounded border bg-gray-50 p-2">
 				<FiltersMenu />
 				<FiltersList />
 			</div>

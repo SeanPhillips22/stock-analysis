@@ -38,7 +38,7 @@ export function ArticleLayout({ meta, url, children }: Props) {
 							{children}
 						</article>
 						<aside className="space-y-8 lg:pt-4">
-							<Sidebar />
+							<Sidebar url={url} />
 						</aside>
 					</div>
 				</div>

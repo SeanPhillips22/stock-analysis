@@ -26,14 +26,16 @@ interface Props {
 }
 
 export const IpoStatistics = ({ data, news, recent }: Props) => {
+	const url = '/ipos/statistics/'
+
 	return (
 		<>
 			<SEO
 				title="IPO Statistics and Charts"
 				description="Statistics and charts for initial public offerings (IPOs) on the US stock market. Annual data is available from 2000-2022 and monthly data for 2019-2022."
-				canonical="/ipos/statistics/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/statistics/">
+			<Layout url={url}>
 				<div className="contain">
 					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation path="statistics" />
@@ -129,7 +131,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
 							<RecentTableMin recent={recent} />
-							<Sidebar1 />
+							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
 								news={news}

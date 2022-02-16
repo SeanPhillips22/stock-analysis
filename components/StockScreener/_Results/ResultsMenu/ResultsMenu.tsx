@@ -28,13 +28,13 @@ export function ResultsMenu({
 	type
 }: Props) {
 	return (
-		<div className="grid grid-cols-2 lg:flex items-center lg:space-x-3 lg:py-2 lg:px-1 lg:overflow-visible border-t border-gray-300 mt-6">
+		<div className="mt-6 grid grid-cols-2 items-center border-t border-gray-300 lg:flex lg:space-x-3 lg:overflow-visible lg:py-2 lg:px-1">
 			<div>
-				<h2 className="text-xl bp:text-[1.3rem] font-semibold whitespace-nowrap text-gray-800">
+				<h2 className="whitespace-nowrap text-xl font-semibold text-gray-800 bp:text-[1.3rem]">
 					{`${count} Results`}
 				</h2>
 			</div>
-			<div className="lg:order-3 py-2 lg:py-0 flex flex-row justify-end md:space-x-4 lg:space-x-3">
+			<div className="flex flex-row justify-end py-2 md:space-x-4 lg:order-3 lg:space-x-3 lg:py-0">
 				<div className="hidden max-w-[110px] md:block">
 					<Filter
 						useAsyncDebounce={useAsyncDebounce}
@@ -61,7 +61,7 @@ export function ResultsMenu({
 					<ColumnDropdown type={type} />
 				</div>
 			</div>
-			<div className="col-span-2 overflow-x-auto hide-scroll lg:grow lg:order-2 border-t lg:border-0 lg:pl-1 xl:pl-2">
+			<div className="hide-scroll col-span-2 overflow-x-auto border-t lg:order-2 lg:grow lg:border-0 lg:pl-1 xl:pl-2">
 				<ResultsNav type={type} />
 			</div>
 		</div>

@@ -21,7 +21,7 @@ export function Layout({ children, url, fullWidth }: Props) {
 					<div className={fullWidth ? 'mainbody fullwidth' : 'mainbody'}>
 						<LeftNav />
 						<div>
-							<HeaderAd />
+							<HeaderAd key={url} />
 							<main id="main" className="maincol">
 								{children}
 							</main>

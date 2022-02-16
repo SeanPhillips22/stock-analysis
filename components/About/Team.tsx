@@ -25,11 +25,11 @@ const people = [
 export function AboutTeam() {
 	return (
 		<div className="bg-gray-100">
-			<div className="mx-auto py-12 px-6 max-w-7xl lg:px-8 lg:py-28">
+			<div className="mx-auto max-w-7xl py-12 px-6 lg:px-8 lg:py-28">
 				<div className="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
 					<div className="space-y-5 sm:space-y-4">
 						<h2 className="text-3xl font-bold sm:text-4xl">Our Team</h2>
-						<p className="text-lg sm:text-xl text-gray-500">
+						<p className="text-lg text-gray-500 sm:text-xl">
 							We have a small but highly efficient team. The three of us
 							currently develop and manage the entire site and everything
 							that comes with it.
@@ -38,21 +38,21 @@ export function AboutTeam() {
 					<div className="lg:col-span-2">
 						<ul
 							role="list"
-							className="space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0"
+							className="space-y-12 sm:-mt-8 sm:space-y-0 sm:divide-y sm:divide-gray-200 lg:gap-x-8 lg:space-y-0"
 						>
 							{people.map(person => (
 								<li key={person.name} className="sm:py-8">
 									<div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
 										<div>
 											<img
-												className="object-cover shadow-lg rounded-lg"
+												className="rounded-lg object-cover shadow-lg"
 												src={person.imageUrl}
 												alt=""
 											/>
 										</div>
 										<div className="sm:col-span-2">
 											<div className="space-y-4">
-												<div className="text-lg leading-6 font-medium space-y-1">
+												<div className="space-y-1 text-lg font-medium leading-6">
 													<h3>{person.name}</h3>
 													<p className="text-blue-600">
 														{person.role}
@@ -80,7 +80,7 @@ export function AboutTeam() {
 																	Twitter
 																</span>
 																<svg
-																	className="w-5 h-5"
+																	className="h-5 w-5"
 																	aria-hidden="true"
 																	fill="currentColor"
 																	viewBox="0 0 20 20"
@@ -100,7 +100,7 @@ export function AboutTeam() {
 																	LinkedIn
 																</span>
 																<svg
-																	className="w-5 h-5"
+																	className="h-5 w-5"
 																	aria-hidden="true"
 																	fill="currentColor"
 																	viewBox="0 0 20 20"

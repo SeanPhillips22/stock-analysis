@@ -22,15 +22,17 @@ type Props = {
 }
 
 export default function EtfOverview({ info, data, news, chart }: Props) {
+	const url = `/etf/${info.symbol}`
+
 	return (
-		<Stock info={info} url={`/etf/${info.symbol}/`}>
+		<Stock info={info} url={url}>
 			<SEO
 				title={`${info.ticker} ETF Stock Price, Quote & Overview`}
 				description={`Get a real-time stock price quote for ${info.ticker} (${info.name}). Also includes news, ETF details and other investing information.`}
-				canonical={`/etf/${info.symbol}/`}
+				canonical={url}
 				preconnect="https://api.stockanalysis.com"
 			/>
-			<div className="px-3 xs:px-4 lg:px-6 lg:flex flex-row gap-4 mt-4">
+			<div className="mt-4 flex-row gap-4 px-3 xs:px-4 lg:flex lg:px-6">
 				<div className="order-3 grow overflow-auto">
 					<PriceChart info={info} initial={chart} />
 				</div>
@@ -39,9 +41,9 @@ export default function EtfOverview({ info, data, news, chart }: Props) {
 					<QuoteTable data={data} info={info} />
 				</div>
 			</div>
-			<div className="px-0 md:px-4 lg:px-6 mt-6 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10">
-				<div className="px-4 md:px-0 lg:order-2 space-y-7">
-					{news.data.length > 5 && <Sidebar1All />}
+			<div className="mt-6 px-0 md:px-4 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10 lg:px-6">
+				<div className="space-y-7 px-4 md:px-0 lg:order-2">
+					{news.data.length > 5 && <Sidebar1All key={url} />}
 					<Profile info={info} data={data} />
 					{data.holdingsTable && (
 						<HoldingsWidget

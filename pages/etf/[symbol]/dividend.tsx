@@ -19,12 +19,14 @@ interface Props {
 }
 
 const Dividend = ({ info, data, news }: Props) => {
+	const url = `/etf/${info.symbol}/dividend/`
+
 	return (
-		<Stock info={info} url={`/etf/${info.symbol}/dividend/`}>
+		<Stock info={info} url={url}>
 			<SEO
 				title={`${info.ticker} Dividend History, Dates & Yield`}
 				description={`Get the latest dividend data for ${info.ticker} (${info.name}), including dividend history, yield, key dates, growth and other metrics.`}
-				canonical={`/etf/${info.symbol}/dividend/`}
+				canonical={url}
 			/>
 			<div className="contain-content mt-3 sm:mt-4">
 				<div className="lg:right-sidebar py-1">
@@ -48,7 +50,7 @@ const Dividend = ({ info, data, news }: Props) => {
 						/>
 					</div>
 					<aside className="mt-7 space-y-8 lg:mt-0">
-						{data.history.length > 0 && <Sidebar1 />}
+						{data.history.length > 0 && <Sidebar1 key={url} />}
 						<NewsWidget
 							title={`${info.ticker} News`}
 							news={news}

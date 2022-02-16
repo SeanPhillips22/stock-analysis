@@ -35,7 +35,7 @@ export function SaveScreen({ type }: { type: ScreenerTypes }) {
 				<input
 					type="text"
 					placeholder="Enter screen name"
-					className="border-gray-200 focus:ring-0 focus:border-blue-300 text-gray-700 text-sm grow"
+					className="grow border-gray-200 text-sm text-gray-700 focus:border-blue-300 focus:ring-0"
 					value={name}
 					onChange={e => {
 						setName(e.target.value)
@@ -48,7 +48,7 @@ export function SaveScreen({ type }: { type: ScreenerTypes }) {
 					}}
 				/>
 				<button
-					className="px-3 bg-gray-500 hover:bg-blue-brand_sharp text-white text-sm font-medium flex items-center"
+					className="flex items-center bg-gray-500 px-3 text-sm font-medium text-white hover:bg-blue-brand_sharp"
 					onClick={() => handleSubmit(name)}
 				>
 					Save
@@ -61,12 +61,12 @@ export function SaveScreen({ type }: { type: ScreenerTypes }) {
 				</button>
 			</div>
 			{msg && (
-				<div className="bg-green-50 border-l-2 border-green-400 p-2 text-green-700 text-sm">
+				<div className="border-l-2 border-green-400 bg-green-50 p-2 text-sm text-green-700">
 					{msg}
 				</div>
 			)}
 			{err && (
-				<div className="bg-red-50 border-l-2 border-red-400 p-2 text-red-700 text-sm">
+				<div className="border-l-2 border-red-400 bg-red-50 p-2 text-sm text-red-700">
 					{err}
 				</div>
 			)}

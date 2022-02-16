@@ -47,9 +47,9 @@ export function SavedItem({ name, type }: Props) {
 	}
 
 	return (
-		<div className="w-full flex justify-between hover:bg-gray-50">
+		<div className="flex w-full justify-between hover:bg-gray-50">
 			<div
-				className="py-2 pl-2 pr-5 block cursor-pointer hover:font-medium focus:font-medium"
+				className="block cursor-pointer py-2 pl-2 pr-5 hover:font-medium focus:font-medium"
 				onClick={() => renderPresetFilters(name)}
 				onKeyPress={e => {
 					if (e.key === 'Enter') {
@@ -61,11 +61,11 @@ export function SavedItem({ name, type }: Props) {
 				{name}
 			</div>
 			<div
-				className="flex items-center p-1 pr-2 text-gray-500 hover:text-red-500 cursor-pointer"
+				className="flex cursor-pointer items-center p-1 pr-2 text-gray-500 hover:text-red-500"
 				title="Delete"
 				onClick={() => handleDelete(name)}
 			>
-				<XIcon className="w-4 h-4" />
+				<XIcon className="h-4 w-4" />
 			</div>
 		</div>
 	)

@@ -16,7 +16,7 @@ export function ColumnSearch({ search, setSearch }: Props) {
 		<div className="relative flex items-center">
 			<input
 				type="text"
-				className="border-0 border-b border-gray-200 w-full focus:ring-0 focus:border-gray-200"
+				className="w-full border-0 border-b border-gray-200 focus:border-gray-200 focus:ring-0"
 				placeholder="Search..."
 				value={search}
 				onChange={e => setSearch(e.target.value.toLowerCase())}

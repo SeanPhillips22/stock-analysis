@@ -17,12 +17,14 @@ interface Props {
 }
 
 const Holdings = ({ info, data, news }: Props) => {
+	const url = `/etf/${info.symbol}/holdings/`
+
 	return (
-		<Stock info={info} url={`/etf/${info.symbol}/holdings/`}>
+		<Stock info={info} url={url}>
 			<SEO
 				title={`${info.ticker} ETF Holdings - ${info.name}`}
 				description={`A long list of holdings for ${info.ticker} (${info.name}) with details about each stock and its percentage weighting in the ETF.`}
-				canonical={`/etf/${info.symbol}/holdings/`}
+				canonical={url}
 			/>
 			<div className="contain-content mt-3 sm:mt-4 lg:mt-5">
 				<div className="lg:right-sidebar">
@@ -35,25 +37,25 @@ const Holdings = ({ info, data, news }: Props) => {
 									rawdata={data.list}
 									fullCount={data.count}
 								/>
-								<div className="text-gray-700 text-small mt-1">
+								<div className="mt-1 text-small text-gray-700">
 									As of {data.updated}
 								</div>
 								<HoldingsPaywall total={data.count} />
 							</>
 						) : (
 							<div>
-								<h2 className="text-xl bp:text-2xl sm:text-2xl font-bold mt-1 mb-0.5 bp:mb-1 sm:mb-1">
+								<h2 className="mt-1 mb-0.5 text-xl font-bold bp:mb-1 bp:text-2xl sm:mb-1 sm:text-2xl">
 									{info.ticker} Holdings
 								</h2>
 
-								<span className="text-lg mt-2">
+								<span className="mt-2 text-lg">
 									No holdings were found for the {info.ticker} ETF
 								</span>
 							</div>
 						)}
 					</div>
-					<aside className="mt-7 lg:mt-0 space-y-8">
-						{data && data.count > 15 && <Sidebar1 />}
+					<aside className="mt-7 space-y-8 lg:mt-0">
+						{data && data.count > 15 && <Sidebar1 key={url} />}
 						<NewsWidget
 							title={`${info.ticker} News`}
 							news={news}

@@ -69,7 +69,7 @@ export function ReActivate({ email, status }: Props) {
 			<div>
 				<p>There is no active subscription on this account.</p>
 				<div
-					className="bll font-medium cursor-pointer"
+					className="bll cursor-pointer font-medium"
 					onClick={() => {
 						window.Paddle.Checkout.open({
 							product: 649892,
@@ -89,7 +89,7 @@ export function ReActivate({ email, status }: Props) {
 			<div>
 				<p>Your subscription has been cancelled.</p>
 				<div
-					className="bll font-medium cursor-pointer"
+					className="bll cursor-pointer font-medium"
 					onClick={() => {
 						window.Paddle.Checkout.open({
 							product: 747289,

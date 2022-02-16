@@ -30,13 +30,14 @@ export default function StockOverview({ info, data, news, chart }: Props) {
 	}
 
 	const symbol = info.symbol.includes('.') ? info.symbol : `${info.symbol}/`
+	const url = `/stock/${symbol}`
 
 	return (
-		<Stock info={info} url={`/stocks/${symbol}`}>
+		<Stock info={info} url={url}>
 			<SEO
 				title={`${info.nameFull} (${info.ticker}) Stock Price, Quote & News`}
 				description={description}
-				canonical={`/stocks/${symbol}`}
+				canonical={url}
 				preconnect={info.isIPO ? null : 'https://api.stockanalysis.com'}
 			/>
 			<div className="mt-4 flex-row gap-4 px-3 xs:px-4 lg:flex lg:px-6">
@@ -51,7 +52,7 @@ export default function StockOverview({ info, data, news, chart }: Props) {
 
 			<div className="mt-6 px-0 md:px-4 lg:grid lg:grid-cols-sidebar_wide lg:gap-x-10 lg:px-6">
 				<div className="space-y-6 px-4 md:px-0 lg:order-2 lg:pt-1">
-					{news.data.length > 5 && <Sidebar1All />}
+					{news.data.length > 5 && <Sidebar1All key={url} />}
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
 					<AnalystWidget data={data} />

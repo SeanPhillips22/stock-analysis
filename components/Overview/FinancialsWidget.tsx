@@ -44,7 +44,7 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 			{data.financialIntro && (
 				<p className="mb-3 text-gray-900">{data.financialIntro}</p>
 			)}
-			<div className="h-72 border border-gray-200 rounded-sm p-1 xs:px-2 bp:px-3">
+			<div className="h-72 rounded-sm border border-gray-200 p-1 xs:px-2 bp:px-3">
 				<FinancialsWidgetChart
 					data={data}
 					colors={colors}

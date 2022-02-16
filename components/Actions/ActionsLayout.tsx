@@ -23,7 +23,7 @@ export function ActionsLayout({ children, url }: Props) {
 							{children}
 						</div>
 						<aside className="flex flex-col space-y-10 py-6">
-							<Sidebar />
+							<Sidebar url={url} />
 						</aside>
 					</div>
 				</div>

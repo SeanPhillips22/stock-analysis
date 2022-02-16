@@ -87,7 +87,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 	if (!news || news.length === 0) {
 		return (
-			<div className="px-4 md:px-0 mt-6 lg:mt-0">
+			<div className="mt-6 px-4 md:px-0 lg:mt-0">
 				<h2 className="hh2 mb-2">News</h2>
 				<span className="text-xl">There is no news available yet.</span>
 			</div>
@@ -96,7 +96,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 	return (
 		<>
-			<div className="px-4 md:px-0 mt-6 lg:mt-0">
+			<div className="mt-6 px-4 md:px-0 lg:mt-0">
 				<h2 className="hh2 mb-0">News</h2>
 				<NewsMenu
 					show={show}
@@ -145,7 +145,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 					/>
 				</>
 			) : (
-				<div id="altwrap" className="pt-2 overflow-x-auto"></div>
+				<div id="altwrap" className="overflow-x-auto pt-2"></div>
 			)}
 		</>
 	)

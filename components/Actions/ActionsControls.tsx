@@ -32,7 +32,7 @@ export function ActionsControls({
 	return (
 		<div className="controls groups">
 			<div className="title-group">
-				<h2 className="text-xl bp:text-2xl font-semibold whitespace-nowrap">
+				<h2 className="whitespace-nowrap text-xl font-semibold bp:text-2xl">
 					{title}
 				</h2>
 			</div>

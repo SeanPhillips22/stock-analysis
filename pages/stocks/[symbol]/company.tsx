@@ -18,26 +18,28 @@ type Props = {
 }
 
 export default function SymbolStatistics({ info, data }: Props) {
+	const url = `/stocks/${info.symbol}/company/`
+
 	return (
-		<Stock info={info} url={`/stocks/${info.symbol}/company/`}>
+		<Stock info={info} url={url}>
 			<SEO
 				title={`${info.nameFull} (${info.ticker}) Company Profile & Overview`}
 				description={`Company profile for ${info.nameFull} (${info.ticker}) with a description, list of executives, contact details and other key facts.`}
-				canonical={`/stocks/${info.symbol}/company/`}
+				canonical={url}
 			/>
 			<div className="contain-content mt-4 sm:mt-5 lg:mt-6">
-				<div className="float-none lg:float-left lg:profilewrap">
+				<div className="lg:profilewrap float-none lg:float-left">
 					<ProfileDescription text={data.description} />
 				</div>
 
 				<div className="float-none lg:float-right lg:w-[336px]">
 					<ProfileInfo info={data.info} logo={data.logo} />
-					<Sidebar1All />
+					<Sidebar1All key={url} />
 					<ProfileContact contact={data.contact} />
 					<ProfileDetails details={data.stockDetails} />
 				</div>
 
-				<div className="float-none lg:float-left lg:profilewrap mb-2">
+				<div className="lg:profilewrap float-none mb-2 lg:float-left">
 					<ProfileExecutives executives={data.executives} />
 					<ProfileSECfilings
 						key={info.symbol}
@@ -47,7 +49,7 @@ export default function SymbolStatistics({ info, data }: Props) {
 					/>
 				</div>
 			</div>
-			<div className="clear-both min-h-5"></div>
+			<div className="min-h-5 clear-both"></div>
 		</Stock>
 	)
 }

@@ -6,7 +6,7 @@ export function UpgradePrompt() {
 
 	if (isLoggedIn && checked && !isPro) {
 		return (
-			<div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-yellow-700 mb-3">
+			<div className="mb-3 border-l-4 border-yellow-400 bg-yellow-50 p-4 text-yellow-700">
 				<div className="flex flex-row items-center">
 					<div className="ml-1">
 						<span className="text-sm">

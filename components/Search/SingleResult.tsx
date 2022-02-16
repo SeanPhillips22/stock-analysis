@@ -99,7 +99,7 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 	}
 
 	return (
-		<li className="first:border-t border-b last:border-none border-gray-200">
+		<li className="border-b border-gray-200 first:border-t last:border-none">
 			<Link href={url} prefetch={false}>
 				<a
 					data-num={index + 1}
@@ -108,7 +108,7 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 				>
 					<span className="min-w-[3rem]">{symbol}</span>
 					<span className="grow">{name}</span>
-					<span className="hidden sm:block text-sm">{tag}</span>
+					<span className="hidden text-sm sm:block">{tag}</span>
 				</a>
 			</Link>
 		</li>

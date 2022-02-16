@@ -4,7 +4,7 @@ import Link from 'next/link'
 export function AboutActions() {
 	return (
 		<section className="bg-white">
-			<div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
+			<div className="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
 				<div className="lg:grid lg:grid-cols-3 lg:gap-8">
 					<div>
 						<h2 className="text-3xl font-bold text-gray-900">
@@ -13,21 +13,21 @@ export function AboutActions() {
 						<p className="mt-4 text-lg text-gray-600">
 							Reach out to our{' '}
 							<Link href="/contact/" prefetch={false}>
-								<a className="font-medium bll">customer support</a>
+								<a className="bll font-medium">customer support</a>
 							</Link>{' '}
 							if you can't find the answers you are looking for.
 						</p>
 					</div>
-					<div className="mt-12 lg:mt-0 lg:col-span-2">
+					<div className="mt-12 lg:col-span-2 lg:mt-0">
 						<div className="space-y-12">
 							<div>
-								<div className="text-xl leading-6 font-medium text-gray-900">
+								<div className="text-xl font-medium leading-6 text-gray-900">
 									Are you a serious investor?
 								</div>
 								<div className="mt-2 text-lg text-gray-600">
 									Consider upgrading to{' '}
 									<Link href="/pro/" prefetch={false}>
-										<a className="font-medium bll">
+										<a className="bll font-medium">
 											Stock Analysis Pro
 										</a>
 									</Link>{' '}
@@ -35,7 +35,7 @@ export function AboutActions() {
 								</div>
 							</div>
 							<div>
-								<div className="text-xl leading-6 font-medium text-gray-900">
+								<div className="text-xl font-medium leading-6 text-gray-900">
 									Are you a developer?
 								</div>
 								<div className="mt-2 text-lg text-gray-600">
@@ -44,13 +44,13 @@ export function AboutActions() {
 										href="https://github.com/stockanalysisdev"
 										target="_blank"
 										rel="noopener noreferrer"
-										className="font-medium bll"
+										className="bll font-medium"
 									>
 										GitHub
 									</a>{' '}
 									or check out our{' '}
 									<Link href="/apis/" prefetch={false}>
-										<a className="font-medium bll">
+										<a className="bll font-medium">
 											API and data offerings
 										</a>
 									</Link>
@@ -58,7 +58,7 @@ export function AboutActions() {
 								</div>
 							</div>
 							<div>
-								<div className="text-xl leading-6 font-medium text-gray-900">
+								<div className="text-xl font-medium leading-6 text-gray-900">
 									See something that can be improved?
 								</div>
 								<div className="mt-2 text-lg text-gray-600">
@@ -66,7 +66,7 @@ export function AboutActions() {
 									data accuracy. If you see anything that looks
 									inaccurate,{' '}
 									<Link href="/contact/" prefetch={false}>
-										<a className="font-medium bll">
+										<a className="bll font-medium">
 											send us a message
 										</a>
 									</Link>{' '}
@@ -74,7 +74,7 @@ export function AboutActions() {
 								</div>
 							</div>
 							<div>
-								<div className="text-xl leading-6 font-medium text-gray-900">
+								<div className="text-xl font-medium leading-6 text-gray-900">
 									Want to keep up-to-date with the latest news?
 								</div>
 								<div className="mt-2 text-lg text-gray-600">
@@ -84,7 +84,7 @@ export function AboutActions() {
 										href="https://github.com/stockanalysisdev"
 										target="_blank"
 										rel="noopener noreferrer"
-										className="font-medium bll"
+										className="bll font-medium"
 									>
 										Facebook
 									</a>
@@ -93,7 +93,7 @@ export function AboutActions() {
 										href="https://twitter.com/stock_analysisx"
 										target="_blank"
 										rel="noopener noreferrer"
-										className="font-medium bll"
+										className="bll font-medium"
 									>
 										Twitter
 									</a>{' '}
@@ -102,7 +102,7 @@ export function AboutActions() {
 										href="https://www.linkedin.com/company/stock-analysis"
 										target="_blank"
 										rel="noopener noreferrer"
-										className="font-medium bll"
+										className="bll font-medium"
 									>
 										Linkedin
 									</a>

@@ -17,7 +17,7 @@ export function HeaderLogin({ hideTrial }: Props) {
 				<ButtonWhite
 					text="Log Out"
 					onClick={signOut}
-					className="mt-0 py-1 border-0 shadow-none cursor-pointer"
+					className="mt-0 cursor-pointer border-0 py-1 shadow-none"
 				/>
 				{url !== '/pro/my-account/' && (
 					<ButtonWhite
@@ -35,7 +35,7 @@ export function HeaderLogin({ hideTrial }: Props) {
 			<ButtonWhite
 				text="Log In"
 				url="/login/"
-				className="mt-0 py-1 border-0 shadow-none text-gray-700"
+				className="mt-0 border-0 py-1 text-gray-700 shadow-none"
 			/>
 			{!hideTrial && (
 				<Button

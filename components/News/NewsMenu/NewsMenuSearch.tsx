@@ -54,7 +54,7 @@ export function NewsMenuSearch({
 	}
 
 	return (
-		<div className="mb-1 relative max-w-[50%] sm:max-w-[170px] filter">
+		<div className="relative mb-1 max-w-[50%] filter sm:max-w-[170px]">
 			<input
 				ref={inputRef}
 				type="text"
@@ -68,7 +68,7 @@ export function NewsMenuSearch({
 				}}
 				onKeyDown={e => e.key === 'Enter' && !searching && doSearch()}
 			/>
-			<div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+			<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
 				{searching ? (
 					<SpinnerIcon classes="animate-spin h-5 w-5 text-gray-400" />
 				) : (

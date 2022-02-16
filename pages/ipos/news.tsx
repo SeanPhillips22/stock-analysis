@@ -17,14 +17,16 @@ interface Props {
 }
 
 export const IpoNews = ({ data, upcoming, recent }: Props) => {
+	const url = '/ipos/news/'
+
 	return (
 		<>
 			<SEO
 				title="Latest IPO News"
 				description="The latest news about initial public offerings (IPOs) on the stock market, including both recent and upcoming IPOs."
-				canonical="/ipos/news/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/news/">
+			<Layout url={url}>
 				<div className="contain pb-0">
 					<h1 className="hh1">IPO News</h1>
 					<IPONavigation path="news" />
@@ -36,7 +38,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 					</div>
 					<aside className="contain sm:uncontain flex flex-col space-y-7 pt-6 lg:space-y-10">
 						<CalendarTableMin upcoming={upcoming} />
-						<Sidebar1 />
+						<Sidebar1 key={url} />
 						<RecentTableMin recent={recent} />
 					</aside>
 				</div>

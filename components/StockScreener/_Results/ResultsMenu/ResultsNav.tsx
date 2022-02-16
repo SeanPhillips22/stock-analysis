@@ -6,7 +6,7 @@ interface Props {
 export function ResultsNav({ type }: Props) {
 	return (
 		<nav className="grow py-3 lg:py-1">
-			<ul className="flex flex-row items-center whitespace-nowrap space-x-0.5 text-base">
+			<ul className="flex flex-row items-center space-x-0.5 whitespace-nowrap text-base">
 				{(type == 'stocks' && (
 					<>
 						<ResultsMenuItem type={type} name="General" />

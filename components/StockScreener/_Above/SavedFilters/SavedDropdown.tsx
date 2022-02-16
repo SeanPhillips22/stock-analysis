@@ -25,7 +25,7 @@ export function SavedDropdown({ type }: Props) {
 	const screeners = data && data.screeners[type]
 
 	return (
-		<div className="max-h-80 overflow-y-auto overscroll-contain thin-scroll text-smaller">
+		<div className="thin-scroll max-h-80 overflow-y-auto overscroll-contain text-smaller">
 			<SaveScreen type={type} />
 			{screeners && Object.keys(screeners).length > 0 ? (
 				<>

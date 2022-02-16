@@ -11,12 +11,12 @@ export function NavLogin() {
 				<ButtonWhite
 					text="Log Out"
 					onClick={signOut}
-					className="text-base px-0"
+					className="px-0 text-base"
 				/>
 				<ButtonWhite
 					text="My Account"
 					url="/pro/my-account/"
-					className="mt-3 text-base px-0"
+					className="mt-3 px-0 text-base"
 				/>
 			</div>
 		)

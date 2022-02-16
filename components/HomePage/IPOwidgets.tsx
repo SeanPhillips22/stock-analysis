@@ -18,10 +18,10 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 			<table className="w-full border border-gray-200 text-sm sm:text-base">
 				<thead>
 					<tr className="border-b border-t border-gray-200">
-						<th className="py-1.5 px-2 text-left border-r border-gray-200">
+						<th className="border-r border-gray-200 py-1.5 px-2 text-left">
 							Date
 						</th>
-						<th className="py-1.5 px-2 text-left border-r border-gray-200">
+						<th className="border-r border-gray-200 py-1.5 px-2 text-left">
 							Symbol
 						</th>
 						<th className="py-1.5 px-2 text-left">Name</th>
@@ -35,10 +35,10 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 									key={index}
 									className="border-b border-gray-200 hover:bg-gray-50"
 								>
-									<td className="py-1.5 px-2 border-r border-gray-200 whitespace-nowrap">
+									<td className="whitespace-nowrap border-r border-gray-200 py-1.5 px-2">
 										{item.date}
 									</td>
-									<td className="py-1.5 px-2 border-r border-gray-200">
+									<td className="border-r border-gray-200 py-1.5 px-2">
 										<StockLink symbol={item.symbol} className="bll" />
 									</td>
 									<td className="py-1.5 px-2">{item.name}</td>
@@ -56,8 +56,8 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 		<>
 			<div className="flex flex-col space-y-6">
 				<section className="px-3 xs:px-4 sm:px-5 lg:px-0">
-					<div className="flex flex-row justify-between items-end mb-1">
-						<h2 className="text-2xl font-bold mb-1">Recent IPOs</h2>
+					<div className="mb-1 flex flex-row items-end justify-between">
+						<h2 className="mb-1 text-2xl font-bold">Recent IPOs</h2>
 						<span>
 							<Link href="/ipos/" prefetch={false}>
 								<a className="bll">All Recent IPOs</a>
@@ -67,8 +67,8 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 					<IPOTable ipos={recent} />
 				</section>
 				<section className="px-3 xs:px-4 sm:px-5 lg:px-0">
-					<div className="flex flex-row justify-between items-end mb-1">
-						<h2 className="text-2xl font-bold mb-1">Upcoming IPOs</h2>
+					<div className="mb-1 flex flex-row items-end justify-between">
+						<h2 className="mb-1 text-2xl font-bold">Upcoming IPOs</h2>
 						<span>
 							<Link href="/ipos/calendar/" prefetch={false}>
 								<a className="bll">IPO Calendar</a>

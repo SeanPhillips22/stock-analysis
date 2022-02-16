@@ -19,7 +19,7 @@ export function ButtonMore({ fn, tag, loading, end }: Props) {
 
 	return (
 		<button
-			className="mx-auto w-[90%] sm:w-full flex items-center justify-center mt-5 lg:mt-6 px-6 py-3 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+			className="mx-auto mt-5 flex w-[90%] items-center justify-center rounded-md border border-transparent bg-blue-brand_light px-6 py-3 text-lg font-medium text-white shadow-sm hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:w-full lg:mt-6"
 			onClick={fn}
 			disabled={loading}
 			id={`tag-feat-news-load-${tag}`}

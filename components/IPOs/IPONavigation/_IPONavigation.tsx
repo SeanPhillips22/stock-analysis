@@ -4,7 +4,7 @@ export function IPONavigation({ path }: { path: string }) {
 	return (
 		<div className="mb-1">
 			<div>
-				<nav className="border-b-[3px] border-blue-brand_sharp mb-1.5">
+				<nav className="mb-1.5 border-b-[3px] border-blue-brand_sharp">
 					<ul className="navmenu">
 						<li>
 							<Link href="/ipos/" prefetch={false}>
