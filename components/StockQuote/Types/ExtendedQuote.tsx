@@ -15,7 +15,7 @@ export function ExtendedQuote({ quote }: Props) {
 	return (
 		<div className="quote ext">
 			<div className={`p-ext${animation}`}>{quote.epd}</div>{' '}
-			<div className={`pc-ext ${color}${animation}`}>
+			<div className={`pc-ext ${color}`}>
 				{`${quote.ec} (${quote.ecp}%)`}
 			</div>
 			<div className="und">
