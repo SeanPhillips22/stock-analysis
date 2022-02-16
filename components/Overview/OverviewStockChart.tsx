@@ -24,6 +24,7 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 					"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
 				fontSize: 13
 			},
+
 			rightPriceScale: {
 				borderColor: 'rgba(197, 203, 206, 1)'
 			},
@@ -53,13 +54,18 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			lineWidth: 2
 		})
 
+		areaSeries.applyOptions({
+			priceLineVisible: false,
+			crosshairMarkerVisible: false
+		})
+
 		const format = data.map(item => {
 			return {
 				time: Math.round(new Date(item.t).getTime() / 1000),
 				value: item.c
 			}
 		})
-
+		//@ts-ignore
 		areaSeries.setData(format)
 		chart.timeScale().fitContent()
 		return () => {
