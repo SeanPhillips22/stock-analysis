@@ -88,6 +88,13 @@ export function StockTableBody({
 										let { format, css } = cellProps
 										let value = cell.value
 										let uniqueKey = `${i}-${cell.column.id}-${ii}`
+										if (
+											!css &&
+											format !== 'string' &&
+											format !== 'formatDate' &&
+											format !== 'linkSymbol'
+										)
+											css = 'tr'
 
 										return (
 											<td key={uniqueKey} className={css}>

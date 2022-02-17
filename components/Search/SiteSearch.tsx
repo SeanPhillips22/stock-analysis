@@ -29,6 +29,9 @@ export function SiteSearch() {
 				setLoading(true)
 				const trendingData = await getData('trending?q=top')
 				setTrending(trendingData)
+				await fetch('https://api.stockanalysis.com/search?q=getready', {
+					mode: 'no-cors'
+				})
 			} catch (error) {
 				setError(true)
 				return console.error(error)

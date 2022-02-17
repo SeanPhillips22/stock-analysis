@@ -50,13 +50,16 @@ export const DataPoints: Props = {
 		sort: stringIgnoreCase,
 		css: 'sl'
 	},
-	marketCap: { id: 'marketCap', name: 'Market Cap', format: 'abbreviate' },
+	marketCap: {
+		id: 'marketCap',
+		name: 'Market Cap',
+		format: 'abbreviate'
+	},
 	price: {
 		id: 'price',
 		name: 'Stock Price',
 		colName: 'Price',
-		format: 'format2dec',
-		css: 'tr'
+		format: 'format2dec'
 	},
 	chg: {
 		id: 'chg',
@@ -71,7 +74,7 @@ export const DataPoints: Props = {
 		format: 'colorPercentage',
 		sort: numberAbsolute
 	},
-	volume: { id: 'volume', name: 'Volume', format: 'integer', css: 'tr' },
+	volume: { id: 'volume', name: 'Volume', format: 'integer' },
 	close: {
 		id: 'close',
 		name: 'Previous Close',
@@ -82,15 +85,13 @@ export const DataPoints: Props = {
 		id: 'premarketPrice',
 		name: 'Premarket Price',
 		colName: 'Price',
-		format: 'format2dec',
-		css: 'tr'
+		format: 'format2dec'
 	},
 	premarketChange: {
 		id: 'premarketChange',
 		name: 'Premarket Change',
 		colName: 'Change',
-		format: 'format2dec',
-		css: 'tr'
+		format: 'format2dec'
 	},
 	premarketChangePercent: {
 		id: 'premarketChangePercent',
@@ -106,8 +107,16 @@ export const DataPoints: Props = {
 		format: 'abbreviate'
 	},
 	industry: { id: 'industry', name: 'Industry', format: 'string' },
-	peRatio: { id: 'peRatio', name: 'PE Ratio', format: 'format2dec' },
-	peForward: { id: 'peForward', name: 'Forward PE', format: 'format2dec' },
+	peRatio: {
+		id: 'peRatio',
+		name: 'PE Ratio',
+		format: 'format2dec'
+	},
+	peForward: {
+		id: 'peForward',
+		name: 'Forward PE',
+		format: 'format2dec'
+	},
 	exchange: { id: 'exchange', name: 'Exchange', format: 'string' },
 	dividendYield: {
 		id: 'dividendYield',
@@ -180,7 +189,11 @@ export const DataPoints: Props = {
 		format: 'colorPercentage'
 	},
 	country: { id: 'country', name: 'Country', format: 'string' },
-	employees: { id: 'employees', name: 'Employees', format: 'integer' },
+	employees: {
+		id: 'employees',
+		name: 'Employees',
+		format: 'integer'
+	},
 	founded: { id: 'founded', name: 'Founded', format: 'string' },
 	/* IPO INFO */
 	ipoDate: {
@@ -192,15 +205,13 @@ export const DataPoints: Props = {
 	ipp: {
 		id: 'ipp',
 		name: 'IPO Price',
-		format: 'price',
-		css: 'tr'
+		format: 'price'
 	},
 	ippc: {
 		id: 'ippc',
 		name: 'Current Price',
 		colName: 'Current',
-		format: 'price',
-		css: 'tr'
+		format: 'price'
 	},
 	ipr: {
 		id: 'ipr',
@@ -266,7 +277,11 @@ export const DataPoints: Props = {
 		colName: 'OpInc. Growth',
 		format: 'formatPercentage'
 	},
-	netIncome: { id: 'netIncome', name: 'Net Income', format: 'abbreviate' },
+	netIncome: {
+		id: 'netIncome',
+		name: 'Net Income',
+		format: 'abbreviate'
+	},
 	netIncomeGrowth: {
 		id: 'netIncomeGrowth',
 		name: 'NetInc. Growth',
@@ -329,7 +344,11 @@ export const DataPoints: Props = {
 	assets: { id: 'assets', name: 'Assets', format: 'abbreviate' },
 	cash: { id: 'cash', name: 'Total Cash', format: 'abbreviate' },
 	debt: { id: 'debt', name: 'Total Debt', format: 'abbreviate' },
-	netCash: { id: 'netCash', name: 'Net Cash / Debt', format: 'abbreviate' },
+	netCash: {
+		id: 'netCash',
+		name: 'Net Cash / Debt',
+		format: 'abbreviate'
+	},
 	netCashGrowth: {
 		id: 'netCashGrowth',
 		name: 'Net Cash Growth',
@@ -372,13 +391,41 @@ export const DataPoints: Props = {
 		name: 'EBIT Margin',
 		format: 'formatPercentage'
 	},
-	psRatio: { id: 'psRatio', name: 'PS Ratio', format: 'format2dec' },
-	pbRatio: { id: 'pbRatio', name: 'PB Ratio', format: 'format2dec' },
-	pFcfRatio: { id: 'pFcfRatio', name: 'P/FCF Ratio', format: 'format2dec' },
-	pegRatio: { id: 'pegRatio', name: 'PEG Ratio', format: 'format2dec' },
-	evSales: { id: 'evSales', name: 'EV/Sales', format: 'format2dec' },
-	evEarnings: { id: 'evEarnings', name: 'EV/Earnings', format: 'format2dec' },
-	evEbitda: { id: 'evEbitda', name: 'EV/EBITDA', format: 'format2dec' },
+	psRatio: {
+		id: 'psRatio',
+		name: 'PS Ratio',
+		format: 'format2dec'
+	},
+	pbRatio: {
+		id: 'pbRatio',
+		name: 'PB Ratio',
+		format: 'format2dec'
+	},
+	pFcfRatio: {
+		id: 'pFcfRatio',
+		name: 'P/FCF Ratio',
+		format: 'format2dec'
+	},
+	pegRatio: {
+		id: 'pegRatio',
+		name: 'PEG Ratio',
+		format: 'format2dec'
+	},
+	evSales: {
+		id: 'evSales',
+		name: 'EV/Sales',
+		format: 'format2dec'
+	},
+	evEarnings: {
+		id: 'evEarnings',
+		name: 'EV/Earnings',
+		format: 'format2dec'
+	},
+	evEbitda: {
+		id: 'evEbitda',
+		name: 'EV/EBITDA',
+		format: 'format2dec'
+	},
 	evEbit: { id: 'evEbit', name: 'EV/EBIT', format: 'format2dec' },
 	evFcf: { id: 'evFcf', name: 'EV/FCF', format: 'format2dec' },
 	earningsYield: {
@@ -386,7 +433,11 @@ export const DataPoints: Props = {
 		name: 'Earnings Yield',
 		format: 'formatPercentage'
 	},
-	fcfYield: { id: 'fcfYield', name: 'FCF Yield', format: 'formatPercentage' },
+	fcfYield: {
+		id: 'fcfYield',
+		name: 'FCF Yield',
+		format: 'formatPercentage'
+	},
 	dps: { id: 'dps', name: 'Dividend ($)', format: 'format2dec' },
 	dividendGrowth: {
 		id: 'dividendGrowth',
@@ -433,8 +484,16 @@ export const DataPoints: Props = {
 		name: 'Short % Shares',
 		format: 'formatPercentage'
 	},
-	shortRatio: { id: 'shortRatio', name: 'Short Ratio', format: 'format2dec' },
-	sharesOut: { id: 'sharesOut', name: 'Shares Out', format: 'abbreviate' },
+	shortRatio: {
+		id: 'shortRatio',
+		name: 'Short Ratio',
+		format: 'format2dec'
+	},
+	sharesOut: {
+		id: 'sharesOut',
+		name: 'Shares Out',
+		format: 'abbreviate'
+	},
 	float: { id: 'float', name: 'Float', format: 'abbreviate' },
 	sharesYoY: {
 		id: 'sharesYoY',
@@ -510,7 +569,11 @@ export const DataPoints: Props = {
 		name: 'Current Ratio',
 		format: 'format2dec'
 	},
-	quickRatio: { id: 'quickRatio', name: 'Quick Ratio', format: 'format2dec' },
+	quickRatio: {
+		id: 'quickRatio',
+		name: 'Quick Ratio',
+		format: 'format2dec'
+	},
 	debtEquity: {
 		id: 'debtEquity',
 		name: 'Debt / Equity',
@@ -521,7 +584,11 @@ export const DataPoints: Props = {
 		name: 'Debt / EBITDA',
 		format: 'format2dec'
 	},
-	debtFcf: { id: 'debtFcf', name: 'Debt / FCF', format: 'format2dec' },
+	debtFcf: {
+		id: 'debtFcf',
+		name: 'Debt / FCF',
+		format: 'format2dec'
+	},
 	taxRate: {
 		id: 'taxRate',
 		name: 'Eff. Tax Rate',
@@ -532,7 +599,11 @@ export const DataPoints: Props = {
 		name: 'Tax / Revenue',
 		format: 'formatPercentage'
 	},
-	equity: { id: 'equity', name: 'Shareh. Equity', format: 'abbreviate' },
+	equity: {
+		id: 'equity',
+		name: 'Shareh. Equity',
+		format: 'abbreviate'
+	},
 	workingCapital: {
 		id: 'workingCapital',
 		name: 'Working Capital',

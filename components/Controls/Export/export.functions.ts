@@ -9,6 +9,11 @@ export function extractTextFromHTML(value: string): string | number | null {
 			.textContent
 	}
 
+	// If value is just a dash, return null
+	if (value === '-') {
+		return null
+	}
+
 	// If there is no value, return null
 	if (value.includes('data-raw="n/a"')) {
 		return null

@@ -75,6 +75,7 @@ export function formatPrice(value: number) {
 
 // Format an integer with comma and 0 decimal points
 export function formatInteger(value: number) {
+	if (!value) return '-'
 	let formatted = format(value, 0)
 	return <div data-raw={value}>{formatted}</div>
 }
@@ -82,14 +83,15 @@ export function formatInteger(value: number) {
 // Format a percentage with comma and 2 decimal points
 export function formatPercentage(value: number) {
 	if (!value) return '-'
+	let raw = (value / 100).toFixed(3)
 	let formatted = format(value, 2) + '%'
-	return formatted
+	return <div data-raw={raw}>{formatted}</div>
 }
 
 // Format percentage growth, with color
 export function colorPercentage(value: number) {
 	if (!value) return '-'
-	let raw = (value / 100 + 1).toFixed(3)
+	let raw = (value / 100).toFixed(3)
 	let formatted = format(value, 2) + '%'
 
 	if (value > 0)
@@ -113,12 +115,7 @@ export function colorPercentage(value: number) {
 
 // Abbreviate a number with B/M/K
 export function abbreviate(value: number) {
-	if (!value)
-		return (
-			<div data-raw="n/a" className="tr">
-				-
-			</div>
-		)
+	if (!value) return '-'
 
 	let num = '-'
 	if (value >= 1000000000) num = dec2.format(value / 1000000000) + 'B'
@@ -129,11 +126,7 @@ export function abbreviate(value: number) {
 	else if (value <= -1000) num = dec2.format(value / 1000) + 'K'
 	else num = dec2.format(value)
 
-	return (
-		<div data-raw={value} className="tr">
-			{num}
-		</div>
-	)
+	return <div data-raw={value}>{num}</div>
 }
 
 // Format a date
