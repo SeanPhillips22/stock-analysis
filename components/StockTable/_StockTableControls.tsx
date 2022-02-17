@@ -9,13 +9,15 @@ import { TableTimestamp } from './Controls/TableTimestamp'
 import { TableTitle } from './Controls/TableTitle'
 import { TableMoverType } from './Controls/TableMoverType'
 import { useTableContext } from './TableContext'
+import { ToggleVisible } from './Controls/ToggleVisible'
+import { cn } from 'functions/helpers/classNames'
 
 type Props = {
 	filter: FilterObject
 }
 
 export function StockTableControls({ filter }: Props) {
-	const { fixed, tableId, title } = useTableContext()
+	const { fixed, tableId, title, dynamic } = useTableContext()
 	const { updated } = usePageContext()
 
 	return (
@@ -25,10 +27,17 @@ export function StockTableControls({ filter }: Props) {
 				<TableTitle title={title} tableId={tableId} />
 				{/* Updated timestamp*/}
 				{updated && <TableTimestamp />}
+				{/* The toggle to show/hide controls on mobile */}
+				<ToggleVisible />
 			</div>
 
 			{/* Button group */}
-			<div className="btn-group">
+			<div
+				className={cn(
+					'btn-group',
+					dynamic.showOnMobile ? 'block' : 'hidem'
+				)}
+			>
 				{/* MoverType Select */}
 				{fixed.controls?.moverType && <TableMoverType />}
 				{/* Time Range */}
