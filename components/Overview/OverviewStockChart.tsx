@@ -91,19 +91,14 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 		})
 
 		const format = data.map(item => {
-			const d = new Date(item.t)
+			// Calculate offset to convert from UTC to Eastern Time
+			// 5 hours (18000s) for EST, 4 hours (14400s) for EDT
+			// https://en.wikipedia.org/wiki/Daylight_saving_time_in_the_United_States
+			// 2022: March 13-November 6 should be 14400
+			let offset = 18000
 
 			return {
-				time:
-					Date.UTC(
-						d.getFullYear(),
-						d.getMonth(),
-						d.getDate(),
-						d.getHours(),
-						d.getMinutes(),
-						d.getSeconds(),
-						d.getMilliseconds()
-					) / 1000,
+				time: Number(item.t) - offset,
 				value: item.c
 			}
 		})
