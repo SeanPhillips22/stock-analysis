@@ -22,8 +22,6 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 
 	useEffect(() => {
-		console.log(data)
-
 		const chart = createChart(ref.current, {
 			width: 650,
 			height: 300,
@@ -74,8 +72,8 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 						const date = new Date(t * 1000)
 
 						if (time == '1D') {
-							let hours = date.getHours()
-							let minutes: any = date.getMinutes()
+							let hours = date.getUTCHours()
+							let minutes: any = date.getUTCMinutes()
 							let ampm = hours >= 12 ? 'pm' : 'am'
 							hours = hours % 12 ? hours : 12
 							minutes = minutes < 10 ? '0' + minutes : minutes
@@ -83,14 +81,18 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 								? hours + ':' + minutes + ' ' + ampm
 								: hours + ' ' + ampm
 						} else if (time == '5D') {
-							return monthNames[date.getMonth()] + ' ' + date.getDate()
+							return (
+								monthNames[date.getUTCMonth()] + ' ' + date.getUTCDate()
+							)
 						} else {
 							if (tickType == 2) {
 								return (
-									monthNames[date.getMonth()] + ' ' + date.getDate()
+									monthNames[date.getUTCMonth()] +
+									' ' +
+									date.getUTCDate()
 								)
 							}
-							return monthNames[date.getMonth()]
+							return monthNames[date.getUTCMonth()]
 						}
 					}
 				}),
@@ -139,22 +141,17 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			lineColor,
 			lineWidth: 2
 		})
+		//const lineSeries = chart.addLineSeries()
 
 		//@ts-ignore
 		const plOptions: PriceLineOptions = time === '1D' && {
-			price: Number(close),
-			axisLabelVisible: false,
-			title: 'Previous Close',
+			price: Number(172),
+			axisLabelVisible: true,
+			title: 'Previous close',
 			color: 'rgb(100, 100, 100)',
 			lineStyle: LineStyle.SparseDotted
 		}
-
 		const pl = areaSeries.createPriceLine(plOptions)
-
-		/* pl.applyOptions({
-			price: Number(close),
-			axisLabelVisible: false
-		})*/
 
 		areaSeries.applyOptions({
 			priceLineVisible: false,
@@ -173,9 +170,20 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 				value: item.c
 			}
 		})
-		console.log(format)
+
+		/*const lineSeriesformat = () => {
+			return [
+				{
+					time: data[0].t,
+					value: close
+				},
+				{ time: data[data.length - 1].t, value: close }
+			]
+		} */
+
 		//@ts-ignore
 		areaSeries.setData(format)
+		// lineSeries.setData(lineSeriesformat())
 		chart.timeScale().fitContent()
 
 		//Code to make chart Responsive.
