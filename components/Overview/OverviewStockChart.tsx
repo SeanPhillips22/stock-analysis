@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef } from 'react'
 import {
 	createChart,
@@ -56,22 +58,47 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			handleScale: false
 		})
 
+		// Set the color based on the price change
+		// Positive is green, negative is red, zero is blue
+		let topColor = 'rgba(33, 150, 243, 0.56)'
+		let bottomColor = 'rgba(33, 150, 243, 0.04)'
+		let lineColor = 'rgba(33, 150, 243, 1)'
+		if (change > 0) {
+			topColor = 'rgba(4, 120, 87, 0.56)'
+			bottomColor = 'rgba(4, 120, 87, 0.04)'
+			lineColor = 'rgba(4, 120, 87, 1)'
+		}
+		if (change < 0) {
+			topColor = 'rgba(220, 38, 38, 0.56)'
+			bottomColor = 'rgba(220, 38, 38, 0.04)'
+			lineColor = 'rgba(220, 38, 38, 1)'
+		}
+
+		/*
+		Change series to red and green
+		time === '1D' ? chart.addBaselineSeries({
+						lineWidth: 2,
+						baseValue: { type: 'price', price: Number(close) }
+				  }) : addAreaSeries...
+		*/
+
 		const areaSeries = chart.addAreaSeries({
-			autoscaleInfoProvider: () => ({
-				priceRange: {
-					minValue: 170,
-					maxValue: 176
-				}
-			}),
-			topColor: 'rgba(33, 150, 243, 0.56)',
-			bottomColor: 'rgba(33, 150, 243, 0.04)',
-			lineColor: 'rgba(33, 150, 243, 1)',
+			// autoscaleInfoProvider: () => ({
+			// 	priceRange: {
+			// 		minValue: 170,
+			// 		maxValue: 176
+			// 	}
+			// }),
+			topColor,
+			bottomColor,
+			lineColor,
 			lineWidth: 2
 		})
+
 		console.log(close)
 		//@ts-ignore
-		const plOptions: PriceLineOptions = {
-			price: 176,
+		const plOptions: PriceLineOptions = time === '1D' && {
+			price: Number(close),
 			axisLabelVisible: false,
 			title: 'Previous Close',
 			color: 'rgb(100, 100, 100)',
