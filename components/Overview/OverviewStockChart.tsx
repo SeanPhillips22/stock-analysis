@@ -36,6 +36,7 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			rightPriceScale: {
 				borderColor: 'rgba(197, 203, 206, 1)'
 			},
+
 			crosshair: {
 				mode: 0
 			},
@@ -47,8 +48,52 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 					visible: false
 				}
 			},
-
+			//This object is for date formatting. Setting a month array is faster than having the Date object conjure it up.
 			timeScale: {
+				...((time == '1D' ||
+					time == '5D' ||
+					time == '1M' ||
+					time == 'YTD') && {
+					// Use TickType to determine whether its hour, day, month or year.
+					tickMarkFormatter: (t: any, tickType: any) => {
+						const monthNames = [
+							'Jan',
+							'Feb',
+							'Mar',
+							'Apr',
+							'May',
+							'Jun',
+							'Jul',
+							'Aug',
+							'Sep',
+							'Oct',
+							'Nov',
+							'Dec'
+						]
+
+						const date = new Date(t * 1000)
+
+						if (time == '1D') {
+							let hours = date.getHours()
+							let minutes: any = date.getMinutes()
+							let ampm = hours >= 12 ? 'pm' : 'am'
+							hours = hours % 12 ? hours : 12
+							minutes = minutes < 10 ? '0' + minutes : minutes
+							return minutes != '00'
+								? hours + ':' + minutes + ' ' + ampm
+								: hours + ' ' + ampm
+						} else if (time == '5D') {
+							return monthNames[date.getMonth()] + ' ' + date.getDate()
+						} else {
+							if (tickType == 2) {
+								return (
+									monthNames[date.getMonth()] + ' ' + date.getDate()
+								)
+							}
+							return monthNames[date.getMonth()]
+						}
+					}
+				}),
 				borderColor: 'rgba(197, 203, 206, 1)',
 				timeVisible: true,
 				fixLeftEdge: true,
@@ -95,7 +140,6 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			lineWidth: 2
 		})
 
-		console.log(close)
 		//@ts-ignore
 		const plOptions: PriceLineOptions = time === '1D' && {
 			price: Number(close),
@@ -133,6 +177,15 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 		//@ts-ignore
 		areaSeries.setData(format)
 		chart.timeScale().fitContent()
+
+		//Code to make chart Responsive.
+		new ResizeObserver(entries => {
+			if (entries.length === 0 || entries[0].target !== ref.current) {
+				return
+			}
+			const newRect = entries[0].contentRect
+			chart.applyOptions({ height: newRect.height, width: newRect.width })
+		}).observe(ref.current)
 
 		return () => {
 			chart.remove()
