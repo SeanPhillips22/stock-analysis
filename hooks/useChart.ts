@@ -25,8 +25,8 @@ export function useChart(
 		['change', info.symbol, info.type, time],
 		() => queryChart(info.symbol, info.type, time),
 		{
-			initialData: initial.data,
-			initialDataUpdatedAt: Date.now() - 60000, // expiration,
+			// initialData: initial.data,
+			// initialDataUpdatedAt: Date.now() - 60000, // expiration,
 			refetchOnWindowFocus: false,
 			enabled: info.state !== 'upcomingipo' && !info.archived,
 			notifyOnChangeProps: 'tracked',
