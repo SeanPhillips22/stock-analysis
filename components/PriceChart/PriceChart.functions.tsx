@@ -68,6 +68,8 @@ export function getPriceChange(data?: ChartDataPoint[]) {
 	if (!data) return 0
 	const first = data[0]?.c
 	const last = data[data.length - 1]?.c
-
-	return first ? last / first - 1 : 0
+	if (last != undefined) {
+		return first ? last / first - 1 : 0
+	}
+	return 0
 }
