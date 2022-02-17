@@ -130,12 +130,12 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 		*/
 
 		const areaSeries = chart.addAreaSeries({
-			// autoscaleInfoProvider: () => ({
-			// 	priceRange: {
-			// 		minValue: 170,
-			// 		maxValue: 176
-			// 	}
-			// }),
+			autoscaleInfoProvider: () => ({
+				priceRange: {
+					minValue: 170.1,
+					maxValue: 172.25
+				}
+			}),
 			topColor,
 			bottomColor,
 			lineColor,
@@ -145,7 +145,7 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 
 		//@ts-ignore
 		const plOptions: PriceLineOptions = time === '1D' && {
-			price: Number(172),
+			price: Number(172.25),
 			axisLabelVisible: true,
 			title: 'Previous close',
 			color: 'rgb(100, 100, 100)',
