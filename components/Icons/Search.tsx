@@ -2,7 +2,7 @@ export const SearchIcon = () => {
 	return (
 		<div className="absolute inset-y-0 left-0 flex items-center pl-2.5">
 			<svg
-				className="w-4 h-4 xs:w-5 xs:h-5 text-gray-600"
+				className="h-4 w-4 text-gray-600 xs:h-5 xs:w-5"
 				fill="none"
 				strokeLinecap="round"
 				strokeLinejoin="round"

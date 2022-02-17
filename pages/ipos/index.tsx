@@ -4,7 +4,6 @@ import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
@@ -31,16 +30,17 @@ const query: TableDynamic = {
 }
 
 export default function RecentIpos(props: Props) {
+	const url = '/ipos/'
+
 	return (
 		<>
 			<SEO
 				title="200 Most Recent IPOs"
 				description="Detailed information the last 200 IPOs (initial public offerings) on the stock market. Includes IPO prices, dates, total returns and more."
-				canonical="/ipos/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/">
+			<Layout url={url}>
 				<div className="contain ipos-recent">
-					<Breadcrumbs url="/ipos/" />
 					<h1 className="hh1">Recent IPOs</h1>
 					<IPONavigation path="" />
 
@@ -77,7 +77,7 @@ export default function RecentIpos(props: Props) {
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
 							<CalendarTableMin upcoming={props.getIpoCalendarDataMin} />
-							<Sidebar1 />
+							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
 								news={props.getIpoNewsMin}

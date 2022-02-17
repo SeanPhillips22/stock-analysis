@@ -6,7 +6,6 @@ import { CalendarTable } from 'components/IPOs/CalendarTable'
 import { LaterExplanation } from 'components/IPOs/LaterExplanation'
 import { IPOSources } from 'components/IPOs/IPOSources'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { FilingTableMin } from 'components/IPOs/FilingTableMin'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
@@ -20,22 +19,23 @@ interface Props {
 }
 
 export const IpoCalendar = ({ data, recent, filings }: Props) => {
+	const url = '/ipos/calendar/'
+
 	return (
 		<>
 			<SEO
 				title="IPO Calendar - All Upcoming IPOs"
 				description="An IPO calendar with all upcoming initial public offerings (IPOs) on the stock market. Includes IPO dates, prices, how many shares are offered and more."
-				canonical="/ipos/calendar/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/calendar/">
+			<Layout url={url}>
 				<div className="contain">
-					<Breadcrumbs url="/ipos/calendar/" />
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation path="calendar" />
 					<div className="lg:right-sidebar">
 						<div>
 							<CalendarNavigation path="calendar" />
-							<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7 py-2 lg:py-4">
+							<div className="flex flex-col space-y-4 py-2 xs:space-y-5 sm:space-y-7 lg:py-4">
 								<CalendarTable
 									title="This Week"
 									data={data.thisweek}
@@ -62,7 +62,7 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 						<div className="flex flex-col pt-3 lg:pt-4">
 							<aside className="space-y-8 lg:space-y-10">
 								<RecentTableMin recent={recent} />
-								<Sidebar1 />
+								<Sidebar1 key={url} />
 								<FilingTableMin
 									filings={filings}
 									count={data.counts.unscheduled}

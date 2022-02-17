@@ -96,7 +96,7 @@ function ContactForm() {
 
 	return (
 		<div className="bg-white">
-			<div className="relative px-2 mx-auto">
+			<div className="relative mx-auto px-2">
 				{warning && <Warning message={warning} />}
 				<div className="mt-4">
 					<form
@@ -118,7 +118,7 @@ function ContactForm() {
 									name="name"
 									id="name"
 									autoComplete="given-name"
-									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+									className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 									value={name}
 									onChange={event => setName(event.target.value)}
 								/>
@@ -138,7 +138,7 @@ function ContactForm() {
 									id="email"
 									autoComplete="email"
 									required
-									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+									className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 									value={email}
 									onChange={event => setEmail(event.target.value)}
 								/>
@@ -158,7 +158,7 @@ function ContactForm() {
 									type="text"
 									id="subject"
 									autoComplete="off"
-									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+									className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 									value={subject}
 									onChange={event => setSubject(event.target.value)}
 								/>
@@ -178,7 +178,7 @@ function ContactForm() {
 									name="message"
 									required
 									rows={4}
-									className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+									className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 									value={message}
 									onChange={event => setMessage(event.target.value)}
 								/>
@@ -187,7 +187,7 @@ function ContactForm() {
 						<div className="pt-1">
 							<button
 								type="submit"
-								className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+								className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
 							>
 								{loading ? (
 									<>

@@ -1,9 +1,9 @@
 export const Loading = () => {
 	return (
-		<div className="w-full h-full">
-			<div className="flex justify-center items-center h-full bg-gray-50 border border-gray-100">
+		<div className="h-full w-full">
+			<div className="flex h-full items-center justify-center border border-gray-100 bg-gray-50">
 				<svg
-					className="animate-spin h-12 w-12 text-blue-300"
+					className="h-12 w-12 animate-spin text-blue-300"
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
 					viewBox="0 0 24 24"

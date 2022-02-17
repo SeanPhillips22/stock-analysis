@@ -18,7 +18,7 @@ export const Byline = ({ date }: { date?: string }) => {
 
 	return (
 		<div>
-			<div className="text-gray-600 text-base">
+			<div className="text-base text-gray-600">
 				By <AboutLink />
 				<Date />
 			</div>

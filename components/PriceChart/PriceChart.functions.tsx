@@ -49,13 +49,13 @@ export function UnavailableIpo({ info }: { info: Info }) {
 	}
 
 	return (
-		<div className="border border-gray-200 rounded-sm lg:border-0 lg:border-l lg:border-gray-300 lg:pl-3 mb-4 lg:mb-0 w-full h-[180px] sm:h-[240px] lg:h-full flex justify-center items-center">
-			<div className="h-full w-full bg-gray-50 text-gray-800 flex flex-col items-center justify-center px-4 xs:px-10">
-				<div className="text-xl xs:text-2xl lg:text-3xl font-medium">
+		<div className="mb-4 flex h-[180px] w-full items-center justify-center rounded-sm border border-gray-200 sm:h-[240px] lg:mb-0 lg:h-full lg:border-0 lg:border-l lg:border-gray-300 lg:pl-3">
+			<div className="flex h-full w-full flex-col items-center justify-center bg-gray-50 px-4 text-gray-800 xs:px-10">
+				<div className="text-xl font-medium xs:text-2xl lg:text-3xl">
 					Chart not available yet
 				</div>
 				{chartMsg && (
-					<div className="text-base xs:text-lg leading-6 xs:leading-7 text-center mt-4">
+					<div className="mt-4 text-center text-base leading-6 xs:text-lg xs:leading-7">
 						{chartMsg}
 					</div>
 				)}

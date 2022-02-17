@@ -26,7 +26,7 @@ export function FiltersMenuActive() {
 	return (
 		<li>
 			<span
-				className="inactive focus:outline-none focus:bg-gray-200"
+				className="inactive focus:bg-gray-200 focus:outline-none"
 				data-title="Active (2)"
 				onClick={() => setFilterMenu('Active')}
 				onKeyPress={e => e.key === 'Enter' && setFilterMenu('Active')}

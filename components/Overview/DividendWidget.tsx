@@ -22,21 +22,21 @@ export const DividendWidget = ({ ticker, data }: Props) => {
 			<table className="w-full text-smaller xs:text-base">
 				<thead>
 					<tr className="border-t border-b border-gray-200">
-						<th className="text-left px-1.5 xs:px-2 py-2">Ex-Dividend</th>
-						<th className="text-left px-1.5 xs:px-2 py-2">Amount</th>
-						<th className="text-right px-1.5 xs:px-2 py-2">Pay Date</th>
+						<th className="px-1.5 py-2 text-left xs:px-2">Ex-Dividend</th>
+						<th className="px-1.5 py-2 text-left xs:px-2">Amount</th>
+						<th className="px-1.5 py-2 text-right xs:px-2">Pay Date</th>
 					</tr>
 				</thead>
 				<tbody>
 					{data.map((item, index) => (
 						<tr key={index} className="border-b border-gray-200">
-							<td className="text-left px-1.5 xs:px-2 py-2">
+							<td className="px-1.5 py-2 text-left xs:px-2">
 								{item.exDate}
 							</td>
-							<td className="text-left px-1.5 xs:px-2 py-2">
+							<td className="px-1.5 py-2 text-left xs:px-2">
 								{'$' + formatter.format(Number(item.amount))}
 							</td>
-							<td className="text-right px-1.5 xs:px-2 py-2">
+							<td className="px-1.5 py-2 text-right xs:px-2">
 								{item.payDate}
 							</td>
 						</tr>

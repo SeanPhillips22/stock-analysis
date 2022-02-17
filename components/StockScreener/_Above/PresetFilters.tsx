@@ -59,14 +59,14 @@ export function PresetFilters() {
 		<div>
 			<label
 				htmlFor="location"
-				className="hidden md:block text-sm font-medium text-gray-700"
+				className="hidden text-sm font-medium text-gray-700 md:block"
 			>
 				Preset Screens
 			</label>
 			<select
 				id="location"
 				name="location"
-				className="block w-full pl-3 pr-10 py-2 text-sm border-gray-300 focus:ring-0 focus:ring-blue-500 focus:border-blue-500 rounded-md cursor-pointer"
+				className="block w-full cursor-pointer rounded-md border-gray-300 py-2 pl-3 pr-10 text-sm focus:border-blue-500 focus:ring-0 focus:ring-blue-500"
 				value={activePreset || 'Select preset'}
 				onChange={e => {
 					renderPresetFilters(e.target.value)

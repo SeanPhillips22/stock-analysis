@@ -4,7 +4,6 @@ import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { InfoBox } from 'components/InfoBox'
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
@@ -34,6 +33,7 @@ const query: TableDynamic = {
 
 export default function IpoYear(props: Props) {
 	const { year } = props
+	const url = `/ipos/${year}/`
 
 	const title =
 		year === '2022'
@@ -47,14 +47,9 @@ export default function IpoYear(props: Props) {
 
 	return (
 		<>
-			<SEO
-				title={title}
-				description={description}
-				canonical={`/ipos/${year}/`}
-			/>
-			<Layout url={`/ipos/${year}/`}>
+			<SEO title={title} description={description} canonical={url} />
+			<Layout url={url}>
 				<div className="contain ipos-recent">
-					<Breadcrumbs url={`/ipos/${year}/`} />
 					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation path="" />
 					<div className="lg:right-sidebar">
@@ -96,7 +91,7 @@ export default function IpoYear(props: Props) {
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
 							<CalendarTableMin upcoming={props.getIpoCalendarDataMin} />
-							<Sidebar1 />
+							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
 								news={props.getIpoNewsMin}

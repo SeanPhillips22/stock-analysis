@@ -53,9 +53,9 @@ export const PriceChange = ({ chartData, chartTime, info, show }: Props) => {
 	if (!show) return null
 
 	return (
-		<div className="flex flex-row space-x-1 text-smaller sm:text-base pr-1">
+		<div className="flex flex-row space-x-1 pr-1 text-smaller sm:text-base">
 			<span className={css}>{formatted}</span>
-			<span className="text-gray-700 hidden sm:block">({chartTime})</span>
+			<span className="hidden text-gray-700 sm:block">({chartTime})</span>
 		</div>
 	)
 }

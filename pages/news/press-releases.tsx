@@ -3,7 +3,6 @@ import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { getMarketNews } from 'functions/apis/callBackEnd'
 import { NewsNavigation } from 'components/News/NewsNavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { NewsFeed } from 'components/News/_NewsFeed'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
@@ -15,16 +14,17 @@ interface Props {
 }
 
 export const AllPressReleases = ({ data, other }: Props) => {
+	const url = '/news/press-releases/'
+
 	return (
 		<>
 			<SEO
 				title="Press Releases From Publicly Traded Companies"
 				description="Press releases for publicly traded companies on the US stock market. Includes important company events, earnings releases and more."
-				canonical="/news/press-releases/"
+				canonical={url}
 			/>
-			<Layout url="/news/press-releases/">
+			<Layout url={url}>
 				<div className="contain pb-0">
-					<Breadcrumbs url="/news/press-releases/" />
 					<h1 className="hh1">Press Releases</h1>
 					<NewsNavigation />
 				</div>
@@ -33,8 +33,8 @@ export const AllPressReleases = ({ data, other }: Props) => {
 					<div className="py-1 sm:pt-0 sm:pb-3">
 						<NewsFeed data={data} related="Stocks" />
 					</div>
-					<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 py-6">
-						<Sidebar1 />
+					<aside className="contain sm:uncontain flex flex-col space-y-7 py-6 lg:space-y-10">
+						<Sidebar1 key={url} />
 						<NewsWidget
 							title="Stock News"
 							news={other}

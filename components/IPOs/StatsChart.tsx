@@ -33,7 +33,7 @@ export const StatsChart = ({ title, x, y }: Props) => {
 		typeof window.ResizeObserver === 'undefined'
 	) {
 		return (
-			<div className="mt-4 mb-3 sm:mb-4 h-[300px] sm:h-[390px]">
+			<div className="mt-4 mb-3 h-[300px] sm:mb-4 sm:h-[390px]">
 				<Unavailable
 					message="This chart does not work in your browser. Please update to the latest browser version."
 					small={true}
@@ -46,7 +46,7 @@ export const StatsChart = ({ title, x, y }: Props) => {
 		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 	return (
-		<div className="mt-4 mb-3 sm:mb-4 border border-gray-200 h-[300px] sm:h-[390px] p-1 sm:p-2">
+		<div className="mt-4 mb-3 h-[300px] border border-gray-200 p-1 sm:mb-4 sm:h-[390px] sm:p-2">
 			<Bar
 				id={'1'}
 				data={{

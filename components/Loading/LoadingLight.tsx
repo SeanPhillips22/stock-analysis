@@ -19,10 +19,10 @@ export function LoadingLight() {
 			leave="bg-gray-500 transition ease-out duration-75"
 			leaveFrom="opacity-100"
 			leaveTo="opacity-0"
-			className="w-full h-full flex justify-center items-center bg-gray-50"
+			className="flex h-full w-full items-center justify-center bg-gray-50"
 		>
 			<svg
-				className="animate-spin h-12 w-12 text-blue-300"
+				className="h-12 w-12 animate-spin text-blue-300"
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
 				viewBox="0 0 24 24"

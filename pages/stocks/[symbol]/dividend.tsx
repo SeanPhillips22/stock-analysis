@@ -19,19 +19,20 @@ interface Props {
 }
 
 export default function Dividend({ info, data, news }: Props) {
+	const url = `/stocks/${info.symbol}/dividend/`
 	const title = info.name.length < 12 ? info.name : info.ticker
 
 	return (
-		<Stock info={info} url={`/stocks/${info.symbol}/dividend/`}>
+		<Stock info={info} url={url}>
 			<SEO
 				title={`${info.nameFull} (${info.ticker}) Dividend History, Dates & Yield`}
 				description={`Get the latest dividend data for ${info.name} (${info.ticker}), including dividend history, yield, key dates, growth and other metrics.`}
-				canonical={`/stocks/${info.symbol}/dividend/`}
+				canonical={url}
 			/>
 			<div className="contain-content mt-3 sm:mt-4">
-				<div className="lg:right-sidebar py-1 gap-8">
+				<div className="lg:right-sidebar gap-8 py-1">
 					<div>
-						<h2 className="text-xl bp:text-2xl font-bold">
+						<h2 className="text-xl font-bold bp:text-2xl">
 							{title} Dividend Information
 						</h2>
 						{data.infoBox && (
@@ -49,8 +50,8 @@ export default function Dividend({ info, data, news }: Props) {
 							ticker={info.ticker}
 						/>
 					</div>
-					<aside className="mt-7 lg:mt-0 space-y-8">
-						{data.history.length > 0 && <Sidebar1 />}
+					<aside className="mt-7 space-y-8 lg:mt-0">
+						{data.history.length > 0 && <Sidebar1 key={url} />}
 						<NewsWidget
 							title={`${info.ticker} News`}
 							news={news}

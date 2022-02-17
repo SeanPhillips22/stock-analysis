@@ -15,8 +15,8 @@ export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
 	}
 
 	return (
-		<div className="border border-gray-200 mt-7 p-6 text-center">
-			<h4 className="text-2xl xs:text-3xl font-bold text-gray-900 mb-3">
+		<div className="mt-7 border border-gray-200 p-6 text-center">
+			<h4 className="mb-3 text-2xl font-bold text-gray-900 xs:text-3xl">
 				Showing {count} of {fullCount} {title.toLowerCase()}
 			</h4>
 			<div className="text-xl">Subscribe to see the full list</div>

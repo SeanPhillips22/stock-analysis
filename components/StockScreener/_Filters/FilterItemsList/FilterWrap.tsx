@@ -22,7 +22,7 @@ export function FilterWrap({ f }: Props) {
 			className="flex items-center justify-between whitespace-nowrap border-b border-gray-200 px-1 py-1.5 text-smaller text-gray-900"
 			key={f.name}
 		>
-			<div className="cursor-help overflow-x-auto hide-scroll">
+			<div className="hide-scroll cursor-help overflow-x-auto">
 				<Tooltip
 					content={<TooltipContent id={f.id} />}
 					theme="light"

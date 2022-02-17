@@ -16,14 +16,16 @@ type Props = {
 }
 
 export default function StatisticsPage({ info, data }: Props) {
+	const url = `/stocks/${info.symbol}/statistics/`
+
 	return (
-		<Stock info={info} url={`/stocks/${info.symbol}/statistics/`}>
+		<Stock info={info} url={url}>
 			<SEO
 				title={`${info.nameFull} (${info.ticker}) Statistics & Valuation Metrics`}
 				description={`Detailed statistics for ${info.nameFull} (${info.ticker}) stock, including valuation metrics, financial numbers, share information and more.`}
-				canonical={`/stocks/${info.symbol}/statistics/`}
+				canonical={url}
 			/>
-			<div className="contain pt-1 xs:pt-1.5 lg:pt-1 pb-0 space-y-5 xs:space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-10 mt-5">
+			<div className="contain mt-5 space-y-5 pt-1 pb-0 xs:space-y-6 xs:pt-1.5 lg:grid lg:grid-cols-3 lg:gap-10 lg:space-y-0 lg:pt-1">
 				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
 					<div>
 						<StatsWidget
@@ -49,7 +51,7 @@ export default function StatisticsPage({ info, data }: Props) {
 						/>
 					</div>
 
-					<Mobile1 />
+					<Mobile1 key={url} />
 
 					<div>
 						<StatsWidget
@@ -177,7 +179,7 @@ export default function StatisticsPage({ info, data }: Props) {
 							map={MAP_STATISTICS}
 						/>
 					</div>
-					<Sidebar1 />
+					<Sidebar1 key={url} />
 				</div>
 			</div>
 		</Stock>

@@ -13,14 +13,14 @@ export function TooltipContent({ id }: { id: DataId }) {
 
 	return (
 		<div className="p-1">
-			<h4 className="text-xl font-semibold mb-2">
+			<h4 className="mb-2 text-xl font-semibold">
 				{data.tooltipTitle || data.name}
 			</h4>
-			<div className="text-smaller border-t border-gray-300 pt-2">
+			<div className="border-t border-gray-300 pt-2 text-smaller">
 				{data.tooltipText}
 			</div>
 			{data.tooltipFormula && (
-				<div className="text-sm border-t border-gray-300 mt-3 pt-2">
+				<div className="mt-3 border-t border-gray-300 pt-2 text-sm">
 					{data.tooltipFormula}
 				</div>
 			)}

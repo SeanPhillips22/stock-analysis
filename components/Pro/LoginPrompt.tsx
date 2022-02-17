@@ -3,10 +3,10 @@ import Link from 'next/link'
 export const LoginPrompt = () => {
 	return (
 		<div className="">
-			<div className="text-2xl font-bold mb-5 pb-4 border-b-2 border-gray-900">
+			<div className="mb-5 border-b-2 border-gray-900 pb-4 text-2xl font-bold">
 				Whoops! This page is only available for logged in users.
 			</div>
-			<p className="text-lg mb-4">
+			<p className="mb-4 text-lg">
 				If you already have an account,{' '}
 				<Link href="/login/">
 					<a className="bll">login here</a>

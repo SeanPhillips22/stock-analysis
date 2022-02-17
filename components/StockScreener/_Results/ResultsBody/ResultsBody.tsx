@@ -99,7 +99,7 @@ function formatColumns() {
 					)
 					cell = function FormatCell({ cell: { value } }: CellNumber) {
 						return (
-							<div className="text-right mr-3">
+							<div className="mr-3 text-right">
 								{abbreviate(value, format2dec)}
 							</div>
 						)

@@ -27,7 +27,7 @@ export function FiltersMenuItem({ name }: Props) {
 	return (
 		<li>
 			<span
-				className="inactive focus:outline-none focus:bg-gray-200"
+				className="inactive focus:bg-gray-200 focus:outline-none"
 				data-title={name}
 				onClick={() => setFilterMenu(name)}
 				onKeyPress={e => e.key === 'Enter' && setFilterMenu(name)}

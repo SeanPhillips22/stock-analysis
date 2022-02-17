@@ -40,15 +40,15 @@
 		background-color: #f2f9ff !important;
 	}
 
-	.right-green {
+	.rg {
 		@apply text-right text-[green];
 	}
 
-	.right-red {
+	.rr {
 		@apply text-right text-[red];
 	}
 
-	.right-gray {
+	.rgr {
 		@apply text-right text-gray-800;
 	}
 

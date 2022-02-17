@@ -60,13 +60,13 @@ export default function MyAccount() {
 			<SEO title="My Account" canonical="/pro/my-account/" noindex={true} />
 			<CrispChat />
 			<Layout url="/pro/my-account/">
-				<div className="max-w-3xl mx-auto px-4 xs:px-6 py-8 xs:py-12 space-y-6 xs:space-y-8">
+				<div className="mx-auto max-w-3xl space-y-6 px-4 py-8 xs:space-y-8 xs:px-6 xs:py-12">
 					{isLoggedIn ? (
 						<>
-							<h1 className="text-3xl xs:text-4xl font-bold mb-5 pb-4 text-gray-800 border-b-2 border-gray-800">
+							<h1 className="mb-5 border-b-2 border-gray-800 pb-4 text-3xl font-bold text-gray-800 xs:text-4xl">
 								My Account
 							</h1>
-							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
+							<div className="rounded-md border border-gray-200 p-3 text-base xs:p-4 xs:text-lg">
 								<h2 className="hh2">User Information</h2>
 								{email && (
 									<div>
@@ -80,7 +80,7 @@ export default function MyAccount() {
 									</div>
 								)}
 							</div>
-							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
+							<div className="rounded-md border border-gray-200 p-3 text-base xs:p-4 xs:text-lg">
 								<h2 className="hh2">Manage Subscription</h2>
 								{showStatus && (
 									<div className="mb-2">
@@ -134,13 +134,13 @@ export default function MyAccount() {
 								)}
 							</div>
 
-							<div className="border border-gray-200 p-3 xs:p-4 rounded-md text-base xs:text-lg">
+							<div className="rounded-md border border-gray-200 p-3 text-base xs:p-4 xs:text-lg">
 								<h2 className="hh2">Get Support</h2>
 								<div className="mb-4">
 									<strong>Here&apos;s how to get support:</strong>
 								</div>
 
-								<ol className="list-decimal ml-8">
+								<ol className="ml-8 list-decimal">
 									<li className="mb-2">
 										Click the blue chat widget in the bottom right
 										corner.

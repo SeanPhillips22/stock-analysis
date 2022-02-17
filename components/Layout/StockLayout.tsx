@@ -12,7 +12,7 @@ export function Stock({ children, info, url }: Props) {
 	return (
 		<Layout url={url}>
 			<div className="pt-5 sm:pt-6">
-				<StockHeading info={info} url={url} />
+				<StockHeading info={info} />
 				{children}
 			</div>
 		</Layout>

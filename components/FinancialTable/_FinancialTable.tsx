@@ -159,12 +159,12 @@ export const FinancialTable = ({
 	const IndicatorTooltip = ({ row }: { row: FinancialsMapType }) => {
 		return (
 			<div>
-				<h4 className="text-xl font-semibold mb-2">
+				<h4 className="mb-2 text-xl font-semibold">
 					{row.tooltipTitle || row.title}
 				</h4>
 				<div className="border-t border-gray-300 pt-2">{row.tooltip}</div>
 				{row.formula && (
-					<div className="text-sm border-t border-gray-300 mt-3 pt-2">
+					<div className="mt-3 border-t border-gray-300 pt-2 text-sm">
 						{row.formula}
 					</div>
 				)}
@@ -270,7 +270,7 @@ export const FinancialTable = ({
 			<>
 				<tr className={getRowStyles(row)}>
 					<td
-						className="flex flex-row justify-between items-center"
+						className="flex flex-row items-center justify-between"
 						onTouchStart={() => !hover && setHover(true)}
 						onClick={() => !hover && setHover(true)}
 						onMouseEnter={() => !hover && setHover(true)}
@@ -289,7 +289,7 @@ export const FinancialTable = ({
 						<TooltipChart
 							render={attrs => (
 								<div
-									className="bg-white border border-gray-200 p-2 md:py-2 md:px-3 h-[40vh] w-[95vw] md:h-[330px] md:w-[600px] z-20"
+									className="z-20 h-[40vh] w-[95vw] border border-gray-200 bg-white p-2 md:h-[330px] md:w-[600px] md:py-2 md:px-3"
 									tabIndex={-1}
 									{...attrs}
 								>
@@ -335,7 +335,7 @@ export const FinancialTable = ({
 
 	return (
 		<div>
-			<div className="md:flex md:flex-row md:justify-between md:items-end">
+			<div className="md:flex md:flex-row md:items-end md:justify-between">
 				<TableTitle info={info} statement={statement} range={range} />
 				<FinancialsControls
 					info={info}
@@ -352,7 +352,7 @@ export const FinancialTable = ({
 				<table className="fintbl" id="financial-table">
 					<thead>
 						<tr className="border-b-2 border-gray-300">
-							<th className="flex flex-row justify-between items-center">
+							<th className="flex flex-row items-center justify-between">
 								<Tooltip
 									content={getPeriodTooltip(range)}
 									theme="light"

@@ -7,8 +7,8 @@ type Props = {
 
 export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 	return (
-		<div className="text-smaller xs:text-base mb-0.5">
-			<ul className="flex flex-row space-x-1 bp:space-x-2 sm:space-x-5 whitespace-nowrap">
+		<div className="mb-0.5 text-smaller xs:text-base">
+			<ul className="flex flex-row space-x-1 whitespace-nowrap bp:space-x-2 sm:space-x-5">
 				<li>
 					<button
 						className={show === 'all' ? 'font-semibold' : 'bll'}

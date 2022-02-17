@@ -3,15 +3,15 @@ import { ButtonWhite } from 'components/Buttons/ButtonWhite'
 
 export function NewsPaywall() {
 	return (
-		<div className="h-[180px] sm:h-auto relative flex justify-center bg-white -mt-8 sm:mt-3">
-			<div className="absolute sm:static text-center max-w-[85%]">
-				<h4 className="text-3xl font-semibold text-gray-900 mb-2.5">
+		<div className="relative -mt-8 flex h-[180px] justify-center bg-white sm:mt-3 sm:h-auto">
+			<div className="absolute max-w-[85%] text-center sm:static">
+				<h4 className="mb-2.5 text-3xl font-semibold text-gray-900">
 					Get unlimited news
 				</h4>
-				<p className="text-gray-700 text-base font-medium mb-0.5">
+				<p className="mb-0.5 text-base font-medium text-gray-700">
 					Keep scrolling with a free 30-day trial of Stock Analysis Pro
 				</p>
-				<div className="flex space-x-6 justify-center">
+				<div className="flex justify-center space-x-6">
 					<Button
 						text="Free Trial"
 						url="/pro/"

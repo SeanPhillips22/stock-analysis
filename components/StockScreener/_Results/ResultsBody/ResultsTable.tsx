@@ -85,7 +85,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 
 	if (!loaded || (fetching.length && !rows.length)) {
 		return (
-			<div className="h-[600px] mt-6">
+			<div className="mt-6 h-[600px]">
 				<Loading />
 			</div>
 		)

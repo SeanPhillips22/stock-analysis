@@ -53,7 +53,7 @@ export const ActionsNavigationSub = () => {
 
 	return (
 		<nav className="mb-2 lg:mb-3">
-			<ul className="md:space-x-1 navmenu submenu tight flex-wrap">
+			<ul className="navmenu submenu tight flex-wrap md:space-x-1">
 				<li className="mb-0.5">
 					<Link
 						href={type ? `/actions/${type}/` : '/actions/'}

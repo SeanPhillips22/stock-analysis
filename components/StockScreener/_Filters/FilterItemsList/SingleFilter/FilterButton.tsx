@@ -47,7 +47,7 @@ export function FilterButton({ active, id }: Props) {
 
 	return (
 		<div
-			className={`inline-flex justify-between w-[125px] xs:w-[140px] sm:w-[125px] rounded border border-gray-200 shadow-sm px-3 py-1 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 cursor-pointer${
+			className={`inline-flex w-[125px] justify-between rounded border border-gray-200 bg-white px-3 py-1 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 xs:w-[140px] sm:w-[125px] cursor-pointer${
 				active ? ' bg-yellow-100 px-2' : ''
 			}`}
 			onClick={handleClick}
@@ -57,7 +57,7 @@ export function FilterButton({ active, id }: Props) {
 			<span className="overflow-hidden text-ellipsis">{buttonText}</span>
 
 			<ChevronDownIcon
-				className="-mr-1 ml-2 h-5 w-5 pointer-events-none"
+				className="pointer-events-none -mr-1 ml-2 h-5 w-5"
 				aria-hidden="true"
 			/>
 		</div>

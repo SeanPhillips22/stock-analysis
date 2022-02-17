@@ -27,10 +27,6 @@ export const SEO = ({
 			? title
 			: title + ' | Stock Analysis'
 
-	const metaRobots = noindex
-		? 'noindex, nofollow'
-		: 'max-snippet:-1,max-image-preview:large,max-video-preview:-1'
-
 	const canonicalUrl = 'https://stockanalysis.com' + canonical
 
 	const featuredImage = image
@@ -45,7 +41,7 @@ export const SEO = ({
 		<Head>
 			<title>{seoTitle}</title>
 			{description && <meta name="description" content={description} />}
-			<meta name="robots" content={metaRobots} />
+			{noindex && <meta name="robots" content="noindex, nofollow" />}
 			<link rel="canonical" href={canonicalUrl} />
 			{preconnect && <link rel="preconnect" href={preconnect} />}
 			<meta property="og:title" content={seoTitle} />

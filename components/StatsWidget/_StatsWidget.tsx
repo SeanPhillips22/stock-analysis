@@ -12,10 +12,10 @@ interface Props {
 export const StatsWidget = ({ title, data, map }: Props) => {
 	return (
 		<>
-			<h2 className="text-xl xs:text-[1.3rem] text-gray-900 mb-2 font-bold px-0.5">
+			<h2 className="mb-2 px-0.5 text-xl font-bold text-gray-900 xs:text-[1.3rem]">
 				{title}
 			</h2>
-			<p className="text-base xs:text-[1.05rem] leading-relaxed lg:leading-normal text-gray-900 mb-4 px-0.5">
+			<p className="mb-4 px-0.5 text-base leading-relaxed text-gray-900 xs:text-[1.05rem] lg:leading-normal">
 				{data.text}
 			</p>
 			<table className={'text-sm xs:text-base ' + styles.statstable}>
