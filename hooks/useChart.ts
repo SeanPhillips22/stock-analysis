@@ -18,6 +18,7 @@ export function useChart(
 	initial: InitialData,
 	initialFetch: boolean
 ) {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	let expiration = initialFetch ? initial.expiration : undefined
 
 	const { data, isFetching } = useQuery(
@@ -25,7 +26,7 @@ export function useChart(
 		() => queryChart(info.symbol, info.type, time),
 		{
 			initialData: initial.data,
-			initialDataUpdatedAt: expiration,
+			initialDataUpdatedAt: Date.now() - 60000, // expiration,
 			refetchOnWindowFocus: false,
 			enabled: info.state !== 'upcomingipo' && !info.archived,
 			notifyOnChangeProps: 'tracked',

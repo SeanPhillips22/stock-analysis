@@ -7,9 +7,9 @@ export function getChartUrl(symbol: string, type: string, time: string) {
 
 	let apiurl
 	if (time === '5Y' || time === 'MAX') {
-		apiurl = `chart?${params}&p=w`
+		apiurl = `chartb?${params}&p=w`
 	} else {
-		apiurl = `chart?${params}`
+		apiurl = `chartb?${params}`
 	}
 
 	return apiurl
