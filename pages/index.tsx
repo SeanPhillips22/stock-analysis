@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { SEO } from 'components/SEO'
 import { Hero } from 'components/HomePage/Hero'
 import { Movers } from 'components/HomePage/Movers'
@@ -86,10 +86,8 @@ export default function FrontPage({ data }: FrontPageProps) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const data = await getHomePageData()
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {
