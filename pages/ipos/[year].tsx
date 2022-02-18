@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
@@ -108,8 +108,8 @@ export default function IpoYear(props: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
-	const year = context?.params?.year as string
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const year = params?.year as string
 	if (!['2022', '2021', '2020', '2019'].includes(year)) {
 		return {
 			notFound: true
@@ -128,13 +128,20 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	response.props.info = response.props[extraFn]
 	delete response.props[extraFn]
 
-	// Cache on the edge
-	let cache =
-		year === '2022'
-			? 'public, max-age=0, s-max-age=300'
-			: 'public, max-age=0, s-max-age=1800'
-	context.res.setHeader('Cache-Control', cache)
-
 	// Return the data to the page
 	return response
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const paths = [
+		{ params: { year: '2022' } },
+		{ params: { year: '2021' } },
+		{ params: { year: '2020' } },
+		{ params: { year: '2019' } }
+	]
+
+	return {
+		paths,
+		fallback: false
+	}
 }
