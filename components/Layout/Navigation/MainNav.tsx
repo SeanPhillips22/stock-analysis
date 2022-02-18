@@ -101,25 +101,20 @@ const navigation = [
 
 export function MainNav() {
 	const setIsOpen = navMenuState(state => state.setIsOpen)
-	const initial = navMenuState(state => state.initial)
-	const setInitial = navMenuState(state => state.setInitial)
 	const { path } = useLayoutContext()
 
-	// Only run once, during server-side rendering
+	// Set the open state for the menu
 	useEffect(() => {
-		setInitial(false)
-	}, [setInitial])
-
-	// Set the initial open state for the menu
-	if (initial && path.one) {
-		navigation.map(item => {
-			if (item.children) {
-				if (matchParentPath(path, item.href)) {
-					setIsOpen({ [item.name]: true })
+		if (path) {
+			navigation.map(item => {
+				if (item.children) {
+					if (matchParentPath(path, item.href)) {
+						setIsOpen({ [item.name]: true })
+					}
 				}
-			}
-		})
-	}
+			})
+		}
+	}, [path, setIsOpen])
 
 	return (
 		<div className="leftnav">
