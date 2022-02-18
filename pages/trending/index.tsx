@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { TrendingAll } from 'types/Trending'
 import { SEO } from 'components/SEO'
 import { SymbolTableSimple } from 'components/Tables/SymbolTableSimple'
@@ -180,11 +180,9 @@ export default function Trending({ timestamp, data }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const raw = await getData('trending?q=trendingAll')
 	const { timestamp, data } = raw
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {
