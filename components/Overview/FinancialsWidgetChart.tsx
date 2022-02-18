@@ -123,7 +123,6 @@ export function FinancialsWidgetChart({
 				plugins: {
 					legend: {
 						position: 'top',
-
 						align: 'start',
 						labels: {
 							font: {

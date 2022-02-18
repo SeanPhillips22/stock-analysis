@@ -16,8 +16,8 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 	const earnings: number[] = data.financialChart[2]
 	const colors: string[] = []
 
-	earnings.map(function (item) {
-		if (item < 0) {
+	earnings.map(() => {
+		if (earnings[earnings.length - 1] < 0) {
 			colors.push('#CD5C5C')
 		} else {
 			colors.push('#00853E')
