@@ -35,9 +35,10 @@ You can easily download the code and run the site on your own computer by clonin
 3. Open Visual Studio Code. Click "File" and "Open Folder" -- then find the folder you created and click "Select Folder"
 4. Hit CMD+J or CTRL+J to open the terminal in VS Code
 5. Write this exact command and hit enter: `git clone https://github.com/stockanalysisdev/stock-analysis.git .` (make sure to include the period at the end)
-6. Write this command and hit enter: `npm install`
-7. Write this command and hit enter: `npm run dev`
-8. You should now be able to open the site in your web browser with this URL: `http://localhost:3001`
+6. Rename the file `env.local` to `.env.local` (adding a period at the front)
+7. Write this command and hit enter: `npm install`
+8. Write this command and hit enter: `npm run dev`
+9. You should now be able to open the site in your web browser with this URL: `http://localhost:3001`
 
 Congrats! You now have the site running locally on your own computer, with the site's code ready to edit from Visual Studio Code.
 
