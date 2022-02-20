@@ -4,7 +4,7 @@ Disallow:
 User-agent: dotbot
 Disallow: /
 
-User-agent: blexbot
+User-agent: BLEXBot
 Disallow: /
 
 User-agent: mj12bot

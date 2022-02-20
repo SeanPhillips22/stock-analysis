@@ -2,12 +2,12 @@ import { authState } from 'state/authState'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { noAds, isDev } from '../noAds'
 import { AdsenseScript } from './AdsenseScript'
-import { useLoadAdsenseDynamic } from './useLoadAdsenseDynamic'
+import { useLoadAdsense } from './useLoadAdsense'
 
 export function Mobile1() {
 	const { path } = useLayoutContext()
 	const isPro = authState(state => state.isPro)
-	useLoadAdsenseDynamic('(min-width: 1024px)')
+	useLoadAdsense()
 
 	if (noAds(path) || isPro) {
 		return null
