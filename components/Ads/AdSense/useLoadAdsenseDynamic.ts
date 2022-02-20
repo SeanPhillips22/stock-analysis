@@ -13,13 +13,8 @@ declare global {
 
 // fill the slot with an AdSense ad
 function loadAdsense() {
-	try {
-		console.log('load')
-		const adsbygoogle = window.adsbygoogle || []
-		adsbygoogle.push({})
-	} catch (e) {
-		console.error(e)
-	}
+	const adsbygoogle = window.adsbygoogle || []
+	adsbygoogle.push({})
 }
 
 // Conditionally load Adsense depending on the screen size
@@ -35,8 +30,6 @@ export function useLoadAdsenseDynamic(mediaQuery: string) {
 	useEffect(() => {
 		if (noAds(path) || isPro) return // no ads for this page
 		if (isHidden) return // no ads for this screen size
-
-		console.log('useEffect')
 
 		// check if AdSense script is loaded every 200ms
 		let count = 0 // count attempts

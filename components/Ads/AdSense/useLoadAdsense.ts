@@ -12,12 +12,8 @@ declare global {
 
 // fill the slot with an AdSense ad
 function loadAdsense() {
-	try {
-		const adsbygoogle = window.adsbygoogle || []
-		adsbygoogle.push({})
-	} catch (e) {
-		console.error(e)
-	}
+	const adsbygoogle = window.adsbygoogle || []
+	adsbygoogle.push({})
 }
 
 export function useLoadAdsense() {
