@@ -13,8 +13,12 @@ declare global {
 
 // fill the slot with an AdSense ad
 function loadAdsense() {
-	const adsbygoogle = window.adsbygoogle || []
-	adsbygoogle.push({})
+	try {
+		const adsbygoogle = window.adsbygoogle || []
+		adsbygoogle.push({})
+	} catch (e) {
+		console.error(e)
+	}
 }
 
 // Conditionally load Adsense depending on the screen size
