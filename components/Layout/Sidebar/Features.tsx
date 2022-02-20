@@ -50,9 +50,9 @@ export function Features() {
 						<Link href={feature.url} prefetch={false}>
 							<a id={feature.tagId}>
 								<div className="pointer-events-none px-4 py-5 sm:p-6">
-									<h4 className="hh3 pointer-events-none">
+									<div className="hh3 pointer-events-none">
 										{feature.title}
-									</h4>
+									</div>
 									<div className="pointer-events-none text-gray-800">
 										{feature.description}
 									</div>

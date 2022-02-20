@@ -7,6 +7,13 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import styles from './ContactForm.module.css'
 
+const defaultValues = {
+	name: '',
+	email: '',
+	message: '',
+	subject: ''
+}
+
 export function ContactForm() {
 	const [loading, setLoading] = useState(false)
 	const [success, setSuccess] = useState<boolean | null>(null)
@@ -15,14 +22,10 @@ export function ContactForm() {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors }
 	} = useForm({
-		defaultValues: {
-			name: '',
-			email: '',
-			subject: '',
-			message: ''
-		}
+		defaultValues
 	})
 
 	// When the form is submitted, show the spinner
@@ -36,7 +39,12 @@ export function ContactForm() {
 		try {
 			const res = await axios.post('/api/contact/', formData)
 			const data = res.data
-			setSuccess(data.status === 'email_sent')
+			if (data.status === 'email_sent') {
+				setSuccess(true)
+				reset(defaultValues)
+			} else {
+				setSuccess(false)
+			}
 		} catch (err) {
 			setSuccess(false)
 		} finally {
@@ -48,7 +56,7 @@ export function ContactForm() {
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 			<div>
 				<label htmlFor="name">Name</label>
-				<input {...register('name')} />
+				<input {...register('name')} id="name" />
 			</div>
 
 			<div>
@@ -68,12 +76,13 @@ export function ContactForm() {
 							message: 'Your email does not appear to be valid'
 						}
 					})}
+					id="email"
 				/>
 			</div>
 
 			<div>
 				<label htmlFor="subject">Subject</label>
-				<input {...register('subject')} />
+				<input {...register('subject')} id="subject" />
 			</div>
 
 			<div>
@@ -94,6 +103,7 @@ export function ContactForm() {
 						}
 					})}
 					rows={4}
+					id="message"
 				/>
 			</div>
 

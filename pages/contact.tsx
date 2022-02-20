@@ -6,11 +6,7 @@ import { ContactForm } from 'components/ContactForm/ContactForm'
 export default function Contact() {
 	return (
 		<>
-			<SEO
-				title="Contact Us"
-				description="This page contains a contact form. Use this form if you have questions or suggestions about the content on this site."
-				canonical="/contact/"
-			/>
+			<SEO title="Contact Us" canonical="/contact/" />
 			<CrispChat />
 			<LayoutSidebar heading="Contact Us" url="/contact/">
 				<p>
