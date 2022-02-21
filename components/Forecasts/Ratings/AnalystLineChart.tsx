@@ -41,7 +41,7 @@ export function AnalystLineChart({
 			data: analystAxis('strongBuy'),
 			backgroundColor: 'rgb(0, 153, 0)',
 			borderColor: 'rgb(0, 153, 0)',
-			pointRadius: 10,
+			pointRadius: 2.5,
 			order: 4
 		},
 		{
@@ -49,6 +49,7 @@ export function AnalystLineChart({
 			data: analystAxis('buy'),
 			backgroundColor: 'rgb(76, 153, 0)',
 			borderColor: 'rgb(76, 153, 0)',
+			pointRadius: 2.5,
 			order: 3
 		},
 
@@ -57,6 +58,7 @@ export function AnalystLineChart({
 			data: analystAxis('hold'),
 			backgroundColor: 'rgb(204, 204, 0)',
 			borderColor: 'rgb(204, 204, 0)',
+			pointRadius: 2.5,
 			order: 2
 		},
 
@@ -65,6 +67,7 @@ export function AnalystLineChart({
 			data: analystAxis('sell'),
 			backgroundColor: 'rgb(153, 76, 0)',
 			borderColor: 'rgb(153, 76, 0)',
+			pointRadius: 2.5,
 			order: 1
 		},
 		{
@@ -72,6 +75,7 @@ export function AnalystLineChart({
 			data: analystAxis('strongSell'),
 			backgroundColor: 'rgb(153, 0, 0)',
 			borderColor: 'rgb(153, 0, 0)',
+			pointRadius: 2.5,
 			order: 0
 		}
 	]
