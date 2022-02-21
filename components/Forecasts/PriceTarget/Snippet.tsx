@@ -5,8 +5,9 @@ export function Snippet() {
 	const { symbol, name } = info
 	let displayName = name.length < 12 ? name : symbol.toUpperCase()
 	let recs = data.recommendations
-	let { total, consensus } = recs[recs.length - 1]
-	let { average, low, high, change } = data.targets
+
+	let { total, consensus } = recs[recs.length - 1] || {}
+	let { average, low, high, change } = data.targets || {}
 
 	// Format the text that says how much the price is forecasted to change
 	let diffString =
@@ -16,9 +17,13 @@ export function Snippet() {
 			? 'a decrease of ' + change + '%'
 			: 'no change'
 
-	return (
-		<p>
-			{`According to ${total} stock analysts, the average 12-month stock price forecast for ${displayName} stock is $${average}, which predicts ${diffString} over the next year. The lowest forecast is $${low} and the highest is $${high}. On average, analysts rate ${displayName} stock as a ${consensus.toLowerCase()}.`}
-		</p>
-	)
+	// Format the text describing the price target and analyst consensus
+	let consensusText = ''
+	if (!consensus) {
+		consensusText = `There are currently no analyst price targets available for ${displayName}.`
+	} else {
+		consensusText = `According to ${total} stock analysts, the average 12-month stock price forecast for ${displayName} stock is $${average}, which predicts ${diffString} over the next year. The lowest forecast is $${low} and the highest is $${high}. On average, analysts rate ${displayName} stock as a ${consensus.toLowerCase()}.`
+	}
+
+	return <p>{consensusText}</p>
 }

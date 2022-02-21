@@ -27,6 +27,7 @@ export function Ratings() {
 		}
 	}, [isPro, info.symbol])
 
+	if (!data.recommendations.length) return null
 	const recommendations = data.recommendations[data.recommendations.length - 1]
 	const { total, consensus } = recommendations
 	let displayName = info.name.length < 12 ? info.name : info.ticker

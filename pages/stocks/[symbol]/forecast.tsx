@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('fc', symbol, 'stocks')
 
-	context.res.setHeader('Cache-Control', 'public, max-age=0')
+	context.res.setHeader('Cache-Control', 'public, max-age=1800')
 
 	return data
 }

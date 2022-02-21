@@ -34,8 +34,9 @@ const d = [
 export function ConsensusChart() {
 	const { data }: { data: ForecastData } = useSymbolContext()
 	const recs = data.recommendations
-	const latest = recs[recs.length - 1]
-	const { angle } = recs[recs.length - 1]
+
+	const latest = recs[recs.length - 1] ?? null
+	const { angle } = recs[recs.length - 1] ?? 0
 
 	return (
 		<div>
@@ -49,6 +50,7 @@ export function ConsensusChart() {
 					{
 						id: '1',
 						afterDatasetsDraw: function (chart: any) {
+							if (!angle) return
 							const chartInstance = chart
 							const ctx = chartInstance.ctx
 
@@ -106,7 +108,7 @@ export function ConsensusChart() {
 									let label = context.label || ''
 									let findId = labelIds.find(x => x.name === label)
 									let id: IDs = findId ? findId.id : 'hold'
-									let value = latest[id]
+									let value = latest ? latest[id] : 0
 									return ` ${value}`
 								}
 							}
