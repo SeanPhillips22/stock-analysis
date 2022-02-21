@@ -103,7 +103,7 @@ export function AnalystTrendsChart({ data }: { data: ForecastData }) {
 	]
 
 	return (
-		<div className="h-[250px]">
+		<div className="h-[240px]">
 			<Bar
 				id="1"
 				data={{
@@ -144,7 +144,21 @@ export function AnalystTrendsChart({ data }: { data: ForecastData }) {
 
 					plugins: {
 						tooltip: {
-							itemSort: function (a, b) {
+							titleFont: {
+								size: 16,
+								weight: '600'
+							},
+							bodyFont: {
+								size: 14,
+								weight: '400'
+							},
+							padding: {
+								top: 12,
+								right: 15,
+								bottom: 12,
+								left: 15
+							},
+							itemSort: (a, b) => {
 								if (
 									a.datasetIndex !== undefined ||
 									b.datasetIndex !== undefined
@@ -156,9 +170,7 @@ export function AnalystTrendsChart({ data }: { data: ForecastData }) {
 							}
 						},
 						legend: {
-							reverse: true,
-							display: true,
-							position: 'bottom'
+							display: false
 						}
 					}
 				}}
