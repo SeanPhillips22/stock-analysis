@@ -4,8 +4,11 @@ import { PriceTargetChart } from './PriceTargetChart'
 import { Snippet } from './Snippet'
 import { SummaryTable } from './SummaryTable'
 import styles from './PriceTarget.module.css'
+import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 export function PriceTarget() {
+	const { data } = useSymbolContext()
+
 	return (
 		<>
 			<div className={styles.pt}>
@@ -16,7 +19,7 @@ export function PriceTarget() {
 					<ConsensusSummary />
 				</div>
 				<div className={styles.ptchart}>
-					<PriceTargetChart />
+					{data.targets.chart && <PriceTargetChart />}
 					<SummaryTable />
 				</div>
 			</div>
