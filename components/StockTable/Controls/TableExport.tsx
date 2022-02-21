@@ -7,17 +7,7 @@ type Props = {
 export function TableExport({ tableId }: Props) {
 	return (
 		<div className="controls-export">
-			<Export
-				buttons={[
-					{
-						title: 'Export to Excel',
-						type: 'xlsx',
-						restricted: true
-					},
-					{ title: 'Export to CSV', type: 'csv', restricted: true }
-				]}
-				tableId={tableId}
-			/>
+			<Export tableId={tableId} />
 		</div>
 	)
 }

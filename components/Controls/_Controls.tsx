@@ -35,7 +35,7 @@ export const Controls = ({
 	return (
 		<div className="controls">
 			<div className="mr-auto">
-				<h2 className="text-xl bp:text-2xl font-semibold whitespace-nowrap">
+				<h2 className="whitespace-nowrap text-xl font-semibold bp:text-2xl">
 					{`${append && append + ' '}${count} ${title}`}
 				</h2>
 			</div>
@@ -45,13 +45,7 @@ export const Controls = ({
 				</div>
 			)}
 			<div className="hidden sm:block">
-				<Export
-					buttons={[
-						{ title: 'Export to Excel', type: 'xlsx', restricted: true },
-						{ title: 'Export to CSV', type: 'csv', restricted: true }
-					]}
-					tableId={tableId}
-				/>
+				<Export tableId={tableId} />
 			</div>
 			{useAsyncDebounce && setGlobalFilter && (
 				<div>

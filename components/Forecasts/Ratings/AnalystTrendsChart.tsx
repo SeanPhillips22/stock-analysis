@@ -26,23 +26,32 @@ ChartJS.register(
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-import { useSymbolContext } from 'components/Layout/SymbolContext'
 import useMediaQuery from 'hooks/useMediaQuery'
+import { ForecastData } from 'types/Forecast'
+import { useEffect, useState } from 'react'
+import { authState } from 'state/authState'
+import { forecastState } from '../forecast.state'
 
-// TODO dropdown to select between stacked bar chart and line chart
-// TODO add a dropdown to select up to 4 years of data
-// TODO add an export button
-export function AnalystTrendsChart() {
-	const { data } = useSymbolContext()
-	const months = data.recommendations
+export function AnalystTrendsChart({ data }: { data: ForecastData }) {
+	const recs = data.recommendations
+	const history = forecastState(state => state.history)
+	const isPro = authState(state => state.isPro)
 	const mobile = useMediaQuery('(max-width: 768px)')
+	const [months, setMonths] = useState(recs)
+
+	useEffect(() => {
+		if (isPro) {
+			if (history === '1 Year') setMonths(recs.slice(recs.length - 13))
+			if (history === '2 Years') setMonths(recs.slice(recs.length - 25))
+			if (history === '5 Years') setMonths(recs)
+		}
+	}, [history, isPro, data, recs])
 
 	const labelAxis = () => months.map((item: { month: any }) => item.month)
 
 	const analystAxis = (s: string) =>
 		months.map((item: { [x: string]: any }) => item[s])
 
-	// TODO modify colors so that the difference between each is more obvious
 	let d: any[] = [
 		{
 			label: 'Strong Buy',

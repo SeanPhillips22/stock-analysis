@@ -32,7 +32,7 @@ export function ActionsControls({
 	return (
 		<div className="controls groups">
 			<div className="title-group">
-				<h2 className="text-xl bp:text-2xl font-semibold whitespace-nowrap">
+				<h2 className="whitespace-nowrap text-xl font-semibold bp:text-2xl">
 					{title}
 				</h2>
 			</div>
@@ -50,17 +50,7 @@ export function ActionsControls({
 				{setColumnFilter && (
 					<SplitsFilter setColumnFilter={setColumnFilter} />
 				)}
-				<Export
-					buttons={[
-						{
-							title: 'Export to Excel',
-							type: 'xlsx',
-							restricted: true
-						},
-						{ title: 'Export to CSV', type: 'csv', restricted: true }
-					]}
-					tableId={tableId}
-				/>
+				<Export tableId={tableId} />
 			</div>
 		</div>
 	)

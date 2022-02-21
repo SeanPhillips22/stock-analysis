@@ -8,25 +8,30 @@ const Download = dynamic(() => import('./Download'), {
 type ExportItemProps = {
 	title: string
 	type: 'csv' | 'xlsx'
-	data: string | any[]
+	tableId?: string
+	data?: any[]
 	fileName?: string
-	returnData?: string
+	bulkData?: string
 }
 
-export const ExportItem = ({
+export function ExportItem({
 	title,
 	type,
+	tableId,
 	data,
 	fileName,
-	returnData
-}: ExportItemProps) => (
-	<Menu.Item>
-		<Download
-			title={title}
-			type={type}
-			data={data}
-			fileName={fileName}
-			returnData={returnData}
-		/>
-	</Menu.Item>
-)
+	bulkData
+}: ExportItemProps) {
+	return (
+		<Menu.Item>
+			<Download
+				title={title}
+				type={type}
+				tableId={tableId}
+				data={data}
+				fileName={fileName}
+				bulkData={bulkData}
+			/>
+		</Menu.Item>
+	)
+}

@@ -1,24 +1,18 @@
 import { GetServerSideProps } from 'next'
 import { Info } from 'types/Info'
+import { Forecast } from 'types/Forecast'
 import { Stock } from 'components/Layout/StockLayout'
 import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { Ratings } from 'components/Forecasts/Ratings/_Ratings'
 import { PriceTarget } from 'components/Forecasts/PriceTarget/_PriceTarget'
-import ContentWideAd from 'components/Ads/Placeholders/ContentWideAd'
-// import { Earnings } from 'components/Forecasts/Earnings/Earnings'
-// import { RevenueGrowth } from 'components/Forecasts/Revenue/RevenueGrowth'
-// import { Revenue } from 'components/Forecasts/Revenue/Revenue'
-// import { EarningsGrowth } from 'components/Forecasts/Earnings/EarningsGrowth'
-// import ContentMobileAd from 'components/Ads/Placeholders/ContentMobileAd'
-// import { AnalystCalls } from 'components/Forecasts/Analysts/AnalystRatings'
-// import { Surprises } from 'components/Forecasts/Surprises/Surprises'
+import { ContentWideAd } from 'components/Ads/Placeholders/ContentWideAd'
 
 type Props = {
 	info: Info
-	data: any
+	data: Forecast
 }
 
-export default function Forecast({ info, data }: Props) {
+export default function ForecastPage({ info, data }: Props) {
 	return (
 		<Stock
 			info={info}
@@ -29,8 +23,6 @@ export default function Forecast({ info, data }: Props) {
 			<div className="contain space-y-8 py-4">
 				<PriceTarget />
 				<ContentWideAd />
-				{/* TODO this should be a stacked bar chart */}
-				{/* Can limit to 6 months, enable 4 years for pro users */}
 				<Ratings />
 				{/* <ContentMobileAd /> */}
 				{/* IDEA: Add a financials table here with last X years plus the forecasted years */}
@@ -64,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('fc', symbol, 'stocks')
 
-	// context.res.setHeader('Cache-Control', 'public, max-age=0')
+	context.res.setHeader('Cache-Control', 'public, max-age=0')
 
 	return data
 }

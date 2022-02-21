@@ -13,7 +13,7 @@ export function RatingsTable() {
 
 	return (
 		<div className="mt-5 text-center">
-			<table className="w-full text-right text-smaller">
+			<table className="w-full text-right text-smaller" id="ratings-table">
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">
 						<th className="text-left font-semibold">Rating</th>

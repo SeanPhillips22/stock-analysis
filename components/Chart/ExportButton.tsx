@@ -89,9 +89,9 @@ export function Export({ buttons, data, time }: Props) {
 	}, [data, setExpData, time])
 
 	return (
-		<Menu as="div" className="relative text-left hidden sm:inline-block z-10">
+		<Menu as="div" className="relative z-10 hidden text-left sm:inline-block">
 			<div>
-				<Menu.Button className="inline-flex items-center relative border-l pl-4 md:border-r-0 border-gray-300 bp:pr-2 py-2 text-xs bp:text-base focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500 focus:outline-none">
+				<Menu.Button className="relative inline-flex items-center border-l border-gray-300 py-2 pl-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 bp:pr-2 bp:text-base md:border-r-0">
 					Export
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@ export function Export({ buttons, data, time }: Props) {
 				leaveFrom="opacity-100 scale-100"
 				leaveTo="opacity-0 scale-95"
 			>
-				<Menu.Items className="origin-top-right absolute right-0 mt-1 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5  focus:outline-none ">
+				<Menu.Items className="absolute right-0 mt-1 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5  focus:outline-none ">
 					<div className="py-1">
 						{buttons &&
 							buttons.map((button, index) =>

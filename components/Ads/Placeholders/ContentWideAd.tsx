@@ -1,6 +1,6 @@
 import { isDev } from '../noAds'
 
-export default function ContentWideAd() {
+export function ContentWideAd() {
 	if (isDev()) {
 		return (
 			<div className="ad-banner cw1">

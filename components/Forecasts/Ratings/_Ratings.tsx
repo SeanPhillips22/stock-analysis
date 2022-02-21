@@ -1,9 +1,32 @@
 import { useSymbolContext } from 'components/Layout/SymbolContext'
+import { getPageDataFull } from 'functions/apis/callBackEnd'
+import { useAuthState } from 'hooks/useAuthState'
+import { useEffect, useState } from 'react'
+import { ForecastData } from 'types/Forecast'
 import { AnalystTrendsChart } from './AnalystTrendsChart'
+import { RatingChartType } from './Controls/RatingChartType'
+import { RatingExport } from './Controls/RatingExport'
+import { RatingHistory } from './Controls/RatingHistory'
 import { RatingsTable } from './RatingsTable'
 
 export function Ratings() {
-	const { info, data } = useSymbolContext()
+	const { info, data: freeData } = useSymbolContext()
+	const [data, setData] = useState(freeData as ForecastData)
+	const { isPro } = useAuthState()
+
+	useEffect(() => {
+		async function getProData() {
+			let res = await getPageDataFull('fc', info.symbol)
+			if (res) {
+				setData(res)
+			}
+		}
+
+		if (isPro) {
+			getProData()
+		}
+	}, [isPro, info.symbol])
+
 	const recommendations = data.recommendations[data.recommendations.length - 1]
 	const { total, consensus } = recommendations
 	let displayName = info.name.length < 12 ? info.name : info.ticker
@@ -45,10 +68,15 @@ export function Ratings() {
 					</p>
 				</div>
 				<div className="grow pl-4">
-					<h2 className="hh3">Recommendation Trends</h2>
-					<div>
-						<AnalystTrendsChart />
+					<div className="flex justify-between">
+						<h2 className="hh3">Recommendation Trends</h2>
+						<div className="flex space-x-4">
+							<RatingChartType />
+							<RatingHistory />
+							<RatingExport data={data} />
+						</div>
 					</div>
+					<AnalystTrendsChart data={data} />
 					<RatingsTable />
 				</div>
 			</div>

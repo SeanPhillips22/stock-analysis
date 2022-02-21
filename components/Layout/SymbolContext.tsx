@@ -3,7 +3,7 @@ import { Info } from 'types/Info'
 
 type ContextProps = {
 	info: Info
-	data?: any // TODO possible to use typescript generics here to pass in different types?
+	data: any
 }
 
 export const SymbolContext = createContext({} as ContextProps)
