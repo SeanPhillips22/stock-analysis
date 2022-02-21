@@ -24,7 +24,7 @@ export function RatingExport({ data }: { data: ForecastData }) {
 	)
 }
 
-function rewrite(data: Recommendations) {
+function rewrite(data: Recommendations[]) {
 	let newData = []
 	newData[0] = [
 		'Date',

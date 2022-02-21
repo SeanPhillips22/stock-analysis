@@ -57,7 +57,7 @@ export function Ratings() {
 		default:
 			break
 	}
-
+	console.log(data)
 	return (
 		<div className="border border-gray-200 p-4 lg:order-1">
 			<div className="lg:flex lg:gap-x-6 lg:divide-x">
