@@ -22,26 +22,34 @@ ChartJS.register(
 	Title,
 	CategoryScale
 )
-import { useSymbolContext } from 'components/Layout/SymbolContext'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function AnalystTrends() {
+defaults.font.family =
+	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
+
+import { useSymbolContext } from 'components/Layout/SymbolContext'
+import useMediaQuery from 'hooks/useMediaQuery'
+
+// TODO add a dropdown to select up to 4 years of data
+// TODO add an export button
+export function AnalystTrendsChart() {
 	const { data } = useSymbolContext()
 	const months = data.recommendations
+	const mobile = useMediaQuery('(max-width: 768px)')
 
 	const labelAxis = () => months.map((item: { month: any }) => item.month)
 
 	const analystAxis = (s: string) =>
 		months.map((item: { [x: string]: any }) => item[s])
 
+	// TODO modify colors so that the difference between each is more obvious
 	let d: any[] = [
 		{
 			label: 'Strong Buy',
 			data: analystAxis('strongBuy'),
 			backgroundColor: 'rgb(0, 153, 0)',
 			barPercentage: 0.5,
-			barThickness: 8,
-			maxBarThickness: 8,
+			barThickness: mobile ? 16 : 30,
+			maxBarThickness: mobile ? 16 : 30,
 			order: 4
 		},
 		{
@@ -49,8 +57,8 @@ export function AnalystTrends() {
 			data: analystAxis('buy'),
 			backgroundColor: 'rgb(76, 153, 0)',
 			barPercentage: 0.5,
-			barThickness: 8,
-			maxBarThickness: 8,
+			barThickness: mobile ? 16 : 30,
+			maxBarThickness: mobile ? 16 : 30,
 			order: 3
 		},
 
@@ -59,8 +67,8 @@ export function AnalystTrends() {
 			data: analystAxis('hold'),
 			backgroundColor: 'rgb(204, 204, 0)',
 			barPercentage: 0.5,
-			barThickness: 8,
-			maxBarThickness: 8,
+			barThickness: mobile ? 16 : 30,
+			maxBarThickness: mobile ? 16 : 30,
 			order: 2
 		},
 
@@ -69,8 +77,8 @@ export function AnalystTrends() {
 			data: analystAxis('sell'),
 			backgroundColor: 'rgb(153, 76, 0)',
 			barPercentage: 0.5,
-			barThickness: 8,
-			maxBarThickness: 8,
+			barThickness: mobile ? 16 : 30,
+			maxBarThickness: mobile ? 16 : 30,
 			order: 1
 		},
 		{
@@ -78,8 +86,8 @@ export function AnalystTrends() {
 			data: analystAxis('strongSell'),
 			backgroundColor: 'rgb(153, 0, 0)',
 			barPercentage: 0.5,
-			barThickness: 8,
-			maxBarThickness: 8,
+			barThickness: mobile ? 16 : 30,
+			maxBarThickness: mobile ? 16 : 30,
 			order: 0
 		}
 	]
@@ -108,8 +116,7 @@ export function AnalystTrends() {
 							grid: {
 								display: false
 							},
-							stacked: true,
-							reverse: true
+							stacked: true
 						},
 						y: {
 							stacked: true,

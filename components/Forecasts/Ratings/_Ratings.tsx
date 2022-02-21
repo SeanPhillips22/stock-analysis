@@ -1,5 +1,5 @@
 import { useSymbolContext } from 'components/Layout/SymbolContext'
-import { AnalystTrends } from './AnalystTrends'
+import { AnalystTrendsChart } from './AnalystTrendsChart'
 import { RatingsTable } from './RatingsTable'
 
 export function Ratings() {
@@ -38,7 +38,7 @@ export function Ratings() {
 	return (
 		<div className="border border-gray-200 p-4 lg:order-1">
 			<div className="lg:flex lg:gap-x-6 lg:divide-x">
-				<div className="lg:max-w-[30%]">
+				<div className="lg:max-w-[25%]">
 					<h2 className="hh3">Analyst Ratings</h2>
 					<p>
 						{`The average analyst rating for ${displayName} stock from ${total} stock analysts is "${consensus}". This means that analysts believe this stock is likely to ${explanation}.`}
@@ -47,7 +47,7 @@ export function Ratings() {
 				<div className="grow pl-4">
 					<h2 className="hh3">Recommendation Trends</h2>
 					<div>
-						<AnalystTrends />
+						<AnalystTrendsChart />
 					</div>
 					<RatingsTable />
 				</div>

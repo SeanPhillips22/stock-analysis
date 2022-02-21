@@ -1,63 +1,59 @@
+import { useSymbolContext } from 'components/Layout/SymbolContext'
+import { slice } from 'lodash'
+
+// Return an array with the data for a single table row
+function makeRow(months: any, index: string, count: number) {
+	let rowArray = months.map((item: { [x: string]: any }) => item[index])
+	return slice(rowArray, -count)
+}
+
 export function RatingsTable() {
+	const { data } = useSymbolContext()
+	const months = data.recommendations
+
 	return (
 		<div className="mt-5 text-center">
 			<table className="w-full text-right text-smaller">
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">
 						<th className="text-left font-semibold">Rating</th>
-						<th className="font-semibold">Sep 21</th>
-						<th className="font-semibold">Oct 21</th>
-						<th className="font-semibold">Nov 21</th>
-						<th className="font-semibold">Dec 21</th>
-						<th className="font-semibold">Jan 22</th>
-						<th className="font-semibold">Feb 22</th>
+						{makeRow(months, 'month', 6).map((item: any) => (
+							<th className="font-semibold" key={item}>
+								{item}
+							</th>
+						))}
 					</tr>
 				</thead>
 				<tbody>
 					<tr className="border-b border-gray-200">
 						<td className="text-left">Strong Buy</td>
-						<td>16</td>
-						<td>16</td>
-						<td>16</td>
-						<td>16</td>
-						<td>17</td>
-						<td>17</td>
+						{makeRow(months, 'strongBuy', 6).map((item: any, i) => (
+							<td key={`strongBuy-${i}`}>{item}</td>
+						))}
 					</tr>
 					<tr className="border-b border-gray-200">
 						<td className="text-left">Buy</td>
-						<td>23</td>
-						<td>23</td>
-						<td>24</td>
-						<td>24</td>
-						<td>25</td>
-						<td>25</td>
+						{makeRow(months, 'buy', 6).map((item: any, i) => (
+							<td key={`buy-${i}`}>{item}</td>
+						))}
 					</tr>
 					<tr className="border-b border-gray-200">
 						<td className="text-left">Hold</td>
-						<td>8</td>
-						<td>9</td>
-						<td>8</td>
-						<td>8</td>
-						<td>7</td>
-						<td>8</td>
+						{makeRow(months, 'hold', 6).map((item: any, i) => (
+							<td key={`hold-${i}`}>{item}</td>
+						))}
 					</tr>
 					<tr className="border-b border-gray-200">
 						<td className="text-left">Sell</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
+						{makeRow(months, 'sell', 6).map((item: any, i) => (
+							<td key={`sell-${i}`}>{item}</td>
+						))}
 					</tr>
-					<tr>
+					<tr className="border-b border-gray-200">
 						<td className="text-left">Strong Sell</td>
-						<td>1</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
+						{makeRow(months, 'strongSell', 6).map((item: any, i) => (
+							<td key={`strongSell-${i}`}>{item}</td>
+						))}
 					</tr>
 				</tbody>
 			</table>
