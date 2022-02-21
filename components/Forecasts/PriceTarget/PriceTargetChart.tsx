@@ -26,56 +26,11 @@ import 'chartjs-adapter-date-fns'
 
 import { useMemo } from 'react'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
-
-interface Props {
-	data: AnalystChartData
-}
-
-interface AnalystPrice {
-	t: string
-	c?: string
-}
-
-interface AnalystTarget {
-	low: string
-	average: string
-	high: string
-}
-
-interface AnalystChartData {
-	price: AnalystPrice[]
-	targets: AnalystTarget
-}
+import { formatMonthLong } from 'functions/datetime/formatDates'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-const placeholderData = {
-	price: [
-		{ t: '2020-12-1', c: '132.69' },
-		{ t: '2021-01-1', c: '131.96' },
-		{ t: '2021-02-1', c: '121.26' },
-		{ t: '2021-03-1', c: '122.15' },
-		{ t: '2021-04-1', c: '131.46' },
-		{ t: '2021-05-1', c: '124.61' },
-		{ t: '2021-06-1', c: '136.96' },
-		{ t: '2021-07-1', c: '145.86' },
-		{ t: '2021-08-1', c: '151.83' },
-		{ t: '2021-09-1', c: '141.50' },
-		{ t: '2021-10-1', c: '149.80' },
-		{ t: '2021-11-1', c: '165.30' },
-		{ t: '2021-12-1', c: '177.57' },
-		{ t: '2022-12-1', c: undefined }
-	],
-	targets: {
-		low: '90',
-		average: '175.28',
-		high: '210'
-	}
-}
-
-// TODO - Improve the formatting and text in the tooltips
-// TODO - Hide the tooltip where the price and targets meet
 export function PriceTargetChart() {
 	const { data } = useSymbolContext()
 	const { high, average, low, chart } = data.targets
@@ -101,10 +56,7 @@ export function PriceTargetChart() {
 
 	const timeAxis = useMemo(() => chart.map((item: any) => item.t), [chart])
 
-	const priceAxis = useMemo(
-		() => chart.map((item: any) => ({ x: item.t, y: item.c })),
-		[chart]
-	)
+	const priceAxis = useMemo(() => chart.map((item: any) => item.c), [chart])
 
 	const backgroundColorCodings = useMemo(
 		() =>
@@ -436,24 +388,27 @@ export function PriceTargetChart() {
 					scales: {
 						x: {
 							afterTickToLabelConversion: function (val: any) {
-								let afterCutOff: boolean
-								afterCutOff = false
+								//? What does this do?
+								// let afterCutOff: boolean
+								// afterCutOff = false
 
-								for (let i = 0; i < val.ticks.length; i++) {
-									if (
-										val.ticks[i].label == 'Dec 2021' ||
-										val.ticks[i].label == 'Dec 2022'
-									) {
-										val.ticks[i].major = true
-										afterCutOff = true
-									} else if (afterCutOff) {
-										val.ticks.splice(i, 1)
-									}
-								}
-								val.ticks.splice(0, 1)
+								// for (let i = 0; i < val.ticks.length; i++) {
+								// 	if (
+								// 		val.ticks[i].label == 'Dec 2021' ||
+								// 		val.ticks[i].label == 'Dec 2022'
+								// 	) {
+								// 		val.ticks[i].major = true
+								// 		afterCutOff = true
+								// 	} else if (afterCutOff) {
+								// 		val.ticks.splice(i, 1)
+								// 	}
+								// }
+								// val.ticks.splice(0, 1)
 
 								if (window.innerWidth < 563) {
 									val.ticks.splice(0, 2)
+								} else {
+									val.ticks.splice(0, 1)
 								}
 							},
 							type: 'time',
@@ -473,10 +428,11 @@ export function PriceTargetChart() {
 									size: 13
 								},
 								autoSkip: false,
-								autoSkipPadding: 60, // ? is this needed when autoSkip is false?
+								autoSkipPadding: 60, //? is this needed when autoSkip is false?
 								maxRotation: 0,
 								minRotation: 0,
 								major: {
+									//? Still needed?
 									enabled: true
 								}
 							}
@@ -526,7 +482,40 @@ export function PriceTargetChart() {
 								bottom: 12,
 								left: 15
 							},
-							displayColors: false
+							displayColors: false,
+							callbacks: {
+								title: function (tooltipItem: any) {
+									let dataset = tooltipItem[0].dataset.label
+									let index =
+										dataset === 'Monthly'
+											? tooltipItem[0].dataIndex
+											: timeAxis.length - 1
+									return formatMonthLong(timeAxis[index])
+								},
+								label: function (context: any) {
+									let currlabel = context.dataset.label || ''
+									let dataIndex = context.dataIndex
+									let value = context.parsed.y || ''
+									let date = context.label.split(', 12')[0]
+									let longDate = formatMonthLong(date)
+									let currentDate = formatMonthLong(
+										timeAxis[timeAxis.length - 2]
+									)
+									if (currlabel !== 'Monthly') {
+										if (dataIndex === 0) return ''
+										let change = (value - currentPrice) / currentPrice
+										let percentageChange =
+											(change * 100).toFixed(2) + '%'
+										if (change > 0)
+											percentageChange = '+' + percentageChange
+										return `${currlabel}: ${value} (${percentageChange})`
+									} else if (longDate === currentDate) {
+										return 'Latest Price: ' + value
+									} else {
+										return 'Month End: ' + value
+									}
+								}
+							}
 						}
 					}
 				}}

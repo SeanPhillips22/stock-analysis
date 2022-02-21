@@ -1,33 +1,48 @@
 import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
+import { ForecastData } from 'types/Forecast'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
-export function ConsensusChart() {
-	const { data } = useSymbolContext()
-	const recs = data.recommendations
-	const { angle } = recs[recs.length - 1]
+type IDs = 'strongSell' | 'sell' | 'hold' | 'buy' | 'strongBuy'
 
-	let d: any[] = [
-		{
-			data: [10, 10, 10, 10, 10],
-			backgroundColor: [
-				'rgb(153, 0, 0)',
-				'rgb(153, 76, 0)',
-				'rgb(204, 204, 0)',
-				'rgb(76, 153, 0)',
-				'rgb(0, 153, 0)'
-			],
-			borderWidth: 0
-		}
-	]
+const labels = ['Strong Sell', 'Sell', 'Hold', 'Buy', 'Strong Buy']
+
+const labelIds: { name: string; id: IDs }[] = [
+	{ name: 'Strong Sell', id: 'strongSell' },
+	{ name: 'Sell', id: 'sell' },
+	{ name: 'Hold', id: 'hold' },
+	{ name: 'Buy', id: 'buy' },
+	{ name: 'Strong Buy', id: 'strongBuy' }
+]
+
+const d = [
+	{
+		data: [10, 10, 10, 10, 10],
+		backgroundColor: [
+			'rgb(153, 0, 0)',
+			'rgb(153, 76, 0)',
+			'rgb(204, 204, 0)',
+			'rgb(76, 153, 0)',
+			'rgb(0, 153, 0)'
+		],
+		borderWidth: 0
+	}
+]
+
+export function ConsensusChart() {
+	const { data }: { data: ForecastData } = useSymbolContext()
+	const recs = data.recommendations
+	const latest = recs[recs.length - 1]
+	const { angle } = recs[recs.length - 1]
 
 	return (
 		<div>
 			<Doughnut
 				id="1"
 				data={{
+					labels: labels,
 					datasets: d
 				}}
 				plugins={[
@@ -74,7 +89,27 @@ export function ConsensusChart() {
 							display: false
 						},
 						tooltip: {
-							enabled: false
+							enabled: true,
+							titleFont: {
+								size: 17,
+								weight: '600'
+							},
+							bodyFont: {
+								size: 16,
+								weight: '400'
+							},
+							callbacks: {
+								title: function (tooltipItem: any) {
+									return tooltipItem[0].label
+								},
+								label: function (context: any) {
+									let label = context.label || ''
+									let findId = labelIds.find(x => x.name === label)
+									let id: IDs = findId ? findId.id : 'hold'
+									let value = latest[id]
+									return ` ${value}`
+								}
+							}
 						}
 					}
 				}}

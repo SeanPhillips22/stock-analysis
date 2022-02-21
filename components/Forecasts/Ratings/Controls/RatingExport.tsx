@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { authState } from 'state/authState'
 import { ForecastData, Recommendations } from 'types/Forecast'
 
-// TODO - Add total count and consensus
 export function RatingExport({ data }: { data: ForecastData }) {
 	const { info } = useSymbolContext()
 	const isPro = authState(state => state.isPro)
@@ -30,11 +29,11 @@ function rewrite(data: Recommendations) {
 	newData[0] = [
 		'Date',
 		'Consensus',
-		'Strong Buy',
-		'Buy',
-		'Hold',
-		'Sell',
 		'Strong Sell',
+		'Sell',
+		'Hold',
+		'Buy',
+		'Strong Buy',
 		'Total'
 	]
 	data.forEach((item: { [x: string]: any }) => {

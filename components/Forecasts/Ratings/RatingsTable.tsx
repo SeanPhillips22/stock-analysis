@@ -49,7 +49,7 @@ export function RatingsTable() {
 							<td key={`sell-${i}`}>{item}</td>
 						))}
 					</tr>
-					<tr className="border-b border-gray-200">
+					<tr>
 						<td className="text-left">Strong Sell</td>
 						{makeRow(months, 'strongSell', 6).map((item: any, i) => (
 							<td key={`strongSell-${i}`}>{item}</td>

@@ -12,7 +12,7 @@ export type Targets = {
 export type Recommendations = {
 	total: number // need to calculate on storage
 	consensus: string // need to calculate on storage
-	angle?: number // the angle of the donut chart arrow, from 0-180
+	angle: number // the angle of the donut chart arrow, from 0-180
 	buy: number
 	hold: number
 	month: string // '2022-02-01',
