@@ -29,6 +29,7 @@ defaults.font.family =
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import useMediaQuery from 'hooks/useMediaQuery'
 
+// TODO dropdown to select between stacked bar chart and line chart
 // TODO add a dropdown to select up to 4 years of data
 // TODO add an export button
 export function AnalystTrendsChart() {

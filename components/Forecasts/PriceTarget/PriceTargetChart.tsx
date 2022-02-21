@@ -74,49 +74,57 @@ const placeholderData = {
 	}
 }
 
+// TODO - Improve the formatting and text in the tooltips
+// TODO - Hide the tooltip where the price and targets meet
 export function PriceTargetChart() {
 	const { data } = useSymbolContext()
-	const { high, average, low } = data.targets
+	const { high, average, low, chart } = data.targets
+	const currentDate = chart[chart.length - 2].t
+	const currentPrice = chart[chart.length - 2].c
+	const oneYearDate = chart[chart.length - 1].t
+	const initialPrice = chart[0].c
 
 	const highData = [
-		{ x: '2021-12-7', y: '177.57' },
-		{ x: '2022-12-1', y: high }
+		{ x: currentDate, y: currentPrice },
+		{ x: oneYearDate, y: high }
 	]
 
 	const avgData = [
-		{ x: '2021-12-7', y: '177.57' },
-		{ x: '2022-12-1', y: average }
+		{ x: currentDate, y: currentPrice },
+		{ x: oneYearDate, y: average }
 	]
 
 	const lowData = [
-		{ x: '2021-12-7', y: '177.57' },
-		{ x: '2022-12-1', y: low }
+		{ x: currentDate, y: currentPrice },
+		{ x: oneYearDate, y: low }
 	]
 
-	const timeAxis = useMemo(
-		() => placeholderData.price.map(item => item.t),
-		[placeholderData]
-	)
+	const timeAxis = useMemo(() => chart.map((item: any) => item.t), [chart])
 
 	const priceAxis = useMemo(
-		() => placeholderData.price.map(item => ({ x: item.t, y: item.c })),
-		[placeholderData]
+		() => chart.map((item: any) => ({ x: item.t, y: item.c })),
+		[chart]
 	)
 
 	const backgroundColorCodings = useMemo(
 		() =>
-			placeholderData.price.map((i, index) =>
+			chart.map((i: any, index: number) =>
 				index == 12 ? '#000000' : '#ffffff'
 			),
-		[placeholderData]
+		[chart]
 	)
+
+	const redOrGreen =
+		currentPrice - initialPrice > 0
+			? 'rgba(4, 120, 87, 1)'
+			: 'rgba(220, 38, 38, 1)'
 
 	const pointBorderColorCodings = useMemo(
 		() =>
-			placeholderData.price.map((i, index) =>
-				index == 12 ? '#000000' : 'rgba(4, 120, 87, 1)'
+			chart.map((i: any, index: number) =>
+				index == 12 ? '#000000' : redOrGreen
 			),
-		[placeholderData]
+		[chart]
 	)
 
 	let datasets: any[] = [
@@ -129,7 +137,7 @@ export function PriceTargetChart() {
 			pointBorderColor: pointBorderColorCodings,
 			pointBackgroundColor: backgroundColorCodings,
 			tension: 0,
-			borderColor: 'rgba(4, 120, 87, 1)',
+			borderColor: redOrGreen,
 			borderWidth: 2.5,
 			spanGaps: true
 		},
@@ -226,7 +234,7 @@ export function PriceTargetChart() {
 
 									ctx.fillText(
 										window.innerWidth > 428
-											? '12 Months Forecast'
+											? '12 Month Forecast'
 											: '1 Yr Forecast',
 										window.innerWidth > 428
 											? meta.iScale._gridLineItems[
