@@ -30,7 +30,7 @@ export function Stock({
 
 			<SymbolContextProvider value={{ info, data }}>
 				<div className="pt-5 sm:pt-6">
-					<StockHeading info={info} url={url} />
+					<StockHeading info={info} />
 					{children}
 				</div>
 			</SymbolContextProvider>
