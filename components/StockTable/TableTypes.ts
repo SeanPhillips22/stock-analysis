@@ -34,4 +34,6 @@ export type TableDynamic = {
 	filters?: string[] // The filters to apply
 
 	fetched?: boolean // Whether the original data has been fetched
+
+	showOnMobile?: boolean // Whether to show the controls on mobile
 }

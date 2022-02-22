@@ -9,7 +9,7 @@ export function HeaderAd() {
 	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
 
-	if (noAds(path) || isPro) {
+	if (!path.one || noAds(path) || isPro) {
 		return null
 	}
 
@@ -26,7 +26,7 @@ export function HeaderAd() {
 			<ins
 				className="adsbygoogle ha1"
 				data-ad-client="ca-pub-7702053427535735"
-				data-ad-slot="8582549443"
+				data-ad-slot="1021894904"
 				data-full-width-responsive="false"
 			></ins>
 			<AdsenseScript />

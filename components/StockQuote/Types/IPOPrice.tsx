@@ -21,7 +21,7 @@ export function IPOPrice({ info }: { info: Info }) {
 				<span className="text-2xl font-semibold">{price}</span>
 			</span>
 
-			<div className="text-small text-gray-700 mt-0">{ipoPriceNotice}</div>
+			<div className="mt-0 text-small text-gray-700">{ipoPriceNotice}</div>
 		</div>
 	)
 }

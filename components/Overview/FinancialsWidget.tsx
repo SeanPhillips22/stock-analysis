@@ -16,8 +16,8 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 	const earnings: number[] = data.financialChart[2]
 	const colors: string[] = []
 
-	earnings.map(function (item) {
-		if (item < 0) {
+	earnings.map(() => {
+		if (earnings[earnings.length - 1] < 0) {
 			colors.push('#CD5C5C')
 		} else {
 			colors.push('#00853E')
@@ -44,7 +44,7 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 			{data.financialIntro && (
 				<p className="mb-3 text-gray-900">{data.financialIntro}</p>
 			)}
-			<div className="h-72 border border-gray-200 rounded-sm p-1 xs:px-2 bp:px-3">
+			<div className="h-72 rounded-sm border border-gray-200 p-1 xs:px-2 bp:px-3">
 				<FinancialsWidgetChart
 					data={data}
 					colors={colors}

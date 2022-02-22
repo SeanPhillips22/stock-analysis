@@ -6,8 +6,9 @@ import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 import { Line } from 'react-chartjs-2'
 import {
 	Chart as ChartJS,
-	BarController,
-	BarElement,
+	LineController,
+	LineElement,
+	PointElement,
 	Tooltip,
 	LinearScale,
 	Title,
@@ -16,8 +17,9 @@ import {
 } from 'chart.js'
 
 ChartJS.register(
-	BarController,
-	BarElement,
+	LineController,
+	LineElement,
+	PointElement,
 	Tooltip,
 	LinearScale,
 	Title,
@@ -62,7 +64,7 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 	return (
 		<div className="h-72 border border-gray-200 p-0.5 xs:p-1">
 			<Line
-				id={'1'}
+				id="1"
 				data={{
 					labels: x,
 					datasets: [

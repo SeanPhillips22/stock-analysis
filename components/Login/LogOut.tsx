@@ -7,22 +7,22 @@ export function LogOut({ email, signOut }: Props) {
 	return (
 		<>
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">
-				<h1 className="mt-2 xs:mt-4 sm:mt-6 text-center text-2xl xs:text-3xl font-bold text-gray-900">
+				<h1 className="mt-2 text-center text-2xl font-bold text-gray-900 xs:mt-4 xs:text-3xl sm:mt-6">
 					You are logged in
 				</h1>
 				{email && (
-					<p className="mt-2 text-center font-medium text-smaller text-gray-600">
+					<p className="mt-2 text-center text-smaller font-medium text-gray-600">
 						Logged in as {email}
 					</p>
 				)}
 			</div>
 
 			<div className="mt-6 xs:mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-				<div className="bg-white py-6 xs:py-8 px-4 sm:rounded-lg sm:px-10 border border-gray-300">
+				<div className="border border-gray-300 bg-white py-6 px-4 xs:py-8 sm:rounded-lg sm:px-10">
 					<div>
 						<button
 							type="submit"
-							className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-brand_light hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+							className="flex w-full justify-center rounded-md border border-transparent bg-blue-brand_light py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
 							onClick={signOut}
 						>
 							Log Out

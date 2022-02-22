@@ -4,7 +4,7 @@ export function RecentNavigation({ path }: { path: string }) {
 	return (
 		<div>
 			<nav className="mb-1 sm:mb-2 lg:mb-3">
-				<ul className="space-x-1 navmenu">
+				<ul className="navmenu space-x-1">
 					<NavTab
 						url="/ipos/"
 						title="Latest"

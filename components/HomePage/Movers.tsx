@@ -117,7 +117,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		<>
 			<section className="mx-auto flex flex-col space-y-7 px-3 py-7 xs:px-4 sm:px-5 lg:max-w-[1200px] lg:flex-row lg:justify-evenly lg:space-y-0 lg:space-x-14 lg:py-10">
 				<Table movers={gainers} type="Gainers" />
-				<Mobile1 />
+				<Mobile1 key="/" />
 				<Table movers={losers} type="Losers" />
 			</section>
 		</>

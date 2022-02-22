@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const Warning = ({ message }: Props) => (
-	<div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-yellow-700">
+	<div className="border-l-4 border-yellow-400 bg-yellow-50 p-4 text-yellow-700">
 		<div className="flex flex-row items-center">
 			<div className="shrink-0">
 				<WarningIcon />

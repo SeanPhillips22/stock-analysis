@@ -4,7 +4,7 @@ export const HeaderSearch = () => {
 	return (
 		<div className="hd-search">
 			<form action="/search/" method="get" role="search">
-				<div className="flex items-center relative">
+				<div className="relative flex items-center">
 					<SiteSearch />
 				</div>
 			</form>

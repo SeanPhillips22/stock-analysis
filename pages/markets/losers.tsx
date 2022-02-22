@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next/types'
+import { GetStaticProps } from 'next/types'
 import { StockTable } from 'components/StockTable/__StockTable'
 import { MarketsLayout } from 'components/Markets/_MarketsLayout'
 import { PageConfig } from 'types/PageConfig'
@@ -69,9 +69,8 @@ export default function LosersPage({ data, tradingTimestamps }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['tradingTimestamps']
 	const data = await getSelect(query, 'stocks', true, extras)
-	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 	return data
 }

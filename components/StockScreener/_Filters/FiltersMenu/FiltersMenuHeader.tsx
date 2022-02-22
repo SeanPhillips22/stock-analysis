@@ -12,10 +12,10 @@ export function FiltersMenuHeader() {
 
 	return (
 		<>
-			<div className="mb-1.5 flex items-center mr-1">
+			<div className="mb-1.5 mr-1 flex items-center">
 				<div
 					title={filtersShown ? 'Hide Filter Area' : 'Show Filter Area'}
-					className="flex items-center text-lg font-semibold text-gray-800 hover:text-black cursor-pointer"
+					className="flex cursor-pointer items-center text-lg font-semibold text-gray-800 hover:text-black"
 					onClick={() => setFiltersShown(!filtersShown)}
 					onKeyPress={e => {
 						if (e.key === 'Enter') {
@@ -26,12 +26,12 @@ export function FiltersMenuHeader() {
 				>
 					{filtersShown ? (
 						<ChevronDownIcon
-							className="h-6 w-6 -mb-0.5"
+							className="-mb-0.5 h-6 w-6"
 							aria-hidden="true"
 						/>
 					) : (
 						<ChevronRightIcon
-							className="h-6 w-6 -mb-0.5"
+							className="-mb-0.5 h-6 w-6"
 							aria-hidden="true"
 						/>
 					)}

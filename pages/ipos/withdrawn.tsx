@@ -1,11 +1,10 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { News } from 'types/News'
 import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { SEO } from 'components/SEO'
 import { getIpoData } from 'functions/apis/callBackEnd'
 import { CalendarTable } from 'components/IPOs/CalendarTable'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
@@ -19,6 +18,7 @@ interface Props {
 }
 
 export const IposWithdrawn = ({ data, news, recent }: Props) => {
+	const url = '/ipos/withdrawn/'
 	const count = data.length
 
 	return (
@@ -26,11 +26,10 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 			<SEO
 				title="Withdrawn IPOs"
 				description="A list of companies that have withdrawn their U.S. stock market IPO within the last year."
-				canonical="/ipos/withdrawn/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/withdrawn/">
+			<Layout url={url}>
 				<div className="contain">
-					<Breadcrumbs url="/ipos/withdrawn/" />
 					<h1 className="hh1">Withdrawn IPOs</h1>
 					<IPONavigation path="calendar" />
 					<div className="lg:right-sidebar">
@@ -46,9 +45,9 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 								/>
 							</div>
 						</div>
-						<aside className="flex flex-col space-y-8 lg:space-y-10 pt-4 lg:pt-5">
+						<aside className="flex flex-col space-y-8 pt-4 lg:space-y-10 lg:pt-5">
 							<RecentTableMin recent={recent} />
-							<Sidebar1 />
+							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
 								news={news}
@@ -67,10 +66,8 @@ export const IposWithdrawn = ({ data, news, recent }: Props) => {
 
 export default IposWithdrawn
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const { data, news, recent } = await getIpoData('withdrawn')
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=3600')
 
 	return {
 		props: {

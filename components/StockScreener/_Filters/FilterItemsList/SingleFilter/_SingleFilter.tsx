@@ -56,7 +56,7 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 			<div className="flex items-center">
 				{active && (
 					<div
-						className="mr-1.5 text-gray-500 hover:text-red-500 focus:text-red-500 focus:outline-none cursor-pointer"
+						className="mr-1.5 cursor-pointer text-gray-500 hover:text-red-500 focus:text-red-500 focus:outline-none"
 						title="Clear Filter"
 						tabIndex={0}
 						onClick={() => remove(id)}
@@ -69,10 +69,10 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 			</div>
 
 			<div
-				className={`transition duration-150 origin-top-right absolute right-2 lg:absolute lg:right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 w-[260px]${
+				className={`absolute right-2 z-50 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 transition duration-150 focus:outline-none lg:absolute lg:right-0 w-[260px]${
 					id === openFilter
-						? ' visible opacity-100 transform translate-y-0'
-						: ' invisible opacity-0 transform -translate-y-2'
+						? ' visible translate-y-0 transform opacity-100'
+						: ' invisible -translate-y-2 transform opacity-0'
 				}`}
 				onKeyDown={e => e.key === 'Escape' && setOpenFilter('')}
 			>

@@ -1,10 +1,9 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { News } from 'types/News'
 import { IpoUpcoming, IpoRecent } from 'types/Ipos'
 import { SEO } from 'components/SEO'
 import { getIpoData } from 'functions/apis/callBackEnd'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { NewsFeed } from 'components/News/_NewsFeed'
 import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { RecentTableMin } from 'components/IPOs/RecentTableMin'
@@ -18,16 +17,17 @@ interface Props {
 }
 
 export const IpoNews = ({ data, upcoming, recent }: Props) => {
+	const url = '/ipos/news/'
+
 	return (
 		<>
 			<SEO
 				title="Latest IPO News"
 				description="The latest news about initial public offerings (IPOs) on the stock market, including both recent and upcoming IPOs."
-				canonical="/ipos/news/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/news/">
+			<Layout url={url}>
 				<div className="contain pb-0">
-					<Breadcrumbs url="/ipos/news/" />
 					<h1 className="hh1">IPO News</h1>
 					<IPONavigation path="news" />
 				</div>
@@ -36,9 +36,9 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 					<div className="py-1">
 						<NewsFeed data={data} related="Stocks" />
 					</div>
-					<aside className="contain sm:uncontain flex flex-col space-y-7 lg:space-y-10 pt-6">
+					<aside className="contain sm:uncontain flex flex-col space-y-7 pt-6 lg:space-y-10">
 						<CalendarTableMin upcoming={upcoming} />
-						<Sidebar1 />
+						<Sidebar1 key={url} />
 						<RecentTableMin recent={recent} />
 					</aside>
 				</div>
@@ -49,10 +49,8 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 
 export default IpoNews
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const { data, upcoming, recent } = await getIpoData('news')
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

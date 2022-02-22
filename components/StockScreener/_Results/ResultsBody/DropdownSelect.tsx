@@ -31,11 +31,11 @@ export function DropdownSelect({
 	return (
 		<Listbox value={selected} onChange={setSelected}>
 			<div>
-				<Listbox.Button className="bg-white relative max-w-[130px] border border-gray-300 rounded-md shadow-sm pl-2 bp:pl-3 pr-8 bp:pr-10 py-2 text-left cursor-pointer focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base font-medium text-gray-700">
+				<Listbox.Button className="relative max-w-[130px] cursor-pointer rounded-md border border-gray-300 bg-white py-2 pl-2 pr-8 text-left text-sm font-medium text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 bp:pl-3 bp:pr-10 sm:text-base">
 					<span className="block truncate">
 						{getName(selected, selectOptions)}
 					</span>
-					<span className="absolute inset-y-0 right-0 flex items-center pr-1 bp:pr-2 pointer-events-none">
+					<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-1 bp:pr-2">
 						<SelectorIcon
 							className="h-5 w-5 text-gray-400"
 							aria-hidden="true"
@@ -49,14 +49,14 @@ export function DropdownSelect({
 					leaveFrom="opacity-100"
 					leaveTo="opacity-0"
 				>
-					<Listbox.Options className="absolute z-10 mt-1 max-w-[130px] bg-white shadow-lg max-h-60 rounded-md py-1 text-sm sm:text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none">
+					<Listbox.Options className="absolute z-10 mt-1 max-h-60 max-w-[130px] overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-base">
 						{selectOptions.map(option => (
 							<Listbox.Option
 								key={option.value}
 								className={({ active }) =>
 									classNames(
 										active ? 'bg-gray-200' : '',
-										'cursor-pointer select-none relative py-2 pl-3 pr-9 text-gray-700'
+										'relative cursor-pointer select-none py-2 pl-3 pr-9 text-gray-700'
 									)
 								}
 								value={option.value}
@@ -73,7 +73,7 @@ export function DropdownSelect({
 										</span>
 
 										{selected ? (
-											<span className="text-blue-600 absolute inset-y-0 right-0 flex items-center pr-3">
+											<span className="absolute inset-y-0 right-0 flex items-center pr-3 text-blue-600">
 												<CheckIcon
 													className="h-5 w-5"
 													aria-hidden="true"

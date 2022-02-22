@@ -9,8 +9,8 @@ export const TabNavigationETF = ({ symbol }: Props) => {
 	const { path } = useLayoutContext()
 
 	return (
-		<nav className="border-b-2 border-blue-brand_sharp w-full">
-			<ul className="w-full navmenu">
+		<nav className="w-full border-b-2 border-blue-brand_sharp">
+			<ul className="navmenu w-full">
 				<li>
 					<Link href={`/etf/${symbol}/`} prefetch={false}>
 						<a

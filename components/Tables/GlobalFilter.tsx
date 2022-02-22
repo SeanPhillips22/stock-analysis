@@ -20,7 +20,7 @@ export const GlobalFilter = ({
 
 	return (
 		<input
-			className="shadow-sm outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block w-full text-sm xs:text-base border border-gray-300 rounded-md py-1.5 sm:py-2 pl-2 pr-1 xs:px-3"
+			className="block w-full rounded-md border border-gray-300 py-1.5 pl-2 pr-1 text-sm shadow-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 xs:px-3 xs:text-base sm:py-2"
 			value={value || ''}
 			onChange={e => {
 				setValue(e.target.value)

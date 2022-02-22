@@ -1,10 +1,9 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { IpoRecent } from 'types/Ipos'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { getIpoData } from 'functions/apis/callBackEnd'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { Breadcrumbs } from 'components/Breadcrumbs/_Breadcrumbs'
 import { StatsChartAnnual } from 'components/IPOs/StatsChartAnnual'
 import { StatsChartMonthly } from 'components/IPOs/StatsChartMonthly'
 import Link from 'next/link'
@@ -27,23 +26,24 @@ interface Props {
 }
 
 export const IpoStatistics = ({ data, news, recent }: Props) => {
+	const url = '/ipos/statistics/'
+
 	return (
 		<>
 			<SEO
 				title="IPO Statistics and Charts"
 				description="Statistics and charts for initial public offerings (IPOs) on the US stock market. Annual data is available from 2000-2022 and monthly data for 2019-2022."
-				canonical="/ipos/statistics/"
+				canonical={url}
 			/>
-			<Layout url="/ipos/statistics/">
+			<Layout url={url}>
 				<div className="contain">
-					<Breadcrumbs url="/ipos/statistics/" />
 					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation path="statistics" />
 
 					<div className="lg:right-sidebar">
 						<div className="flex flex-col space-y-3 py-3 sm:py-4">
 							<div>
-								<p className="text-base sm:text-lg text-gray-900">
+								<p className="text-base text-gray-900 sm:text-lg">
 									This page contains statistics and charts for initial
 									public offerings (IPOs) on the US stock market.
 									Annual data is available from 2000-2022 and monthly
@@ -52,7 +52,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 							</div>
 							<div>
 								<h2 className="hh2 mb-2">Number of IPOs by Year</h2>
-								<p className="text-base sm:text-lg text-gray-900">
+								<p className="text-base text-gray-900 sm:text-lg">
 									{`There have been ${data.total.toLocaleString(
 										'en-US'
 									)} IPOs between 2000 and 2022. The least was in 2009 with only 62. The full year 2021 was an all-time record with 1035 IPOs, beating the previous record of 480 in the year 2020.`}
@@ -81,7 +81,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								<h2 className="hh2 mb-2">
 									2021 Initial Public Offerings
 								</h2>
-								<p className="text-base sm:text-lg text-gray-900">
+								<p className="text-base text-gray-900 sm:text-lg">
 									There were 1035 IPOs in 2021, which was an all-time
 									record. March had the most with a total of 151, while
 									August had the fewest with only 40 IPOs.{' '}
@@ -98,7 +98,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 								<h2 className="hh2 mb-2">
 									2020 Initial Public Offerings
 								</h2>
-								<p className="text-base sm:text-lg text-gray-900">
+								<p className="text-base text-gray-900 sm:text-lg">
 									There were 480 initial public offerings in 2020.
 									October had the most with a total of 97 IPOs. March
 									had the fewest with only 5.{' '}
@@ -131,7 +131,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
 							<RecentTableMin recent={recent} />
-							<Sidebar1 />
+							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
 								news={news}
@@ -150,10 +150,8 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 
 export default IpoStatistics
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const { data, news, recent } = await getIpoData('statistics')
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=3600')
 
 	return {
 		props: {

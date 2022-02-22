@@ -10,29 +10,29 @@ export const RecentTableMin = ({ recent }: Props) => {
 	return (
 		<div>
 			<h3 className="hh3 mb-2.5">Latest IPOs</h3>
-			<div className="border border-gray-200 rounded">
-				<table className="w-full text-gray-900 text-[0.95rem]">
+			<div className="rounded border border-gray-200">
+				<table className="w-full text-[0.95rem] text-gray-900">
 					<thead>
 						<tr className="border-b border-gray-200">
-							<th className="text-left py-2 px-2 pl-2 border-r border-gray-200">
+							<th className="border-r border-gray-200 py-2 px-2 pl-2 text-left">
 								Date
 							</th>
-							<th className="text-left py-2 px-2 border-r border-gray-200">
+							<th className="border-r border-gray-200 py-2 px-2 text-left">
 								Symbol
 							</th>
-							<th className="text-left py-2 px-2 pr-2">Name</th>
+							<th className="py-2 px-2 pr-2 text-left">Name</th>
 						</tr>
 					</thead>
 					<tbody>
 						{recent.map((item, index) => (
 							<tr
 								key={index}
-								className="border-b last:border-0 border-gray-200"
+								className="border-b border-gray-200 last:border-0"
 							>
-								<td className="py-2 px-2 pl-2 border-r border-gray-200 whitespace-nowrap">
+								<td className="whitespace-nowrap border-r border-gray-200 py-2 px-2 pl-2">
 									{item.date}
 								</td>
-								<td className="py-2 px-2 border-r border-gray-200">
+								<td className="border-r border-gray-200 py-2 px-2">
 									<StockLink symbol={item.symbol} className="bll" />
 								</td>
 								<td className="py-2 px-2 pr-2 lg:max-w-[150px] lg:truncate">

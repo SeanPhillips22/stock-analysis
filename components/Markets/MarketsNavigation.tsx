@@ -7,7 +7,7 @@ type Props = {
 
 export function MarketsNavigation({ active }: Props) {
 	return (
-		<nav className="border-b-[3px] border-blue-brand_sharp mb-3">
+		<nav className="mb-3 border-b-[3px] border-blue-brand_sharp">
 			<ul className="navmenu">
 				<NavTab
 					url="/markets/gainers/"

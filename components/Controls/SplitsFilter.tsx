@@ -38,11 +38,11 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 				leaveFrom="opacity-100 scale-100"
 				leaveTo="opacity-0 scale-95"
 			>
-				<Menu.Items className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+				<Menu.Items className="absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 					<div className="py-1">
 						<Menu.Item>
 							<div
-								className="text-gray-700 hover:bg-gray-100 px-4 py-2 text-sm cursor-default"
+								className="cursor-default px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 								onClick={() => {
 									setColumnFilter('splitType', '')
 									setTitle('All Splits')
@@ -54,7 +54,7 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 						</Menu.Item>
 						<Menu.Item>
 							<div
-								className="text-gray-700 hover:bg-gray-100 px-4 py-2 text-sm cursor-default"
+								className="cursor-default px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 								onClick={() => {
 									setColumnFilter('splitType', 'Forward')
 									setTitle('Forward')
@@ -66,7 +66,7 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 						</Menu.Item>
 						<Menu.Item>
 							<div
-								className="text-gray-700 hover:bg-gray-100 px-4 py-2 text-sm cursor-default"
+								className="cursor-default px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 								onClick={() => {
 									setColumnFilter('splitType', 'Reverse')
 									setTitle('Reverse')

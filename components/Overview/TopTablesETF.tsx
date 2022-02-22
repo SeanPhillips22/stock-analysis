@@ -11,7 +11,7 @@ const cssCellRight =
 
 export const InfoTable = ({ data }: { data: Overview }) => {
 	return (
-		<table className="text-small w-[48%] lg:w-auto text-gray-900">
+		<table className="w-[48%] text-small text-gray-900 lg:w-auto">
 			<tbody>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Assets</td>
@@ -58,7 +58,7 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 	const q = useQuote(info)
 
 	return (
-		<table className="text-small w-[48%] lg:w-auto text-gray-900">
+		<table className="w-[48%] text-small text-gray-900 lg:w-auto">
 			<tbody>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Volume</td>
@@ -84,7 +84,7 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>52-Week High</td>
-					<td className={cssCellRight}>{q?.l52 || 'n/a'}</td>
+					<td className={cssCellRight}>{q?.h52 || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Beta</td>

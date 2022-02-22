@@ -29,6 +29,9 @@ export function SiteSearch() {
 				setLoading(true)
 				const trendingData = await getData('trending?q=top')
 				setTrending(trendingData)
+				await fetch('https://api.stockanalysis.com/search?q=getready', {
+					mode: 'no-cors'
+				})
 			} catch (error) {
 				setError(true)
 				return console.error(error)
@@ -207,7 +210,7 @@ export function SiteSearch() {
 				{open && !error && (
 					<div className="results-wrap">
 						{!loading && query.length === 0 && (
-							<h4 className="text-lg font-semibold py-1.5 px-2 sm:px-3">
+							<h4 className="py-1.5 px-2 text-lg font-semibold sm:px-3">
 								Trending
 							</h4>
 						)}
@@ -225,7 +228,7 @@ export function SiteSearch() {
 						) : (
 							!loading &&
 							!filtering && (
-								<div className="text-lg py-1.5 px-2 sm:px-3 activebg">
+								<div className="activebg py-1.5 px-2 text-lg sm:px-3">
 									<a
 										href={`/search?q=${query}`}
 										className="hover:text-blue-link"

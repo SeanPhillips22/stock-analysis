@@ -69,19 +69,19 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 						<tr className="border-b border-t border-gray-200 bg-gray-50">
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+								className="py-2 px-1 text-left text-gray-800 xs:px-2"
 							>
 								Date
 							</th>
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+								className="py-2 px-1 text-left text-gray-800 xs:px-2"
 							>
 								Type
 							</th>
 							<th
 								scope="col"
-								className="text-left py-2 px-1 xs:px-2 text-gray-800"
+								className="py-2 px-1 text-left text-gray-800 xs:px-2"
 							>
 								Title
 							</th>
@@ -94,15 +94,15 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 									key={entry['url']}
 									className="border-b border-gray-200"
 								>
-									<td className="py-3 pr-1 xs:px-2 text-gray-900 whitespace-nowrap align-top">
+									<td className="whitespace-nowrap py-3 pr-1 align-top text-gray-900 xs:px-2">
 										<span title={entry['time']}>
 											{entry['cleantime']}
 										</span>
 									</td>
-									<td className="py-3 px-1 xs:px-2 text-gray-900 align-top">
+									<td className="py-3 px-1 align-top text-gray-900 xs:px-2">
 										{entry['type']}
 									</td>
-									<td className="py-3 pl-1 xs:px-2 align-top">
+									<td className="py-3 pl-1 align-top xs:px-2">
 										<External
 											url={entry['url']}
 											text={entry['title']}

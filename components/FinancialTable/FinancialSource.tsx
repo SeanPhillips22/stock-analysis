@@ -57,7 +57,7 @@ export function FinancialSource({ info }: { info: Info }) {
 		(info.state === 'newipo' && info.daysSince && info.daysSince < 5)
 	) {
 		return (
-			<div className="text-tiny text-gray-700 mt-2">
+			<div className="mt-2 text-tiny text-gray-700">
 				{/* prettier-ignore */}
 				Source: IPO financials are sourced from{' '}
 				{secLink(info.cik, 'S-1 and S-1/A filings', 'S-1')} submitted to the
@@ -70,7 +70,7 @@ export function FinancialSource({ info }: { info: Info }) {
 
 	if (info.currency !== 'USD') {
 		return (
-			<div className="text-[0.85rem] text-gray-600 mt-2">
+			<div className="mt-2 text-[0.85rem] text-gray-600">
 				{/* prettier-ignore */}
 				Source: Financials are provided by {nasdaqLink} and sourced from
 				audited reports submitted to the{' '}
@@ -80,7 +80,7 @@ export function FinancialSource({ info }: { info: Info }) {
 	}
 
 	return (
-		<div className="text-[0.85rem] text-gray-600 mt-2">
+		<div className="mt-2 text-[0.85rem] text-gray-600">
 			{/* prettier-ignore */}
 			Source: Financials are provided by {nasdaqLink} and sourced from the
 			audited annual ({returnLink('10-K', info.cik)}) and quarterly (

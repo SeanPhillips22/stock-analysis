@@ -37,7 +37,7 @@ export function FiltersList() {
 		}
 
 		return (
-			<div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2.5 pt-1">
+			<div className="gap-x-2.5 pt-1 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{DataPoints.map(f => {
 					if (searched.includes(f.id)) {
 						return <FilterWrap f={f} key={f.id} />
@@ -61,7 +61,7 @@ export function FiltersList() {
 		}
 
 		return (
-			<div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-2.5 pt-1">
+			<div className="gap-x-2.5 pt-1 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{DataPoints.map(f => {
 					if (active.includes(f.id)) {
 						return <FilterWrap f={f} key={f.id} />
@@ -76,7 +76,7 @@ export function FiltersList() {
 	return (
 		<>
 			<div
-				className={`sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-x-2.5 pt-1`}
+				className={`pt-1 sm:grid sm:grid-cols-2 sm:gap-x-2.5 lg:grid-cols-3 xl:grid-cols-4`}
 			>
 				{DataPoints.map(f => {
 					if (f.category?.includes(filterMenu) || filterMenu === 'All') {

@@ -85,7 +85,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 	}
 
 	return (
-		<div className="p-1 pb-2 pr-2 text-sm space-y-1">
+		<div className="space-y-1 p-1 pb-2 pr-2 text-sm">
 			<div className="flex items-center justify-start space-x-1">
 				<div>
 					<SelectComparison compare={compare} setCompare={setCompare} />
@@ -98,21 +98,21 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 						onChange={e => setFirst(e.target.value)}
 						onKeyDown={e => handleKeyDown(e, 'first')}
 						tabIndex={0}
-						className="shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]"
+						className="block max-w-[4rem] rounded-sm border-gray-300 p-1 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
 					/>
 					{/* Add two icons that increase and decrease the input value */}
 					{compare !== 'notzero' && compare !== 'between' && (
-						<div className="flex flex-col items-center ml-1 space-y-0">
+						<div className="ml-1 flex flex-col items-center space-y-0">
 							<span title="Increase by 1">
 								<ChevronUpIcon
-									className="w-4 h-4 text-gray-500 hover:text-black cursor-pointer"
+									className="h-4 w-4 cursor-pointer text-gray-500 hover:text-black"
 									onClick={() => setFirst(incrementFilter(first))}
 									style={{ maxWidth: '40px' }}
 								/>
 							</span>
 							<span title="Decrease by 1">
 								<ChevronDownIcon
-									className="w-4 h-4 text-gray-500 hover:text-black cursor-pointer"
+									className="h-4 w-4 cursor-pointer text-gray-500 hover:text-black"
 									onClick={() => setFirst(decrementFilter(first))}
 									style={{ maxWidth: '40px' }}
 								/>
@@ -128,13 +128,13 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 					onChange={e => setSecond(e.target.value)}
 					onKeyDown={e => handleKeyDown(e, 'second')}
 					tabIndex={0}
-					className={`shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm block border-gray-300 rounded-sm p-1 max-w-[4rem]${
+					className={`block rounded-sm border-gray-300 p-1 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 max-w-[4rem]${
 						compare === 'between' ? ' block' : ' hidden'
 					}`}
 				/>
 			</div>
 			{(first || second) && (
-				<div className="ml-2 text-gray-600 whitespace-normal">{`"${name} is ${compare} ${
+				<div className="ml-2 whitespace-normal text-gray-600">{`"${name} is ${compare} ${
 					first ? firstValue : '...'
 				}${
 					second && compare === 'between' ? ` and ${secondValue}` : ''

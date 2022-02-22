@@ -1,6 +1,6 @@
 export const MoonIcon = () => {
 	return (
-		<span className="text-blue-400 inline">
+		<span className="inline text-blue-400">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				className="h-4 w-4"

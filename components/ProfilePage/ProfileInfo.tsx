@@ -8,8 +8,8 @@ interface Props {
 
 export const ProfileInfo = ({ info, logo }: Props) => {
 	return (
-		<div className="bg-gray-50 mt-7 lg:mt-1 px-3 xs:px-4 pt-3 xs:pt-4 pb-2 border border-gray-200 rounded">
-			<div className="text-2xl font-semibold text-center pb-3">
+		<div className="mt-7 rounded border border-gray-200 bg-gray-50 px-3 pt-3 pb-2 xs:px-4 xs:pt-4 lg:mt-1">
+			<div className="pb-3 text-center text-2xl font-semibold">
 				{info.name}
 			</div>
 			{logo.src && (
@@ -23,72 +23,72 @@ export const ProfileInfo = ({ info, logo }: Props) => {
 					/>
 				</div>
 			)}
-			<table className="w-full profile-table">
+			<table className="profile-table w-full">
 				<tbody>
 					{info.country && (
 						<tr>
-							<td className="py-1.5 lg:py-2 px-1 font-semibold">
+							<td className="py-1.5 px-1 font-semibold lg:py-2">
 								Country
 							</td>
-							<td className="text-right py-1.5 lg:py-2 px-1">
+							<td className="py-1.5 px-1 text-right lg:py-2">
 								{info.country}
 							</td>
 						</tr>
 					)}
 					{info.founded && (
 						<tr>
-							<td className="py-1.5 lg:py-2 px-1 font-semibold">
+							<td className="py-1.5 px-1 font-semibold lg:py-2">
 								Founded
 							</td>
-							<td className="text-right py-1.5 lg:py-2 px-1">
+							<td className="py-1.5 px-1 text-right lg:py-2">
 								{info.founded}
 							</td>
 						</tr>
 					)}
 					{info.ipoDate && (
 						<tr>
-							<td className="py-1.5 lg:py-2 px-1 font-semibold">
+							<td className="py-1.5 px-1 font-semibold lg:py-2">
 								IPO Date
 							</td>
-							<td className="text-right py-1.5 lg:py-2 px-1">
+							<td className="py-1.5 px-1 text-right lg:py-2">
 								{info.ipoDate}
 							</td>
 						</tr>
 					)}
 					{info.industry && (
 						<tr>
-							<td className="py-1.5 lg:py-2 px-1 font-semibold">
+							<td className="py-1.5 px-1 font-semibold lg:py-2">
 								Industry
 							</td>
-							<td className="text-right py-1.5 lg:py-2 px-1">
+							<td className="py-1.5 px-1 text-right lg:py-2">
 								{info.industry}
 							</td>
 						</tr>
 					)}
 					{info.sector && info.sector !== 'Blank Check / SPAC' && (
 						<tr>
-							<td className="py-1.5 lg:py-2 px-1 font-semibold">
+							<td className="py-1.5 px-1 font-semibold lg:py-2">
 								Sector
 							</td>
-							<td className="text-right py-1.5 lg:py-2 px-1">
+							<td className="py-1.5 px-1 text-right lg:py-2">
 								{info.sector}
 							</td>
 						</tr>
 					)}
 					{info.employees && (
 						<tr>
-							<td className="py-1.5 lg:py-2 px-1 font-semibold">
+							<td className="py-1.5 px-1 font-semibold lg:py-2">
 								Employees
 							</td>
-							<td className="text-right py-1.5 lg:py-2 px-1">
+							<td className="py-1.5 px-1 text-right lg:py-2">
 								{info.employees}
 							</td>
 						</tr>
 					)}
 					{info.ceo && (
 						<tr>
-							<td className="py-1.5 lg:py-2 px-1 font-semibold">CEO</td>
-							<td className="text-right py-1.5 lg:py-2 px-1">
+							<td className="py-1.5 px-1 font-semibold lg:py-2">CEO</td>
+							<td className="py-1.5 px-1 text-right lg:py-2">
 								{info.ceo}
 							</td>
 						</tr>

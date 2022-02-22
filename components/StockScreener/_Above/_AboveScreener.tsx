@@ -13,16 +13,16 @@ export function AboveScreener() {
 
 	return (
 		<>
-			<div className="mb-2.5 md:flex md:mb-1.5 md:justify-between md:items-end">
+			<div className="mb-2.5 md:mb-1.5 md:flex md:items-end md:justify-between">
 				<div className="flex items-end">
 					<h1 className="hh1 mb-3.5 md:mb-2">{typeTitle + ' Screener'}</h1>
 					{filterCount > 0 && (
-						<span className="ml-2.5 mb-4 md:mb-2.5 text-sm text-gray-600 font-semibold">
+						<span className="ml-2.5 mb-4 text-sm font-semibold text-gray-600 md:mb-2.5">
 							{resultsCount} matches
 						</span>
 					)}
 				</div>
-				<div className="flex space-x-2 items-center">
+				<div className="flex items-center space-x-2">
 					<PresetFilters />
 					<SavedFilters />
 				</div>

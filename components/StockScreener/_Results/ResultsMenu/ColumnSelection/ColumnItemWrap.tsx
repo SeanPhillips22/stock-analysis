@@ -45,7 +45,7 @@ export function ColumnItemWrap({ search, type }: Props) {
 	const inactive = useMemo(() => inactiveArray, [columnDropdownOpen, search])
 
 	return (
-		<div className="max-h-80 overflow-y-auto overscroll-contain thin-scroll text-sm p-2 space-y-2">
+		<div className="thin-scroll max-h-80 space-y-2 overflow-y-auto overscroll-contain p-2 text-sm">
 			{active.map(item => (
 				<ColumnItem
 					key={item.id}

@@ -48,23 +48,23 @@ export function TablePagination({
 	}
 
 	return (
-		<nav className="mt-2.5 py-1 px-0.5 flex flex-row items-center justify-between space-x-1.5 sm:space-x-2 text-sm sm:text-base overflow-x-auto hide-scroll">
+		<nav className="hide-scroll mt-2.5 flex flex-row items-center justify-between space-x-1.5 overflow-x-auto py-1 px-0.5 text-sm sm:space-x-2 sm:text-base">
 			<button
 				onClick={() => {
 					previousPage()
 					setTablePage(tablePage - 2)
 				}}
 				disabled={!canPreviousPage}
-				className={`flex items-center border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 py-2 pl-1.5 pr-2.5 sm:pr-3${
+				className={`flex items-center rounded-md border border-gray-300 bg-white py-2 pl-1.5 pr-2.5 font-medium text-gray-700 hover:bg-gray-50 sm:pr-3${
 					!canPreviousPage
 						? ' cursor-default hover:bg-white'
 						: ' cursor-pointer'
 				}`}
 			>
-				<ChevronLeftIcon className="w-4 h-4 -mb-px" />
+				<ChevronLeftIcon className="-mb-px h-4 w-4" />
 				<div className="hidden xs:inline">Previous</div>
 			</button>
-			<div className="flex flex-row items-center space-x-2 bp:space-x-4 font-medium text-gray-700">
+			<div className="flex flex-row items-center space-x-2 font-medium text-gray-700 bp:space-x-4">
 				<span className="whitespace-nowrap">
 					<span className="hidden sm:inline">Page </span>
 					{`${pageIndex + 1} of ${pageOptions.length}`}
@@ -81,14 +81,14 @@ export function TablePagination({
 					setTablePage(tablePage + 1)
 				}}
 				disabled={!canNextPage}
-				className={`flex items-center border border-gray-300 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 py-2 pr-1.5 pl-2.5 sm:pl-3${
+				className={`flex items-center rounded-md border border-gray-300 bg-white py-2 pr-1.5 pl-2.5 font-medium text-gray-700 hover:bg-gray-50 sm:pl-3${
 					!canNextPage
 						? ' cursor-default hover:bg-white'
 						: ' cursor-pointer'
 				}`}
 			>
 				<div className="hidden xs:inline">Next</div>
-				<ChevronRightIcon className="w-4 h-4 -mb-px" />
+				<ChevronRightIcon className="-mb-px h-4 w-4" />
 			</button>
 		</nav>
 	)

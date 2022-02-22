@@ -16,7 +16,7 @@ export const NewsWidget = ({ title, news, button }: Props) => {
 	}
 
 	return (
-		<div className="border border-gray-200 rounded text-sm p-4">
+		<div className="rounded border border-gray-200 p-4 text-sm">
 			<h3 className="hh3">{title}</h3>
 			<ul className="text-gray-700">
 				{news.map((item, index) => (

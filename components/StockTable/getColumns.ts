@@ -1,6 +1,5 @@
 import { DataPoints } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
-import { formatCells } from 'functions/tables/formatCells'
 
 /**
  * This function formats the columns for react-table
@@ -23,13 +22,6 @@ export function getColumns(cols: DataId[], main: DataId) {
 		return {
 			Header: colName || name,
 			accessor: col,
-			Cell: (props: any) => {
-				return format
-					? formatCells(format, props, 'stocks')
-					: props.value
-					? props.value
-					: '-'
-			},
 			sortType: sort || 'basic',
 			sortInverted:
 				col !== main && format !== 'string' && format !== 'linkSymbol'

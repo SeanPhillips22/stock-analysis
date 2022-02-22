@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 import { PathType } from 'types/Path'
 
-type ContextProps = {
+interface ContextProps {
 	url: string
 	path: PathType
 }
@@ -14,8 +14,13 @@ type ProviderProps = {
 }
 
 export function LayoutContextProvider({ value, children }: ProviderProps) {
+	const state = {
+		url: value.url,
+		path: value.path
+	}
+
 	return (
-		<LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>
+		<LayoutContext.Provider value={state}>{children}</LayoutContext.Provider>
 	)
 }
 

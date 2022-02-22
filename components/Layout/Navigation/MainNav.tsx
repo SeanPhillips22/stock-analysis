@@ -13,6 +13,7 @@ import { Collapse } from './Collapse'
 import { MenuNavItem } from './NavItems/Menu'
 import { SingleNavItem } from './NavItems/Single'
 import { useLayoutContext } from '../LayoutContext'
+import { useEffect } from 'react'
 
 const navigation = [
 	{ name: 'Home', href: '/', icon: HomeIcon },
@@ -100,13 +101,10 @@ const navigation = [
 
 export function MainNav() {
 	const setIsOpen = navMenuState(state => state.setIsOpen)
-	const initial = navMenuState(state => state.initial)
-	const setInitial = navMenuState(state => state.setInitial)
 	const { path } = useLayoutContext()
 
-	// Set the initial open state for the menu
-	if (initial && path.one) {
-		setInitial(false)
+	// Set the open state for the menu
+	useEffect(() => {
 		if (path) {
 			navigation.map(item => {
 				if (item.children) {
@@ -116,7 +114,7 @@ export function MainNav() {
 				}
 			})
 		}
-	}
+	}, [path, setIsOpen])
 
 	return (
 		<div className="leftnav">

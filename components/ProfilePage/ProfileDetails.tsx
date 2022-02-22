@@ -4,8 +4,8 @@ export const ProfileDetails = ({ details }: { details: StockDetails }) => {
 	return (
 		<>
 			<h2 className="hh2 mt-6 xs:mt-8">Stock Details</h2>
-			<div className="bg-gray-50 px-2 xs:px-4 pt-2 xs:pt-2.5 pb-2 border border-gray-200 rounded">
-				<table className="w-full detailstable">
+			<div className="rounded border border-gray-200 bg-gray-50 px-2 pt-2 pb-2 xs:px-4 xs:pt-2.5">
+				<table className="detailstable w-full">
 					<tbody>
 						{details.symbol && (
 							<tr>

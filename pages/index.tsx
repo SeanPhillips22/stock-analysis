@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { SEO } from 'components/SEO'
 import { Hero } from 'components/HomePage/Hero'
 import { Movers } from 'components/HomePage/Movers'
@@ -74,7 +74,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 					gainers={data.gainers}
 					losers={data.losers}
 				/>
-				<div className="mx-auto flex flex-col space-y-6 lg:grid lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:px-5 lg:max-w-[1200px]">
+				<div className="mx-auto flex flex-col space-y-6 lg:grid lg:max-w-[1200px] lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:px-5">
 					<LatestNews news={data.news} />
 					<IPOwidgets
 						recent={data.recentIpos}
@@ -86,10 +86,8 @@ export default function FrontPage({ data }: FrontPageProps) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const data = await getHomePageData()
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

@@ -40,7 +40,7 @@ export const Profile = ({ info, data }: Props) => {
 										: 'col-span-1'
 								}
 							>
-								<span className="font-semibold block">
+								<span className="block font-semibold">
 									{data.infoTable[number][0]}
 								</span>
 								<span>{data.infoTable[number][1]}</span>

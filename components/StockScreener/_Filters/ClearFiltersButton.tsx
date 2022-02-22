@@ -15,7 +15,7 @@ export function ClearFiltersButton({ showLabel }: Props) {
 				<div
 					className={cn(
 						showLabel ? 'pt-2 sm:py-2' : '',
-						'flex items-center text-gray-500 hover:text-red-500 cursor-pointer font-semibold text-base'
+						'flex cursor-pointer items-center text-base font-semibold text-gray-500 hover:text-red-500'
 					)}
 					title="Clear All Filters"
 					onClick={() => clearFilters()}

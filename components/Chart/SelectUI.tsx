@@ -29,7 +29,7 @@ export const SelectPeriod = (props: SelectPeriodProps) => {
 				}}
 				id="period"
 				name="period"
-				className="block pl-2 tiny:pl-3 border-0 border-r sm:border-r-0 sm:border-l border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
+				className="block border-0 border-r border-gray-300 py-2 pl-2 pr-7 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 tiny:pl-3 xs:pr-8 bp:pr-10 bp:text-base sm:border-r-0 sm:border-l"
 				value={defaultValue}
 			>
 				<option value="d">Day</option>
@@ -49,7 +49,7 @@ export const SelectType = (props: SelectTypeProps) => {
 				onChange={e => props.dispatcher(e.target.value)}
 				id="type"
 				name="type"
-				className="block pl-2 tiny:pl-3 border-0 sm:border-l border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
+				className="block border-0 border-gray-300 py-2 pl-2 pr-7 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 tiny:pl-3 xs:pr-8 bp:pr-10 bp:text-base sm:border-l"
 				value={defaultValue}
 			>
 				<option value="candlestick">Candles</option>
@@ -73,7 +73,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				onChange={e => dispatch(e.target.value)}
 				id="range"
 				name="range"
-				className="block lg:hidden pl-2 tiny:pl-3 border-r border-gray-300 pr-7 xs:pr-8 bp:pr-10 py-2 border-0 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm bp:text-base"
+				className="block border-0 border-r border-gray-300 py-2 pl-2 pr-7 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 tiny:pl-3 xs:pr-8 bp:pr-10 bp:text-base lg:hidden"
 				value={defaultValue}
 			>
 				<option value="1D">1 Day</option>
@@ -87,7 +87,7 @@ export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 				<option value="MAX">MAX</option>
 			</select>
 
-			<ul className="hidden lg:flex flex-row whitespace-nowrap overflow-x-auto pl-1 hide-scroll lg:mr-auto">
+			<ul className="hide-scroll hidden flex-row overflow-x-auto whitespace-nowrap pl-1 lg:mr-auto lg:flex">
 				<li>
 					<button
 						onClick={() => {

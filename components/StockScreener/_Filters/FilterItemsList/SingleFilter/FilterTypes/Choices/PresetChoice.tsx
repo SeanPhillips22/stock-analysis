@@ -40,7 +40,7 @@ export function PresetChoice({ option, filter }: Props) {
 	return (
 		<div className="border-b border-gray-100 last:border-0">
 			<div
-				className="block px-4 py-2 text-sm text-gray-700 focus:outline-none hover:bg-gray-100 focus:bg-blue-100 hover:text-gray-900 focus:text-gray-900 cursor-pointer"
+				className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-blue-100 focus:text-gray-900 focus:outline-none"
 				onClick={() => handleSelection(option.name, option.value)}
 				onKeyDown={e => handleKeyPress(e)}
 				tabIndex={0}

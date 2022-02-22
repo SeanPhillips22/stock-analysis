@@ -42,7 +42,6 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 								: 'nav-item parent'
 						}
 						title={item.name}
-						onClick={() => setIsOpen({ [item.name]: true })}
 					>
 						<item.icon
 							className="nav-icon"
@@ -70,10 +69,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 										? 'nav-item current subitem'
 										: 'nav-item subitem'
 								}
-								onClick={() => {
-									close()
-									setIsOpen({ [item.name]: true })
-								}}
+								onClick={close}
 								title={subItem.name}
 							>
 								<span className="nav-label">{subItem.name}</span>
