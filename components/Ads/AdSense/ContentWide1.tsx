@@ -14,11 +14,15 @@ export function ContentWide1() {
 	}
 
 	if (isDev()) {
-		return <div className="adph cw1"></div>
+		return (
+			<div className="ad-banner cw1w">
+				<div className="adph cw1"></div>
+			</div>
+		)
 	}
 
 	return (
-		<>
+		<aside className="ad-banner cw1w">
 			<ins
 				className="adsbygoogle cw1"
 				data-ad-client="ca-pub-7702053427535735"
@@ -26,6 +30,6 @@ export function ContentWide1() {
 				data-full-width-responsive="false"
 			></ins>
 			<AdsenseScript />
-		</>
+		</aside>
 	)
 }

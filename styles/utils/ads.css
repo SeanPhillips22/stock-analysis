@@ -57,6 +57,10 @@
 		@apply mx-auto min-h-[200px] w-full xs:h-[250px] xs:w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[90px] lg:w-[970px];
 	}
 
+	.cw1w {
+		@apply text-center;
+	}
+
 	/* Adsense Footer Ad */
 	.ftad {
 		@apply mx-auto h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[250px] lg:w-[970px];
