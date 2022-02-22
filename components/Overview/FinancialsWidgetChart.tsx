@@ -1,4 +1,4 @@
-import { Unavailable } from 'components/Unavailable'
+import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
 import { Bar } from 'react-chartjs-2'
 import {
@@ -37,16 +37,9 @@ export function FinancialsWidgetChart({
 	colors,
 	padLegend
 }: FinancialsWidgetChartI) {
-	if (
-		typeof window !== 'undefined' &&
-		typeof window.ResizeObserver === 'undefined'
-	) {
-		return (
-			<Unavailable
-				message="This chart does not work in your browser. Please update to the latest browser version."
-				small={true}
-			/>
-		)
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
+		return <UnavailableSafari />
 	}
 
 	ChartJS.register(

@@ -4,6 +4,7 @@ import { useSymbolContext } from 'components/Layout/SymbolContext'
 // Format as a percentage, with a '%' symbol at the end
 // Also return the color to use -- green, red or gray
 function getChange(target: number, current: number) {
+	if (!target) return ['n/a', 'text-gray-800']
 	let change = ((target - current) / current) * 100
 	let formatted = change.toFixed(2) + '%'
 	if (change > 0) formatted = '+' + formatted
@@ -42,10 +43,10 @@ export function SummaryTable() {
 				<tbody>
 					<tr className="border-b border-gray-200">
 						<td className="text-left">Price</td>
-						<td>${low}</td>
-						<td>${average}</td>
-						<td>${median}</td>
-						<td>${high}</td>
+						<td>{low ? '$' + low : 'n/a'}</td>
+						<td>{average ? '$' + average : 'n/a'}</td>
+						<td>{median ? '$' + median : 'n/a'}</td>
+						<td>{high ? '$' + high : 'n/a'}</td>
 					</tr>
 					<tr>
 						<td className="text-left">Change</td>

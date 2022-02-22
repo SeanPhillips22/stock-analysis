@@ -21,7 +21,11 @@ ChartJS.register(
 	PointElement
 )
 
-// import { Unavailable } from 'components/Unavailable'
+import {
+	isOldSafari,
+	Unavailable,
+	UnavailableSafari
+} from 'components/Unavailable'
 import 'chartjs-adapter-date-fns'
 
 import { useMemo } from 'react'
@@ -34,6 +38,7 @@ defaults.font.family =
 export function PriceTargetChart() {
 	const { data } = useSymbolContext()
 	const { high, average, low, chart } = data.targets
+	const hasTargets = high && average && low
 	const currentDate = chart[chart.length - 2].t
 	const currentPrice = chart[chart.length - 2].c
 	const oneYearDate = chart[chart.length - 1].t
@@ -78,6 +83,19 @@ export function PriceTargetChart() {
 			),
 		[chart]
 	)
+
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
+		return <UnavailableSafari classes="h-[275px]" />
+	}
+
+	if (timeAxis.length < 3) {
+		return (
+			<div className="h-[275px]">
+				<Unavailable message="No price forecast data available" />
+			</div>
+		)
+	}
 
 	let datasets: any[] = [
 		{
@@ -140,6 +158,7 @@ export function PriceTargetChart() {
 					{
 						id: '1',
 						afterDatasetsDraw: function (chart: any) {
+							if (!hasTargets) return
 							const chartInstance = chart
 							const ctx = chartInstance.ctx
 							ctx.font =
@@ -459,7 +478,7 @@ export function PriceTargetChart() {
 						padding: {
 							top: 20,
 							left: 5,
-							right: 70
+							right: hasTargets ? 70 : 5
 						}
 					},
 					plugins: {

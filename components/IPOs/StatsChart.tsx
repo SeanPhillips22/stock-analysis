@@ -19,7 +19,7 @@ ChartJS.register(
 	CategoryScale
 )
 
-import { Unavailable } from 'components/Unavailable'
+import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
 interface Props {
 	title: string
@@ -28,17 +28,10 @@ interface Props {
 }
 
 export const StatsChart = ({ title, x, y }: Props) => {
-	if (
-		typeof window !== 'undefined' &&
-		typeof window.ResizeObserver === 'undefined'
-	) {
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
 		return (
-			<div className="mt-4 mb-3 sm:mb-4 h-[300px] sm:h-[390px]">
-				<Unavailable
-					message="This chart does not work in your browser. Please update to the latest browser version."
-					small={true}
-				/>
-			</div>
+			<UnavailableSafari classes="mt-4 mb-3 h-[300px] sm:mb-4 sm:h-[390px]" />
 		)
 	}
 
@@ -46,7 +39,7 @@ export const StatsChart = ({ title, x, y }: Props) => {
 		"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 	return (
-		<div className="mt-4 mb-3 sm:mb-4 border border-gray-200 h-[300px] sm:h-[390px] p-1 sm:p-2">
+		<div className="mt-4 mb-3 h-[300px] border border-gray-200 p-1 sm:mb-4 sm:h-[390px] sm:p-2">
 			<Bar
 				id={'1'}
 				data={{

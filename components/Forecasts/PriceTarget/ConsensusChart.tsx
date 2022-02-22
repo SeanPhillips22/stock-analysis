@@ -2,6 +2,7 @@ import { Doughnut } from 'react-chartjs-2'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { ForecastData } from 'types/Forecast'
+import { isOldSafari } from 'components/Unavailable'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -37,6 +38,11 @@ export function ConsensusChart() {
 
 	const latest = recs[recs.length - 1] ?? null
 	const { angle } = recs[recs.length - 1] ?? 0
+
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
+		return <div className="py-2"></div>
+	}
 
 	return (
 		<div>
