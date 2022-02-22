@@ -5,7 +5,7 @@ import { Stock } from 'components/Layout/StockLayout'
 import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { Ratings } from 'components/Forecasts/Ratings/_Ratings'
 import { PriceTarget } from 'components/Forecasts/PriceTarget/_PriceTarget'
-import { ContentWideAd } from 'components/Ads/Placeholders/ContentWideAd'
+import { ContentWide1 } from 'components/Ads/AdSense/ContentWide1'
 
 type Props = {
 	info: Info
@@ -18,11 +18,11 @@ export default function ForecastPage({ info, data }: Props) {
 			info={info}
 			data={data}
 			url={`/stocks/${info.symbol}/forecast/`}
-			title={`${info.nameFull} (${info.ticker}) Forecast`}
+			title={`${info.nameFull} (${info.ticker}) Forecast & Price Targets`}
 		>
 			<div className="contain space-y-8 py-4">
 				<PriceTarget />
-				<ContentWideAd />
+				<ContentWide1 />
 				<Ratings />
 				{/* <ContentMobileAd /> */}
 				{/* IDEA: Add a financials table here with last X years plus the forecasted years */}

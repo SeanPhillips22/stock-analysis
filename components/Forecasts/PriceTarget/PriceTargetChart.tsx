@@ -425,7 +425,7 @@ export function PriceTargetChart() {
 								// val.ticks.splice(0, 1)
 
 								if (window.innerWidth < 563) {
-									val.ticks.splice(0, 2)
+									val.ticks.splice(0, 3)
 								} else {
 									val.ticks.splice(0, 1)
 								}
