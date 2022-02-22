@@ -33,8 +33,8 @@ export interface Overview {
 		buy: number
 		hold: number
 		sell: number
-		strongbuy: number
-		strongsell: number
+		strongBuy: number
+		strongSell: number
 	}
 	assets?: string
 	nav?: string

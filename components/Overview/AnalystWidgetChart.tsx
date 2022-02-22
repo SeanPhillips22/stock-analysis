@@ -23,11 +23,11 @@ import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
 interface AnalystWidgetChartI {
 	ratings: {
-		strongsell: number
+		strongSell: number
 		sell: number
 		hold: number
 		buy: number
-		strongbuy: number
+		strongBuy: number
 	}
 }
 
@@ -49,18 +49,18 @@ export function AnalystWidgetChart({ ratings }: AnalystWidgetChartI) {
 					{
 						label: 'Analysts',
 						data: [
-							ratings.strongsell,
+							ratings.strongSell,
 							ratings.sell,
 							ratings.hold,
 							ratings.buy,
-							ratings.strongbuy
+							ratings.strongBuy
 						],
 						//@ts-ignore
 						backgroundColor: [
 							'#FF3333',
 							'#FF3333',
 							'#323232',
-							'#0B610B',
+							'#208a20',
 							'#0B610B'
 						]
 					}

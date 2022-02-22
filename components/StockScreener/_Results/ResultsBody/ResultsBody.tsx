@@ -74,7 +74,7 @@ function formatColumns() {
 				case 'align': {
 					header = formatHeader(column.columnName || column.name)
 					cell = function formatCells({ cell: { value } }: CellNumber) {
-						return <div className="text-right">{value}</div>
+						return <div className="text-right">{value || '-'}</div>
 					}
 					break
 				}

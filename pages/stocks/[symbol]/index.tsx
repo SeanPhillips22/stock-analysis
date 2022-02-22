@@ -55,7 +55,7 @@ export default function StockOverview({ info, data, news, chart }: Props) {
 					{news.data.length > 5 && <Sidebar1All key={url} />}
 					<Profile info={info} data={data} />
 					<FinancialsWidget info={info} data={data} />
-					<AnalystWidget data={data} />
+					<AnalystWidget info={info} data={data} />
 				</div>
 				{news && (
 					<div className="lg:order-1">
