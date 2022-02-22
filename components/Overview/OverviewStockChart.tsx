@@ -52,7 +52,7 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 				fontSize: 13
 			},
 			localization: {
-				// Timeformatter controls the crosshair date format.
+				// timeFormatter controls the crosshair date format.
 				timeFormatter: (t: any) => {
 					const date = new Date(t * 1000)
 
@@ -114,7 +114,7 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 					time == '5D' ||
 					time == '1M' ||
 					time == 'YTD') && {
-					// Use TickType to determine whether its hour, day, month or year.
+					// Use TickType to determine whether its hour, day, month or year on the timescale itself
 					tickMarkFormatter: (t: any, tickType: any) => {
 						const date = new Date(t * 1000)
 
@@ -193,7 +193,7 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			lineWidth: 2
 		})
 
-		//@ts-ignore 	Remove plOptions and pl if not planning have previous Close
+		//@ts-ignore Remove plOptions and pl if not planning have previous Close
 		const plOptions: PriceLineOptions = time === '1D' && {
 			price: Number(close),
 			axisLabelVisible: true,
