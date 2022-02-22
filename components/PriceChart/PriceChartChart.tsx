@@ -29,7 +29,7 @@ import {
 	formatDateMonth,
 	formatDateYear
 } from 'functions/datetime/formatDates'
-import { Unavailable } from 'components/Unavailable'
+import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 import { ChartDataPoint } from 'types/Charts'
 import { useMemo, useState } from 'react'
 
@@ -63,16 +63,8 @@ export function Chart({ data, time, symbol, close, change }: Props) {
 	const prevCloseLine = useMemo(() => data.map(() => prev), [data, prev])
 
 	// Chart.js causes critical errors on older Safari versions
-	if (
-		typeof window !== 'undefined' &&
-		typeof window.ResizeObserver === 'undefined'
-	) {
-		return (
-			<Unavailable
-				message="This chart does not work in your browser. Please update to the latest browser version."
-				small={true}
-			/>
-		)
+	if (isOldSafari()) {
+		return <UnavailableSafari />
 	}
 
 	let d: any[] = [

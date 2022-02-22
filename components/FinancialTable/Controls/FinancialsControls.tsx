@@ -45,13 +45,12 @@ export function FinancialsControls({ info, statement, range }: Props) {
 			>
 				<Export
 					buttons={[
-						{ title: 'Export to Excel', type: 'xlsx', restricted: true },
-						{ title: 'Export to CSV', type: 'csv', restricted: true },
+						{ title: 'Export to Excel', type: 'xlsx' },
+						{ title: 'Export to CSV', type: 'csv' },
 						{
 							title: 'Bulk Export',
 							type: 'xlsx',
-							restricted: true,
-							data: data
+							bulkData: data
 						}
 					]}
 					tableId="financial-table"

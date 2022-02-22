@@ -33,7 +33,7 @@
 	Mobile: Rectangle 
 	*/
 	.sb-1a {
-		@apply mx-auto mt-8 block h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[280px] lg:w-[336px];
+		@apply mx-auto mt-8 block min-h-[200px] w-full xs:h-[250px] xs:w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[280px] lg:w-[336px];
 	}
 
 	/* Sidebar 2 - 300x600 */
@@ -43,12 +43,18 @@
 
 	/* Mobile 1 */
 	.m-1 {
-		@apply mx-auto h-[250px] w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:hidden;
+		@apply mx-auto min-h-[200px] w-full xs:h-[250px] xs:w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:hidden;
 	}
 
 	/* Mobile 1 wrapper, inside article */
 	.m1aw {
 		@apply m-1 mt-7 mb-4 text-center;
+	}
+
+	/* Content Wide */
+	/* TODO change to h-250 when there is more content on forecast page */
+	.cw1 {
+		@apply mx-auto min-h-[200px] w-full xs:h-[250px] xs:w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:h-[90px] lg:w-[970px];
 	}
 
 	/* Adsense Footer Ad */

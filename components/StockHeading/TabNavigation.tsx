@@ -29,6 +29,9 @@ export function TabNavigation({ symbol, hideChart }: Props) {
 				<Tab symbol={symbol} title="Overview" append="" />
 				<Tab symbol={symbol} title="Financials" append="financials" />
 				<Tab symbol={symbol} title="Statistics" append="statistics" />
+				{['aapl', 'msft', 'amzn', 'tsla', 'fb', 'baba'].includes(
+					symbol
+				) && <Tab symbol={symbol} title="Forecast" append="forecast" />}
 				<Tab symbol={symbol} title="Dividends" append="dividend" />
 				<Tab symbol={symbol} title="Profile" append="company" />
 				{!hideChart && <Tab symbol={symbol} title="Chart" append="chart" />}

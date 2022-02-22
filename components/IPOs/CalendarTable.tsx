@@ -143,21 +143,7 @@ export function CalendarTable({ title, data, tableId, border, filter }: Props) {
 						: title}
 				</h2>
 				<div className="hidden sm:block">
-					<Export
-						buttons={[
-							{
-								title: 'Export to Excel',
-								type: 'xlsx',
-								restricted: true
-							},
-							{
-								title: 'Export to CSV',
-								type: 'csv',
-								restricted: true
-							}
-						]}
-						tableId={tableId}
-					/>
+					<Export tableId={tableId} />
 				</div>
 				{filter && (
 					<div className="hidden md:block">

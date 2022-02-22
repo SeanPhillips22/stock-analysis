@@ -19,7 +19,7 @@ ChartJS.register(
 	CategoryScale
 )
 
-import { Unavailable } from 'components/Unavailable'
+import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
 interface AnalystWidgetChartI {
 	ratings: {
@@ -32,17 +32,9 @@ interface AnalystWidgetChartI {
 }
 
 export function AnalystWidgetChart({ ratings }: AnalystWidgetChartI) {
-	if (
-		typeof window !== 'undefined' &&
-		typeof window.ResizeObserver === 'undefined'
-	) {
-		return (
-			<Unavailable
-				message="This chart does not work in your browser. Please update to the latest browser version."
-				small={true}
-				classes="mt-3"
-			/>
-		)
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
+		return <UnavailableSafari classes="mt-3" />
 	}
 
 	defaults.font.family =

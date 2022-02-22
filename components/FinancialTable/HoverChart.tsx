@@ -36,7 +36,7 @@ import {
 	countDecimals,
 	reducePrecisionFix
 } from './FinancialTable.functions'
-import { Unavailable } from 'components/Unavailable'
+import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -64,17 +64,9 @@ export const HoverChart = ({
 	statement,
 	showTTM
 }: Props) => {
-	if (
-		typeof window !== 'undefined' &&
-		typeof window.ResizeObserver === 'undefined'
-	) {
-		return (
-			<Unavailable
-				message="This chart does not work in your browser. Please update to the latest browser version."
-				small={true}
-				classes="whitespace-normal"
-			/>
-		)
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
+		return <UnavailableSafari classes="whitespace-normal" />
 	}
 
 	defaults.font.family =

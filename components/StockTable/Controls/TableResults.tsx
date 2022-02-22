@@ -6,6 +6,7 @@ import { tabActive } from 'functions/helpers/tabActive'
 import { useRouter } from 'next/router'
 import { authState } from 'state/authState'
 import { useTableContext } from '../TableContext'
+import { Menu } from '@headlessui/react'
 
 const OPTIONS = [
 	{
@@ -52,25 +53,26 @@ export function TableResults() {
 		<Dropdown title={title} hoverTitle="Change results count">
 			{OPTIONS.map(i => (
 				/* One Dropdown Item */
-				<div
-					key={i.value}
-					className={cn('dd-option', tabActive(i.value, count || 0))}
-					title={hoverTitle(i.value, i.pro)}
-					onClick={() => handleClick(i.value, i.pro)}
-				>
-					{/* Button Text */}
-					{i.value.toString() + ' Rows'}
+				<Menu.Item key={i.value}>
+					<div
+						className={cn('dd', tabActive(i.value, count || 0))}
+						title={hoverTitle(i.value, i.pro)}
+						onClick={() => handleClick(i.value, i.pro)}
+					>
+						{/* Button Text */}
+						{i.value.toString() + ' Rows'}
 
-					{/* Icon - if option selected */}
-					{i.value === count && (
-						<CheckIcon className="h-5 w-5" aria-hidden="true" />
-					)}
+						{/* Icon - if option selected */}
+						{i.value === count && (
+							<CheckIcon className="h-5 w-5" aria-hidden="true" />
+						)}
 
-					{/* Icon - if option is only for pro members */}
-					{i.pro && !isPro && (
-						<LockClosedIcon className="lock-icon" aria-hidden="true" />
-					)}
-				</div>
+						{/* Icon - if option is only for pro members */}
+						{i.pro && !isPro && (
+							<LockClosedIcon className="lock-icon" aria-hidden="true" />
+						)}
+					</div>
+				</Menu.Item>
 			))}
 		</Dropdown>
 	)

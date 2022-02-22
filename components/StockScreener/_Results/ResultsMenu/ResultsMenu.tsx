@@ -45,17 +45,7 @@ export function ResultsMenu({
 					/>
 				</div>
 				<div className="hidden md:block">
-					<Export
-						buttons={[
-							{
-								title: 'Export to Excel',
-								type: 'xlsx',
-								restricted: true
-							},
-							{ title: 'Export to CSV', type: 'csv', restricted: true }
-						]}
-						tableId={tableId}
-					/>
+					<Export tableId={tableId} />
 				</div>
 				<div className="ml-auto md:ml-0">
 					<ColumnDropdown type={type} />

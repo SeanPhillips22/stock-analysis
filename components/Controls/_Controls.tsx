@@ -45,13 +45,7 @@ export const Controls = ({
 				</div>
 			)}
 			<div className="hidden sm:block">
-				<Export
-					buttons={[
-						{ title: 'Export to Excel', type: 'xlsx', restricted: true },
-						{ title: 'Export to CSV', type: 'csv', restricted: true }
-					]}
-					tableId={tableId}
-				/>
+				<Export tableId={tableId} />
 			</div>
 			{useAsyncDebounce && setGlobalFilter && (
 				<div>
