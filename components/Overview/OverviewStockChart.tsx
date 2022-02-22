@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
 	createChart,
 	PriceLineOptions,
@@ -8,6 +8,7 @@ import {
 	LineData,
 	WhitespaceData
 } from 'lightweight-charts'
+import styles from './OverViewStockChart.module.css'
 import { ChartDataPoint } from 'types/Charts'
 
 type Props = {
@@ -20,6 +21,26 @@ type Props = {
 
 export default function Chart({ data, time, symbol, close, change }: Props) {
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>
+	const toolTip = useRef() as React.MutableRefObject<HTMLDivElement>
+	const [tWidth, settWidth] = useState('300px')
+	const [tHeight, settHeight] = useState('690px')
+	const [showTooltip, setShowTooltip] = useState('none')
+	const [price, setPrice] = useState('500')
+	const [priceDate, setPriceDate] = useState('1999-20')
+	const monthNames = [
+		'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
+		'May',
+		'Jun',
+		'Jul',
+		'Aug',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dec'
+	]
 
 	useEffect(() => {
 		const chart = createChart(ref.current, {
@@ -30,14 +51,55 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 					"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
 				fontSize: 13
 			},
+			localization: {
+				// Timeformatter controls the crosshair date format.
+				timeFormatter: (t: any) => {
+					const date = new Date(t * 1000)
+
+					if (time == '1D' || time == '5D') {
+						let hours = date.getUTCHours()
+						let minutes: any = date.getUTCMinutes()
+						let ampm = hours >= 12 ? 'pm' : 'am'
+						hours = hours % 12 ? hours : 12
+						minutes = minutes < 10 ? '0' + minutes : minutes
+						return (
+							monthNames[date.getUTCMonth()] +
+							' ' +
+							date.getUTCDate() +
+							', ' +
+							date.getUTCFullYear() +
+							' ' +
+							hours +
+							':' +
+							minutes +
+							' ' +
+							ampm
+						)
+					} else if (time == '1M' || time == 'YTD' || time == '1Y') {
+						return (
+							monthNames[date.getUTCMonth()] +
+							' ' +
+							date.getUTCDate() +
+							', ' +
+							date.getUTCFullYear()
+						)
+					} else {
+						return (
+							'Week Of ' +
+							monthNames[date.getUTCMonth()] +
+							' ' +
+							date.getUTCDate() +
+							', ' +
+							date.getUTCFullYear()
+						)
+					}
+				}
+			},
 
 			rightPriceScale: {
 				borderColor: 'rgba(197, 203, 206, 1)'
 			},
 
-			crosshair: {
-				mode: 0
-			},
 			grid: {
 				horzLines: {
 					color: '#EBECF0'
@@ -54,25 +116,10 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 					time == 'YTD') && {
 					// Use TickType to determine whether its hour, day, month or year.
 					tickMarkFormatter: (t: any, tickType: any) => {
-						const monthNames = [
-							'Jan',
-							'Feb',
-							'Mar',
-							'Apr',
-							'May',
-							'Jun',
-							'Jul',
-							'Aug',
-							'Sep',
-							'Oct',
-							'Nov',
-							'Dec'
-						]
-
 						const date = new Date(t * 1000)
 
 						if (time == '1D') {
-							let hours = date.getUTCHours()
+							let hours = date.getUTCHours() //UTC must since date localizes the inputs based on your browser.
 							let minutes: any = date.getUTCMinutes()
 							let ampm = hours >= 12 ? 'pm' : 'am'
 							hours = hours % 12 ? hours : 12
@@ -121,19 +168,23 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			lineColor = 'rgba(220, 38, 38, 1)'
 		}
 
-		/*
-		Change series to red and green
-		time === '1D' ? chart.addBaselineSeries({
-						lineWidth: 2,
-						baseValue: { type: 'price', price: Number(close) }
-				  }) : addAreaSeries...
-		*/
+		const max = Math.max(
+			...data.map(d => {
+				return d.c
+			})
+		)
 
+		const min = Math.min(
+			...data.map(d => {
+				return d.c
+			})
+		)
 		const areaSeries = chart.addAreaSeries({
+			// Remove this section if you don't want the price line to appear,
 			autoscaleInfoProvider: () => ({
 				priceRange: {
-					minValue: 170.1,
-					maxValue: 172.25
+					minValue: Number(close) < min ? Number(close) : min,
+					maxValue: Number(close) > max ? Number(close) : max
 				}
 			}),
 			topColor,
@@ -141,11 +192,10 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			lineColor,
 			lineWidth: 2
 		})
-		//const lineSeries = chart.addLineSeries()
 
-		//@ts-ignore
+		//@ts-ignore 	Remove plOptions and pl if not planning have previous Close
 		const plOptions: PriceLineOptions = time === '1D' && {
-			price: Number(172.25),
+			price: Number(close),
 			axisLabelVisible: true,
 			title: 'Previous close',
 			color: 'rgb(100, 100, 100)',
@@ -154,8 +204,7 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 		const pl = areaSeries.createPriceLine(plOptions)
 
 		areaSeries.applyOptions({
-			priceLineVisible: false,
-			crosshairMarkerVisible: false
+			priceLineVisible: false
 		})
 
 		const format = data.map(item => {
@@ -171,22 +220,11 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			}
 		})
 
-		/*const lineSeriesformat = () => {
-			return [
-				{
-					time: data[0].t,
-					value: close
-				},
-				{ time: data[data.length - 1].t, value: close }
-			]
-		} */
-
 		//@ts-ignore
 		areaSeries.setData(format)
-		// lineSeries.setData(lineSeriesformat())
-		chart.timeScale().fitContent()
 
-		//Code to make chart Responsive.
+		chart.timeScale().fitContent()
+		//This object makes
 		new ResizeObserver(entries => {
 			if (entries.length === 0 || entries[0].target !== ref.current) {
 				return
@@ -195,6 +233,57 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 			chart.applyOptions({ height: newRect.height, width: newRect.width })
 		}).observe(ref.current)
 
+		let toolTipWidth = 100
+		let toolTipHeight = 80
+		let toolTipMargin = 15
+		const w = ref.current.clientWidth
+		const h = ref.current.clientHeight
+		console.log(ref)
+		//Tooltips are handled here, based on crosshairMove
+		chart.subscribeCrosshairMove((param: any) => {
+			if (
+				param.time == undefined ||
+				param.point.x < 0 ||
+				param.point.x > w ||
+				param.point.y < 0 ||
+				param.point.y > h
+			) {
+				setShowTooltip('none')
+				return
+			}
+
+			const width = ref.current.offsetLeft
+			const height = ref.current.offsetTop
+			let y = param.point.y
+
+			let left = width + param.point.x + toolTipMargin
+			if (left > width + w - toolTipWidth) {
+				left = width + param.point.x - toolTipMargin - toolTipWidth
+			}
+
+			let top = y + height + toolTipMargin
+			if (top > h + height - toolTipHeight) {
+				top = height + y - toolTipHeight - toolTipMargin
+			}
+
+			const date = new Date(param.time * 1000)
+
+			settWidth(left + 'px')
+			settHeight(top + 'px')
+			setShowTooltip('block')
+
+			setPrice(
+				Number(param.seriesPrices.get(areaSeries)).toFixed(2).toString()
+			)
+			setPriceDate(
+				date.getUTCDate() +
+					' ' +
+					monthNames[date.getUTCMonth()] +
+					' ' +
+					date.getUTCFullYear().toString()
+			)
+		})
+
 		return () => {
 			chart.remove()
 		}
@@ -202,7 +291,19 @@ export default function Chart({ data, time, symbol, close, change }: Props) {
 
 	return (
 		<>
-			<div ref={ref} />
+			<div ref={ref}>
+				{showTooltip && (
+					<div
+						ref={toolTip}
+						style={{ top: tHeight, left: tWidth, display: showTooltip }}
+						className={styles.tooltip}
+					>
+						<div className={styles.name}>Apple Inc.</div>
+						<div className={styles.price}>{price}</div>
+						<div>{priceDate}</div>
+					</div>
+				)}
+			</div>
 		</>
 	)
 }
