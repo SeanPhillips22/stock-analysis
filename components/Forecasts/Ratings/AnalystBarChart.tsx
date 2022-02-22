@@ -112,6 +112,7 @@ export function AnalystBarChart({
 				}}
 				options={{
 					maintainAspectRatio: false,
+					animation: false,
 					interaction: {
 						mode: 'index'
 					},
@@ -158,6 +159,7 @@ export function AnalystBarChart({
 								bottom: 12,
 								left: 15
 							},
+							boxPadding: 3,
 							itemSort: (a, b) => {
 								if (
 									a.datasetIndex !== undefined ||

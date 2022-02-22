@@ -29,7 +29,7 @@ export function SummaryTable() {
 	const [highChange, highColor] = getChange(high, info.quote.p)
 
 	return (
-		<div className="mt-2 mb-1 px-1.5 text-center md:px-3 lg:mt-2 lg:mb-0 lg:px-0">
+		<div className="mt-2 mb-1 px-1.5 text-center md:mb-0 md:px-0 lg:mt-2">
 			<table className="w-full text-right text-tiny text-gray-800 xs:text-sm sm:text-base">
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">

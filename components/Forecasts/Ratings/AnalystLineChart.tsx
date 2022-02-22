@@ -41,7 +41,8 @@ export function AnalystLineChart({
 			data: analystAxis('strongBuy'),
 			backgroundColor: 'rgb(0, 153, 0)',
 			borderColor: 'rgb(0, 153, 0)',
-			pointRadius: 2.5,
+			pointHitRadius: 10,
+			pointRadius: 0,
 			order: 4
 		},
 		{
@@ -49,7 +50,8 @@ export function AnalystLineChart({
 			data: analystAxis('buy'),
 			backgroundColor: 'rgb(76, 153, 0)',
 			borderColor: 'rgb(76, 153, 0)',
-			pointRadius: 2.5,
+			pointHitRadius: 10,
+			pointRadius: 0,
 			order: 3
 		},
 
@@ -58,7 +60,8 @@ export function AnalystLineChart({
 			data: analystAxis('hold'),
 			backgroundColor: 'rgb(204, 204, 0)',
 			borderColor: 'rgb(204, 204, 0)',
-			pointRadius: 2.5,
+			pointHitRadius: 10,
+			pointRadius: 0,
 			order: 2
 		},
 
@@ -67,7 +70,8 @@ export function AnalystLineChart({
 			data: analystAxis('sell'),
 			backgroundColor: 'rgb(153, 76, 0)',
 			borderColor: 'rgb(153, 76, 0)',
-			pointRadius: 2.5,
+			pointHitRadius: 10,
+			pointRadius: 0,
 			order: 1
 		},
 		{
@@ -75,7 +79,8 @@ export function AnalystLineChart({
 			data: analystAxis('strongSell'),
 			backgroundColor: 'rgb(153, 0, 0)',
 			borderColor: 'rgb(153, 0, 0)',
-			pointRadius: 2.5,
+			pointHitRadius: 10,
+			pointRadius: 0,
 			order: 0
 		}
 	]
@@ -90,10 +95,10 @@ export function AnalystLineChart({
 				}}
 				options={{
 					maintainAspectRatio: false,
+					animation: false,
 					interaction: {
 						mode: 'index'
 					},
-
 					scales: {
 						x: {
 							ticks: {
@@ -119,7 +124,6 @@ export function AnalystLineChart({
 							position: 'left'
 						}
 					},
-
 					plugins: {
 						tooltip: {
 							titleFont: {
@@ -136,6 +140,7 @@ export function AnalystLineChart({
 								bottom: 12,
 								left: 15
 							},
+							boxPadding: 3,
 							itemSort: (a, b) => {
 								if (
 									a.datasetIndex !== undefined ||

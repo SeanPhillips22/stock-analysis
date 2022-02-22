@@ -147,7 +147,7 @@ export function PriceTargetChart() {
 	]
 
 	return (
-		<div className="h-[275px]">
+		<div className="h-[250px] xs:h-[275px]">
 			<Line
 				id="1"
 				data={{
@@ -162,7 +162,7 @@ export function PriceTargetChart() {
 							const chartInstance = chart
 							const ctx = chartInstance.ctx
 							ctx.font =
-								'bold 12px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+								'bold 13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
 							const fontSize = 12
 							ctx.textAlign = 'center'
 							ctx.textBaseline = 'bottom'
@@ -459,9 +459,9 @@ export function PriceTargetChart() {
 						y: {
 							position: 'left',
 							ticks: {
-								color: '#555555',
+								color: '#323232',
 								font: {
-									size: 12.5
+									size: 13
 								},
 								padding: 5,
 								callback: function (value) {
@@ -477,8 +477,8 @@ export function PriceTargetChart() {
 					layout: {
 						padding: {
 							top: 20,
-							left: 5,
-							right: hasTargets ? 70 : 5
+							left: 0,
+							right: hasTargets ? 71 : 0
 						}
 					},
 					plugins: {

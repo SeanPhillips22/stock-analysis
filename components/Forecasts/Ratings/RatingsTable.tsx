@@ -13,8 +13,11 @@ export function RatingsTable() {
 	const months = data.recommendations
 
 	return (
-		<div className="mt-5 text-center">
-			<table className="w-full text-right text-smaller" id="ratings-table">
+		<div className="mt-3 text-center lg:mt-5">
+			<table
+				className="w-full text-right text-sm md:text-smaller"
+				id="ratings-table"
+			>
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">
 						<th className="text-left font-semibold">Rating</th>
@@ -30,7 +33,7 @@ export function RatingsTable() {
 				</thead>
 				<tbody>
 					<tr className="border-b border-gray-200">
-						<td className="text-left">Strong Buy</td>
+						<td className="whitespace-nowrap text-left">Strong Buy</td>
 						{!months.length && <td>n/a</td>}
 						{makeRow(months, 'strongBuy', 6).map((item: any, i) => (
 							<td key={`strongBuy-${i}`}>{item}</td>
@@ -58,7 +61,7 @@ export function RatingsTable() {
 						))}
 					</tr>
 					<tr>
-						<td className="text-left">Strong Sell</td>
+						<td className="whitespace-nowrap text-left">Strong Sell</td>
 						{!months.length && <td>n/a</td>}
 						{makeRow(months, 'strongSell', 6).map((item: any, i) => (
 							<td key={`strongSell-${i}`}>{item}</td>
