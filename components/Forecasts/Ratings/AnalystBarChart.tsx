@@ -22,6 +22,8 @@ ChartJS.register(
 
 import useMediaQuery from 'hooks/useMediaQuery'
 import { Recommendations } from 'types/Forecast'
+import { forecastState } from '../forecast.state'
+import { useEffect, useState } from 'react'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -32,6 +34,18 @@ export function AnalystBarChart({
 	recommendations: Recommendations[]
 }) {
 	const mobile = useMediaQuery('(max-width: 768px)')
+	const history = forecastState(state => state.history)
+	const [thickness, setThickness] = useState(16)
+
+	useEffect(() => {
+		if (!mobile) {
+			if (history === '5 Years') {
+				setThickness(13)
+			} else {
+				setThickness(31)
+			}
+		}
+	}, [history, mobile])
 
 	const labelAxis = () => recommendations.map(item => item.month)
 
@@ -44,17 +58,17 @@ export function AnalystBarChart({
 			data: analystAxis('strongBuy'),
 			backgroundColor: 'rgb(0, 153, 0)',
 			barPercentage: 0.5,
-			barThickness: mobile ? 16 : 30,
-			maxBarThickness: mobile ? 16 : 30,
+			barThickness: thickness,
+			maxBarThickness: thickness,
 			order: 4
 		},
 		{
 			label: 'Buy',
 			data: analystAxis('buy'),
-			backgroundColor: 'rgb(76, 153, 0)',
+			backgroundColor: 'rgb(67, 175, 29)',
 			barPercentage: 0.5,
-			barThickness: mobile ? 16 : 30,
-			maxBarThickness: mobile ? 16 : 30,
+			barThickness: thickness,
+			maxBarThickness: thickness,
 			order: 3
 		},
 
@@ -63,27 +77,27 @@ export function AnalystBarChart({
 			data: analystAxis('hold'),
 			backgroundColor: 'rgb(204, 204, 0)',
 			barPercentage: 0.5,
-			barThickness: mobile ? 16 : 30,
-			maxBarThickness: mobile ? 16 : 30,
+			barThickness: thickness,
+			maxBarThickness: thickness,
 			order: 2
 		},
 
 		{
 			label: 'Sell',
 			data: analystAxis('sell'),
-			backgroundColor: 'rgb(153, 76, 0)',
+			backgroundColor: 'rgb(203, 67, 53)',
 			barPercentage: 0.5,
-			barThickness: mobile ? 16 : 30,
-			maxBarThickness: mobile ? 16 : 30,
+			barThickness: thickness,
+			maxBarThickness: thickness,
 			order: 1
 		},
 		{
 			label: 'Strong Sell',
 			data: analystAxis('strongSell'),
-			backgroundColor: 'rgb(153, 0, 0)',
+			backgroundColor: 'rgb(148, 49, 38)',
 			barPercentage: 0.5,
-			barThickness: mobile ? 16 : 30,
-			maxBarThickness: mobile ? 16 : 30,
+			barThickness: thickness,
+			maxBarThickness: thickness,
 			order: 0
 		}
 	]

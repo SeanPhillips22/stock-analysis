@@ -1,4 +1,3 @@
-import { Menu } from '@headlessui/react'
 import dynamic from 'next/dynamic'
 
 const Download = dynamic(() => import('./Download'), {
@@ -23,15 +22,13 @@ export function ExportItem({
 	bulkData
 }: ExportItemProps) {
 	return (
-		<Menu.Item>
-			<Download
-				title={title}
-				type={type}
-				tableId={tableId}
-				data={data}
-				fileName={fileName}
-				bulkData={bulkData}
-			/>
-		</Menu.Item>
+		<Download
+			title={title}
+			type={type}
+			tableId={tableId}
+			data={data}
+			fileName={fileName}
+			bulkData={bulkData}
+		/>
 	)
 }

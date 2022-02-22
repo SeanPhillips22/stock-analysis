@@ -72,11 +72,12 @@
 		@apply min-w-[220px];
 	}
 
-	.dd-option {
+	/* Dropdown item */
+	.dd {
 		@apply flex cursor-pointer items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
 	}
 
-	.dd-option.active {
+	.dd.active {
 		@apply bg-gray-100;
 	}
 

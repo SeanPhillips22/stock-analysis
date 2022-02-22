@@ -36,9 +36,7 @@ export function SelectFormat() {
 			{DIVIDER_MAP.map(item => (
 				<div
 					key={item.value}
-					className={
-						item.value === divider ? 'dd-option active' : 'dd-option'
-					}
+					className={item.value === divider ? 'dd active' : 'dd'}
 					onClick={() => setDivider(item.value)}
 				>
 					{item.title}

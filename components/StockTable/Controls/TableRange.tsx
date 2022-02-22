@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { authState } from 'state/authState'
 import { DataId } from 'types/DataId'
 import { useTableContext } from '../TableContext'
+import { Menu } from '@headlessui/react'
 
 const OPTIONS: {
 	id: DataId
@@ -85,25 +86,26 @@ export function TableRange() {
 		>
 			{OPTIONS.map(i => (
 				/* One Dropdown Item */
-				<div
-					key={i.id}
-					className={cn('dd-option', tabActive(i.id, main))}
-					title={hoverTitle(i.id, i.pro)}
-					onClick={() => handleClick(i.id, i.pro)}
-				>
-					{/* Button Text */}
-					{i.long}
+				<Menu.Item key={i.id}>
+					<div
+						className={cn('dd', tabActive(i.id, main))}
+						title={hoverTitle(i.id, i.pro)}
+						onClick={() => handleClick(i.id, i.pro)}
+					>
+						{/* Button Text */}
+						{i.long}
 
-					{/* Icon - if option selected */}
-					{i.id === main && (
-						<CheckIcon className="h-5 w-5" aria-hidden="true" />
-					)}
+						{/* Icon - if option selected */}
+						{i.id === main && (
+							<CheckIcon className="h-5 w-5" aria-hidden="true" />
+						)}
 
-					{/* Icon - if option is only for pro members */}
-					{i.pro && !isPro && (
-						<LockClosedIcon className="lock-icon" aria-hidden="true" />
-					)}
-				</div>
+						{/* Icon - if option is only for pro members */}
+						{i.pro && !isPro && (
+							<LockClosedIcon className="lock-icon" aria-hidden="true" />
+						)}
+					</div>
+				</Menu.Item>
 			))}
 		</Dropdown>
 	)

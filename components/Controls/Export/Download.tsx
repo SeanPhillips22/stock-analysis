@@ -5,6 +5,7 @@ import {
 	extractTextFromHTML,
 	removeNanValues
 } from './export.functions'
+import { Menu } from '@headlessui/react'
 
 interface Props {
 	title: string
@@ -74,13 +75,15 @@ export default function Download({
 	}
 
 	return (
-		<div
-			className="dd-option"
-			onClick={() => {
-				download(type)
-			}}
-		>
-			{title}
-		</div>
+		<Menu.Item>
+			<div
+				className="dd"
+				onClick={() => {
+					download(type)
+				}}
+			>
+				{title}
+			</div>
+		</Menu.Item>
 	)
 }
