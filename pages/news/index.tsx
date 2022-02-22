@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { getMarketNews } from 'functions/apis/callBackEnd'
@@ -8,12 +8,12 @@ import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Layout } from 'components/Layout/_Layout'
 
-interface Props {
+type Props = {
 	data: News[]
 	other: News[]
 }
 
-export const MarketNews = ({ data, other }: Props) => {
+export default function MarketNewsPage({ data, other }: Props) {
 	const url = '/news/'
 
 	return (
@@ -50,12 +50,8 @@ export const MarketNews = ({ data, other }: Props) => {
 	)
 }
 
-export default MarketNews
-
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const { data, other } = await getMarketNews('market')
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {
