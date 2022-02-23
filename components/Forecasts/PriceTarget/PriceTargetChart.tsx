@@ -478,7 +478,7 @@ export function PriceTargetChart() {
 						padding: {
 							top: 20,
 							left: 0,
-							right: hasTargets ? 72 : 0
+							right: hasTargets ? 73 : 0
 						}
 					},
 					plugins: {

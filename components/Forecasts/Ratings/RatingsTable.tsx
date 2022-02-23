@@ -20,7 +20,9 @@ export function RatingsTable() {
 			>
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">
-						<th className="py-0.5 text-left font-semibold">Rating</th>
+						<th className="py-[3px] text-left font-semibold lg:py-0.5">
+							Rating
+						</th>
 						{!months.length && (
 							<th>{formatDateMonth(new Date().toDateString())}</th>
 						)}
@@ -33,7 +35,7 @@ export function RatingsTable() {
 				</thead>
 				<tbody>
 					<tr className="border-b border-gray-200">
-						<td className="whitespace-nowrap py-0.5 text-left">
+						<td className="whitespace-nowrap py-[3px] text-left lg:py-0.5">
 							Strong Buy
 						</td>
 						{!months.length && <td>n/a</td>}
@@ -42,28 +44,28 @@ export function RatingsTable() {
 						))}
 					</tr>
 					<tr className="border-b border-gray-200">
-						<td className="py-0.5 text-left">Buy</td>
+						<td className="py-[3px] text-left lg:py-0.5">Buy</td>
 						{!months.length && <td>n/a</td>}
 						{makeRow(months, 'buy', 6).map((item: any, i) => (
 							<td key={`buy-${i}`}>{item}</td>
 						))}
 					</tr>
 					<tr className="border-b border-gray-200">
-						<td className="py-0.5 text-left">Hold</td>
+						<td className="py-[3px] text-left lg:py-0.5">Hold</td>
 						{!months.length && <td>n/a</td>}
 						{makeRow(months, 'hold', 6).map((item: any, i) => (
 							<td key={`hold-${i}`}>{item}</td>
 						))}
 					</tr>
 					<tr className="border-b border-gray-200">
-						<td className="py-0.5 text-left">Sell</td>
+						<td className="py-[3px] text-left lg:py-0.5">Sell</td>
 						{!months.length && <td>n/a</td>}
 						{makeRow(months, 'sell', 6).map((item: any, i) => (
 							<td key={`sell-${i}`}>{item}</td>
 						))}
 					</tr>
 					<tr>
-						<td className="whitespace-nowrap py-0.5 text-left">
+						<td className="whitespace-nowrap py-[3px] text-left lg:py-0.5">
 							Strong Sell
 						</td>
 						{!months.length && <td>n/a</td>}

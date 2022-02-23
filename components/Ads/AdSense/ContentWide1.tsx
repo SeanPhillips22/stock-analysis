@@ -22,7 +22,7 @@ export function ContentWide1() {
 	}
 
 	return (
-		<aside className="ad-banner cw1w">
+		<div className="ad-banner cw1w">
 			<ins
 				className="adsbygoogle cw1"
 				data-ad-client="ca-pub-7702053427535735"
@@ -30,6 +30,6 @@ export function ContentWide1() {
 				data-full-width-responsive="false"
 			></ins>
 			<AdsenseScript />
-		</aside>
+		</div>
 	)
 }
