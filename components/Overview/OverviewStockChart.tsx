@@ -8,7 +8,7 @@ import {
 	LineData,
 	WhitespaceData
 } from 'lightweight-charts'
-import styles from './OverViewStockChart.module.css'
+import styles from './OverviewStockChart.module.css'
 import { ChartDataPoint } from 'types/Charts'
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 	change: number
 }
 
-export default function OverViewStockChart({
+export default function OverviewStockChart({
 	data,
 	time,
 	symbol,
