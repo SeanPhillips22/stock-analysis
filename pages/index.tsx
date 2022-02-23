@@ -6,6 +6,7 @@ import { LatestNews } from 'components/HomePage/LatestNews'
 import { IPOwidgets } from 'components/HomePage/IPOwidgets'
 import { getHomePageData } from 'functions/apis/callBackEnd'
 import { Layout } from 'components/Layout/_Layout'
+import { Desktop1 } from 'components/Ads/AdSense/Desktop1'
 
 type Trending = {
 	s: string
@@ -68,18 +69,21 @@ export default function FrontPage({ data }: FrontPageProps) {
 			/>
 			<Layout fullWidth={true} url="/">
 				<Hero trending={data.trending} />
-				<Movers
-					date={data.date}
-					marketStatus={data.marketStatus}
-					gainers={data.gainers}
-					losers={data.losers}
-				/>
-				<div className="mx-auto flex flex-col space-y-6 lg:grid lg:max-w-[1200px] lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:px-5">
-					<LatestNews news={data.news} />
-					<IPOwidgets
-						recent={data.recentIpos}
-						upcoming={data.ipoCalendar}
+				<div className="space-y-6 pt-6 pb-3 md:space-y-8 md:pt-8 lg:space-y-10 lg:pt-10">
+					<Movers
+						date={data.date}
+						marketStatus={data.marketStatus}
+						gainers={data.gainers}
+						losers={data.losers}
 					/>
+					<Desktop1 />
+					<div className="mx-auto flex flex-col space-y-6 md:space-y-8 lg:grid lg:max-w-[1200px] lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:space-y-0 lg:px-5">
+						<LatestNews news={data.news} />
+						<IPOwidgets
+							recent={data.recentIpos}
+							upcoming={data.ipoCalendar}
+						/>
+					</div>
 				</div>
 			</Layout>
 		</>

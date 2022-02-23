@@ -4,7 +4,7 @@ import { noAds, isDev } from '../noAds'
 import { AdsenseScript } from './AdsenseScript'
 import { useLoadAdsense } from './useLoadAdsense'
 
-export function Mobile1() {
+export function Desktop1() {
 	const { path } = useLayoutContext()
 	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
@@ -14,18 +14,22 @@ export function Mobile1() {
 	}
 
 	if (isDev()) {
-		return <div className="adph m-1"></div>
+		return (
+			<div className="d1w">
+				<div className="adph d1"></div>
+			</div>
+		)
 	}
 
 	return (
-		<>
+		<aside className="ad-banner d1w">
 			<ins
-				className="adsbygoogle m-1"
+				className="adsbygoogle d1"
 				data-ad-client="ca-pub-7702053427535735"
-				data-ad-slot="9694172988"
+				data-ad-slot="1165821987"
 				data-full-width-responsive="false"
 			></ins>
 			<AdsenseScript />
-		</>
+		</aside>
 	)
 }

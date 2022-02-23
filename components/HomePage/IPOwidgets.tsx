@@ -54,10 +54,12 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 
 	return (
 		<>
-			<div className="flex flex-col space-y-6">
+			<div className="flex flex-col space-y-6 lg:space-y-8">
 				<section className="px-3 xs:px-4 sm:px-5 lg:px-0">
 					<div className="mb-1 flex flex-row items-end justify-between">
-						<h2 className="mb-1 text-2xl font-bold">Recent IPOs</h2>
+						<h2 className="mb-1 text-2xl font-bold leading-tight">
+							Recent IPOs
+						</h2>
 						<span>
 							<Link href="/ipos/" prefetch={false}>
 								<a className="bll">All Recent IPOs</a>
@@ -68,7 +70,9 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 				</section>
 				<section className="px-3 xs:px-4 sm:px-5 lg:px-0">
 					<div className="mb-1 flex flex-row items-end justify-between">
-						<h2 className="mb-1 text-2xl font-bold">Upcoming IPOs</h2>
+						<h2 className="mb-1 text-2xl font-bold leading-tight">
+							Upcoming IPOs
+						</h2>
 						<span>
 							<Link href="/ipos/calendar/" prefetch={false}>
 								<a className="bll">IPO Calendar</a>

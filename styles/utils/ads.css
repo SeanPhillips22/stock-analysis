@@ -60,6 +60,15 @@
 		@apply m-1 mt-7 mb-4 text-center;
 	}
 
+	/* Desktop 1 */
+	.d1 {
+		@apply mx-auto hidden lg:block lg:h-[250px] lg:w-[970px];
+	}
+
+	.d1w {
+		@apply hidden text-center lg:my-10 lg:block;
+	}
+
 	/* Content Wide */
 	/* TODO change to h-250 when there is more content on forecast page */
 	.cw1 {

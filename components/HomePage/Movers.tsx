@@ -77,7 +77,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		return (
 			<div className="grow">
 				<div className="mb-1 flex flex-row items-end justify-between">
-					<h2 className="mb-0.5 text-xl font-bold bp:mb-1 bp:pb-1.5 bp:text-2xl bp:leading-4 lg:pb-0 lg:leading-8">
+					<h2 className="mb-0.5 text-xl font-bold leading-tight bp:text-2xl bp:leading-tight md:mb-1">
 						{titlePrefix} {type}
 					</h2>
 					<span className="text-xs text-gray-600 xs:text-sm">
@@ -115,7 +115,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 
 	return (
 		<>
-			<section className="mx-auto flex flex-col space-y-7 px-3 py-7 xs:px-4 sm:px-5 lg:max-w-[1200px] lg:flex-row lg:justify-evenly lg:space-y-0 lg:space-x-14 lg:py-10">
+			<section className="mx-auto flex flex-col space-y-8 px-3 xs:px-4 sm:px-5 lg:max-w-[1200px] lg:flex-row lg:justify-evenly lg:space-y-0 lg:space-x-14">
 				<Table movers={gainers} type="Gainers" />
 				<Mobile1 key="/" />
 				<Table movers={losers} type="Losers" />
