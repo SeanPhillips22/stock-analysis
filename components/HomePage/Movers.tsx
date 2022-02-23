@@ -1,4 +1,4 @@
-import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
+import { Mobile1Home } from 'components/Ads/AdSense/Mobile1Home'
 import { StockLink } from 'components/Links'
 
 const cellStyles =
@@ -117,7 +117,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		<>
 			<section className="mx-auto flex flex-col space-y-8 px-3 xs:px-4 sm:px-5 lg:max-w-[1200px] lg:flex-row lg:justify-evenly lg:space-y-0 lg:space-x-14">
 				<Table movers={gainers} type="Gainers" />
-				<Mobile1 key="/" />
+				<Mobile1Home key="/" />
 				<Table movers={losers} type="Losers" />
 			</section>
 		</>

@@ -2,34 +2,32 @@ import { authState } from 'state/authState'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { noAds, isDev } from '../noAds'
 import { AdsenseScript } from './AdsenseScript'
-import { useLoadAdsense } from './useLoadAdsense'
+import { useLoadAdsenseDynamic } from './useLoadAdsenseDynamic'
 
-export function Desktop1() {
+// Home page only
+// uses useLoadAdsenseDynamic to get rid of JS error
+export function Mobile1Home() {
 	const { path } = useLayoutContext()
 	const isPro = authState(state => state.isPro)
-	useLoadAdsense()
+	useLoadAdsenseDynamic('(min-width: 1024px)')
 
 	if (noAds(path) || isPro) {
 		return null
 	}
 
 	if (isDev()) {
-		return (
-			<div className="d1w">
-				<div className="adph d1"></div>
-			</div>
-		)
+		return <div className="adph m-1"></div>
 	}
 
 	return (
-		<aside className="ad-banner d1w">
+		<>
 			<ins
-				className="adsbygoogle d1"
+				className="adsbygoogle m-1"
 				data-ad-client="ca-pub-7702053427535735"
-				data-ad-slot="1165821987"
+				data-ad-slot="9694172988"
 				data-full-width-responsive="false"
 			></ins>
 			<AdsenseScript />
-		</aside>
+		</>
 	)
 }

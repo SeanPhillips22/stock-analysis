@@ -6,7 +6,7 @@ import { LatestNews } from 'components/HomePage/LatestNews'
 import { IPOwidgets } from 'components/HomePage/IPOwidgets'
 import { getHomePageData } from 'functions/apis/callBackEnd'
 import { Layout } from 'components/Layout/_Layout'
-import { Desktop1 } from 'components/Ads/AdSense/Desktop1'
+import { Desktop1Home } from 'components/Ads/AdSense/Desktop1Home'
 
 type Trending = {
 	s: string
@@ -76,7 +76,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 						gainers={data.gainers}
 						losers={data.losers}
 					/>
-					<Desktop1 />
+					<Desktop1Home key="/" />
 					<div className="mx-auto flex flex-col space-y-6 md:space-y-8 lg:grid lg:max-w-[1200px] lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:space-y-0 lg:px-5">
 						<LatestNews news={data.news} />
 						<IPOwidgets
