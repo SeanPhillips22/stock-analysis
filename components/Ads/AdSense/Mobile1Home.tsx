@@ -17,14 +17,14 @@ export function Mobile1Home() {
 
 	if (isDev()) {
 		return (
-			<div className="pt-2">
+			<div className="pt-2 text-center">
 				<div className="adph m-1"></div>
 			</div>
 		)
 	}
 
 	return (
-		<div className="ad-banner pt-2">
+		<div className="ad-banner pt-2 text-center">
 			<ins
 				className="adsbygoogle m-1"
 				data-ad-client="ca-pub-7702053427535735"
