@@ -76,7 +76,7 @@
 	}
 
 	.cw1w {
-		@apply min-h-[90px] text-center;
+		@apply text-center lg:h-[90px];
 	}
 
 	/* Dianomi Footer Ad */
