@@ -19,7 +19,13 @@ type Props = {
 	change: number
 }
 
-export default function Chart({ data, time, symbol, close, change }: Props) {
+export default function OverViewStockChart({
+	data,
+	time,
+	symbol,
+	close,
+	change
+}: Props) {
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 	const toolTip = useRef() as React.MutableRefObject<HTMLDivElement>
 	const [tWidth, settWidth] = useState('300px')
