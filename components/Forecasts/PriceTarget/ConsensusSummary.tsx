@@ -8,23 +8,23 @@ export function ConsensusSummary() {
 
 	switch (consensus) {
 		case 'Strong Sell':
-			color = 'rgb(153, 0, 0)'
+			color = 'text-red-700'
 			break
 
 		case 'Sell':
-			color = 'rgb(153, 76, 0)'
+			color = 'text-red-500'
 			break
 
 		case 'Hold':
-			color = 'rgb(204, 204, 0)'
+			color = 'text-gray-700'
 			break
 
 		case 'Buy':
-			color = 'rgb(76, 153, 0)'
+			color = 'text-green-700'
 			break
 
 		case 'Strong Buy':
-			color = 'rgb(0, 153, 0)'
+			color = 'text-green-800'
 			break
 
 		default:

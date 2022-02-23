@@ -6,19 +6,11 @@ import {
 	BarElement,
 	Tooltip,
 	LinearScale,
-	Title,
 	CategoryScale,
 	defaults
 } from 'chart.js'
 
-ChartJS.register(
-	BarController,
-	BarElement,
-	Tooltip,
-	LinearScale,
-	Title,
-	CategoryScale
-)
+ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale)
 
 import useMediaQuery from 'hooks/useMediaQuery'
 import { Recommendations } from 'types/Forecast'
@@ -116,7 +108,6 @@ export function AnalystBarChart({
 					interaction: {
 						mode: 'index'
 					},
-
 					scales: {
 						x: {
 							ticks: {
@@ -142,7 +133,6 @@ export function AnalystBarChart({
 							position: 'left'
 						}
 					},
-
 					plugins: {
 						tooltip: {
 							titleFont: {

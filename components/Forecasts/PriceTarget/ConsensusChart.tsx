@@ -1,10 +1,10 @@
 import { Doughnut } from 'react-chartjs-2'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Chart as ChartJS, ArcElement, Tooltip } from 'chart.js'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { ForecastData } from 'types/Forecast'
 import { isOldSafari } from 'components/Unavailable'
 
-ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.register(ArcElement, Tooltip)
 
 type IDs = 'strongSell' | 'sell' | 'hold' | 'buy' | 'strongBuy'
 
@@ -35,7 +35,6 @@ const d = [
 export function ConsensusChart() {
 	const { data }: { data: ForecastData } = useSymbolContext()
 	const recs = data.recommendations
-
 	const latest = recs[recs.length - 1] ?? null
 	const { angle } = recs[recs.length - 1] ?? 0
 

@@ -33,7 +33,7 @@ export function SummaryTable() {
 			<table className="w-full text-right text-tiny text-gray-800 xs:text-sm sm:text-base">
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">
-						<th className="text-left font-semibold">Target</th>
+						<th className="py-0.5 text-left font-semibold">Target</th>
 						<th className="font-semibold">Low</th>
 						<th className="font-semibold">Average</th>
 						<th className="font-semibold">Median</th>
@@ -42,14 +42,14 @@ export function SummaryTable() {
 				</thead>
 				<tbody>
 					<tr className="border-b border-gray-200">
-						<td className="text-left">Price</td>
+						<td className="py-0.5 text-left">Price</td>
 						<td>{low ? '$' + low : 'n/a'}</td>
 						<td>{average ? '$' + average : 'n/a'}</td>
 						<td>{median ? '$' + median : 'n/a'}</td>
 						<td>{high ? '$' + high : 'n/a'}</td>
 					</tr>
 					<tr>
-						<td className="text-left">Change</td>
+						<td className="py-0.5 text-left">Change</td>
 						<td className={lowColor}>{lowChange}</td>
 						<td className={averageColor}>{averageChange}</td>
 						<td className={medianColor}>{medianChange}</td>

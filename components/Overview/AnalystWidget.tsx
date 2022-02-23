@@ -96,7 +96,7 @@ export const AnalystWidget = ({
 			) && (
 				<Button
 					url={`/stocks/${info.symbol}/forecast/`}
-					text="Analyst Forecast"
+					text="Forecast Details"
 				/>
 			)}
 		</div>

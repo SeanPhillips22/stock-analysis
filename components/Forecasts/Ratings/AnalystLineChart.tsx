@@ -6,7 +6,6 @@ import {
 	LineElement,
 	Tooltip,
 	LinearScale,
-	Title,
 	CategoryScale,
 	defaults
 } from 'chart.js'
@@ -16,7 +15,6 @@ ChartJS.register(
 	LineElement,
 	Tooltip,
 	LinearScale,
-	Title,
 	CategoryScale
 )
 
