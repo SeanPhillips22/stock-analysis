@@ -194,10 +194,16 @@ export function PriceTargetChart() {
 									ctx.lineJoin = 'round'
 
 									ctx.fillText(
-										'Past 12 Months',
-										meta.iScale._gridLineItems[
-											meta.iScale._gridLineItems.length - 2
-										].tx1 - 55,
+										window.innerWidth > 428
+											? 'Past 12 Months'
+											: 'Past Year',
+										window.innerWidth > 428
+											? meta.iScale._gridLineItems[
+													meta.iScale._gridLineItems.length - 2
+											  ].tx1 - 55
+											: meta.iScale._gridLineItems[
+													meta.iScale._gridLineItems.length - 2
+											  ].tx1 - 37,
 										meta.iScale._gridLineItems[
 											meta.iScale._gridLineItems.length - 2
 										].y1
@@ -206,14 +212,14 @@ export function PriceTargetChart() {
 									ctx.fillText(
 										window.innerWidth > 428
 											? '12 Month Forecast'
-											: '1 Yr Forecast',
+											: 'Next Year',
 										window.innerWidth > 428
 											? meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
 											  ].tx1 + 65
 											: meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
-											  ].tx1 + 45,
+											  ].tx1 + 40,
 										meta.iScale._gridLineItems[
 											meta.iScale._gridLineItems.length - 2
 										].y1
