@@ -242,6 +242,13 @@ export const DataPoints: Props = {
 		colName: 'Return (Open)',
 		format: 'colorPercentage'
 	},
+	ipoPriceRange: {
+		id: 'ipoPriceRange',
+		name: 'IPO Price Range',
+		format: 'string',
+		only: 'ipo'
+	},
+	isSpac: { id: 'isSpac', name: 'Is SPAC' },
 	revenue: { id: 'revenue', name: 'Revenue', format: 'abbreviate' },
 	revenueGrowth: {
 		id: 'revenueGrowth',
@@ -359,6 +366,11 @@ export const DataPoints: Props = {
 		name: 'Net Cash / Market Cap',
 		colName: 'Cash / M.Cap',
 		format: 'formatPercentage'
+	},
+	liabilities: {
+		id: 'liabilities',
+		name: 'Liabilities',
+		format: 'abbreviate'
 	},
 	grossMargin: {
 		id: 'grossMargin',
@@ -609,6 +621,7 @@ export const DataPoints: Props = {
 		name: 'Working Capital',
 		format: 'abbreviate'
 	},
+
 	lastSplitType: {
 		id: 'lastSplitType',
 		name: 'Last Stock Split',
@@ -619,18 +632,21 @@ export const DataPoints: Props = {
 		name: 'Last Split Date',
 		format: 'formatDate'
 	},
-	liabilities: {
-		id: 'liabilities',
-		name: 'Liabilities',
-		format: 'abbreviate'
+	zScore: {
+		id: 'zScore',
+		name: 'Altman Z-Score',
+		format: 'format2dec'
 	},
-	ipoPriceRange: {
-		id: 'ipoPriceRange',
-		name: 'IPO Price Range',
-		format: 'string',
-		only: 'ipo'
+	fScore: {
+		id: 'fScore',
+		name: 'Piotroski F-Score',
+		format: 'integer'
 	},
-	isSpac: { id: 'isSpac', name: 'Is SPAC' },
+	/* ETFs
+	
+	
+	
+	*/
 	aum: {
 		id: 'aum',
 		name: 'Assets Under Management',

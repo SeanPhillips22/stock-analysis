@@ -103,17 +103,21 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 					{/* Add two icons that increase and decrease the input value */}
 					{compare !== 'notzero' && compare !== 'between' && (
 						<div className="ml-1 flex flex-col items-center space-y-0">
-							<span title="Increase by 1">
+							<span
+								title="Increase by 1"
+								onClick={() => setFirst(incrementFilter(first))}
+							>
 								<ChevronUpIcon
 									className="h-4 w-4 cursor-pointer text-gray-500 hover:text-black"
-									onClick={() => setFirst(incrementFilter(first))}
 									style={{ maxWidth: '40px' }}
 								/>
 							</span>
-							<span title="Decrease by 1">
+							<span
+								title="Decrease by 1"
+								onClick={() => setFirst(decrementFilter(first))}
+							>
 								<ChevronDownIcon
 									className="h-4 w-4 cursor-pointer text-gray-500 hover:text-black"
-									onClick={() => setFirst(decrementFilter(first))}
 									style={{ maxWidth: '40px' }}
 								/>
 							</span>

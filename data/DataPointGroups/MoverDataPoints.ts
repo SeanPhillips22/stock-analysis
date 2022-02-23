@@ -114,5 +114,7 @@ export const MoverDataPoints: DataId[] = [
 	'equity',
 	'workingCapital',
 	'lastSplitType',
-	'lastSplitDate'
+	'lastSplitDate',
+	'zScore',
+	'fScore'
 ]

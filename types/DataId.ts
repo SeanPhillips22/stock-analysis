@@ -131,6 +131,8 @@ export type DataId =
 	| 'lastSplitDate' // Last Split Date
 	| 'liabilities' // Liabilities
 	| 'isSpac' // Is SPAC
+	| 'zScore' // Altman Z-Score
+	| 'fScore' // Piotroski F-Score
 	| 'aum' // ETF assets
 	| 'etfPeRatio' // ETF PE Ratio
 	| 'assetClass' // ETF Asset Class

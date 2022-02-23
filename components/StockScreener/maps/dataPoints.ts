@@ -2544,6 +2544,41 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'date',
 		tooltipText: 'The date when the company last performed a stock split.',
 		columnName: 'Split Date'
+	},
+	{
+		name: 'Altman Z-Score',
+		id: 'zScore',
+		category: ['Other'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 10', value: 'over-10' },
+			{ name: 'Over 5', value: 'over-5' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 3', value: 'under-3' },
+			{ name: 'Under 1', value: 'under-1' }
+		],
+		format: 'format2dec',
+		tooltipText:
+			'The Altman Z-Score is a number based on a formula that can be used to predict the likelihood that a company will go into bankruptcy within two years.',
+		columnName: 'Z-Score'
+	},
+	{
+		name: 'Piotroski F-Score',
+		id: 'fScore',
+		category: ['Other'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Exactly 9', value: 'exactly-9' },
+			{ name: 'Exactly 8', value: 'exactly-8' },
+			{ name: 'Over 7', value: 'over-7' },
+			{ name: 'Over 5', value: 'over-5' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 3', value: 'under-3' }
+		],
+		format: 'format0dec',
+		tooltipText:
+			"The Piotroski F-Score is a score between 0 and 9 that determine the strength of a company's financial position. The higher, the better.",
+		columnName: 'F-Score'
 	}
 ]
 
