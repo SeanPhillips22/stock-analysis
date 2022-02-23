@@ -17,14 +17,14 @@ export function Desktop1Home() {
 
 	if (isDev()) {
 		return (
-			<div className="d1w">
+			<div className="d1w pt-2">
 				<div className="adph d1"></div>
 			</div>
 		)
 	}
 
 	return (
-		<aside className="ad-banner d1w">
+		<aside className="ad-banner d1w pt-2">
 			<ins
 				className="adsbygoogle d1"
 				data-ad-client="ca-pub-7702053427535735"

@@ -16,11 +16,15 @@ export function Mobile1Home() {
 	}
 
 	if (isDev()) {
-		return <div className="adph m-1"></div>
+		return (
+			<div className="pt-2">
+				<div className="adph m-1"></div>
+			</div>
+		)
 	}
 
 	return (
-		<>
+		<div className="ad-banner pt-2">
 			<ins
 				className="adsbygoogle m-1"
 				data-ad-client="ca-pub-7702053427535735"
@@ -28,6 +32,6 @@ export function Mobile1Home() {
 				data-full-width-responsive="false"
 			></ins>
 			<AdsenseScript />
-		</>
+		</div>
 	)
 }

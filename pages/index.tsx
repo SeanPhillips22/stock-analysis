@@ -69,7 +69,7 @@ export default function FrontPage({ data }: FrontPageProps) {
 			/>
 			<Layout fullWidth={true} url="/">
 				<Hero trending={data.trending} />
-				<div className="space-y-6 pt-6 pb-3 md:space-y-8 md:pt-8 lg:space-y-10 lg:pt-10">
+				<div className="space-y-6 pt-6 pb-3 md:space-y-8 md:pt-8 lg:pt-10">
 					<Movers
 						date={data.date}
 						marketStatus={data.marketStatus}
