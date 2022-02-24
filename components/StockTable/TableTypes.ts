@@ -1,4 +1,4 @@
-import { SortObject } from 'components/StockScreener/screener.types'
+import { SortObject } from 'components/Screener/screener.types'
 import { DataId } from 'types/DataId'
 
 // The table's fixed properties

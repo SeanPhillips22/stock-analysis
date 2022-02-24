@@ -1,4 +1,4 @@
-import { SortObject } from 'components/StockScreener/screener.types'
+import { SortObject } from 'components/Screener/screener.types'
 import { FilterValue } from 'react-table'
 import create from 'zustand'
 

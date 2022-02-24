@@ -1,4 +1,4 @@
-import { SortObject, SortProps } from 'components/StockScreener/screener.types'
+import { SortObject, SortProps } from 'components/Screener/screener.types'
 import { HeaderCell } from 'components/Tables/HeaderCell'
 import { useSort } from 'hooks/useSort'
 import {

@@ -1,4 +1,4 @@
-import { ScreenerTypes } from 'components/StockScreener/screener.types'
+import { ScreenerTypes } from 'components/Screener/screener.types'
 import Link from 'next/link'
 import { FormatFunction } from 'types/Tables'
 

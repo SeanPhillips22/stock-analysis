@@ -5,7 +5,7 @@ import {
 	percentage,
 	dateSort,
 	stringIgnoreCase
-} from 'components/StockScreener/functions/sort/sortFunctions'
+} from 'components/Screener/functions/sort/sortFunctions'
 
 type SymbolType = 'stocks' | 'ipo' | 'etf'
 
