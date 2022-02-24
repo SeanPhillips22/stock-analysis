@@ -18,11 +18,12 @@ async function queryQuote({ queryKey }: { queryKey: (string | number)[] }) {
 }
 
 export function useQuote(info: Info) {
-	const tradingHours = info.isOTC ? isTradingHoursOpen() : isTradingHours()
-	const expire = info.isOTC ? 65000 : 5000
+	const { isOTC } = info
+	const tradingHours = isOTC ? isTradingHoursOpen() : isTradingHours()
+	const expire = isOTC ? 65000 : 5000
 
 	const { data } = useQuery(['q', info.symbol, info.type], queryQuote, {
-		refetchInterval: tradingHours ? 5000 : false,
+		refetchInterval: tradingHours && !isOTC ? 5000 : false,
 		refetchOnWindowFocus: tradingHours ? true : false,
 		initialData: info.quote,
 		initialDataUpdatedAt: info.quote.lf
