@@ -7,6 +7,11 @@ interface InitialProps {
 	tableId: string // The unique ID for the table
 	fixed: TableFixed // Table data that does not change
 	dynamic: TableDynamic // Table data that becomes state and changes
+	fallback?: {
+		// Fallback if no data is found
+		title: string
+		text: string
+	}
 }
 
 interface ContextProps extends InitialProps {
@@ -86,7 +91,8 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 		dynamic,
 		setState,
 		clearState,
-		enabled
+		enabled,
+		fallback: value.fallback
 	}
 
 	return (

@@ -1,6 +1,9 @@
 import { SortObject } from 'components/Screener/screener.types'
 import { DataId } from 'types/DataId'
 
+// Create a type that is an array of objects with keys as DataID
+export type TableData = { [key in DataId]: any }[]
+
 // The table's fixed properties
 export type TableFixed = {
 	defaultSort?: SortObject[] // The default sort order

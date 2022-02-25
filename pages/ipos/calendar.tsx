@@ -1,24 +1,51 @@
 import { GetStaticProps } from 'next'
-import { CalendarData, IpoRecent, FilingMin } from 'types/Ipos'
 import { SEO } from 'components/SEO'
-import { getIpoData } from 'functions/apis/callBackEnd'
-import { CalendarTable } from 'components/IPOs/CalendarTable'
-import { LaterExplanation } from 'components/IPOs/LaterExplanation'
 import { IPOSources } from 'components/IPOs/IPOSources'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { RecentTableMin } from 'components/IPOs/RecentTableMin'
-import { FilingTableMin } from 'components/IPOs/FilingTableMin'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
 import { Layout } from 'components/Layout/_Layout'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
+import { TableContextProvider } from 'components/StockTable/TableContext'
+import { FutureIpoDataPoints } from 'data/DataPointGroups/FutureIpoDataPoints'
+import { StockTable } from 'components/StockTable/__StockTable'
+import { getSelect } from 'functions/apis/getSelect'
+import { TableData, TableDynamic } from 'components/StockTable/TableTypes'
+import { LaterExplanation } from 'components/IPOs/LaterExplanation'
+import { SidebarTable, SidebarTableProps } from 'components/IPOs/SidebarTable'
 
-interface Props {
-	data: CalendarData
-	recent: IpoRecent[]
-	filings: FilingMin[]
+type Props = {
+	response: {
+		data: TableData
+		getIposRecentMin: SidebarTableProps
+		getIpoFilingsMin: SidebarTableProps
+		getFilingsCount: number
+	}
+	later: {
+		data: TableData[]
+	}
 }
 
-export const IpoCalendar = ({ data, recent, filings }: Props) => {
+// the initial config for the select endpoint to fetch data
+const queryWeek: TableDynamic = {
+	index: 'futip',
+	main: 'ipoDate',
+	sort: [{ id: 'ipoDate', desc: true }],
+	sortDirection: 'asc',
+	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
+	filters: ['ipoDate-thisweek']
+}
+
+// the initial config for the select endpoint to fetch data
+const queryLater: TableDynamic = {
+	index: 'futip',
+	main: 'ipoDate',
+	sort: [{ id: 'ipoDate', desc: true }],
+	sortDirection: 'asc',
+	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
+	filters: ['ipoDate-nextweek']
+}
+
+export default function IpoCalendar(props: Props) {
 	const url = '/ipos/calendar/'
 
 	return (
@@ -29,43 +56,91 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 				canonical={url}
 			/>
 			<Layout url={url}>
-				<div className="contain">
+				<div className="contain" id="ipos">
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation path="calendar" />
 					<div className="lg:right-sidebar">
 						<div>
 							<CalendarNavigation path="calendar" />
-							<div className="flex flex-col space-y-4 py-2 xs:space-y-5 sm:space-y-7 lg:py-4">
-								<CalendarTable
-									title="This Week"
-									data={data.thisweek}
-									tableId="this-week"
-									border={true}
-								/>
-								<CalendarTable
-									title="Next Week"
-									data={data.nextweek}
-									tableId="next-week"
-								/>
-								{data.later.length ? (
-									<CalendarTable
-										title="After Next Week"
-										data={data.later}
-										tableId="later"
-									/>
-								) : (
-									<LaterExplanation />
-								)}
+							<div
+								className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7"
+								id="calendar"
+							>
+								<TableContextProvider
+									value={{
+										tableId: 'ipo-calendar',
+										title: `This Week · ${props.response.data.length} IPOs`,
+										fixed: {
+											defaultSort: queryWeek.sort,
+											controls: {
+												filter: true,
+												export: true,
+												columns: true
+											},
+											columnOptions: FutureIpoDataPoints,
+											columnOrder: [
+												'ipoDate',
+												's',
+												'n',
+												'exchange',
+												'ipoPriceRange',
+												'sharesOffered'
+											]
+										},
+										dynamic: queryWeek
+									}}
+								>
+									<StockTable _data={props.response.data} />
+								</TableContextProvider>
+								<TableContextProvider
+									value={{
+										tableId: 'ipo-calendar-later',
+										title: `Next Week · ${props.later.data.length} IPOs`,
+										fixed: {
+											defaultSort: queryLater.sort,
+											controls: {
+												filter: true,
+												export: true,
+												columns: true
+											},
+											columnOptions: FutureIpoDataPoints,
+											columnOrder: [
+												'ipoDate',
+												's',
+												'n',
+												'exchange',
+												'ipoPriceRange',
+												'sharesOffered'
+											]
+										},
+										dynamic: queryLater,
+										fallback: {
+											title: 'Next Week · 0 IPOs',
+											text: 'There are no IPOs scheduled for next week.'
+										}
+									}}
+								>
+									<StockTable _data={props.later.data} />
+								</TableContextProvider>
+								<LaterExplanation />
 								<IPOSources />
 							</div>
 						</div>
-						<div className="flex flex-col pt-3 lg:pt-4">
+						<div className="flex flex-col pt-4">
 							<aside className="space-y-8 lg:space-y-10">
-								<RecentTableMin recent={recent} />
+								<SidebarTable
+									title="Latest IPOs"
+									btnTitle="All Recent IPOs"
+									btnUrl="/ipos/"
+									data={props.response.getIposRecentMin}
+								/>
 								<Sidebar1 key={url} />
-								<FilingTableMin
-									filings={filings}
-									count={data.counts.unscheduled}
+								<SidebarTable
+									title="Unscheduled IPOs"
+									btnTitle="All IPO Filings"
+									btnUrl="/ipos/filings/"
+									data={props.response.getIpoFilingsMin}
+									count={props.response.getFilingsCount}
 								/>
 							</aside>
 						</div>
@@ -76,16 +151,17 @@ export const IpoCalendar = ({ data, recent, filings }: Props) => {
 	)
 }
 
-export default IpoCalendar
-
 export const getStaticProps: GetStaticProps = async () => {
-	const { data, recent, filings } = await getIpoData('calendar')
+	let extras = ['getIposRecentMin', 'getIpoFilingsMin', 'getFilingsCount']
+	const [response, later] = await Promise.all([
+		getSelect(queryWeek, false, extras),
+		getSelect(queryLater)
+	])
 
 	return {
 		props: {
-			data,
-			recent,
-			filings
+			response,
+			later
 		}
 	}
 }

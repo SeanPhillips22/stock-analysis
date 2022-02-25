@@ -1,9 +1,8 @@
+/* eslint-disable react/jsx-no-undef */
 import { GetStaticProps } from 'next'
 import { News } from 'types/News'
-import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { SEO } from 'components/SEO'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
@@ -11,12 +10,13 @@ import { Layout } from 'components/Layout/_Layout'
 import { getSelect } from 'functions/apis/getSelect'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { StockTable } from 'components/StockTable/__StockTable'
-import { TableDynamic } from 'components/StockTable/TableTypes'
+import { TableData, TableDynamic } from 'components/StockTable/TableTypes'
 import { FutureIpoDataPoints } from 'data/DataPointGroups/FutureIpoDataPoints'
+import { SidebarTable, SidebarTableProps } from 'components/IPOs/SidebarTable'
 
 type Props = {
-	data: IpoUpcoming[]
-	getIposRecentMin: IpoRecent[]
+	data: TableData
+	getIposRecentMin: SidebarTableProps
 	getIpoNewsMin: News[]
 }
 
@@ -48,37 +48,40 @@ export default function IpoFilings(props: Props) {
 					<div className="lg:right-sidebar">
 						<div>
 							<CalendarNavigation path="filings" />
-							<div className="md:py-2 lg:py-4">
-								<TableContextProvider
-									value={{
-										tableId: 'ipo-filings',
-										title: `${count} Filings`,
-										fixed: {
-											defaultSort: query.sort,
-											controls: {
-												filter: true,
-												export: true,
-												columns: true
-											},
-											columnOptions: FutureIpoDataPoints,
-											columnOrder: [
-												'filingDateFB',
-												's',
-												'n',
-												'exchange',
-												'ipoPriceRange',
-												'sharesOffered'
-											]
+							<TableContextProvider
+								value={{
+									tableId: 'ipo-filings',
+									title: `${count} Filings`,
+									fixed: {
+										defaultSort: query.sort,
+										controls: {
+											filter: true,
+											export: true,
+											columns: true
 										},
-										dynamic: query
-									}}
-								>
-									<StockTable _data={props.data} />
-								</TableContextProvider>
-							</div>
+										columnOptions: FutureIpoDataPoints,
+										columnOrder: [
+											'filingDateFB',
+											's',
+											'n',
+											'exchange',
+											'ipoPriceRange',
+											'sharesOffered'
+										]
+									},
+									dynamic: query
+								}}
+							>
+								<StockTable _data={props.data} />
+							</TableContextProvider>
 						</div>
 						<aside className="flex flex-col space-y-8 pt-4 lg:space-y-10 lg:pt-5">
-							<RecentTableMin recent={props.getIposRecentMin} />
+							<SidebarTable
+								title="Latest IPOs"
+								btnTitle="All Recent IPOs"
+								btnUrl="/ipos/"
+								data={props.getIposRecentMin}
+							/>
 							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
