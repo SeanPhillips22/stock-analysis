@@ -22,6 +22,7 @@ type Props = {
 
 // the initial config for the select endpoint to fetch data
 const query: TableDynamic = {
+	index: 'histip',
 	main: 'ipoDate',
 	count: 200,
 	sort: [{ id: 'ipoDate', desc: true }],
@@ -40,7 +41,7 @@ export default function RecentIpos(props: Props) {
 				canonical={url}
 			/>
 			<Layout url={url}>
-				<div className="contain ipos-recent">
+				<div className="contain ipos-recent" id="ipos">
 					<h1 className="hh1">Recent IPOs</h1>
 					<IPONavigation path="" />
 
@@ -49,7 +50,6 @@ export default function RecentIpos(props: Props) {
 							<RecentNavigation path="" />
 							<TableContextProvider
 								value={{
-									type: 'histip',
 									tableId: 'ipos-recent',
 									title: 'Last 200 IPOs',
 									fixed: {
@@ -96,7 +96,7 @@ export default function RecentIpos(props: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['getIpoCalendarDataMin', 'getIpoNewsMin']
-	const response = await getSelect(query, 'histip', true, extras)
+	const response = await getSelect(query, true, extras)
 
 	return response
 }

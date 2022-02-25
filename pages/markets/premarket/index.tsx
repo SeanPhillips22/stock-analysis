@@ -21,6 +21,7 @@ const page: PageConfig = {
 
 // the initial config for the select endpoint to fetch data
 const query: TableDynamic = {
+	index: 'stocks',
 	main: 'premarketChangePercent',
 	count: 20,
 	sort: [{ id: 'premarketChangePercent', desc: true }],
@@ -40,7 +41,6 @@ export default function PreMarket({ data, tradingTimestamps }: Props) {
 			<MarketsLayout>
 				<TableContextProvider
 					value={{
-						type: 'stocks',
 						title: 'Top Gainers',
 						tableId: 'premarket',
 						fixed: {
@@ -67,6 +67,6 @@ export default function PreMarket({ data, tradingTimestamps }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['tradingTimestamps']
-	const data = await getSelect(query, 'stocks', true, extras)
+	const data = await getSelect(query, true, extras)
 	return data
 }

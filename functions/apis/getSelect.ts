@@ -7,12 +7,11 @@ import { respondSSR } from './callBackEnd'
  */
 export async function getSelect(
 	config: TableDynamic,
-	type: 'stocks' | 'etf' | 'histip',
 	ssr?: boolean,
 	extras?: string[]
 ) {
 	// destructure the props and create the URL
-	let { main, count, sortDirection, columns } = config
+	let { main, count, sortDirection, columns, index } = config
 
 	// turn the columns array into a string
 	let cols = columns.join(',')
@@ -22,7 +21,9 @@ export async function getSelect(
 	let filters = config.filters ? config.filters.join(',') : ''
 
 	// create the url
-	let url = `select?type=${type}&main=${main}&count=${count}&sort=${sortDirection}&columns=${cols}&filters=${filters}`
+	let url = `select?index=${
+		index || 'stocks'
+	}&main=${main}&count=${count}&sort=${sortDirection}&columns=${cols}&filters=${filters}`
 
 	// request extra data
 	if (extras) {

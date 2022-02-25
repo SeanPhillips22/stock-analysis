@@ -25,6 +25,7 @@ type Props = {
 
 // the initial config for the select endpoint to fetch data
 const query: TableDynamic = {
+	index: 'histip',
 	main: 'ipoDate',
 	sort: [{ id: 'ipoDate', desc: true }],
 	sortDirection: 'asc',
@@ -49,7 +50,7 @@ export default function IpoYear(props: Props) {
 		<>
 			<SEO title={title} description={description} canonical={url} />
 			<Layout url={url}>
-				<div className="contain ipos-recent">
+				<div className="contain ipos-recent" id="ipos">
 					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation path="" />
 					<div className="lg:right-sidebar">
@@ -60,7 +61,6 @@ export default function IpoYear(props: Props) {
 							</div>
 							<TableContextProvider
 								value={{
-									type: 'histip',
 									tableId: 'ipos-' + year,
 									title: props.data.length + ' IPOs',
 									fixed: {
@@ -123,7 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	ssrQuery.filters = ['ipoDate-year-' + year]
 
 	// Fetch the data
-	const response = await getSelect(ssrQuery, 'histip', true, extras)
+	const response = await getSelect(ssrQuery, true, extras)
 	response.props.year = year
 	response.props.info = response.props[extraFn]
 	delete response.props[extraFn]
