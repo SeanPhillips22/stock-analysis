@@ -16,6 +16,11 @@ export type DataId =
 	// > IPO details
 	// TODO add to screener
 	| 'ipoDate' // IPO Date
+	| 'ipoStatus' // IPO Date
+	| 'filingDate' // Filing Date
+	| 'filingDateFB' // Filing Date (with n/a fallback)
+	| 'withdrawnDate' // Withdrawn Date
+	| 'withdrawnDateFB' // Withdrawn Date (with n/a fallback)
 	| 'ipp' // IPO Price
 	| 'ippc' // IPO Price
 	| 'ipr' // IPO Return

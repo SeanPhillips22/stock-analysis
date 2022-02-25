@@ -106,7 +106,7 @@
 		@apply hidden md:block;
 	}
 
-	.ipos-recent .controls-export {
+	#ipos .controls-export {
 		@apply block;
 	}
 }

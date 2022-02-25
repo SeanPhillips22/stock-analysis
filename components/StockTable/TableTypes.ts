@@ -22,6 +22,8 @@ export type TableFixed = {
 
 // Dynamic data that becomes state and is used to modify the table
 export type TableDynamic = {
+	index: IndexTypes // The index type, more specific is faster
+
 	main: DataId // The main column to sort by
 
 	count?: number // The number of symbols to show -- if empty, show all
@@ -37,3 +39,6 @@ export type TableDynamic = {
 
 	showOnMobile?: boolean // Whether to show the controls on mobile
 }
+
+// The stock index type (more specific is faster)
+export type IndexTypes = 'stocks' | 'etf' | 'histip' | 'futip'

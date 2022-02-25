@@ -63,8 +63,12 @@ export const priceSort = (a: Row, b: Row) => {
 }
 
 export const dateSort = (a: Row, b: Row, columnId: string) => {
-	const aDate = new Date(a.values[columnId])
-	const bDate = new Date(b.values[columnId])
+	let ad = a.values[columnId]
+	let bd = b.values[columnId]
+	if (ad === 'n/a') return -1
+
+	const aDate = new Date(ad)
+	const bDate = new Date(bd)
 	if (aDate < bDate) {
 		return -1
 	} else if (aDate > bDate) {

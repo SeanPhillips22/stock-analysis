@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { TableDynamic, TableFixed } from './TableTypes'
 
 interface InitialProps {
-	type: 'stocks' | 'etf' | 'histip' // The stock index type (more specific is faster)
 	title: string // The title of the table
 	tableId: string // The unique ID for the table
 	fixed: TableFixed // Table data that does not change
@@ -81,7 +80,6 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 
 	// The full state to pass as context
 	const state = {
-		type: value.type,
 		title: value.title,
 		tableId: id,
 		fixed: value.fixed,

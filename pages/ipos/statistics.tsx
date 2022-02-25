@@ -36,7 +36,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 				canonical={url}
 			/>
 			<Layout url={url}>
-				<div className="contain">
+				<div className="contain" id="ipos">
 					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation path="statistics" />
 
