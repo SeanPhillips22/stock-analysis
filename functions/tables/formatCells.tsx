@@ -194,7 +194,11 @@ export function formatDate(cell: CellString) {
 	]
 
 	const dt = new Date(value)
-	return `${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`
+	return (
+		<div className="tr">
+			{`${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`}
+		</div>
+	)
 }
 
 // Format a string

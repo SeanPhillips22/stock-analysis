@@ -63,11 +63,9 @@ export function SelectRowCount({ pageSize, setSelected }: Props) {
 		<Dropdown
 			title={title}
 			hoverTitle="Change results count"
-			// classes="whitespace-nowrap"
 			btnClasses="text-sm"
 		>
 			{OPTIONS.map(i => {
-				console.log(i)
 				return (
 					/* One Dropdown Item */
 					<Menu.Item key={i.value}>
@@ -83,11 +81,6 @@ export function SelectRowCount({ pageSize, setSelected }: Props) {
 							{i.value === pageSize && (
 								<CheckIcon className="h-5 w-5" aria-hidden="true" />
 							)}
-
-							{/* Add slow warning for many results */}
-							{/* {i.value === 9999 && pageSize !== 9999 && isPro && (
-								<span className="ml-1.5 text-tiny">(can be slow)</span>
-							)} */}
 
 							{/* Icon - if option is only for pro members */}
 							{i.pro && !isPro && (

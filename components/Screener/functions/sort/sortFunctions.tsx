@@ -65,7 +65,8 @@ export const priceSort = (a: Row, b: Row) => {
 export const dateSort = (a: Row, b: Row, columnId: string) => {
 	let ad = a.values[columnId]
 	let bd = b.values[columnId]
-	if (ad === 'n/a') return -1
+	if (ad === 'n/a') ad = 0
+	if (bd === 'n/a') bd = 0
 
 	const aDate = new Date(ad)
 	const bDate = new Date(bd)
