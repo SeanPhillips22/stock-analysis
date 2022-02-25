@@ -59,13 +59,10 @@ export default function IpoCalendar(props: Props) {
 				<div className="contain" id="ipos">
 					<h1 className="hh1">IPO Calendar</h1>
 					<IPONavigation path="calendar" />
-					<div className="lg:right-sidebar">
+					<div className="lg:right-sidebar" id="calendar">
 						<div>
 							<CalendarNavigation path="calendar" />
-							<div
-								className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7"
-								id="calendar"
-							>
+							<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">
 								<TableContextProvider
 									value={{
 										tableId: 'ipo-calendar',
