@@ -84,7 +84,11 @@ export default function IpoCalendar(props: Props) {
 												'sharesOffered'
 											]
 										},
-										dynamic: queryWeek
+										dynamic: queryWeek,
+										fallback: {
+											title: 'This Week · 0 IPOs',
+											text: 'There are no upcoming IPOs remaining for this week.'
+										}
 									}}
 								>
 									<StockTable _data={props.response.data} />
