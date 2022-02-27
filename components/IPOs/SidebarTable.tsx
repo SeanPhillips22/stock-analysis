@@ -15,7 +15,15 @@ type Props = {
 	count?: number
 }
 
+/**
+ * A table in the sidebar that shows a list of stocks with date, symbol and name
+ */
 export function SidebarTable({ data, title, btnTitle, btnUrl, count }: Props) {
+	// Make sure data is an array
+	// If no data, return null
+	if (!Array.isArray(data)) data = [data]
+	if (!data[0]?.date) return null
+
 	return (
 		<div>
 			<h3 className="hh3 mb-2.5">{count ? `${title} (${count})` : title}</h3>
