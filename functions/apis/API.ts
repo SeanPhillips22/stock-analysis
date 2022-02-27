@@ -9,7 +9,6 @@ export async function getData(params: string) {
 		process.env.API_URL ||
 		'https://api.stockanalysis.com/wp-json/sa'
 
-	console.log(`${url}/${encodeURI(params)}`)
 	const response = await fetch(`${url}/${encodeURI(params)}`)
 
 	if (response.ok) {
