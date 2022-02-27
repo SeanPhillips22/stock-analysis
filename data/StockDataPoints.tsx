@@ -645,6 +645,17 @@ export const DataPoints: Props = {
 		name: 'Piotroski F-Score',
 		format: 'integer'
 	},
+	views: {
+		id: 'views',
+		name: 'Views',
+		format: 'integer'
+	},
+	number: {
+		id: 'number',
+		name: 'Number',
+		format: 'integer',
+		css: 'sl'
+	},
 	/* IPOs
 	
 

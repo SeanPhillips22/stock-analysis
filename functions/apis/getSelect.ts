@@ -26,6 +26,7 @@ export async function getSelect(
 	}&main=${main}&count=${count}&sort=${sortDirection}&columns=${cols}&filters=${filters}`
 
 	// request extra data
+	// for example, data to show in the page's sidebar
 	if (extras) {
 		url += `&extras=${extras.join(',')}`
 	}
@@ -38,6 +39,6 @@ export async function getSelect(
 		return respondSSR(response)
 	}
 
-	// if not, then return the data
+	// if not, then return the data as is
 	return response.data
 }

@@ -25,7 +25,7 @@ const query: TableDynamic = {
 	index: 'futip',
 	main: 'filingDateFB',
 	sort: [{ id: 'filingDateFB', desc: true }],
-	sortDirection: 'asc',
+	sortDirection: 'desc',
 	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 	filters: ['ipoDate-isnull', 'ipoStatus-isnot-withdrawn']
 }

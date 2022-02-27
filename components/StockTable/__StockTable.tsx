@@ -11,8 +11,7 @@ import { TableTitle } from './Controls/TableTitle'
  */
 export function StockTable({ _data }: { _data: any[] }) {
 	// Get the table contexts
-	const { tableId, fixed, dynamic, setState, enabled, fallback } =
-		useTableContext()
+	const { tableId, fixed, dynamic, setState, enabled } = useTableContext()
 
 	// Get the props
 	const { defaultSort, columnOrder } = fixed
@@ -23,20 +22,31 @@ export function StockTable({ _data }: { _data: any[] }) {
 
 	// memoize the data and columns
 	const data = useMemo(() => query?.data?.data || query?.data, [query.data])
-	const columns = useMemo(() => getColumns(_columns, main), [_columns, main])
+	const columns = useMemo(
+		() => getColumns(_columns, main, fixed),
+		[_columns, fixed, main]
+	)
 
+	// Memoize the sort props to insert into the table
 	const sortProps = useMemo(
 		() => ({ defaultSort, setSort: (sort: any) => setState({ sort }) }),
 		[defaultSort, setState]
 	)
 
+	// Add the "number" cell to the front of each row, if applicable
+	if (fixed.other?.showNumberColumn) {
+		data.forEach((d: any, i: number) => {
+			d.number = i + 1
+		})
+	}
+
 	// If there's no data, display a fallback with title and text
 	// Completely skip rendering the stock table
-	if (!data.length && fallback) {
+	if (!data.length && fixed.fallback) {
 		return (
 			<div className="controls fallback">
-				<TableTitle title={fallback.title} />
-				<p>{fallback.text}</p>
+				<TableTitle title={fixed.fallback.title} />
+				<p>{fixed.fallback.text}</p>
 			</div>
 		)
 	}

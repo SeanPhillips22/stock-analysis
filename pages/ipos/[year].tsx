@@ -27,7 +27,7 @@ const query: TableDynamic = {
 	index: 'histip',
 	main: 'ipoDate',
 	sort: [{ id: 'ipoDate', desc: true }],
-	sortDirection: 'asc',
+	sortDirection: 'desc',
 	columns: ['s', 'n', 'ipp', 'ippc', 'ipr']
 }
 

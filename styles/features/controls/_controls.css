@@ -118,6 +118,7 @@
 		@apply hidden md:block;
 	}
 
+	#trending .controls-export,
 	#ipos .controls-export {
 		@apply block;
 	}

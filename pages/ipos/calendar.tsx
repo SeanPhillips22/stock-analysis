@@ -40,7 +40,7 @@ const queryLater: TableDynamic = {
 	index: 'futip',
 	main: 'ipoDate',
 	sort: [{ id: 'ipoDate', desc: true }],
-	sortDirection: 'asc',
+	sortDirection: 'desc',
 	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 	filters: ['ipoDate-nextweek']
 }
@@ -82,13 +82,13 @@ export default function IpoCalendar(props: Props) {
 												'exchange',
 												'ipoPriceRange',
 												'sharesOffered'
-											]
+											],
+											fallback: {
+												title: 'This Week · 0 IPOs',
+												text: 'There are no upcoming IPOs remaining for this week.'
+											}
 										},
-										dynamic: queryWeek,
-										fallback: {
-											title: 'This Week · 0 IPOs',
-											text: 'There are no upcoming IPOs remaining for this week.'
-										}
+										dynamic: queryWeek
 									}}
 								>
 									<StockTable _data={props.response.data} />
@@ -112,13 +112,13 @@ export default function IpoCalendar(props: Props) {
 												'exchange',
 												'ipoPriceRange',
 												'sharesOffered'
-											]
+											],
+											fallback: {
+												title: 'Next Week · 0 IPOs',
+												text: 'There are no IPOs scheduled for next week.'
+											}
 										},
-										dynamic: queryLater,
-										fallback: {
-											title: 'Next Week · 0 IPOs',
-											text: 'There are no IPOs scheduled for next week.'
-										}
+										dynamic: queryLater
 									}}
 								>
 									<StockTable _data={props.later.data} />
