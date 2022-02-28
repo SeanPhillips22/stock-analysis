@@ -36,6 +36,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'markets/losers/',
 		'markets/active/',
 		'markets/premarket/',
+		'markets/premarket/gainers/',
+		'markets/premarket/losers/',
 		'actions/',
 		'actions/listed/',
 		'actions/delisted/',
