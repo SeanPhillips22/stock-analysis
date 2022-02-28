@@ -1,11 +1,11 @@
-import { screenerState } from 'components/StockScreener/screener.state'
+import { screenerState } from 'components/Screener/screener.state'
 import { SEO } from 'components/SEO'
-import { Screener } from 'components/StockScreener/_Screener'
+import { Screener } from 'components/Screener/_Screener'
 import { ScreenerLayout } from 'components/Layout/ScreenerLayout'
-import { PresetFiltersETFs } from 'components/StockScreener/maps/presetFilters.map'
+import { PresetFiltersETFs } from 'components/Screener/maps/presetFilters.map'
 import { useEffect } from 'react'
-import { useFetchFullData } from 'components/StockScreener/functions/useFetchFullData'
-import { defaultColumnsETFs } from 'components/StockScreener/maps/resultColumns.map'
+import { useFetchFullData } from 'components/Screener/functions/useFetchFullData'
+import { defaultColumnsETFs } from 'components/Screener/maps/resultColumns.map'
 
 export default function ETFScreenerPage() {
 	const type = screenerState(state => state.type)

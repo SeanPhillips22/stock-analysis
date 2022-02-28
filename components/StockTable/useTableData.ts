@@ -1,6 +1,5 @@
 import { getSelect } from 'functions/apis/getSelect'
 import { useQuery } from 'react-query'
-import { IndexType } from 'types/Tables'
 import { TableDynamic } from './TableTypes'
 
 /**
@@ -8,26 +7,25 @@ import { TableDynamic } from './TableTypes'
  */
 export function useTableData(
 	tableId: string,
-	type: IndexType,
 	dynamic: TableDynamic,
 	_data: any[],
 	enabled?: boolean
 ) {
 	// The params that  tell react-query when to update
-	const { main, count, columns, filters, sortDirection } = dynamic
+	const { main, count, columns, filters, sortDirection, index } = dynamic
 	const queryObject = {
 		main,
 		count,
 		columns,
 		filters,
 		sortDirection,
-		type,
+		index,
 		tableId
 	}
 
 	const { data } = useQuery(
 		[tableId, queryObject],
-		async () => await getSelect(dynamic, type, false),
+		async () => await getSelect(dynamic, false),
 		{
 			placeholderData: _data,
 			enabled: enabled,

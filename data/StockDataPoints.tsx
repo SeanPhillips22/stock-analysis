@@ -1,11 +1,12 @@
 import { DataId } from 'types/DataId'
-import { FormatFunction, IndexType } from 'types/Tables'
+import { FormatFunction } from 'types/Tables'
 import {
 	numberAbsolute,
 	percentage,
 	dateSort,
 	stringIgnoreCase
-} from 'components/StockScreener/functions/sort/sortFunctions'
+} from 'components/Screener/functions/sort/sortFunctions'
+import { IndexTypes } from 'components/StockTable/TableTypes'
 
 type SymbolType = 'stocks' | 'ipo' | 'etf'
 
@@ -24,7 +25,7 @@ type Props = {
 }
 
 // Get a list of data point IDs to use for a table
-export function getDataPointsArray(type: IndexType, exclude?: DataId[]) {
+export function getDataPointsArray(type: IndexTypes, exclude?: DataId[]) {
 	// get all the matching IDs from the DataPoints array of objects
 	let ids = Object.values(DataPoints)
 		.filter(f => !f.only || f.only === type)
@@ -202,6 +203,7 @@ export const DataPoints: Props = {
 		format: 'formatDate',
 		sort: dateSort
 	},
+
 	ipp: {
 		id: 'ipp',
 		name: 'IPO Price',
@@ -245,7 +247,8 @@ export const DataPoints: Props = {
 	ipoPriceRange: {
 		id: 'ipoPriceRange',
 		name: 'IPO Price Range',
-		format: 'string',
+		colName: 'Price Range',
+		format: 'stringright',
 		only: 'ipo'
 	},
 	isSpac: { id: 'isSpac', name: 'Is SPAC' },
@@ -641,6 +644,56 @@ export const DataPoints: Props = {
 		id: 'fScore',
 		name: 'Piotroski F-Score',
 		format: 'integer'
+	},
+	views: {
+		id: 'views',
+		name: 'Views',
+		format: 'integer'
+	},
+	number: {
+		id: 'number',
+		name: 'Number',
+		format: 'integer',
+		css: 'sl'
+	},
+	/* IPOs
+	
+
+
+	
+	
+	
+	*/
+	filingDate: {
+		id: 'filingDate',
+		name: 'Filing Date',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	filingDateFB: {
+		id: 'filingDateFB',
+		name: 'Filing Date',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	withdrawnDate: {
+		id: 'withdrawnDate',
+		name: 'Withdrawn Date',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	withdrawnDateFB: {
+		id: 'withdrawnDateFB',
+		name: 'Withdrawn Date',
+		colName: 'Withdrawn',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	ipoStatus: {
+		id: 'ipoStatus',
+		name: 'IPO Status',
+		format: 'string',
+		sort: stringIgnoreCase
 	},
 	/* ETFs
 	

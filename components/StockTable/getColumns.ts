@@ -1,12 +1,13 @@
 import { DataPoints } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
+import { TableFixed } from './TableTypes'
 
 /**
  * This function formats the columns for react-table
  * @param cols an array of data point names
  * @returns
  */
-export function getColumns(cols: DataId[], main: DataId) {
+export function getColumns(cols: DataId[], main: DataId, fixed: TableFixed) {
 	const newCols = [...cols]
 
 	// Add the "main" column to the front of the array
@@ -29,6 +30,16 @@ export function getColumns(cols: DataId[], main: DataId) {
 					: false
 		}
 	})
+
+	// Add the "number" column to the front of the array, if applicable
+	if (fixed.other?.showNumberColumn) {
+		columns.push({
+			Header: 'No.',
+			accessor: 'number',
+			sortType: 'basic',
+			sortInverted: true
+		})
+	}
 
 	return columns
 }

@@ -1,0 +1,9 @@
+import { DataId } from 'types/DataId'
+import { FilterValue } from 'components/Screener/screener.types'
+
+// Check if the selected filter is in the list of filters
+export function isFilterSelected(id: DataId, filters: FilterValue[]) {
+	if (filters.length === 0) return false
+	const findFilter = filters.find(filter => filter.id === id)
+	return findFilter ? findFilter.value : false
+}

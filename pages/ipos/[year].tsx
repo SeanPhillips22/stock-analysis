@@ -1,33 +1,33 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { RecentNavigation } from 'components/IPOs/IPONavigation/RecentNavigation'
 import { InfoBox } from 'components/InfoBox'
-import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Layout } from 'components/Layout/_Layout'
-import { TableDynamic } from 'components/StockTable/TableTypes'
+import { TableData, TableDynamic } from 'components/StockTable/TableTypes'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { StockTable } from 'components/StockTable/__StockTable'
 import { getSelect } from 'functions/apis/getSelect'
 import { RecentIpoDataPoints } from 'data/DataPointGroups/RecentIpoDataPoints'
+import { SidebarTable, SidebarTableProps } from 'components/IPOs/SidebarTable'
 
 type Props = {
 	year: string
-	data: IpoRecent[]
+	data: TableData
 	info: string
 	getIpoNewsMin: News[]
-	getIpoCalendarDataMin: IpoUpcoming[]
+	getIpoCalendarDataMin: SidebarTableProps
 }
 
 // the initial config for the select endpoint to fetch data
 const query: TableDynamic = {
+	index: 'histip',
 	main: 'ipoDate',
 	sort: [{ id: 'ipoDate', desc: true }],
-	sortDirection: 'asc',
+	sortDirection: 'desc',
 	columns: ['s', 'n', 'ipp', 'ippc', 'ipr']
 }
 
@@ -49,7 +49,7 @@ export default function IpoYear(props: Props) {
 		<>
 			<SEO title={title} description={description} canonical={url} />
 			<Layout url={url}>
-				<div className="contain ipos-recent">
+				<div className="contain ipos-recent" id="ipos">
 					<h1 className="hh1">All {year} IPOs</h1>
 					<IPONavigation path="" />
 					<div className="lg:right-sidebar">
@@ -60,7 +60,6 @@ export default function IpoYear(props: Props) {
 							</div>
 							<TableContextProvider
 								value={{
-									type: 'histip',
 									tableId: 'ipos-' + year,
 									title: props.data.length + ' IPOs',
 									fixed: {
@@ -90,7 +89,12 @@ export default function IpoYear(props: Props) {
 							</TableContextProvider>
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
-							<CalendarTableMin upcoming={props.getIpoCalendarDataMin} />
+							<SidebarTable
+								title="Upcoming IPOs"
+								btnTitle="Full IPO Calendar"
+								btnUrl="/ipos/calendar/"
+								data={props.getIpoCalendarDataMin}
+							/>
 							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
@@ -123,7 +127,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	ssrQuery.filters = ['ipoDate-year-' + year]
 
 	// Fetch the data
-	const response = await getSelect(ssrQuery, 'histip', true, extras)
+	const response = await getSelect(ssrQuery, true, extras)
 	response.props.year = year
 	response.props.info = response.props[extraFn]
 	delete response.props[extraFn]

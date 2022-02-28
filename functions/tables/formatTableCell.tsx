@@ -1,4 +1,4 @@
-import { ScreenerTypes } from 'components/StockScreener/screener.types'
+import { ScreenerTypes } from 'components/Screener/screener.types'
 import Link from 'next/link'
 import { FormatFunction } from 'types/Tables'
 
@@ -43,7 +43,8 @@ export function formatTableCell(
 	if (fn === 'colorPercentage') return colorPercentage(value as number)
 	if (fn === 'abbreviate') return abbreviate(value as number)
 	if (fn === 'formatDate') return formatDate(value as string)
-	if (fn === 'string') return formatString(value as string)
+	if (fn === 'string' || fn === 'stringright')
+		return formatString(value as string)
 	return null
 }
 
@@ -132,6 +133,7 @@ export function abbreviate(value: number) {
 // Format a date
 export function formatDate(value: string) {
 	if (!value) return '-'
+	if (value === 'n/a') return '-'
 
 	const months = [
 		'Jan',

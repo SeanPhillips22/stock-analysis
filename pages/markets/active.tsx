@@ -21,6 +21,7 @@ const page: PageConfig = {
 
 // the initial config for the select endpoint to fetch data
 const query: TableDynamic = {
+	index: 'stocks',
 	main: 'volume',
 	count: 20,
 	sort: [{ id: 'volume', desc: true }],
@@ -40,7 +41,6 @@ export default function ActivePage({ data, tradingTimestamps }: Props) {
 			<MarketsLayout>
 				<TableContextProvider
 					value={{
-						type: 'stocks',
 						title: 'Active Today',
 						tableId: 'active',
 						fixed: {
@@ -71,6 +71,6 @@ export default function ActivePage({ data, tradingTimestamps }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['tradingTimestamps']
-	const data = await getSelect(query, 'stocks', true, extras)
+	const data = await getSelect(query, true, extras)
 	return data
 }

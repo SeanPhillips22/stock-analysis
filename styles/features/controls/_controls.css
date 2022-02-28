@@ -43,6 +43,18 @@
 		@apply hidden md:flex;
 	}
 
+	.controls.fallback {
+		@apply block space-x-0 border-0 py-0;
+	}
+
+	.controls.fallback h2 {
+		@apply mb-2 text-[1.4rem] font-semibold text-gray-800;
+	}
+
+	.controls.fallback p {
+		@apply text-lg text-gray-900;
+	}
+
 	.toggle {
 		@apply ml-auto block md:hidden;
 	}
@@ -106,7 +118,17 @@
 		@apply hidden md:block;
 	}
 
-	.ipos-recent .controls-export {
+	#trending .controls-export,
+	#ipos .controls-export {
 		@apply block;
+	}
+
+	#calendar .controls {
+		@apply px-0;
+	}
+
+	/* Reduce h2 size on IPO calendar page */
+	#calendar .controls h2 {
+		@apply bp:text-[1.4rem];
 	}
 }

@@ -1,4 +1,5 @@
-import { ScreenerTypes } from 'components/StockScreener/screener.types'
+import { ScreenerTypes } from 'components/Screener/screener.types'
+import { cn } from 'functions/helpers/classNames'
 import Link from 'next/link'
 import { CellNumber, CellString, FormatFunction } from 'types/Tables'
 
@@ -34,7 +35,12 @@ export function formatHeader(fn: Fn, value: string) {
 	return value
 }
 
-export function formatCells(fn: Fn, cell: Cell, type: Type = 'stocks') {
+export function formatCells(
+	fn: Fn,
+	cell: Cell,
+	type: Type = 'stocks',
+	appendClass = ''
+) {
 	if (fn === 'linkSymbol') return formatSymbol(cell as CellString, type)
 	if (fn === 'linkName') return formatName(cell as CellString, type)
 	if (fn === 'format2dec') return format2dec(cell as CellNumber)
@@ -42,7 +48,7 @@ export function formatCells(fn: Fn, cell: Cell, type: Type = 'stocks') {
 	if (fn === 'integer') return formatInteger(cell as CellNumber)
 	if (fn === 'formatPercentage') return formatPercentage(cell as CellNumber)
 	if (fn === 'colorPercentage') return colorPercentage(cell as CellNumber)
-	if (fn === 'abbreviate') return abbreviate(cell as CellNumber)
+	if (fn === 'abbreviate') return abbreviate(cell as CellNumber, appendClass)
 	if (fn === 'formatDate') return formatDate(cell as CellString)
 	if (fn === 'string') return formatString(cell as CellString)
 	return null
@@ -142,7 +148,7 @@ export function colorPercentage(cell: CellNumber) {
 }
 
 // Abbreviate a number with B/M/K
-export function abbreviate(cell: CellNumber) {
+export function abbreviate(cell: CellNumber, appendClass: string) {
 	let { value } = cell.cell
 	if (!value)
 		return (
@@ -161,7 +167,7 @@ export function abbreviate(cell: CellNumber) {
 	else num = dec2.format(value)
 
 	return (
-		<div title={dec0.format(value)} className="text-right">
+		<div title={dec0.format(value)} className={cn('text-right', appendClass)}>
 			{num}
 		</div>
 	)
@@ -188,7 +194,11 @@ export function formatDate(cell: CellString) {
 	]
 
 	const dt = new Date(value)
-	return `${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`
+	return (
+		<div className="tr">
+			{`${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`}
+		</div>
+	)
 }
 
 // Format a string

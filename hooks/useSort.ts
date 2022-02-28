@@ -1,4 +1,4 @@
-import { SortProps } from 'components/StockScreener/screener.types'
+import { SortProps } from 'components/Screener/screener.types'
 
 /**
  * Prevent table sort state from resetting after clicking a stock and going back

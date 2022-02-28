@@ -13,6 +13,10 @@ interface Props {
 }
 
 export const IPOwidgets = ({ recent, upcoming }: Props) => {
+	// Make sure data is an array
+	if (!Array.isArray(upcoming)) upcoming = [upcoming]
+	if (!upcoming[0]?.date) upcoming = []
+
 	const IPOTable = ({ ipos }: { ipos: IposMin[] }) => {
 		return (
 			<table className="w-full border border-gray-200 text-sm sm:text-base">

@@ -12,7 +12,6 @@
 @import './features/price-chart';
 @import './features/quote';
 @import './features/top-table';
-@import './features/ipo-table';
 @import './features/controls/_controls';
 @import './features/controls/export';
 @import './features/financials';

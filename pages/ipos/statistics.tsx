@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next'
-import { IpoRecent } from 'types/Ipos'
 import { News } from 'types/News'
 import { SEO } from 'components/SEO'
 import { getIpoData } from 'functions/apis/callBackEnd'
@@ -7,10 +6,10 @@ import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { StatsChartAnnual } from 'components/IPOs/StatsChartAnnual'
 import { StatsChartMonthly } from 'components/IPOs/StatsChartMonthly'
 import Link from 'next/link'
-import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Layout } from 'components/Layout/_Layout'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
+import { SidebarTable, SidebarTableProps } from 'components/IPOs/SidebarTable'
 
 interface Props {
 	data: {
@@ -22,7 +21,7 @@ interface Props {
 		months2022: [string, number][]
 	}
 	news: News[]
-	recent: IpoRecent[]
+	recent: SidebarTableProps
 }
 
 export const IpoStatistics = ({ data, news, recent }: Props) => {
@@ -36,7 +35,7 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 				canonical={url}
 			/>
 			<Layout url={url}>
-				<div className="contain">
+				<div className="contain" id="ipos">
 					<h1 className="hh1">IPO Statistics</h1>
 					<IPONavigation path="statistics" />
 
@@ -130,7 +129,12 @@ export const IpoStatistics = ({ data, news, recent }: Props) => {
 							</div>
 						</div>
 						<aside className="flex flex-col space-y-10 pt-6">
-							<RecentTableMin recent={recent} />
+							<SidebarTable
+								title="Latest IPOs"
+								btnTitle="All Recent IPOs"
+								btnUrl="/ipos/"
+								data={recent}
+							/>
 							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"

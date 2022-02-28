@@ -33,7 +33,21 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 
 	// Disable on stocks other than these initial 5
-	if (!['aapl', 'msft', 'amzn', 'tsla', 'fb', 'baba'].includes(symbol)) {
+	if (
+		![
+			'aapl',
+			'msft',
+			'amzn',
+			'tsla',
+			'fb',
+			'baba',
+			'nvda',
+			'rblx',
+			'net',
+			'abnb',
+			'uber'
+		].includes(symbol)
+	) {
 		return {
 			notFound: true
 		}

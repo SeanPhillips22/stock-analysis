@@ -1,25 +1,38 @@
+/* eslint-disable react/jsx-no-undef */
 import { GetStaticProps } from 'next'
 import { News } from 'types/News'
-import { IpoRecent, IpoUpcoming } from 'types/Ipos'
 import { SEO } from 'components/SEO'
-import { getIpoData } from 'functions/apis/callBackEnd'
-import { CalendarTable } from 'components/IPOs/CalendarTable'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
-import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { NewsWidget } from 'components/News/NewsWidget'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { CalendarNavigation } from 'components/IPOs/IPONavigation/CalendarNavigation'
 import { Layout } from 'components/Layout/_Layout'
+import { getSelect } from 'functions/apis/getSelect'
+import { TableContextProvider } from 'components/StockTable/TableContext'
+import { StockTable } from 'components/StockTable/__StockTable'
+import { TableData, TableDynamic } from 'components/StockTable/TableTypes'
+import { FutureIpoDataPoints } from 'data/DataPointGroups/FutureIpoDataPoints'
+import { SidebarTable, SidebarTableProps } from 'components/IPOs/SidebarTable'
 
-interface Props {
-	data: IpoUpcoming[]
-	news: News[]
-	recent: IpoRecent[]
+type Props = {
+	data: TableData
+	getIposRecentMin: SidebarTableProps
+	getIpoNewsMin: News[]
 }
 
-export function IpoFilings({ data, news, recent }: Props) {
+// the initial config for the select endpoint to fetch data
+const query: TableDynamic = {
+	index: 'futip',
+	main: 'filingDateFB',
+	sort: [{ id: 'filingDateFB', desc: true }],
+	sortDirection: 'desc',
+	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
+	filters: ['ipoDate-isnull', 'ipoStatus-isnot-withdrawn']
+}
+
+export default function IpoFilings(props: Props) {
 	const url = '/ipos/filings/'
-	const count = data.length
+	const count = props.data.length
 
 	return (
 		<>
@@ -29,28 +42,50 @@ export function IpoFilings({ data, news, recent }: Props) {
 				canonical={url}
 			/>
 			<Layout url={url}>
-				<div className="contain">
+				<div className="contain" id="ipos">
 					<h1 className="hh1">IPO Filings</h1>
 					<IPONavigation path="calendar" />
 					<div className="lg:right-sidebar">
 						<div>
 							<CalendarNavigation path="filings" />
-							<div className="py-2 lg:py-4">
-								<CalendarTable
-									title={`${count} IPOs`}
-									data={data}
-									tableId="filings"
-									border={true}
-									filter={true}
-								/>
-							</div>
+							<TableContextProvider
+								value={{
+									tableId: 'ipo-filings',
+									title: `${count} Filings`,
+									fixed: {
+										defaultSort: query.sort,
+										controls: {
+											filter: true,
+											export: true,
+											columns: true
+										},
+										columnOptions: FutureIpoDataPoints,
+										columnOrder: [
+											'filingDateFB',
+											's',
+											'n',
+											'exchange',
+											'ipoPriceRange',
+											'sharesOffered'
+										]
+									},
+									dynamic: query
+								}}
+							>
+								<StockTable _data={props.data} />
+							</TableContextProvider>
 						</div>
 						<aside className="flex flex-col space-y-8 pt-4 lg:space-y-10 lg:pt-5">
-							<RecentTableMin recent={recent} />
+							<SidebarTable
+								title="Latest IPOs"
+								btnTitle="All Recent IPOs"
+								btnUrl="/ipos/"
+								data={props.getIposRecentMin}
+							/>
 							<Sidebar1 key={url} />
 							<NewsWidget
 								title="IPO News"
-								news={news}
+								news={props.getIpoNewsMin}
 								button={{
 									text: 'More IPO News',
 									url: '/ipos/news/'
@@ -64,16 +99,9 @@ export function IpoFilings({ data, news, recent }: Props) {
 	)
 }
 
-export default IpoFilings
-
 export const getStaticProps: GetStaticProps = async () => {
-	const { data, news, recent } = await getIpoData('filings')
+	let extras = ['getIposRecentMin', 'getIpoNewsMin']
+	const response = await getSelect(query, true, extras)
 
-	return {
-		props: {
-			data,
-			news,
-			recent
-		}
-	}
+	return response
 }

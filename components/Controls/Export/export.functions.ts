@@ -4,6 +4,11 @@
  * @return {string | number | null}
  */
 export function extractTextFromHTML(value: string): string | number | null {
+	// Remove svg tags
+	if (value.includes('<svg')) {
+		value = value.replace(/<svg.*?>.*?<\/svg>/g, '')
+	}
+
 	if (value.split('class=').length === 3) {
 		return new DOMParser().parseFromString(value, 'text/html').documentElement
 			.textContent
