@@ -45,7 +45,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
 			'rblx',
 			'net',
 			'abnb',
-			'uber'
+			'uber',
+			'rivn',
+			'sq',
+			'pypl'
 		].includes(symbol)
 	) {
 		return {

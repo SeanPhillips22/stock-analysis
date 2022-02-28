@@ -102,7 +102,10 @@ export const AnalystWidget = ({
 				'rblx',
 				'net',
 				'abnb',
-				'uber'
+				'uber',
+				'rivn',
+				'sq',
+				'pypl'
 			].includes(info.symbol) && (
 				<Button
 					url={`/stocks/${info.symbol}/forecast/`}

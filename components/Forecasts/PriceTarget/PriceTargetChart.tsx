@@ -31,18 +31,25 @@ import 'chartjs-adapter-date-fns'
 import { useMemo } from 'react'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { formatMonthLong } from 'functions/datetime/formatDates'
+import { fillWhitespaceLine, formatTarget } from './target.functions'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
 export function PriceTargetChart() {
 	const { data } = useSymbolContext()
-	const { high, average, low, chart } = data.targets
+	let { chart } = data.targets
+	const { high, average, low } = data.targets
+
 	const hasTargets = high && average && low
 	const currentDate = chart[chart.length - 2].t
 	const currentPrice = chart[chart.length - 2].c
 	const oneYearDate = chart[chart.length - 1].t
 	const initialPrice = chart[0].c
+
+	// An invisible time series to adjust the appearance of a chart
+	// if the price history is less than 1 year
+	let whiteSpaceMonths = fillWhitespaceLine(chart)
 
 	const highData = [
 		{ x: currentDate, y: currentPrice },
@@ -66,7 +73,7 @@ export function PriceTargetChart() {
 	const backgroundColorCodings = useMemo(
 		() =>
 			chart.map((i: any, index: number) =>
-				index == 12 ? '#000000' : '#ffffff'
+				index == chart.length - 2 ? '#000000' : '#ffffff'
 			),
 		[chart]
 	)
@@ -79,7 +86,7 @@ export function PriceTargetChart() {
 	const pointBorderColorCodings = useMemo(
 		() =>
 			chart.map((i: any, index: number) =>
-				index == 12 ? '#000000' : redOrGreen
+				index == chart.length - 2 ? '#000000' : redOrGreen
 			),
 		[chart]
 	)
@@ -108,6 +115,19 @@ export function PriceTargetChart() {
 			pointBackgroundColor: backgroundColorCodings,
 			tension: 0,
 			borderColor: redOrGreen,
+			borderWidth: 2.5,
+			spanGaps: true
+		},
+		{
+			label: 'Whitespace',
+			data: whiteSpaceMonths,
+			pointHitRadius: 0,
+			pointRadius: 0,
+			pointBorderWidth: 0,
+			pointBorderColor: pointBorderColorCodings,
+			pointBackgroundColor: backgroundColorCodings,
+			tension: 0,
+			borderColor: '#FFFFFF00',
 			borderWidth: 2.5,
 			spanGaps: true
 		},
@@ -194,10 +214,16 @@ export function PriceTargetChart() {
 									ctx.lineJoin = 'round'
 
 									ctx.fillText(
-										'Past 12 Months',
-										meta.iScale._gridLineItems[
-											meta.iScale._gridLineItems.length - 2
-										].tx1 - 55,
+										window.innerWidth > 428
+											? 'Past 12 Months'
+											: 'Past Year',
+										window.innerWidth > 428
+											? meta.iScale._gridLineItems[
+													meta.iScale._gridLineItems.length - 2
+											  ].tx1 - 55
+											: meta.iScale._gridLineItems[
+													meta.iScale._gridLineItems.length - 2
+											  ].tx1 - 37,
 										meta.iScale._gridLineItems[
 											meta.iScale._gridLineItems.length - 2
 										].y1
@@ -206,14 +232,14 @@ export function PriceTargetChart() {
 									ctx.fillText(
 										window.innerWidth > 428
 											? '12 Month Forecast'
-											: '1 Yr Forecast',
+											: 'Next Year',
 										window.innerWidth > 428
 											? meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
 											  ].tx1 + 65
 											: meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
-											  ].tx1 + 45,
+											  ].tx1 + 40,
 										meta.iScale._gridLineItems[
 											meta.iScale._gridLineItems.length - 2
 										].y1
@@ -231,7 +257,7 @@ export function PriceTargetChart() {
 
 									const raw = dataset.data[last]
 
-									const str = '$' + raw.y
+									const str = '$' + formatTarget(raw.y)
 
 									ctx.save()
 
@@ -292,7 +318,7 @@ export function PriceTargetChart() {
 
 									const raw = dataset.data[last]
 
-									const str = '$' + raw.y
+									const str = '$' + formatTarget(raw.y)
 
 									ctx.save()
 
@@ -347,7 +373,7 @@ export function PriceTargetChart() {
 
 									const raw = dataset.data[last]
 
-									const str = '$' + raw.y
+									const str = '$' + formatTarget(raw.y)
 
 									ctx.save()
 
@@ -407,23 +433,6 @@ export function PriceTargetChart() {
 					scales: {
 						x: {
 							afterTickToLabelConversion: function (val: any) {
-								//? What does this do?
-								// let afterCutOff: boolean
-								// afterCutOff = false
-
-								// for (let i = 0; i < val.ticks.length; i++) {
-								// 	if (
-								// 		val.ticks[i].label == 'Dec 2021' ||
-								// 		val.ticks[i].label == 'Dec 2022'
-								// 	) {
-								// 		val.ticks[i].major = true
-								// 		afterCutOff = true
-								// 	} else if (afterCutOff) {
-								// 		val.ticks.splice(i, 1)
-								// 	}
-								// }
-								// val.ticks.splice(0, 1)
-
 								if (window.innerWidth < 563) {
 									val.ticks.splice(0, 3)
 								} else {
@@ -447,16 +456,12 @@ export function PriceTargetChart() {
 									size: 13
 								},
 								autoSkip: false,
-								autoSkipPadding: 60, //? is this needed when autoSkip is false?
 								maxRotation: 0,
-								minRotation: 0,
-								major: {
-									//? Still needed?
-									enabled: true
-								}
+								minRotation: 0
 							}
 						},
 						y: {
+							grace: '10%',
 							position: 'left',
 							ticks: {
 								color: '#323232',

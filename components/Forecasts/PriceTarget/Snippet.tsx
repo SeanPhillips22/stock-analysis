@@ -1,4 +1,5 @@
 import { useSymbolContext } from 'components/Layout/SymbolContext'
+import { formatTarget } from './target.functions'
 
 export function Snippet() {
 	const { info, data } = useSymbolContext()
@@ -22,7 +23,13 @@ export function Snippet() {
 	if (!consensus) {
 		consensusText = `There is currently no analyst price target forecast available for ${displayName}.`
 	} else {
-		consensusText = `According to ${total} stock analysts, the average 12-month stock price forecast for ${displayName} stock is $${average}, which predicts ${diffString} over the next year. The lowest forecast is $${low} and the highest is $${high}. On average, analysts rate ${displayName} stock as a ${consensus.toLowerCase()}.`
+		consensusText = `According to ${total} stock analysts, the average 12-month stock price forecast for ${displayName} stock is $${formatTarget(
+			average
+		)}, which predicts ${diffString} over the next year. The lowest forecast is $${formatTarget(
+			low
+		)} and the highest is $${formatTarget(
+			high
+		)}. On average, analysts rate ${displayName} stock as a ${consensus.toLowerCase()}.`
 	}
 
 	return <p>{consensusText}</p>
