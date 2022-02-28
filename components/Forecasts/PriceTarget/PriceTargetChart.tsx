@@ -31,20 +31,10 @@ import 'chartjs-adapter-date-fns'
 import { useMemo } from 'react'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { formatMonthLong } from 'functions/datetime/formatDates'
+import { fillWhitespaceLine } from './chart.functions'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
-
-function checkIfDateIsEqualOrSetLater(
-	yearAgoDate: Date,
-	oldestPriceDateAvailable: Date
-) {
-	return (
-		(oldestPriceDateAvailable.getMonth() != yearAgoDate.getMonth() ||
-			oldestPriceDateAvailable.getFullYear() != yearAgoDate.getFullYear()) &&
-		oldestPriceDateAvailable > yearAgoDate
-	)
-}
 
 export function PriceTargetChart() {
 	const { data } = useSymbolContext()
@@ -57,49 +47,9 @@ export function PriceTargetChart() {
 	const oneYearDate = chart[chart.length - 1].t
 	const initialPrice = chart[0].c
 
-	let whiteSpaceMonths = []
-
-	let yearAgoDate = new Date(chart[chart.length - 2].t)
-	yearAgoDate.setDate(1)
-	yearAgoDate.setFullYear(yearAgoDate.getFullYear() - 1)
-
-	let oldestPriceDateAvailable = new Date(chart[0].t)
-	oldestPriceDateAvailable.setDate(1)
-
-	//For loop checks whether the date of the oldest price is older than a year from the first price point and whether it's in the same month and iterates month by month.
-	for (let i = 0; i < 12; i++) {
-		if (
-			!checkIfDateIsEqualOrSetLater(yearAgoDate, oldestPriceDateAvailable)
-		) {
-			break
-		}
-		// This case handles specifically if month is set to January and year needs to be changed
-		if (
-			yearAgoDate.getFullYear() != oldestPriceDateAvailable.getFullYear() &&
-			oldestPriceDateAvailable.getMonth() == 0
-		) {
-			oldestPriceDateAvailable.setMonth(11)
-			oldestPriceDateAvailable.setFullYear(
-				oldestPriceDateAvailable.getFullYear() - 1
-			)
-			//Month is set to the one before it.
-		} else {
-			oldestPriceDateAvailable.setMonth(
-				oldestPriceDateAvailable.getMonth() - 1
-			)
-		}
-		let dateObj = {
-			x:
-				oldestPriceDateAvailable.getFullYear().toString() +
-				'-' +
-				(oldestPriceDateAvailable.getMonth() + 1).toString() +
-				'-' +
-				oldestPriceDateAvailable.getDate(),
-			y: chart[0].c
-		}
-
-		whiteSpaceMonths.push(dateObj)
-	}
+	// An invisible time series to adjust the appearance of a chart
+	// if the price history is less than 1 year
+	let whiteSpaceMonths = fillWhitespaceLine(chart)
 
 	const highData = [
 		{ x: currentDate, y: currentPrice },
@@ -169,10 +119,8 @@ export function PriceTargetChart() {
 			spanGaps: true
 		},
 		{
-			label: 'Test',
-
+			label: 'Whitespace',
 			data: whiteSpaceMonths,
-			// borderDash: [10, 10],
 			pointHitRadius: 0,
 			pointRadius: 0,
 			pointBorderWidth: 0,
@@ -183,7 +131,6 @@ export function PriceTargetChart() {
 			borderWidth: 2.5,
 			spanGaps: true
 		},
-
 		{
 			label: 'High',
 			data: highData,
