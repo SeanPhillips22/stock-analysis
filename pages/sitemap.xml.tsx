@@ -25,6 +25,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'ipos/2019/',
 		'ipos/news/',
 		'ipos/statistics/',
+		'ipos/filings/',
+		'ipos/withdrawn/',
 		'news/',
 		'news/all-stocks/',
 		'news/press-releases/',

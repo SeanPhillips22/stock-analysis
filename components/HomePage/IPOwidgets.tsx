@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { StockLink } from 'components/Links'
+import { HeadingLink } from 'components/Buttons/HeadingLink'
 
 type IposMin = {
 	date: string
@@ -60,29 +61,15 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 		<>
 			<div className="flex flex-col space-y-6 lg:space-y-8">
 				<section className="px-3 xs:px-4 sm:px-5 lg:px-0">
-					<div className="mb-1 flex flex-row items-end justify-between">
-						<h2 className="mb-1 text-2xl font-bold leading-tight">
-							Recent IPOs
-						</h2>
-						<span>
-							<Link href="/ipos/" prefetch={false}>
-								<a className="bll">All Recent IPOs</a>
-							</Link>
-						</span>
-					</div>
+					<HeadingLink url="/ipos/" title="Recent IPOs" classes="mb-1" />
 					<IPOTable ipos={recent} />
 				</section>
 				<section className="px-3 xs:px-4 sm:px-5 lg:px-0">
-					<div className="mb-1 flex flex-row items-end justify-between">
-						<h2 className="mb-1 text-2xl font-bold leading-tight">
-							Upcoming IPOs
-						</h2>
-						<span>
-							<Link href="/ipos/calendar/" prefetch={false}>
-								<a className="bll">IPO Calendar</a>
-							</Link>
-						</span>
-					</div>
+					<HeadingLink
+						url="/ipos/calendar/"
+						title="Upcoming IPOs"
+						classes="mb-1"
+					/>
 					{upcoming.length ? (
 						<IPOTable ipos={upcoming} />
 					) : (
