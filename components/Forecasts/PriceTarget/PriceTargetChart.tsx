@@ -35,14 +35,72 @@ import { formatMonthLong } from 'functions/datetime/formatDates'
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
+function checkIfDateIsEqualOrSetLater(
+	yearAgoDate: Date,
+	oldestPriceDateAvailable: Date
+) {
+	return (
+		(oldestPriceDateAvailable.getMonth() != yearAgoDate.getMonth() ||
+			oldestPriceDateAvailable.getFullYear() != yearAgoDate.getFullYear()) &&
+		oldestPriceDateAvailable > yearAgoDate
+	)
+}
+
 export function PriceTargetChart() {
 	const { data } = useSymbolContext()
-	const { high, average, low, chart } = data.targets
+	let { chart } = data.targets
+	const { high, average, low } = data.targets
+	console.log(high)
 	const hasTargets = high && average && low
 	const currentDate = chart[chart.length - 2].t
 	const currentPrice = chart[chart.length - 2].c
 	const oneYearDate = chart[chart.length - 1].t
 	const initialPrice = chart[0].c
+
+	let whiteSpaceMonths = []
+
+	//Represents the left most date of the scale
+	let yearAgoDate = new Date(chart[chart.length - 2].t)
+	yearAgoDate.setDate(1)
+	yearAgoDate.setFullYear(yearAgoDate.getFullYear() - 1)
+
+	//The oldest price value in the chart dataset
+	let oldestPriceDateAvailable = new Date(chart[0].t)
+	oldestPriceDateAvailable.setDate(1)
+
+	//For loop checks whether the date of the oldest price is older than a year from the first price point and whether it's in the same month and iterates month by month.
+	for (let i = 0; i < 12; i++) {
+		if (
+			!checkIfDateIsEqualOrSetLater(yearAgoDate, oldestPriceDateAvailable)
+		) {
+			break
+		}
+		if (
+			yearAgoDate.getFullYear() != oldestPriceDateAvailable.getFullYear() &&
+			oldestPriceDateAvailable.getMonth() == 0
+		) {
+			oldestPriceDateAvailable.setMonth(11)
+			oldestPriceDateAvailable.setFullYear(
+				oldestPriceDateAvailable.getFullYear() - 1
+			)
+			//Month is set to the one before it.
+		} else {
+			oldestPriceDateAvailable.setMonth(
+				oldestPriceDateAvailable.getMonth() - 1
+			)
+		}
+		let dateObj = {
+			x:
+				oldestPriceDateAvailable.getFullYear().toString() +
+				'-' +
+				(oldestPriceDateAvailable.getMonth() + 1).toString() +
+				'-' +
+				oldestPriceDateAvailable.getDate(),
+			y: chart[0].c
+		}
+
+		whiteSpaceMonths.push(dateObj)
+	}
 
 	const highData = [
 		{ x: currentDate, y: currentPrice },
@@ -66,7 +124,7 @@ export function PriceTargetChart() {
 	const backgroundColorCodings = useMemo(
 		() =>
 			chart.map((i: any, index: number) =>
-				index == 12 ? '#000000' : '#ffffff'
+				index == chart.length - 2 ? '#000000' : '#ffffff'
 			),
 		[chart]
 	)
@@ -79,7 +137,7 @@ export function PriceTargetChart() {
 	const pointBorderColorCodings = useMemo(
 		() =>
 			chart.map((i: any, index: number) =>
-				index == 12 ? '#000000' : redOrGreen
+				index == chart.length - 2 ? '#000000' : redOrGreen
 			),
 		[chart]
 	)
@@ -111,6 +169,22 @@ export function PriceTargetChart() {
 			borderWidth: 2.5,
 			spanGaps: true
 		},
+		{
+			label: 'Test',
+
+			data: whiteSpaceMonths,
+			// borderDash: [10, 10],
+			pointHitRadius: 0,
+			pointRadius: 0,
+			pointBorderWidth: 0,
+			pointBorderColor: pointBorderColorCodings,
+			pointBackgroundColor: backgroundColorCodings,
+			tension: 0,
+			borderColor: '#FFFFFF00',
+			borderWidth: 2.5,
+			spanGaps: true
+		},
+
 		{
 			label: 'High',
 			data: highData,
@@ -413,23 +487,6 @@ export function PriceTargetChart() {
 					scales: {
 						x: {
 							afterTickToLabelConversion: function (val: any) {
-								//? What does this do?
-								// let afterCutOff: boolean
-								// afterCutOff = false
-
-								// for (let i = 0; i < val.ticks.length; i++) {
-								// 	if (
-								// 		val.ticks[i].label == 'Dec 2021' ||
-								// 		val.ticks[i].label == 'Dec 2022'
-								// 	) {
-								// 		val.ticks[i].major = true
-								// 		afterCutOff = true
-								// 	} else if (afterCutOff) {
-								// 		val.ticks.splice(i, 1)
-								// 	}
-								// }
-								// val.ticks.splice(0, 1)
-
 								if (window.innerWidth < 563) {
 									val.ticks.splice(0, 3)
 								} else {
@@ -453,16 +510,12 @@ export function PriceTargetChart() {
 									size: 13
 								},
 								autoSkip: false,
-								autoSkipPadding: 60, //? is this needed when autoSkip is false?
 								maxRotation: 0,
-								minRotation: 0,
-								major: {
-									//? Still needed?
-									enabled: true
-								}
+								minRotation: 0
 							}
 						},
 						y: {
+							grace: '10%',
 							position: 'left',
 							ticks: {
 								color: '#323232',
