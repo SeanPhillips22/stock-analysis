@@ -50,7 +50,7 @@ export function PriceTargetChart() {
 	const { data } = useSymbolContext()
 	let { chart } = data.targets
 	const { high, average, low } = data.targets
-	console.log(high)
+
 	const hasTargets = high && average && low
 	const currentDate = chart[chart.length - 2].t
 	const currentPrice = chart[chart.length - 2].c
@@ -59,12 +59,10 @@ export function PriceTargetChart() {
 
 	let whiteSpaceMonths = []
 
-	//Represents the left most date of the scale
 	let yearAgoDate = new Date(chart[chart.length - 2].t)
 	yearAgoDate.setDate(1)
 	yearAgoDate.setFullYear(yearAgoDate.getFullYear() - 1)
 
-	//The oldest price value in the chart dataset
 	let oldestPriceDateAvailable = new Date(chart[0].t)
 	oldestPriceDateAvailable.setDate(1)
 
@@ -75,6 +73,7 @@ export function PriceTargetChart() {
 		) {
 			break
 		}
+		// This case handles specifically if month is set to January and year needs to be changed
 		if (
 			yearAgoDate.getFullYear() != oldestPriceDateAvailable.getFullYear() &&
 			oldestPriceDateAvailable.getMonth() == 0
