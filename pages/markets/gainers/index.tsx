@@ -8,13 +8,14 @@ import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
+import { GainersNav } from 'components/Markets/Navigation/GainersNav'
 
 // the page's config and settings
 const page: PageConfig = {
-	path: '/markets/losers/',
-	metaTitle: "Today's Top Stock Losers",
+	path: '/markets/gainers/',
+	metaTitle: "Today's Top Stock Gainers",
 	metaDescription:
-		'A list of the stocks with the highest percentage loss today. See stock price, volume, market cap and more.',
+		'A list of the stocks with the highest percentage gain today. See stock price, volume, market cap and more.',
 	heading: 'h1'
 }
 
@@ -24,7 +25,7 @@ const query: TableDynamic = {
 	main: 'change',
 	count: 20,
 	sort: [{ id: 'change', desc: true }],
-	sortDirection: 'asc',
+	sortDirection: 'desc',
 	columns: ['s', 'n', 'price', 'volume', 'marketCap'],
 	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
 }
@@ -34,14 +35,14 @@ type Props = {
 	tradingTimestamps: TableTimestamp
 }
 
-export default function LosersPage({ data, tradingTimestamps }: Props) {
+export default function GainersPage({ data, tradingTimestamps }: Props) {
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
-			<MarketsLayout>
+			<MarketsLayout SubNav={GainersNav}>
 				<TableContextProvider
 					value={{
-						title: 'Losers Today',
-						tableId: 'losers',
+						title: 'Gainers Today',
+						tableId: 'gainers',
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
