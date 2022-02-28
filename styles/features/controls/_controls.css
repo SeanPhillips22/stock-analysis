@@ -16,6 +16,7 @@
 		@apply block space-x-0 border-0 py-0 md:flex md:space-x-6 md:border-t md:py-2;
 	}
 
+	.controls h1,
 	.controls h2 {
 		@apply whitespace-nowrap text-xl font-semibold bp:text-2xl;
 	}
@@ -97,6 +98,13 @@
 		@apply min-w-[220px];
 	}
 
+	/* When the dropdown is all the way to the left on mobile
+	add this class so that it expands from the left side instead of the right
+	so that it doesn't overflow out of the screen */
+	.dropdown.leftmost {
+		@apply left-0 md:left-auto;
+	}
+
 	/* Dropdown item */
 	.dd {
 		@apply flex cursor-pointer items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
@@ -112,15 +120,6 @@
 
 	.btn-stretch .controls-icon {
 		@apply ml-3;
-	}
-
-	.controls-export {
-		@apply hidden md:block;
-	}
-
-	#trending .controls-export,
-	#ipos .controls-export {
-		@apply block;
 	}
 
 	#calendar .controls {

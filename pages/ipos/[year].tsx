@@ -54,7 +54,7 @@ export default function IpoYear(props: Props) {
 					<IPONavigation path="" />
 					<div className="lg:right-sidebar">
 						<div>
-							<RecentNavigation path={year} />
+							<RecentNavigation path={url} />
 							<div className="mt-4 mb-2 lg:mb-3">
 								<InfoBox text={props.info} />
 							</div>

@@ -46,7 +46,7 @@ export default function RecentIpos(props: Props) {
 
 					<div className="lg:right-sidebar">
 						<div>
-							<RecentNavigation path="" />
+							<RecentNavigation path={url} />
 							<TableContextProvider
 								value={{
 									tableId: 'ipos-recent',

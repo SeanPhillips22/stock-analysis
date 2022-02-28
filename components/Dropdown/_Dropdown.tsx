@@ -8,7 +8,7 @@ type Props = {
 	children: React.ReactNode
 	hoverTitle?: string
 	id?: string
-	classes?: string
+	classes?: string // Applies to the dropdown itself
 	menuClasses?: string
 	btnClasses?: string
 	icnClasses?: string

@@ -46,7 +46,7 @@ export default function IposWithdrawn(props: Props) {
 					<IPONavigation path="calendar" />
 					<div className="lg:right-sidebar">
 						<div>
-							<CalendarNavigation path="withdrawn" />
+							<CalendarNavigation path={url} />
 							<TableContextProvider
 								value={{
 									tableId: 'ipos-withdrawn',

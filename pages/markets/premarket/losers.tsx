@@ -8,24 +8,23 @@ import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
+import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
 
 // the page's config and settings
 const page: PageConfig = {
-	path: '/markets/losers/',
-	metaTitle: "Today's Top Stock Losers",
-	metaDescription:
-		'A list of the stocks with the highest percentage loss today. See stock price, volume, market cap and more.',
+	path: '/markets/premarket/losers/',
+	metaTitle: "Today's Premarket Losers",
 	heading: 'h1'
 }
 
 // the initial config for the select endpoint to fetch data
 const query: TableDynamic = {
 	index: 'stocks',
-	main: 'change',
+	main: 'premarketChangePercent',
 	count: 20,
-	sort: [{ id: 'change', desc: true }],
+	sort: [{ id: 'premarketChangePercent', desc: true }],
 	sortDirection: 'asc',
-	columns: ['s', 'n', 'price', 'volume', 'marketCap'],
+	columns: ['s', 'n', 'premarketChange', 'premarketPrice', 'marketCap'],
 	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
 }
 
@@ -34,14 +33,14 @@ type Props = {
 	tradingTimestamps: TableTimestamp
 }
 
-export default function LosersPage({ data, tradingTimestamps }: Props) {
+export default function PreMarket({ data, tradingTimestamps }: Props) {
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
-			<MarketsLayout>
+			<MarketsLayout SubNav={PremarketNav}>
 				<TableContextProvider
 					value={{
-						title: 'Losers Today',
-						tableId: 'losers',
+						title: 'Premarket Losers',
+						tableId: 'premarket-losers',
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
@@ -49,12 +48,7 @@ export default function LosersPage({ data, tradingTimestamps }: Props) {
 								export: true,
 								columns: true
 							},
-							columnOptions: MoverDataPoints,
-							excludeColumns: [
-								'premarketPrice',
-								'premarketChange',
-								'premarketChangePercent'
-							]
+							columnOptions: MoverDataPoints
 						},
 						dynamic: query
 					}}

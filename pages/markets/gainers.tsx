@@ -12,11 +12,10 @@ import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 // the page's config and settings
 const page: PageConfig = {
 	path: '/markets/gainers/',
-	pageTitle: 'Top Stock Gainers',
-	active: 'gainers',
 	metaTitle: "Today's Top Stock Gainers",
 	metaDescription:
-		'A list of the stocks with the highest percentage gain today. See stock price, volume, market cap and more.'
+		'A list of the stocks with the highest percentage gain today. See stock price, volume, market cap and more.',
+	heading: 'h1'
 }
 
 // the initial config for the select endpoint to fetch data
@@ -46,9 +45,7 @@ export default function GainersPage({ data, tradingTimestamps }: Props) {
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
-								range: true,
 								results: true,
-								filter: false,
 								export: true,
 								columns: true
 							},

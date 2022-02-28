@@ -47,7 +47,7 @@ export default function IpoFilings(props: Props) {
 					<IPONavigation path="calendar" />
 					<div className="lg:right-sidebar">
 						<div>
-							<CalendarNavigation path="filings" />
+							<CalendarNavigation path={url} />
 							<TableContextProvider
 								value={{
 									tableId: 'ipo-filings',

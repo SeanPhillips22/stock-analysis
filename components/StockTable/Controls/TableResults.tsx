@@ -2,13 +2,15 @@ import { CheckIcon } from 'components/Icons/CheckIcon'
 import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { cn } from 'functions/helpers/classNames'
-import { tabActive } from 'functions/helpers/tabActive'
 import { useRouter } from 'next/router'
 import { authState } from 'state/authState'
 import { useTableContext } from '../TableContext'
 import { Menu } from '@headlessui/react'
 
 const OPTIONS = [
+	{
+		value: 10
+	},
 	{
 		value: 20
 	},
@@ -50,12 +52,19 @@ export function TableResults() {
 	let title = count ? count.toString() + ' Rows' : 'Rows'
 
 	return (
-		<Dropdown title={title} hoverTitle="Change results count">
+		<Dropdown
+			title={title}
+			hoverTitle="Change results count"
+			classes="leftmost"
+		>
 			{OPTIONS.map(i => (
 				/* One Dropdown Item */
 				<Menu.Item key={i.value}>
 					<div
-						className={cn('dd', tabActive(i.value, count || 0))}
+						className={cn(
+							'dd',
+							i.value === count ? 'active' : 'inactive'
+						)}
 						title={hoverTitle(i.value, i.pro)}
 						onClick={() => handleClick(i.value, i.pro)}
 					>

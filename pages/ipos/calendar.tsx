@@ -61,7 +61,7 @@ export default function IpoCalendar(props: Props) {
 					<IPONavigation path="calendar" />
 					<div className="lg:right-sidebar" id="calendar">
 						<div>
-							<CalendarNavigation path="calendar" />
+							<CalendarNavigation path={url} />
 							<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">
 								<TableContextProvider
 									value={{

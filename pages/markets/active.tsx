@@ -12,11 +12,10 @@ import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 // the page's config and settings
 const page: PageConfig = {
 	path: '/markets/active/',
-	pageTitle: 'Most Active Stocks',
-	active: 'active',
 	metaTitle: "Today's Most Active Stocks",
 	metaDescription:
-		'A list of the stocks with the highest trading volume today. See stock price, price changes, market cap and more.'
+		'A list of the stocks with the highest trading volume today. See stock price, price changes, market cap and more.',
+	heading: 'h1'
 }
 
 // the initial config for the select endpoint to fetch data
@@ -46,9 +45,7 @@ export default function ActivePage({ data, tradingTimestamps }: Props) {
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
-								range: false,
 								results: true,
-								filter: true,
 								export: true,
 								columns: true
 							},
