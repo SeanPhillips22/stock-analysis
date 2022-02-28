@@ -1,4 +1,5 @@
 import { useSymbolContext } from 'components/Layout/SymbolContext'
+import { formatTarget } from './target.functions'
 
 // Calculate the change from the current price to the target price
 // Format as a percentage, with a '%' symbol at the end
@@ -45,10 +46,10 @@ export function SummaryTable() {
 				<tbody>
 					<tr className="border-b border-gray-200">
 						<td className="py-[3px] text-left lg:py-0.5">Price</td>
-						<td>{low ? '$' + low : 'n/a'}</td>
-						<td>{average ? '$' + average : 'n/a'}</td>
-						<td>{median ? '$' + median : 'n/a'}</td>
-						<td>{high ? '$' + high : 'n/a'}</td>
+						<td>{low ? '$' + formatTarget(low) : 'n/a'}</td>
+						<td>{average ? '$' + formatTarget(average) : 'n/a'}</td>
+						<td>{median ? '$' + formatTarget(median) : 'n/a'}</td>
+						<td>{high ? '$' + formatTarget(high) : 'n/a'}</td>
 					</tr>
 					<tr>
 						<td className="py-[3px] text-left lg:py-0.5">Change</td>

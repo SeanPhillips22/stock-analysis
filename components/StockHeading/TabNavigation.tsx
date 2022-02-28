@@ -41,7 +41,9 @@ export function TabNavigation({ symbol, hideChart }: Props) {
 					'net',
 					'abnb',
 					'uber',
-					'rivn'
+					'rivn',
+					'sq',
+					'pypl'
 				].includes(symbol) && (
 					<Tab symbol={symbol} title="Forecast" append="forecast" />
 				)}

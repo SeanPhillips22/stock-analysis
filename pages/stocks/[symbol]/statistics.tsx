@@ -196,7 +196,9 @@ export default function StatisticsPage({ info, data }: Props) {
 							'net',
 							'abnb',
 							'uber',
-							'rivn'
+							'rivn',
+							'sq',
+							'pypl'
 						].includes(info.symbol) && (
 							<Button
 								text="Forecast Details"

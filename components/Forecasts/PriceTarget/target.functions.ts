@@ -48,3 +48,12 @@ export function fillWhitespaceLine(chart: any) {
 
 	return whiteSpaceMonths
 }
+
+const dec0 = new Intl.NumberFormat('en-US', {
+	minimumFractionDigits: 0,
+	maximumFractionDigits: 0
+})
+
+export function formatTarget(num: number) {
+	return num > 1000 ? dec0.format(num) : num
+}
