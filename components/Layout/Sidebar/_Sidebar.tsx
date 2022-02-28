@@ -1,11 +1,16 @@
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Features } from './Features'
 
-export function Sidebar({ url }: { url: string }) {
+type Props = {
+	url: string
+	list?: string[]
+}
+
+export function Sidebar({ url, list }: Props) {
 	return (
 		<>
 			<Sidebar1 key={url} />
-			<Features />
+			<Features list={list} />
 		</>
 	)
 }

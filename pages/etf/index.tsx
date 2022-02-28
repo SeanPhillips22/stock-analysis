@@ -41,7 +41,11 @@ export default function StocksIndexPage({ stocks }: Props) {
 	]
 
 	return (
-		<LayoutSidebar heading="All ETF Symbols" url="/etf/">
+		<LayoutSidebar
+			heading="All ETF Symbols"
+			url="/etf/"
+			list={['pro', 'ipoCalendar', 'etfScreener', 'marketMovers']}
+		>
 			<SEO
 				title="List of All ETF Ticker Symbols"
 				description="An overview of all the ETF symbols listed. Explore the ETF pages to learn about the fund’s price history, holdings, dividends and more."
