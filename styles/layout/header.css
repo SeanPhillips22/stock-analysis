@@ -12,8 +12,8 @@
 	.hd-inner {
 		@apply flex flex-row items-center
 		gap-x-1 py-1.5
-		px-1 tiny:gap-x-2 tiny:px-2 xs:gap-x-4 xs:px-3
-		sm:py-2 xxl:px-4 xxxl:px-6;
+		px-1 tiny:gap-x-1 tiny:px-2 xs:gap-x-3 xs:px-3 sm:py-2
+		lg:gap-x-4 xxl:px-4 xxxl:px-6;
 	}
 
 	.hd-inner.hidenav {
@@ -33,7 +33,7 @@
 	}
 
 	.hd-logo-wrap {
-		@apply h-8 max-w-[32px] overflow-hidden md:h-auto md:max-w-none;
+		@apply mx-1 h-8 max-w-[32px] overflow-hidden md:h-auto md:max-w-none lg:mx-0;
 	}
 
 	.hd-logo {

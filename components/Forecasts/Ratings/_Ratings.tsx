@@ -38,7 +38,7 @@ export function Ratings() {
 				<div className="my-2 p-1 md:mt-3 md:mb-0 md:flex md:justify-between lg:my-0">
 					<h2 className="hh3 mb-2 md:mb-3">Recommendation Trends</h2>
 					{data.recommendations.length > 0 && (
-						<div className="flex flex-wrap space-x-2 xs:space-x-4">
+						<div className="flex flex-wrap justify-between space-x-2 sm:space-x-4">
 							<RatingChartType />
 							<RatingHistory />
 							<RatingExport data={data} />

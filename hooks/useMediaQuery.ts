@@ -8,7 +8,11 @@ import { useEffect, useState } from 'react'
 function useMediaQuery(query: string): boolean {
 	const getMatches = (query: string): boolean => {
 		// Prevents SSR issues
-		if (typeof window !== 'undefined') {
+		if (
+			typeof window !== 'undefined' &&
+			// @ts-ignore
+			typeof window?.matchMedia?.addEventListener === 'function'
+		) {
 			return window.matchMedia(query).matches
 		}
 		return false
@@ -21,6 +25,8 @@ function useMediaQuery(query: string): boolean {
 	}
 
 	useEffect(() => {
+		// @ts-ignore
+		if (typeof window?.matchMedia?.addEventListener !== 'function') return
 		const matchMedia = window.matchMedia(query)
 
 		// Triggered at the first client-side load and if query changes
