@@ -46,14 +46,14 @@ export function ConsensusChart() {
 	return (
 		<div>
 			<Doughnut
-				id="1"
+				id="2"
 				data={{
 					labels: labels,
 					datasets: d
 				}}
 				plugins={[
 					{
-						id: '1',
+						id: '2',
 						afterDatasetsDraw: function (chart: any) {
 							if (!angle) return
 							const chartInstance = chart

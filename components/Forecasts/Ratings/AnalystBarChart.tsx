@@ -97,7 +97,7 @@ export function AnalystBarChart({
 	return (
 		<div className="h-[240px]">
 			<Bar
-				id="1"
+				id="3"
 				data={{
 					labels: labelAxis(),
 					datasets: d

@@ -86,7 +86,7 @@ export function AnalystLineChart({
 	return (
 		<div className="h-[240px]">
 			<Line
-				id="1"
+				id="4"
 				data={{
 					labels: labelAxis(),
 					datasets: d
