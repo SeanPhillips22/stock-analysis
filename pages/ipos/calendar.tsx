@@ -29,7 +29,7 @@ type Props = {
 const queryWeek: TableDynamic = {
 	index: 'futip',
 	main: 'ipoDate',
-	sort: [{ id: 'ipoDate', desc: true }],
+	sort: [{ id: 'ipoDate', desc: false }],
 	sortDirection: 'asc',
 	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 	filters: ['ipoDate-thisweek']
