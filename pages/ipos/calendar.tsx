@@ -39,8 +39,8 @@ const queryWeek: TableDynamic = {
 const queryLater: TableDynamic = {
 	index: 'futip',
 	main: 'ipoDate',
-	sort: [{ id: 'ipoDate', desc: true }],
-	sortDirection: 'desc',
+	sort: [{ id: 'ipoDate', desc: false }],
+	sortDirection: 'asc',
 	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 	filters: ['ipoDate-nextweek']
 }
