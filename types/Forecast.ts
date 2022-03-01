@@ -22,15 +22,21 @@ export type Recommendations = {
 	strongSell: number
 }
 
+export type Estimates = {
+	table: {
+		dates: string[]
+		revenue: number[]
+		eps: number[]
+	}
+}
+
 export type ForecastData = {
 	targets: Targets
 	recommendations: Recommendations[]
+	estimates: Estimates
 }
 
 export type Forecast = {
 	info: Info
-	data: {
-		targets: Targets
-		recommendations: Recommendations[]
-	}
+	data: ForecastData
 }

@@ -6,6 +6,7 @@ import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { Ratings } from 'components/Forecasts/Ratings/_Ratings'
 import { PriceTarget } from 'components/Forecasts/PriceTarget/_PriceTarget'
 import { ContentWide1 } from 'components/Ads/AdSense/ContentWide1'
+import { Estimates } from 'components/Forecasts/Estimates/_Estimates'
 
 type Props = {
 	info: Info
@@ -13,6 +14,7 @@ type Props = {
 }
 
 export default function ForecastPage({ info, data }: Props) {
+	console.log(data)
 	return (
 		<Stock
 			info={info}
@@ -24,6 +26,7 @@ export default function ForecastPage({ info, data }: Props) {
 				<PriceTarget />
 				<ContentWide1 />
 				<Ratings />
+				<Estimates />
 			</div>
 		</Stock>
 	)
