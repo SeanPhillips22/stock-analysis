@@ -15,6 +15,7 @@
 	},
 	"dependencies": {
 		"@headlessui/react": "^1.4.3",
+		"@heroicons/react": "^1.0.6",
 		"@supabase/supabase-js": "^1.30.0",
 		"@tippyjs/react": "^4.2.6",
 		"axios": "^0.25.0",

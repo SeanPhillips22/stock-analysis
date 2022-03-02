@@ -26,7 +26,10 @@ export type Estimates = {
 	table: {
 		dates: string[]
 		revenue: number[]
+		revenueGrowth: number[]
 		eps: number[]
+		epsGrowth: number[]
+		analysts: (string | number)[]
 	}
 }
 
