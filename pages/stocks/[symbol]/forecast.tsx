@@ -14,7 +14,6 @@ type Props = {
 }
 
 export default function ForecastPage({ info, data }: Props) {
-	console.log(data)
 	return (
 		<Stock
 			info={info}

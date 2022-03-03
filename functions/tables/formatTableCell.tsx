@@ -28,20 +28,31 @@ function format(value: number, decimals: 0 | 2 | 3) {
 	return value
 }
 
-// Inline formatting inside the table loop
-export function formatTableCell(
+export function formatCellRaw(
 	fn: Fn | undefined,
 	value: string | number,
 	type: Type = 'stocks'
 ) {
+	return formatTableCell(fn, value, type, true)
+}
+
+// Inline formatting inside the table loop
+export function formatTableCell(
+	fn: Fn | undefined,
+	value: string | number,
+	type: Type = 'stocks',
+	raw = false
+) {
 	if (!fn) return value
 	if (fn === 'linkSymbol') return formatSymbol(value as string, type)
+	if (fn === 'format0dec') return format0dec(value as number)
 	if (fn === 'format2dec') return format2dec(value as number)
+	if (fn === 'format3dec') return format3dec(value as number)
 	if (fn === 'price') return formatPrice(value as number)
 	if (fn === 'integer') return formatInteger(value as number)
 	if (fn === 'formatPercentage') return formatPercentage(value as number)
 	if (fn === 'colorPercentage') return colorPercentage(value as number)
-	if (fn === 'abbreviate') return abbreviate(value as number)
+	if (fn === 'abbreviate') return abbreviate(value as number, raw)
 	if (fn === 'formatDate') return formatDate(value as string)
 	if (fn === 'string' || fn === 'stringright')
 		return formatString(value as string)
@@ -62,9 +73,19 @@ export function formatSymbol(value: string, type: ScreenerTypes) {
 	)
 }
 
+// Format a number with comma but 0 decimal points
+export function format0dec(value: number) {
+	return format(value, 0)
+}
+
 // Format a number with comma and 2 decimal points
 export function format2dec(value: number) {
 	return format(value, 2)
+}
+
+// Format a number with comma and 3 decimal points
+export function format3dec(value: number) {
+	return format(value, 3)
 }
 
 // Format a number with comma and 2 decimal points
@@ -115,7 +136,7 @@ export function colorPercentage(value: number) {
 }
 
 // Abbreviate a number with B/M/K
-export function abbreviate(value: number) {
+export function abbreviate(value: number, raw: boolean) {
 	if (!value) return '-'
 
 	let num = '-'
@@ -127,7 +148,7 @@ export function abbreviate(value: number) {
 	else if (value <= -1000) num = dec2.format(value / 1000) + 'K'
 	else num = dec2.format(value)
 
-	return <div data-raw={value}>{num}</div>
+	return raw ? num : <div data-raw={value}>{num}</div>
 }
 
 // Format a date

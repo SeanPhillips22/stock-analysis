@@ -15,11 +15,11 @@
 }
 
 .table thead tr th {
-	@apply border-r px-2;
+	@apply border-r px-2 font-semibold;
 }
 
 .table thead tr th:first-child {
-	@apply border-r py-1 px-3 text-left;
+	@apply border-r py-1.5 px-3 text-left;
 }
 
 .table tbody tr td {
@@ -27,7 +27,7 @@
 }
 
 .table tbody tr td:first-child {
-	@apply flex items-center justify-between whitespace-nowrap border-r bg-gray-100 py-1 px-3 text-left;
+	@apply flex items-center justify-between whitespace-nowrap border-r bg-gray-100 py-1.5 px-3 text-left;
 }
 
 .table tr > *:nth-child(2),
