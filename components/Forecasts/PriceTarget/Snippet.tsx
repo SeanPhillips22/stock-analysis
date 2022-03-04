@@ -25,7 +25,7 @@ export function Snippet() {
 	} else {
 		consensusText = `According to ${total} stock analysts, the average 12-month stock price forecast for ${displayName} stock is $${formatTarget(
 			average
-		)}, which predicts ${diffString} over the next year. The lowest forecast is $${formatTarget(
+		)}, which predicts ${diffString}. The lowest target is $${formatTarget(
 			low
 		)} and the highest is $${formatTarget(
 			high

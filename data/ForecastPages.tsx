@@ -12,5 +12,15 @@ export const ForecastPages = [
 	'uber',
 	'rivn',
 	'sq',
-	'pypl'
+	'pypl',
+	'bby',
+	'googl',
+	'brk.b',
+	'tsm',
+	'unh',
+	'v',
+	'jnj',
+	'jpm',
+	'wmt',
+	'pg'
 ]

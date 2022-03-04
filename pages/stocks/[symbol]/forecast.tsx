@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 
 	// Disable on stocks other than these initial 5
-	if (!ForecastPages.includes(symbol)) {
+	if (!ForecastPages.includes(symbol.toLowerCase())) {
 		return {
 			notFound: true
 		}
