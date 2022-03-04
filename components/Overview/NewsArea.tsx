@@ -36,9 +36,12 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 	// Check for fresh news if it's been more than 60 minutes
 	useEffect(() => {
+		const controller = new AbortController()
+
 		async function fetchData() {
 			const fresh = await getData(
-				`news-fresh?s=${info.symbol}&t=${info.type}`
+				`news-fresh?s=${info.symbol}&t=${info.type}`,
+				controller.signal
 			)
 			if (news[0] && fresh[0] && news[0].title !== fresh[0].title) {
 				setData(fresh)
@@ -49,14 +52,17 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 			setTimestamp(currentTime.getTime())
 			fetchData()
 		}
+		return () => controller?.abort()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	// Fetch data if a menu item has been clicked (videos, press releases, conversation)
 	useEffect(() => {
+		let controller = new AbortController()
 		async function fetchData() {
 			const fresh = await getData(
-				`news?s=${info.symbol}&t=${info.type}&f=${show}`
+				`news?s=${info.symbol}&t=${info.type}&f=${show}`,
+				controller?.signal
 			)
 			if (fresh.length) {
 				setData(fresh)
@@ -81,7 +87,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 				fetchData()
 			}
 		}
-
+		return () => controller?.abort()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [show])
 
