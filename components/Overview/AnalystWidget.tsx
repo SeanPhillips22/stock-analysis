@@ -1,4 +1,5 @@
 import { Button } from 'components/Buttons/Button'
+import { ForecastPages } from 'data/ForecastPages'
 import { Info } from 'types/Info'
 import { Overview } from 'types/Overview'
 import { AnalystWidgetChart } from './AnalystWidgetChart'
@@ -91,22 +92,7 @@ export const AnalystWidget = ({
 					<AnalystWidgetChart ratings={ratings} />
 				</div>
 			</div>
-			{[
-				'aapl',
-				'msft',
-				'amzn',
-				'tsla',
-				'fb',
-				'baba',
-				'nvda',
-				'rblx',
-				'net',
-				'abnb',
-				'uber',
-				'rivn',
-				'sq',
-				'pypl'
-			].includes(info.symbol) && (
+			{ForecastPages.includes(info.symbol) && (
 				<Button
 					url={`/stocks/${info.symbol}/forecast/`}
 					text="Forecast Details"

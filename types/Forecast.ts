@@ -22,15 +22,49 @@ export type Recommendations = {
 	strongSell: number
 }
 
+type EstimatesStats = {
+	last: number // the previous year's number
+	this: number // the current year's number
+	growth: number // the growth between the previous and current year's number
+}
+
+type EstimatesTable = {
+	dates: string[]
+	revenue: number[]
+	revenueGrowth: number[]
+	eps: number[]
+	epsGrowth: number[]
+	analysts: (string | number)[]
+}
+
+export type Estimates = {
+	stats: {
+		annual: {
+			revenueThis: EstimatesStats
+			revenueNext: EstimatesStats
+			epsThis: EstimatesStats
+			epsNext: EstimatesStats
+		}
+		quarterly: {
+			revenueThis: EstimatesStats
+			revenueNext: EstimatesStats
+			epsThis: EstimatesStats
+			epsNext: EstimatesStats
+		}
+	}
+	table: {
+		annual: EstimatesTable
+		quarterly: EstimatesTable
+	}
+}
+
 export type ForecastData = {
 	targets: Targets
 	recommendations: Recommendations[]
+	estimates: Estimates
 }
 
 export type Forecast = {
 	info: Info
-	data: {
-		targets: Targets
-		recommendations: Recommendations[]
-	}
+	data: ForecastData
 }

@@ -14,7 +14,9 @@ export type CellNumber = {
 export type FormatFunction =
 	| 'linkSymbol'
 	| 'linkName'
+	| 'format0dec'
 	| 'format2dec'
+	| 'format3dec'
 	| 'price'
 	| 'integer'
 	| 'formatPercentage'

@@ -1,0 +1,67 @@
+.wrap {
+	@apply overflow-x-auto;
+}
+
+.table {
+	@apply w-full border border-gray-200 text-right text-sm sm:text-base;
+}
+
+.table thead tr {
+	@apply border-b-2 bg-gray-100;
+}
+
+.table tbody tr {
+	@apply border-b;
+}
+
+.table thead tr th {
+	@apply whitespace-nowrap border-r px-2.5 font-semibold sm:px-3;
+}
+
+.table thead tr th:first-child {
+	@apply border-r py-1.5 px-2 text-left sm:px-3;
+}
+
+.table tbody tr td {
+	@apply border-r px-2.5 sm:px-3;
+}
+
+.table tbody tr td:first-child {
+	@apply flex items-center justify-between whitespace-nowrap border-r bg-gray-100 py-1.5 px-2 text-left sm:px-3;
+}
+
+.table tr > *:nth-child(2),
+.table tr > *:nth-child(3) {
+	@apply hidden sm:table-cell;
+}
+
+.table tbody tr td:nth-last-child(1),
+.table tbody tr td:nth-last-child(2) {
+	@apply bg-blue-50 font-semibold;
+}
+
+.table tbody tr:nth-child(2) td:first-child,
+.table tbody tr:nth-child(4) td:first-child {
+	@apply pl-5 sm:pl-6;
+}
+
+.table tbody tr:nth-child(2),
+.table tbody tr:nth-child(4) {
+	@apply text-[0.85rem] sm:text-[0.95rem];
+}
+
+/* .table svg {
+	@apply my-0 mx-1 h-[22px] w-[22px] stroke-[#777];
+}
+
+.table .hovericon {
+	@apply relative z-10 border border-t-0 border-transparent p-[3px] delay-200;
+}
+
+.table .hovericon:hover {
+	@apply z-50 border-gray-200 bg-white;
+}
+
+.table .hovericon:hover svg {
+	@apply stroke-[#2c6288];
+} */
