@@ -9,6 +9,10 @@ type Props = {
 	range: 'Annual' | 'Quarterly'
 }
 
+function getChangeType(val: number) {
+	return val > 0 ? 'increase' : val < 0 ? 'decrease' : 'nochange'
+}
+
 export function EstimatesStats({ range }: Props) {
 	const { data } = useSymbolContext()
 	const { revenueThis, revenueNext, epsThis, epsNext } =
@@ -21,54 +25,34 @@ export function EstimatesStats({ range }: Props) {
 	const stats = [
 		{
 			name: `Revenue This ${rangeTitle}`,
-			stat: formatCellRaw('abbreviate', revenueThis.this),
+			stat: formatCellRaw('abbreviate', revenueThis?.this),
 			previousStat:
-				revenueThis.last === 0
+				revenueThis?.last === 0
 					? 0
-					: formatCellRaw('abbreviate', revenueThis.last),
-			change: formatCellRaw('formatPercentage', revenueThis.growth),
-			changeType:
-				revenueThis.growth > 0
-					? 'increase'
-					: revenueThis.growth < 0
-					? 'decrease'
-					: 'nochange'
+					: formatCellRaw('abbreviate', revenueThis?.last),
+			change: formatCellRaw('formatPercentage', revenueThis?.growth),
+			changeType: getChangeType(revenueThis?.growth)
 		},
 		{
 			name: `Revenue Next ${rangeTitle}`,
-			stat: formatCellRaw('abbreviate', revenueNext.this),
-			previousStat: formatCellRaw('abbreviate', revenueNext.last),
-			change: formatCellRaw('formatPercentage', revenueNext.growth),
-			changeType:
-				revenueNext.growth > 0
-					? 'increase'
-					: revenueNext.growth < 0
-					? 'decrease'
-					: 'nochange'
+			stat: formatCellRaw('abbreviate', revenueNext?.this),
+			previousStat: formatCellRaw('abbreviate', revenueNext?.last),
+			change: formatCellRaw('formatPercentage', revenueNext?.growth),
+			changeType: getChangeType(revenueNext?.growth)
 		},
 		{
 			name: `EPS This ${rangeTitle}`,
-			stat: formatCellRaw('abbreviate', epsThis.this),
-			previousStat: formatCellRaw('abbreviate', epsThis.last),
-			change: formatCellRaw('formatPercentage', epsThis.growth),
-			changeType:
-				epsThis.growth > 0
-					? 'increase'
-					: epsThis.growth < 0
-					? 'decrease'
-					: 'nochange'
+			stat: formatCellRaw('abbreviate', epsThis?.this),
+			previousStat: formatCellRaw('abbreviate', epsThis?.last),
+			change: formatCellRaw('formatPercentage', epsThis?.growth),
+			changeType: getChangeType(epsThis?.growth)
 		},
 		{
 			name: `EPS Next ${rangeTitle}`,
-			stat: formatCellRaw('abbreviate', epsNext.this),
-			previousStat: formatCellRaw('abbreviate', epsNext.last),
-			change: formatCellRaw('formatPercentage', epsNext.growth),
-			changeType:
-				epsNext.growth > 0
-					? 'increase'
-					: epsNext.growth < 0
-					? 'decrease'
-					: 'nochange'
+			stat: formatCellRaw('abbreviate', epsNext?.this),
+			previousStat: formatCellRaw('abbreviate', epsNext?.last),
+			change: formatCellRaw('formatPercentage', epsNext?.growth),
+			changeType: getChangeType(epsNext?.growth)
 		}
 	]
 

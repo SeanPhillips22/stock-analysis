@@ -15,19 +15,19 @@
 }
 
 .table thead tr th {
-	@apply border-r px-2 font-semibold;
+	@apply whitespace-nowrap border-r px-2.5 font-semibold sm:px-3;
 }
 
 .table thead tr th:first-child {
-	@apply border-r py-1.5 px-3 text-left;
+	@apply border-r py-1.5 px-2 text-left sm:px-3;
 }
 
 .table tbody tr td {
-	@apply border-r px-3;
+	@apply border-r px-2.5 sm:px-3;
 }
 
 .table tbody tr td:first-child {
-	@apply flex items-center justify-between whitespace-nowrap border-r bg-gray-100 py-1.5 px-3 text-left;
+	@apply flex items-center justify-between whitespace-nowrap border-r bg-gray-100 py-1.5 px-2 text-left sm:px-3;
 }
 
 .table tr > *:nth-child(2),
@@ -42,7 +42,7 @@
 
 .table tbody tr:nth-child(2) td:first-child,
 .table tbody tr:nth-child(4) td:first-child {
-	@apply pl-6;
+	@apply pl-5 sm:pl-6;
 }
 
 .table tbody tr:nth-child(2),
@@ -50,7 +50,7 @@
 	@apply text-[0.85rem] sm:text-[0.95rem];
 }
 
-.table svg {
+/* .table svg {
 	@apply my-0 mx-1 h-[22px] w-[22px] stroke-[#777];
 }
 
@@ -64,4 +64,4 @@
 
 .table .hovericon:hover svg {
 	@apply stroke-[#2c6288];
-}
+} */

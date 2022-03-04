@@ -30,7 +30,7 @@ export function EstimatesTable({ range }: Props) {
 					<thead>
 						<tr>
 							<th>Year</th>
-							{table.dates.map((i, ii) => (
+							{table.dates?.map((i, ii) => (
 								<th key={`year-${range}-${ii}`} title={i}>
 									{range === 'Annual' ? formatYear(i) : i}
 								</th>
@@ -40,7 +40,7 @@ export function EstimatesTable({ range }: Props) {
 					<tbody>
 						<tr>
 							<td>Revenue</td>
-							{table.revenue.map((i, ii) => (
+							{table.revenue?.map((i, ii) => (
 								<td
 									key={`revenue-${range}-${ii}`}
 									title={
@@ -55,7 +55,7 @@ export function EstimatesTable({ range }: Props) {
 						</tr>
 						<tr>
 							<td>Revenue Growth</td>
-							{table.revenueGrowth.map((i, ii) => (
+							{table.revenueGrowth?.map((i, ii) => (
 								<td
 									key={`revenueGrowth-${range}-${ii}`}
 									title={
@@ -70,7 +70,7 @@ export function EstimatesTable({ range }: Props) {
 						</tr>
 						<tr>
 							<td>EPS</td>
-							{table.eps.map((i, ii) => (
+							{table.eps?.map((i, ii) => (
 								<td
 									key={`eps-${range}-${ii}`}
 									title={formatTableCell('format3dec', i) as string}
@@ -81,7 +81,7 @@ export function EstimatesTable({ range }: Props) {
 						</tr>
 						<tr>
 							<td>EPS Growth</td>
-							{table.epsGrowth.map((i, ii) => (
+							{table.epsGrowth?.map((i, ii) => (
 								<td
 									key={`epsGrowth-${range}-${ii}`}
 									title={
@@ -96,7 +96,7 @@ export function EstimatesTable({ range }: Props) {
 						</tr>
 						<tr>
 							<td>No. Analysts</td>
-							{table.analysts.map((i, ii) => (
+							{table.analysts?.map((i, ii) => (
 								<td
 									key={`analysts-${range}-${ii}`}
 									title={

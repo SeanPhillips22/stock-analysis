@@ -8,7 +8,16 @@ type Props = {
 }
 
 export function EstimatesTableControls({ range, setRange }: Props) {
-	const { info } = useSymbolContext()
+	const { info, data } = useSymbolContext()
+
+	// Hide export button if no data
+	let showExport = true
+	if (
+		data.estimates.table.annual.length === 0 &&
+		data.estimates.table.quarterly.length === 0
+	) {
+		showExport = false
+	}
 
 	return (
 		<div className="flex space-x-4">
@@ -16,7 +25,7 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 				<button
 					type="button"
 					className={cn(
-						'relative inline-flex items-center rounded-l-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50',
+						'relative inline-flex items-center rounded-l-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Annual' ? 'bg-gray-100' : ''
 					)}
 					onClick={() => setRange('Annual')}
@@ -26,7 +35,7 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 				<button
 					type="button"
 					className={cn(
-						'relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50',
+						'relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Quarterly' ? 'bg-gray-100' : ''
 					)}
 					onClick={() => setRange('Quarterly')}
@@ -34,12 +43,14 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 					Quarterly
 				</button>
 			</span>
-			<div className="hidden md:block">
-				<Export
-					tableId="estimates-table"
-					fileName={`${info.symbol}-estimates`}
-				/>
-			</div>
+			{showExport && (
+				<div className="hidden md:block">
+					<Export
+						tableId="estimates-table"
+						fileName={`${info.symbol}-estimates`}
+					/>
+				</div>
+			)}
 		</div>
 	)
 }
