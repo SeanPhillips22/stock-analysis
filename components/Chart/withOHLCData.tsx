@@ -1,7 +1,8 @@
 import { timeParse } from 'd3-time-format'
 import * as React from 'react'
 import { IOHLCData } from './iOHLCData'
-import Axios from 'axios'
+import { getChartData } from 'functions/apis/callBackEnd'
+
 import { Unavailable } from 'components/Unavailable'
 
 const parseDate = timeParse('%Y-%m-%d')
@@ -112,22 +113,25 @@ export function withOHLCData() {
 				// Case where data is undefined because a component is already loaded.
 
 				// Case where user is switching from MAX to 1D/5D
+
 				if (
 					(prevProps.time == '1D' || prevProps.time == '5D') &&
 					newProps.time != '1D' &&
 					newProps.time != '5D'
 				) {
 					loading(true)
-					Axios.get(
-						`${
-							process.env.NEXT_PUBLIC_API_URL ||
-							'https://api.stockanalysis.com/wp-json/sa'
-						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${
-							newProps.period
-						}&r=MAX`
+					const rawData = getChartData(
+						newProps.stockSymbol,
+						newProps.stockType,
+						newProps.period,
+						'MAX',
+						undefined
 					)
+					console.log('Test')
+					console.log(rawData)
+					rawData
 						.then(res => {
-							const forDateParse = res.data.map(fixDataHeaders)
+							const forDateParse = res.map(fixDataHeaders)
 							data = forDateParse.map(parseData())
 
 							this.setState({ data })
@@ -156,16 +160,18 @@ export function withOHLCData() {
 					data != undefined
 				) {
 					loading(true)
-					Axios.get(
-						`${
-							process.env.NEXT_PUBLIC_API_URL ||
-							'https://api.stockanalysis.com/wp-json/sa'
-						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${
-							newProps.time
-						}`
+
+					const rawData = getChartData(
+						newProps.stockSymbol,
+						newProps.stockType,
+						undefined,
+						newProps.time,
+						undefined
 					)
+
+					rawData
 						.then(res => {
-							const forDateParse = res.data.map(fixDataHeaders1D5D)
+							const forDateParse = res.map(fixDataHeaders1D5D)
 							data = forDateParse.map(parseData1D5D())
 							this.setState({ data })
 
@@ -183,6 +189,8 @@ export function withOHLCData() {
 								<Unavailable message="Unable to load the data for this chart." />
 							)
 						})
+
+					// Case where user is switching from 1D/5D
 				}
 				// Case where using is switching between 1D and 5D
 				else if (
@@ -194,19 +202,20 @@ export function withOHLCData() {
 						data != undefined)
 				) {
 					loading(true)
-					Axios.get(
-						`${
-							process.env.NEXT_PUBLIC_API_URL ||
-							'https://api.stockanalysis.com/wp-json/sa'
-						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${
-							newProps.time
-						}&f=candles`
+
+					const rawData = getChartData(
+						newProps.stockSymbol,
+						newProps.stockType,
+						undefined,
+						newProps.time,
+						'candles'
 					)
+					rawData
 						.then(res => {
 							setTimeout(function () {
 								loading(false)
 							}, 0)
-							const forDateParse = res.data.map(fixDataHeaders1D5D)
+							const forDateParse = res.map(fixDataHeaders1D5D)
 							data = forDateParse.map(parseData1D5D())
 							this.setState({ data })
 							if (typeof data != 'undefined') {
@@ -232,16 +241,16 @@ export function withOHLCData() {
 				) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
-						Axios.get(
-							`${
-								process.env.NEXT_PUBLIC_API_URL ||
-								'https://api.stockanalysis.com/wp-json/sa'
-							}/chart?s=${newProps.stockSymbol}&t=${
-								newProps.stockType
-							}&r=${newProps.time}`
+						const rawData = getChartData(
+							newProps.stockSymbol,
+							newProps.stockType,
+							undefined,
+							newProps.time,
+							undefined
 						)
+						rawData
 							.then(res => {
-								const forDateParse = res.data.map(fixDataHeaders1D5D)
+								const forDateParse = res.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
 								this.setState({ data })
 
@@ -261,16 +270,16 @@ export function withOHLCData() {
 							})
 					} else {
 						loading(true)
-						Axios.get(
-							`${
-								process.env.NEXT_PUBLIC_API_URL ||
-								'https://api.stockanalysis.com/wp-json/sa'
-							}/chart?s=${newProps.stockSymbol}&t=${
-								newProps.stockType
-							}&p=${newProps.period}&r=MAX`
+						const rawData = getChartData(
+							newProps.stockSymbol,
+							newProps.stockType,
+							newProps.period,
+							newProps.time,
+							undefined
 						)
+						rawData
 							.then(res => {
-								const forDateParse = res.data.map(fixDataHeaders)
+								const forDateParse = res.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
 								this.setState({ data })
 
@@ -295,16 +304,17 @@ export function withOHLCData() {
 				} else if (data == undefined) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
-						Axios.get(
-							`${
-								process.env.NEXT_PUBLIC_API_URL ||
-								'https://api.stockanalysis.com/wp-json/sa'
-							}/chart?s=${newProps.stockSymbol}&t=${
-								newProps.stockType
-							}&r=${newProps.time}`
+						const rawData = getChartData(
+							newProps.stockSymbol,
+							newProps.stockType,
+							undefined,
+							newProps.time,
+							undefined
 						)
+
+						rawData
 							.then(res => {
-								const forDateParse = res.data.map(fixDataHeaders1D5D)
+								const forDateParse = res.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
 								this.setState({ data })
 
@@ -324,16 +334,16 @@ export function withOHLCData() {
 							})
 					} else {
 						loading(true)
-						Axios.get(
-							`${
-								process.env.NEXT_PUBLIC_API_URL ||
-								'https://api.stockanalysis.com/wp-json/sa'
-							}/chart?s=${newProps.stockSymbol}&t=${
-								newProps.stockType
-							}&p=${newProps.period}&r=MAX`
+						const rawData = getChartData(
+							newProps.stockSymbol,
+							newProps.stockType,
+							newProps.period,
+							'MAX',
+							undefined
 						)
+						rawData
 							.then(res => {
-								const forDateParse = res.data.map(fixDataHeaders)
+								const forDateParse = res.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
 								this.setState({ data })
 

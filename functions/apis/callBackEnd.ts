@@ -45,6 +45,32 @@ export async function getStockFinancialsSSR(
 	return respondSSR(response)
 }
 
+export async function getChartData(
+	symbol: string, //this is the s parameter
+	type?: 'stocks' | 'etf', //this is the t parameter
+	period?: string, //this is the p parameter
+	time?: string, //this is the r parameter.
+	candles?: string //this the f parameter
+) {
+	let response
+	if (typeof period == 'undefined' && typeof candles == 'undefined') {
+		console.log('here')
+		response = await getData(`chart?s=${symbol}&t=${type}&r=${time}`)
+	} else if (typeof period == 'undefined') {
+		console.log('working')
+		response = await getData(
+			`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`
+		)
+	} else {
+		console.log('test')
+		response = await getData(
+			`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`
+		)
+	}
+
+	console.log(response)
+	return response
+}
 export function respond(response: Response, revalidate: number) {
 	if (response.status === 200) {
 		return {
