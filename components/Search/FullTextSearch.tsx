@@ -1,8 +1,8 @@
-import Link from 'next/link'
+import { SearchItem } from './search.types'
 
 type Props = {
 	loading: boolean
-	results: number
+	results: SearchItem[]
 	query: string
 }
 
@@ -13,7 +13,7 @@ type Props = {
 export function FullTextSearch({ loading, results, query }: Props) {
 	if (loading) return <></>
 
-	if (!results) {
+	if (!results.length) {
 		return (
 			<div className="bll activebg py-1.5 px-2 text-base sm:px-3 md:text-lg">
 				<a href={`/search?q=${query}`}>
@@ -23,11 +23,15 @@ export function FullTextSearch({ loading, results, query }: Props) {
 		)
 	}
 
-	return (
-		<div className="border-t border-gray-200 py-1.5 px-2 text-base hover:bg-gray-100 sm:px-3">
-			<a href={`/search?q=${query}`}>
-				Not what you&apos;re looking for? Try a full text search.
-			</a>
-		</div>
-	)
+	if (results.length > 1) {
+		return (
+			<div className="border-t border-gray-200 py-1.5 px-2 text-base hover:bg-gray-100 sm:px-3">
+				<a href={`/search?q=${query}`}>
+					Not what you&apos;re looking for? Try a full text search.
+				</a>
+			</div>
+		)
+	}
+
+	return null
 }

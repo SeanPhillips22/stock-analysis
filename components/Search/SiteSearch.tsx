@@ -232,7 +232,7 @@ export function SiteSearch() {
 						) : null}
 						<FullTextSearch
 							loading={loading || filtering}
-							results={results.length}
+							results={results}
 							query={query}
 						/>
 					</div>
