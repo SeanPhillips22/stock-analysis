@@ -86,6 +86,7 @@ interface WithOHLCDataProps {
 
 interface WithOHLCState {
 	data?: IOHLCData[]
+	abort: AbortController | undefined
 }
 
 export function withOHLCData() {
@@ -98,14 +99,19 @@ export function withOHLCData() {
 		> {
 			public constructor(props: Omit<TProps, 'data'>) {
 				super(props)
-
 				this.state = {
-					data: undefined
+					data: undefined,
+					abort: undefined
 				}
+			}
+			public componentDidMount() {
+				let { abort } = this.state
+				abort = new AbortController()
+				this.setState({ abort })
 			}
 
 			public componentDidUpdate(prevProps: any) {
-				let { data } = this.state
+				let { data, abort } = this.state
 				let loading = this.props.setLoading
 
 				const newProps: any = this.props
@@ -121,6 +127,7 @@ export function withOHLCData() {
 				) {
 					loading(true)
 					const rawData = getChartData(
+						abort,
 						newProps.stockSymbol,
 						newProps.stockType,
 						newProps.period,
@@ -162,6 +169,7 @@ export function withOHLCData() {
 					loading(true)
 
 					const rawData = getChartData(
+						abort,
 						newProps.stockSymbol,
 						newProps.stockType,
 						undefined,
@@ -204,6 +212,7 @@ export function withOHLCData() {
 					loading(true)
 
 					const rawData = getChartData(
+						abort,
 						newProps.stockSymbol,
 						newProps.stockType,
 						undefined,
@@ -242,6 +251,7 @@ export function withOHLCData() {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
 						const rawData = getChartData(
+							abort,
 							newProps.stockSymbol,
 							newProps.stockType,
 							undefined,
@@ -271,6 +281,7 @@ export function withOHLCData() {
 					} else {
 						loading(true)
 						const rawData = getChartData(
+							abort,
 							newProps.stockSymbol,
 							newProps.stockType,
 							newProps.period,
@@ -305,6 +316,7 @@ export function withOHLCData() {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
 						const rawData = getChartData(
+							abort,
 							newProps.stockSymbol,
 							newProps.stockType,
 							undefined,
@@ -335,6 +347,7 @@ export function withOHLCData() {
 					} else {
 						loading(true)
 						const rawData = getChartData(
+							abort,
 							newProps.stockSymbol,
 							newProps.stockType,
 							newProps.period,
@@ -365,6 +378,11 @@ export function withOHLCData() {
 								)
 							})
 					}
+				}
+			}
+			public componentWillUnmount() {
+				if (typeof this.state.abort != 'undefined') {
+					this.state.abort.abort()
 				}
 			}
 

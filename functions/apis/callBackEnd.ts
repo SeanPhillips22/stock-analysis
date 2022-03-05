@@ -46,6 +46,7 @@ export async function getStockFinancialsSSR(
 }
 
 export async function getChartData(
+	abortController: AbortController | undefined,
 	symbol: string, //this is the s parameter
 	type?: 'stocks' | 'etf', //this is the t parameter
 	period?: string, //this is the p parameter
@@ -53,19 +54,41 @@ export async function getChartData(
 	candles?: string //this the f parameter
 ) {
 	let response
-	if (typeof period == 'undefined' && typeof candles == 'undefined') {
-		console.log('here')
-		response = await getData(`chart?s=${symbol}&t=${type}&r=${time}`)
-	} else if (typeof period == 'undefined') {
-		console.log('working')
-		response = await getData(
-			`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`
-		)
+	if (typeof abortController == 'undefined') {
+		if (typeof period == 'undefined' && typeof candles == 'undefined') {
+			console.log('here')
+			response = await getData(`chart?s=${symbol}&t=${type}&r=${time}`)
+		} else if (typeof period == 'undefined') {
+			console.log('working')
+			response = await getData(
+				`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`
+			)
+		} else {
+			console.log('test')
+			response = await getData(
+				`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`
+			)
+		}
 	} else {
-		console.log('test')
-		response = await getData(
-			`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`
-		)
+		if (typeof period == 'undefined' && typeof candles == 'undefined') {
+			console.log('here')
+			response = await getData(
+				`chart?s=${symbol}&t=${type}&r=${time}`,
+				abortController.signal
+			)
+		} else if (typeof period == 'undefined') {
+			console.log('working')
+			response = await getData(
+				`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`,
+				abortController.signal
+			)
+		} else {
+			console.log('test')
+			response = await getData(
+				`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`,
+				abortController.signal
+			)
+		}
 	}
 
 	console.log(response)
