@@ -6,17 +6,21 @@ import { getData } from 'functions/apis/API'
 import { CloseIcon } from 'components/Icons/Close'
 import { useDebounce } from 'hooks/useDebounce'
 import { useSearch } from './useSearch'
+import { searchState } from './SiteSearch.state'
+import { FullTextSearch } from './FullTextSearch'
 
 export function SiteSearch() {
 	const router = useRouter()
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [query, setQuery] = useState('')
 	const debouncedQuery = useDebounce<string>(query, 150)
-	const [fetched, setFetched] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [open, setOpen] = useState(false)
-	const [trending, setTrending] = useState([])
 	const [error, setError] = useState(false)
+	const fetched = searchState(state => state.fetched)
+	const setFetched = searchState(state => state.setFetched)
+	const trending = searchState(state => state.trending)
+	const setTrending = searchState(state => state.setTrending)
 	const { results, filtering } = useSearch(debouncedQuery, trending)
 	let num = 1
 
@@ -225,19 +229,12 @@ export function SiteSearch() {
 									/>
 								))}
 							</ul>
-						) : (
-							!loading &&
-							!filtering && (
-								<div className="activebg py-1.5 px-2 text-lg sm:px-3">
-									<a
-										href={`/search?q=${query}`}
-										className="hover:text-blue-link"
-									>
-										No results found. Click to try a full text search.
-									</a>
-								</div>
-							)
-						)}
+						) : null}
+						<FullTextSearch
+							loading={loading || filtering}
+							results={results.length}
+							query={query}
+						/>
 					</div>
 				)}
 			</div>
