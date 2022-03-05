@@ -22,6 +22,14 @@
 		@apply mt-3 -mb-2 text-center;
 	}
 
+	.ha1w.home {
+		@apply relative my-0 bg-gray-100 text-center;
+	}
+
+	.ha1w.home .ha1 {
+		@apply absolute top-3 left-0 right-0;
+	}
+
 	/* Sidebar 1 */
 	.sb-1 {
 		@apply mx-auto hidden h-[250px] w-[300px] lg:block;
