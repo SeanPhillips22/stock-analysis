@@ -24,10 +24,10 @@ export function FullTextSearch({ loading, results, query }: Props) {
 	}
 
 	return (
-		<div className="bll border-t border-gray-200 py-1.5 px-2 text-base sm:px-3 md:text-lg">
-			<Link href={`/search?q=${query}`} prefetch={false}>
-				<a>Not what you&apos;re looking for? Try a full text search.</a>
-			</Link>
+		<div className="border-t border-gray-200 py-1.5 px-2 text-base hover:bg-gray-100 sm:px-3">
+			<a href={`/search?q=${query}`}>
+				Not what you&apos;re looking for? Try a full text search.
+			</a>
 		</div>
 	)
 }
