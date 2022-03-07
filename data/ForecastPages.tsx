@@ -27,5 +27,9 @@ export const ForecastPages = [
 	'amc',
 	'pfe',
 	't',
-	'ko'
+	'ko',
+	'tcehy',
+	'bac',
+	'xom',
+	'cvs'
 ]
