@@ -19,9 +19,15 @@ export function EstimatesTable({ range }: Props) {
 
 	if (!table) return null
 
+	const lastDate = table.lastDate
+
 	// Add note below financials table
 	let tableNote =
-		info.currency !== 'USD' ? 'Financials in ' + info.currency + '.' : null
+		'White columns are actual numbers, blue columns are estimates.'
+	tableNote =
+		info.currency !== 'USD'
+			? 'Financials in ' + info.currency + '. ' + tableNote
+			: tableNote
 
 	return (
 		<>
@@ -48,6 +54,7 @@ export function EstimatesTable({ range }: Props) {
 											? (formatTableCell('format0dec', i) as string)
 											: undefined
 									}
+									className={ii > lastDate ? styles.est : undefined}
 								>
 									{i === 0 ? 0 : formatTableCell('abbreviate', i)}
 								</td>
@@ -63,6 +70,7 @@ export function EstimatesTable({ range }: Props) {
 											? formatTableCell('format3dec', i) + '%'
 											: undefined
 									}
+									className={ii > lastDate ? styles.est : undefined}
 								>
 									{formatTableCell('colorPercentage', i)}
 								</td>
@@ -74,6 +82,7 @@ export function EstimatesTable({ range }: Props) {
 								<td
 									key={`eps-${range}-${ii}`}
 									title={formatTableCell('format3dec', i) as string}
+									className={ii > lastDate ? styles.est : undefined}
 								>
 									{formatTableCell('format2dec', i)}
 								</td>
@@ -89,6 +98,7 @@ export function EstimatesTable({ range }: Props) {
 											? formatTableCell('format3dec', i) + '%'
 											: undefined
 									}
+									className={ii > lastDate ? styles.est : undefined}
 								>
 									{formatTableCell('colorPercentage', i)}
 								</td>
@@ -104,6 +114,7 @@ export function EstimatesTable({ range }: Props) {
 											? (formatTableCell('format0dec', i) as string)
 											: undefined
 									}
+									className={ii > lastDate ? styles.est : undefined}
 								>
 									{formatTableCell('integer', i)}
 								</td>
@@ -111,12 +122,12 @@ export function EstimatesTable({ range }: Props) {
 						</tr>
 					</tbody>
 				</table>
-				{tableNote && (
-					<div className="mt-1 text-[0.85rem] text-gray-600">
-						{tableNote}
-					</div>
-				)}
 			</div>
+			{tableNote && (
+				<div className="mt-0.5 text-[0.8rem] text-gray-600">
+					{tableNote}
+				</div>
+			)}
 		</>
 	)
 }
