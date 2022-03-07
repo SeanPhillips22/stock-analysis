@@ -77,7 +77,6 @@ export function PriceTargetChart() {
 			),
 		[chart]
 	)
-	console.log(data)
 
 	data.targets.chart.map((item: any) => {
 		let d = new Date(item.t)
@@ -89,8 +88,6 @@ export function PriceTargetChart() {
 			'-' +
 			d.getDate()
 	})
-
-	console.log(data)
 
 	const redOrGreen =
 		currentPrice - initialPrice > 0
