@@ -31,5 +31,9 @@ export const ForecastPages = [
 	'tcehy',
 	'bac',
 	'xom',
-	'cvs'
+	'cvs',
+	'intc',
+	'hood',
+	'ttd',
+	'rdfn'
 ]

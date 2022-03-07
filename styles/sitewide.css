@@ -8,13 +8,6 @@
 		@apply bg-white text-gray-900;
 	}
 
-	/* Fix bug with iOS scroll when focusing an input element */
-	html,
-	body {
-		-webkit-overflow-scrolling: touch !important;
-		overflow: auto !important;
-	}
-
 	.bll {
 		@apply text-blue-link hover:text-gray-900;
 		color: #1e73ba;
