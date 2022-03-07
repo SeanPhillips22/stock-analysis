@@ -35,5 +35,9 @@ export const ForecastPages = [
 	'intc',
 	'hood',
 	'ttd',
-	'rdfn'
+	'rdfn',
+	'o',
+	'gild',
+	'bcs',
+	'nvo'
 ]
