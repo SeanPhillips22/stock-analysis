@@ -21,7 +21,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 						financial statements and more.
 					</p>
 					<form action="/search/" method="get" role="search">
-						<div className="relative mx-auto mb-5 flex max-w-[95%] items-center text-left md:max-w-[75%] lg:max-w-lg">
+						<div className="fix-input-scroll relative mx-auto mb-5 flex max-w-[95%] items-center text-left md:max-w-[75%] lg:max-w-lg">
 							<SiteSearch />
 						</div>
 					</form>
