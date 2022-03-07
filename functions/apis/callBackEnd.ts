@@ -56,34 +56,28 @@ export async function getChartData(
 	let response
 	if (typeof abortController == 'undefined') {
 		if (typeof period == 'undefined' && typeof candles == 'undefined') {
-			console.log('here')
 			response = await getData(`chart?s=${symbol}&t=${type}&r=${time}`)
 		} else if (typeof period == 'undefined') {
-			console.log('working')
 			response = await getData(
 				`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`
 			)
 		} else {
-			console.log('test')
 			response = await getData(
 				`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`
 			)
 		}
 	} else {
 		if (typeof period == 'undefined' && typeof candles == 'undefined') {
-			console.log('here')
 			response = await getData(
 				`chart?s=${symbol}&t=${type}&r=${time}`,
 				abortController.signal
 			)
 		} else if (typeof period == 'undefined') {
-			console.log('working')
 			response = await getData(
 				`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`,
 				abortController.signal
 			)
 		} else {
-			console.log('test')
 			response = await getData(
 				`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`,
 				abortController.signal
@@ -91,7 +85,6 @@ export async function getChartData(
 		}
 	}
 
-	console.log(response)
 	return response
 }
 export function respond(response: Response, revalidate: number) {

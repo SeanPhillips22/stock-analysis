@@ -8,6 +8,14 @@ import { Unavailable } from 'components/Unavailable'
 const parseDate = timeParse('%Y-%m-%d')
 const parseDate1D5D = timeParse('%b %d, %Y %H:%M')
 
+const errorHandling = (error: any, setLoading: any) => {
+	console.error(
+		'Error: There was an error loading the data for the chart |',
+		error
+	)
+	setLoading(false)
+}
+
 const parseData = () => {
 	return (d: any) => {
 		const date = parseDate(d.date)
@@ -26,7 +34,6 @@ const parseData = () => {
 		return d as IOHLCData
 	}
 }
-
 const parseData1D5D = () => {
 	return (d: any) => {
 		const date = parseDate1D5D(d.date)
@@ -111,6 +118,10 @@ export function withOHLCData() {
 			}
 
 			public componentDidUpdate(prevProps: any) {
+				if (prevProps.loading != this.props.loading) {
+					return
+				}
+
 				let { data, abort } = this.state
 				let loading = this.props.setLoading
 
@@ -126,7 +137,7 @@ export function withOHLCData() {
 					newProps.time != '5D'
 				) {
 					loading(true)
-					const rawData = getChartData(
+					getChartData(
 						abort,
 						newProps.stockSymbol,
 						newProps.stockType,
@@ -134,9 +145,6 @@ export function withOHLCData() {
 						'MAX',
 						undefined
 					)
-					console.log('Test')
-					console.log(rawData)
-					rawData
 						.then(res => {
 							const forDateParse = res.map(fixDataHeaders)
 							data = forDateParse.map(parseData())
@@ -151,13 +159,11 @@ export function withOHLCData() {
 							}
 						})
 						.catch(error => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
+							errorHandling(error, this.props.setLoading)
+							if (typeof data != undefined) {
+								data = undefined
+								this.setState({ data })
+							}
 						})
 					// Case where user is switching from 1D/5D to MAX
 				} else if (
@@ -168,7 +174,7 @@ export function withOHLCData() {
 				) {
 					loading(true)
 
-					const rawData = getChartData(
+					getChartData(
 						abort,
 						newProps.stockSymbol,
 						newProps.stockType,
@@ -176,8 +182,6 @@ export function withOHLCData() {
 						newProps.time,
 						undefined
 					)
-
-					rawData
 						.then(res => {
 							const forDateParse = res.map(fixDataHeaders1D5D)
 							data = forDateParse.map(parseData1D5D())
@@ -188,17 +192,12 @@ export function withOHLCData() {
 							}, 0)
 						})
 						.catch(error => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
+							errorHandling(error, this.props.setLoading)
+							if (typeof data != undefined) {
+								data = undefined
+								this.setState({ data })
+							}
 						})
-
-					// Case where user is switching from 1D/5D
 				}
 				// Case where using is switching between 1D and 5D
 				else if (
@@ -211,7 +210,7 @@ export function withOHLCData() {
 				) {
 					loading(true)
 
-					const rawData = getChartData(
+					getChartData(
 						abort,
 						newProps.stockSymbol,
 						newProps.stockType,
@@ -219,7 +218,6 @@ export function withOHLCData() {
 						newProps.time,
 						'candles'
 					)
-					rawData
 						.then(res => {
 							setTimeout(function () {
 								loading(false)
@@ -232,14 +230,11 @@ export function withOHLCData() {
 							}
 						})
 						.catch(error => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-							this.props.setLoading(false)
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
+							errorHandling(error, this.props.setLoading)
+							if (typeof data != undefined) {
+								data = undefined
+								this.setState({ data })
+							}
 						})
 				}
 				//Case where Symbol or period or type has changed.
@@ -250,7 +245,7 @@ export function withOHLCData() {
 				) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
-						const rawData = getChartData(
+						getChartData(
 							abort,
 							newProps.stockSymbol,
 							newProps.stockType,
@@ -258,7 +253,6 @@ export function withOHLCData() {
 							newProps.time,
 							undefined
 						)
-						rawData
 							.then(res => {
 								const forDateParse = res.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
@@ -269,18 +263,15 @@ export function withOHLCData() {
 								}, 0)
 							})
 							.catch(error => {
-								console.error(
-									'Error: There was an error loading the data for the chart |',
-									error
-								)
-								this.props.setLoading(false)
-								return (
-									<Unavailable message="Unable to load the data for this chart." />
-								)
+								errorHandling(error, this.props.setLoading)
+								if (typeof data != undefined) {
+									data = undefined
+									this.setState({ data })
+								}
 							})
 					} else {
 						loading(true)
-						const rawData = getChartData(
+						getChartData(
 							abort,
 							newProps.stockSymbol,
 							newProps.stockType,
@@ -288,7 +279,6 @@ export function withOHLCData() {
 							newProps.time,
 							undefined
 						)
-						rawData
 							.then(res => {
 								const forDateParse = res.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
@@ -302,20 +292,17 @@ export function withOHLCData() {
 								}
 							})
 							.catch(error => {
-								console.error(
-									'Error: There was an error loading the data for the chart |',
-									error
-								)
-								this.props.setLoading(false)
-								return (
-									<Unavailable message="Unable to load the data for this chart." />
-								)
+								errorHandling(error, this.props.setLoading)
+								if (typeof data != undefined) {
+									data = undefined
+									this.setState({ data })
+								}
 							})
 					}
 				} else if (data == undefined) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
-						const rawData = getChartData(
+						getChartData(
 							abort,
 							newProps.stockSymbol,
 							newProps.stockType,
@@ -323,8 +310,6 @@ export function withOHLCData() {
 							newProps.time,
 							undefined
 						)
-
-						rawData
 							.then(res => {
 								const forDateParse = res.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
@@ -335,18 +320,11 @@ export function withOHLCData() {
 								}, 0)
 							})
 							.catch(error => {
-								console.error(
-									'Error: There was an error loading the data for the chart |',
-									error
-								)
-								this.props.setLoading(false)
-								return (
-									<Unavailable message="Unable to load the data for this chart." />
-								)
+								errorHandling(error, this.props.setLoading)
 							})
 					} else {
 						loading(true)
-						const rawData = getChartData(
+						getChartData(
 							abort,
 							newProps.stockSymbol,
 							newProps.stockType,
@@ -354,7 +332,6 @@ export function withOHLCData() {
 							'MAX',
 							undefined
 						)
-						rawData
 							.then(res => {
 								const forDateParse = res.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
@@ -368,14 +345,7 @@ export function withOHLCData() {
 								}
 							})
 							.catch(error => {
-								console.error(
-									'Error: There was an error loading the data for the chart |',
-									error
-								)
-								this.props.setLoading(false)
-								return (
-									<Unavailable message="Unable to load the data for this chart." />
-								)
+								errorHandling(error, this.props.setLoading)
 							})
 					}
 				}
@@ -389,8 +359,10 @@ export function withOHLCData() {
 			public render() {
 				const { data } = this.state
 
-				if (data === undefined) {
-					return <div></div>
+				if (typeof data == 'undefined') {
+					return (
+						<Unavailable message="Unable to load the data for this chart." />
+					)
 				}
 
 				return (
