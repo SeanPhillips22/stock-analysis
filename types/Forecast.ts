@@ -35,6 +35,7 @@ type EstimatesTable = {
 	eps: number[]
 	epsGrowth: number[]
 	analysts: (string | number)[]
+	lastDate: number // The index in the array that is the last actual data point
 }
 
 export type Estimates = {

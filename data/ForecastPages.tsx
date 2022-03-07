@@ -22,5 +22,7 @@ export const ForecastPages = [
 	'jnj',
 	'jpm',
 	'wmt',
-	'pg'
+	'pg',
+	'gme',
+	'amc'
 ]
