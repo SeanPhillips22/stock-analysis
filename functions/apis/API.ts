@@ -9,12 +9,11 @@ export async function getData(params: string, controller?: AbortSignal) {
 		process.env.API_URL ||
 		'https://api.stockanalysis.com/wp-json/sa'
 
-	const response =
-		typeof controller == 'undefined'
-			? await fetch(`${url}/${encodeURI(params)}`)
-			: await fetch(`${url}/${encodeURI(params)}`, {
-					signal: controller
-			  })
+	const response = !controller
+		? await fetch(`${url}/${encodeURI(params)}`)
+		: await fetch(`${url}/${encodeURI(params)}`, {
+				signal: controller
+		  })
 
 	if (response.ok) {
 		if (controller) controller = undefined

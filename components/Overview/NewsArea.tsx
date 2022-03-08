@@ -39,12 +39,16 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 		const controller = new AbortController()
 
 		async function fetchData() {
-			const fresh = await getData(
-				`news-fresh?s=${info.symbol}&t=${info.type}`,
-				controller.signal
-			)
-			if (news[0] && fresh[0] && news[0].title !== fresh[0].title) {
-				setData(fresh)
+			try {
+				const fresh = await getData(
+					`news-fresh?s=${info.symbol}&t=${info.type}`,
+					controller.signal
+				)
+				if (news[0] && fresh[0] && news[0].title !== fresh[0].title) {
+					setData(fresh)
+				}
+			} catch {
+				// Do nothing, likely the page was changed before the fetch completed
 			}
 		}
 

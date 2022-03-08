@@ -47,17 +47,17 @@ export async function getStockFinancialsSSR(
 
 export async function getChartData(
 	abortController: AbortController | undefined,
-	symbol: string, //this is the s parameter
-	type?: 'stocks' | 'etf', //this is the t parameter
-	period?: string, //this is the p parameter
-	time?: string, //this is the r parameter.
-	candles?: string //this the f parameter
+	symbol: string, // this is the s parameter
+	type?: 'stocks' | 'etf', // this is the t parameter
+	period?: string, // this is the p parameter
+	time?: string, // this is the r parameter.
+	candles?: string // this is the f parameter
 ) {
 	let response
-	if (typeof abortController == 'undefined') {
-		if (typeof period == 'undefined' && typeof candles == 'undefined') {
+	if (!abortController) {
+		if (!period && !candles) {
 			response = await getData(`chart?s=${symbol}&t=${type}&r=${time}`)
-		} else if (typeof period == 'undefined') {
+		} else if (!period) {
 			response = await getData(
 				`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`
 			)
@@ -67,12 +67,12 @@ export async function getChartData(
 			)
 		}
 	} else {
-		if (typeof period == 'undefined' && typeof candles == 'undefined') {
+		if (!period && !candles) {
 			response = await getData(
 				`chart?s=${symbol}&t=${type}&r=${time}`,
 				abortController.signal
 			)
-		} else if (typeof period == 'undefined') {
+		} else if (!period) {
 			response = await getData(
 				`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`,
 				abortController.signal
