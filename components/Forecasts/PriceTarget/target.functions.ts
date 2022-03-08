@@ -32,6 +32,9 @@ export function fillWhitespaceLine(chart: any) {
 			} else {
 				oldestDate.setMonth(oldestDate.getMonth() - 1)
 			}
+
+			if (oldestDate < yearAgo) break
+
 			let dateObj = {
 				x:
 					oldestDate.getFullYear().toString() +
