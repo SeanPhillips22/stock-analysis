@@ -78,17 +78,6 @@ export function PriceTargetChart() {
 		[chart]
 	)
 
-	data.targets.chart.map((item: any) => {
-		let d = new Date(item.t)
-		d.setDate(1)
-		item.t =
-			d.getFullYear().toString() +
-			'-' +
-			(d.getMonth() + 1).toString() +
-			'-' +
-			d.getDate()
-	})
-
 	const redOrGreen =
 		currentPrice - initialPrice > 0
 			? 'rgba(4, 120, 87, 1)'
