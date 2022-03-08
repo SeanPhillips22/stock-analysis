@@ -54,35 +54,22 @@ export async function getChartData(
 	candles?: string // this is the f parameter
 ) {
 	let response
-	if (!abortController) {
-		if (!period && !candles) {
-			response = await getData(`chart?s=${symbol}&t=${type}&r=${time}`)
-		} else if (!period) {
-			response = await getData(
-				`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`
-			)
-		} else {
-			response = await getData(
-				`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`
-			)
-		}
+
+	if (!period && !candles) {
+		response = await getData(
+			`chart?s=${symbol}&t=${type}&r=${time}`,
+			abortController?.signal
+		)
+	} else if (!period) {
+		response = await getData(
+			`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`,
+			abortController?.signal
+		)
 	} else {
-		if (!period && !candles) {
-			response = await getData(
-				`chart?s=${symbol}&t=${type}&r=${time}`,
-				abortController.signal
-			)
-		} else if (!period) {
-			response = await getData(
-				`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`,
-				abortController.signal
-			)
-		} else {
-			response = await getData(
-				`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`,
-				abortController.signal
-			)
-		}
+		response = await getData(
+			`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`,
+			abortController?.signal
+		)
 	}
 
 	return response
