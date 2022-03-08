@@ -36,7 +36,7 @@ export function EstimatesHoverChart({ id, range, title }: Props) {
 			? data.estimates.table.annual
 			: data.estimates.table.quarterly
 
-	if (!table) return null
+	if (!table || !table.dates) return null
 
 	// To determine which is actual and which is estimates
 	const lastDate = table.lastDate
