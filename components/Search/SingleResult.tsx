@@ -79,6 +79,12 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 					}
 					break
 
+				case 'forecast':
+					if (type === 's') {
+						url = `${url}forecast/`
+					}
+					break
+
 				case 'holdings':
 					if (type === 'e') {
 						url = `${url}holdings/`
