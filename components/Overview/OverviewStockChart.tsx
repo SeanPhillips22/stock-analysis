@@ -1,14 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useRef, useState } from 'react'
-import {
-	createChart,
-	PriceLineOptions,
-	LineStyle,
-	LineData,
-	WhitespaceData
-} from 'lightweight-charts'
-import styles from './OverviewStockChart.module.css'
+import React, { useEffect, useRef } from 'react'
+import { createChart, PriceLineOptions, LineStyle } from 'lightweight-charts'
 import { ChartDataPoint } from 'types/Charts'
 
 type Props = {
@@ -27,12 +20,7 @@ export default function OverviewStockChart({
 	change
 }: Props) {
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>
-	const toolTip = useRef() as React.MutableRefObject<HTMLDivElement>
-	const [tWidth, settWidth] = useState('300px')
-	const [tHeight, settHeight] = useState('690px')
-	const [showTooltip, setShowTooltip] = useState('none')
-	const [price, setPrice] = useState('500')
-	const [priceDate, setPriceDate] = useState('1999-20')
+
 	const monthNames = [
 		'Jan',
 		'Feb',
@@ -239,57 +227,6 @@ export default function OverviewStockChart({
 			chart.applyOptions({ height: newRect.height, width: newRect.width })
 		}).observe(ref.current)
 
-		let toolTipWidth = 100
-		let toolTipHeight = 80
-		let toolTipMargin = 15
-		const w = ref.current.clientWidth
-		const h = ref.current.clientHeight
-		console.log(ref)
-		//Tooltips are handled here, based on crosshairMove
-		chart.subscribeCrosshairMove((param: any) => {
-			if (
-				param.time == undefined ||
-				param.point.x < 0 ||
-				param.point.x > w ||
-				param.point.y < 0 ||
-				param.point.y > h
-			) {
-				setShowTooltip('none')
-				return
-			}
-
-			const width = ref.current.offsetLeft
-			const height = ref.current.offsetTop
-			let y = param.point.y
-
-			let left = width + param.point.x + toolTipMargin
-			if (left > width + w - toolTipWidth) {
-				left = width + param.point.x - toolTipMargin - toolTipWidth
-			}
-
-			let top = y + height + toolTipMargin
-			if (top > h + height - toolTipHeight) {
-				top = height + y - toolTipHeight - toolTipMargin
-			}
-
-			const date = new Date(param.time * 1000)
-
-			settWidth(left + 'px')
-			settHeight(top + 'px')
-			setShowTooltip('block')
-
-			setPrice(
-				Number(param.seriesPrices.get(areaSeries)).toFixed(2).toString()
-			)
-			setPriceDate(
-				date.getUTCDate() +
-					' ' +
-					monthNames[date.getUTCMonth()] +
-					' ' +
-					date.getUTCFullYear().toString()
-			)
-		})
-
 		return () => {
 			chart.remove()
 		}
@@ -297,19 +234,7 @@ export default function OverviewStockChart({
 
 	return (
 		<>
-			<div ref={ref}>
-				{showTooltip && (
-					<div
-						ref={toolTip}
-						style={{ top: tHeight, left: tWidth, display: showTooltip }}
-						className={styles.tooltip}
-					>
-						<div className={styles.name}>Apple Inc.</div>
-						<div className={styles.price}>{price}</div>
-						<div>{priceDate}</div>
-					</div>
-				)}
-			</div>
+			<div ref={ref} />
 		</>
 	)
 }
