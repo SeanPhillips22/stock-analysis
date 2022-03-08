@@ -5,17 +5,17 @@ import { FormatFunction } from 'types/Tables'
 type Fn = FormatFunction
 type Type = ScreenerTypes
 
-const dec0 = new Intl.NumberFormat('en-US', {
+export const dec0 = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 0,
 	maximumFractionDigits: 0
 })
 
-const dec2 = new Intl.NumberFormat('en-US', {
+export const dec2 = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
 	maximumFractionDigits: 2
 })
 
-const dec3 = new Intl.NumberFormat('en-US', {
+export const dec3 = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 3,
 	maximumFractionDigits: 3
 })
@@ -31,9 +31,10 @@ function format(value: number, decimals: 0 | 2 | 3) {
 export function formatCellRaw(
 	fn: Fn | undefined,
 	value: string | number,
-	type: Type = 'stocks'
+	type: Type = 'stocks',
+	noDec = false
 ) {
-	return formatTableCell(fn, value, type, true)
+	return formatTableCell(fn, value, type, true, noDec)
 }
 
 // Inline formatting inside the table loop
@@ -41,7 +42,8 @@ export function formatTableCell(
 	fn: Fn | undefined,
 	value: string | number,
 	type: Type = 'stocks',
-	raw = false
+	raw = false,
+	noDec = false
 ) {
 	if (!fn) return value
 	if (fn === 'linkSymbol') return formatSymbol(value as string, type)
@@ -52,7 +54,7 @@ export function formatTableCell(
 	if (fn === 'integer') return formatInteger(value as number)
 	if (fn === 'formatPercentage') return formatPercentage(value as number)
 	if (fn === 'colorPercentage') return colorPercentage(value as number)
-	if (fn === 'abbreviate') return abbreviate(value as number, raw)
+	if (fn === 'abbreviate') return abbreviate(value as number, raw, noDec)
 	if (fn === 'formatDate') return formatDate(value as string)
 	if (fn === 'string' || fn === 'stringright')
 		return formatString(value as string)
@@ -136,17 +138,20 @@ export function colorPercentage(value: number) {
 }
 
 // Abbreviate a number with B/M/K
-export function abbreviate(value: number, raw: boolean) {
+export function abbreviate(value: number, raw: boolean, noDec: boolean) {
 	if (!value) return '-'
 
+	let formatter = noDec ? dec0 : dec2
+
 	let num = '-'
-	if (value >= 1000000000) num = dec2.format(value / 1000000000) + 'B'
-	else if (value >= 1000000) num = dec2.format(value / 1000000) + 'M'
-	else if (value > 1000) num = dec2.format(value / 1000) + 'K'
-	else if (value <= -1000000000) num = dec2.format(value / 1000000000) + 'B'
-	else if (value <= -1000000) num = dec2.format(value / 1000000) + 'M'
-	else if (value <= -1000) num = dec2.format(value / 1000) + 'K'
-	else num = dec2.format(value)
+	if (value >= 1000000000) num = formatter.format(value / 1000000000) + 'B'
+	else if (value >= 1000000) num = formatter.format(value / 1000000) + 'M'
+	else if (value > 1000) num = formatter.format(value / 1000) + 'K'
+	else if (value <= -1000000000)
+		num = formatter.format(value / 1000000000) + 'B'
+	else if (value <= -1000000) num = formatter.format(value / 1000000) + 'M'
+	else if (value <= -1000) num = formatter.format(value / 1000) + 'K'
+	else num = formatter.format(value)
 
 	return raw ? num : <div data-raw={value}>{num}</div>
 }
