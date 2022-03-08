@@ -38,6 +38,14 @@ type EstimatesTable = {
 	lastDate: number // The index in the array that is the last actual data point
 }
 
+export type EstimatesTableKeys =
+	| 'dates'
+	| 'revenue'
+	| 'revenueGrowth'
+	| 'eps'
+	| 'epsGrowth'
+	| 'analysts'
+
 export type Estimates = {
 	stats: {
 		annual: {

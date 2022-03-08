@@ -4,7 +4,7 @@ import { formatTableCell } from 'functions/tables/formatTableCell'
 import styles from './EstimatesTable.module.css'
 import { formatYear } from 'components/FinancialTable/FinancialTable.functions'
 import { Info } from 'types/Info'
-// import { HoverChartIcon } from 'components/Icons/HoverChart'
+import { TableRowTitle } from './TableRow'
 
 type Props = {
 	range: 'Annual' | 'Quarterly'
@@ -45,7 +45,12 @@ export function EstimatesTable({ range }: Props) {
 					</thead>
 					<tbody>
 						<tr>
-							<td>Revenue</td>
+							<TableRowTitle
+								title="Revenue"
+								styles={styles.hovericon}
+								range={range}
+								id="revenue"
+							/>
 							{table.revenue?.map((i, ii) => (
 								<td
 									key={`revenue-${range}-${ii}`}
@@ -61,7 +66,12 @@ export function EstimatesTable({ range }: Props) {
 							))}
 						</tr>
 						<tr>
-							<td>Revenue Growth</td>
+							<TableRowTitle
+								title="Revenue Growth"
+								styles={styles.hovericon}
+								range={range}
+								id="revenueGrowth"
+							/>
 							{table.revenueGrowth?.map((i, ii) => (
 								<td
 									key={`revenueGrowth-${range}-${ii}`}
@@ -77,7 +87,12 @@ export function EstimatesTable({ range }: Props) {
 							))}
 						</tr>
 						<tr>
-							<td>EPS</td>
+							<TableRowTitle
+								title="EPS"
+								styles={styles.hovericon}
+								range={range}
+								id="eps"
+							/>
 							{table.eps?.map((i, ii) => (
 								<td
 									key={`eps-${range}-${ii}`}
@@ -89,7 +104,12 @@ export function EstimatesTable({ range }: Props) {
 							))}
 						</tr>
 						<tr>
-							<td>EPS Growth</td>
+							<TableRowTitle
+								title="EPS Growth"
+								styles={styles.hovericon}
+								range={range}
+								id="epsGrowth"
+							/>
 							{table.epsGrowth?.map((i, ii) => (
 								<td
 									key={`epsGrowth-${range}-${ii}`}
