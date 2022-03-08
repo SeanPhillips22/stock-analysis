@@ -8,6 +8,7 @@ import { Chart as ChartJS, Title, defaults } from 'chart.js'
 import { EstimatesTableKeys, ForecastData } from 'types/Forecast'
 import { Info } from 'types/Info'
 import { dec0, dec3, formatCellRaw } from 'functions/tables/formatTableCell'
+import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
 ChartJS.register(Title)
 
@@ -22,6 +23,11 @@ type Props = {
 
 export function EstimatesHoverChart({ id, range, title }: Props) {
 	const { info, data }: { info: Info; data: ForecastData } = useSymbolContext()
+
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
+		return <UnavailableSafari classes="whitespace-normal" />
+	}
 
 	// Get the table data
 	// It contains the data we want to display

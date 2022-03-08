@@ -21,7 +21,7 @@ type Props = {
 export function TableRowTitle({ title, styles, range, id }: Props) {
 	return (
 		<td>
-			{title}
+			<span>{title}</span>
 			<TooltipChart
 				render={attrs => (
 					<div
