@@ -225,6 +225,7 @@ export default function OverviewStockChart({
 			}
 			const newRect = entries[0].contentRect
 			chart.applyOptions({ height: newRect.height, width: newRect.width })
+			chart.timeScale().fitContent()
 		}).observe(ref.current)
 
 		return () => {
