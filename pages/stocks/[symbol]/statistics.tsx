@@ -9,7 +9,6 @@ import { Button } from 'components/Buttons/Button'
 import { MAP_STATISTICS } from 'data/financials/map_statistics'
 import { Sidebar1Wide } from 'components/Ads/AdSense/Sidebar1Wide'
 import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
-import { ForecastPages } from 'data/ForecastPages'
 
 type Props = {
 	info: Info
@@ -185,7 +184,7 @@ export default function StatisticsPage({ info, data }: Props) {
 							data={data.forecast}
 							map={MAP_STATISTICS}
 						/>
-						{ForecastPages.includes(info.symbol) && (
+						{!info.exceptions.hideForecast && (
 							<Button
 								text="Forecast Details"
 								url={`/stocks/${info.symbol}/forecast/`}

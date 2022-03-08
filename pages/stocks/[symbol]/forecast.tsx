@@ -7,7 +7,6 @@ import { Ratings } from 'components/Forecasts/Ratings/_Ratings'
 import { PriceTarget } from 'components/Forecasts/PriceTarget/_PriceTarget'
 import { ContentWide1 } from 'components/Ads/AdSense/ContentWide1'
 import { Estimates } from 'components/Forecasts/Estimates/_Estimates'
-import { ForecastPages } from 'data/ForecastPages'
 
 type Props = {
 	info: Info
@@ -34,17 +33,7 @@ export default function ForecastPage({ info, data }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
-
-	// Disable on stocks other than these initial 5
-	if (!ForecastPages.includes(symbol.toLowerCase())) {
-		return {
-			notFound: true
-		}
-	}
-
 	const data = await getPageDataSSR('fc', symbol, 'stocks')
-
 	context.res.setHeader('Cache-Control', 'public, max-age=1800')
-
 	return data
 }

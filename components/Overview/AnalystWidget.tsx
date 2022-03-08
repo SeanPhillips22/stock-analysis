@@ -1,5 +1,4 @@
 import { Button } from 'components/Buttons/Button'
-import { ForecastPages } from 'data/ForecastPages'
 import { Info } from 'types/Info'
 import { Overview } from 'types/Overview'
 import { AnalystWidgetChart } from './AnalystWidgetChart'
@@ -92,7 +91,7 @@ export const AnalystWidget = ({
 					<AnalystWidgetChart ratings={ratings} />
 				</div>
 			</div>
-			{ForecastPages.includes(info.symbol) && (
+			{!info.exceptions.hideForecast && (
 				<Button
 					url={`/stocks/${info.symbol}/forecast/`}
 					text="Forecast Details"
