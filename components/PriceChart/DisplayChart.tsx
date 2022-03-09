@@ -1,6 +1,10 @@
 import { memo } from 'react'
 import dynamic from 'next/dynamic'
 
+const Chart = dynamic(() => import('components/PriceChartNew/_PriceChartNew'), {
+	ssr: false
+})
+
 type Props = {
 	data: any
 	time: string
@@ -11,14 +15,6 @@ type Props = {
 
 // A memoized wrapper around the chart cnomponent
 function DisplayChartComponent({ data, time, symbol, close, change }: Props) {
-	const Chart = dynamic(
-		() => import('components/Overview/OverviewStockChart'),
-		{
-			loading: () => <p>Loading ...</p>,
-			ssr: false
-		}
-	)
-
 	return (
 		<Chart
 			key={symbol + '-' + time}

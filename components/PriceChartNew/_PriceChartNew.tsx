@@ -3,6 +3,11 @@
 import React, { useEffect, useRef } from 'react'
 import { createChart, PriceLineOptions, LineStyle } from 'lightweight-charts'
 import { ChartDataPoint } from 'types/Charts'
+import {
+	formatPriceChartTicks,
+	formatPriceChartTime,
+	setPriceChartColor
+} from './PriceChartNew.functions'
 
 type Props = {
 	data: ChartDataPoint[]
@@ -21,21 +26,6 @@ export default function OverviewStockChart({
 }: Props) {
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 
-	const monthNames = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec'
-	]
-
 	useEffect(() => {
 		const chart = createChart(ref.current, {
 			width: 650,
@@ -47,47 +37,7 @@ export default function OverviewStockChart({
 			},
 			localization: {
 				// timeFormatter controls the crosshair date format.
-				timeFormatter: (t: any) => {
-					const date = new Date(t * 1000)
-
-					if (time == '1D' || time == '5D') {
-						let hours = date.getUTCHours()
-						let minutes: any = date.getUTCMinutes()
-						let ampm = hours >= 12 ? 'pm' : 'am'
-						hours = hours % 12 ? hours : 12
-						minutes = minutes < 10 ? '0' + minutes : minutes
-						return (
-							monthNames[date.getUTCMonth()] +
-							' ' +
-							date.getUTCDate() +
-							', ' +
-							date.getUTCFullYear() +
-							' ' +
-							hours +
-							':' +
-							minutes +
-							' ' +
-							ampm
-						)
-					} else if (time == '1M' || time == 'YTD' || time == '1Y') {
-						return (
-							monthNames[date.getUTCMonth()] +
-							' ' +
-							date.getUTCDate() +
-							', ' +
-							date.getUTCFullYear()
-						)
-					} else {
-						return (
-							'Week Of ' +
-							monthNames[date.getUTCMonth()] +
-							' ' +
-							date.getUTCDate() +
-							', ' +
-							date.getUTCFullYear()
-						)
-					}
-				}
+				timeFormatter: (t: any) => formatPriceChartTime(t, time)
 			},
 
 			rightPriceScale: {
@@ -109,33 +59,8 @@ export default function OverviewStockChart({
 					time == '1M' ||
 					time == 'YTD') && {
 					// Use TickType to determine whether its hour, day, month or year on the timescale itself
-					tickMarkFormatter: (t: any, tickType: any) => {
-						const date = new Date(t * 1000)
-
-						if (time == '1D') {
-							let hours = date.getUTCHours() //UTC must since date localizes the inputs based on your browser.
-							let minutes: any = date.getUTCMinutes()
-							let ampm = hours >= 12 ? 'pm' : 'am'
-							hours = hours % 12 ? hours : 12
-							minutes = minutes < 10 ? '0' + minutes : minutes
-							return minutes != '00'
-								? hours + ':' + minutes + ' ' + ampm
-								: hours + ' ' + ampm
-						} else if (time == '5D') {
-							return (
-								monthNames[date.getUTCMonth()] + ' ' + date.getUTCDate()
-							)
-						} else {
-							if (tickType == 2) {
-								return (
-									monthNames[date.getUTCMonth()] +
-									' ' +
-									date.getUTCDate()
-								)
-							}
-							return monthNames[date.getUTCMonth()]
-						}
-					}
+					tickMarkFormatter: (t: any, tickType: any) =>
+						formatPriceChartTicks(t, time, tickType)
 				}),
 				borderColor: 'rgba(197, 203, 206, 1)',
 				timeVisible: true,
@@ -148,19 +73,7 @@ export default function OverviewStockChart({
 
 		// Set the color based on the price change
 		// Positive is green, negative is red, zero is blue
-		let topColor = 'rgba(33, 150, 243, 0.56)'
-		let bottomColor = 'rgba(33, 150, 243, 0.04)'
-		let lineColor = 'rgba(33, 150, 243, 1)'
-		if (change > 0) {
-			topColor = 'rgba(4, 120, 87, 0.56)'
-			bottomColor = 'rgba(4, 120, 87, 0.04)'
-			lineColor = 'rgba(4, 120, 87, 1)'
-		}
-		if (change < 0) {
-			topColor = 'rgba(220, 38, 38, 0.56)'
-			bottomColor = 'rgba(220, 38, 38, 0.04)'
-			lineColor = 'rgba(220, 38, 38, 1)'
-		}
+		let [topColor, bottomColor, lineColor] = setPriceChartColor(change)
 
 		const max = Math.max(
 			...data.map(d => {
