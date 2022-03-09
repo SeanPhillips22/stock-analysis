@@ -1,15 +1,15 @@
-import { ForecastPages } from 'data/ForecastPages'
 import { Router } from 'next/router'
 import { useRef } from 'react'
 import { menuState } from 'state/menuState'
+import { Info } from 'types/Info'
 import { Tab } from './Tab'
 
 type Props = {
-	symbol: string
+	info: Info
 	hideChart: boolean
 }
 
-export function TabNavigation({ symbol, hideChart }: Props) {
+export function TabNavigation({ info, hideChart }: Props) {
 	const menuref = useRef<HTMLUListElement>(null)
 	const pos = menuState(state => state.pos)
 	const setPos = menuState(state => state.setPos)
@@ -27,15 +27,17 @@ export function TabNavigation({ symbol, hideChart }: Props) {
 	return (
 		<nav className="w-full border-b-2 border-blue-brand_sharp">
 			<ul className="navmenu" ref={menuref}>
-				<Tab symbol={symbol} title="Overview" append="" />
-				<Tab symbol={symbol} title="Financials" append="financials" />
-				<Tab symbol={symbol} title="Statistics" append="statistics" />
-				{ForecastPages.includes(symbol) && (
-					<Tab symbol={symbol} title="Forecast" append="forecast" />
+				<Tab symbol={info.symbol} title="Overview" append="" />
+				<Tab symbol={info.symbol} title="Financials" append="financials" />
+				<Tab symbol={info.symbol} title="Statistics" append="statistics" />
+				{!info.exceptions.hideForecast && (
+					<Tab symbol={info.symbol} title="Forecast" append="forecast" />
 				)}
-				<Tab symbol={symbol} title="Dividends" append="dividend" />
-				<Tab symbol={symbol} title="Profile" append="company" />
-				{!hideChart && <Tab symbol={symbol} title="Chart" append="chart" />}
+				<Tab symbol={info.symbol} title="Dividends" append="dividend" />
+				<Tab symbol={info.symbol} title="Profile" append="company" />
+				{!hideChart && (
+					<Tab symbol={info.symbol} title="Chart" append="chart" />
+				)}
 			</ul>
 		</nav>
 	)
