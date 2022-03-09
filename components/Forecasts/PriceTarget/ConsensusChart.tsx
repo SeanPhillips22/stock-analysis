@@ -44,7 +44,7 @@ export function ConsensusChart() {
 	}
 
 	return (
-		<div>
+		<div key={angle}>
 			<Doughnut
 				id="2"
 				data={{
