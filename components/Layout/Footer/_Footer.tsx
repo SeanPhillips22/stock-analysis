@@ -18,10 +18,10 @@ const navigation = {
 	]
 }
 
-export const Footer = () => {
+export function Footer() {
 	return (
 		<>
-			<footer className="footerbg clear-both bg-gray-800">
+			<footer className="footerbg clear-both">
 				<div className="mx-auto max-w-7xl px-5 pt-12 sm:px-6 lg:px-8 lg:pt-16 lg:pb-8">
 					<div className="xl:grid xl:grid-cols-3 xl:gap-8">
 						<div className="grid grid-cols-2 gap-8 xl:col-span-2">
