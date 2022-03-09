@@ -25,7 +25,7 @@ export function TableRowTitle({ title, styles, range, id }: Props) {
 			<TooltipChart
 				render={attrs => (
 					<div
-						className="z-20 h-[40vh] w-[96vw] border border-gray-200 bg-white p-2 md:h-[330px] md:w-[600px] md:py-2 md:px-3"
+						className="whitebg z-20 h-[40vh] w-[96vw] border border-gray-200 bg-white p-2 md:h-[330px] md:w-[600px] md:py-2 md:px-3"
 						tabIndex={-1}
 						{...attrs}
 					>

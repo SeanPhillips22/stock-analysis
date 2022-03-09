@@ -1,0 +1,34 @@
+/*
+* COLOR BACKUPS
+* Use hex colors as a backup on older browser versions to improve compatibility
+* Tailwind uses a color format which is not supported by older Safari browsers
+*/
+
+@layer base {
+	.bll {
+		@apply text-blue-link hover:text-gray-900;
+		color: #1e73ba;
+	}
+
+	.bll:hover {
+		color: #111827;
+	}
+
+	.herobg {
+		background-color: #f3f4f6;
+	}
+
+	.footerbg {
+		background-color: #1f2937;
+	}
+
+	.whitebg {
+		background-color: #ffffff;
+	}
+
+	.button-blue {
+		@apply bg-blue-brand_light text-white hover:bg-blue-brand_sharp;
+		color: #ffffff;
+		background-color: #3c74d4;
+	}
+}
