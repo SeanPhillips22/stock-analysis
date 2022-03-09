@@ -27,9 +27,11 @@ export default function OverviewStockChart({
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>
 
 	useEffect(() => {
+		let height = window?.innerWidth < 600 ? 240 : 300
+
 		const chart = createChart(ref.current, {
 			width: 650,
-			height: 300,
+			height: height,
 			layout: {
 				fontFamily:
 					"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
@@ -137,7 +139,8 @@ export default function OverviewStockChart({
 				return
 			}
 			const newRect = entries[0].contentRect
-			chart.applyOptions({ height: newRect.height, width: newRect.width })
+			let newHeight = window?.innerWidth < 600 ? 240 : 300
+			chart.applyOptions({ height: newHeight, width: newRect.width })
 			chart.timeScale().fitContent()
 		}).observe(ref.current)
 
