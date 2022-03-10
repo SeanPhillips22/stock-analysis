@@ -133,16 +133,18 @@ export default function OverviewStockChart({
 		areaSeries.setData(format)
 
 		chart.timeScale().fitContent()
-		//This object makes
-		new ResizeObserver(entries => {
-			if (entries.length === 0 || entries[0].target !== ref.current) {
-				return
-			}
-			const newRect = entries[0].contentRect
-			let newHeight = window?.innerWidth < 600 ? 240 : 300
-			chart.applyOptions({ height: newHeight, width: newRect.width })
-			chart.timeScale().fitContent()
-		}).observe(ref.current)
+		// This object makes the chart responsive
+		if (typeof window?.ResizeObserver !== undefined) {
+			new ResizeObserver(entries => {
+				if (entries.length === 0 || entries[0].target !== ref.current) {
+					return
+				}
+				const newRect = entries[0].contentRect
+				let newHeight = window?.innerWidth < 600 ? 240 : 300
+				chart.applyOptions({ height: newHeight, width: newRect.width })
+				chart.timeScale().fitContent()
+			}).observe(ref.current)
+		}
 
 		return () => {
 			chart.remove()
