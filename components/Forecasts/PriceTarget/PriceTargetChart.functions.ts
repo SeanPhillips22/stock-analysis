@@ -16,27 +16,31 @@ export function collisionOffset(coords: priceRects) {
 			coords.lowTop,
 			coords.lowBottom,
 			coords.avgTop,
-			coords.avgBottom
+			coords.avgBottom,
+			true
 		)
 
 		avoidCollisionOffsetHighAvg = compareTwoLabels(
 			coords.avgTop + avoidCollisonOffsetAvgLow * -1,
 			coords.avgBottom + avoidCollisonOffsetAvgLow * -1,
 			coords.highTop,
-			coords.highBottom
+			coords.highBottom,
+			true
 		)
 	} else {
 		avoidCollisionOffsetHighAvg = compareTwoLabels(
 			coords.highTop,
 			coords.highBottom,
 			coords.avgTop,
-			coords.avgBottom
+			coords.avgBottom,
+			false
 		)
 		avoidCollisonOffsetAvgLow = compareTwoLabels(
 			coords.avgTop + avoidCollisionOffsetHighAvg,
 			coords.avgBottom + avoidCollisionOffsetHighAvg,
 			coords.lowTop,
-			coords.lowBottom
+			coords.lowBottom,
+			false
 		)
 	}
 
@@ -91,14 +95,15 @@ function compareTwoLabels(
 	yTop: number,
 	yBottom: number,
 	yTop2: number,
-	yBottom2: number
+	yBottom2: number,
+	shiftLabelsUp: boolean
 ) {
 	const result = findCollision(yTop, yBottom, yTop2, yBottom2)
-
+	console.log(result)
 	if (result == 'none') return 0
-	if (result == 'topHit') {
-		return Math.abs(yBottom - yTop2)
-	} else return Math.abs(yTop - yBottom2)
+	if (shiftLabelsUp) {
+		return Math.abs(yBottom2 - yTop)
+	} else return Math.abs(yBottom - yTop2)
 }
 
 //y is the top of the rectangle, yy is the bottom.

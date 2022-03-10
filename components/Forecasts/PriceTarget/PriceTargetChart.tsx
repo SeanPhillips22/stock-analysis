@@ -55,17 +55,17 @@ export function PriceTargetChart() {
 
 	const highData = [
 		{ x: currentDate, y: currentPrice },
-		{ x: oneYearDate, y: high }
+		{ x: oneYearDate, y: 52 }
 	]
 
 	const avgData = [
 		{ x: currentDate, y: currentPrice },
-		{ x: oneYearDate, y: average }
+		{ x: oneYearDate, y: 42 }
 	]
 
 	const lowData = [
 		{ x: currentDate, y: currentPrice },
-		{ x: oneYearDate, y: low }
+		{ x: oneYearDate, y: 32 }
 	]
 
 	const timeAxis = useMemo(() => chart.map((item: any) => item.t), [chart])
