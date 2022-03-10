@@ -1,11 +1,20 @@
 import { timeParse } from 'd3-time-format'
 import * as React from 'react'
 import { IOHLCData } from './iOHLCData'
-import Axios from 'axios'
+import { getChartData } from 'functions/apis/callBackEnd'
+
 import { Unavailable } from 'components/Unavailable'
 
 const parseDate = timeParse('%Y-%m-%d')
 const parseDate1D5D = timeParse('%b %d, %Y %H:%M')
+
+const errorHandling = (error: any, setLoading: any) => {
+	console.error(
+		'Error: There was an error loading the data for the chart |',
+		error
+	)
+	setLoading(false)
+}
 
 const parseData = () => {
 	return (d: any) => {
@@ -25,7 +34,6 @@ const parseData = () => {
 		return d as IOHLCData
 	}
 }
-
 const parseData1D5D = () => {
 	return (d: any) => {
 		const date = parseDate1D5D(d.date)
@@ -85,6 +93,7 @@ interface WithOHLCDataProps {
 
 interface WithOHLCState {
 	data?: IOHLCData[]
+	abort: AbortController | undefined
 }
 
 export function withOHLCData() {
@@ -97,14 +106,23 @@ export function withOHLCData() {
 		> {
 			public constructor(props: Omit<TProps, 'data'>) {
 				super(props)
-
 				this.state = {
-					data: undefined
+					data: undefined,
+					abort: undefined
 				}
+			}
+			public componentDidMount() {
+				let { abort } = this.state
+				abort = new AbortController()
+				this.setState({ abort })
 			}
 
 			public componentDidUpdate(prevProps: any) {
-				let { data } = this.state
+				if (prevProps.loading != this.props.loading) {
+					return
+				}
+
+				let { data, abort } = this.state
 				let loading = this.props.setLoading
 
 				const newProps: any = this.props
@@ -112,22 +130,23 @@ export function withOHLCData() {
 				// Case where data is undefined because a component is already loaded.
 
 				// Case where user is switching from MAX to 1D/5D
+
 				if (
 					(prevProps.time == '1D' || prevProps.time == '5D') &&
 					newProps.time != '1D' &&
 					newProps.time != '5D'
 				) {
 					loading(true)
-					Axios.get(
-						`${
-							process.env.NEXT_PUBLIC_API_URL ||
-							'https://api.stockanalysis.com/wp-json/sa'
-						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&p=${
-							newProps.period
-						}&r=MAX`
+					getChartData(
+						abort,
+						newProps.stockSymbol,
+						newProps.stockType,
+						newProps.period,
+						'MAX',
+						undefined
 					)
 						.then(res => {
-							const forDateParse = res.data.map(fixDataHeaders)
+							const forDateParse = res.map(fixDataHeaders)
 							data = forDateParse.map(parseData())
 
 							this.setState({ data })
@@ -140,13 +159,11 @@ export function withOHLCData() {
 							}
 						})
 						.catch(error => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
+							errorHandling(error, this.props.setLoading)
+							if (typeof data != undefined) {
+								data = undefined
+								this.setState({ data })
+							}
 						})
 					// Case where user is switching from 1D/5D to MAX
 				} else if (
@@ -156,16 +173,17 @@ export function withOHLCData() {
 					data != undefined
 				) {
 					loading(true)
-					Axios.get(
-						`${
-							process.env.NEXT_PUBLIC_API_URL ||
-							'https://api.stockanalysis.com/wp-json/sa'
-						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${
-							newProps.time
-						}`
+
+					getChartData(
+						abort,
+						newProps.stockSymbol,
+						newProps.stockType,
+						undefined,
+						newProps.time,
+						undefined
 					)
 						.then(res => {
-							const forDateParse = res.data.map(fixDataHeaders1D5D)
+							const forDateParse = res.map(fixDataHeaders1D5D)
 							data = forDateParse.map(parseData1D5D())
 							this.setState({ data })
 
@@ -174,14 +192,11 @@ export function withOHLCData() {
 							}, 0)
 						})
 						.catch(error => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
+							errorHandling(error, this.props.setLoading)
+							if (typeof data != undefined) {
+								data = undefined
+								this.setState({ data })
+							}
 						})
 				}
 				// Case where using is switching between 1D and 5D
@@ -194,19 +209,20 @@ export function withOHLCData() {
 						data != undefined)
 				) {
 					loading(true)
-					Axios.get(
-						`${
-							process.env.NEXT_PUBLIC_API_URL ||
-							'https://api.stockanalysis.com/wp-json/sa'
-						}/chart?s=${newProps.stockSymbol}&t=${newProps.stockType}&r=${
-							newProps.time
-						}&f=candles`
+
+					getChartData(
+						abort,
+						newProps.stockSymbol,
+						newProps.stockType,
+						undefined,
+						newProps.time,
+						'candles'
 					)
 						.then(res => {
 							setTimeout(function () {
 								loading(false)
 							}, 0)
-							const forDateParse = res.data.map(fixDataHeaders1D5D)
+							const forDateParse = res.map(fixDataHeaders1D5D)
 							data = forDateParse.map(parseData1D5D())
 							this.setState({ data })
 							if (typeof data != 'undefined') {
@@ -214,14 +230,11 @@ export function withOHLCData() {
 							}
 						})
 						.catch(error => {
-							console.error(
-								'Error: There was an error loading the data for the chart |',
-								error
-							)
-							this.props.setLoading(false)
-							return (
-								<Unavailable message="Unable to load the data for this chart." />
-							)
+							errorHandling(error, this.props.setLoading)
+							if (typeof data != undefined) {
+								data = undefined
+								this.setState({ data })
+							}
 						})
 				}
 				//Case where Symbol or period or type has changed.
@@ -232,16 +245,16 @@ export function withOHLCData() {
 				) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
-						Axios.get(
-							`${
-								process.env.NEXT_PUBLIC_API_URL ||
-								'https://api.stockanalysis.com/wp-json/sa'
-							}/chart?s=${newProps.stockSymbol}&t=${
-								newProps.stockType
-							}&r=${newProps.time}`
+						getChartData(
+							abort,
+							newProps.stockSymbol,
+							newProps.stockType,
+							undefined,
+							newProps.time,
+							undefined
 						)
 							.then(res => {
-								const forDateParse = res.data.map(fixDataHeaders1D5D)
+								const forDateParse = res.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
 								this.setState({ data })
 
@@ -250,27 +263,24 @@ export function withOHLCData() {
 								}, 0)
 							})
 							.catch(error => {
-								console.error(
-									'Error: There was an error loading the data for the chart |',
-									error
-								)
-								this.props.setLoading(false)
-								return (
-									<Unavailable message="Unable to load the data for this chart." />
-								)
+								errorHandling(error, this.props.setLoading)
+								if (typeof data != undefined) {
+									data = undefined
+									this.setState({ data })
+								}
 							})
 					} else {
 						loading(true)
-						Axios.get(
-							`${
-								process.env.NEXT_PUBLIC_API_URL ||
-								'https://api.stockanalysis.com/wp-json/sa'
-							}/chart?s=${newProps.stockSymbol}&t=${
-								newProps.stockType
-							}&p=${newProps.period}&r=MAX`
+						getChartData(
+							abort,
+							newProps.stockSymbol,
+							newProps.stockType,
+							newProps.period,
+							'MAX',
+							undefined
 						)
 							.then(res => {
-								const forDateParse = res.data.map(fixDataHeaders)
+								const forDateParse = res.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
 								this.setState({ data })
 
@@ -282,29 +292,26 @@ export function withOHLCData() {
 								}
 							})
 							.catch(error => {
-								console.error(
-									'Error: There was an error loading the data for the chart |',
-									error
-								)
-								this.props.setLoading(false)
-								return (
-									<Unavailable message="Unable to load the data for this chart." />
-								)
+								errorHandling(error, this.props.setLoading)
+								if (typeof data != undefined) {
+									data = undefined
+									this.setState({ data })
+								}
 							})
 					}
 				} else if (data == undefined) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
-						Axios.get(
-							`${
-								process.env.NEXT_PUBLIC_API_URL ||
-								'https://api.stockanalysis.com/wp-json/sa'
-							}/chart?s=${newProps.stockSymbol}&t=${
-								newProps.stockType
-							}&r=${newProps.time}`
+						getChartData(
+							abort,
+							newProps.stockSymbol,
+							newProps.stockType,
+							undefined,
+							newProps.time,
+							undefined
 						)
 							.then(res => {
-								const forDateParse = res.data.map(fixDataHeaders1D5D)
+								const forDateParse = res.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
 								this.setState({ data })
 
@@ -313,27 +320,20 @@ export function withOHLCData() {
 								}, 0)
 							})
 							.catch(error => {
-								console.error(
-									'Error: There was an error loading the data for the chart |',
-									error
-								)
-								this.props.setLoading(false)
-								return (
-									<Unavailable message="Unable to load the data for this chart." />
-								)
+								errorHandling(error, this.props.setLoading)
 							})
 					} else {
 						loading(true)
-						Axios.get(
-							`${
-								process.env.NEXT_PUBLIC_API_URL ||
-								'https://api.stockanalysis.com/wp-json/sa'
-							}/chart?s=${newProps.stockSymbol}&t=${
-								newProps.stockType
-							}&p=${newProps.period}&r=MAX`
+						getChartData(
+							abort,
+							newProps.stockSymbol,
+							newProps.stockType,
+							newProps.period,
+							'MAX',
+							undefined
 						)
 							.then(res => {
-								const forDateParse = res.data.map(fixDataHeaders)
+								const forDateParse = res.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
 								this.setState({ data })
 
@@ -345,24 +345,24 @@ export function withOHLCData() {
 								}
 							})
 							.catch(error => {
-								console.error(
-									'Error: There was an error loading the data for the chart |',
-									error
-								)
-								this.props.setLoading(false)
-								return (
-									<Unavailable message="Unable to load the data for this chart." />
-								)
+								errorHandling(error, this.props.setLoading)
 							})
 					}
+				}
+			}
+			public componentWillUnmount() {
+				if (typeof this.state.abort != 'undefined') {
+					this.state.abort.abort()
 				}
 			}
 
 			public render() {
 				const { data } = this.state
 
-				if (data === undefined) {
-					return <div></div>
+				if (typeof data == 'undefined') {
+					return (
+						<Unavailable message="Unable to load the data for this chart." />
+					)
 				}
 
 				return (

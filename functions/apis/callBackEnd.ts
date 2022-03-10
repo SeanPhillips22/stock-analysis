@@ -45,6 +45,36 @@ export async function getStockFinancialsSSR(
 	return respondSSR(response)
 }
 
+export async function getChartData(
+	abortController: AbortController | undefined,
+	symbol: string, // this is the s parameter
+	type?: 'stocks' | 'etf', // this is the t parameter
+	period?: string, // this is the p parameter
+	time?: string, // this is the r parameter.
+	candles?: string // this is the f parameter
+) {
+	let response
+
+	if (!period && !candles) {
+		response = await getData(
+			`chart?s=${symbol}&t=${type}&r=${time}`,
+			abortController?.signal
+		)
+	} else if (!period) {
+		response = await getData(
+			`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`,
+			abortController?.signal
+		)
+	} else {
+		response = await getData(
+			`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`,
+			abortController?.signal
+		)
+	}
+
+	return response
+}
+
 export async function getPageDataFull(page: string, symbol: string) {
 	const url = `${page}?s=${symbol}&f=${PRO_KEY}`
 	const response = await getData(url)
