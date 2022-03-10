@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next/types'
+import { GetStaticProps } from 'next/types'
 import { StockTable } from 'components/StockTable/__StockTable'
 import { MarketsLayout } from 'components/Markets/_MarketsLayout'
 import { PageConfig } from 'types/PageConfig'
@@ -12,15 +12,15 @@ import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 // the page's config and settings
 const page: PageConfig = {
 	path: '/markets/active/',
-	pageTitle: 'Most Active Stocks',
-	active: 'active',
 	metaTitle: "Today's Most Active Stocks",
 	metaDescription:
-		'A list of the stocks with the highest trading volume today. See stock price, price changes, market cap and more.'
+		'A list of the stocks with the highest trading volume today. See stock price, price changes, market cap and more.',
+	heading: 'h1'
 }
 
 // the initial config for the select endpoint to fetch data
 const query: TableDynamic = {
+	index: 'stocks',
 	main: 'volume',
 	count: 20,
 	sort: [{ id: 'volume', desc: true }],
@@ -40,15 +40,12 @@ export default function ActivePage({ data, tradingTimestamps }: Props) {
 			<MarketsLayout>
 				<TableContextProvider
 					value={{
-						type: 'stocks',
 						title: 'Active Today',
 						tableId: 'active',
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
-								range: false,
 								results: true,
-								filter: true,
 								export: true,
 								columns: true
 							},
@@ -69,9 +66,8 @@ export default function ActivePage({ data, tradingTimestamps }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['tradingTimestamps']
-	const data = await getSelect(query, 'stocks', true, extras)
-	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
+	const data = await getSelect(query, true, extras)
 	return data
 }

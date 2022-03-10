@@ -55,21 +55,7 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 			<div className="mb-2 flex-row items-end justify-between px-1 sm:mb-1 sm:flex">
 				<h2 className="hh2 mb-0.5 sm:mb-2">Dividend History</h2>
 				<div className="hidden pb-0.5 sm:block">
-					<Export
-						buttons={[
-							{
-								title: 'Export to Excel',
-								type: 'xlsx',
-								restricted: true
-							},
-							{
-								title: 'Export to CSV',
-								type: 'csv',
-								restricted: true
-							}
-						]}
-						tableId="dividend-table"
-					/>
+					<Export tableId="dividend-table" />
 				</div>
 			</div>
 			<div className="overflow-x-auto">

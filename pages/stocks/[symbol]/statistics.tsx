@@ -7,7 +7,7 @@ import { getPageDataSSR } from 'functions/apis/callBackEnd'
 import { StatsWidget } from 'components/StatsWidget/_StatsWidget'
 import { Button } from 'components/Buttons/Button'
 import { MAP_STATISTICS } from 'data/financials/map_statistics'
-import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
+import { Sidebar1Wide } from 'components/Ads/AdSense/Sidebar1Wide'
 import { Mobile1 } from 'components/Ads/AdSense/Mobile1'
 
 type Props = {
@@ -170,6 +170,26 @@ export default function StatisticsPage({ info, data }: Props) {
 							data={data.dividends}
 							map={MAP_STATISTICS}
 						/>
+						<Button
+							text="Dividend Details"
+							url={`/stocks/${info.symbol}/dividend/`}
+						/>
+					</div>
+
+					<Sidebar1Wide key={url} />
+
+					<div>
+						<StatsWidget
+							title="Analyst Forecast"
+							data={data.forecast}
+							map={MAP_STATISTICS}
+						/>
+						{!info.exceptions.hideForecast && (
+							<Button
+								text="Forecast Details"
+								url={`/stocks/${info.symbol}/forecast/`}
+							/>
+						)}
 					</div>
 
 					<div>
@@ -179,7 +199,6 @@ export default function StatisticsPage({ info, data }: Props) {
 							map={MAP_STATISTICS}
 						/>
 					</div>
-					<Sidebar1 key={url} />
 				</div>
 			</div>
 		</Stock>

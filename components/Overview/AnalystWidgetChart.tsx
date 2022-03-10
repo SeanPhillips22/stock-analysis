@@ -19,30 +19,22 @@ ChartJS.register(
 	CategoryScale
 )
 
-import { Unavailable } from 'components/Unavailable'
+import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
 interface AnalystWidgetChartI {
 	ratings: {
-		strongsell: number
+		strongSell: number
 		sell: number
 		hold: number
 		buy: number
-		strongbuy: number
+		strongBuy: number
 	}
 }
 
 export function AnalystWidgetChart({ ratings }: AnalystWidgetChartI) {
-	if (
-		typeof window !== 'undefined' &&
-		typeof window.ResizeObserver === 'undefined'
-	) {
-		return (
-			<Unavailable
-				message="This chart does not work in your browser. Please update to the latest browser version."
-				small={true}
-				classes="mt-3"
-			/>
-		)
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
+		return <UnavailableSafari classes="mt-3" />
 	}
 
 	defaults.font.family =
@@ -57,18 +49,18 @@ export function AnalystWidgetChart({ ratings }: AnalystWidgetChartI) {
 					{
 						label: 'Analysts',
 						data: [
-							ratings.strongsell,
+							ratings.strongSell,
 							ratings.sell,
 							ratings.hold,
 							ratings.buy,
-							ratings.strongbuy
+							ratings.strongBuy
 						],
 						//@ts-ignore
 						backgroundColor: [
 							'#FF3333',
 							'#FF3333',
 							'#323232',
-							'#0B610B',
+							'#208a20',
 							'#0B610B'
 						]
 					}

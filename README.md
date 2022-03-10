@@ -35,31 +35,12 @@ You can easily download the code and run the site on your own computer by clonin
 3. Open Visual Studio Code. Click "File" and "Open Folder" -- then find the folder you created and click "Select Folder"
 4. Hit CMD+J or CTRL+J to open the terminal in VS Code
 5. Write this exact command and hit enter: `git clone https://github.com/stockanalysisdev/stock-analysis.git .` (make sure to include the period at the end)
-6. Write this command and hit enter: `npm install` (installs dependencies)
-7. Follow [Supabase Instructions](https://github.com/stockanalysisdev/stock-analysis#supabase-instructions) to to setup your backend and get values needed in `.env` file
-8. Write this command and hit enter: `npm run dev` (starts development server)
+6. Rename the file `env.local` to `.env.local` (adding a period at the front)
+7. Write this command and hit enter: `npm install`
+8. Write this command and hit enter: `npm run dev`
 9. You should now be able to open the site in your web browser with this URL: `http://localhost:3001`
 
-### Supabase Instructions
-
-Supabase is a service that we use on the back-end.
-
-**Here are the steps to set it up:**
-
--  Go to the [Subpabase website](https://app.supabase.io/)
--  Sign in with GitHub
--  Click on `Authorize Supabase`
--  Click on `New project`
--  Give it a name (for example: stock-analysis)
--  Enter a Database Password
--  For Region, you can leave it as default or select another region that is closest to you
--  Select **Free tier** Pricing Plan
--  Click on Create new project (will take a few minutes to complete setup)
--  Once created, under `Project Configuration`, copy URL and paste in `.env` for `NEXT_PUBLIC_SUPABASE_URL`
--  under `Project API keys`, copy `anon` `public` key and paste in `.env` for `NEXT_PUBLIC_SUPABASE_ANON_KEY`
--  You are done! Continue last steps in [How to start](https://github.com/stockanalysisdev/stock-analysis#how-to-start) section.
-
-Congrats! 🎉 You now have the site running locally on your own computer, with the site's code ready to edit from Visual Studio Code.
+Congrats! You now have the site running locally on your own computer, with the site's code ready to edit from Visual Studio Code.
 
 ## License
 

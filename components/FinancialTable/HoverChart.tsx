@@ -36,7 +36,8 @@ import {
 	countDecimals,
 	reducePrecisionFix
 } from './FinancialTable.functions'
-import { Unavailable } from 'components/Unavailable'
+import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
+import { dec0 } from 'functions/tables/formatTableCell'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -64,17 +65,9 @@ export const HoverChart = ({
 	statement,
 	showTTM
 }: Props) => {
-	if (
-		typeof window !== 'undefined' &&
-		typeof window.ResizeObserver === 'undefined'
-	) {
-		return (
-			<Unavailable
-				message="This chart does not work in your browser. Please update to the latest browser version."
-				small={true}
-				classes="whitespace-normal"
-			/>
-		)
+	// Chart.js causes critical errors on older Safari versions
+	if (isOldSafari()) {
+		return <UnavailableSafari classes="whitespace-normal" />
 	}
 
 	defaults.font.family =
@@ -261,9 +254,7 @@ export const HoverChart = ({
 						} else if (type === 'ratio') {
 							return `${val.toFixed(3)}`
 						} else if (!type || type === 'reduce_precision') {
-							return new Intl.NumberFormat('en-US', {
-								maximumFractionDigits: 0
-							}).format(val)
+							return dec0.format(val)
 						} else {
 							return val.toString()
 						}

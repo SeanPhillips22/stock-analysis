@@ -21,7 +21,7 @@ export function LiteYouTubeEmbed({ id, title }: Props) {
 	const videoTitle = title
 	const background = inView
 		? {
-				backgroundImage: `url(https://img.stockanalysis.com/vi/${videoId}/hqdefault.jpg)`
+				backgroundImage: `url(https://i.ytimg.com/vi/${videoId}/hqdefault.jpg)`
 		  }
 		: { backgroundColor: '#EEE' }
 

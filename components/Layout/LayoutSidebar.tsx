@@ -6,9 +6,10 @@ interface Props {
 	heading: string
 	children: ReactNode
 	url: string
+	list?: string[]
 }
 
-export const LayoutSidebar = ({ heading, children, url }: Props) => {
+export const LayoutSidebar = ({ heading, children, url, list }: Props) => {
 	return (
 		<Layout url={url}>
 			<div className="contain py-5 xs:py-6">
@@ -19,7 +20,7 @@ export const LayoutSidebar = ({ heading, children, url }: Props) => {
 				<div className="lg:right-sidebar mt-3 sm:mt-4 lg:mt-5">
 					<div className="">{children}</div>
 					<aside className="space-y-8 py-0">
-						<Sidebar url={url} />
+						<Sidebar url={url} list={list} />
 					</aside>
 				</div>
 			</div>

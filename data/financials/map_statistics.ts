@@ -609,6 +609,23 @@ export const MAP_STATISTICS = [
 			'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
 	},
 	{
+		id: 'buybackYield',
+		title: 'Buyback Yield / Dilution',
+		format: 'percentage',
+		tooltip:
+			'The buyback yield measures how much cash the company is returning to investors via share buybacks. A positive number indicates that the company is buying back shares. A negative number implies that the company is issuing shares and causing ownership dilution for shareholders.',
+		formula:
+			'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%'
+	},
+	{
+		id: 'shareholderYield',
+		title: 'Total Shareholder Yield',
+		format: 'percentage',
+		tooltip:
+			'The total shareholder yield is how much the company is returning to shareholders via dividends and share buybacks combined.',
+		formula: 'Shareholder Yield = Dividend Yield + Buyback Yield'
+	},
+	{
 		id: 'splitdate',
 		title: 'Last Split Date',
 		tooltip: 'The date when the company last performed a stock split.'
@@ -624,5 +641,28 @@ export const MAP_STATISTICS = [
 		title: 'Split Ratio',
 		tooltip:
 			'The split ratio, also called the split factor, is the ratio in which the amount of shares changes because of the stock split.'
+	},
+	{
+		id: 'priceTarget',
+		title: 'Price Target',
+		tooltip:
+			'The average 12-month price target forecast predicted by stock analysts.'
+	},
+	{
+		id: 'priceTargetChange',
+		title: 'Price Target Difference',
+		tooltip:
+			'The difference between the price target forecast and the current price, expressed as a percentage.'
+	},
+	{
+		id: 'analystRatings',
+		title: 'Analyst Consensus',
+		tooltip: 'The average rating of analysts for the stock.'
+	},
+	{
+		id: 'analystCount',
+		title: 'Analyst Count',
+		tooltip:
+			'The number of analysts that have provided price targets and ratings for this stock.'
 	}
 ]

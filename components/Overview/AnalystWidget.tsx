@@ -1,3 +1,5 @@
+import { Button } from 'components/Buttons/Button'
+import { Info } from 'types/Info'
 import { Overview } from 'types/Overview'
 import { AnalystWidgetChart } from './AnalystWidgetChart'
 
@@ -41,7 +43,7 @@ function AnalystConsensus({ consensus }: { consensus: string }) {
 	switch (consensus) {
 		case 'Buy':
 		case 'Strong Buy':
-			return <span className="font-bold text-green-700">{consensus}</span>
+			return <span className="font-bold text-green-800">{consensus}</span>
 
 		case 'Underweight':
 		case 'Sell':
@@ -52,10 +54,16 @@ function AnalystConsensus({ consensus }: { consensus: string }) {
 	}
 }
 
-export const AnalystWidget = ({ data }: { data: Overview }) => {
+export const AnalystWidget = ({
+	info,
+	data
+}: {
+	info: Info
+	data: Overview
+}) => {
 	if (
 		typeof data.analystTarget === 'undefined' ||
-		data.analystTarget[0] === '$0' ||
+		data.analystTarget[0] === '0' ||
 		data.analysts === 'n/a'
 	) {
 		return null
@@ -83,6 +91,12 @@ export const AnalystWidget = ({ data }: { data: Overview }) => {
 					<AnalystWidgetChart ratings={ratings} />
 				</div>
 			</div>
+			{!info.exceptions.hideForecast && (
+				<Button
+					url={`/stocks/${info.symbol}/forecast/`}
+					text="Forecast Details"
+				/>
+			)}
 		</div>
 	)
 }

@@ -1,3 +1,4 @@
+import { usePageContext } from 'components/Markets/PageContext'
 import { useTableContext } from '../TableContext'
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
 export function TableTitle({ title, tableId }: Props) {
 	const { dynamic } = useTableContext()
 	const { main, sortDirection } = dynamic
+	const { page } = usePageContext()
 
 	let printTitle = title
 
@@ -23,5 +25,5 @@ export function TableTitle({ title, tableId }: Props) {
 		printTitle = printTitle.replace('Gainers', 'Losers')
 	}
 
-	return <h2>{printTitle}</h2>
+	return page?.heading === 'h1' ? <h1>{printTitle}</h1> : <h2>{printTitle}</h2>
 }

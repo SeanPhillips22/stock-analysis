@@ -39,7 +39,7 @@ export const DividendChart = ({ data, options, ticker }: Props) => {
 		setY2(data.growthTTM)
 	}
 
-	if (data === null || data.amount.length === 0) {
+	if (data === null || data.amount.length < 2) {
 		return null
 	}
 

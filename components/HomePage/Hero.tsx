@@ -10,7 +10,7 @@ type Trending = {
 export function Hero({ trending }: { trending: Trending[] }) {
 	return (
 		<>
-			<section className="home-hero border-b border-gray-200 bg-gray-100 py-12 px-4 shadow-sm md:py-24 lg:py-40 landscape:border-t-2 landscape:md:border-t-0">
+			<section className="home-hero herobg border-b border-gray-200 px-4 pb-12 pt-20 shadow-sm md:pt-32 md:pb-24 lg:pt-44 lg:pb-40 landscape:border-t-2 landscape:md:border-t-0">
 				<div className="mx-auto max-w-[850px] text-center">
 					<h1 className="mb-5 text-2xl font-bold xs:text-3xl md:text-4xl lg:mb-7 lg:text-[42px]">
 						Search for a stock to start your analysis

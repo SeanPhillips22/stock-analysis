@@ -12,10 +12,7 @@ export default function StockHeading({ info }: { info: Info }) {
 			<Title info={info} />
 			<StockQuote info={info} />
 			{info.type === 'stocks' ? (
-				<TabNavigation
-					symbol={info.symbol}
-					hideChart={info.exceptions.hideChart}
-				/>
+				<TabNavigation info={info} hideChart={info.exceptions.hideChart} />
 			) : (
 				<TabNavigationETF symbol={info.symbol} />
 			)}

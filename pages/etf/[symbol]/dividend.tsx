@@ -44,6 +44,7 @@ const Dividend = ({ info, data, news }: Props) => {
 							<HistoryTable rawdata={data.history} />
 						)}
 						<DividendChart
+							key={url}
 							data={data.chartData}
 							options={data.chartOptions}
 							ticker={info.ticker}

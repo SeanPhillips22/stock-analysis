@@ -84,7 +84,7 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>52-Week High</td>
-					<td className={cssCellRight}>{q?.l52 || 'n/a'}</td>
+					<td className={cssCellRight}>{q?.h52 || 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Beta</td>

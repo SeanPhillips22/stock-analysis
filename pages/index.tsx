@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { SEO } from 'components/SEO'
 import { Hero } from 'components/HomePage/Hero'
 import { Movers } from 'components/HomePage/Movers'
@@ -68,28 +68,28 @@ export default function FrontPage({ data }: FrontPageProps) {
 			/>
 			<Layout fullWidth={true} url="/">
 				<Hero trending={data.trending} />
-				<Movers
-					date={data.date}
-					marketStatus={data.marketStatus}
-					gainers={data.gainers}
-					losers={data.losers}
-				/>
-				<div className="mx-auto flex flex-col space-y-6 lg:grid lg:max-w-[1200px] lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:px-5">
-					<LatestNews news={data.news} />
-					<IPOwidgets
-						recent={data.recentIpos}
-						upcoming={data.ipoCalendar}
+				<div className="space-y-6 pt-6 pb-3 md:space-y-8 md:pt-8 lg:pt-10">
+					<Movers
+						date={data.date}
+						marketStatus={data.marketStatus}
+						gainers={data.gainers}
+						losers={data.losers}
 					/>
+					<div className="mx-auto flex flex-col space-y-6 md:space-y-8 lg:grid lg:max-w-[1200px] lg:grid-cols-3 lg:justify-evenly lg:gap-8 lg:space-y-0 lg:px-5">
+						<LatestNews news={data.news} />
+						<IPOwidgets
+							recent={data.recentIpos}
+							upcoming={data.ipoCalendar}
+						/>
+					</div>
 				</div>
 			</Layout>
 		</>
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const data = await getHomePageData()
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

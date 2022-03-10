@@ -14,7 +14,7 @@ export default function Restricted({ title, type }: ExportItemProps) {
 
 	return (
 		<div
-			className="dd-option"
+			className="dd"
 			onClick={() => router.push('/pro/')}
 			title="This feature is available for Pro members."
 			id={id}

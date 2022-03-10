@@ -50,17 +50,7 @@ export function ActionsControls({
 				{setColumnFilter && (
 					<SplitsFilter setColumnFilter={setColumnFilter} />
 				)}
-				<Export
-					buttons={[
-						{
-							title: 'Export to Excel',
-							type: 'xlsx',
-							restricted: true
-						},
-						{ title: 'Export to CSV', type: 'csv', restricted: true }
-					]}
-					tableId={tableId}
-				/>
+				<Export tableId={tableId} />
 			</div>
 		</div>
 	)

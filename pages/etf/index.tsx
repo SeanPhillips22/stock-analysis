@@ -41,10 +41,14 @@ export default function StocksIndexPage({ stocks }: Props) {
 	]
 
 	return (
-		<LayoutSidebar heading="All ETFs" url="/etf/">
+		<LayoutSidebar
+			heading="All ETF Symbols"
+			url="/etf/"
+			list={['pro', 'ipoCalendar', 'etfScreener', 'marketMovers']}
+		>
 			<SEO
-				title="List of ETF Symbols"
-				description="An overview of the ETF symbols currently listed on the site. Explore the ETF pages to learn about the fund’s price history, key information and more."
+				title="List of All ETF Ticker Symbols"
+				description="An overview of all the ETF symbols listed. Explore the ETF pages to learn about the fund’s price history, holdings, dividends and more."
 				canonical="/etf/"
 			/>
 			<SymbolTable title="ETFs" columndata={columns} rowdata={stocks} />
@@ -58,7 +62,6 @@ export const getStaticProps: GetStaticProps = async () => {
 	return {
 		props: {
 			stocks: etfs
-		},
-		revalidate: 6 * 60 * 60
+		}
 	}
 }

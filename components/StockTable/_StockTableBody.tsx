@@ -1,4 +1,4 @@
-import { SortObject, SortProps } from 'components/StockScreener/screener.types'
+import { SortObject, SortProps } from 'components/Screener/screener.types'
 import { HeaderCell } from 'components/Tables/HeaderCell'
 import { useSort } from 'hooks/useSort'
 import {
@@ -88,6 +88,13 @@ export function StockTableBody({
 										let { format, css } = cellProps
 										let value = cell.value
 										let uniqueKey = `${i}-${cell.column.id}-${ii}`
+										if (
+											!css &&
+											format !== 'string' &&
+											format !== 'formatDate' &&
+											format !== 'linkSymbol'
+										)
+											css = 'tr'
 
 										return (
 											<td key={uniqueKey} className={css}>

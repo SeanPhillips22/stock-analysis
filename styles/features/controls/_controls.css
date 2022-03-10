@@ -13,21 +13,22 @@
 
 	/* when the controls are is split into groups -- title group and button group */
 	.controls.groups {
-		@apply block space-x-0 border-0 pt-0 pb-1.5 md:flex md:space-x-6 md:border-t md:py-2;
+		@apply block space-x-0 border-0 py-0 md:flex md:space-x-6 md:border-t md:py-2;
 	}
 
+	.controls h1,
 	.controls h2 {
 		@apply whitespace-nowrap text-xl font-semibold bp:text-2xl;
 	}
 
 	/* The div that contains the title and timestamp */
 	.controls .title-group {
-		@apply mr-auto mb-1.5 flex items-end justify-between border-b border-gray-200 pb-1.5 md:mb-0 md:space-x-4 md:border-0 md:pb-0;
+		@apply mr-auto flex items-end justify-between pb-1 md:space-x-4 md:border-0 md:pb-0;
 	}
 
 	/* The timestamp in the controls area */
 	.controls .controls-timestamp {
-		@apply mb-0 whitespace-nowrap text-sm font-semibold text-gray-600 md:mb-1;
+		@apply mb-0 ml-3 whitespace-nowrap text-sm font-semibold text-gray-600 md:ml-0 md:mb-1;
 	}
 
 	.controls-timestamp span {
@@ -35,7 +36,32 @@
 	}
 
 	.controls .btn-group {
-		@apply flex justify-between md:ml-auto md:space-x-2 lg:space-x-6;
+		@apply flex justify-between border-t border-gray-200 py-1.5 md:ml-auto md:space-x-2 md:border-0 md:py-0 lg:space-x-6;
+	}
+
+	/* Hide, but only on mobile */
+	.controls .btn-group.hidem {
+		@apply hidden md:flex;
+	}
+
+	.controls.fallback {
+		@apply block space-x-0 border-0 py-0;
+	}
+
+	.controls.fallback h2 {
+		@apply mb-2 text-[1.4rem] font-semibold text-gray-800;
+	}
+
+	.controls.fallback p {
+		@apply text-lg text-gray-900;
+	}
+
+	.toggle {
+		@apply ml-auto block md:hidden;
+	}
+
+	.toggle-icon {
+		@apply h-8 w-8 text-gray-800;
 	}
 
 	.controls-btn {
@@ -72,11 +98,19 @@
 		@apply min-w-[220px];
 	}
 
-	.dd-option {
+	/* When the dropdown is all the way to the left on mobile
+	add this class so that it expands from the left side instead of the right
+	so that it doesn't overflow out of the screen */
+	.dropdown.leftmost {
+		@apply left-0 md:left-auto;
+	}
+
+	/* Dropdown item */
+	.dd {
 		@apply flex cursor-pointer items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
 	}
 
-	.dd-option.active {
+	.dd.active {
 		@apply bg-gray-100;
 	}
 
@@ -88,11 +122,12 @@
 		@apply ml-3;
 	}
 
-	.controls-export {
-		@apply hidden md:block;
+	#calendar .controls {
+		@apply px-0;
 	}
 
-	.ipos-recent .controls-export {
-		@apply block;
+	/* Reduce h2 size on IPO calendar page */
+	#calendar .controls h2 {
+		@apply bp:text-[1.4rem];
 	}
 }

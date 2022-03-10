@@ -5,52 +5,43 @@ import {
 	extractTextFromHTML,
 	removeNanValues
 } from './export.functions'
+import { Menu } from '@headlessui/react'
 
 interface Props {
 	title: string
 	type: 'csv' | 'xlsx'
 	data: any
+	tableId?: string
 	fileName?: string
-	returnData?: any
+	bulkData?: any
 }
 
 export default function Download({
 	title,
 	type,
 	data,
+	tableId,
 	fileName,
-	returnData
+	bulkData
 }: Props) {
 	const { path } = useLayoutContext()
 
-	let fn = fileName
+	let name = fileName
 		? fileName
 		: `${path.one}${path.two ? '-' + path.two : ''}${
 				path.three ? '-' + path.three : ''
 		  }`
 
-	let returnArray: any
+	let returnArray: any[] = []
 
-	if (title === 'Bulk Export') {
-		returnArray = returnData
-		fn = `${path.two}-financials`
-	} else if (data === 'financial-table') {
-		returnArray = [
-			{
-				name: path.two?.toUpperCase() || 'Export',
-				from: { table: data },
-				fixValue: extractFinancialValues
-			}
-		]
-	} else if (typeof data === 'string') {
-		returnArray = [
-			{
-				name: 'Export',
-				from: { table: data },
-				fixValue: extractTextFromHTML
-			}
-		]
-	} else {
+	//* Bulk Export
+	if (bulkData) {
+		returnArray = bulkData
+		name = `${path.two}-financials`
+	}
+
+	//* Array export
+	else if (data) {
 		returnArray = [
 			{
 				name: 'Export',
@@ -60,11 +51,23 @@ export default function Download({
 		]
 	}
 
+	//* Table Export
+	else if (tableId) {
+		let isFinancial = tableId === 'financial-table'
+		returnArray = [
+			{
+				name: isFinancial ? path.two?.toUpperCase() : 'Export',
+				from: { table: tableId },
+				fixValue: isFinancial ? extractFinancialValues : extractTextFromHTML
+			}
+		]
+	}
+
 	function download(type: 'csv' | 'xlsx') {
 		return ExcellentExport.convert(
 			{
 				openAsDownload: true,
-				filename: fn,
+				filename: name,
 				format: type
 			},
 			returnArray
@@ -72,13 +75,15 @@ export default function Download({
 	}
 
 	return (
-		<div
-			className="dd-option"
-			onClick={() => {
-				download(type)
-			}}
-		>
-			{title}
-		</div>
+		<Menu.Item>
+			<div
+				className="dd"
+				onClick={() => {
+					download(type)
+				}}
+			>
+				{title}
+			</div>
+		</Menu.Item>
 	)
 }

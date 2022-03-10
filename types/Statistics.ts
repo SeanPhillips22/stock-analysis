@@ -15,6 +15,7 @@ export interface Statistics {
 	margins: StatisticType
 	dividends: StatisticType
 	splits: StatisticType
+	forecast: StatisticType
 }
 
 export interface StatisticType {

@@ -1,19 +1,17 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { News } from 'types/News'
-import { IpoUpcoming, IpoRecent } from 'types/Ipos'
 import { SEO } from 'components/SEO'
 import { getIpoData } from 'functions/apis/callBackEnd'
 import { IPONavigation } from 'components/IPOs/IPONavigation/_IPONavigation'
 import { NewsFeed } from 'components/News/_NewsFeed'
-import { CalendarTableMin } from 'components/IPOs/CalendarTableMin'
-import { RecentTableMin } from 'components/IPOs/RecentTableMin'
 import { Sidebar1 } from 'components/Ads/AdSense/Sidebar1'
 import { Layout } from 'components/Layout/_Layout'
+import { SidebarTable, SidebarTableProps } from 'components/IPOs/SidebarTable'
 
 interface Props {
 	data: News[]
-	upcoming: IpoUpcoming[]
-	recent: IpoRecent[]
+	upcoming: SidebarTableProps
+	recent: SidebarTableProps
 }
 
 export const IpoNews = ({ data, upcoming, recent }: Props) => {
@@ -37,9 +35,19 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 						<NewsFeed data={data} related="Stocks" />
 					</div>
 					<aside className="contain sm:uncontain flex flex-col space-y-7 pt-6 lg:space-y-10">
-						<CalendarTableMin upcoming={upcoming} />
+						<SidebarTable
+							title="Upcoming IPOs"
+							btnTitle="Full IPO Calendar"
+							btnUrl="/ipos/calendar/"
+							data={upcoming}
+						/>
 						<Sidebar1 key={url} />
-						<RecentTableMin recent={recent} />
+						<SidebarTable
+							title="Latest IPOs"
+							btnTitle="All Recent IPOs"
+							btnUrl="/ipos/"
+							data={recent}
+						/>
 					</aside>
 				</div>
 			</Layout>
@@ -49,10 +57,8 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 
 export default IpoNews
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const { data, upcoming, recent } = await getIpoData('news')
-
-	res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=60')
 
 	return {
 		props: {

@@ -1,5 +1,8 @@
-import { SortObject } from 'components/StockScreener/screener.types'
+import { SortObject } from 'components/Screener/screener.types'
 import { DataId } from 'types/DataId'
+
+// Create a type that is an array of objects with keys as DataID
+export type TableData = { [key in DataId]: any }[]
 
 // The table's fixed properties
 export type TableFixed = {
@@ -18,10 +21,23 @@ export type TableFixed = {
 	columnOptions?: DataId[] // The columns available to select
 	excludeColumns?: DataId[] // Columns to exclude
 	columnOrder?: DataId[] // The order of the columns
+
+	// Fallback if no data is found
+	fallback?: {
+		title: string
+		text: string
+	}
+
+	// Other options to customize the table
+	other?: {
+		showNumberColumn?: boolean // Show the number column
+	}
 }
 
 // Dynamic data that becomes state and is used to modify the table
 export type TableDynamic = {
+	index: IndexTypes // The index type, more specific is faster
+
 	main: DataId // The main column to sort by
 
 	count?: number // The number of symbols to show -- if empty, show all
@@ -34,4 +50,9 @@ export type TableDynamic = {
 	filters?: string[] // The filters to apply
 
 	fetched?: boolean // Whether the original data has been fetched
+
+	showOnMobile?: boolean // Whether to show the controls on mobile
 }
+
+// The stock index type (more specific is faster)
+export type IndexTypes = 'stocks' | 'etf' | 'histip' | 'futip'

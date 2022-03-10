@@ -8,7 +8,10 @@ type Props = {
 	children: React.ReactNode
 	hoverTitle?: string
 	id?: string
-	classes?: string
+	classes?: string // Applies to the dropdown itself
+	menuClasses?: string
+	btnClasses?: string
+	icnClasses?: string
 	active?: boolean // if non-default is selected
 }
 
@@ -18,16 +21,22 @@ export function Dropdown({
 	hoverTitle,
 	id,
 	classes,
+	menuClasses = '',
+	btnClasses = '',
+	icnClasses = '',
 	active
 }: Props) {
 	return (
-		<Menu as="div" className="controls-menu" id={id}>
+		<Menu as="div" className={cn('controls-menu', menuClasses)} id={id}>
 			<Menu.Button
-				className={cn('controls-btn', active ? 'active' : '')}
+				className={cn('controls-btn', active ? 'active' : '', btnClasses)}
 				title={hoverTitle}
 			>
 				{title}
-				<ChevronDownIcon className="controls-icon" aria-hidden="true" />
+				<ChevronDownIcon
+					className={cn('controls-icon', icnClasses)}
+					aria-hidden="true"
+				/>
 			</Menu.Button>
 
 			<Transition

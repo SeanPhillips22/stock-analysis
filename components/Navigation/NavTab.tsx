@@ -1,16 +1,18 @@
+import { tabActive } from 'functions/helpers/tabActive'
 import Link from 'next/link'
 
 type Props = {
 	url: string
+	path: string
 	title: string
-	css: 'active' | 'inactive'
+	lvl?: number
 }
 
-export function NavTab({ url, title, css }: Props) {
+export function NavTab({ url, title, path, lvl }: Props) {
 	return (
 		<li>
 			<Link href={url} prefetch={false}>
-				<a data-title={title} className={css}>
+				<a data-title={title} className={tabActive(path, url, lvl)}>
 					{title}
 				</a>
 			</Link>

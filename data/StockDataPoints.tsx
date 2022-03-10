@@ -1,11 +1,12 @@
 import { DataId } from 'types/DataId'
-import { FormatFunction, IndexType } from 'types/Tables'
+import { FormatFunction } from 'types/Tables'
 import {
 	numberAbsolute,
 	percentage,
 	dateSort,
 	stringIgnoreCase
-} from 'components/StockScreener/functions/sort/sortFunctions'
+} from 'components/Screener/functions/sort/sortFunctions'
+import { IndexTypes } from 'components/StockTable/TableTypes'
 
 type SymbolType = 'stocks' | 'ipo' | 'etf'
 
@@ -24,7 +25,7 @@ type Props = {
 }
 
 // Get a list of data point IDs to use for a table
-export function getDataPointsArray(type: IndexType, exclude?: DataId[]) {
+export function getDataPointsArray(type: IndexTypes, exclude?: DataId[]) {
 	// get all the matching IDs from the DataPoints array of objects
 	let ids = Object.values(DataPoints)
 		.filter(f => !f.only || f.only === type)
@@ -50,13 +51,16 @@ export const DataPoints: Props = {
 		sort: stringIgnoreCase,
 		css: 'sl'
 	},
-	marketCap: { id: 'marketCap', name: 'Market Cap', format: 'abbreviate' },
+	marketCap: {
+		id: 'marketCap',
+		name: 'Market Cap',
+		format: 'abbreviate'
+	},
 	price: {
 		id: 'price',
 		name: 'Stock Price',
 		colName: 'Price',
-		format: 'format2dec',
-		css: 'tr'
+		format: 'format2dec'
 	},
 	chg: {
 		id: 'chg',
@@ -71,7 +75,7 @@ export const DataPoints: Props = {
 		format: 'colorPercentage',
 		sort: numberAbsolute
 	},
-	volume: { id: 'volume', name: 'Volume', format: 'integer', css: 'tr' },
+	volume: { id: 'volume', name: 'Volume', format: 'integer' },
 	close: {
 		id: 'close',
 		name: 'Previous Close',
@@ -82,15 +86,13 @@ export const DataPoints: Props = {
 		id: 'premarketPrice',
 		name: 'Premarket Price',
 		colName: 'Price',
-		format: 'format2dec',
-		css: 'tr'
+		format: 'format2dec'
 	},
 	premarketChange: {
 		id: 'premarketChange',
 		name: 'Premarket Change',
 		colName: 'Change',
-		format: 'format2dec',
-		css: 'tr'
+		format: 'format2dec'
 	},
 	premarketChangePercent: {
 		id: 'premarketChangePercent',
@@ -106,8 +108,16 @@ export const DataPoints: Props = {
 		format: 'abbreviate'
 	},
 	industry: { id: 'industry', name: 'Industry', format: 'string' },
-	peRatio: { id: 'peRatio', name: 'PE Ratio', format: 'format2dec' },
-	peForward: { id: 'peForward', name: 'Forward PE', format: 'format2dec' },
+	peRatio: {
+		id: 'peRatio',
+		name: 'PE Ratio',
+		format: 'format2dec'
+	},
+	peForward: {
+		id: 'peForward',
+		name: 'Forward PE',
+		format: 'format2dec'
+	},
 	exchange: { id: 'exchange', name: 'Exchange', format: 'string' },
 	dividendYield: {
 		id: 'dividendYield',
@@ -180,7 +190,11 @@ export const DataPoints: Props = {
 		format: 'colorPercentage'
 	},
 	country: { id: 'country', name: 'Country', format: 'string' },
-	employees: { id: 'employees', name: 'Employees', format: 'integer' },
+	employees: {
+		id: 'employees',
+		name: 'Employees',
+		format: 'integer'
+	},
 	founded: { id: 'founded', name: 'Founded', format: 'string' },
 	/* IPO INFO */
 	ipoDate: {
@@ -189,18 +203,17 @@ export const DataPoints: Props = {
 		format: 'formatDate',
 		sort: dateSort
 	},
+
 	ipp: {
 		id: 'ipp',
 		name: 'IPO Price',
-		format: 'price',
-		css: 'tr'
+		format: 'price'
 	},
 	ippc: {
 		id: 'ippc',
 		name: 'Current Price',
 		colName: 'Current',
-		format: 'price',
-		css: 'tr'
+		format: 'price'
 	},
 	ipr: {
 		id: 'ipr',
@@ -231,6 +244,14 @@ export const DataPoints: Props = {
 		colName: 'Return (Open)',
 		format: 'colorPercentage'
 	},
+	ipoPriceRange: {
+		id: 'ipoPriceRange',
+		name: 'IPO Price Range',
+		colName: 'Price Range',
+		format: 'stringright',
+		only: 'ipo'
+	},
+	isSpac: { id: 'isSpac', name: 'Is SPAC' },
 	revenue: { id: 'revenue', name: 'Revenue', format: 'abbreviate' },
 	revenueGrowth: {
 		id: 'revenueGrowth',
@@ -266,7 +287,11 @@ export const DataPoints: Props = {
 		colName: 'OpInc. Growth',
 		format: 'formatPercentage'
 	},
-	netIncome: { id: 'netIncome', name: 'Net Income', format: 'abbreviate' },
+	netIncome: {
+		id: 'netIncome',
+		name: 'Net Income',
+		format: 'abbreviate'
+	},
 	netIncomeGrowth: {
 		id: 'netIncomeGrowth',
 		name: 'NetInc. Growth',
@@ -329,7 +354,11 @@ export const DataPoints: Props = {
 	assets: { id: 'assets', name: 'Assets', format: 'abbreviate' },
 	cash: { id: 'cash', name: 'Total Cash', format: 'abbreviate' },
 	debt: { id: 'debt', name: 'Total Debt', format: 'abbreviate' },
-	netCash: { id: 'netCash', name: 'Net Cash / Debt', format: 'abbreviate' },
+	netCash: {
+		id: 'netCash',
+		name: 'Net Cash / Debt',
+		format: 'abbreviate'
+	},
 	netCashGrowth: {
 		id: 'netCashGrowth',
 		name: 'Net Cash Growth',
@@ -340,6 +369,11 @@ export const DataPoints: Props = {
 		name: 'Net Cash / Market Cap',
 		colName: 'Cash / M.Cap',
 		format: 'formatPercentage'
+	},
+	liabilities: {
+		id: 'liabilities',
+		name: 'Liabilities',
+		format: 'abbreviate'
 	},
 	grossMargin: {
 		id: 'grossMargin',
@@ -372,13 +406,41 @@ export const DataPoints: Props = {
 		name: 'EBIT Margin',
 		format: 'formatPercentage'
 	},
-	psRatio: { id: 'psRatio', name: 'PS Ratio', format: 'format2dec' },
-	pbRatio: { id: 'pbRatio', name: 'PB Ratio', format: 'format2dec' },
-	pFcfRatio: { id: 'pFcfRatio', name: 'P/FCF Ratio', format: 'format2dec' },
-	pegRatio: { id: 'pegRatio', name: 'PEG Ratio', format: 'format2dec' },
-	evSales: { id: 'evSales', name: 'EV/Sales', format: 'format2dec' },
-	evEarnings: { id: 'evEarnings', name: 'EV/Earnings', format: 'format2dec' },
-	evEbitda: { id: 'evEbitda', name: 'EV/EBITDA', format: 'format2dec' },
+	psRatio: {
+		id: 'psRatio',
+		name: 'PS Ratio',
+		format: 'format2dec'
+	},
+	pbRatio: {
+		id: 'pbRatio',
+		name: 'PB Ratio',
+		format: 'format2dec'
+	},
+	pFcfRatio: {
+		id: 'pFcfRatio',
+		name: 'P/FCF Ratio',
+		format: 'format2dec'
+	},
+	pegRatio: {
+		id: 'pegRatio',
+		name: 'PEG Ratio',
+		format: 'format2dec'
+	},
+	evSales: {
+		id: 'evSales',
+		name: 'EV/Sales',
+		format: 'format2dec'
+	},
+	evEarnings: {
+		id: 'evEarnings',
+		name: 'EV/Earnings',
+		format: 'format2dec'
+	},
+	evEbitda: {
+		id: 'evEbitda',
+		name: 'EV/EBITDA',
+		format: 'format2dec'
+	},
 	evEbit: { id: 'evEbit', name: 'EV/EBIT', format: 'format2dec' },
 	evFcf: { id: 'evFcf', name: 'EV/FCF', format: 'format2dec' },
 	earningsYield: {
@@ -386,7 +448,11 @@ export const DataPoints: Props = {
 		name: 'Earnings Yield',
 		format: 'formatPercentage'
 	},
-	fcfYield: { id: 'fcfYield', name: 'FCF Yield', format: 'formatPercentage' },
+	fcfYield: {
+		id: 'fcfYield',
+		name: 'FCF Yield',
+		format: 'formatPercentage'
+	},
 	dps: { id: 'dps', name: 'Dividend ($)', format: 'format2dec' },
 	dividendGrowth: {
 		id: 'dividendGrowth',
@@ -433,8 +499,16 @@ export const DataPoints: Props = {
 		name: 'Short % Shares',
 		format: 'formatPercentage'
 	},
-	shortRatio: { id: 'shortRatio', name: 'Short Ratio', format: 'format2dec' },
-	sharesOut: { id: 'sharesOut', name: 'Shares Out', format: 'abbreviate' },
+	shortRatio: {
+		id: 'shortRatio',
+		name: 'Short Ratio',
+		format: 'format2dec'
+	},
+	sharesOut: {
+		id: 'sharesOut',
+		name: 'Shares Out',
+		format: 'abbreviate'
+	},
 	float: { id: 'float', name: 'Float', format: 'abbreviate' },
 	sharesYoY: {
 		id: 'sharesYoY',
@@ -510,7 +584,11 @@ export const DataPoints: Props = {
 		name: 'Current Ratio',
 		format: 'format2dec'
 	},
-	quickRatio: { id: 'quickRatio', name: 'Quick Ratio', format: 'format2dec' },
+	quickRatio: {
+		id: 'quickRatio',
+		name: 'Quick Ratio',
+		format: 'format2dec'
+	},
 	debtEquity: {
 		id: 'debtEquity',
 		name: 'Debt / Equity',
@@ -521,7 +599,11 @@ export const DataPoints: Props = {
 		name: 'Debt / EBITDA',
 		format: 'format2dec'
 	},
-	debtFcf: { id: 'debtFcf', name: 'Debt / FCF', format: 'format2dec' },
+	debtFcf: {
+		id: 'debtFcf',
+		name: 'Debt / FCF',
+		format: 'format2dec'
+	},
 	taxRate: {
 		id: 'taxRate',
 		name: 'Eff. Tax Rate',
@@ -532,12 +614,17 @@ export const DataPoints: Props = {
 		name: 'Tax / Revenue',
 		format: 'formatPercentage'
 	},
-	equity: { id: 'equity', name: 'Shareh. Equity', format: 'abbreviate' },
+	equity: {
+		id: 'equity',
+		name: 'Shareh. Equity',
+		format: 'abbreviate'
+	},
 	workingCapital: {
 		id: 'workingCapital',
 		name: 'Working Capital',
 		format: 'abbreviate'
 	},
+
 	lastSplitType: {
 		id: 'lastSplitType',
 		name: 'Last Stock Split',
@@ -548,18 +635,71 @@ export const DataPoints: Props = {
 		name: 'Last Split Date',
 		format: 'formatDate'
 	},
-	liabilities: {
-		id: 'liabilities',
-		name: 'Liabilities',
-		format: 'abbreviate'
+	zScore: {
+		id: 'zScore',
+		name: 'Altman Z-Score',
+		format: 'format2dec'
 	},
-	ipoPriceRange: {
-		id: 'ipoPriceRange',
-		name: 'IPO Price Range',
+	fScore: {
+		id: 'fScore',
+		name: 'Piotroski F-Score',
+		format: 'integer'
+	},
+	views: {
+		id: 'views',
+		name: 'Views',
+		format: 'integer'
+	},
+	number: {
+		id: 'number',
+		name: 'Number',
+		format: 'integer',
+		css: 'sl'
+	},
+	/* IPOs
+	
+
+
+	
+	
+	
+	*/
+	filingDate: {
+		id: 'filingDate',
+		name: 'Filing Date',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	filingDateFB: {
+		id: 'filingDateFB',
+		name: 'Filing Date',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	withdrawnDate: {
+		id: 'withdrawnDate',
+		name: 'Withdrawn Date',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	withdrawnDateFB: {
+		id: 'withdrawnDateFB',
+		name: 'Withdrawn Date',
+		colName: 'Withdrawn',
+		format: 'formatDate',
+		sort: dateSort
+	},
+	ipoStatus: {
+		id: 'ipoStatus',
+		name: 'IPO Status',
 		format: 'string',
-		only: 'ipo'
+		sort: stringIgnoreCase
 	},
-	isSpac: { id: 'isSpac', name: 'Is SPAC' },
+	/* ETFs
+	
+	
+	
+	*/
 	aum: {
 		id: 'aum',
 		name: 'Assets Under Management',

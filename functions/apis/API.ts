@@ -3,15 +3,21 @@
  * @param {string} params The parameters to use in the API request, ex: "q?id=123"
  */
 
-export async function getData(params: string) {
+export async function getData(params: string, controller?: AbortSignal) {
 	const url =
 		process.env.NEXT_PUBLIC_API_URL ||
 		process.env.API_URL ||
 		'https://api.stockanalysis.com/wp-json/sa'
 
-	const response = await fetch(`${url}/${encodeURI(params)}`)
+	const response =
+		typeof controller == 'undefined'
+			? await fetch(`${url}/${encodeURI(params)}`)
+			: await fetch(`${url}/${encodeURI(params)}`, {
+					signal: controller
+			  })
 
 	if (response.ok) {
+		if (controller) controller = undefined
 		return await response.json()
 	}
 

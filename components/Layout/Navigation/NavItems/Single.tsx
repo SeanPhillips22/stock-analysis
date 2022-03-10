@@ -5,7 +5,6 @@ import { navMenuState } from 'components/Layout/Navigation/navMenuState'
 
 export function SingleNavItem({ item, path }: NavItemProps) {
 	const close = navMenuState(state => state.close)
-	const setIsOpen = navMenuState(state => state.setIsOpen)
 
 	return (
 		<Link href={item.href} prefetch={false}>
@@ -15,13 +14,10 @@ export function SingleNavItem({ item, path }: NavItemProps) {
 						? 'nav-item current group'
 						: 'nav-item group'
 				}
-				onClick={() => {
-					close()
-					setIsOpen({})
-				}}
+				onClick={close}
 				title={item.name}
 			>
-				<item.icon className="nav-icon" style={{ maxWidth: '50px' }} />
+				<item.icon className="nav-icon" />
 				<span className="nav-label">{item.name}</span>
 			</a>
 		</Link>

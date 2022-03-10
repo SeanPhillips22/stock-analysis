@@ -6,9 +6,10 @@ import { Observer } from 'components/LazyLoad/Observer'
 type Props = {
 	children: React.ReactNode
 	offset: number
+	className?: string
 }
 
-export function LazyLoadAd({ children, offset }: Props) {
+export function LazyLoadAd({ children, offset, className }: Props) {
 	const { checked, isPro } = useAuthState()
 
 	// Check the nav state
@@ -18,7 +19,9 @@ export function LazyLoadAd({ children, offset }: Props) {
 	return (
 		<>
 			{checked && !isPro && !noAds(path) && (
-				<Observer offset={offset}>{children}</Observer>
+				<Observer offset={offset} className={className}>
+					{children}
+				</Observer>
 			)}
 		</>
 	)

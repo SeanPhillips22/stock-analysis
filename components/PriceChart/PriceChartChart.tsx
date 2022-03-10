@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { createChart, PriceLineOptions, LineStyle } from 'lightweight-charts'
 import { ChartDataPoint } from 'types/Charts'
 import {

@@ -45,6 +45,7 @@ export default function Dividend({ info, data, news }: Props) {
 							<HistoryTable rawdata={data.history} disclaimer={true} />
 						)}
 						<DividendChart
+							key={url}
 							data={data.chartData}
 							options={data.chartOptions}
 							ticker={info.ticker}

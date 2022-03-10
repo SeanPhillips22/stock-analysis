@@ -9,8 +9,6 @@ type NavMenuState = {
 	expand: () => void
 	isOpen: { [key: string]: boolean }
 	setIsOpen: (newIsOpen: { [key: string]: boolean }) => void
-	initial: boolean
-	setInitial: (newInitial: boolean) => void
 }
 /**
  * The state for the left nav menu
@@ -28,9 +26,5 @@ export const navMenuState = create<NavMenuState>(set => ({
 
 	// Whether each menu item is open or closed
 	isOpen: {},
-	setIsOpen: newIsOpen => set({ isOpen: newIsOpen }),
-
-	// Whether nav is loading for the first time
-	initial: true,
-	setInitial: newInitial => set({ initial: newInitial })
+	setIsOpen: newIsOpen => set({ isOpen: newIsOpen })
 }))
