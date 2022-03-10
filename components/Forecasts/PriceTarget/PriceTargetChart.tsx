@@ -210,9 +210,15 @@ export function PriceTargetChart() {
 									chartInstance.getDatasetMeta(4).data.length - 1
 								].y + accuracyOffset
 
+							let highBoundaryOffset = 0
+
+							if (highY < 20) {
+								highBoundaryOffset = 20 - highY
+							}
+
 							let collisionOffsets = collisionOffset({
-								highTop: highY - sideHeight * 2,
-								highBottom: highY + pointerHeight,
+								highTop: highY - sideHeight * 2 + highBoundaryOffset,
+								highBottom: highY + pointerHeight + highBoundaryOffset,
 								avgTop: avgY - sideHeight,
 								avgBottom: avgY + sideHeight + pointerHeight,
 								lowTop: lowY,
@@ -361,6 +367,7 @@ export function PriceTargetChart() {
 									const yPos =
 										meta.data[last].y +
 										accuracyOffset +
+										highBoundaryOffset +
 										collisionOffsets.high
 
 									ctx.beginPath()
