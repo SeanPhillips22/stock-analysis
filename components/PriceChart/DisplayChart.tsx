@@ -1,12 +1,9 @@
 import { memo } from 'react'
 import dynamic from 'next/dynamic'
 
-const Chart = dynamic(
-	() => import('components/PriceChart/PriceChartChartNew'),
-	{
-		ssr: false
-	}
-)
+const Chart = dynamic(() => import('components/PriceChart/PriceChartChart'), {
+	ssr: false
+})
 
 type Props = {
 	data: any
