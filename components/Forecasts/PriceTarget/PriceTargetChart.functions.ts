@@ -99,7 +99,6 @@ function compareTwoLabels(
 	shiftLabelsUp: boolean
 ) {
 	const result = findCollision(yTop, yBottom, yTop2, yBottom2)
-	console.log(result)
 	if (result == 'none') return 0
 	if (shiftLabelsUp) {
 		return Math.abs(yBottom2 - yTop)
