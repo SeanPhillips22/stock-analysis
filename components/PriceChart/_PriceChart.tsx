@@ -101,10 +101,12 @@ export function PriceChart({ info, initial }: Props) {
 						close={quote.cl}
 						change={change}
 					/>
-				) : (
+				) : !isFetching ? (
 					<div className="h-full pt-1.5">
 						<Unavailable message="No data available" />
 					</div>
+				) : (
+					<div className="h-full w-full pt-1.5"></div>
 				)}
 			</div>
 		</div>
