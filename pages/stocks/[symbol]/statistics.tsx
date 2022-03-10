@@ -186,7 +186,7 @@ export default function StatisticsPage({ info, data }: Props) {
 						/>
 						{!info.exceptions.hideForecast && (
 							<Button
-								text="Forecast Details"
+								text="Stock Forecasts"
 								url={`/stocks/${info.symbol}/forecast/`}
 							/>
 						)}

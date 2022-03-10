@@ -94,7 +94,7 @@ export const AnalystWidget = ({
 			{!info.exceptions.hideForecast && (
 				<Button
 					url={`/stocks/${info.symbol}/forecast/`}
-					text="Forecast Details"
+					text="Stock Forecasts"
 				/>
 			)}
 		</div>
