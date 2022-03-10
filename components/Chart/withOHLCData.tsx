@@ -276,7 +276,7 @@ export function withOHLCData() {
 							newProps.stockSymbol,
 							newProps.stockType,
 							newProps.period,
-							newProps.time,
+							'MAX',
 							undefined
 						)
 							.then(res => {
