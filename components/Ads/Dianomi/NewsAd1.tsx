@@ -16,7 +16,7 @@ export default function NewsAd1() {
 		}
 	}, [])
 
-	if (isDev()) {
+	if (isDev() || !isDev()) {
 		return <div className="adph nwsdia"></div>
 	}
 
