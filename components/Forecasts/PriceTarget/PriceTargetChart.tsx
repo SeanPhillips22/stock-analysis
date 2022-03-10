@@ -497,7 +497,6 @@ export function PriceTargetChart() {
 						},
 						y: {
 							suggestedMin: 0,
-							// grace: '10%',
 							position: 'left',
 							ticks: {
 								color: '#323232',
