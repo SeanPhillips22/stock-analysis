@@ -78,14 +78,14 @@ export function collisionOffset(coords: priceRects) {
 			if (shiftLabelsUp) {
 				return {
 					high: 0,
-					avg: avoidCollisionOffsetHighAvg * -1,
+					avg: avoidCollisonOffsetAvgLow * -1,
 					low: 0
 				}
 			}
 			return {
 				high: 0,
 				avg: 0,
-				low: avoidCollisionOffsetHighAvg * -1
+				low: avoidCollisonOffsetAvgLow
 			}
 		}
 	}
