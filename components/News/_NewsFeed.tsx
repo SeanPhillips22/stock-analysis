@@ -22,7 +22,7 @@ export function NewsFeed({ data, related, paywalled }: Props) {
 				// first ad should load after 3 articles or 1 video + 1 article
 				// second ad should load after 5 articles or 2 videos + 1 article
 				loadAds = false
-				if (ads < 2) {
+				if (ads < 3) {
 					i = item.type === 'Video' ? i + 2 : i + 1
 
 					// If only few news items, load ad at the bottom

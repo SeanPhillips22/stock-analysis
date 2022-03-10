@@ -6,6 +6,9 @@ const NewsAd1 = dynamic(() => import('components/Ads/Dianomi/NewsAd1'), {
 const NewsAd2 = dynamic(() => import('components/Ads/Dianomi/NewsAd2'), {
 	ssr: false
 })
+const NewsAd3 = dynamic(() => import('components/Ads/Dianomi/NewsAd3'), {
+	ssr: false
+})
 
 import { LazyLoadAd } from 'components/LazyLoad/_LazyLoadAd'
 
@@ -23,6 +26,14 @@ export function NewsAds({ ad }: { ad: number }) {
 			<LazyLoadAd offset={400}>
 				<div className="news-spns" id="ad-banner">
 					<NewsAd2 />
+				</div>
+			</LazyLoadAd>
+		)
+	} else if (ad === 3) {
+		return (
+			<LazyLoadAd offset={500}>
+				<div className="news-spns" id="ad-banner">
+					<NewsAd3 />
 				</div>
 			</LazyLoadAd>
 		)
