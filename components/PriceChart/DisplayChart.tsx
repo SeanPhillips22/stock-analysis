@@ -1,9 +1,12 @@
 import { memo } from 'react'
 import dynamic from 'next/dynamic'
 
-const Chart = dynamic(() => import('components/PriceChartNew/_PriceChartNew'), {
-	ssr: false
-})
+const Chart = dynamic(
+	() => import('components/PriceChart/PriceChartChartNew'),
+	{
+		ssr: false
+	}
+)
 
 type Props = {
 	data: any
@@ -20,7 +23,6 @@ function DisplayChartComponent({ data, time, symbol, close, change }: Props) {
 			key={symbol + '-' + time}
 			data={data}
 			time={time}
-			symbol={symbol}
 			close={close}
 			change={change}
 		/>
