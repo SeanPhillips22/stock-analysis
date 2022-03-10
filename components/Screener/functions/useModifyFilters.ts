@@ -18,6 +18,8 @@ export function useModifyFilters() {
 		state => state.removeFilteredColumn
 	)
 	const resultsMenu = screenerState(state => state.resultsMenu)
+	const tablePage = screenerState(state => state.tablePage)
+	const setTablePage = screenerState(state => state.setTablePage)
 
 	// Add a filter
 	function add(
@@ -49,6 +51,9 @@ export function useModifyFilters() {
 			newColumns.push(id)
 			setShowColumns(newColumns)
 		}
+
+		// If not on the first page, reset the pagination to the first page
+		if (tablePage !== 0) setTablePage(0)
 	}
 
 	// Remove a filter

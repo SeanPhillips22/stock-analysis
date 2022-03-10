@@ -184,24 +184,9 @@ export default function StatisticsPage({ info, data }: Props) {
 							data={data.forecast}
 							map={MAP_STATISTICS}
 						/>
-						{[
-							'aapl',
-							'msft',
-							'amzn',
-							'tsla',
-							'fb',
-							'baba',
-							'nvda',
-							'rblx',
-							'net',
-							'abnb',
-							'uber',
-							'rivn',
-							'sq',
-							'pypl'
-						].includes(info.symbol) && (
+						{!info.exceptions.hideForecast && (
 							<Button
-								text="Forecast Details"
+								text="Stock Forecasts"
 								url={`/stocks/${info.symbol}/forecast/`}
 							/>
 						)}

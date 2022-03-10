@@ -62,7 +62,6 @@ export const getStaticProps: GetStaticProps = async () => {
 	return {
 		props: {
 			stocks: etfs
-		},
-		revalidate: 6 * 60 * 60
+		}
 	}
 }

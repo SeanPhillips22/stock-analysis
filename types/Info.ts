@@ -24,7 +24,7 @@ export interface Info {
 	exceptions: {
 		hideTTM: boolean
 		hideChart: boolean
-		overrideChart: boolean
+		hideForecast: boolean
 	}
 }
 

@@ -43,10 +43,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 						}
 						title={item.name}
 					>
-						<item.icon
-							className="nav-icon"
-							style={{ maxWidth: '50px' }}
-						/>
+						<item.icon className="nav-icon" />
 						<span className="nav-label">{item.name}</span>
 					</a>
 				</Link>

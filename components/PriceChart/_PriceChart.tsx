@@ -85,7 +85,7 @@ export function PriceChart({ info, initial }: Props) {
 					/>
 				)}
 			</div>
-			<div className="hide-scroll h-[240px] overflow-x-auto sm:h-[300px]">
+			<div className="hide-scroll h-[250px] overflow-x-auto sm:h-[300px]">
 				{message && (
 					<div className="h-full pt-1.5">
 						<Unavailable message={message} />
@@ -101,10 +101,12 @@ export function PriceChart({ info, initial }: Props) {
 						close={quote.cl}
 						change={change}
 					/>
-				) : (
+				) : !isFetching ? (
 					<div className="h-full pt-1.5">
 						<Unavailable message="No data available" />
 					</div>
+				) : (
+					<div className="h-full w-full pt-1.5"></div>
 				)}
 			</div>
 		</div>

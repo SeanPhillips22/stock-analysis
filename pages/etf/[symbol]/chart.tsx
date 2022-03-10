@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Stock } from 'components/Layout/StockLayout'
-import { SEO } from 'components/SEO'
 import { Info } from 'types/Info'
 import { SelectPeriod, SelectType, Buttons } from 'components/Chart/SelectUI'
 import { getPageDataSSR } from 'functions/apis/callBackEnd'
@@ -13,11 +12,7 @@ import { useEffect } from 'react'
 import { Unavailable } from 'components/Unavailable'
 import StockChart from 'components/Chart/StockChart'
 
-interface ChartProps {
-	info: Info
-}
-
-const CandleStickStockChart = ({ info }: ChartProps) => {
+export default function ChartPage({ info }: { info: Info }) {
 	const [period, setPeriod] = useState<string | null>(null)
 	const [time, setTime] = useState<string | null>(null)
 	const [type, setType] = useState<string | null>(null)
@@ -74,12 +69,12 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	}, [time, period, type])
 
 	return (
-		<Stock info={info} url={`/etf/${info.symbol}/chart/`}>
-			<SEO
-				title={`${info.name} (${info.ticker}) Stock Chart`}
-				description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
-				canonical={`/etf/${info.symbol}/chart/`}
-			/>
+		<Stock
+			info={info}
+			url={`/etf/${info.symbol}/chart/`}
+			title={`${info.name} (${info.ticker}) Stock Chart`}
+			description={`Interactive ${info.name} (${info.ticker}) stock chart with full price history, volume, trends and moving averages.`}
+		>
 			<div className="sm:contain-content px-2.5">
 				<div className="py-2">
 					<div className="mb-2 flex flex-row items-center justify-between border border-gray-200 text-sm bp:text-base">
@@ -112,7 +107,6 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 						{info.state !== 'upcomingipo' ? (
 							<div className="h-[400px] touch-auto xs:h-[450px] bp:h-[500px] sm:h-[600px]">
 								{loading && <Loading />}
-
 								<StockChart
 									stockSymbol={info.ticker}
 									stockType={info.type}
@@ -134,13 +128,9 @@ const CandleStickStockChart = ({ info }: ChartProps) => {
 	)
 }
 
-export default CandleStickStockChart
-
 export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
 	const data = await getPageDataSSR('chartpage', symbol, 'etf')
-
 	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=3600')
-
 	return data
 }

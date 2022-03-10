@@ -10,12 +10,12 @@ export function fillWhitespaceLine(chart: any) {
 	let whiteSpaceMonths = []
 	// If there is a full chart, then this should match the oldest date on the chart
 	// The date one year ago
-	let yearAgo = new Date(chart[chart.length - 2].t)
+	let yearAgo = new Date(chart[chart.length - 2]?.t)
 	yearAgo.setDate(1)
 	yearAgo.setFullYear(yearAgo.getFullYear() - 1)
 
 	// The oldest date on the chart
-	let oldestDate = new Date(chart[0].t)
+	let oldestDate = new Date(chart[0]?.t)
 	oldestDate.setDate(1)
 
 	//For loop checks whether the date of the oldest price is older than a year from the first price point and whether it's in the same month and iterates month by month.
@@ -32,6 +32,9 @@ export function fillWhitespaceLine(chart: any) {
 			} else {
 				oldestDate.setMonth(oldestDate.getMonth() - 1)
 			}
+
+			if (oldestDate < yearAgo) break
+
 			let dateObj = {
 				x:
 					oldestDate.getFullYear().toString() +

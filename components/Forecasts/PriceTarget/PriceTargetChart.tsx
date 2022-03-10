@@ -42,10 +42,10 @@ export function PriceTargetChart() {
 	const { high, average, low } = data.targets
 
 	const hasTargets = high && average && low
-	const currentDate = chart[chart.length - 2].t
-	const currentPrice = chart[chart.length - 2].c
-	const oneYearDate = chart[chart.length - 1].t
-	const initialPrice = chart[0].c
+	const currentDate = chart[chart.length - 2]?.t
+	const currentPrice = chart[chart.length - 2]?.c
+	const oneYearDate = chart[chart.length - 1]?.t
+	const initialPrice = chart[0]?.c
 
 	// An invisible time series to adjust the appearance of a chart
 	// if the price history is less than 1 year

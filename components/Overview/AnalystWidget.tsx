@@ -91,25 +91,10 @@ export const AnalystWidget = ({
 					<AnalystWidgetChart ratings={ratings} />
 				</div>
 			</div>
-			{[
-				'aapl',
-				'msft',
-				'amzn',
-				'tsla',
-				'fb',
-				'baba',
-				'nvda',
-				'rblx',
-				'net',
-				'abnb',
-				'uber',
-				'rivn',
-				'sq',
-				'pypl'
-			].includes(info.symbol) && (
+			{!info.exceptions.hideForecast && (
 				<Button
 					url={`/stocks/${info.symbol}/forecast/`}
-					text="Forecast Details"
+					text="Stock Forecasts"
 				/>
 			)}
 		</div>

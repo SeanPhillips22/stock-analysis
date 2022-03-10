@@ -74,28 +74,6 @@ export async function getChartData(
 
 	return response
 }
-export function respond(response: Response, revalidate: number) {
-	if (response.status === 200) {
-		return {
-			props: response.data,
-			revalidate: revalidate
-		}
-	} else {
-		return response.data
-	}
-}
-
-export async function getPageData(
-	page: string,
-	symbol: string,
-	reval: number,
-	type?: 'stocks' | 'etf'
-) {
-	const response = type
-		? await getData(`${page}?symbol=${symbol}&t=${type}`)
-		: await getData(`${page}?symbol=${symbol}`)
-	return respond(response, reval)
-}
 
 export async function getPageDataFull(page: string, symbol: string) {
 	const url = `${page}?s=${symbol}&f=${PRO_KEY}`

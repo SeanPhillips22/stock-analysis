@@ -13,18 +13,16 @@ import {
 ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale)
 
 import useMediaQuery from 'hooks/useMediaQuery'
-import { Recommendations } from 'types/Forecast'
+import { ForecastData } from 'types/Forecast'
 import { forecastState } from '../forecast.state'
 import { useEffect, useState } from 'react'
+import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-export function AnalystBarChart({
-	recommendations
-}: {
-	recommendations: Recommendations[]
-}) {
+export function AnalystBarChart() {
+	const { data }: { data: ForecastData } = useSymbolContext()
 	const mobile = useMediaQuery('(max-width: 768px)')
 	const history = forecastState(state => state.history)
 	const [thickness, setThickness] = useState(16)
@@ -39,10 +37,10 @@ export function AnalystBarChart({
 		}
 	}, [history, mobile])
 
-	const labelAxis = () => recommendations.map(item => item.month)
+	const labelAxis = () => data.recommendations.map(item => item.month)
 
 	const analystAxis = (s: string) =>
-		recommendations.map((item: { [x: string]: any }) => item[s])
+		data.recommendations.map((item: { [x: string]: any }) => item[s])
 
 	let d: any[] = [
 		{

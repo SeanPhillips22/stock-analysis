@@ -3,7 +3,12 @@ import { cn } from 'functions/helpers/classNames'
 
 export function ConsensusSummary() {
 	const { data } = useSymbolContext()
-	let consensus = data.recommendations[0]?.consensus || 'n/a'
+
+	// get the consensus value from the last item in the array
+	let length = data?.recommendations?.length || 0
+	let indx = length > 0 ? length - 1 : 0
+	let consensus = data.recommendations[indx]?.consensus || 'n/a'
+
 	let color = 'rgb(204, 204, 0)'
 
 	switch (consensus) {

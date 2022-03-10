@@ -40,11 +40,7 @@ export function AnalystTrendsChart({ data }: { data: ForecastData }) {
 
 	return (
 		<div className="h-[240px]">
-			{chartType == 'Bar Chart' ? (
-				<AnalystBarChart recommendations={months} />
-			) : (
-				<AnalystLineChart recommendations={months} />
-			)}
+			{chartType == 'Bar Chart' ? <AnalystBarChart /> : <AnalystLineChart />}
 		</div>
 	)
 }

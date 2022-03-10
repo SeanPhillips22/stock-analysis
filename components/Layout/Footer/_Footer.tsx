@@ -18,7 +18,7 @@ const navigation = {
 	]
 }
 
-export const Footer = () => {
+export function Footer() {
 	return (
 		<>
 			<footer className="clear-both bg-gray-800">

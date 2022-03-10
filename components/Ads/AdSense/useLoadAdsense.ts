@@ -25,26 +25,36 @@ export function useLoadAdsense() {
 
 	const isPro = authState(state => state.isPro)
 
+	let isInterval = false
+	let interval: any
 	useEffect(() => {
 		if (noAds(path) || isPro) return // no ads for this page
 
-		// check if AdSense script is loaded every 200ms
-		let count = 0 // count attempts
-		let interval = setInterval(() => {
-			count++
+		if (window.adsbygoogle) {
+			loadAdsense()
+		} else {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+			isInterval = true
+			// check if AdSense script is loaded every 200ms
+			let count = 0 // count attempts
+			let interval = setInterval(() => {
+				count++
 
-			// if adsbygoogle is defined, then the script is loaded
-			if (window.adsbygoogle) {
-				loadAdsense()
-				clearInterval(interval)
-			}
+				// if adsbygoogle is defined, then the script is loaded
+				if (window.adsbygoogle) {
+					loadAdsense()
+					clearInterval(interval)
+				}
 
-			// stop after 20 attempts (4 seconds)
-			// usually this works on the first attempt
-			if (count === 20) clearInterval(interval)
-		}, 200)
+				// stop after 20 attempts (4 seconds)
+				// usually this works on the first attempt
+				if (count === 20) clearInterval(interval)
+			}, 200)
+		}
 
-		return () => clearInterval(interval)
+		return () => {
+			if (isInterval) clearInterval(interval)
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 }

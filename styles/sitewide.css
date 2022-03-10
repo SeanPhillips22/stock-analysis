@@ -8,15 +8,6 @@
 		@apply bg-white text-gray-900;
 	}
 
-	.bll {
-		@apply text-blue-link hover:text-gray-900;
-		color: #1e73ba;
-	}
-
-	.bll:hover {
-		color: #111827;
-	}
-
 	.hh1 {
 		@apply mb-4 text-3xl font-bold;
 	}
@@ -31,11 +22,5 @@
 
 	.text-shadow {
 		text-shadow: 0 0 0.5px #555555;
-	}
-
-	.button-blue {
-		@apply bg-blue-brand_light text-white hover:bg-blue-brand_sharp;
-		color: #ffffff;
-		background-color: #3c74d4;
 	}
 }
