@@ -496,7 +496,8 @@ export function PriceTargetChart() {
 							}
 						},
 						y: {
-							grace: '10%',
+							suggestedMin: 0,
+							// grace: '10%',
 							position: 'left',
 							ticks: {
 								color: '#323232',
@@ -507,9 +508,10 @@ export function PriceTargetChart() {
 								callback: function (value) {
 									let formattedValue
 									if (value < 10) {
-										formattedValue = format('.1f')(Number(value))
+										formattedValue = format('.1~f')(Number(value))
 										return '$' + formattedValue
 									}
+
 									return '$' + value
 								}
 							},
