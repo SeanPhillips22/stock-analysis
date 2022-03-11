@@ -1,7 +1,6 @@
 import { Export } from 'components/Controls/Export'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { cn } from 'functions/helpers/classNames'
-import { event } from 'functions/events'
 
 type Props = {
 	range: 'Annual' | 'Quarterly'
@@ -26,30 +25,22 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 				<button
 					type="button"
 					className={cn(
-						'relative inline-flex items-center rounded-l-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
+						'eventbtn relative inline-flex items-center rounded-l-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Annual' ? 'bg-gray-100' : ''
 					)}
-					onClick={() => {
-						setRange('Annual')
-						event('Click', 'Forecast Page', 'Financial Forecast - Annual')
-					}}
+					id="Forecast_Toggle_Annual"
+					onClick={() => setRange('Annual')}
 				>
 					Annual
 				</button>
 				<button
 					type="button"
 					className={cn(
-						'relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
+						'eventbtn relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Quarterly' ? 'bg-gray-100' : ''
 					)}
-					onClick={() => {
-						setRange('Quarterly')
-						event(
-							'Click',
-							'Forecast Page',
-							'Financial Forecast - Quarterly'
-						)
-					}}
+					id="Forecast_Toggle_Annual"
+					onClick={() => setRange('Quarterly')}
 				>
 					Quarterly
 				</button>
