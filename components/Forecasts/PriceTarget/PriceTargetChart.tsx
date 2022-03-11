@@ -26,12 +26,14 @@ import {
 	Unavailable,
 	UnavailableSafari
 } from 'components/Unavailable'
-import 'chartjs-adapter-date-fns'
 
+import { format } from 'd3-format'
+import 'chartjs-adapter-date-fns'
 import { useMemo } from 'react'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { formatMonthLong } from 'functions/datetime/formatDates'
 import { fillWhitespaceLine, formatTarget } from './target.functions'
+import { collisionOffset } from './PriceTargetChart.functions'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -191,6 +193,38 @@ export function PriceTargetChart() {
 
 							const pointerHeight = fontSize + 2
 							const sideHeight = 10
+							const accuracyOffset = -7.6
+
+							const highY =
+								chartInstance.getDatasetMeta(2).data[
+									chartInstance.getDatasetMeta(2).data.length - 1
+								].y + accuracyOffset
+
+							const avgY =
+								chartInstance.getDatasetMeta(3).data[
+									chartInstance.getDatasetMeta(3).data.length - 1
+								].y + accuracyOffset
+
+							const lowY =
+								chartInstance.getDatasetMeta(4).data[
+									chartInstance.getDatasetMeta(4).data.length - 1
+								].y + accuracyOffset
+
+							let highBoundaryOffset = 0
+
+							if (highY < 20) {
+								highBoundaryOffset = 20 - highY
+							}
+
+							let collisionOffsets = collisionOffset({
+								highTop: highY - sideHeight * 2 + highBoundaryOffset,
+								highBottom: highY + pointerHeight + highBoundaryOffset,
+								avgTop: avgY - sideHeight,
+								avgBottom: avgY + sideHeight + pointerHeight,
+								lowTop: lowY,
+								lowBottom: lowY + sideHeight * 2 + pointerHeight
+							})
+
 							const width =
 								max([
 									ctx.measureText(lowData[lowData.length - 1].y).width,
@@ -253,7 +287,10 @@ export function PriceTargetChart() {
 									const last = meta.data.length - 1
 
 									const xPos = meta.data[last].x + 10.2
-									const yPos = meta.data[last].y - 7.6
+									const yPos =
+										meta.data[last].y +
+										accuracyOffset +
+										collisionOffsets.avg
 
 									const raw = dataset.data[last]
 
@@ -262,7 +299,6 @@ export function PriceTargetChart() {
 									ctx.save()
 
 									ctx.strokeStyle = 'lightgrey'
-									ctx.fillStyle = '#000000'
 									ctx.lineWidth = '0.6'
 									ctx.lineJoin = 'round'
 
@@ -323,12 +359,15 @@ export function PriceTargetChart() {
 									ctx.save()
 
 									ctx.strokeStyle = 'lightgrey'
-									ctx.fillStyle = '#000000' // ? not doing anything?
 									ctx.lineWidth = '1'
 									ctx.lineJoin = 'round'
 
 									const xPos = meta.data[last].x + 10.2
-									const yPos = meta.data[last].y - 7.6
+									const yPos =
+										meta.data[last].y +
+										accuracyOffset +
+										highBoundaryOffset +
+										collisionOffsets.high
 
 									ctx.beginPath()
 									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
@@ -378,12 +417,14 @@ export function PriceTargetChart() {
 									ctx.save()
 
 									ctx.strokeStyle = 'lightgrey'
-									ctx.fillStyle = '#ffffff' // ? not doing anything?
 									ctx.lineWidth = '1'
 									ctx.lineJoin = 'round'
 
 									const xPos = meta.data[last].x + 10.2
-									const yPos = meta.data[last].y - 7.6
+									const yPos =
+										meta.data[last].y +
+										accuracyOffset +
+										collisionOffsets.low
 
 									ctx.beginPath()
 									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
@@ -461,7 +502,7 @@ export function PriceTargetChart() {
 							}
 						},
 						y: {
-							grace: '10%',
+							grace: '5%',
 							position: 'left',
 							ticks: {
 								color: '#323232',
@@ -470,6 +511,12 @@ export function PriceTargetChart() {
 								},
 								padding: 5,
 								callback: function (value) {
+									let formattedValue
+									if (value < 10) {
+										formattedValue = format('.1~f')(Number(value))
+										return '$' + formattedValue
+									}
+
 									return '$' + value
 								}
 							},
