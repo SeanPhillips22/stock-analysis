@@ -1,6 +1,7 @@
 import { Export } from 'components/Controls/Export'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { cn } from 'functions/helpers/classNames'
+import { event } from 'functions/events'
 
 type Props = {
 	range: 'Annual' | 'Quarterly'
@@ -28,8 +29,11 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 						'eventbtn relative inline-flex items-center rounded-l-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Annual' ? 'bg-gray-100' : ''
 					)}
-					id="Forecast_Toggle_Annual"
-					onClick={() => setRange('Annual')}
+					id="Page_Forecast_Toggle_Annual"
+					onClick={() => {
+						setRange('Annual')
+						event('EventBtn', 'Page_Forecast_Toggle_Annual')
+					}}
 				>
 					Annual
 				</button>
@@ -39,8 +43,11 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 						'eventbtn relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Quarterly' ? 'bg-gray-100' : ''
 					)}
-					id="Forecast_Toggle_Annual"
-					onClick={() => setRange('Quarterly')}
+					id="Page_Forecast_Toggle_Quarterly"
+					onClick={() => {
+						setRange('Quarterly')
+						event('EventBtn', 'Page_Forecast_Toggle_Quarterly')
+					}}
 				>
 					Quarterly
 				</button>

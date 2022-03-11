@@ -27,10 +27,15 @@ export function NavLogin() {
 			<Button
 				text="Free Trial"
 				url="/pro/"
-				className="text-base"
-				id="tag-upgr-leftnav-free-trial"
+				className="eventbtn text-base"
+				id="Trial_Layout_MobileNav_FreeTrialBtn"
 			/>
-			<ButtonWhite text="Log In" url="/login/" className="mt-3 text-base" />
+			<ButtonWhite
+				text="Log In"
+				url="/login/"
+				className="eventbtn mt-3 text-base"
+				id="Layout_MobileNav_LoginBtn"
+			/>
 		</div>
 	)
 }

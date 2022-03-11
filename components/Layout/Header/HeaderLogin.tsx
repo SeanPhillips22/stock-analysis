@@ -35,14 +35,15 @@ export function HeaderLogin({ hideTrial }: Props) {
 			<ButtonWhite
 				text="Log In"
 				url="/login/"
-				className="mt-0 border-0 py-1 text-gray-700 shadow-none"
+				className="eventbtn mt-0 border-0 py-1 text-gray-700 shadow-none"
+				id="Layout_Header_LoginBtn"
 			/>
 			{!hideTrial && (
 				<Button
 					text="Free Trial"
 					url="/pro/"
-					className="mt-0 py-1"
-					id="tag-upgr-header-free-trial"
+					className="eventbtn mt-0 py-1"
+					id="Trial_Layout_Header_FreeTrialBtn"
 				/>
 			)}
 		</div>
