@@ -8,8 +8,8 @@ export const LeftRightIcon = ({ classes }: IProps) => (
 		viewBox="0 0 24 24"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
-		style={{ maxWidth: '40px' }}
 		stroke="currentColor"
+		style={{ maxWidth: '40px' }}
 	>
 		<path
 			strokeLinecap="round"

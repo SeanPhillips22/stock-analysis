@@ -99,6 +99,7 @@ export function Export({ buttons, data, time }: Props) {
 						fill="none"
 						viewBox="0 0 20 20"
 						stroke="currentColor"
+						style={{ maxWidth: '40px' }}
 					>
 						<path
 							strokeLinecap="round"

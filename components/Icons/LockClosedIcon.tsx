@@ -5,6 +5,7 @@ export function LockClosedIcon(props: React.ComponentProps<'svg'>) {
 			className={props.className}
 			viewBox="0 0 20 20"
 			fill="currentColor"
+			style={{ maxWidth: '40px' }}
 		>
 			<path
 				fillRule="evenodd"

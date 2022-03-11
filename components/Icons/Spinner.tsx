@@ -9,6 +9,7 @@ export const SpinnerIcon = ({ classes }: Props) => (
 		viewBox="0 0 24 24"
 		fill="none"
 		aria-hidden="true"
+		style={{ maxWidth: '100px' }}
 	>
 		<circle
 			className="opacity-25"
