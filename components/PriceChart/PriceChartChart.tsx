@@ -72,27 +72,8 @@ export default function PriceChart({ data, time, close, change }: Props) {
 		// Positive is green, negative is red, zero is blue
 		let [topColor, bottomColor, lineColor] = setPriceChartColor(change)
 
-		const max = Math.max(
-			...data.map(d => {
-				return d.c
-			})
-		)
-
-		const min = Math.min(
-			...data.map(d => {
-				return d.c
-			})
-		)
-
 		// Configure the main data series of the chart
 		const areaSeries = chart.addAreaSeries({
-			// Remove this section if you don't want the price line to appear,
-			autoscaleInfoProvider: () => ({
-				priceRange: {
-					minValue: Number(close) < min ? Number(close) : min,
-					maxValue: Number(close) > max ? Number(close) : max
-				}
-			}),
 			topColor,
 			bottomColor,
 			lineColor,
