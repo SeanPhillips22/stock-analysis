@@ -1,6 +1,7 @@
 import { Export } from 'components/Controls/Export'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { cn } from 'functions/helpers/classNames'
+import { event } from 'functions/events'
 
 type Props = {
 	range: 'Annual' | 'Quarterly'
@@ -28,7 +29,10 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 						'relative inline-flex items-center rounded-l-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Annual' ? 'bg-gray-100' : ''
 					)}
-					onClick={() => setRange('Annual')}
+					onClick={() => {
+						setRange('Annual')
+						event('Click', 'Forecast Page', 'Financial Forecast - Annual')
+					}}
 				>
 					Annual
 				</button>
@@ -38,7 +42,14 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 						'relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Quarterly' ? 'bg-gray-100' : ''
 					)}
-					onClick={() => setRange('Quarterly')}
+					onClick={() => {
+						setRange('Quarterly')
+						event(
+							'Click',
+							'Forecast Page',
+							'Financial Forecast - Quarterly'
+						)
+					}}
 				>
 					Quarterly
 				</button>

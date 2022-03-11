@@ -20,7 +20,7 @@ export function Snippet() {
 
 	// Format the text describing the price target and analyst consensus
 	let consensusText = ''
-	if (!consensus) {
+	if (!consensus || !average) {
 		consensusText = `There is currently no analyst price target forecast available for ${displayName}.`
 	} else {
 		consensusText = `According to ${total} stock analysts, the average 12-month stock price forecast for ${displayName} stock is $${formatTarget(
