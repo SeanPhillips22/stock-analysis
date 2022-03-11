@@ -1,5 +1,5 @@
 // Used on the /stocks/ and /etf/ index pages
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
 	useTable,
 	usePagination,
@@ -9,9 +9,10 @@ import {
 	Column
 } from 'react-table'
 import { tableState } from 'state/tableState'
-import { Controls } from 'components/Controls/_Controls'
 import { useSort } from 'hooks/useSort'
 import { ColumnSort } from './ColumnSort'
+import { SymbolTableControls } from './SymbolTableControls'
+import { authState } from 'state/authState'
 
 interface StockType {
 	s: string
@@ -29,6 +30,8 @@ interface Props {
 }
 
 export function SymbolTable({ title, columndata, rowdata }: Props) {
+	const [exportData, setExportData] = useState<null | any>(null)
+	const isPro = authState(state => state.isPro)
 	const tablePage = tableState(state => state.tablePage)
 	const setTablePage = tableState(state => state.setTablePage)
 	const tableSize = tableState(state => state.tableSize)
@@ -43,6 +46,27 @@ export function SymbolTable({ title, columndata, rowdata }: Props) {
 		defaultSort: [{ id: 's', desc: true }],
 		setSort
 	})
+
+	// If user is pro, rewrite the data to make it ready for export
+	// so that pro users can export the entire dataset and don't need
+	// to change the "Rows" count
+	useEffect(() => {
+		if (isPro && !exportData) {
+			let newData = []
+
+			// Set the heading row
+			newData[0] =
+				title === 'Stocks'
+					? ['Symbol', 'Name', 'Industry', 'Market Cap']
+					: ['Symbol', 'Fund Name', 'Asset Class', 'Assets']
+
+			// Set the data rows
+			rowdata.forEach((item: { [x: string]: any }) => {
+				newData.push([item.s, item.n, item.i, item.m])
+			})
+			setExportData(newData)
+		}
+	}, [exportData, isPro, rowdata, title])
 
 	const {
 		headerGroups,
@@ -74,7 +98,7 @@ export function SymbolTable({ title, columndata, rowdata }: Props) {
 
 	return (
 		<>
-			<Controls
+			<SymbolTableControls
 				count={rows.length}
 				title={title}
 				useAsyncDebounce={useAsyncDebounce}
@@ -82,6 +106,7 @@ export function SymbolTable({ title, columndata, rowdata }: Props) {
 				setGlobalFilter={setGlobalFilter}
 				setFilterState={setFilter}
 				tableId="symbol-table"
+				data={exportData}
 			/>
 			<div className="overflow-x-auto">
 				<table className="symbol-table index" id="symbol-table">
