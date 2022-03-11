@@ -26,13 +26,12 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 				<button
 					type="button"
 					className={cn(
-						'eventbtn relative inline-flex items-center rounded-l-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
+						'relative inline-flex items-center rounded-l-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Annual' ? 'bg-gray-100' : ''
 					)}
-					id="Page_Forecast_Toggle_Annual"
 					onClick={() => {
 						setRange('Annual')
-						event('EventBtn', 'Page_Forecast_Toggle_Annual')
+						event('Click', 'Button', 'Page_Forecast_Toggle_Annual')
 					}}
 				>
 					Annual
@@ -40,13 +39,12 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 				<button
 					type="button"
 					className={cn(
-						'eventbtn relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
+						'relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-2 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 bp:px-3 sm:py-2 sm:px-4',
 						range === 'Quarterly' ? 'bg-gray-100' : ''
 					)}
-					id="Page_Forecast_Toggle_Quarterly"
 					onClick={() => {
 						setRange('Quarterly')
-						event('EventBtn', 'Page_Forecast_Toggle_Quarterly')
+						event('Click', 'Button', 'Page_Forecast_Toggle_Quarterly')
 					}}
 				>
 					Quarterly
