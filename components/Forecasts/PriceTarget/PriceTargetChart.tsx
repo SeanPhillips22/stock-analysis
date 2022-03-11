@@ -238,7 +238,6 @@ export function PriceTargetChart() {
 								dataset: { data: any[]; label: string },
 								i: any
 							) {
-								console.log(i + ' ' + dataset.label)
 								if (dataset.label == 'Monthly') {
 									const meta = chartInstance.getDatasetMeta(i)
 
@@ -503,7 +502,7 @@ export function PriceTargetChart() {
 							}
 						},
 						y: {
-							suggestedMin: 0,
+							grace: '5%',
 							position: 'left',
 							ticks: {
 								color: '#323232',
