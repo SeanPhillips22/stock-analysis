@@ -100,9 +100,12 @@ export default function PriceChart({ data, time, close, change }: Props) {
 		})
 
 		// Configure the "Previous Close" line and label
-		const lastPrice = data[data.length - 1].c
+		const lastPrice = data[data.length - 1]?.c
 		let showPriceLineTitle =
-			lastPrice > Number(close) * 1.001 || lastPrice < Number(close) * 0.999
+			lastPrice &&
+			close &&
+			(lastPrice > Number(close) * 1.001 ||
+				lastPrice < Number(close) * 0.999)
 
 		//@ts-ignore
 		const plOptions: PriceLineOptions = time === '1D' && {
