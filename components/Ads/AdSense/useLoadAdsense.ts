@@ -28,6 +28,7 @@ export function useLoadAdsense() {
 	let isInterval = false
 	let interval: any
 	useEffect(() => {
+		if (window.location.hash.includes('#access_token=')) return // no ads while logging in
 		if (noAds(path) || isPro) return // no ads for this page
 
 		if (window.adsbygoogle) {

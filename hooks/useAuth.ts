@@ -124,8 +124,7 @@ export function useAuth() {
 
 	async function signOut() {
 		await supabase.auth.signOut()
-		setChecked(false)
-		setIsPro(false)
+		router.reload()
 	}
 
 	// If there is a login error, redirect to the login page and show an error message
