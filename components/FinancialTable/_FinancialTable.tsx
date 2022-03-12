@@ -366,7 +366,7 @@ export const FinancialTable = ({
 								</Tooltip>
 							</th>
 							{headerRow()}
-							{paywalled && !isPro && (
+							{paywalled && !isPro && data.datekey && (
 								<PaywallHeaderCell
 									range={range}
 									diff={fullcount - showcount}

@@ -78,6 +78,18 @@ export const MAP_INCOME_STATEMENT = [
 			'Interest expense or income is the amount that the company paid or received in interest. A positive number indicates a net expense, while a negative number implies that the company had more interest income from its cash reserves than it paid for interest on debt.'
 	},
 	{
+		id: 'interestIncome',
+		title: 'Interest Income',
+		tooltip:
+			'Interest income is the amount that the company received in interest.'
+	},
+	{
+		id: 'interestExpense',
+		title: 'Interest Expense',
+		tooltip:
+			'Interest expense is the amount that the company paid in interest.'
+	},
+	{
 		id: 'otherincome',
 		title: 'Other Expense / Income',
 		tooltip:
