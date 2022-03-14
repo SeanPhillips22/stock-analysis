@@ -104,8 +104,8 @@ export default function PriceChart({ data, time, close, change }: Props) {
 		let showPriceLineTitle =
 			lastPrice &&
 			close &&
-			(lastPrice > Number(close) * 1.001 ||
-				lastPrice < Number(close) * 0.999)
+			(lastPrice > Number(close) * 1.002 ||
+				lastPrice < Number(close) * 0.998)
 
 		//@ts-ignore
 		const plOptions: PriceLineOptions = time === '1D' && {

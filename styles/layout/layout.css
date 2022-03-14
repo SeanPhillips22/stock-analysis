@@ -17,7 +17,7 @@
 	}
 
 	.maincol {
-		@apply mx-auto mb-6 w-full xl:max-w-screen-xl xxl:mx-0;
+		@apply mx-auto mb-10 w-full xl:max-w-screen-xl xxl:mx-0;
 	}
 
 	.fullwidth .maincol {
