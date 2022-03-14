@@ -40,7 +40,7 @@ export function Export({ buttons = Buttons, tableId, fileName, data }: Props) {
 						/>
 					) : (
 						<ExportItem
-							key={button.type}
+							key={button.title}
 							title={button.title}
 							type={button.type}
 							tableId={tableId}

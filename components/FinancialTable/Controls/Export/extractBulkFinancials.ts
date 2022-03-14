@@ -113,7 +113,12 @@ export function extractFinancials(data: any, statement: string, range: string) {
 		} else {
 			let arr = data[key]
 			let parsedKey = KEYS[key] || key
-			if (range === 'annual' && statement !== 'ratios') arr.shift() // Remove TTM column
+			if (
+				range === 'annual' &&
+				statement !== 'ratios' &&
+				data.datekey[0] === 'TTM'
+			)
+				arr.shift() // Remove TTM column
 			arr.unshift(parsedKey)
 			financials.push(arr)
 		}
