@@ -5,19 +5,19 @@
 
 @layer base {
 	.pagewrap {
-		@apply min-h-screen flex flex-col;
+		@apply flex min-h-screen flex-col;
 	}
 
 	.mainbody {
-		@apply xxl:grid xxl:grid-cols-leftnav xxl:gap-x-1 xxxl:gap-x-2 xxl:max-w-[1420px] grow;
+		@apply grow xxl:grid xxl:max-w-[1420px] xxl:grid-cols-leftnav xxl:gap-x-1 xxxl:gap-x-2;
 	}
 
 	.mainbody.fullwidth {
-		@apply gap-x-0 max-w-none;
+		@apply max-w-none gap-x-0;
 	}
 
 	.maincol {
-		@apply w-full mx-auto xxl:mx-0 xl:max-w-screen-xl mb-10;
+		@apply mx-auto mb-6 w-full xl:max-w-screen-xl xxl:mx-0;
 	}
 
 	.fullwidth .maincol {
@@ -25,16 +25,16 @@
 	}
 
 	.contain {
-		@apply px-3 xs:px-4 lg:px-6 py-5 xs:py-6 w-full xl:max-w-screen-xl;
+		@apply w-full px-3 py-5 xs:px-4 xs:py-6 lg:px-6 xl:max-w-screen-xl;
 	}
 
 	.contain-content {
-		@apply px-3 xs:px-4 lg:px-6 w-full xl:max-w-screen-xl;
+		@apply w-full px-3 xs:px-4 lg:px-6 xl:max-w-screen-xl;
 	}
 
 	.uncontain {
 		/* Remove the container */
-		@apply px-0 mx-0 w-auto max-w-none;
+		@apply mx-0 w-auto max-w-none px-0;
 	}
 
 	.right-sidebar {
