@@ -89,7 +89,7 @@ export const FinancialTable = ({
 	)
 
 	// If count is empty, show message
-	if (showcount === 0) {
+	if ((range === 'annual' && showcount < 2) || showcount === 0) {
 		return (
 			<div>
 				<TableTitle info={info} statement={statement} range={range} />
