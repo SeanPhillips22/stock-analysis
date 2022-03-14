@@ -40,6 +40,7 @@ export function TableTitle({ info, statement, range }: Props) {
 	const dividerTextDesktop = dividerText ? dividerText + ' ' : ''
 	const dividerTextMobile = dividerText ? capitalize(dividerText) + ' ' : ''
 	const firstWord = statement === 'ratios' ? 'Market cap' : 'Financials'
+	const currency = statement === 'ratios' ? 'USD' : info.currency
 
 	return (
 		<div>
@@ -49,10 +50,10 @@ export function TableTitle({ info, statement, range }: Props) {
 			{info.currency && info.fiscalYear && (
 				<div className="mb-1.5 flex items-end justify-between md:block lg:mb-0">
 					<div className="hidden pb-1 text-sm text-gray-600 lg:block">
-						{`${firstWord} in ${dividerTextDesktop}${info.currency}. Fiscal year is ${info.fiscalYear}.`}
+						{`${firstWord} in ${dividerTextDesktop}${currency}. Fiscal year is ${info.fiscalYear}.`}
 					</div>
 					<div className="block text-sm text-gray-600 lg:hidden">
-						{`${dividerTextMobile}${info.currency}. Fiscal year is ${info.fiscalYearShort}.`}
+						{`${dividerTextMobile}${currency}. Fiscal year is ${info.fiscalYearShort}.`}
 					</div>
 					<button
 						className="text-gray-600 md:hidden"
