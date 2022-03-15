@@ -32,8 +32,11 @@ import 'chartjs-adapter-date-fns'
 import { useMemo } from 'react'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { formatMonthLong } from 'functions/datetime/formatDates'
-import { fillWhitespaceLine, formatTarget } from './target.functions'
-import { collisionOffset } from './PriceTargetChart.functions'
+import {
+	fillWhitespaceLine,
+	formatTarget,
+	collisionOffset
+} from './target.functions'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
