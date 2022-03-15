@@ -241,15 +241,15 @@ export function EstimateChart() {
 			label: 'Yearly',
 			data: priceAxis,
 			pointHitRadius: 10,
-			pointRadius: 2,
-			pointBorderWidth: 3.5,
-			pointBorderColor: '#000039',
-			pointBackgroundColor: '#000039',
+			pointRadius: 0,
+			pointBorderWidth: 3,
+			pointBorderColor: 'lightgray',
+			pointBackgroundColor: 'lightgray',
 			tension: 0,
-			borderColor: '#000039',
-			borderWidth: 5,
+			borderColor: '#0096FF',
+			borderWidth: 2.5,
 			spanGaps: true,
-			borderDash: [0, 3]
+			borderDash: [0, 0]
 		},
 		/*{
 			label: 'Whitespace',
@@ -270,7 +270,7 @@ export function EstimateChart() {
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderColor: 'rgba(4, 120, 87, 1)',
+			borderColor: 'lightgray',
 			borderWidth: 2.5,
 			spanGaps: true,
 			borderDash: [3, 3]
@@ -281,7 +281,7 @@ export function EstimateChart() {
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderColor: 'rgba(55, 65, 81)',
+			borderColor: 'lightgray',
 			borderWidth: 2.5,
 			spanGaps: true,
 			borderDash: [3, 3]
@@ -289,7 +289,7 @@ export function EstimateChart() {
 		{
 			label: 'Low',
 			data: lowData,
-			borderColor: 'rgba(220, 38, 38, 1)',
+			borderColor: 'lightgray',
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
@@ -322,56 +322,6 @@ export function EstimateChart() {
 							ctx.textBaseline = 'bottom'
 
 							const max = (arr: number[]): number => Math.max(...arr)
-
-							const pointerHeight = fontSize + 2
-							const sideHeight = 10
-							const accuracyOffset = -7.6
-
-							const highY =
-								chartInstance.getDatasetMeta(1).data[
-									chartInstance.getDatasetMeta(1).data.length - 1
-								].y + accuracyOffset
-
-							const avgY =
-								chartInstance.getDatasetMeta(2).data[
-									chartInstance.getDatasetMeta(2).data.length - 1
-								].y + accuracyOffset
-
-							const lowY =
-								chartInstance.getDatasetMeta(3).data[
-									chartInstance.getDatasetMeta(3).data.length - 1
-								].y + accuracyOffset
-
-							let highBoundaryOffset = 0
-
-							if (highY < 20) {
-								highBoundaryOffset = 20 - highY
-							}
-
-							let collisionOffsets = collisionOffset({
-								highTop: highY - sideHeight * 2 + highBoundaryOffset,
-								highBottom: highY + pointerHeight + highBoundaryOffset,
-								avgTop: avgY - sideHeight,
-								avgBottom: avgY + sideHeight + pointerHeight,
-								lowTop: lowY,
-								lowBottom: lowY + sideHeight * 2 + pointerHeight
-							})
-
-							const width =
-								max([
-									ctx.measureText(
-										abbreviateNumber(lowData[lowData.length - 1].y, 0)
-									).width,
-									ctx.measureText(
-										abbreviateNumber(highData[highData.length - 1].y),
-										0
-									).width,
-									ctx.measureText(
-										abbreviateNumber(avgData[avgData.length - 1].y),
-										0
-									).width,
-									ctx.measureText('Average').width
-								]) + 10
 
 							chartInstance.data.datasets.forEach(function (
 								dataset: { data: any[]; label: string },
@@ -418,187 +368,6 @@ export function EstimateChart() {
 										].y1
 									)
 
-									ctx.restore()
-								}
-
-								if (dataset.label == 'Average') {
-									const meta = chartInstance.getDatasetMeta(i)
-									const last = meta.data.length - 1
-									console.log(meta)
-									const xPos = meta.data[last].x + 10.2
-									const yPos =
-										meta.data[last].y +
-										accuracyOffset +
-										collisionOffsets.avg
-
-									const raw = dataset.data[last]
-									console.log(raw.y)
-									const str = '$' + abbreviateNumber(raw.y, 0)
-									ctx.save()
-
-									ctx.strokeStyle = 'lightgrey'
-									ctx.lineWidth = '0.6'
-									ctx.lineJoin = 'round'
-
-									ctx.beginPath()
-									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-									ctx.lineTo(xPos, yPos)
-
-									ctx.moveTo(xPos - 8.7, yPos + pointerHeight / 2)
-									ctx.lineTo(xPos, yPos + pointerHeight)
-									ctx.moveTo(xPos, yPos)
-									ctx.lineTo(xPos, yPos - sideHeight)
-									ctx.lineTo(xPos + width, yPos - sideHeight)
-
-									ctx.lineTo(
-										xPos + width,
-										yPos + sideHeight + pointerHeight
-									)
-									ctx.lineTo(
-										xPos + 0.7,
-										yPos + sideHeight + pointerHeight
-									)
-
-									ctx.lineTo(xPos, yPos + pointerHeight)
-
-									ctx.stroke()
-
-									ctx.closePath()
-
-									ctx.fillStyle = 'rgba(55, 65, 81)'
-									ctx.fillText(
-										str,
-										xPos + width - width / 2,
-										yPos -
-											sideHeight +
-											(sideHeight * 2 + pointerHeight) / 2 +
-											13
-									)
-									ctx.fillText(
-										'Average',
-										xPos + width - width / 2,
-										yPos -
-											sideHeight +
-											(sideHeight * 2 + pointerHeight) / 2 -
-											1
-									)
-									ctx.restore()
-								}
-
-								if (dataset.label == 'High') {
-									const meta = chartInstance.getDatasetMeta(i)
-
-									const last = meta.data.length - 1
-
-									const raw = dataset.data[last]
-
-									const str = '$' + abbreviateNumber(raw.y, 0)
-									ctx.save()
-
-									ctx.strokeStyle = 'lightgrey'
-									ctx.lineWidth = '1'
-									ctx.lineJoin = 'round'
-
-									const xPos = meta.data[last].x + 10.2
-									const yPos =
-										meta.data[last].y +
-										accuracyOffset +
-										highBoundaryOffset +
-										collisionOffsets.high
-
-									ctx.beginPath()
-									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-									ctx.lineTo(xPos, yPos)
-									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-									ctx.lineTo(xPos, yPos + pointerHeight)
-
-									ctx.moveTo(xPos, yPos)
-									ctx.lineTo(xPos, yPos - sideHeight * 2)
-									ctx.lineTo(xPos + width, yPos - sideHeight * 2)
-
-									ctx.lineTo(xPos + width, yPos + pointerHeight)
-									ctx.lineTo(xPos, yPos + pointerHeight)
-
-									ctx.stroke()
-
-									ctx.closePath()
-
-									ctx.fillStyle = 'rgba(4, 120, 87, 1)'
-									ctx.fillText(
-										str,
-										xPos + width - width / 2,
-										yPos -
-											sideHeight * 2 +
-											(sideHeight * 2 + pointerHeight) / 2 +
-											13
-									)
-									ctx.fillText(
-										'High',
-										xPos + width - width / 2,
-										yPos -
-											sideHeight * 2 +
-											(sideHeight * 2 + pointerHeight) / 2 -
-											1
-									)
-									ctx.restore()
-								}
-
-								if (dataset.label == 'Low') {
-									const meta = chartInstance.getDatasetMeta(i)
-									const last = meta.data.length - 1
-
-									const raw = dataset.data[last]
-
-									const str = '$' + abbreviateNumber(raw.y, 0)
-
-									ctx.save()
-
-									ctx.strokeStyle = 'lightgrey'
-									ctx.lineWidth = '1'
-									ctx.lineJoin = 'round'
-
-									const xPos = meta.data[last].x + 10.2
-									const yPos =
-										meta.data[last].y +
-										accuracyOffset +
-										collisionOffsets.low
-
-									ctx.beginPath()
-									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-									ctx.lineTo(xPos, yPos)
-
-									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
-									ctx.lineTo(xPos, yPos + pointerHeight)
-									ctx.moveTo(xPos, yPos)
-
-									ctx.lineTo(xPos + width, yPos)
-
-									ctx.lineTo(
-										xPos + width,
-										yPos + sideHeight * 2 + pointerHeight
-									)
-
-									ctx.lineTo(
-										xPos,
-										yPos + sideHeight * 2 + pointerHeight
-									)
-
-									ctx.lineTo(xPos, yPos + pointerHeight)
-									ctx.stroke()
-
-									ctx.closePath()
-
-									ctx.fillStyle = 'rgba(220, 38, 38, 1)'
-									ctx.fillText(
-										str,
-										xPos + width - width / 2,
-										yPos + (sideHeight * 2 + pointerHeight) / 2 + 13
-									)
-									ctx.fillText(
-										'Low',
-										xPos + width - width / 2,
-										yPos + (sideHeight * 2 + pointerHeight) / 2 - 1
-									)
 									ctx.restore()
 								}
 							})
