@@ -55,4 +55,4 @@ export type TableDynamic = {
 }
 
 // The stock index type (more specific is faster)
-export type IndexTypes = 'stocks' | 'etf' | 'histip' | 'futip'
+export type IndexTypes = 'allstocks' | 'stocks' | 'etf' | 'histip' | 'futip'

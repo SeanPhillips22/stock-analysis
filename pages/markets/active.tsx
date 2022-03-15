@@ -15,7 +15,7 @@ const page: PageConfig = {
 	metaTitle: "Today's Most Active Stocks",
 	metaDescription:
 		'A list of the stocks with the highest trading volume today. See stock price, price changes, market cap and more.',
-	heading: 'h1'
+	headingType: 'h1'
 }
 
 // the initial config for the select endpoint to fetch data

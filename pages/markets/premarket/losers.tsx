@@ -14,7 +14,7 @@ import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
 const page: PageConfig = {
 	path: '/markets/premarket/losers/',
 	metaTitle: "Today's Premarket Losers",
-	heading: 'h1'
+	headingType: 'h1'
 }
 
 // the initial config for the select endpoint to fetch data

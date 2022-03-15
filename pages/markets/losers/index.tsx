@@ -16,7 +16,7 @@ const page: PageConfig = {
 	metaTitle: "Today's Top Stock Losers",
 	metaDescription:
 		'A list of the stocks with the highest percentage loss today. See stock price, volume, market cap and more.',
-	heading: 'h1'
+	headingType: 'h1'
 }
 
 // the initial config for the select endpoint to fetch data
