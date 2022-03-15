@@ -5,6 +5,8 @@ import { Snippet } from './Snippet'
 import { SummaryTable } from './SummaryTable'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 
+import { EstimateChart } from 'components/Forecasts/Estimates/EstimateChart'
+
 export function PriceTarget() {
 	const { data } = useSymbolContext()
 
@@ -24,6 +26,7 @@ export function PriceTarget() {
 					</div>
 				</div>
 				<div className="grow md:pt-4 lg:pt-0 lg:pl-4">
+					<EstimateChart />
 					{data.targets.chart && <PriceTargetChart />}
 					<SummaryTable />
 				</div>

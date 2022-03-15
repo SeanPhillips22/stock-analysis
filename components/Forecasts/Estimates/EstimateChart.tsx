@@ -27,58 +27,178 @@ import {
 	UnavailableSafari
 } from 'components/Unavailable'
 
+import { abbreviateNumber } from 'functions/numbers/abbreviateNumber'
 import { format } from 'd3-format'
 import 'chartjs-adapter-date-fns'
 import { useMemo } from 'react'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { formatMonthLong } from 'functions/datetime/formatDates'
+// import { fillWhitespaceLine, formatTarget } from './target.functions'
 import {
 	fillWhitespaceLine,
 	formatTarget,
 	collisionOffset
-} from './target.functions'
+} from 'components/Forecasts/PriceTarget/target.functions'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-export function PriceTargetChart() {
+export function EstimateChart() {
+	const experimentalData = [
+		{
+			period: '2017-1-1',
+			revenueAvg: 41485974741.4,
+			revenueHigh: 43806000000,
+			revenueLow: 39034097760
+		},
+		{
+			period: '2018-1-1',
+			revenueAvg: 56973209550.4,
+			revenueHigh: 58331700000,
+			revenueLow: 53933320000
+		},
+		{
+			period: '2019-1-1',
+			revenueAvg: 72611486989.3,
+			revenueHigh: 74461065000,
+			revenueLow: 68652920000
+		},
+		{
+			period: '2020-1-1',
+			revenueAvg: 86654649582.5,
+			revenueHigh: 89888400000,
+			revenueLow: 76537849080
+		},
+		{
+			period: '2021-1-1',
+			revenueAvg: 121212841038.2,
+			revenueHigh: 125834100000,
+			revenueLow: 114573760000
+		},
+		{
+			period: '2022-1-1',
+			revenueAvg: 137267738634.8,
+			revenueHigh: 147309750000,
+			revenueLow: 124771972220
+		},
+		{
+			period: '2023-1-1',
+			revenueAvg: 161236112048.30002,
+			revenueHigh: 178050600000,
+			revenueLow: 141838340000
+		},
+		{
+			period: '2024-1-1',
+			revenueAvg: 180388094963.4,
+			revenueHigh: 197098560750,
+			revenueLow: 155828820000
+		},
+		{
+			period: '2025-1-1',
+			revenueAvg: 200825593932.32538,
+			revenueHigh: 210866873628.94165,
+			revenueLow: 194800826114.35562
+		},
+		{
+			period: '2026-1-1',
+			revenueAvg: 230285966277.58527,
+			revenueHigh: 239497404928.6887,
+			revenueLow: 223377387289.2577
+		}
+	]
+
+	const experimentalRevenueData = [
+		{
+			period: '2026-1-1',
+			revenue: null
+		},
+		{
+			period: '2025-1-1',
+			revenue: null
+		},
+		{
+			period: '2024-1-1',
+			revenue: null
+		},
+		{
+			period: '2023-1-1',
+			revenue: null
+		},
+		{
+			period: '2022-1-1',
+			revenue: null
+		},
+
+		{
+			period: '2021-1-1',
+			revenue: 117929000000
+		},
+		{
+			period: '2020-1-1',
+			revenue: 85965000000
+		},
+		{
+			period: '2019-1-1',
+			revenue: 70697000000
+		},
+		{
+			period: '2018-1-1',
+			revenue: 55838000000
+		},
+		{
+			period: '2017-1-1',
+			revenue: 40653000000
+		}
+	]
+
 	const { data } = useSymbolContext()
 	let { chart } = data.targets
 	const { high, average, low } = data.targets
 
 	const hasTargets = high && average && low
-	const currentDate = chart[chart.length - 2]?.t
-	const currentPrice = chart[chart.length - 2]?.c
-	const oneYearDate = chart[chart.length - 1]?.t
-	const initialPrice = chart[0]?.c
-	console.log(data)
+	const currentDate = chart[chart.length - 2].t
+	const currentPrice = chart[chart.length - 2].c
+	const oneYearDate = chart[chart.length - 1].t
+	const initialPrice = chart[0].c
+
 	// An invisible time series to adjust the appearance of a chart
 	// if the price history is less than 1 year
 	let whiteSpaceMonths = fillWhitespaceLine(chart)
 
-	const highData = [
-		{ x: currentDate, y: currentPrice },
-		{ x: oneYearDate, y: high }
-	]
+	const highData = experimentalData.map((item: any) => {
+		return { y: item.revenueHigh, x: item.period }
+	})
 
-	const avgData = [
-		{ x: currentDate, y: currentPrice },
-		{ x: oneYearDate, y: average }
-	]
+	const avgData = experimentalData.map((item: any) => {
+		return { y: item.revenueAvg, x: item.period }
+	})
 
-	const lowData = [
-		{ x: currentDate, y: currentPrice },
-		{ x: oneYearDate, y: low }
-	]
+	const lowData = experimentalData.map((item: any) => {
+		return { y: item.revenueLow, x: item.period }
+	})
 
-	const timeAxis = useMemo(() => chart.map((item: any) => item.t), [chart])
+	const timeAxis = useMemo(
+		() => experimentalRevenueData.map((item: any) => item.period),
+		[chart]
+	)
 
-	const priceAxis = useMemo(() => chart.map((item: any) => item.c), [chart])
+	const priceAxis = useMemo(
+		() => experimentalRevenueData.map((item: any) => item.revenue),
+		[chart]
+	)
 
 	const backgroundColorCodings = useMemo(
 		() =>
 			chart.map((i: any, index: number) =>
-				index == chart.length - 2 ? '#000000' : '#ffffff'
+				index == chart.length - 2 ? '#000000' : '#FFFFFF00'
+			),
+		[chart]
+	)
+
+	const gridColor = useMemo(
+		() =>
+			chart.map((i: any, index: number) =>
+				index == 4 ? '#efefef' : '#FFFFFF00'
 			),
 		[chart]
 	)
@@ -111,19 +231,20 @@ export function PriceTargetChart() {
 
 	let datasets: any[] = [
 		{
-			label: 'Monthly',
+			label: 'Yearly',
 			data: priceAxis,
 			pointHitRadius: 10,
-			pointRadius: 4,
-			pointBorderWidth: 3,
-			pointBorderColor: pointBorderColorCodings,
-			pointBackgroundColor: backgroundColorCodings,
+			pointRadius: 3,
+			pointBorderWidth: 4,
+			pointBorderColor: '#00A36C',
+			pointBackgroundColor: '#00A36C',
 			tension: 0,
-			borderColor: redOrGreen,
-			borderWidth: 2.5,
-			spanGaps: true
+			borderColor: 'black',
+			borderWidth: 5,
+			spanGaps: true,
+			borderDash: [0, 3]
 		},
-		{
+		/*{
 			label: 'Whitespace',
 			data: whiteSpaceMonths,
 			pointHitRadius: 0,
@@ -135,7 +256,7 @@ export function PriceTargetChart() {
 			borderColor: '#FFFFFF00',
 			borderWidth: 2.5,
 			spanGaps: true
-		},
+		}, */
 		{
 			label: 'High',
 			data: highData,
@@ -145,7 +266,7 @@ export function PriceTargetChart() {
 			borderColor: 'rgba(4, 120, 87, 1)',
 			borderWidth: 2.5,
 			spanGaps: true,
-			borderDash: [5, 6]
+			borderDash: [5, 3]
 		},
 		{
 			label: 'Average',
@@ -185,6 +306,7 @@ export function PriceTargetChart() {
 						afterDatasetsDraw: function (chart: any) {
 							if (!hasTargets) return
 							const chartInstance = chart
+
 							const ctx = chartInstance.ctx
 							ctx.font =
 								'bold 13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
@@ -199,18 +321,18 @@ export function PriceTargetChart() {
 							const accuracyOffset = -7.6
 
 							const highY =
+								chartInstance.getDatasetMeta(1).data[
+									chartInstance.getDatasetMeta(1).data.length - 1
+								].y + accuracyOffset
+
+							const avgY =
 								chartInstance.getDatasetMeta(2).data[
 									chartInstance.getDatasetMeta(2).data.length - 1
 								].y + accuracyOffset
 
-							const avgY =
+							const lowY =
 								chartInstance.getDatasetMeta(3).data[
 									chartInstance.getDatasetMeta(3).data.length - 1
-								].y + accuracyOffset
-
-							const lowY =
-								chartInstance.getDatasetMeta(4).data[
-									chartInstance.getDatasetMeta(4).data.length - 1
 								].y + accuracyOffset
 
 							let highBoundaryOffset = 0
@@ -230,10 +352,17 @@ export function PriceTargetChart() {
 
 							const width =
 								max([
-									ctx.measureText(lowData[lowData.length - 1].y).width,
-									ctx.measureText(highData[highData.length - 1].y)
-										.width,
-									ctx.measureText(avgData[avgData.length - 1].y).width,
+									ctx.measureText(
+										abbreviateNumber(lowData[lowData.length - 1].y, 0)
+									).width,
+									ctx.measureText(
+										abbreviateNumber(highData[highData.length - 1].y),
+										0
+									).width,
+									ctx.measureText(
+										abbreviateNumber(avgData[avgData.length - 1].y),
+										0
+									).width,
 									ctx.measureText('Average').width
 								]) + 10
 
@@ -241,7 +370,7 @@ export function PriceTargetChart() {
 								dataset: { data: any[]; label: string },
 								i: any
 							) {
-								if (dataset.label == 'Monthly') {
+								if (dataset.label == 'Yearly') {
 									const meta = chartInstance.getDatasetMeta(i)
 
 									ctx.save()
@@ -252,12 +381,12 @@ export function PriceTargetChart() {
 
 									ctx.fillText(
 										window.innerWidth > 428
-											? 'Past 12 Months'
-											: 'Past Year',
+											? 'Past Five Years'
+											: 'Past 5 Years',
 										window.innerWidth > 428
 											? meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
-											  ].tx1 - 55
+											  ].tx1 - 330
 											: meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
 											  ].tx1 - 37,
@@ -268,12 +397,12 @@ export function PriceTargetChart() {
 
 									ctx.fillText(
 										window.innerWidth > 428
-											? '12 Month Forecast'
-											: 'Next Year',
+											? 'Next Five Years'
+											: 'Next 5 Years',
 										window.innerWidth > 428
 											? meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
-											  ].tx1 + 65
+											  ].tx1 - 210
 											: meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
 											  ].tx1 + 40,
@@ -288,7 +417,7 @@ export function PriceTargetChart() {
 								if (dataset.label == 'Average') {
 									const meta = chartInstance.getDatasetMeta(i)
 									const last = meta.data.length - 1
-
+									console.log(meta)
 									const xPos = meta.data[last].x + 10.2
 									const yPos =
 										meta.data[last].y +
@@ -296,9 +425,8 @@ export function PriceTargetChart() {
 										collisionOffsets.avg
 
 									const raw = dataset.data[last]
-
-									const str = '$' + formatTarget(raw.y)
-
+									console.log(raw.y)
+									const str = '$' + abbreviateNumber(raw.y, 0)
 									ctx.save()
 
 									ctx.strokeStyle = 'lightgrey'
@@ -357,8 +485,7 @@ export function PriceTargetChart() {
 
 									const raw = dataset.data[last]
 
-									const str = '$' + formatTarget(raw.y)
-
+									const str = '$' + abbreviateNumber(raw.y, 0)
 									ctx.save()
 
 									ctx.strokeStyle = 'lightgrey'
@@ -415,7 +542,7 @@ export function PriceTargetChart() {
 
 									const raw = dataset.data[last]
 
-									const str = '$' + formatTarget(raw.y)
+									const str = '$' + abbreviateNumber(raw.y, 0)
 
 									ctx.save()
 
@@ -476,25 +603,28 @@ export function PriceTargetChart() {
 					animation: false,
 					scales: {
 						x: {
-							afterTickToLabelConversion: function (val: any) {
+							/* afterTickToLabelConversion: function (val: any) {
 								if (window.innerWidth < 563) {
 									val.ticks.splice(0, 3)
 								} else {
 									val.ticks.splice(0, 1)
 								}
-							},
+							}, */
+
 							type: 'time',
+
 							time: {
 								parser: 'yyyy-MM-dd',
-								stepSize: 4,
-								unit: 'month'
+								// stepSize: 3,
+								unit: 'year'
 							},
 							grid: {
-								display: true
+								display: true,
+								color: gridColor
 							},
 							ticks: {
-								align: 'end',
-								source: 'data',
+								align: 'center',
+								source: 'auto',
 								color: '#323232',
 								font: {
 									size: 13
@@ -505,7 +635,6 @@ export function PriceTargetChart() {
 							}
 						},
 						y: {
-							grace: '5%',
 							position: 'left',
 							ticks: {
 								color: '#323232',
@@ -514,13 +643,7 @@ export function PriceTargetChart() {
 								},
 								padding: 5,
 								callback: function (value) {
-									let formattedValue
-									if (value < 10) {
-										formattedValue = format('.1~f')(Number(value))
-										return '$' + formattedValue
-									}
-
-									return '$' + value
+									return abbreviateNumber(Number(value), 0)
 								}
 							},
 							grid: {
