@@ -96,6 +96,14 @@ export function PriceTargetChart() {
 		[chart]
 	)
 
+	const pointSize = useMemo(
+		() =>
+			chart.map((i: any, index: number) =>
+				index == chart.length - 2 ? 4 : 2.7
+			),
+		[chart]
+	)
+
 	// Chart.js causes critical errors on older Safari versions
 	if (isOldSafari()) {
 		return <UnavailableSafari classes="h-[275px]" />
@@ -114,10 +122,10 @@ export function PriceTargetChart() {
 			label: 'Monthly',
 			data: priceAxis,
 			pointHitRadius: 10,
-			pointRadius: 4,
+			pointRadius: pointSize,
 			pointBorderWidth: 3,
-			pointBorderColor: pointBorderColorCodings,
-			pointBackgroundColor: backgroundColorCodings,
+			pointBorderColor: redOrGreen,
+			pointBackgroundColor: redOrGreen,
 			tension: 0,
 			borderColor: redOrGreen,
 			borderWidth: 2.5,
@@ -245,8 +253,8 @@ export function PriceTargetChart() {
 									const meta = chartInstance.getDatasetMeta(i)
 
 									ctx.save()
-									ctx.strokeStyle = '#000000'
-									ctx.fillStyle = '#000000'
+									ctx.strokeStyle = '#323232'
+									ctx.fillStyle = '#323232'
 									ctx.lineWidth = '3.5'
 									ctx.lineJoin = 'round'
 
