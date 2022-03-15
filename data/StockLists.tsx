@@ -13,7 +13,7 @@ export const StockLists: StockList = {
 	'biggest-companies': {
 		page: {
 			path: '/list/biggest-companies/',
-			metaTitle: 'Top 500 Biggest Companies Ranked by Market Cap',
+			metaTitle: '500 Biggest Companies Ranked by Market Cap',
 			pageTitle: 'Largest Companies by Market Cap'
 		},
 		fixed: {
