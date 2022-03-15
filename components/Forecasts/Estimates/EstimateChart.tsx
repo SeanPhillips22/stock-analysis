@@ -46,6 +46,12 @@ defaults.font.family =
 export function EstimateChart() {
 	const experimentalData = [
 		{
+			period: '2016-1-1',
+			revenueAvg: 28173007452.600002,
+			revenueHigh: 29124064200,
+			revenueLow: 26450200000
+		},
+		{
 			period: '2017-1-1',
 			revenueAvg: 41485974741.4,
 			revenueHigh: 43806000000,
@@ -148,7 +154,8 @@ export function EstimateChart() {
 		{
 			period: '2017-1-1',
 			revenue: 40653000000
-		}
+		},
+		{ period: '2016-1-1', revenue: 27638000000 }
 	]
 
 	const { data } = useSymbolContext()
@@ -198,7 +205,7 @@ export function EstimateChart() {
 	const gridColor = useMemo(
 		() =>
 			chart.map((i: any, index: number) =>
-				index == 4 ? '#efefef' : '#FFFFFF00'
+				index == 5 || index == 10 ? '#efefef' : '#FFFFFF00'
 			),
 		[chart]
 	)
@@ -234,12 +241,12 @@ export function EstimateChart() {
 			label: 'Yearly',
 			data: priceAxis,
 			pointHitRadius: 10,
-			pointRadius: 3,
-			pointBorderWidth: 4,
-			pointBorderColor: '#00A36C',
-			pointBackgroundColor: '#00A36C',
+			pointRadius: 2,
+			pointBorderWidth: 3.5,
+			pointBorderColor: '#000039',
+			pointBackgroundColor: '#000039',
 			tension: 0,
-			borderColor: 'black',
+			borderColor: '#000039',
 			borderWidth: 5,
 			spanGaps: true,
 			borderDash: [0, 3]
@@ -266,7 +273,7 @@ export function EstimateChart() {
 			borderColor: 'rgba(4, 120, 87, 1)',
 			borderWidth: 2.5,
 			spanGaps: true,
-			borderDash: [5, 3]
+			borderDash: [3, 3]
 		},
 		{
 			label: 'Average',
@@ -277,7 +284,7 @@ export function EstimateChart() {
 			borderColor: 'rgba(55, 65, 81)',
 			borderWidth: 2.5,
 			spanGaps: true,
-			borderDash: [5, 6]
+			borderDash: [3, 3]
 		},
 		{
 			label: 'Low',
@@ -288,7 +295,7 @@ export function EstimateChart() {
 			tension: 0.01,
 			borderWidth: 2.5,
 			spanGaps: true,
-			borderDash: [5, 6]
+			borderDash: [3, 3]
 		}
 	]
 
@@ -374,8 +381,8 @@ export function EstimateChart() {
 									const meta = chartInstance.getDatasetMeta(i)
 
 									ctx.save()
-									ctx.strokeStyle = '#000000'
-									ctx.fillStyle = '#000000'
+									ctx.strokeStyle = '#323232'
+									ctx.fillStyle = '#323232'
 									ctx.lineWidth = '3.5'
 									ctx.lineJoin = 'round'
 
@@ -386,7 +393,7 @@ export function EstimateChart() {
 										window.innerWidth > 428
 											? meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
-											  ].tx1 - 330
+											  ].tx1 - 302
 											: meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
 											  ].tx1 - 37,
@@ -402,7 +409,7 @@ export function EstimateChart() {
 										window.innerWidth > 428
 											? meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
-											  ].tx1 - 210
+											  ].tx1 - 182
 											: meta.iScale._gridLineItems[
 													meta.iScale._gridLineItems.length - 2
 											  ].tx1 + 40,
@@ -643,6 +650,9 @@ export function EstimateChart() {
 								},
 								padding: 5,
 								callback: function (value) {
+									if (value == 0) {
+										return 0
+									}
 									return abbreviateNumber(Number(value), 0)
 								}
 							},
