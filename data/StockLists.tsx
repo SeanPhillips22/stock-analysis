@@ -19,6 +19,7 @@ export const StockLists: StockList = {
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],
 			controls: {
+				filter: true,
 				export: true,
 				columns: true
 			},
@@ -28,7 +29,7 @@ export const StockLists: StockList = {
 			columnOrder: ['number', 's', 'n', 'marketCap', 'price', 'change']
 		},
 		query: {
-			index: 'stocks',
+			index: 'allstocks',
 			main: 'marketCap',
 			count: 500,
 			sort: [{ id: 'marketCap', desc: true }],
