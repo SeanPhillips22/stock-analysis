@@ -29,6 +29,7 @@ import { abbreviateNumber } from 'functions/numbers/abbreviateNumber'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 import { EstimateChartType, ForecastData } from 'types/Forecast'
+import { dec0, dec3 } from 'functions/tables/formatTableCell'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -77,29 +78,29 @@ export function EstimateChart({ type, title }: Props) {
 	let low: any = [{ y: actual[lastDate], x: getYear(dates[lastDate]) }]
 	let avg: any = [{ y: actual[lastDate], x: getYear(dates[lastDate]) }]
 	Object.keys(estimatesData[type]).map(i => {
-		if (i === getYear(dates[lastDate])) return
+		if (getYear(i) === getYear(dates[lastDate])) return
 		// Push the values to the arrays
 		high.push({ y: estimatesData[type][i].high, x: getYear(i) })
 		avg.push({ y: estimatesData[type][i].avg, x: getYear(i) })
 		low.push({ y: estimatesData[type][i].low, x: getYear(i) })
 	})
 
-	console.log(high)
+	// Format the name of the data series
+	let seriesName = title.includes('Forecast') ? title.split(' ')[0] : title
 
 	let datasets: any[] = [
 		{
-			label: 'Yearly',
+			label: seriesName,
 			data: actual,
 			pointHitRadius: 10,
 			pointRadius: 0,
-			pointBorderWidth: 3,
-			pointBorderColor: 'lightgray',
-			pointBackgroundColor: 'lightgray',
+			pointBorderWidth: 5,
+			pointBorderColor: 'rgba(44, 98, 136, 1)',
+			pointBackgroundColor: 'rgba(44, 98, 136, 1)',
 			tension: 0,
-			borderColor: '#0096FF',
-			borderWidth: 2.5,
-			spanGaps: true,
-			borderDash: [0, 0]
+			borderColor: 'rgba(44, 98, 136, 1)',
+			borderWidth: 3,
+			spanGaps: true
 		},
 		{
 			label: 'High',
@@ -107,10 +108,10 @@ export function EstimateChart({ type, title }: Props) {
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderColor: 'lightgray',
+			borderColor: 'rgba(4, 120, 87, 1)',
 			borderWidth: 2.5,
 			spanGaps: true,
-			borderDash: [3, 3]
+			borderDash: [5, 3]
 		},
 		{
 			label: 'Average',
@@ -118,124 +119,63 @@ export function EstimateChart({ type, title }: Props) {
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderColor: 'lightgray',
+			borderColor: '#444444',
 			borderWidth: 2.5,
 			spanGaps: true,
-			borderDash: [3, 3]
+			borderDash: [5, 3]
 		},
 		{
 			label: 'Low',
 			data: low,
-			borderColor: 'lightgray',
+			borderColor: 'rgba(220, 38, 38, 1)',
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
 			borderWidth: 2.5,
 			spanGaps: true,
-			borderDash: [3, 3]
+			borderDash: [5, 3]
 		}
 	]
 
 	return (
 		<div>
 			<h2 className="mb-2 text-xl font-bold">{title}</h2>
-			<div className="h-[275px] w-full border p-2">
+			<div className="h-[275px] w-full rounded-sm border p-2">
 				<Line
 					id="1"
 					data={{
 						labels: dates,
 						datasets: datasets
 					}}
-					plugins={[
-						{
-							id: '1',
-							afterDatasetsDraw: function (chart: any) {
-								const chartInstance = chart
-
-								const ctx = chartInstance.ctx
-								ctx.font =
-									'bold 13px -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
-								const fontSize = 12
-								ctx.textAlign = 'center'
-								ctx.textBaseline = 'bottom'
-
-								const max = (arr: number[]): number => Math.max(...arr)
-
-								chartInstance.data.datasets.forEach(function (
-									dataset: { data: any[]; label: string },
-									i: any
-								) {
-									if (dataset.label == 'Yearly') {
-										const meta = chartInstance.getDatasetMeta(i)
-
-										ctx.save()
-										ctx.strokeStyle = '#323232'
-										ctx.fillStyle = '#323232'
-										ctx.lineWidth = '3.5'
-										ctx.lineJoin = 'round'
-
-										ctx.fillText(
-											window.innerWidth > 428
-												? 'Past Five Years'
-												: 'Past 5 Years',
-											window.innerWidth > 428
-												? meta.iScale._gridLineItems[
-														meta.iScale._gridLineItems.length - 2
-												  ].tx1 - 302
-												: meta.iScale._gridLineItems[
-														meta.iScale._gridLineItems.length - 2
-												  ].tx1 - 37,
-											meta.iScale._gridLineItems[
-												meta.iScale._gridLineItems.length - 2
-											].y1
-										)
-
-										ctx.fillText(
-											window.innerWidth > 428
-												? 'Next Five Years'
-												: 'Next 5 Years',
-											window.innerWidth > 428
-												? meta.iScale._gridLineItems[
-														meta.iScale._gridLineItems.length - 2
-												  ].tx1 - 182
-												: meta.iScale._gridLineItems[
-														meta.iScale._gridLineItems.length - 2
-												  ].tx1 + 40,
-											meta.iScale._gridLineItems[
-												meta.iScale._gridLineItems.length - 2
-											].y1
-										)
-
-										ctx.restore()
-									}
-								})
-							}
-						}
-					]}
 					options={{
 						maintainAspectRatio: false,
 						animation: false,
 						scales: {
 							x: {
 								grid: {
-									display: true
+									display: false
 								},
 								ticks: {
 									align: 'center',
 									source: 'auto',
-									color: '#323232',
+									color: '#222',
 									font: {
 										size: 13
 									},
 									autoSkip: false,
 									maxRotation: 0,
-									minRotation: 0
+									minRotation: 0,
+									maxTicksLimit:
+										typeof window !== 'undefined' &&
+										window.innerWidth < 600
+											? 7
+											: 10
 								}
 							},
 							y: {
 								position: 'right',
 								ticks: {
-									color: '#323232',
+									color: '#222',
 									font: {
 										size: 13
 									},
@@ -244,8 +184,16 @@ export function EstimateChart({ type, title }: Props) {
 										if (value == 0) {
 											return 0
 										}
-										return abbreviateNumber(Number(value), 0)
-									}
+										if (type === 'revenue' || type === 'eps')
+											return abbreviateNumber(Number(value), 0)
+										if (
+											type === 'revenueGrowth' ||
+											type === 'epsGrowth'
+										)
+											return abbreviateNumber(Number(value), 0) + '%'
+										return value
+									},
+									maxTicksLimit: 8
 								},
 								grid: {
 									drawBorder: true,
@@ -280,7 +228,27 @@ export function EstimateChart({ type, title }: Props) {
 									bottom: 12,
 									left: 15
 								},
-								displayColors: false
+								displayColors: false,
+								callbacks: {
+									label: function (context: any) {
+										let label = context.dataset.label || ''
+										// Don't show multiple labels on the same dataset
+										if (
+											context.label === getYear(dates[lastDate]) &&
+											label !== seriesName
+										) {
+											return ''
+										}
+										const val = parseFloat(context.parsed.y) || 0
+										if (type.includes('Growth'))
+											return `${label}: ${dec3.format(val)}%`
+										if (type === 'revenue')
+											return `${label}: ${dec0.format(val)}`
+										if (type === 'eps')
+											return `${label}: ${dec3.format(val)}`
+										else return `${label}: ${val.toString()}`
+									}
+								}
 							}
 						}
 					}}

@@ -7,6 +7,7 @@ import { Ratings } from 'components/Forecasts/Ratings/_Ratings'
 import { PriceTarget } from 'components/Forecasts/PriceTarget/_PriceTarget'
 import { ContentWide1 } from 'components/Ads/AdSense/ContentWide1'
 import { Estimates } from 'components/Forecasts/Estimates/_Estimates'
+import { ContentWide2 } from 'components/Ads/AdSense/ContentWide2'
 import { EstimateChartArea } from 'components/Forecasts/Estimates/EstimateChartArea'
 
 type Props = {
@@ -27,7 +28,7 @@ export default function ForecastPage({ info, data }: Props) {
 				<ContentWide1 />
 				<Ratings />
 				<Estimates />
-				<ContentWide1 />
+				<ContentWide2 />
 				<EstimateChartArea />
 			</div>
 		</Stock>

@@ -51,7 +51,7 @@ export function PriceTargetChart() {
 	const currentPrice = chart[chart.length - 2]?.c
 	const oneYearDate = chart[chart.length - 1]?.t
 	const initialPrice = chart[0]?.c
-	console.log(data)
+
 	// An invisible time series to adjust the appearance of a chart
 	// if the price history is less than 1 year
 	let whiteSpaceMonths = fillWhitespaceLine(chart)
