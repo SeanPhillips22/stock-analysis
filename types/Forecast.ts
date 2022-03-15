@@ -67,10 +67,27 @@ export type Estimates = {
 	}
 }
 
+export type EstimateChartType =
+	| 'revenue'
+	| 'eps'
+	| 'revenueGrowth'
+	| 'epsGrowth'
+
+export type EstimatesCharts = {
+	[key in EstimateChartType]: {
+		[key: string]: {
+			avg: number
+			high: number
+			low: number
+		}
+	}
+}
+
 export type ForecastData = {
 	targets: Targets
 	recommendations: Recommendations[]
 	estimates: Estimates
+	estimatesCharts: EstimatesCharts
 }
 
 export type Forecast = {
