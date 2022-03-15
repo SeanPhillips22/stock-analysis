@@ -29,7 +29,7 @@ import { abbreviateNumber } from 'functions/numbers/abbreviateNumber'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 import { EstimateChartType, ForecastData } from 'types/Forecast'
-import { dec0, dec3 } from 'functions/tables/formatTableCell'
+import { dec0, dec2, dec3 } from 'functions/tables/formatTableCell'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -108,8 +108,8 @@ export function EstimateChart({ type, title }: Props) {
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderColor: 'rgba(4, 120, 87, 1)',
-			borderWidth: 2.5,
+			borderColor: 'rgba(44, 98, 136, 0.7)',
+			borderWidth: 2,
 			spanGaps: true,
 			borderDash: [5, 3]
 		},
@@ -119,19 +119,19 @@ export function EstimateChart({ type, title }: Props) {
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderColor: '#444444',
-			borderWidth: 2.5,
+			borderColor: 'rgba(44, 98, 136, 0.9)',
+			borderWidth: 3,
 			spanGaps: true,
 			borderDash: [5, 3]
 		},
 		{
 			label: 'Low',
 			data: low,
-			borderColor: 'rgba(220, 38, 38, 1)',
+			borderColor: 'rgba(44, 98, 136, 0.7)',
 			pointHitRadius: 10,
 			pointRadius: 0,
 			tension: 0.01,
-			borderWidth: 2.5,
+			borderWidth: 2,
 			spanGaps: true,
 			borderDash: [5, 3]
 		}
@@ -140,7 +140,7 @@ export function EstimateChart({ type, title }: Props) {
 	return (
 		<div>
 			<h2 className="mb-2 text-xl font-bold">{title}</h2>
-			<div className="h-[275px] w-full rounded-sm border p-2">
+			<div className="h-[275px] w-full rounded-sm border p-2 shadow">
 				<Line
 					id="1"
 					data={{
@@ -241,7 +241,7 @@ export function EstimateChart({ type, title }: Props) {
 										}
 										const val = parseFloat(context.parsed.y) || 0
 										if (type.includes('Growth'))
-											return `${label}: ${dec3.format(val)}%`
+											return `${label}: ${dec2.format(val)}%`
 										if (type === 'revenue')
 											return `${label}: ${dec0.format(val)}`
 										if (type === 'eps')
