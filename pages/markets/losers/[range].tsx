@@ -72,7 +72,7 @@ export default function LosersPageRange({
 	const page: PageConfig = {
 		path: `/markets/losers/${rangePath}/`,
 		metaTitle: `Top Stock Losers ${metaTitle}`,
-		heading: 'h1'
+		headingType: 'h1'
 	}
 
 	query = {

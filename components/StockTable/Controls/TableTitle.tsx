@@ -2,16 +2,16 @@ import { usePageContext } from 'components/Markets/PageContext'
 import { useTableContext } from '../TableContext'
 
 type Props = {
-	title: string
+	title?: string
 	tableId?: string
 }
 
 export function TableTitle({ title, tableId }: Props) {
 	const { dynamic } = useTableContext()
 	const { main, sortDirection } = dynamic
-	const { page } = usePageContext()
+	const { page, count } = usePageContext()
 
-	let printTitle = title
+	let printTitle = title || `${count} Stocks`
 
 	// Change the title from "Today" if a different time range is selected
 	if ((tableId === 'gainers' || tableId === 'losers') && main !== 'change') {
@@ -25,5 +25,9 @@ export function TableTitle({ title, tableId }: Props) {
 		printTitle = printTitle.replace('Gainers', 'Losers')
 	}
 
-	return page?.heading === 'h1' ? <h1>{printTitle}</h1> : <h2>{printTitle}</h2>
+	return page?.headingType === 'h1' ? (
+		<h1>{printTitle}</h1>
+	) : (
+		<h2>{printTitle}</h2>
+	)
 }

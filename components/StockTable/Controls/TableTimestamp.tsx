@@ -6,7 +6,7 @@ export function TableTimestamp() {
 	return (
 		<div className="controls-timestamp">
 			<span>Updated</span>{' '}
-			{page.path.includes('premarket') ? updated.premarket : updated.last}
+			{page.path.includes('premarket') ? updated?.premarket : updated?.last}
 		</div>
 	)
 }
