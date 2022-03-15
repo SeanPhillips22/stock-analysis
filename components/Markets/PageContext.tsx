@@ -4,7 +4,8 @@ import { TableTimestamp } from 'types/Tables'
 
 type ContextProps = {
 	page: PageConfig
-	updated: TableTimestamp
+	updated?: TableTimestamp
+	count?: number
 }
 
 export const PageContext = createContext({} as ContextProps)
@@ -12,7 +13,8 @@ export const PageContext = createContext({} as ContextProps)
 type Props = {
 	value: {
 		page: PageConfig
-		updated: TableTimestamp
+		updated?: TableTimestamp
+		count?: number
 	}
 	children: React.ReactNode
 }

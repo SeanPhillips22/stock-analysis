@@ -77,7 +77,7 @@ export default function GainersPageRange({
 	const page: PageConfig = {
 		path: `/markets/gainers/${rangePath}/`,
 		metaTitle: `Top Stock Gainers ${metaTitle}`,
-		heading: 'h1'
+		headingType: 'h1'
 	}
 
 	query = {

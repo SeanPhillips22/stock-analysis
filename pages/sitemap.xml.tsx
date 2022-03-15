@@ -48,6 +48,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 		'actions/spinoffs/',
 		'actions/bankruptcies/',
 		'actions/acquisitions/',
+		'list/biggest-companies/',
+		'list/monthly-dividend-stocks/',
 		'stock-market-hours/',
 		'berkshire-class-a-and-class-b-stock/',
 		'safe-low-risk-investments/',
