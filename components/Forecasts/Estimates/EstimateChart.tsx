@@ -7,7 +7,6 @@ import {
 	LineElement,
 	LinearScale,
 	CategoryScale,
-	TimeScale,
 	PointElement,
 	defaults
 } from 'chart.js'
@@ -17,7 +16,6 @@ ChartJS.register(
 	LineElement,
 	LinearScale,
 	CategoryScale,
-	TimeScale,
 	PointElement
 )
 
@@ -28,11 +26,9 @@ import {
 } from 'components/Unavailable'
 
 import { abbreviateNumber } from 'functions/numbers/abbreviateNumber'
-import 'chartjs-adapter-date-fns'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 import { EstimateChartType, ForecastData } from 'types/Forecast'
-import { formatDateYear, formatMonthLong } from 'functions/datetime/formatDates'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -40,6 +36,10 @@ defaults.font.family =
 type Props = {
 	type: EstimateChartType
 	title: string
+}
+
+function getYear(date: string) {
+	return date.split('-')[0]
 }
 
 export function EstimateChart({ type, title }: Props) {
@@ -64,7 +64,7 @@ export function EstimateChart({ type, title }: Props) {
 	}
 
 	// Get the dates to use on the x-axis
-	const dates = actualData.dates
+	const dates = actualData.dates.map(i => getYear(i))
 
 	// Get the "actual" data (not estimates)
 	const actual = actualData[type].map((i, ii) => {
@@ -73,15 +73,15 @@ export function EstimateChart({ type, title }: Props) {
 	})
 
 	// Grab the high, low and avg estimates
-	let high: any = [{ y: actual[lastDate], x: dates[lastDate] }]
-	let low: any = [{ y: actual[lastDate], x: dates[lastDate] }]
-	let avg: any = [{ y: actual[lastDate], x: dates[lastDate] }]
+	let high: any = [{ y: actual[lastDate], x: getYear(dates[lastDate]) }]
+	let low: any = [{ y: actual[lastDate], x: getYear(dates[lastDate]) }]
+	let avg: any = [{ y: actual[lastDate], x: getYear(dates[lastDate]) }]
 	Object.keys(estimatesData[type]).map(i => {
-		if (i === dates[lastDate]) return
+		if (i === getYear(dates[lastDate])) return
 		// Push the values to the arrays
-		high.push({ y: estimatesData[type][i].high, x: i })
-		avg.push({ y: estimatesData[type][i].avg, x: i })
-		low.push({ y: estimatesData[type][i].low, x: i })
+		high.push({ y: estimatesData[type][i].high, x: getYear(i) })
+		avg.push({ y: estimatesData[type][i].avg, x: getYear(i) })
+		low.push({ y: estimatesData[type][i].low, x: getYear(i) })
 	})
 
 	console.log(high)
@@ -217,11 +217,6 @@ export function EstimateChart({ type, title }: Props) {
 						animation: false,
 						scales: {
 							x: {
-								type: 'time',
-								time: {
-									parser: 'yyyy-MM-dd',
-									unit: 'year'
-								},
 								grid: {
 									display: true
 								},
@@ -285,15 +280,7 @@ export function EstimateChart({ type, title }: Props) {
 									bottom: 12,
 									left: 15
 								},
-								displayColors: false,
-								callbacks: {
-									title: function (tooltipItem: any) {
-										let label = tooltipItem[0].label
-										let split = label.split(' ')
-										let year = split[2].substring(0, 4)
-										return year
-									}
-								}
+								displayColors: false
 							}
 						}
 					}}
