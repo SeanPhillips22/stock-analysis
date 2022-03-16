@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Chart, Line } from 'react-chartjs-2'
+import { Chart } from 'react-chartjs-2'
 import {
 	Chart as ChartJS,
 	LineController,
@@ -100,6 +100,18 @@ export function EstimateGrowthChart({ type, title }: Props) {
 		return i.y
 	})
 
+	const backgroundColorCodings = combinedActualandEstimates.map((i, index) => {
+		if (i.y < 0) {
+			return index <= lastDate
+				? 'rgba(220, 38, 38, 0.8)'
+				: 'rgba(220, 38, 38, 0.6)'
+		}
+
+		return index <= lastDate
+			? 'rgba(4, 120, 87, 0.8)'
+			: 'rgba(4, 120, 87, 0.6)'
+	})
+
 	// Format the name of the data series
 	let seriesName = title.includes('Forecast') ? title.split(' ')[0] : title
 
@@ -109,9 +121,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 			data: combinedActualandEstimates,
 			labels: labels,
 			spanGaps: true,
-			backgroundColor: 'rgba(44, 98, 136, 0.3)',
-			borderColor: 'rgba(44, 98, 136, 1)',
-			borderWidth: 1
+			backgroundColor: backgroundColorCodings
 		}
 	]
 
