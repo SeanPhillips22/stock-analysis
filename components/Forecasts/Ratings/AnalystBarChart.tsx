@@ -42,11 +42,19 @@ export function AnalystBarChart() {
 	const analystAxis = (s: string) =>
 		data.recommendations.map((item: { [x: string]: any }) => item[s])
 
+	'rgb(119, 21, 17)',
+		'rgb(172, 37, 31)',
+		'rgb(174, 177, 0)',
+		'rgb(29, 148, 0)',
+		'rgb(0, 136, 0)'
+
 	let d: any[] = [
 		{
 			label: 'Strong Buy',
 			data: analystAxis('strongBuy'),
 			backgroundColor: 'rgb(0, 153, 0)',
+			borderColor: 'rgb(0, 136, 0)',
+			borderWidth: 1,
 			barPercentage: 0.5,
 			barThickness: thickness,
 			maxBarThickness: thickness,
@@ -56,6 +64,8 @@ export function AnalystBarChart() {
 			label: 'Buy',
 			data: analystAxis('buy'),
 			backgroundColor: 'rgb(67, 175, 29)',
+			borderColor: 'rgb(29, 148, 0)',
+			borderWidth: 1,
 			barPercentage: 0.5,
 			barThickness: thickness,
 			maxBarThickness: thickness,
@@ -66,6 +76,8 @@ export function AnalystBarChart() {
 			label: 'Hold',
 			data: analystAxis('hold'),
 			backgroundColor: 'rgb(204, 204, 0)',
+			borderColor: 'rgb(174, 177, 0)',
+			borderWidth: 1,
 			barPercentage: 0.5,
 			barThickness: thickness,
 			maxBarThickness: thickness,
@@ -76,6 +88,8 @@ export function AnalystBarChart() {
 			label: 'Sell',
 			data: analystAxis('sell'),
 			backgroundColor: 'rgb(203, 67, 53)',
+			borderColor: 'rgb(172, 37, 31)',
+			borderWidth: 1,
 			barPercentage: 0.5,
 			barThickness: thickness,
 			maxBarThickness: thickness,
@@ -85,6 +99,8 @@ export function AnalystBarChart() {
 			label: 'Strong Sell',
 			data: analystAxis('strongSell'),
 			backgroundColor: 'rgb(148, 49, 38)',
+			borderColor: 'rgb(119, 21, 17)',
+			borderWidth: 1,
 			barPercentage: 0.5,
 			barThickness: thickness,
 			maxBarThickness: thickness,
