@@ -22,11 +22,7 @@ export const StockLists: StockList = {
 				filter: true,
 				export: true,
 				columns: true
-			},
-			other: {
-				showNumberColumn: true
-			},
-			columnOrder: ['number', 's', 'n', 'marketCap', 'price', 'change']
+			}
 		},
 		query: {
 			index: 'allstocks',
@@ -34,7 +30,7 @@ export const StockLists: StockList = {
 			count: 500,
 			sort: [{ id: 'marketCap', desc: true }],
 			sortDirection: 'desc',
-			columns: ['s', 'n', 'marketCap', 'price', 'change']
+			columns: ['rank', 's', 'n', 'marketCap', 'price', 'change']
 		}
 	},
 	'monthly-dividend-stocks': {
@@ -57,6 +53,28 @@ export const StockLists: StockList = {
 			sortDirection: 'desc',
 			columns: ['s', 'n', 'dividendYield', 'price', 'change', 'marketCap'],
 			filters: ['payoutFrequency-is-monthly']
+		}
+	},
+	'largest-car-companies': {
+		page: {
+			path: '/list/largest-car-companies/',
+			metaTitle: 'Largest Car Companies by Market Cap',
+			pageTitle: 'Largest Car Companies by Market Cap'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }],
+			controls: {
+				export: true,
+				columns: true
+			}
+		},
+		query: {
+			index: 'stocks',
+			main: 'marketCap',
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['industry-isin-automobiles|auto%manufacturers']
 		}
 	}
 }

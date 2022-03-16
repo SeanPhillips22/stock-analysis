@@ -84,21 +84,29 @@ export function StockTableBody({
 							return (
 								<tr key={i}>
 									{row.cells.map((cell, ii) => {
-										let cellProps = DP[cell.column.id as DataId]
+										let id = cell.column.id
+										let cellProps = DP[id as DataId]
 										let { format, css } = cellProps
 										let value = cell.value
-										let uniqueKey = `${i}-${cell.column.id}-${ii}`
+										let uniqueKey = `${i}-${id}-${ii}`
 										if (
 											!css &&
 											format !== 'string' &&
 											format !== 'formatDate' &&
-											format !== 'linkSymbol'
+											format !== 'linkSymbol' &&
+											id !== 'rank'
 										)
 											css = 'tr'
 
 										return (
 											<td key={uniqueKey} className={css}>
-												{formatTableCell(format, value, 'stocks')}
+												{id === 'rank'
+													? i + 1
+													: formatTableCell(
+															format,
+															value,
+															'stocks'
+													  )}
 											</td>
 										)
 									})}

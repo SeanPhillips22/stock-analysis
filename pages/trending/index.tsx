@@ -20,7 +20,16 @@ const query: TableDynamic = {
 	count: 20,
 	sort: [{ id: 'views', desc: true }],
 	sortDirection: 'desc',
-	columns: ['s', 'n', 'views', 'marketCap', 'price', 'change', 'volume']
+	columns: [
+		'rank',
+		's',
+		'n',
+		'views',
+		'marketCap',
+		'price',
+		'change',
+		'volume'
+	]
 }
 
 export default function Trending(props: Props) {
@@ -51,19 +60,6 @@ export default function Trending(props: Props) {
 											export: true,
 											columns: true,
 											results: true
-										},
-										columnOrder: [
-											'number',
-											's',
-											'n',
-											'views',
-											'marketCap',
-											'price',
-											'change',
-											'volume'
-										],
-										other: {
-											showNumberColumn: true
 										}
 									},
 									dynamic: query

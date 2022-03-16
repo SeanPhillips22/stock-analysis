@@ -135,7 +135,6 @@ export type DataId =
 	| 'workingCapital' // Working Capital
 	| 'lastSplitType' // Last Stock Split
 	| 'lastSplitDate' // Last Split Date
-	| 'number' // The number of the table row
 	| 'views' // Pageviews via Google Analytics
 	| 'isSpac' // Is SPAC
 	| 'zScore' // Altman Z-Score
@@ -150,3 +149,4 @@ export type DataId =
 	| 'etfRegion' // ETF Geographic Region
 	| 'issuer' // ETF Geographic Region
 	| 'etfIndex' // Index tracked by the ETF
+	| 'rank' // The number of the table row

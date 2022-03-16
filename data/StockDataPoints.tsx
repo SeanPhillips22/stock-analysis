@@ -44,6 +44,7 @@ export function getDataPointsArray(type: IndexTypes, exclude?: DataId[]) {
  * Stock Columns: all the data points available for a stock
  */
 export const DataPoints: Props = {
+	rank: { id: 'rank', name: 'No.' },
 	s: { id: 's', name: 'Symbol', format: 'linkSymbol' },
 	n: {
 		id: 'n',
@@ -649,12 +650,6 @@ export const DataPoints: Props = {
 		id: 'views',
 		name: 'Views',
 		format: 'integer'
-	},
-	number: {
-		id: 'number',
-		name: 'Number',
-		format: 'integer',
-		css: 'sl'
 	},
 	/* IPOs
 	

@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next/types'
+import { GetServerSideProps } from 'next/types'
 import { StockLists } from 'data/StockLists'
 import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
@@ -36,14 +36,26 @@ export default function StockList({ listId, data, page, fixed, query }: Props) {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const listId = params?.slug as string
+export const getServerSideProps: GetServerSideProps = async context => {
+	const listId = context?.params?.slug as string
 
+	// If list ID is not in StocksLists, return not found
+	if (!StockLists[listId]) {
+		return {
+			notFound: true
+		}
+	}
+
+	// Add the configs from StockLists to the props that are returned
 	const page = StockLists[listId].page
 	const fixed = StockLists[listId].fixed
 	const query = StockLists[listId].query
 
+	// Fetch the data
 	const data = await getSelect(query, false)
+
+	// Set the page cache to 10 minutes
+	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=600')
 
 	return {
 		props: {
@@ -53,17 +65,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			fixed,
 			query
 		}
-	}
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
-	const paths = [
-		{ params: { slug: 'biggest-companies' } },
-		{ params: { slug: 'monthly-dividend-stocks' } }
-	]
-
-	return {
-		paths,
-		fallback: false
 	}
 }

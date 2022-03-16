@@ -22,23 +22,13 @@ export function StockTable({ _data }: { _data: any[] }) {
 
 	// memoize the data and columns
 	const data = useMemo(() => query?.data?.data || query?.data, [query.data])
-	const columns = useMemo(
-		() => getColumns(_columns, main, fixed),
-		[_columns, fixed, main]
-	)
+	const columns = useMemo(() => getColumns(_columns, main), [_columns, main])
 
 	// Memoize the sort props to insert into the table
 	const sortProps = useMemo(
 		() => ({ defaultSort, setSort: (sort: any) => setState({ sort }) }),
 		[defaultSort, setState]
 	)
-
-	// Add the "number" cell to the front of each row, if applicable
-	if (fixed.other?.showNumberColumn) {
-		data.forEach((d: any, i: number) => {
-			d.number = i + 1
-		})
-	}
 
 	// If there's no data, display a fallback with title and text
 	// Completely skip rendering the stock table

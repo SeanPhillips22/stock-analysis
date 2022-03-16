@@ -29,9 +29,9 @@ export type TableFixed = {
 	}
 
 	// Other options to customize the table
-	other?: {
-		showNumberColumn?: boolean // Show the number column
-	}
+	// other?: {
+	// 	showNumberColumn?: boolean // Show the number column
+	// }
 }
 
 // Dynamic data that becomes state and is used to modify the table

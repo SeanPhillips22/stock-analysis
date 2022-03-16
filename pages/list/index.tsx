@@ -17,6 +17,13 @@ export default function StockListPage() {
 					</Link>
 				</li>
 				<li>
+					<Link href="/list/largest-car-companies/" prefetch={false}>
+						<a className="bll text-lg">
+							Largest Car Companies by Market Cap
+						</a>
+					</Link>
+				</li>
+				<li>
 					<Link href="/list/monthly-dividend-stocks/" prefetch={false}>
 						<a className="bll text-lg">Monthly Dividend Payers</a>
 					</Link>
