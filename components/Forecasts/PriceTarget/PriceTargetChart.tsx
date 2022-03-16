@@ -75,23 +75,15 @@ export function PriceTargetChart() {
 
 	const priceAxis = useMemo(() => chart.map((item: any) => item.c), [chart])
 
-	const backgroundColorCodings = useMemo(
-		() =>
-			chart.map((i: any, index: number) =>
-				index == chart.length - 2 ? '#000000' : '#ffffff'
-			),
-		[chart]
-	)
-
 	const redOrGreen =
 		currentPrice - initialPrice > 0
 			? 'rgba(4, 120, 87, 1)'
 			: 'rgba(220, 38, 38, 1)'
 
-	const pointBorderColorCodings = useMemo(
+	const pointSize = useMemo(
 		() =>
 			chart.map((i: any, index: number) =>
-				index == chart.length - 2 ? '#000000' : redOrGreen
+				index == chart.length - 2 ? 4 : 2.7
 			),
 		[chart]
 	)
@@ -114,10 +106,10 @@ export function PriceTargetChart() {
 			label: 'Monthly',
 			data: priceAxis,
 			pointHitRadius: 10,
-			pointRadius: 4,
+			pointRadius: pointSize,
 			pointBorderWidth: 3,
-			pointBorderColor: pointBorderColorCodings,
-			pointBackgroundColor: backgroundColorCodings,
+			pointBorderColor: redOrGreen,
+			pointBackgroundColor: redOrGreen,
 			tension: 0,
 			borderColor: redOrGreen,
 			borderWidth: 2.5,
@@ -129,8 +121,6 @@ export function PriceTargetChart() {
 			pointHitRadius: 0,
 			pointRadius: 0,
 			pointBorderWidth: 0,
-			pointBorderColor: pointBorderColorCodings,
-			pointBackgroundColor: backgroundColorCodings,
 			tension: 0,
 			borderColor: '#FFFFFF00',
 			borderWidth: 2.5,
@@ -245,8 +235,8 @@ export function PriceTargetChart() {
 									const meta = chartInstance.getDatasetMeta(i)
 
 									ctx.save()
-									ctx.strokeStyle = '#000000'
-									ctx.fillStyle = '#000000'
+									ctx.strokeStyle = '#323232'
+									ctx.fillStyle = '#323232'
 									ctx.lineWidth = '3.5'
 									ctx.lineJoin = 'round'
 
