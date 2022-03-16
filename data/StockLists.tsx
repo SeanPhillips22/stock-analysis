@@ -14,7 +14,7 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/biggest-companies/',
 			metaTitle: '500 Biggest Companies Ranked by Market Cap',
-			pageTitle: 'Largest Companies by Market Cap'
+			pageTitle: 'Biggest Companies by Market Cap'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],
@@ -55,11 +55,11 @@ export const StockLists: StockList = {
 			filters: ['payoutFrequency-is-monthly']
 		}
 	},
-	'largest-car-companies': {
+	'biggest-car-companies': {
 		page: {
-			path: '/list/largest-car-companies/',
-			metaTitle: 'Largest Car Companies by Market Cap',
-			pageTitle: 'Largest Car Companies by Market Cap'
+			path: '/list/biggest-car-companies/',
+			metaTitle: 'Biggest Car Companies by Market Cap',
+			pageTitle: 'Biggest Car Companies by Market Cap'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],

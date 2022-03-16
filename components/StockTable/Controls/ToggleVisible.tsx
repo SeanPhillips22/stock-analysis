@@ -6,7 +6,6 @@ export function ToggleVisible() {
 	const { dynamic, setState } = useTableContext()
 
 	function toggle() {
-		console.log('toggle')
 		setState({ showOnMobile: !dynamic.showOnMobile })
 	}
 
