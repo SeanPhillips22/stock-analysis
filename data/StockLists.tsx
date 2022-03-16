@@ -14,8 +14,11 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/biggest-companies/',
 			metaTitle: '500 Biggest Companies Ranked by Market Cap',
+			metaDescription:
+				'A list of the 500 biggest companies ranked by market cap, updated daily. This list includes public companies that can be traded in the U.S.',
 			pageTitle: 'Biggest Companies by Market Cap',
-			tableTitleObject: 'Companies'
+			tableTitleObject: 'Companies',
+			headingType: 'div'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],
@@ -38,8 +41,11 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/monthly-dividend-stocks/',
 			metaTitle: 'List of Stocks That Pay Monthly Dividends',
+			metaDescription:
+				'A list of dividend stocks that pay their shareholder each and every month.',
 			pageTitle: 'Stocks That Pay Monthly Dividends',
-			tableTitleObject: 'Monthly Payers'
+			tableTitleObject: 'Monthly Payers',
+			headingType: 'div'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],
@@ -62,8 +68,11 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/biggest-car-companies/',
 			metaTitle: 'List of Biggest Car Companies by Market Cap',
+			metaDescription:
+				"A list of the world's biggest car companies and automakers, ranked by market cap.",
 			pageTitle: 'Biggest Car Companies by Market Cap',
-			tableTitleObject: 'Companies'
+			tableTitleObject: 'Companies',
+			headingType: 'div'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],

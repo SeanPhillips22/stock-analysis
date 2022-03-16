@@ -25,9 +25,14 @@ export function TableTitle({ title, tableId }: Props) {
 		printTitle = printTitle.replace('Gainers', 'Losers')
 	}
 
-	return page?.headingType === 'h1' ? (
-		<h1>{printTitle}</h1>
-	) : (
-		<h2>{printTitle}</h2>
-	)
+	switch (page?.headingType) {
+		case 'h1':
+			return <h1>{printTitle}</h1>
+
+		case 'div':
+			return <div className="head">{printTitle}</div>
+
+		default:
+			return <h2>{printTitle}</h2>
+	}
 }

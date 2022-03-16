@@ -16,6 +16,7 @@
 		@apply block space-x-0 border-0 py-0 md:flex md:space-x-6 md:border-t md:py-2;
 	}
 
+	.controls div.head,
 	.controls h1,
 	.controls h2 {
 		@apply whitespace-nowrap text-lg font-semibold tiny:text-xl bp:text-2xl;
