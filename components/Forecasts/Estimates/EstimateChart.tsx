@@ -40,7 +40,7 @@ type Props = {
 }
 
 function getYear(date: string) {
-	return date.split('-')[0]
+	return date?.split('-')[0]
 }
 
 export function EstimateChart({ type, title }: Props) {
