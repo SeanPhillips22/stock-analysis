@@ -146,17 +146,6 @@ export const HoverChart = ({
 		}
 	}
 
-	// Cut zero values from start of data array
-	const ylength = yaxis.length
-	for (let i = 0; i < ylength; i++) {
-		if (!yaxis[0]) {
-			yaxis.shift()
-			xaxis.shift()
-		} else {
-			break
-		}
-	}
-
 	const ymin = yaxis[0]
 	const ymax = yaxis[yaxis.length - 1]
 
