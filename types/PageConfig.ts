@@ -3,6 +3,7 @@ export type PageConfig = {
 	metaTitle: string
 	pageTitle?: string
 	tableTitle?: string
+	tableTitleObject?: string // If you want to show something other than "X Stocks"
 	active?: string
 	metaDescription?: string
 	headingType?: 'h1' // Set the table heading as h1

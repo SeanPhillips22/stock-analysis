@@ -23,7 +23,7 @@ export function StockListLayout({ children, list }: Props) {
 					{page.pageTitle || page.metaTitle}
 				</h1>
 				<div className="lg:right-sidebar mt-3 sm:mt-4 lg:mt-5">
-					<div>{children}</div>
+					{children}
 					<aside className="space-y-8 py-0">
 						<Sidebar url={page.path} list={list} />
 					</aside>

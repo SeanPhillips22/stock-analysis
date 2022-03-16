@@ -18,12 +18,12 @@
 
 	.controls h1,
 	.controls h2 {
-		@apply whitespace-nowrap text-xl font-semibold bp:text-2xl;
+		@apply whitespace-nowrap text-lg font-semibold tiny:text-xl bp:text-2xl;
 	}
 
 	/* The div that contains the title and timestamp */
 	.controls .title-group {
-		@apply mr-auto flex items-end justify-between pb-1 md:space-x-4 md:border-0 md:pb-0;
+		@apply mr-auto flex items-end justify-between pb-1 xs:pb-1.5 md:space-x-4 md:border-0 md:pb-0;
 	}
 
 	/* The timestamp in the controls area */
@@ -61,7 +61,7 @@
 	}
 
 	.toggle-icon {
-		@apply h-8 w-8 text-gray-800;
+		@apply h-7 w-7 text-gray-700 bp:h-[1.9rem] bp:w-[1.9rem];
 	}
 
 	.controls-btn {

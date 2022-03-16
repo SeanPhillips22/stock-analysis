@@ -14,7 +14,8 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/biggest-companies/',
 			metaTitle: '500 Biggest Companies Ranked by Market Cap',
-			pageTitle: 'Biggest Companies by Market Cap'
+			pageTitle: 'Biggest Companies by Market Cap',
+			tableTitleObject: 'Companies'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],
@@ -37,11 +38,13 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/monthly-dividend-stocks/',
 			metaTitle: 'List of Stocks That Pay Monthly Dividends',
-			pageTitle: 'Monthly Dividend Payers'
+			pageTitle: 'Stocks That Pay Monthly Dividends',
+			tableTitleObject: 'Monthly Payers'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],
 			controls: {
+				filter: true,
 				export: true,
 				columns: true
 			}
@@ -58,18 +61,20 @@ export const StockLists: StockList = {
 	'biggest-car-companies': {
 		page: {
 			path: '/list/biggest-car-companies/',
-			metaTitle: 'Biggest Car Companies by Market Cap',
-			pageTitle: 'Biggest Car Companies by Market Cap'
+			metaTitle: 'List of Biggest Car Companies by Market Cap',
+			pageTitle: 'Biggest Car Companies by Market Cap',
+			tableTitleObject: 'Companies'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }],
 			controls: {
+				filter: true,
 				export: true,
 				columns: true
 			}
 		},
 		query: {
-			index: 'stocks',
+			index: 'allstocks',
 			main: 'marketCap',
 			sort: [{ id: 'marketCap', desc: true }],
 			sortDirection: 'desc',

@@ -15,7 +15,7 @@
 
 	/* Header Ad */
 	.ha1 {
-		@apply mx-auto block h-[50px] w-[300px] xs:h-[50px] xs:w-[320px] md:h-[90px] md:w-[728px];
+		@apply mx-auto block h-[50px] tiny:w-[300px] xs:h-[50px] xs:w-[320px] md:h-[90px] md:w-[728px];
 	}
 
 	.ha1w {

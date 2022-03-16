@@ -23,6 +23,7 @@ export default function StockList({ listId, data, page, fixed, query }: Props) {
 				<StockListLayout>
 					<TableContextProvider
 						value={{
+							title: page.tableTitle,
 							tableId: listId,
 							fixed,
 							dynamic: query

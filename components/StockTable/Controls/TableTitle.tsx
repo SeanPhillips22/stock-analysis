@@ -11,7 +11,7 @@ export function TableTitle({ title, tableId }: Props) {
 	const { main, sortDirection } = dynamic
 	const { page, count } = usePageContext()
 
-	let printTitle = title || `${count} Stocks`
+	let printTitle = title || `${count} ${page.tableTitleObject || 'Stocks'}`
 
 	// Change the title from "Today" if a different time range is selected
 	if ((tableId === 'gainers' || tableId === 'losers') && main !== 'change') {
