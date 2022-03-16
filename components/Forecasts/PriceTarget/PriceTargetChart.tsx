@@ -75,26 +75,10 @@ export function PriceTargetChart() {
 
 	const priceAxis = useMemo(() => chart.map((item: any) => item.c), [chart])
 
-	const backgroundColorCodings = useMemo(
-		() =>
-			chart.map((i: any, index: number) =>
-				index == chart.length - 2 ? '#000000' : '#ffffff'
-			),
-		[chart]
-	)
-
 	const redOrGreen =
 		currentPrice - initialPrice > 0
 			? 'rgba(4, 120, 87, 1)'
 			: 'rgba(220, 38, 38, 1)'
-
-	const pointBorderColorCodings = useMemo(
-		() =>
-			chart.map((i: any, index: number) =>
-				index == chart.length - 2 ? '#000000' : redOrGreen
-			),
-		[chart]
-	)
 
 	const pointSize = useMemo(
 		() =>
@@ -137,8 +121,6 @@ export function PriceTargetChart() {
 			pointHitRadius: 0,
 			pointRadius: 0,
 			pointBorderWidth: 0,
-			pointBorderColor: pointBorderColorCodings,
-			pointBackgroundColor: backgroundColorCodings,
 			tension: 0,
 			borderColor: '#FFFFFF00',
 			borderWidth: 2.5,
