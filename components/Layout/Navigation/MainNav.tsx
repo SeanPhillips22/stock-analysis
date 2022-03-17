@@ -20,7 +20,8 @@ const navigation = [
 	{
 		name: 'Stocks',
 		href: '/stocks/',
-		icon: ChartBarIcon
+		icon: ChartBarIcon,
+		children: [{ name: 'Stock Lists', href: '/list/' }]
 	},
 	{
 		name: 'IPOs',
@@ -110,6 +111,9 @@ export function MainNav() {
 				if (item.children) {
 					if (matchParentPath(path, item.href)) {
 						setIsOpen({ [item.name]: true })
+					}
+					if (path.one === 'list') {
+						setIsOpen({ ['Stocks']: true })
 					}
 				}
 			})

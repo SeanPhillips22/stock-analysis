@@ -21,12 +21,7 @@ export const StockLists: StockList = {
 			headingType: 'div'
 		},
 		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }],
-			controls: {
-				filter: true,
-				export: true,
-				columns: true
-			}
+			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'allstocks',
@@ -48,12 +43,7 @@ export const StockLists: StockList = {
 			headingType: 'div'
 		},
 		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }],
-			controls: {
-				filter: true,
-				export: true,
-				columns: true
-			}
+			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'stocks',
@@ -64,10 +54,84 @@ export const StockLists: StockList = {
 			filters: ['payoutFrequency-is-monthly']
 		}
 	},
+	'most-employees': {
+		page: {
+			path: '/list/most-employees/',
+			metaTitle: 'List of The Biggest Companies by Number of Employees',
+			metaDescription:
+				'A list of the biggest public companies ranked by the total number of employees. This list is updated daily.',
+			pageTitle: 'Biggest Companies by Employee Count',
+			tableTitleObject: 'Companies',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'employees', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'employees',
+			count: 100,
+			sort: [{ id: 'employees', desc: true }],
+			sortDirection: 'desc',
+			columns: [
+				'rank',
+				's',
+				'n',
+				'employees',
+				'price',
+				'change',
+				'marketCap'
+			]
+		}
+	},
+	'highest-revenue': {
+		page: {
+			path: '/list/highest-revenue/',
+			metaTitle: 'The Biggest Companies by Revenue or Sales',
+			metaDescription:
+				'A list of the biggest public companies ranked by the total sales or revenue in the past twelve months.',
+			pageTitle: 'Biggest Companies by Revenue',
+			tableTitleObject: 'Companies',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'revenue', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'revenue',
+			count: 100,
+			sort: [{ id: 'revenue', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'revenue', 'price', 'change', 'marketCap']
+		}
+	},
+	// 'oldest-companies': {
+	// 	page: {
+	// 		path: '/list/oldest-companies/',
+	// 		metaTitle: '500 Oldest Publicly Traded Companies',
+	// 		metaDescription:
+	// 			'A list of the top 500 oldest publicly traded companies, sorted by the year they were founded.',
+	// 		pageTitle: 'Oldest Publicly Traded Companies',
+	// 		tableTitleObject: 'Companies',
+	// 		headingType: 'div'
+	// 	},
+	// 	fixed: {
+	// 		defaultSort: [{ id: 'founded', desc: true }]
+	// 	},
+	// 	query: {
+	// 		index: 'allstocks',
+	// 		main: 'founded',
+	// 		count: 500,
+	// 		sort: [{ id: 'founded', desc: false }],
+	// 		sortDirection: 'asc',
+	// 		columns: ['rank', 's', 'n', 'founded', 'price', 'change', 'marketCap']
+	// 	}
+	// },
 	'biggest-car-companies': {
 		page: {
 			path: '/list/biggest-car-companies/',
-			metaTitle: 'List of Biggest Car Companies by Market Cap',
+			metaTitle: 'List of The Biggest Car Companies by Market Cap',
 			metaDescription:
 				"A list of the world's biggest car companies and automakers, ranked by market cap.",
 			pageTitle: 'Biggest Car Companies by Market Cap',
@@ -75,12 +139,7 @@ export const StockLists: StockList = {
 			headingType: 'div'
 		},
 		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }],
-			controls: {
-				filter: true,
-				export: true,
-				columns: true
-			}
+			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'allstocks',
@@ -89,6 +148,73 @@ export const StockLists: StockList = {
 			sortDirection: 'desc',
 			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
 			filters: ['industry-isin-automobiles|auto%manufacturers']
+		}
+	},
+	'biggest-pharmaceutical-companies': {
+		page: {
+			path: '/list/biggest-pharmaceutical-companies/',
+			metaTitle: 'The Biggest Pharmaceutical Companies by Market Cap',
+			metaDescription:
+				"A list of the world's biggest pharmaceutical and drug companies, ranked by market cap.",
+			pageTitle: 'Biggest Pharmaceutical Companies by Market Cap',
+			tableTitleObject: 'Companies',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['industry-is-pharmaceuticals']
+		}
+	},
+	'biggest-semiconductor-companies': {
+		page: {
+			path: '/list/biggest-semiconductor-companies/',
+			metaTitle: 'The Biggest Semiconductor Companies by Market Cap',
+			metaDescription:
+				"A list of the world's biggest semiconductor and chip manufacturing companies, ranked by market cap.",
+			pageTitle: 'Biggest Semiconductor Companies by Market Cap',
+			tableTitleObject: 'Companies',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['industry-contains-semiconductors']
+		}
+	},
+	'biggest-biotech-companies': {
+		page: {
+			path: '/list/biggest-biotech-companies/',
+			metaTitle: 'The Biggest Biotechnology Companies by Market Cap',
+			metaDescription:
+				'A list of the biggest publicly traded biotechnology companies, ranked by market cap.',
+			pageTitle: 'Biggest Biotech Companies by Market Cap',
+			tableTitleObject: 'Companies',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			count: 100,
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['industry-is-biotechnology']
 		}
 	}
 }

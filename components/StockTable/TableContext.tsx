@@ -78,6 +78,15 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 		setDynamic(initial)
 	}
 
+	// Add default options if they are missing
+	if (!value.fixed.controls) {
+		value.fixed.controls = {
+			filter: true,
+			export: true,
+			columns: true
+		}
+	}
+
 	// The full state to pass as context
 	const state = {
 		title: value.title,

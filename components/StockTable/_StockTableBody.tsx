@@ -84,6 +84,7 @@ export function StockTableBody({
 							return (
 								<tr key={i}>
 									{row.cells.map((cell, ii) => {
+										// let symbol = row.values.s
 										let id = cell.column.id
 										let cellProps = DP[id as DataId]
 										let { format, css } = cellProps

@@ -34,7 +34,7 @@ export function formatCellRaw(
 	type: Type = 'stocks',
 	noDec = false
 ) {
-	return formatTableCell(fn, value, type, true, noDec)
+	return formatTableCell(fn, value, type, '', true, noDec)
 }
 
 // Inline formatting inside the table loop
@@ -42,11 +42,13 @@ export function formatTableCell(
 	fn: Fn | undefined,
 	value: string | number,
 	type: Type = 'stocks',
+	symbol = '',
 	raw = false,
 	noDec = false
 ) {
 	if (!fn) return value
 	if (fn === 'linkSymbol') return formatSymbol(value as string, type)
+	if (fn === 'linkName') return formatName(value as string, type, symbol)
 	if (fn === 'format0dec') return format0dec(value as number)
 	if (fn === 'format2dec') return format2dec(value as number)
 	if (fn === 'format3dec') return format3dec(value as number)
@@ -72,6 +74,21 @@ export function formatSymbol(value: string, type: ScreenerTypes) {
 		<Link href={url} prefetch={false}>
 			<a>{value}</a>
 		</Link>
+	)
+}
+
+// Turn a name into a link to the overview page
+export function formatName(value: string, type: ScreenerTypes, symbol: string) {
+	let urlPath = type === 'etf' ? 'etf' : 'stocks'
+	let ticker = symbol.includes('.') ? symbol : `${symbol}/`
+	let url = `/${urlPath}/${ticker.toLowerCase()}`
+
+	return (
+		<div className="string-left">
+			<Link href={url} prefetch={false}>
+				<a>{value}</a>
+			</Link>
+		</div>
 	)
 }
 
