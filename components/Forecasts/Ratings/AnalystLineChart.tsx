@@ -18,18 +18,20 @@ ChartJS.register(
 	CategoryScale
 )
 
-import { ForecastData } from 'types/Forecast'
-import { useSymbolContext } from 'components/Layout/SymbolContext'
+import { Recommendations } from 'types/Forecast'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
 
-export function AnalystLineChart() {
-	const { data }: { data: ForecastData } = useSymbolContext()
-	const labelAxis = () => data.recommendations.map(item => item.month)
+type Props = {
+	data: Recommendations[]
+}
+
+export function AnalystLineChart({ data }: Props) {
+	const labelAxis = () => data.map(item => item.month)
 
 	const analystAxis = (s: string) =>
-		data.recommendations.map((item: { [x: string]: any }) => item[s])
+		data.map((item: { [x: string]: any }) => item[s])
 
 	let d: any[] = [
 		{

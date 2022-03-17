@@ -60,7 +60,7 @@ export const DataPoints: Props = {
 	price: {
 		id: 'price',
 		name: 'Stock Price',
-		colName: 'Price',
+		colName: 'Stock Price',
 		format: 'format2dec'
 	},
 	chg: {
