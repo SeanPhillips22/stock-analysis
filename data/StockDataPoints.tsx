@@ -172,6 +172,7 @@ export const DataPoints: Props = {
 	analystRatings: {
 		id: 'analystRatings',
 		name: 'Analyst Rating',
+		colName: 'Rating',
 		format: 'string'
 	},
 	analystCount: {

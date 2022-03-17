@@ -42,8 +42,12 @@ export default function StockListPage() {
 							title="Companies With The Most Employees"
 						/>
 						<ListItem
+							url="/list/top-rated-dividend-stocks/"
+							title="Top-Rated Dividend Stocks"
+						/>
+						<ListItem
 							url="/list/monthly-dividend-stocks/"
-							title="Monthly Dividend Payers"
+							title="Stocks That Pay Monthly Dividends"
 						/>
 						{/* <ListItem
 							url="/list/oldest-companies/"
@@ -70,6 +74,11 @@ export default function StockListPage() {
 						<ListItem
 							url="/list/biggest-biotech-companies/"
 							title="Biggest Biotech Companies"
+						/>
+						<ListItem url="/list/biggest-banks/" title="Biggest Banks" />
+						<ListItem
+							url="/list/biggest-social-media-companies/"
+							title="Biggest Social Media Companies"
 						/>
 					</ul>
 				</div>

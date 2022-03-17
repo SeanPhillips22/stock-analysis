@@ -32,6 +32,33 @@ export const StockLists: StockList = {
 			columns: ['rank', 's', 'n', 'marketCap', 'price', 'change']
 		}
 	},
+	'top-rated-dividend-stocks': {
+		page: {
+			path: '/list/top-rated-dividend-stocks/',
+			metaTitle: 'List of Dividend Stocks Rated as "Buy" or "Strong Buy"',
+			metaDescription:
+				'A list of dividend-paying stocks that have an average rating of "buy" or "strong buy" according to stock analysts.',
+			pageTitle: 'Top-Rated Dividend Stocks',
+			tableTitleObject: 'Stocks',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'stocks',
+			main: 'marketCap',
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['s', 'n', 'dividendYield', 'price', 'change', 'marketCap'],
+			filters: [
+				'dividendYield-over-2',
+				'analystRatings-is-Buy!Strong%Buy',
+				'analystCount-over-20',
+				'payoutRatio-under-80'
+			]
+		}
+	},
 	'monthly-dividend-stocks': {
 		page: {
 			path: '/list/monthly-dividend-stocks/',
@@ -106,12 +133,34 @@ export const StockLists: StockList = {
 			columns: ['rank', 's', 'n', 'revenue', 'price', 'change', 'marketCap']
 		}
 	},
+	// 'highest-earnings': {
+	// 	page: {
+	// 		path: '/list/highest-revenue/',
+	// 		metaTitle: 'The Biggest Companies by Revenue or Sales',
+	// 		metaDescription:
+	// 			'A list of the biggest public companies ranked by the total sales or revenue in the past twelve months.',
+	// 		pageTitle: 'Biggest Companies by Revenue',
+	// 		tableTitleObject: 'Companies',
+	// 		headingType: 'div'
+	// 	},
+	// 	fixed: {
+	// 		defaultSort: [{ id: 'revenue', desc: true }]
+	// 	},
+	// 	query: {
+	// 		index: 'allstocks',
+	// 		main: 'revenue',
+	// 		count: 100,
+	// 		sort: [{ id: 'revenue', desc: true }],
+	// 		sortDirection: 'desc',
+	// 		columns: ['rank', 's', 'n', 'revenue', 'price', 'change', 'marketCap']
+	// 	}
+	// },
 	// 'oldest-companies': {
 	// 	page: {
 	// 		path: '/list/oldest-companies/',
-	// 		metaTitle: '500 Oldest Publicly Traded Companies',
+	// 		metaTitle: '100 Oldest Publicly Traded Companies',
 	// 		metaDescription:
-	// 			'A list of the top 500 oldest publicly traded companies, sorted by the year they were founded.',
+	// 			'A list of the top 100 oldest publicly traded companies, sorted by the year they were founded.',
 	// 		pageTitle: 'Oldest Publicly Traded Companies',
 	// 		tableTitleObject: 'Companies',
 	// 		headingType: 'div'
@@ -122,7 +171,7 @@ export const StockLists: StockList = {
 	// 	query: {
 	// 		index: 'allstocks',
 	// 		main: 'founded',
-	// 		count: 500,
+	// 		count: 100,
 	// 		sort: [{ id: 'founded', desc: false }],
 	// 		sortDirection: 'asc',
 	// 		columns: ['rank', 's', 'n', 'founded', 'price', 'change', 'marketCap']
@@ -215,6 +264,48 @@ export const StockLists: StockList = {
 			sortDirection: 'desc',
 			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
 			filters: ['industry-is-biotechnology']
+		}
+	},
+	'biggest-banks': {
+		page: {
+			path: '/list/biggest-banks/',
+			metaTitle: '100 Biggest Banks by Market Cap',
+			pageTitle: 'Biggest Banks by Market Cap',
+			tableTitleObject: 'Companies',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			count: 100,
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['industry-is-banks']
+		}
+	},
+	'biggest-social-media-companies': {
+		page: {
+			path: '/list/biggest-social-media-companies/',
+			metaTitle: 'The Biggest Social Media Companies by Market Cap',
+			pageTitle: 'Biggest Social Media Companies by Market Cap',
+			tableTitleObject: 'Companies',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			count: 100,
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['tags-includes-social=media']
 		}
 	}
 }
