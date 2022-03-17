@@ -75,7 +75,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 	let actual: any[] = []
 	actualData[type].forEach((item, index) => {
 		//If item is null, then it doesn't get added (no empty year columns)
-		if (item == null) return
+		if (item === null) return
 		if (index <= lastDate)
 			actual.push({
 				x: getYear(actualData['dates'][index]),
