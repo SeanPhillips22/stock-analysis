@@ -74,6 +74,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 	// Get the "actual" data (not estimates)
 	let actual: any[] = []
 	actualData[type].forEach((item, index) => {
+		if (!item) return
 		if (index <= lastDate)
 			actual.push({
 				x: getYear(actualData['dates'][index]),
@@ -98,17 +99,19 @@ export function EstimateGrowthChart({ type, title }: Props) {
 
 	let combinedActualandEstimates = actual.concat(estimateArr)
 	console.log(combinedActualandEstimates)
-	const backgroundColorCodings = combinedActualandEstimates.map((i, index) => {
-		if (i.y < 0) {
-			return index <= lastDate
-				? 'rgba(220, 38, 38, 0.8)'
-				: 'rgba(220, 38, 38, 0.6)'
-		}
+	const backgroundColorCodings = combinedActualandEstimates.map(
+		(item, index) => {
+			if (item.y < 0) {
+				return index <= lastDate
+					? 'rgba(220, 38, 38, 0.8)'
+					: 'rgba(220, 38, 38, 0.6)'
+			}
 
-		return index <= lastDate
-			? 'rgba(4, 120, 87, 0.8)'
-			: 'rgba(4, 120, 87, 0.6)'
-	})
+			return typeof item.yMax == 'undefined'
+				? 'rgba(4, 120, 87, 0.8)'
+				: 'rgba(4, 120, 87, 0.6)'
+		}
+	)
 
 	// Format the name of the data series
 	let seriesName = title.includes('Forecast') ? title.split(' ')[0] : title
