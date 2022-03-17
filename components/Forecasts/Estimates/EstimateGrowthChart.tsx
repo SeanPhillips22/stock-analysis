@@ -74,7 +74,8 @@ export function EstimateGrowthChart({ type, title }: Props) {
 	// Get the "actual" data (not estimates)
 	let actual: any[] = []
 	actualData[type].forEach((item, index) => {
-		if (!item) return
+		//If item is null, then it doesn't get added (no empty year columns)
+		if (item == null) return
 		if (index <= lastDate)
 			actual.push({
 				x: getYear(actualData['dates'][index]),
@@ -98,7 +99,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 	})
 
 	let combinedActualandEstimates = actual.concat(estimateArr)
-	console.log(combinedActualandEstimates)
+
 	const backgroundColorCodings = combinedActualandEstimates.map(
 		(item, index) => {
 			if (item.y < 0) {
@@ -106,7 +107,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 					? 'rgba(220, 38, 38, 0.8)'
 					: 'rgba(220, 38, 38, 0.6)'
 			}
-
+			//If ymax is undefined, then it's not an estimate.
 			return typeof item.yMax == 'undefined'
 				? 'rgba(4, 120, 87, 0.8)'
 				: 'rgba(4, 120, 87, 0.6)'
