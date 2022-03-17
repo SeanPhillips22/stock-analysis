@@ -42,12 +42,6 @@ export function AnalystBarChart() {
 	const analystAxis = (s: string) =>
 		data.recommendations.map((item: { [x: string]: any }) => item[s])
 
-	'rgb(119, 21, 17)',
-		'rgb(172, 37, 31)',
-		'rgb(174, 177, 0)',
-		'rgb(29, 148, 0)',
-		'rgb(0, 136, 0)'
-
 	let d: any[] = [
 		{
 			label: 'Strong Buy',
