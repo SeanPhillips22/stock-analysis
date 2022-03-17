@@ -86,6 +86,8 @@ export function EstimateGrowthChart({ type, title }: Props) {
 	let estimateArr: any[] = []
 
 	Object.keys(estimatesData[type]).map(i => {
+		//This if sentence is a duplicate years fix, causes a visual error.
+		if (getYear(i) === actual[actual.length - 1].x) return
 		estimateArr.push({
 			y: estimatesData[type][i].avg,
 			x: getYear(i),
@@ -95,11 +97,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 	})
 
 	let combinedActualandEstimates = actual.concat(estimateArr)
-
-	const labels = estimateArr.map(i => {
-		return i.y
-	})
-
+	console.log(combinedActualandEstimates)
 	const backgroundColorCodings = combinedActualandEstimates.map((i, index) => {
 		if (i.y < 0) {
 			return index <= lastDate
@@ -119,7 +117,6 @@ export function EstimateGrowthChart({ type, title }: Props) {
 		{
 			label: seriesName,
 			data: combinedActualandEstimates,
-			labels: labels,
 			spanGaps: true,
 			backgroundColor: backgroundColorCodings
 		}
