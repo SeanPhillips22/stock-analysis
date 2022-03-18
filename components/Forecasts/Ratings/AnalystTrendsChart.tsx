@@ -9,8 +9,11 @@ import {
 	Unavailable,
 	UnavailableSafari
 } from 'components/Unavailable'
+import { useSymbolContext } from 'components/Layout/SymbolContext'
+import { Info } from 'types/Info'
 
-export function AnalystTrendsChart({ data }: { data: ForecastData }) {
+export function AnalystTrendsChart() {
+	const { info, data }: { info: Info; data: ForecastData } = useSymbolContext()
 	const recs = data.recommendations
 	const history = forecastState(state => state.history)
 	const chartType = forecastState(state => state.chartType)
@@ -22,8 +25,10 @@ export function AnalystTrendsChart({ data }: { data: ForecastData }) {
 			if (history === '1 Year') setMonths(recs.slice(recs.length - 13))
 			if (history === '2 Years') setMonths(recs.slice(recs.length - 25))
 			if (history === '5 Years') setMonths(recs)
+		} else {
+			setMonths(recs)
 		}
-	}, [history, isPro, data, recs])
+	}, [history, isPro, data, recs, info.symbol])
 
 	// Chart.js causes critical errors on older Safari versions
 	if (isOldSafari()) {

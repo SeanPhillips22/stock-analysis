@@ -45,7 +45,7 @@ export function Ratings() {
 						</div>
 					)}
 				</div>
-				<AnalystTrendsChart data={data} />
+				<AnalystTrendsChart />
 				<RatingsTable />
 			</div>
 		</div>
