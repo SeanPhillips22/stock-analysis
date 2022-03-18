@@ -11,7 +11,7 @@ function ListItem({ url, title }: Props) {
 	return (
 		<li>
 			<Link href={url} prefetch={false}>
-				<a className="bll text-lg">{title}</a>
+				<a className="bll text-base md:text-lg">{title}</a>
 			</Link>
 		</li>
 	)
@@ -28,7 +28,7 @@ export default function StockListPage() {
 			<div className="space-y-6">
 				<div>
 					<h2 className="hh3 mb-2">Popular Lists</h2>
-					<ul className="list-inside list-disc columns-2 space-y-1 p-1">
+					<ul className="list-outside list-disc space-y-1 p-1 pl-6 md:columns-2">
 						<ListItem
 							url="/list/biggest-companies/"
 							title="Biggest Companies By Market Cap"
@@ -58,7 +58,7 @@ export default function StockListPage() {
 
 				<div>
 					<h2 className="hh3 mb-2">Companies Ranked by Market Cap</h2>
-					<ul className="list-inside list-disc columns-2 space-y-1 p-1">
+					<ul className="list-inside list-disc space-y-1 p-1 md:columns-2">
 						<ListItem
 							url="/list/biggest-car-companies/"
 							title="Biggest Car Companies"

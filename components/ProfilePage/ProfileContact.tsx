@@ -45,7 +45,9 @@ export const ProfileContact = ({ contact }: { contact: Contact }) => {
 										rel="noopener noreferrer nofollow"
 										className="bll"
 									>
-										{contact.domain}
+										{contact.domain.length > 30
+											? 'Visit Website'
+											: contact.domain}
 									</a>
 								</td>
 							</tr>
