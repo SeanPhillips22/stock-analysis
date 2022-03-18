@@ -38,6 +38,8 @@ export const StockLists: StockList = {
 			metaTitle: 'List of Dividend Stocks Rated as "Buy" or "Strong Buy"',
 			metaDescription:
 				'A list of dividend-paying stocks that have an average rating of "buy" or "strong buy" according to stock analysts.',
+			pageDescription:
+				'This list shows the top rated dividend stocks according to stock analysts. Each stock on the list has an average "buy" or "strong buy" rating from at least 20 analysts. Each stock also has a dividend yield of at least 2% and a payout ratio under 60%, which indicates that the dividend is sustainable.',
 			pageTitle: 'Top-Rated Dividend Stocks',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
@@ -55,7 +57,7 @@ export const StockLists: StockList = {
 				'dividendYield-over-2',
 				'analystRatings-is-Buy!Strong%Buy',
 				'analystCount-over-20',
-				'payoutRatio-under-80'
+				'payoutRatio-under-60'
 			]
 		}
 	},

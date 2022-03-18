@@ -13,6 +13,7 @@ import { useState } from 'react'
 import { DataPoints as DP } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
 import { formatTableCell } from 'functions/tables/formatTableCell'
+import { Information } from 'components/Alerts/Information'
 
 type Props = {
 	data: any[]
@@ -24,6 +25,7 @@ type Props = {
 	sort?: SortObject[]
 	tableId: string
 	columnOrder?: DataId[]
+	description?: string
 }
 
 export function StockTableBody({
@@ -32,7 +34,8 @@ export function StockTableBody({
 	sortProps,
 	sort,
 	tableId,
-	columnOrder
+	columnOrder,
+	description
 }: Props) {
 	const [search, setSearch] = useState('')
 	const { updateSort } = useSort(sortProps)
@@ -53,6 +56,12 @@ export function StockTableBody({
 
 	return (
 		<div>
+			{description && (
+				<Information
+					message={description}
+					classes="p-3 mb-4 sm:mb-5 text-blue-900"
+				/>
+			)}
 			<div className="mt-3 sm:mt-0">
 				<StockTableControls
 					filter={{

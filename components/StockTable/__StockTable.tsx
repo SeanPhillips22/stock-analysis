@@ -11,7 +11,8 @@ import { TableTitle } from './Controls/TableTitle'
  */
 export function StockTable({ _data }: { _data: any[] }) {
 	// Get the table contexts
-	const { tableId, fixed, dynamic, setState, enabled } = useTableContext()
+	const { tableId, fixed, dynamic, setState, enabled, description } =
+		useTableContext()
 
 	// Get the props
 	const { defaultSort, columnOrder } = fixed
@@ -50,6 +51,7 @@ export function StockTable({ _data }: { _data: any[] }) {
 			sort={sort}
 			columnOrder={columnOrder}
 			tableId={tableId}
+			description={description}
 		/>
 	)
 }
