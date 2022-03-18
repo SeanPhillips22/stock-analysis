@@ -32,7 +32,7 @@ const queryWeek: TableDynamic = {
 	sort: [{ id: 'ipoDate', desc: false }],
 	sortDirection: 'asc',
 	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
-	filters: ['ipoDate-thisweek']
+	filters: ['ipoDate-is-thisweek']
 }
 
 // the initial config for the select endpoint to fetch data
@@ -42,7 +42,7 @@ const queryLater: TableDynamic = {
 	sort: [{ id: 'ipoDate', desc: false }],
 	sortDirection: 'asc',
 	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
-	filters: ['ipoDate-nextweek']
+	filters: ['ipoDate-is-nextweek']
 }
 
 export default function IpoCalendar(props: Props) {

@@ -27,7 +27,7 @@ const query: TableDynamic = {
 	sort: [{ id: 'filingDateFB', desc: true }],
 	sortDirection: 'desc',
 	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
-	filters: ['ipoDate-isnull', 'ipoStatus-isnot-withdrawn']
+	filters: ['ipoDate-is-null', 'ipoStatus-isnot-withdrawn']
 }
 
 export default function IpoFilings(props: Props) {
