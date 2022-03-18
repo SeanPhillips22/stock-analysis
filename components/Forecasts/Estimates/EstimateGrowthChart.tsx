@@ -74,6 +74,8 @@ export function EstimateGrowthChart({ type, title }: Props) {
 	// Get the "actual" data (not estimates)
 	let actual: any[] = []
 	actualData[type].forEach((item, index) => {
+		//If item is null, then it doesn't get added (no empty year columns)
+		if (item === null) return
 		if (index <= lastDate)
 			actual.push({
 				x: getYear(actualData['dates'][index]),
@@ -86,6 +88,8 @@ export function EstimateGrowthChart({ type, title }: Props) {
 	let estimateArr: any[] = []
 
 	Object.keys(estimatesData[type]).map(i => {
+		//This if sentence is a duplicate years fix, causes a visual error.
+		if (getYear(i) === actual[actual.length - 1]?.x) return
 		estimateArr.push({
 			y: estimatesData[type][i].avg,
 			x: getYear(i),
@@ -96,21 +100,19 @@ export function EstimateGrowthChart({ type, title }: Props) {
 
 	let combinedActualandEstimates = actual.concat(estimateArr)
 
-	const labels = estimateArr.map(i => {
-		return i.y
-	})
-
-	const backgroundColorCodings = combinedActualandEstimates.map((i, index) => {
-		if (i.y < 0) {
-			return index <= lastDate
-				? 'rgba(220, 38, 38, 0.8)'
-				: 'rgba(220, 38, 38, 0.6)'
+	const backgroundColorCodings = combinedActualandEstimates.map(
+		(item, index) => {
+			if (item.y < 0) {
+				return index <= lastDate
+					? 'rgba(220, 38, 38, 0.8)'
+					: 'rgba(220, 38, 38, 0.6)'
+			}
+			//If ymax is undefined, then it's not an estimate.
+			return typeof item.yMax == 'undefined'
+				? 'rgba(4, 120, 87, 0.8)'
+				: 'rgba(4, 120, 87, 0.6)'
 		}
-
-		return index <= lastDate
-			? 'rgba(4, 120, 87, 0.8)'
-			: 'rgba(4, 120, 87, 0.6)'
-	})
+	)
 
 	// Format the name of the data series
 	let seriesName = title.includes('Forecast') ? title.split(' ')[0] : title
@@ -119,7 +121,6 @@ export function EstimateGrowthChart({ type, title }: Props) {
 		{
 			label: seriesName,
 			data: combinedActualandEstimates,
-			labels: labels,
 			spanGaps: true,
 			backgroundColor: backgroundColorCodings
 		}
