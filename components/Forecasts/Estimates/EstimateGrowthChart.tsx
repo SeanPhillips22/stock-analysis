@@ -89,7 +89,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 
 	Object.keys(estimatesData[type]).map(i => {
 		//This if sentence is a duplicate years fix, causes a visual error.
-		if (getYear(i) === actual[actual.length - 1].x) return
+		if (getYear(i) === actual[actual.length - 1]?.x) return
 		estimateArr.push({
 			y: estimatesData[type][i].avg,
 			x: getYear(i),
