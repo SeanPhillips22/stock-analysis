@@ -15,6 +15,7 @@ export type FormatFunction =
 	| 'linkSymbol'
 	| 'linkName'
 	| 'format0dec'
+	| 'format1dec'
 	| 'format2dec'
 	| 'format3dec'
 	| 'price'

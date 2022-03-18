@@ -10,6 +10,11 @@ export const dec0 = new Intl.NumberFormat('en-US', {
 	maximumFractionDigits: 0
 })
 
+export const dec1 = new Intl.NumberFormat('en-US', {
+	minimumFractionDigits: 1,
+	maximumFractionDigits: 1
+})
+
 export const dec2 = new Intl.NumberFormat('en-US', {
 	minimumFractionDigits: 2,
 	maximumFractionDigits: 2
@@ -20,9 +25,10 @@ export const dec3 = new Intl.NumberFormat('en-US', {
 	maximumFractionDigits: 3
 })
 
-function format(value: number, decimals: 0 | 2 | 3) {
+function format(value: number, decimals: 0 | 1 | 2 | 3) {
 	if (!value) return '-'
 	if (decimals === 0) return dec0.format(value)
+	if (decimals === 1) return dec1.format(value)
 	if (decimals === 2) return dec2.format(value)
 	if (decimals === 3) return dec3.format(value)
 	return value
@@ -50,6 +56,7 @@ export function formatTableCell(
 	if (fn === 'linkSymbol') return formatSymbol(value as string, type)
 	if (fn === 'linkName') return formatName(value as string, type, symbol)
 	if (fn === 'format0dec') return format0dec(value as number)
+	if (fn === 'format1dec') return format1dec(value as number)
 	if (fn === 'format2dec') return format2dec(value as number)
 	if (fn === 'format3dec') return format3dec(value as number)
 	if (fn === 'price') return formatPrice(value as number)
@@ -95,6 +102,11 @@ export function formatName(value: string, type: ScreenerTypes, symbol: string) {
 // Format a number with comma but 0 decimal points
 export function format0dec(value: number) {
 	return format(value, 0)
+}
+
+// Format a number with comma but 1 decimal point
+export function format1dec(value: number) {
+	return format(value, 1)
 }
 
 // Format a number with comma and 2 decimal points

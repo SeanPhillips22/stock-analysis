@@ -30,6 +30,7 @@ import { useSymbolContext } from 'components/Layout/SymbolContext'
 
 import { EstimateChartType, ForecastData } from 'types/Forecast'
 import { dec0, dec2, dec3 } from 'functions/tables/formatTableCell'
+import { EstimateChartTable } from './EstimateChartTable'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -66,6 +67,7 @@ export function EstimateChart({ type, title }: Props) {
 
 	// Get the dates to use on the x-axis
 	const dates = actualData.dates.map(i => getYear(i))
+	const lastActualDate = actualData.dates?.[lastDate] // Used to remove non-future data from the table
 
 	// Get the "actual" data (not estimates)
 	const actual = actualData[type].map((i, ii) => {
@@ -140,118 +142,129 @@ export function EstimateChart({ type, title }: Props) {
 	return (
 		<div>
 			<h2 className="mb-2 text-xl font-bold">{title}</h2>
-			<div className="h-[275px] w-full rounded-sm border p-2 shadow">
-				<Line
-					id="1"
-					data={{
-						labels: dates,
-						datasets: datasets
-					}}
-					options={{
-						maintainAspectRatio: false,
-						animation: false,
-						scales: {
-							x: {
-								grid: {
+			<div className="rounded-sm border p-2 shadow">
+				<div className="h-[275px] w-full">
+					<Line
+						id="1"
+						data={{
+							labels: dates,
+							datasets: datasets
+						}}
+						options={{
+							maintainAspectRatio: false,
+							animation: false,
+							scales: {
+								x: {
+									grid: {
+										display: false
+									},
+									ticks: {
+										align: 'center',
+										source: 'auto',
+										color: '#222',
+										font: {
+											size: 13
+										},
+										autoSkip: false,
+										maxRotation: 0,
+										minRotation: 0,
+										maxTicksLimit:
+											typeof window !== 'undefined' &&
+											window.innerWidth < 600
+												? 7
+												: 10
+									}
+								},
+								y: {
+									position: 'right',
+									ticks: {
+										color: '#222',
+										font: {
+											size: 13
+										},
+										padding: 5,
+										callback: function (value) {
+											if (value == 0) {
+												return 0
+											}
+											if (type === 'revenue' || type === 'eps')
+												return abbreviateNumber(Number(value), 0)
+											if (
+												type === 'revenueGrowth' ||
+												type === 'epsGrowth'
+											)
+												return (
+													abbreviateNumber(Number(value), 0) + '%'
+												)
+											return value
+										},
+										maxTicksLimit: 8
+									},
+									grid: {
+										drawBorder: true,
+										color: '#efefef'
+									}
+								}
+							},
+							layout: {
+								padding: {
+									top: 20,
+									left: 0,
+									right: 0
+								}
+							},
+							plugins: {
+								legend: {
 									display: false
 								},
-								ticks: {
-									align: 'center',
-									source: 'auto',
-									color: '#222',
-									font: {
-										size: 13
+								tooltip: {
+									enabled: true,
+									titleFont: {
+										size: 16,
+										weight: '600'
 									},
-									autoSkip: false,
-									maxRotation: 0,
-									minRotation: 0,
-									maxTicksLimit:
-										typeof window !== 'undefined' &&
-										window.innerWidth < 600
-											? 7
-											: 10
-								}
-							},
-							y: {
-								position: 'right',
-								ticks: {
-									color: '#222',
-									font: {
-										size: 13
+									bodyFont: {
+										size: 14,
+										weight: '400'
 									},
-									padding: 5,
-									callback: function (value) {
-										if (value == 0) {
-											return 0
+									padding: {
+										top: 12,
+										right: 15,
+										bottom: 12,
+										left: 15
+									},
+									displayColors: false,
+									callbacks: {
+										label: function (context: any) {
+											let label = context.dataset.label || ''
+											// Don't show multiple labels on the same dataset
+											if (
+												context.label ===
+													getYear(dates[lastDate]) &&
+												label !== seriesName
+											) {
+												return ''
+											}
+											const val = parseFloat(context.parsed.y) || 0
+											if (type.includes('Growth'))
+												return `${label}: ${dec2.format(val)}%`
+											if (type === 'revenue')
+												return `${label}: ${dec0.format(val)}`
+											if (type === 'eps')
+												return `${label}: ${dec3.format(val)}`
+											else return `${label}: ${val.toString()}`
 										}
-										if (type === 'revenue' || type === 'eps')
-											return abbreviateNumber(Number(value), 0)
-										if (
-											type === 'revenueGrowth' ||
-											type === 'epsGrowth'
-										)
-											return abbreviateNumber(Number(value), 0) + '%'
-										return value
-									},
-									maxTicksLimit: 8
-								},
-								grid: {
-									drawBorder: true,
-									color: '#efefef'
-								}
-							}
-						},
-						layout: {
-							padding: {
-								top: 20,
-								left: 0,
-								right: 0
-							}
-						},
-						plugins: {
-							legend: {
-								display: false
-							},
-							tooltip: {
-								enabled: true,
-								titleFont: {
-									size: 16,
-									weight: '600'
-								},
-								bodyFont: {
-									size: 14,
-									weight: '400'
-								},
-								padding: {
-									top: 12,
-									right: 15,
-									bottom: 12,
-									left: 15
-								},
-								displayColors: false,
-								callbacks: {
-									label: function (context: any) {
-										let label = context.dataset.label || ''
-										// Don't show multiple labels on the same dataset
-										if (
-											context.label === getYear(dates[lastDate]) &&
-											label !== seriesName
-										) {
-											return ''
-										}
-										const val = parseFloat(context.parsed.y) || 0
-										if (type.includes('Growth'))
-											return `${label}: ${dec2.format(val)}%`
-										if (type === 'revenue')
-											return `${label}: ${dec0.format(val)}`
-										if (type === 'eps')
-											return `${label}: ${dec3.format(val)}`
-										else return `${label}: ${val.toString()}`
 									}
 								}
 							}
-						}
-					}}
+						}}
+					/>
+				</div>
+				<EstimateChartTable
+					title={seriesName}
+					data={estimatesData}
+					type={type}
+					lastActualDate={lastActualDate}
 				/>
 			</div>
 		</div>
