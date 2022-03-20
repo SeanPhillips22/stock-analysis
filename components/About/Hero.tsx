@@ -7,9 +7,8 @@ export function AboutHero() {
 						About Us
 					</h2>
 					<p className="mx-auto mt-5 max-w-3xl text-xl leading-normal text-gray-600 md:mt-7 md:text-2xl">
-						Welcome to Stock Analysis — a site that aims to be the
-						internet&apos;s best source of free stock data and information
-						for regular investors.
+						Welcome to Stock Analysis — a site that aims to be the internet&apos;s best source of free stock data
+						and information for regular investors.
 					</p>
 				</div>
 			</div>

@@ -68,11 +68,7 @@ export const ActionsSpinoffsYear = ({ year, data }: ActionProps) => {
 					type="spinoffs"
 					year={year}
 				/>
-				<ActionsPaywall
-					count={data.data.length}
-					fullCount={data.fullCount}
-					title="Spinoffs"
-				/>
+				<ActionsPaywall count={data.data.length} fullCount={data.fullCount} title="Spinoffs" />
 			</ActionsLayout>
 		</>
 	)

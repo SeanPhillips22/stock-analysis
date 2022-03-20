@@ -6,10 +6,7 @@ import { FilterValue } from 'components/Screener/screener.types'
  * @param {FilterValue} filter the properties of the filter
  * @return {string}
  */
-export function createLabelFromString(
-	value: string,
-	filter?: FilterValue
-): string {
+export function createLabelFromString(value: string, filter?: FilterValue): string {
 	if (value === 'notzero') {
 		return 'Not Zero'
 	}

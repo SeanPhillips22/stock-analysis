@@ -14,17 +14,9 @@ export function HeaderLogin({ hideTrial }: Props) {
 	if (isLoggedIn) {
 		return (
 			<div className="hd-login logged-in">
-				<ButtonWhite
-					text="Log Out"
-					onClick={signOut}
-					className="mt-0 cursor-pointer border-0 py-1 shadow-none"
-				/>
+				<ButtonWhite text="Log Out" onClick={signOut} className="mt-0 cursor-pointer border-0 py-1 shadow-none" />
 				{url !== '/pro/my-account/' && (
-					<ButtonWhite
-						text="My Account"
-						url="/pro/my-account/"
-						className="mt-0 py-1"
-					/>
+					<ButtonWhite text="My Account" url="/pro/my-account/" className="mt-0 py-1" />
 				)}
 			</div>
 		)

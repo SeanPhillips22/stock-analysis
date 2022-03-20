@@ -27,45 +27,33 @@ export function Footer() {
 						<div className="grid grid-cols-2 gap-8 xl:col-span-2">
 							<div className="md:grid md:grid-cols-2 md:gap-8">
 								<div>
-									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-										Sections
-									</h4>
+									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Sections</h4>
 									<ul className="mt-4 space-y-4">
 										{navigation.sections.map(item => (
 											<li key={item.name}>
 												<Link href={item.href} prefetch={false}>
-													<a className="text-base text-gray-300 hover:text-white">
-														{item.name}
-													</a>
+													<a className="text-base text-gray-300 hover:text-white">{item.name}</a>
 												</Link>
 											</li>
 										))}
 									</ul>
 								</div>
 								<div className="mt-12 md:mt-0">
-									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-										Support
-									</h4>
+									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Support</h4>
 									<ul className="mt-4 space-y-4">
 										<li>
 											<Link href="/contact/" prefetch={false}>
-												<a className="text-base text-gray-300 hover:text-white">
-													Contact Us
-												</a>
+												<a className="text-base text-gray-300 hover:text-white">Contact Us</a>
 											</Link>
 										</li>
 										<li>
 											<Link href="/login/" prefetch={false}>
-												<a className="text-base text-gray-300 hover:text-white">
-													Login
-												</a>
+												<a className="text-base text-gray-300 hover:text-white">Login</a>
 											</Link>
 										</li>
 										<li>
 											<Link href="/pro/" prefetch={false}>
-												<a className="text-base text-gray-300 hover:text-white">
-													Free Trial
-												</a>
+												<a className="text-base text-gray-300 hover:text-white">Free Trial</a>
 											</Link>
 										</li>
 									</ul>
@@ -73,32 +61,24 @@ export function Footer() {
 							</div>
 							<div className="md:grid md:grid-cols-2 md:gap-8">
 								<div>
-									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-										Company
-									</h4>
+									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Company</h4>
 									<ul className="mt-4 space-y-4">
 										{navigation.company.map(item => (
 											<li key={item.name}>
 												<Link href={item.href} prefetch={false}>
-													<a className="text-base text-gray-300 hover:text-white">
-														{item.name}
-													</a>
+													<a className="text-base text-gray-300 hover:text-white">{item.name}</a>
 												</Link>
 											</li>
 										))}
 									</ul>
 								</div>
 								<div className="mt-12 md:mt-0">
-									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-										Legal
-									</h4>
+									<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Legal</h4>
 									<ul className="mt-4 space-y-4">
 										{navigation.legal.map(item => (
 											<li key={item.name}>
 												<Link href={item.href} prefetch={false}>
-													<a className="text-base text-gray-300 hover:text-white">
-														{item.name}
-													</a>
+													<a className="text-base text-gray-300 hover:text-white">{item.name}</a>
 												</Link>
 											</li>
 										))}
@@ -110,36 +90,22 @@ export function Footer() {
 							<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
 								Subscribe to the newsletter
 							</h4>
-							<p className="mt-4 text-base text-gray-300">
-								The latest updates, straight to your inbox.
-							</p>
+							<p className="mt-4 text-base text-gray-300">The latest updates, straight to your inbox.</p>
 							<form
 								className="mt-4 sm:flex sm:max-w-md"
 								method="post"
 								acceptCharset="UTF-8"
 								action="https://www.aweber.com/scripts/addlead.pl"
 							>
-								<input
-									type="hidden"
-									name="meta_web_form_id"
-									value="734113215"
-								/>
-								<input
-									type="hidden"
-									name="listname"
-									value="awlist5254312"
-								/>
+								<input type="hidden" name="meta_web_form_id" value="734113215" />
+								<input type="hidden" name="listname" value="awlist5254312" />
 								<input
 									type="hidden"
 									name="redirect"
 									value="https://stockanalysis.com/subscribe/thank-you/"
 									id="redirect_756a76620e2e180d07c2981f91a5fa1e"
 								/>
-								<input
-									type="hidden"
-									name="meta_adtracking"
-									value="Footer"
-								/>
+								<input type="hidden" name="meta_adtracking" value="Footer" />
 								<label htmlFor="email-footer" className="sr-only">
 									Email address
 								</label>

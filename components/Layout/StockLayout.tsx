@@ -13,20 +13,11 @@ type Props = {
 	data?: any
 }
 
-export function Stock({
-	children,
-	info,
-	url,
-	title,
-	description,
-	data
-}: Props) {
+export function Stock({ children, info, url, title, description, data }: Props) {
 	return (
 		<Layout url={url}>
 			{/* SEO Config */}
-			{title && (
-				<SEO title={title} description={description} canonical={url} />
-			)}
+			{title && <SEO title={title} description={description} canonical={url} />}
 
 			<SymbolContextProvider value={{ info, data }}>
 				<div className="pt-5 sm:pt-6">

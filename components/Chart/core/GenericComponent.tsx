@@ -24,9 +24,7 @@ const aliases = {
 interface GenericComponentProps {
 	readonly svgDraw?: (moreProps: any) => React.ReactNode
 	readonly canvasDraw?: (ctx: CanvasRenderingContext2D, moreProps: any) => void
-	readonly canvasToDraw?: (
-		contexts: ICanvasContexts
-	) => CanvasRenderingContext2D | undefined
+	readonly canvasToDraw?: (contexts: ICanvasContexts) => CanvasRenderingContext2D | undefined
 	readonly clip?: boolean
 	readonly disablePan?: boolean
 	readonly drawOn: string[]
@@ -43,15 +41,9 @@ interface GenericComponentProps {
 	readonly onDrag?: (e: React.MouseEvent, moreProps: any) => void
 	readonly onDragComplete?: (e: React.MouseEvent, moreProps: any) => void
 	readonly onDoubleClick?: (e: React.MouseEvent, moreProps: any) => void
-	readonly onDoubleClickWhenHover?: (
-		e: React.MouseEvent,
-		moreProps: any
-	) => void
+	readonly onDoubleClickWhenHover?: (e: React.MouseEvent, moreProps: any) => void
 	readonly onContextMenu?: (e: React.MouseEvent, moreProps: any) => void
-	readonly onContextMenuWhenHover?: (
-		e: React.MouseEvent,
-		moreProps: any
-	) => void
+	readonly onContextMenuWhenHover?: (e: React.MouseEvent, moreProps: any) => void
 	readonly onMouseMove?: (e: React.MouseEvent, moreProps: any) => void
 	readonly onMouseDown?: (e: React.MouseEvent, moreProps: any) => void
 	readonly onHover?: (e: React.MouseEvent, moreProps: any) => void
@@ -63,10 +55,7 @@ interface GenericComponentState {
 	updateCount: number
 }
 
-export class GenericComponent extends React.Component<
-	GenericComponentProps,
-	GenericComponentState
-> {
+export class GenericComponent extends React.Component<GenericComponentProps, GenericComponentState> {
 	public static defaultProps = {
 		svgDraw: functor(null),
 		draw: [],
@@ -89,8 +78,7 @@ export class GenericComponent extends React.Component<
 		displayXAccessor: PropTypes.func.isRequired,
 		plotData: PropTypes.array.isRequired,
 		fullData: PropTypes.array.isRequired,
-		chartConfig: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-			.isRequired,
+		chartConfig: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
 		morePropsDecorator: PropTypes.func,
 		generateSubscriptionId: PropTypes.func,
 		getMutableState: PropTypes.func.isRequired,
@@ -222,18 +210,10 @@ export class GenericComponent extends React.Component<
 				) {
 					setCursorClass('react-financial-charts-pointer-cursor')
 					this.iSetTheCursorClass = true
-				} else if (
-					this.moreProps.hovering &&
-					this.props.selected &&
-					amIOnTop(this.suscriberId)
-				) {
+				} else if (this.moreProps.hovering && this.props.selected && amIOnTop(this.suscriberId)) {
 					setCursorClass(this.props.interactiveCursorClass)
 					this.iSetTheCursorClass = true
-				} else if (
-					prevHover &&
-					!this.moreProps.hovering &&
-					this.iSetTheCursorClass
-				) {
+				} else if (prevHover && !this.moreProps.hovering && this.iSetTheCursorClass) {
 					this.iSetTheCursorClass = false
 					setCursorClass(null)
 				}
@@ -325,8 +305,7 @@ export class GenericComponent extends React.Component<
 
 	public getPanConditions() {
 		const draggable =
-			!!(this.props.selected && this.moreProps.hovering) ||
-			(this.props.enableDragOnHover && this.moreProps.hovering)
+			!!(this.props.selected && this.moreProps.hovering) || (this.props.enableDragOnHover && this.moreProps.hovering)
 
 		return {
 			draggable,
@@ -344,11 +323,7 @@ export class GenericComponent extends React.Component<
 		const type = aliases[trigger] || trigger
 		const proceed = this.props.drawOn.indexOf(type) > -1
 
-		if (
-			proceed ||
-			this.props.selected /* this is to draw as soon as you select */ ||
-			force
-		) {
+		if (proceed || this.props.selected /* this is to draw as soon as you select */ || force) {
 			const { canvasDraw } = this.props
 			if (canvasDraw === undefined) {
 				const { updateCount } = this.state
@@ -409,10 +384,7 @@ export class GenericComponent extends React.Component<
 		}
 	}
 
-	public UNSAFE_componentWillReceiveProps(
-		nextProps: GenericComponentProps,
-		nextContext: any
-	) {
+	public UNSAFE_componentWillReceiveProps(nextProps: GenericComponentProps, nextContext: any) {
 		const { xScale, plotData, chartConfig, getMutableState } = nextContext
 
 		this.moreProps = {
@@ -431,16 +403,8 @@ export class GenericComponent extends React.Component<
 	}
 
 	public getMoreProps() {
-		const {
-			xScale,
-			plotData,
-			chartConfig,
-			morePropsDecorator,
-			xAccessor,
-			displayXAccessor,
-			width,
-			height
-		} = this.context
+		const { xScale, plotData, chartConfig, morePropsDecorator, xAccessor, displayXAccessor, width, height } =
+			this.context
 
 		const { chartId, fullData } = this.context
 
@@ -498,9 +462,7 @@ export class GenericComponent extends React.Component<
 
 		const suffix = chartId !== undefined ? '-' + chartId : ''
 
-		const style = clip
-			? { clipPath: `url(#chart-area-clip${suffix})` }
-			: undefined
+		const style = clip ? { clipPath: `url(#chart-area-clip${suffix})` } : undefined
 
 		return <g style={style}>{svgDraw(this.getMoreProps())}</g>
 	}

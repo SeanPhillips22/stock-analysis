@@ -1,9 +1,9 @@
 import { useModifyColumns } from 'components/Screener/functions/useModifyColumns'
-import { screenerState } from 'components/Screener/screener.state'
 import { FilterProps } from 'components/Screener/screener.types'
 import { Tooltip } from 'components/Tooltips/Tooltip'
 import { SingleFilter } from './_Filter'
 import { TooltipContent } from './TooltipContent'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	f: FilterProps
@@ -14,8 +14,8 @@ type Props = {
  * contains the label name and the tooltip
  */
 export function FilterWrap({ f }: Props) {
-	const type = screenerState(state => state.type)
-	const { fetchColumn } = useModifyColumns()
+	const { endpoint } = useScreenerContext()
+	const { fetchColumn } = useModifyColumns(endpoint)
 
 	return (
 		<div
@@ -23,18 +23,11 @@ export function FilterWrap({ f }: Props) {
 			key={f.name}
 		>
 			<div className="hide-scroll cursor-help overflow-x-auto">
-				<Tooltip
-					content={<TooltipContent id={f.id} />}
-					theme="light"
-					delay={500}
-				>
+				<Tooltip content={<TooltipContent id={f.id} />} theme="light" delay={500}>
 					<div>{f.name}</div>
 				</Tooltip>
 			</div>
-			<div
-				onMouseEnter={() => fetchColumn(f.id, type)}
-				onFocus={() => fetchColumn(f.id, type)}
-			>
+			<div onMouseEnter={() => fetchColumn(f.id)} onFocus={() => fetchColumn(f.id)}>
 				<SingleFilter filter={f} />
 			</div>
 		</div>

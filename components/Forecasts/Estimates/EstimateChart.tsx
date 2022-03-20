@@ -11,19 +11,9 @@ import {
 	defaults
 } from 'chart.js'
 
-ChartJS.register(
-	LineController,
-	LineElement,
-	LinearScale,
-	CategoryScale,
-	PointElement
-)
+ChartJS.register(LineController, LineElement, LinearScale, CategoryScale, PointElement)
 
-import {
-	isOldSafari,
-	Unavailable,
-	UnavailableSafari
-} from 'components/Unavailable'
+import { isOldSafari, Unavailable, UnavailableSafari } from 'components/Unavailable'
 
 import { abbreviateNumber } from 'functions/numbers/abbreviateNumber'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
@@ -168,11 +158,7 @@ export function EstimateChart({ type, title }: Props) {
 										autoSkip: false,
 										maxRotation: 0,
 										minRotation: 0,
-										maxTicksLimit:
-											typeof window !== 'undefined' &&
-											window.innerWidth < 600
-												? 7
-												: 10
+										maxTicksLimit: typeof window !== 'undefined' && window.innerWidth < 600 ? 7 : 10
 									}
 								},
 								y: {
@@ -187,15 +173,9 @@ export function EstimateChart({ type, title }: Props) {
 											if (value == 0) {
 												return 0
 											}
-											if (type === 'revenue' || type === 'eps')
-												return abbreviateNumber(Number(value), 0)
-											if (
-												type === 'revenueGrowth' ||
-												type === 'epsGrowth'
-											)
-												return (
-													abbreviateNumber(Number(value), 0) + '%'
-												)
+											if (type === 'revenue' || type === 'eps') return abbreviateNumber(Number(value), 0)
+											if (type === 'revenueGrowth' || type === 'epsGrowth')
+												return abbreviateNumber(Number(value), 0) + '%'
 											return value
 										},
 										maxTicksLimit: 8
@@ -238,20 +218,13 @@ export function EstimateChart({ type, title }: Props) {
 										label: function (context: any) {
 											let label = context.dataset.label || ''
 											// Don't show multiple labels on the same dataset
-											if (
-												context.label ===
-													getYear(dates[lastDate]) &&
-												label !== seriesName
-											) {
+											if (context.label === getYear(dates[lastDate]) && label !== seriesName) {
 												return ''
 											}
 											const val = parseFloat(context.parsed.y) || 0
-											if (type.includes('Growth'))
-												return `${label}: ${dec2.format(val)}%`
-											if (type === 'revenue')
-												return `${label}: ${dec0.format(val)}`
-											if (type === 'eps')
-												return `${label}: ${dec3.format(val)}`
+											if (type.includes('Growth')) return `${label}: ${dec2.format(val)}%`
+											if (type === 'revenue') return `${label}: ${dec0.format(val)}`
+											if (type === 'eps') return `${label}: ${dec3.format(val)}`
 											else return `${label}: ${val.toString()}`
 										}
 									}
@@ -260,12 +233,7 @@ export function EstimateChart({ type, title }: Props) {
 						}}
 					/>
 				</div>
-				<EstimateChartTable
-					title={seriesName}
-					data={estimatesData}
-					type={type}
-					lastActualDate={lastActualDate}
-				/>
+				<EstimateChartTable title={seriesName} data={estimatesData} type={type} lastActualDate={lastActualDate} />
 			</div>
 		</div>
 	)

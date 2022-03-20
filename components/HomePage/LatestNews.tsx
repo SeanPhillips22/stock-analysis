@@ -15,20 +15,10 @@ export const LatestNews = ({ news }: { news: NewsMin[] }) => (
 			<tbody>
 				{news.map((item, index) => {
 					return (
-						<tr
-							key={index}
-							className="border-b border-gray-200 hover:bg-gray-50"
-						>
-							<td className="pr-1 pt-2 align-top text-gray-600">
-								{item.d}
-							</td>
+						<tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
+							<td className="pr-1 pt-2 align-top text-gray-600">{item.d}</td>
 							<td className="py-2 pl-2">
-								<a
-									href={item.u}
-									target="_blank"
-									rel="nofollow noopener noreferrer"
-									className="bll"
-								>
+								<a href={item.u} target="_blank" rel="nofollow noopener noreferrer" className="bll">
 									{item.t}
 								</a>
 								<span className="text-gray-600"> - {item.n}</span>
@@ -37,10 +27,7 @@ export const LatestNews = ({ news }: { news: NewsMin[] }) => (
 					)
 				})}
 				<tr className="border-b border-gray-200">
-					<td
-						colSpan={2}
-						className="pl-0.5 pt-3 pb-2 text-base font-semibold bp:pl-1 sm:pl-2 sm:text-lg"
-					>
+					<td colSpan={2} className="pl-0.5 pt-3 pb-2 text-base font-semibold bp:pl-1 sm:pl-2 sm:text-lg">
 						<span className="hidden xs:inline">More News:</span>
 						<Link href="/news/">
 							<a className="bll ml-2 mb-1 inline-flex items-center rounded-md bg-gray-100 px-1.5 py-1 text-sm font-medium hover:bg-gray-200 bp:px-2 sm:ml-2 sm:text-base">

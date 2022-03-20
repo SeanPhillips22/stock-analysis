@@ -1,82 +1,69 @@
 import { useModifyFilters } from '../../functions/useModifyFilters'
 import { useModifyColumns } from '../../functions/useModifyColumns'
 import { screenerState } from '../../screener.state'
-import { returnFilteredColumns } from '../../maps/resultColumns.map'
-import { getDataPoints } from 'components/Screener/maps/dataPoints'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { Menu } from '@headlessui/react'
 import { cn } from 'functions/helpers/classNames'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { FilterValue } from 'components/Screener/screener.types'
 
 export function PresetScreens() {
-	const type = screenerState(state => state.type)
-	const presets = screenerState(state => state.presets)
+	const { endpoint, state, dispatch, presets, dataPoints } = useScreenerContext()
 	const setSort = screenerState(state => state.setSort)
 	const setResetSort = screenerState(state => state.setResetSort)
-	const setFilterMenu = screenerState(state => state.setFilterMenu)
-	const activePreset = screenerState(state => state.activePreset)
-	const setActivePreset = screenerState(state => state.setActivePreset)
-	const setShowColumns = screenerState(state => state.setShowColumns)
-	const resultsMenu = screenerState(state => state.resultsMenu)
-	const setResultsMenu = screenerState(state => state.setResultsMenu)
-	const { add, clear } = useModifyFilters()
-	const { fetchColumn } = useModifyColumns()
+	const { clear } = useModifyFilters()
+	const { fetchColumn } = useModifyColumns(endpoint)
 
 	function renderPresetFilters(value: string) {
-		const DataPoints = getDataPoints(type)
 		clear()
-		setFilterMenu('Active')
-		setActivePreset(value)
+		dispatch({ type: 'SET_FILTERS_MENU', value: 'Active' })
+		dispatch({ type: 'SET_ACTIVE_PRESET', value })
 		setResetSort(true)
-		presets?.map(item => {
+		let addFilters: FilterValue[] = []
+		presets.map(item => {
 			if (item.name === value) {
 				item.filters.map(filter => {
-					let dp = DataPoints.find(item => item.id === filter.id)
+					let dp = dataPoints.find(item => item.id === filter.id)
 					if (dp) {
-						add(
-							filter.id,
-							dp.name,
-							filter.value,
-							dp.filterType,
-							dp.numberType
-						)
-						fetchColumn(filter.id, type)
+						addFilters.push({
+							id: filter.id,
+							name: dp.name,
+							value: filter.value,
+							filterType: dp.filterType,
+							numberType: dp.numberType
+						})
+						fetchColumn(filter.id)
 					}
 				})
 				if (item.sort) {
 					setSort([item.sort])
-					setResultsMenu('Filtered')
 				}
-				// If "Filtered" menu is selected, add all the values
-				if (resultsMenu === 'Filtered') {
-					const cols = returnFilteredColumns(type)
-					item.filters.map(filter => {
-						cols.push(filter.id)
-					})
-					setShowColumns(cols)
-				}
+				// Add all the preset filter values to the "Filtered" column
+				// Then set the active results menu to "Filtered"
+				let cols = [...state.columns.all.Filtered]
+				item.filters.map(filter => {
+					cols.push(filter.id)
+				})
+				dispatch({ type: 'SET_RESULTS_MENU', value: 'Filtered' })
+				dispatch({ type: 'SET_FILTERS', value: addFilters })
 			}
 		})
 	}
 
 	return (
 		<div className="flex w-[50%] md:block md:w-auto">
-			<div className="hidden text-sm font-medium text-gray-800 md:block">
-				Preset Screens
-			</div>
+			<div className="hidden text-sm font-medium text-gray-800 md:block">Preset Screens</div>
 			<Dropdown
-				title={activePreset || 'Select preset'}
+				title={state.activePreset || 'Select preset'}
 				menuClasses="grow"
 				btnClasses="justify-between text-sm font-normal"
 				icnClasses="text-gray-700"
 				classes="min-w-[150px] -right-2 xs:min-w-[160px] xs:right-0"
 			>
-				{presets?.map(item => (
+				{presets.map(item => (
 					<Menu.Item key={item.name}>
 						<div
-							className={cn(
-								'dd',
-								activePreset === item.name ? 'active' : ''
-							)}
+							className={cn('dd', state.activePreset === item.name ? 'active' : '')}
 							onClick={() => renderPresetFilters(item.name)}
 						>
 							{item.name}

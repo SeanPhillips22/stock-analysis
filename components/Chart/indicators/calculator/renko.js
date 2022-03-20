@@ -134,10 +134,7 @@ export default function RenkoComponent() {
 					brick = {}
 				} else {
 					if (idx === rawData.length - 1) {
-						brick.close =
-							direction > 0
-								? pricingMethod(d).high
-								: pricingMethod(d).low
+						brick.close = direction > 0 ? pricingMethod(d).high : pricingMethod(d).low
 						brick.to = idx
 						brick.toDate = dateAccessor(d)
 						dateMutator(brick, dateAccessor(d))

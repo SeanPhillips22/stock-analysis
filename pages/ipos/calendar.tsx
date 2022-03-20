@@ -75,14 +75,7 @@ export default function IpoCalendar(props: Props) {
 												columns: true
 											},
 											columnOptions: FutureIpoDataPoints,
-											columnOrder: [
-												'ipoDate',
-												's',
-												'n',
-												'exchange',
-												'ipoPriceRange',
-												'sharesOffered'
-											],
+											columnOrder: ['ipoDate', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 											fallback: {
 												title: 'This Week · 0 IPOs',
 												text: 'There are no upcoming IPOs remaining for this week.'
@@ -105,14 +98,7 @@ export default function IpoCalendar(props: Props) {
 												columns: true
 											},
 											columnOptions: FutureIpoDataPoints,
-											columnOrder: [
-												'ipoDate',
-												's',
-												'n',
-												'exchange',
-												'ipoPriceRange',
-												'sharesOffered'
-											],
+											columnOrder: ['ipoDate', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 											fallback: {
 												title: 'Next Week · 0 IPOs',
 												text: 'There are no IPOs scheduled for next week.'
@@ -154,10 +140,7 @@ export default function IpoCalendar(props: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['getIposRecentMin', 'getIpoFilingsMin', 'getFilingsCount']
-	const [response, later] = await Promise.all([
-		getSelect(queryWeek, false, extras),
-		getSelect(queryLater)
-	])
+	const [response, later] = await Promise.all([getSelect(queryWeek, false, extras), getSelect(queryLater)])
 
 	return {
 		props: {

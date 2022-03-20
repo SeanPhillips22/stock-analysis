@@ -12,12 +12,7 @@ async function queryChart(symbol: string, type: string, time: string) {
 	return await getData(url)
 }
 
-export function useChart(
-	info: Info,
-	time: string,
-	initial: InitialData,
-	initialFetch: boolean
-) {
+export function useChart(info: Info, time: string, initial: InitialData, initialFetch: boolean) {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	let expiration = initialFetch ? initial.expiration : undefined
 

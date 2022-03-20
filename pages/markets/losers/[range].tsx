@@ -61,11 +61,7 @@ type Props = {
 	tradingTimestamps: TableTimestamp
 }
 
-export default function LosersPageRange({
-	data,
-	rangePath,
-	tradingTimestamps
-}: Props) {
+export default function LosersPageRange({ data, rangePath, tradingTimestamps }: Props) {
 	const { id, title, metaTitle } = rangeMap[rangePath]
 
 	// the page's config and settings
@@ -96,11 +92,7 @@ export default function LosersPageRange({
 								columns: true
 							},
 							columnOptions: MoverDataPoints,
-							excludeColumns: [
-								'premarketPrice',
-								'premarketChange',
-								'premarketChangePercent'
-							]
+							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent']
 						},
 						dynamic: {
 							...query,

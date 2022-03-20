@@ -10,14 +10,7 @@ import {
 	defaults
 } from 'chart.js'
 
-ChartJS.register(
-	BarController,
-	BarElement,
-	Tooltip,
-	LinearScale,
-	Title,
-	CategoryScale
-)
+ChartJS.register(BarController, BarElement, Tooltip, LinearScale, Title, CategoryScale)
 
 import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
@@ -48,21 +41,9 @@ export function AnalystWidgetChart({ ratings }: AnalystWidgetChartI) {
 				datasets: [
 					{
 						label: 'Analysts',
-						data: [
-							ratings.strongSell,
-							ratings.sell,
-							ratings.hold,
-							ratings.buy,
-							ratings.strongBuy
-						],
+						data: [ratings.strongSell, ratings.sell, ratings.hold, ratings.buy, ratings.strongBuy],
 						//@ts-ignore
-						backgroundColor: [
-							'#FF3333',
-							'#FF3333',
-							'#323232',
-							'#208a20',
-							'#0B610B'
-						]
+						backgroundColor: ['#FF3333', '#FF3333', '#323232', '#208a20', '#0B610B']
 					}
 				]
 			}}

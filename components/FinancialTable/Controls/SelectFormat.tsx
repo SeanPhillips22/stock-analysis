@@ -28,11 +28,7 @@ export function SelectFormat() {
 	let active = DIVIDER_MAP.find(item => item.value === divider)
 
 	return (
-		<Dropdown
-			title={active ? active.title : 'Format'}
-			hoverTitle="Change number units"
-			active={divider !== 1000000}
-		>
+		<Dropdown title={active ? active.title : 'Format'} hoverTitle="Change number units" active={divider !== 1000000}>
 			{DIVIDER_MAP.map(item => (
 				<div
 					key={item.value}
@@ -40,9 +36,7 @@ export function SelectFormat() {
 					onClick={() => setDivider(item.value)}
 				>
 					{item.title}
-					{item.value === divider && (
-						<CheckIcon className="h-5 w-5" aria-hidden="true" />
-					)}
+					{item.value === divider && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
 				</div>
 			))}
 		</Dropdown>

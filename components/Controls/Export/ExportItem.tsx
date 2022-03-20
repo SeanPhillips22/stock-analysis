@@ -13,22 +13,6 @@ type ExportItemProps = {
 	bulkData?: string
 }
 
-export function ExportItem({
-	title,
-	type,
-	tableId,
-	data,
-	fileName,
-	bulkData
-}: ExportItemProps) {
-	return (
-		<Download
-			title={title}
-			type={type}
-			tableId={tableId}
-			data={data}
-			fileName={fileName}
-			bulkData={bulkData}
-		/>
-	)
+export function ExportItem({ title, type, tableId, data, fileName, bulkData }: ExportItemProps) {
+	return <Download title={title} type={type} tableId={tableId} data={data} fileName={fileName} bulkData={bulkData} />
 }

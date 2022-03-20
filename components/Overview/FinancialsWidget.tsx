@@ -41,26 +41,15 @@ export const FinancialsWidget = ({ info, data }: Props) => {
 	return (
 		<div>
 			<h2 className="hh2 mb-2">Financial Performance</h2>
-			{data.financialIntro && (
-				<p className="mb-3 text-gray-900">{data.financialIntro}</p>
-			)}
+			{data.financialIntro && <p className="mb-3 text-gray-900">{data.financialIntro}</p>}
 			<div className="h-72 rounded-sm border border-gray-200 p-1 xs:px-2 bp:px-3">
-				<FinancialsWidgetChart
-					data={data}
-					colors={colors}
-					padLegend={padLegend}
-				/>
+				<FinancialsWidgetChart data={data} colors={colors} padLegend={padLegend} />
 			</div>
 			{info.currency !== 'USD' && (
-				<span className="text-small text-gray-700">
-					Financial numbers in millions {info.currency}
-				</span>
+				<span className="text-small text-gray-700">Financial numbers in millions {info.currency}</span>
 			)}
 
-			<Button
-				url={`/stocks/${info.symbol}/financials/`}
-				text="Financial Statements"
-			/>
+			<Button url={`/stocks/${info.symbol}/financials/`} text="Financial Statements" />
 		</div>
 	)
 }

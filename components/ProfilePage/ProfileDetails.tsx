@@ -9,46 +9,32 @@ export const ProfileDetails = ({ details }: { details: StockDetails }) => {
 					<tbody>
 						{details.symbol && (
 							<tr>
-								<td className="py-2 px-2 font-semibold">
-									Ticker Symbol
-								</td>
-								<td className="py-2 px-2 text-right">
-									{details.symbol}
-								</td>
+								<td className="py-2 px-2 font-semibold">Ticker Symbol</td>
+								<td className="py-2 px-2 text-right">{details.symbol}</td>
 							</tr>
 						)}
 						{details.exchange && (
 							<tr>
 								<td className="py-2 px-2 font-semibold">Exchange</td>
-								<td className="py-2 px-2 text-right">
-									{details.exchange}
-								</td>
+								<td className="py-2 px-2 text-right">{details.exchange}</td>
 							</tr>
 						)}
 						{details.fiscalYear && (
 							<tr>
 								<td className="py-2 px-2 font-semibold">Fiscal Year</td>
-								<td className="py-2 px-2 text-right">
-									{details.fiscalYear}
-								</td>
+								<td className="py-2 px-2 text-right">{details.fiscalYear}</td>
 							</tr>
 						)}
 						{details.currency && (
 							<tr>
-								<td className="py-2 px-2 font-semibold">
-									Reporting Currency
-								</td>
-								<td className="py-2 px-2 text-right">
-									{details.currency}
-								</td>
+								<td className="py-2 px-2 font-semibold">Reporting Currency</td>
+								<td className="py-2 px-2 text-right">{details.currency}</td>
 							</tr>
 						)}
 						{details.ipoPrice && (
 							<tr>
 								<td className="py-2 px-2 font-semibold">IPO Price</td>
-								<td className="py-2 px-2 text-right">
-									{details.ipoPrice}
-								</td>
+								<td className="py-2 px-2 text-right">{details.ipoPrice}</td>
 							</tr>
 						)}
 						{details.cik && (
@@ -59,12 +45,8 @@ export const ProfileDetails = ({ details }: { details: StockDetails }) => {
 						)}
 						{details.cusip && (
 							<tr>
-								<td className="py-2 px-2 font-semibold">
-									CUSIP Number
-								</td>
-								<td className="py-2 px-2 text-right">
-									{details.cusip}
-								</td>
+								<td className="py-2 px-2 font-semibold">CUSIP Number</td>
+								<td className="py-2 px-2 text-right">{details.cusip}</td>
 							</tr>
 						)}
 						{details.isin && (

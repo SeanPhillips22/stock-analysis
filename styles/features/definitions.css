@@ -5,7 +5,7 @@
 
 @layer components {
 	.def-icon {
-		@apply text-gray-400 absolute -right-3 -top-0.5 p-1 cursor-pointer;
+		@apply absolute -right-3 -top-0.5 cursor-pointer p-1 text-gray-400;
 	}
 
 	.def-icon svg:hover {
@@ -13,18 +13,18 @@
 	}
 
 	.def {
-		@apply p-1.5 whitespace-pre-wrap;
+		@apply whitespace-pre-wrap p-1.5;
 	}
 
 	.def h4 {
-		@apply text-lg font-semibold mb-2;
+		@apply mb-2 text-lg font-semibold;
 	}
 
 	.def div.def-text {
-		@apply text-sm border-t border-gray-300 pt-2;
+		@apply border-t border-gray-300 pt-2 text-sm;
 	}
 
 	.def div.def-formula {
-		@apply text-sm border-t border-gray-300 mt-3 pt-2;
+		@apply mt-3 border-t border-gray-300 pt-2 text-sm;
 	}
 }

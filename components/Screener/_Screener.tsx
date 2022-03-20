@@ -7,7 +7,7 @@ import { Filters } from './_Filters/_Filters'
 // 2. The "Filters" area: The filter menu and list of filters that are used to narrow down the results
 // 3. The "Results" area: The list of stocks that match the filters, with menu items and table
 
-export function Screener() {
+export default function Screener() {
 	return (
 		<>
 			<AboveScreener />

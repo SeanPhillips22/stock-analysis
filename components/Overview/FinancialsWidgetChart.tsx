@@ -32,26 +32,13 @@ interface FinancialsWidgetChartI {
 	}
 }
 
-export function FinancialsWidgetChart({
-	data,
-	colors,
-	padLegend
-}: FinancialsWidgetChartI) {
+export function FinancialsWidgetChart({ data, colors, padLegend }: FinancialsWidgetChartI) {
 	// Chart.js causes critical errors on older Safari versions
 	if (isOldSafari()) {
 		return <UnavailableSafari />
 	}
 
-	ChartJS.register(
-		BarController,
-		BarElement,
-		Tooltip,
-		LinearScale,
-		CategoryScale,
-		Title,
-		Legend,
-		padLegend
-	)
+	ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale, Title, Legend, padLegend)
 
 	return (
 		<Bar
@@ -103,9 +90,7 @@ export function FinancialsWidgetChart({
 							// beginAtZero: true,
 							callback: function (value: any) {
 								const newvalue = value / 1000000
-								return newvalue
-									.toString()
-									.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+								return newvalue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 							}
 						},
 						grid: {

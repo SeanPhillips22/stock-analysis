@@ -1,15 +1,7 @@
 /* eslint-disable no-invalid-this */
 import { format } from 'd3-format'
 import * as React from 'react'
-import {
-	first,
-	functor,
-	getAxisCanvas,
-	GenericChartComponent,
-	last,
-	noop,
-	strokeDashTypes
-} from '../core'
+import { first, functor, getAxisCanvas, GenericChartComponent, last, noop, strokeDashTypes } from '../core'
 import { drawOnCanvas } from './EdgeCoordinateV3'
 
 export interface EdgeIndicatorProps {
@@ -47,8 +39,7 @@ export class EdgeIndicator extends React.Component<EdgeIndicatorProps> {
 		rectHeight: 20,
 		rectWidth: 50,
 		arrowWidth: 0,
-		fontFamily:
-			"-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
+		fontFamily: "-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
 		fontSize: 13,
 		dx: 0,
 		hideLine: false,
@@ -73,10 +64,7 @@ export class EdgeIndicator extends React.Component<EdgeIndicatorProps> {
 		)
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
 		const edge = this.helper(this.props, moreProps)
 		if (edge === undefined) {
 			return
@@ -95,13 +83,9 @@ export class EdgeIndicator extends React.Component<EdgeIndicatorProps> {
 
 		const { plotData } = moreProps
 
-		const item =
-			itemType === 'first'
-				? first(plotData, yAccessor)
-				: last(plotData, yAccessor)
+		const item = itemType === 'first' ? first(plotData, yAccessor) : last(plotData, yAccessor)
 
-		const edge =
-			item !== undefined ? this.getEdge(moreProps, item) : undefined
+		const edge = item !== undefined ? this.getEdge(moreProps, item) : undefined
 
 		return edge
 	}

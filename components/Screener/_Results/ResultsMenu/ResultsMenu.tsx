@@ -48,7 +48,7 @@ export function ResultsMenu({
 					<Export tableId={tableId} />
 				</div>
 				<div className="ml-auto md:ml-0">
-					<ColumnDropdown type={type} />
+					<ColumnDropdown />
 				</div>
 			</div>
 			<div className="hide-scroll col-span-2 overflow-x-auto border-t lg:order-2 lg:grow lg:border-0 lg:pl-1 xl:pl-2">

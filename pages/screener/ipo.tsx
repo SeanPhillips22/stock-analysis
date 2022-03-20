@@ -1,22 +1,40 @@
 import { screenerState } from 'components/Screener/screener.state'
-import { SEO } from 'components/SEO'
-import { Screener } from 'components/Screener/_Screener'
 import { ScreenerLayout } from 'components/Layout/ScreenerLayout'
 import { PresetFiltersIpos } from 'components/Screener/maps/presetFilters.map'
 import { useEffect } from 'react'
 import { useFetchFullData } from 'components/Screener/functions/useFetchFullData'
-import { defaultColumnsIPOs } from 'components/Screener/maps/resultColumns.map'
+import { initialIpoColumns } from 'components/Screener/maps/columns'
+import { ScreenerContextProvider } from 'components/Screener/ScreenerContext'
+import { ScreenerState } from 'components/Screener/screener.types'
+import { IpoDataPoints } from 'components/Screener/maps/DataPoints/IpoDataPoints'
+import dynamic from 'next/dynamic'
+
+const Screener = dynamic(() => import('components/Screener/_Screener'), {
+	ssr: false,
+	loading: () => {
+		return <div className="mt-6 h-[1000px]">Loading...</div>
+	}
+})
+
+const INITIAL_STATE: ScreenerState = {
+	resultsMenu: 'General',
+	filtersMenu: 'Active',
+	filtersShowing: true,
+	activePreset: '',
+	columns: {
+		all: initialIpoColumns,
+		filtered: initialIpoColumns.Filtered,
+		default: initialIpoColumns.General
+	},
+	filters: []
+}
 
 export default function IpoScreenerPage() {
 	const type = screenerState(state => state.type)
 	const setType = screenerState(state => state.setType)
 	const setData = screenerState(state => state.setData)
 	const setLoaded = screenerState(state => state.setLoaded)
-	const clearFilters = screenerState(state => state.clearFilters)
 	const clearVarFilters = screenerState(state => state.clearVarFilters)
-	const setResultsMenu = screenerState(state => state.setResultsMenu)
-	const setPresets = screenerState(state => state.setPresets)
-	const setShowColumns = screenerState(state => state.setShowColumns)
 	const setFetchedColumns = screenerState(state => state.setFetchedColumns)
 	const fetchFullData = useFetchFullData()
 
@@ -25,28 +43,33 @@ export default function IpoScreenerPage() {
 		if (type !== 'ipo') {
 			setType('ipo')
 			setLoaded(false)
-			clearFilters()
 			clearVarFilters()
-			setResultsMenu('General')
 			setData([])
-			setPresets(PresetFiltersIpos)
-			fetchFullData('ipo')
-			setShowColumns(defaultColumnsIPOs)
-			setFetchedColumns(defaultColumnsIPOs)
+			fetchFullData('iposcreener')
+			setFetchedColumns(initialIpoColumns.General)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type])
 
 	return (
-		<>
-			<SEO
-				title="IPO Screener: Search and Filter Upcoming IPOs"
-				description="An IPO screening tool to search, filter and compare all upcoming IPOs on the US stock market."
-				canonical="/screener/ipo/"
-			/>
-			<ScreenerLayout url="/screener/ipo/">
+		<ScreenerLayout
+			url="/screener/ipo/"
+			title="IPO Screener: Search and Filter Upcoming IPOs"
+			description="An IPO screening tool to search, filter and compare all upcoming IPOs on the US stock market."
+		>
+			<ScreenerContextProvider
+				value={{
+					id: 'ipo-screener',
+					endpoint: 'iposcreener',
+					type: 'ipo',
+					title: 'IPO Screener',
+					presets: PresetFiltersIpos,
+					dataPoints: IpoDataPoints,
+					initial: INITIAL_STATE
+				}}
+			>
 				<Screener />
-			</ScreenerLayout>
-		</>
+			</ScreenerContextProvider>
+		</ScreenerLayout>
 	)
 }

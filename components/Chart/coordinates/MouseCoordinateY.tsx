@@ -30,8 +30,7 @@ export class MouseCoordinateY extends React.Component<MouseCoordinateYProps> {
 		dx: 0,
 		fill: '#4C525E',
 		fitToText: false,
-		fontFamily:
-			"-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
+		fontFamily: "-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
 		fontSize: 13,
 		opacity: 1,
 		orient: 'right',
@@ -54,10 +53,7 @@ export class MouseCoordinateY extends React.Component<MouseCoordinateYProps> {
 		)
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
 		const props = this.helper(this.props, moreProps)
 		if (props === undefined) {
 			return
@@ -97,33 +93,11 @@ export class MouseCoordinateY extends React.Component<MouseCoordinateYProps> {
 	}
 }
 
-export function getYCoordinate(
-	y: number,
-	coordinate: string,
-	props: any,
-	moreProps: any
-) {
+export function getYCoordinate(y: number, coordinate: string, props: any, moreProps: any) {
 	const { width } = moreProps
 
-	const {
-		orient,
-		at,
-		rectWidth,
-		rectHeight,
-		dx,
-		stroke,
-		strokeOpacity,
-		strokeWidth
-	} = props
-	const {
-		fill,
-		opacity,
-		fitToText,
-		fontFamily,
-		fontSize,
-		textFill,
-		arrowWidth
-	} = props
+	const { orient, at, rectWidth, rectHeight, dx, stroke, strokeOpacity, strokeWidth } = props
+	const { fill, opacity, fitToText, fontFamily, fontSize, textFill, arrowWidth } = props
 
 	const x1 = 0
 	const x2 = width

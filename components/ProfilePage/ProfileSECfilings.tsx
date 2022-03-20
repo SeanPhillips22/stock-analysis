@@ -26,10 +26,7 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 				const newData = await getData(url)
 
 				if (newData) {
-					if (
-						!entries.length ||
-						newData.filings[0].time !== entries[0].time
-					) {
+					if (!entries.length || newData.filings[0].time !== entries[0].time) {
 						setEntries(newData.filings)
 						setUpdated(newData.updated)
 					}
@@ -42,12 +39,7 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 			const timestamp = Date.parse(updated)
 			const diff = (now - timestamp) / 1000
 
-			if (
-				(entries && !entries.length) ||
-				diff > 12 * 60 * 60 ||
-				isNaN(diff) ||
-				!updated
-			) {
+			if ((entries && !entries.length) || diff > 12 * 60 * 60 || isNaN(diff) || !updated) {
 				fetchSecData()
 			}
 		}
@@ -67,22 +59,13 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 				<table className="w-full text-smaller bp:text-base">
 					<thead>
 						<tr className="border-b border-t border-gray-200 bg-gray-50">
-							<th
-								scope="col"
-								className="py-2 px-1 text-left text-gray-800 xs:px-2"
-							>
+							<th scope="col" className="py-2 px-1 text-left text-gray-800 xs:px-2">
 								Date
 							</th>
-							<th
-								scope="col"
-								className="py-2 px-1 text-left text-gray-800 xs:px-2"
-							>
+							<th scope="col" className="py-2 px-1 text-left text-gray-800 xs:px-2">
 								Type
 							</th>
-							<th
-								scope="col"
-								className="py-2 px-1 text-left text-gray-800 xs:px-2"
-							>
+							<th scope="col" className="py-2 px-1 text-left text-gray-800 xs:px-2">
 								Title
 							</th>
 						</tr>
@@ -90,23 +73,13 @@ export const ProfileSECfilings = ({ info, cik, filings }: Props) => {
 					<tbody>
 						{entries.map(entry => {
 							return (
-								<tr
-									key={entry['url']}
-									className="border-b border-gray-200"
-								>
+								<tr key={entry['url']} className="border-b border-gray-200">
 									<td className="whitespace-nowrap py-3 pr-1 align-top text-gray-900 xs:px-2">
-										<span title={entry['time']}>
-											{entry['cleantime']}
-										</span>
+										<span title={entry['time']}>{entry['cleantime']}</span>
 									</td>
-									<td className="py-3 px-1 align-top text-gray-900 xs:px-2">
-										{entry['type']}
-									</td>
+									<td className="py-3 px-1 align-top text-gray-900 xs:px-2">{entry['type']}</td>
 									<td className="py-3 pl-1 align-top xs:px-2">
-										<External
-											url={entry['url']}
-											text={entry['title']}
-										/>
+										<External url={entry['url']} text={entry['title']} />
 									</td>
 								</tr>
 							)

@@ -13,44 +13,28 @@ export const TabNavigationETF = ({ symbol }: Props) => {
 			<ul className="navmenu w-full">
 				<li>
 					<Link href={`/etf/${symbol}/`} prefetch={false}>
-						<a
-							className={!path.three ? 'active' : 'inactive'}
-							data-title="Overview"
-						>
+						<a className={!path.three ? 'active' : 'inactive'} data-title="Overview">
 							Overview
 						</a>
 					</Link>
 				</li>
 				<li>
 					<Link href={`/etf/${symbol}/holdings/`} prefetch={false}>
-						<a
-							className={
-								path.three == 'holdings' ? 'active' : 'inactive'
-							}
-							data-title="Holdings"
-						>
+						<a className={path.three == 'holdings' ? 'active' : 'inactive'} data-title="Holdings">
 							Holdings
 						</a>
 					</Link>
 				</li>
 				<li>
 					<Link href={`/etf/${symbol}/dividend/`} prefetch={false}>
-						<a
-							className={
-								path.three == 'dividend' ? 'active' : 'inactive'
-							}
-							data-title="Dividend"
-						>
+						<a className={path.three == 'dividend' ? 'active' : 'inactive'} data-title="Dividend">
 							Dividend
 						</a>
 					</Link>
 				</li>
 				<li>
 					<Link href={`/etf/${symbol}/chart/`} prefetch={false}>
-						<a
-							className={path.three == 'chart' ? 'active' : 'inactive'}
-							data-title="Chart"
-						>
+						<a className={path.three == 'chart' ? 'active' : 'inactive'} data-title="Chart">
 							Chart
 						</a>
 					</Link>

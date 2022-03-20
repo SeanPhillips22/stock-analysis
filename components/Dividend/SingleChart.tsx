@@ -16,15 +16,7 @@ import {
 	defaults
 } from 'chart.js'
 
-ChartJS.register(
-	LineController,
-	LineElement,
-	PointElement,
-	Tooltip,
-	LinearScale,
-	Title,
-	CategoryScale
-)
+ChartJS.register(LineController, LineElement, PointElement, Tooltip, LinearScale, Title, CategoryScale)
 
 const countZero = (cutter: number[]) => {
 	let count = 0
@@ -88,22 +80,15 @@ export const SingleChart = ({ xdata, ydata, type, title }: Props) => {
 							ctx.textAlign = 'start'
 							ctx.textBaseline = 'bottom'
 
-							chartInstance.data.datasets.forEach(function (
-								dataset: { data: any[] },
-								i: any
-							) {
+							chartInstance.data.datasets.forEach(function (dataset: { data: any[] }, i: any) {
 								const meta = chartInstance.getDatasetMeta(i)
 
 								const last = meta.data.length - 1 // The last index of the array, so that the latest stock price is shown
-								if (meta.data.length == 0 || dataset.data[last] == 0)
-									return
+								if (meta.data.length == 0 || dataset.data[last] == 0) return
 
 								// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
 
-								const x =
-									meta.vScale._labelItems[
-										meta.vScale._labelItems.length - 1
-									].translation[0] - 0.5
+								const x = meta.vScale._labelItems[meta.vScale._labelItems.length - 1].translation[0] - 0.5
 
 								const y = meta.data[last].y - 9
 								let str = dataset.data[last]

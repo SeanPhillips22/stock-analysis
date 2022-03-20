@@ -1,22 +1,40 @@
 import { screenerState } from 'components/Screener/screener.state'
-import { SEO } from 'components/SEO'
-import { Screener } from 'components/Screener/_Screener'
 import { ScreenerLayout } from 'components/Layout/ScreenerLayout'
 import { PresetFiltersStocks } from 'components/Screener/maps/presetFilters.map'
 import { useEffect } from 'react'
 import { useFetchFullData } from 'components/Screener/functions/useFetchFullData'
-import { defaultColumnsStocks } from 'components/Screener/maps/resultColumns.map'
+import { initialStockColumns } from 'components/Screener/maps/columns'
+import { ScreenerContextProvider } from 'components/Screener/ScreenerContext'
+import { ScreenerState } from 'components/Screener/screener.types'
+import { StockDataPoints } from 'components/Screener/maps/DataPoints/StockDataPoints'
+import dynamic from 'next/dynamic'
+
+const Screener = dynamic(() => import('components/Screener/_Screener'), {
+	ssr: false,
+	loading: () => {
+		return <div className="mt-6 h-[1000px]">Loading...</div>
+	}
+})
+
+const INITIAL_STATE: ScreenerState = {
+	resultsMenu: 'General',
+	filtersMenu: 'Active',
+	filtersShowing: true,
+	activePreset: '',
+	columns: {
+		all: initialStockColumns,
+		filtered: initialStockColumns.Filtered,
+		default: initialStockColumns.General
+	},
+	filters: []
+}
 
 export default function StockScreenerPage() {
 	const type = screenerState(state => state.type)
 	const setType = screenerState(state => state.setType)
 	const setData = screenerState(state => state.setData)
 	const setLoaded = screenerState(state => state.setLoaded)
-	const clearFilters = screenerState(state => state.clearFilters)
 	const clearVarFilters = screenerState(state => state.clearVarFilters)
-	const setResultsMenu = screenerState(state => state.setResultsMenu)
-	const setPresets = screenerState(state => state.setPresets)
-	const setShowColumns = screenerState(state => state.setShowColumns)
 	const setFetchedColumns = screenerState(state => state.setFetchedColumns)
 	const fetchFullData = useFetchFullData()
 
@@ -25,28 +43,33 @@ export default function StockScreenerPage() {
 		if (type !== 'stocks') {
 			setType('stocks')
 			setLoaded(false)
-			clearFilters()
-			setResultsMenu('General')
 			setData([])
 			clearVarFilters()
-			setPresets(PresetFiltersStocks)
-			fetchFullData('stocks')
-			setShowColumns(defaultColumnsStocks)
-			setFetchedColumns(defaultColumnsStocks)
+			fetchFullData('screener')
+			setFetchedColumns(initialStockColumns.General)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type])
 
 	return (
-		<>
-			<SEO
-				title="Stock Screener: Filter and Analyze Stocks"
-				description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
-				canonical="/screener/stock/"
-			/>
-			<ScreenerLayout url="/screener/stock/">
+		<ScreenerLayout
+			url="/screener/stock/"
+			title="Stock Screener: Filter and Analyze Stocks"
+			description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
+		>
+			<ScreenerContextProvider
+				value={{
+					id: 'stocks-screener',
+					endpoint: 'screener',
+					type: 'stocks',
+					title: 'Stock Screener',
+					presets: PresetFiltersStocks,
+					dataPoints: StockDataPoints,
+					initial: INITIAL_STATE
+				}}
+			>
 				<Screener />
-			</ScreenerLayout>
-		</>
+			</ScreenerContextProvider>
+		</ScreenerLayout>
 	)
 }

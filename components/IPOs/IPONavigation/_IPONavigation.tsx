@@ -8,44 +8,28 @@ export function IPONavigation({ path }: { path: string }) {
 					<ul className="navmenu">
 						<li>
 							<Link href="/ipos/" prefetch={false}>
-								<a
-									data-title="IPOs"
-									className={!path ? 'active' : 'inactive'}
-								>
+								<a data-title="IPOs" className={!path ? 'active' : 'inactive'}>
 									Recent
 								</a>
 							</Link>
 						</li>
 						<li>
 							<Link href="/ipos/calendar/" prefetch={false}>
-								<a
-									data-title="Calendar"
-									className={
-										path === 'calendar' ? 'active' : 'inactive'
-									}
-								>
+								<a data-title="Calendar" className={path === 'calendar' ? 'active' : 'inactive'}>
 									Calendar
 								</a>
 							</Link>
 						</li>
 						<li>
 							<Link href="/ipos/statistics/" prefetch={false}>
-								<a
-									data-title="Statistics"
-									className={
-										path === 'statistics' ? 'active' : 'inactive'
-									}
-								>
+								<a data-title="Statistics" className={path === 'statistics' ? 'active' : 'inactive'}>
 									Statistics
 								</a>
 							</Link>
 						</li>
 						<li>
 							<Link href="/ipos/news/" prefetch={false}>
-								<a
-									data-title="News"
-									className={path === 'news' ? 'active' : 'inactive'}
-								>
+								<a data-title="News" className={path === 'news' ? 'active' : 'inactive'}>
 									News
 								</a>
 							</Link>

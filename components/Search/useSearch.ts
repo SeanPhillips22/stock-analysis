@@ -30,9 +30,7 @@ export function useSearch(debouncedQuery: string, trending: SearchItem[]) {
 			if (e.name === 'AbortError') {
 				// Do nothing
 			} else {
-				throw new Error(
-					`API/getSearchResults not ok: ${e.name} - ${e.message}`
-				)
+				throw new Error(`API/getSearchResults not ok: ${e.name} - ${e.message}`)
 			}
 		} finally {
 			setFiltering(false)

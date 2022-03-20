@@ -17,15 +17,8 @@ import {
 	zipper
 } from './index'
 
-export function getChartOrigin(
-	origin: any,
-	contextWidth: number,
-	contextHeight: number
-) {
-	const originCoordinates =
-		typeof origin === 'function'
-			? origin(contextWidth, contextHeight)
-			: origin
+export function getChartOrigin(origin: any, contextWidth: number, contextHeight: number) {
+	const originCoordinates = typeof origin === 'function' ? origin(contextWidth, contextHeight) : origin
 
 	return originCoordinates
 }
@@ -59,9 +52,7 @@ function isArraySize2AndNumber(yExtentsProp: any) {
 	return false
 }
 
-const isChartProps = (
-	props: ChartProps | any | undefined
-): props is ChartProps => {
+const isChartProps = (props: ChartProps | any | undefined): props is ChartProps => {
 	if (props === undefined) {
 		return false
 	}
@@ -74,11 +65,7 @@ const isChartProps = (
 	return true
 }
 
-export function getNewChartConfig(
-	innerDimension: any,
-	children: any,
-	existingChartConfig: any[] = []
-) {
+export function getNewChartConfig(innerDimension: any, children: any, existingChartConfig: any[] = []) {
 	return React.Children.map(children, each => {
 		if (each !== undefined && each !== null && isChartProps(each.props)) {
 			const chartProps = {
@@ -97,17 +84,12 @@ export function getNewChartConfig(
 			} = chartProps
 
 			const yScale = yScaleProp.copy()
-			const { width, height, availableHeight } = getDimensions(
-				innerDimension,
-				chartProps
-			)
+			const { width, height, availableHeight } = getDimensions(innerDimension, chartProps)
 
 			const { yPan } = chartProps
 			let { yPanEnabled } = chartProps
 			const yExtents = isDefined(yExtentsProp)
-				? (Array.isArray(yExtentsProp) ? yExtentsProp : [yExtentsProp]).map(
-						functor
-				  )
+				? (Array.isArray(yExtentsProp) ? yExtentsProp : [yExtentsProp]).map(functor)
 				: undefined
 
 			const prevChartConfig = existingChartConfig.find(d => d.id === id)
@@ -179,9 +161,7 @@ function setRange(scale: any, height: number, padding: any, flipYScale: any) {
 			scale.range(flipYScale ? [0, height] : [height, 0]).padding(padding)
 		}
 	} else {
-		const { top, bottom } = isNaN(padding)
-			? padding
-			: { top: padding, bottom: padding }
+		const { top, bottom } = isNaN(padding) ? padding : { top: padding, bottom: padding }
 
 		scale.range(flipYScale ? [top, height - bottom] : [height - bottom, top])
 	}
@@ -189,15 +169,11 @@ function setRange(scale: any, height: number, padding: any, flipYScale: any) {
 }
 
 function yDomainFromYExtents(yExtents: any, yScale: any, plotData: any[]) {
-	const yValues = yExtents.map((eachExtent: any) =>
-		plotData.map(values(eachExtent))
-	)
+	const yValues = yExtents.map((eachExtent: any) => plotData.map(values(eachExtent)))
 
 	const allYValues: number[] = flattenDeep(yValues)
 
-	const realYDomain = yScale.invert
-		? extent(allYValues)
-		: [...new Set(allYValues).values()]
+	const realYDomain = yScale.invert ? extent(allYValues) : [...new Set(allYValues).values()]
 
 	return realYDomain
 }
@@ -209,68 +185,45 @@ export function getChartConfigWithUpdatedYScales(
 	dy?: number,
 	chartsToPan?: string[]
 ) {
-	const yDomains = chartConfig.map(
-		({ yExtentsCalculator, yExtents, yScale }: any) => {
-			const realYDomain = isDefined(yExtentsCalculator)
-				? yExtentsCalculator({
-						plotData,
-						xDomain,
-						xAccessor,
-						displayXAccessor,
-						fullData
-				  })
-				: yDomainFromYExtents(yExtents, yScale, plotData)
+	const yDomains = chartConfig.map(({ yExtentsCalculator, yExtents, yScale }: any) => {
+		const realYDomain = isDefined(yExtentsCalculator)
+			? yExtentsCalculator({
+					plotData,
+					xDomain,
+					xAccessor,
+					displayXAccessor,
+					fullData
+			  })
+			: yDomainFromYExtents(yExtents, yScale, plotData)
 
-			const yDomainDY =
-				dy !== undefined
-					? yScale
-							.range()
-							.map((each: any) => each - dy)
-							.map(yScale.invert)
-					: yScale.domain()
-			return {
-				realYDomain,
-				yDomainDY,
-				prevYDomain: yScale.domain()
-			}
+		const yDomainDY =
+			dy !== undefined
+				? yScale
+						.range()
+						.map((each: any) => each - dy)
+						.map(yScale.invert)
+				: yScale.domain()
+		return {
+			realYDomain,
+			yDomainDY,
+			prevYDomain: yScale.domain()
 		}
-	)
+	})
 
-	const combine = zipper().combine(
-		(config: any, { realYDomain, yDomainDY, prevYDomain }: any) => {
-			const {
-				id,
-				padding,
-				height,
-				yScale,
-				yPan,
-				flipYScale,
-				yPanEnabled = false
-			} = config
+	const combine = zipper().combine((config: any, { realYDomain, yDomainDY, prevYDomain }: any) => {
+		const { id, padding, height, yScale, yPan, flipYScale, yPanEnabled = false } = config
 
-			const another =
-				chartsToPan !== undefined ? chartsToPan.indexOf(id) > -1 : true
-			const domain =
-				yPan && yPanEnabled
-					? another
-						? yDomainDY
-						: prevYDomain
-					: realYDomain
+		const another = chartsToPan !== undefined ? chartsToPan.indexOf(id) > -1 : true
+		const domain = yPan && yPanEnabled ? (another ? yDomainDY : prevYDomain) : realYDomain
 
-			const newYScale = setRange(
-				yScale.copy().domain(domain),
-				height,
-				padding,
-				flipYScale
-			)
+		const newYScale = setRange(yScale.copy().domain(domain), height, padding, flipYScale)
 
-			return {
-				...config,
-				yScale: newYScale,
-				realYDomain
-			}
+		return {
+			...config,
+			yScale: newYScale,
+			realYDomain
 		}
-	)
+	})
 
 	const updatedChartConfig = combine(chartConfig, yDomains)
 

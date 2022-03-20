@@ -41,9 +41,7 @@ export function numericMatch(stock: SingleStock, id: DataId, filter: string) {
 			if (!first) {
 				return Number(value) <= Number(second)
 			}
-			return (
-				Number(value) >= Number(first) && Number(value) <= Number(second)
-			)
+			return Number(value) >= Number(first) && Number(value) <= Number(second)
 
 		case 'exactly':
 			return Number(value) === Number(first)

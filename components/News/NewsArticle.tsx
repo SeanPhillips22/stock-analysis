@@ -18,29 +18,12 @@ export function NewsArticle({ item, related, ad, loadAds }: Props) {
 	return (
 		<>
 			<div className="news-article">
-				<a
-					href={item.url}
-					target="_blank"
-					rel="nofollow noopener noreferrer"
-					aria-hidden="true"
-					tabIndex={-1}
-				>
-					<img
-						loading="lazy"
-						src={imgSrc}
-						width={640}
-						height={360}
-						alt=""
-						onError={onError}
-					/>
+				<a href={item.url} target="_blank" rel="nofollow noopener noreferrer" aria-hidden="true" tabIndex={-1}>
+					<img loading="lazy" src={imgSrc} width={640} height={360} alt="" onError={onError} />
 				</a>
 				<div>
 					<h3>
-						<a
-							href={item.url}
-							target="_blank"
-							rel="noopener noreferrer nofollow"
-						>
+						<a href={item.url} target="_blank" rel="noopener noreferrer nofollow">
 							{item.title}
 						</a>
 					</h3>

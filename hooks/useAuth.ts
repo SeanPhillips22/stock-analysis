@@ -20,26 +20,24 @@ export function useAuth() {
 	useEffect(() => {
 		// subscribe to login and logout events
 		// auth state is stored in localstorage
-		const { data: authListener } = supabase.auth.onAuthStateChange(
-			(event, session) => {
-				if (event === 'SIGNED_IN') {
-					setUser(session?.user)
-					setIsLoggedIn(true)
-					checkPro(session?.user)
-				}
-				if (event === 'SIGNED_OUT') {
-					setUser(undefined)
-					setIsLoggedIn(false)
-				}
-				// set a cookie in order to use server-side rendered features
-				// fetch('/api/auth/', {
-				// 	method: 'POST',
-				// 	headers: new Headers({ 'Content-Type': 'application/json' }),
-				// 	credentials: 'same-origin',
-				// 	body: JSON.stringify({ event, session })
-				// })
+		const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+			if (event === 'SIGNED_IN') {
+				setUser(session?.user)
+				setIsLoggedIn(true)
+				checkPro(session?.user)
 			}
-		)
+			if (event === 'SIGNED_OUT') {
+				setUser(undefined)
+				setIsLoggedIn(false)
+			}
+			// set a cookie in order to use server-side rendered features
+			// fetch('/api/auth/', {
+			// 	method: 'POST',
+			// 	headers: new Headers({ 'Content-Type': 'application/json' }),
+			// 	credentials: 'same-origin',
+			// 	body: JSON.stringify({ event, session })
+			// })
+		})
 
 		if (!checking) {
 			setChecking(true)
@@ -93,19 +91,13 @@ export function useAuth() {
 				})
 			}
 
-			if (
-				userdata.status === 'deleted' &&
-				auth.cancelled_date !== userdata.cancelled_date
-			) {
+			if (userdata.status === 'deleted' && auth.cancelled_date !== userdata.cancelled_date) {
 				await supabase.auth.update({
 					data: { cancelled_date: userdata.cancelled_date }
 				})
 			}
 
-			if (
-				userdata.status === 'paused' &&
-				auth.paused_date !== userdata.paused_date
-			) {
+			if (userdata.status === 'paused' && auth.paused_date !== userdata.paused_date) {
 				await supabase.auth.update({
 					data: { paused_date: userdata.paused_date }
 				})

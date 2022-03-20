@@ -51,11 +51,7 @@ export default function LosersPage({ data, tradingTimestamps }: Props) {
 								columns: true
 							},
 							columnOptions: MoverDataPoints,
-							excludeColumns: [
-								'premarketPrice',
-								'premarketChange',
-								'premarketChangePercent'
-							]
+							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent']
 						},
 						dynamic: query
 					}}

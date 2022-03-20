@@ -52,8 +52,7 @@ export default function MyAccount() {
 	if (status === 'paused') showStatus = 'Subscription Paused'
 	if (status === 'deleted') showStatus = 'Subscription Cancelled'
 
-	const isSubscribed =
-		status === 'active' || status === 'trialing' ? true : false
+	const isSubscribed = status === 'active' || status === 'trialing' ? true : false
 
 	return (
 		<>
@@ -75,8 +74,7 @@ export default function MyAccount() {
 								)}
 								{registered_date && (
 									<div>
-										<strong>Registered Date:</strong>{' '}
-										{formatDateClean(registered_date)}
+										<strong>Registered Date:</strong> {formatDateClean(registered_date)}
 									</div>
 								)}
 							</div>
@@ -87,51 +85,30 @@ export default function MyAccount() {
 										<strong>Status:</strong> {showStatus}
 									</div>
 								)}
-								{isSubscribed && next_bill_date && (
-									<div>Next Payment Date: {next_bill_date}</div>
-								)}
-								{isSubscribed &&
-									next_payment_amount &&
-									next_payment_amount !== '0' && (
-										<div>
-											Amount: {next_payment_amount}{' '}
-											{currency && currency}
-										</div>
-									)}
-								{isSubscribed && payment_method && (
+								{isSubscribed && next_bill_date && <div>Next Payment Date: {next_bill_date}</div>}
+								{isSubscribed && next_payment_amount && next_payment_amount !== '0' && (
 									<div>
-										Payment Method:{' '}
-										{payment_method.charAt(0).toUpperCase() +
-											payment_method.slice(1)}
+										Amount: {next_payment_amount} {currency && currency}
 									</div>
+								)}
+								{isSubscribed && payment_method && (
+									<div>Payment Method: {payment_method.charAt(0).toUpperCase() + payment_method.slice(1)}</div>
 								)}
 								{isSubscribed && update_url && (
 									<div>
-										<a
-											href={update_url}
-											target="_blank"
-											rel="nofollow noopener noreferrer"
-											className="bll"
-										>
+										<a href={update_url} target="_blank" rel="nofollow noopener noreferrer" className="bll">
 											Update Payment Details
 										</a>
 									</div>
 								)}
 								{isSubscribed && cancel_url && (
 									<div className="mt-3">
-										<a
-											href={cancel_url}
-											target="_blank"
-											rel="nofollow noopener noreferrer"
-											className="bll"
-										>
+										<a href={cancel_url} target="_blank" rel="nofollow noopener noreferrer" className="bll">
 											Cancel Subscription
 										</a>
 									</div>
 								)}
-								{loaded && !isSubscribed && (
-									<ReActivate email={email} status={status} />
-								)}
+								{loaded && !isSubscribed && <ReActivate email={email} status={status} />}
 							</div>
 
 							<div className="rounded-md border border-gray-200 p-3 text-base xs:p-4 xs:text-lg">
@@ -141,13 +118,8 @@ export default function MyAccount() {
 								</div>
 
 								<ol className="ml-8 list-decimal">
-									<li className="mb-2">
-										Click the blue chat widget in the bottom right
-										corner.
-									</li>
-									<li className="mb-2">
-										Send an email to support@stockanalysis.com.
-									</li>
+									<li className="mb-2">Click the blue chat widget in the bottom right corner.</li>
+									<li className="mb-2">Send an email to support@stockanalysis.com.</li>
 									<li>
 										Send a message via the{' '}
 										<Link href="/contact/" prefetch={false}>

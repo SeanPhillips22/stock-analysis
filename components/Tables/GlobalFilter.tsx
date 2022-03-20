@@ -8,11 +8,7 @@ interface Props {
 	setGlobalFilter: (filterValue: FilterValue) => void
 }
 
-export const GlobalFilter = ({
-	useAsyncDebounce,
-	globalFilter,
-	setGlobalFilter
-}: Props) => {
+export const GlobalFilter = ({ useAsyncDebounce, globalFilter, setGlobalFilter }: Props) => {
 	const [value, setValue] = useState(globalFilter)
 	const onChange = useAsyncDebounce((value: any) => {
 		setGlobalFilter(value || undefined)

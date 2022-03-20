@@ -61,10 +61,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 	private readonly changeDisplayFormat = format('+.2f')
 	private readonly percentDisplayFormat = format('+.2%')
 
-	private readonly xScaleProvider =
-		discontinuousTimeScaleProviderBuilder().inputDateAccessor(
-			(d: IOHLCData) => d.date
-		)
+	private readonly xScaleProvider = discontinuousTimeScaleProviderBuilder().inputDateAccessor((d: IOHLCData) => d.date)
 
 	constructor(props: any) {
 		super(props)
@@ -160,9 +157,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		}
 
 		const priceFormatDecider = (data: number) => {
-			return data < 1
-				? this.pricesBelowOneDisplayFormat(data)
-				: this.pricesDisplayFormat(data)
+			return data < 1 ? this.pricesBelowOneDisplayFormat(data) : this.pricesDisplayFormat(data)
 		}
 
 		const openCloseColor = (data: IOHLCData) => {
@@ -189,9 +184,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 			return data.close
 		}
 		const volumeColor = (data: IOHLCData) => {
-			return data.close > data.open
-				? 'rgba(38, 166, 154, 0.9)'
-				: 'rgba(239, 83, 80, 0.9)'
+			return data.close > data.open ? 'rgba(38, 166, 154, 0.9)' : 'rgba(239, 83, 80, 0.9)'
 		}
 		const volumeSeries = (data: IOHLCData) => {
 			return data.volume
@@ -244,8 +237,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		const { xScaleProvider } = this
 		const { margin } = this.state
 
-		const { data, xScale, xAccessor, displayXAccessor } =
-			xScaleProvider(calculatedData)
+		const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(calculatedData)
 
 		if (type == 'line' || time == '1D' || time == '5D') {
 			if (time == '1D' || time == '5D') {
@@ -334,21 +326,12 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 						xExtents={xExtents}
 						zoomAnchor={lastVisibleItemBasedZoomAnchor}
 					>
-						<Chart
-							id={2}
-							height={100}
-							origin={(w, h) => [0, h - 100]}
-							yExtents={volChartExtents}
-						>
+						<Chart id={2} height={100} origin={(w, h) => [0, h - 100]} yExtents={volChartExtents}>
 							<BarSeries
 								widthRatio={0.5}
 								clip={true}
 								yAccessor={d => d.volume}
-								fillStyle={d =>
-									d.close > d.open
-										? 'rgba(38, 166, 154, 0.8)'
-										: 'rgba(239, 83, 80, 0.8)'
-								}
+								fillStyle={d => (d.close > d.open ? 'rgba(38, 166, 154, 0.8)' : 'rgba(239, 83, 80, 0.8)')}
 							/>
 							<EdgeIndicator
 								itemType="last"
@@ -364,58 +347,29 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								yAxisPad={0}
 							/>
 						</Chart>
-						<Chart
-							id={3}
-							height={chartHeight}
-							yExtents={candleChartExtents}
-						>
+						<Chart id={3} height={chartHeight} yExtents={candleChartExtents}>
 							<XAxis showTickLabel={true} />
-							<YAxis
-								showGridLines={true}
-								tickFormat={this.yAxisTickDisplay}
-								getMaxTicks={maxValueCallback}
-							/>
+							<YAxis showGridLines={true} tickFormat={this.yAxisTickDisplay} getMaxTicks={maxValueCallback} />
 							{type == 'candlestick' ? (
 								<CandlestickSeries {...candlesAppearance} />
 							) : (
 								<>
-									<LineSeries
-										yAccessor={d => d.close}
-										strokeStyle={'#000000'}
-									/>
-									<CurrentCoordinate
-										yAccessor={d => d.close}
-										fillStyle={priceOrCandleStickColor}
-									/>
+									<LineSeries yAccessor={d => d.close} strokeStyle={'#000000'} />
+									<CurrentCoordinate yAccessor={d => d.close} fillStyle={priceOrCandleStickColor} />
 								</>
 							)}
 							{time != '1D' && time != '5D' ? (
 								<>
-									<LineSeries
-										yAccessor={d => d.ma1}
-										strokeStyle={ma1color}
-									/>
-									<CurrentCoordinate
-										yAccessor={d => d.ma1}
-										fillStyle={ma1color}
-									/>
-									<LineSeries
-										yAccessor={d => d.ma2}
-										strokeStyle={ma2color}
-									/>
-									<CurrentCoordinate
-										yAccessor={d => d.ma2}
-										fillStyle={ma2color}
-									/>
+									<LineSeries yAccessor={d => d.ma1} strokeStyle={ma1color} />
+									<CurrentCoordinate yAccessor={d => d.ma1} fillStyle={ma1color} />
+									<LineSeries yAccessor={d => d.ma2} strokeStyle={ma2color} />
+									<CurrentCoordinate yAccessor={d => d.ma2} fillStyle={ma2color} />
 								</>
 							) : (
 								<></>
 							)}
 							{isBrowser == true ? (
-								<MouseCoordinateY
-									rectWidth={margin.right / 1.01225}
-									displayFormat={this.pricesDisplayFormat}
-								/>
+								<MouseCoordinateY rectWidth={margin.right / 1.01225} displayFormat={this.pricesDisplayFormat} />
 							) : (
 								<> </>
 							)}
@@ -462,10 +416,7 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 								fontSize={13}
 							/>
 							<OHLCTooltipCustom origin={[5, 15]} time={time} />
-							<MovingAverageTooltipCustom
-								origin={[8, 24]}
-								options={movingAverageTooltipOptions}
-							/>
+							<MovingAverageTooltipCustom origin={[8, 24]} options={movingAverageTooltipOptions} />
 							{isBrowser == true ? (
 								<HoverTooltipCustom
 									yAccessor={sma50.accessor()}
@@ -476,43 +427,23 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 											y: [
 												{
 													label: 'Open',
-													value:
-														currentItem.open &&
-														this.pricesDisplayFormat(
-															currentItem.open
-														)
+													value: currentItem.open && this.pricesDisplayFormat(currentItem.open)
 												},
 												{
 													label: 'High',
-													value:
-														currentItem.high &&
-														this.pricesDisplayFormat(
-															currentItem.high
-														)
+													value: currentItem.high && this.pricesDisplayFormat(currentItem.high)
 												},
 												{
 													label: 'Low',
-													value:
-														currentItem.low &&
-														this.pricesDisplayFormat(
-															currentItem.low
-														)
+													value: currentItem.low && this.pricesDisplayFormat(currentItem.low)
 												},
 												{
 													label: 'Close',
-													value:
-														currentItem.close &&
-														this.pricesDisplayFormat(
-															currentItem.close
-														)
+													value: currentItem.close && this.pricesDisplayFormat(currentItem.close)
 												},
 												{
 													label: 'Volume',
-													value:
-														currentItem.volume &&
-														this.volumeDisplayFormat(
-															currentItem.volume
-														)
+													value: currentItem.volume && this.volumeDisplayFormat(currentItem.volume)
 												}
 											]
 										})
@@ -530,6 +461,4 @@ class StockChart extends React.Component<StockChartProps, StateProps> {
 		)
 	}
 }
-export default withOHLCData()(
-	withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart))
-)
+export default withOHLCData()(withSize({ style: { minHeight: 600 } })(withDeviceRatio()(StockChart)))

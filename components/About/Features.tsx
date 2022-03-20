@@ -24,8 +24,7 @@ const features = [
 	},
 	{
 		name: 'Integrity',
-		description:
-			"We don't promote individual stocks and present each data point following objective rules.",
+		description: "We don't promote individual stocks and present each data point following objective rules.",
 		icon: AdjustmentsIcon
 	}
 ]
@@ -39,8 +38,7 @@ export function AboutFeatures() {
 						What sets us apart
 					</h2>
 					<p className="mt-4 max-w-lg text-xl text-gray-500 lg:mx-auto">
-						We want to make investing easy and accessible with data that
-						is up-to-date and highly accurate.
+						We want to make investing easy and accessible with data that is up-to-date and highly accurate.
 					</p>
 				</div>
 
@@ -50,18 +48,11 @@ export function AboutFeatures() {
 							<div key={feature.name} className="relative">
 								<dt>
 									<div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-blue-500 text-white">
-										<feature.icon
-											className="h-6 w-6"
-											aria-hidden="true"
-										/>
+										<feature.icon className="h-6 w-6" aria-hidden="true" />
 									</div>
-									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">
-										{feature.name}
-									</p>
+									<p className="ml-16 text-lg font-medium leading-6 text-gray-900">{feature.name}</p>
 								</dt>
-								<dd className="mt-2 ml-16 text-base text-gray-500">
-									{feature.description}
-								</dd>
+								<dd className="mt-2 ml-16 text-base text-gray-500">{feature.description}</dd>
 							</div>
 						))}
 					</dl>

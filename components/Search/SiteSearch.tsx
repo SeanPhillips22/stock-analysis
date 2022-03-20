@@ -70,9 +70,7 @@ export function SiteSearch() {
 							active.classList.remove('activeresult')
 						}
 						num++
-						const next: HTMLLinkElement | null = document.querySelector(
-							'[data-num="' + num + '"]'
-						)
+						const next: HTMLLinkElement | null = document.querySelector('[data-num="' + num + '"]')
 						if (next) {
 							next.classList.add('activeresult')
 							next.focus()
@@ -92,9 +90,7 @@ export function SiteSearch() {
 							active.classList.remove('activeresult')
 						}
 						num--
-						const next: HTMLLinkElement | null = document.querySelector(
-							'[data-num="' + num + '"]'
-						)
+						const next: HTMLLinkElement | null = document.querySelector('[data-num="' + num + '"]')
 						if (next) {
 							next.classList.add('activeresult')
 							next.focus()
@@ -108,8 +104,7 @@ export function SiteSearch() {
 
 			case 'Enter':
 				{
-					const activeResult: HTMLLinkElement | null =
-						document.querySelector('.activeresult') ?? null
+					const activeResult: HTMLLinkElement | null = document.querySelector('.activeresult') ?? null
 					if (activeResult) {
 						e.preventDefault()
 						const selected = activeResult.href
@@ -130,10 +125,7 @@ export function SiteSearch() {
 		const formref = inputRef.current ?? null
 		const results = document.querySelector('.results-wrap') ?? null
 
-		if (
-			(formref && formref.contains(e.target as Node)) ||
-			(results && results.contains(e.target as Node))
-		) {
+		if ((formref && formref.contains(e.target as Node)) || (results && results.contains(e.target as Node))) {
 			return
 		}
 		setOpen(false)
@@ -214,27 +206,16 @@ export function SiteSearch() {
 				{open && !error && (
 					<div className="results-wrap">
 						{!loading && query.length === 0 && (
-							<h4 className="py-1.5 px-2 text-lg font-semibold sm:px-3">
-								Trending
-							</h4>
+							<h4 className="py-1.5 px-2 text-lg font-semibold sm:px-3">Trending</h4>
 						)}
 						{results.length ? (
 							<ul role="listbox" id="owned_listbox">
 								{results.map((item, index) => (
-									<SingleResult
-										key={index}
-										index={index}
-										result={item}
-										setOpen={setOpen}
-									/>
+									<SingleResult key={index} index={index} result={item} setOpen={setOpen} />
 								))}
 							</ul>
 						) : null}
-						<FullTextSearch
-							loading={loading || filtering}
-							results={results}
-							query={query}
-						/>
+						<FullTextSearch loading={loading || filtering} results={results} query={query} />
 					</div>
 				)}
 			</div>

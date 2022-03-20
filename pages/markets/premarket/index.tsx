@@ -51,9 +51,7 @@ type Props = {
 
 export default function PreMarket(props: Props) {
 	return (
-		<PageContextProvider
-			value={{ page, updated: props.res.tradingTimestamps }}
-		>
+		<PageContextProvider value={{ page, updated: props.res.tradingTimestamps }}>
 			<MarketsLayout SubNav={PremarketNav}>
 				<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">
 					<TableContextProvider
@@ -100,10 +98,7 @@ export default function PreMarket(props: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['tradingTimestamps']
-	const [res, losers] = await Promise.all([
-		getSelect(queryGainers, false, extras),
-		getSelect(queryLosers)
-	])
+	const [res, losers] = await Promise.all([getSelect(queryGainers, false, extras), getSelect(queryLosers)])
 
 	return {
 		props: {

@@ -1,13 +1,6 @@
 // Used on the /stocks/ and /etf/ index pages
 import { useEffect, useMemo, useState } from 'react'
-import {
-	useTable,
-	usePagination,
-	useGlobalFilter,
-	useAsyncDebounce,
-	useSortBy,
-	Column
-} from 'react-table'
+import { useTable, usePagination, useGlobalFilter, useAsyncDebounce, useSortBy, Column } from 'react-table'
 import { tableState } from 'state/tableState'
 import { useSort } from 'hooks/useSort'
 import { ColumnSort } from './ColumnSort'
@@ -120,14 +113,9 @@ export function SymbolTable({ title, columndata, rowdata }: Props) {
 											title: `Sort by: ${column.Header}`
 										})}
 									>
-										<span
-											className="inline-flex flex-row items-center"
-											onClick={() => updateSort(column)}
-										>
+										<span className="inline-flex flex-row items-center" onClick={() => updateSort(column)}>
 											{column.render('Header')}
-											{column.Header !== 'Symbol' && (
-												<ColumnSort column={column} />
-											)}
+											{column.Header !== 'Symbol' && <ColumnSort column={column} />}
 										</span>
 									</th>
 								))}
@@ -191,10 +179,7 @@ export function SymbolTable({ title, columndata, rowdata }: Props) {
 				</button>
 			</nav>
 			<div className="mt-6 text-center">
-				<button
-					className="bll text-lg"
-					onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-				>
+				<button className="bll text-lg" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
 					Back to Top &#8593;
 				</button>
 			</div>

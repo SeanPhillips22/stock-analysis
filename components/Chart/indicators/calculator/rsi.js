@@ -40,18 +40,14 @@ export default function Rsi() {
 			.accumulator(values => {
 				const avgGain =
 					prevAvgGain !== undefined
-						? (prevAvgGain * (windowSize - 1) +
-								values[values.length - 1].gain) /
-						  windowSize
+						? (prevAvgGain * (windowSize - 1) + values[values.length - 1].gain) / windowSize
 						: mean(values, each => each.gain)
 				if (avgGain === undefined) {
 					return undefined
 				}
 				const avgLoss =
 					prevAvgLoss !== undefined
-						? (prevAvgLoss * (windowSize - 1) +
-								values[values.length - 1].loss) /
-						  windowSize
+						? (prevAvgLoss * (windowSize - 1) + values[values.length - 1].loss) / windowSize
 						: mean(values, each => each.loss)
 				if (avgLoss === undefined) {
 					return undefined

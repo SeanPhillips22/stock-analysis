@@ -1,15 +1,8 @@
 import { DataId } from 'types/DataId'
 import { SingleStock } from 'components/Screener/screener.types'
-import {
-	getFilterFromString,
-	getPriceRangeFilterFromString
-} from '../filterString/getFilterFromString'
+import { getFilterFromString, getPriceRangeFilterFromString } from '../filterString/getFilterFromString'
 
-export function numericRangeMatch(
-	stock: SingleStock,
-	id: DataId,
-	filter: string
-) {
+export function numericRangeMatch(stock: SingleStock, id: DataId, filter: string) {
 	let result
 	if (/^\d+$/.test(filter[0])) {
 		result = getPriceRangeFilterFromString(filter)
@@ -42,17 +35,13 @@ export function numericRangeMatch(
 	// Three comparison types: over, under and between
 	switch (compare) {
 		case 'over':
-			return (
-				Number(firstValue) >= Number(first) ||
-				Number(secondValue) > Number(first)
-			)
+			return Number(firstValue) >= Number(first) || Number(secondValue) > Number(first)
 		case 'between':
 			if (!secondValue) {
 				return (
 					Number(firstValue) == Number(first) ||
 					Number(firstValue) == Number(second) ||
-					(Number(firstValue) < Number(second) &&
-						Number(firstValue) > Number(first))
+					(Number(firstValue) < Number(second) && Number(firstValue) > Number(first))
 				)
 			} else {
 				return (
@@ -64,18 +53,14 @@ export function numericRangeMatch(
 						Number(secondValue) > Number(second)) ||
 					(Number(firstValue) > Number(first) && // Third case, if either ends of the price fall between the filter range.
 						Number(firstValue) < Number(second)) ||
-					(Number(secondValue) > Number(first) &&
-						Number(secondValue) < Number(second))
+					(Number(secondValue) > Number(first) && Number(secondValue) < Number(second))
 				)
 			}
 		case 'under':
 			if (!secondValue) {
 				return Number(firstValue) < Number(first)
 			} else {
-				return (
-					Number(firstValue) < Number(first) ||
-					Number(secondValue) < Number(first)
-				)
+				return Number(firstValue) < Number(first) || Number(secondValue) < Number(first)
 			}
 		case 'notzero':
 			return stock[id] !== 'n/a'
@@ -84,11 +69,7 @@ export function numericRangeMatch(
 			if (!secondValue) {
 				return first == firstValue
 			} else {
-				return (
-					first == firstValue ||
-					first == secondValue ||
-					(first > firstValue && first < secondValue)
-				)
+				return first == firstValue || first == secondValue || (first > firstValue && first < secondValue)
 			}
 	}
 	return false

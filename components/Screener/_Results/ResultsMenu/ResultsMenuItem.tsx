@@ -1,34 +1,36 @@
-import { screenerState } from 'components/Screener/screener.state'
-import { ColumnName, ScreenerTypes } from 'components/Screener/screener.types'
-import { returnResultColumns } from 'components/Screener/maps/resultColumns.map'
+import { ColumnName } from 'components/Screener/screener.types'
 import { useModifyColumns } from 'components/Screener/functions/useModifyColumns'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	name: ColumnName
-	type: ScreenerTypes
 }
 
-export function ResultsMenuItem({ name, type }: Props) {
-	const filters = screenerState(state => state.filters)
-	const resultsMenu = screenerState(state => state.resultsMenu)
-	const setResultsMenu = screenerState(state => state.setResultsMenu)
-	const { fetchManyColumns } = useModifyColumns()
+export function ResultsMenuItem({ name }: Props) {
+	const { endpoint, state, dispatch } = useScreenerContext()
+	const { fetchManyColumns } = useModifyColumns(endpoint)
 
+	// Format the tab title
 	let display = name.toString()
 	let dataTitle = name.toString()
 	if (name === 'Filtered') {
-		display = `${name} (${filters.length})`
+		display = `${name} (${state.filters.length})`
 		dataTitle = `${name} (5)`
 	}
 
 	// When hovering over a results tab, fetch the required columns
 	function handleHover(name: ColumnName) {
 		if (name !== 'Filtered' && name !== 'General') {
-			fetchManyColumns(returnResultColumns(type, name), type)
+			fetchManyColumns(state.columns.all[name])
 		}
 	}
 
-	if (resultsMenu === name) {
+	// Change the active results menu
+	function setMenu(name: ColumnName) {
+		dispatch({ type: 'SET_RESULTS_MENU', value: name })
+	}
+
+	if (state.resultsMenu === name) {
 		return (
 			<li>
 				<span
@@ -47,9 +49,9 @@ export function ResultsMenuItem({ name, type }: Props) {
 			<span
 				className="cursor-pointer py-1 px-2 hover:rounded-md hover:bg-gray-100 focus:outline-none"
 				data-title={dataTitle}
-				onClick={() => setResultsMenu(name)}
+				onClick={() => setMenu(name)}
 				onKeyPress={e => {
-					e.key === 'Enter' && setResultsMenu(name)
+					e.key === 'Enter' && setMenu(name)
 				}}
 				onMouseOver={() => handleHover(name)}
 				onFocus={() => handleHover(name)}

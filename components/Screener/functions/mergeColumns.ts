@@ -1,15 +1,8 @@
 import { DataId } from 'types/DataId'
-import {
-	SingleStock,
-	SingleDataPoint
-} from 'components/Screener/screener.types'
+import { SingleStock, SingleDataPoint } from 'components/Screener/screener.types'
 
 // Merge a new screener column with the existing columns
-export function mergeColumns(
-	existing: SingleStock[],
-	newColumns: SingleDataPoint[],
-	id: DataId
-): any {
+export function mergeColumns(existing: SingleStock[], newColumns: SingleDataPoint[], id: DataId): any {
 	const combined: any = existing.map((stock: SingleStock) => {
 		const newStock = newColumns.find((newStock: SingleDataPoint) => {
 			return stock ? stock.s === newStock[0] : false

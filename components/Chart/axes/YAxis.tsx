@@ -11,23 +11,14 @@ export interface YAxisProps {
 	readonly fontFamily?: string
 	readonly fontSize?: number
 	readonly fontWeight?: number
-	readonly getMouseDelta?: (
-		startXY: [number, number],
-		mouseXY: [number, number]
-	) => number
+	readonly getMouseDelta?: (startXY: [number, number], mouseXY: [number, number]) => number
 	readonly getMaxTicks?: (data: number) => void
 	readonly gridLinesStrokeStyle?: string
 	readonly gridLinesStrokeWidth?: number
 	readonly gridLinesStrokeDasharray?: strokeDashTypes
 	readonly innerTickSize?: number
-	readonly onContextMenu?: (
-		e: React.MouseEvent,
-		mousePosition: [number, number]
-	) => void
-	readonly onDoubleClick?: (
-		e: React.MouseEvent,
-		mousePosition: [number, number]
-	) => void
+	readonly onContextMenu?: (e: React.MouseEvent, mousePosition: [number, number]) => void
+	readonly onDoubleClick?: (e: React.MouseEvent, mousePosition: [number, number]) => void
 	readonly orient?: 'left' | 'right'
 	readonly outerTickSize?: number
 	readonly showDomain?: boolean
@@ -55,12 +46,10 @@ export class YAxis extends React.Component<YAxisProps> {
 		axisAt: 'right',
 		className: 'react-financial-charts-y-axis',
 		domainClassName: 'react-financial-charts-axis-domain',
-		fontFamily:
-			"-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
+		fontFamily: "-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
 		fontSize: 12,
 		fontWeight: 400,
-		getMouseDelta: (startXY: [number, number], mouseXY: [number, number]) =>
-			startXY[1] - mouseXY[1],
+		getMouseDelta: (startXY: [number, number], mouseXY: [number, number]) => startXY[1] - mouseXY[1],
 		gridLinesStrokeStyle: '#E2E4EC',
 		gridLinesStrokeWidth: 1,
 		innerTickSize: 4,
@@ -82,8 +71,7 @@ export class YAxis extends React.Component<YAxisProps> {
 
 	public static contextTypes = {
 		yAxisZoom: PropTypes.func.isRequired,
-		chartId: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-			.isRequired,
+		chartId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 		chartConfig: PropTypes.object.isRequired
 	}
 
@@ -121,12 +109,7 @@ export class YAxis extends React.Component<YAxisProps> {
 	}
 
 	private readonly helper = () => {
-		const {
-			axisAt,
-			ticks,
-			yZoomWidth = YAxis.defaultProps.yZoomWidth,
-			orient
-		} = this.props
+		const { axisAt, ticks, yZoomWidth = YAxis.defaultProps.yZoomWidth, orient } = this.props
 		const {
 			chartConfig: { width, height }
 		} = this.context

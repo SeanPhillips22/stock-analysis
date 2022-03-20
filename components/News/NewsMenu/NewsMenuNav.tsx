@@ -23,9 +23,7 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 				</li>
 				<li>
 					<button
-						className={
-							show === 'v' ? 'font-semibold' : 'bll hidden sm:block'
-						}
+						className={show === 'v' ? 'font-semibold' : 'bll hidden sm:block'}
 						id="tag-feat-news-menu-videos"
 						onClick={() => {
 							setError('')
@@ -38,9 +36,7 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 				{pageType === 'stocks' && (
 					<li>
 						<button
-							className={
-								show === 'pr' ? 'font-semibold' : 'bll hidden sm:block'
-							}
+							className={show === 'pr' ? 'font-semibold' : 'bll hidden sm:block'}
 							id="tag-feat-news-menu-press"
 							onClick={() => {
 								setError('')

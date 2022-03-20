@@ -4,11 +4,7 @@ export const validateUrlBit = (bit: string | null | undefined) => {
 		return null
 	}
 
-	if (
-		bit.charAt(0) === '#' ||
-		bit.charAt(0) === '?' ||
-		bit.charAt(0) === '%'
-	) {
+	if (bit.charAt(0) === '#' || bit.charAt(0) === '?' || bit.charAt(0) === '%') {
 		return null
 	}
 

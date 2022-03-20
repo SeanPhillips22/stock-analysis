@@ -40,10 +40,7 @@ export const ActionsAcquisitions = ({ data }: ActionProps) => {
 					const symbol = sliced[0]
 					const name = sliced[1]
 					return (
-						<Link
-							href={`/stocks/${symbol.toLowerCase()}/`}
-							prefetch={false}
-						>
+						<Link href={`/stocks/${symbol.toLowerCase()}/`} prefetch={false}>
 							<a className="bll" title={name}>
 								{name}
 							</a>

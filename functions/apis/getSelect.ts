@@ -5,11 +5,7 @@ import { respondSSR } from './callBackEnd'
 /**
  * Fetch data from the select endpoint on the backend
  */
-export async function getSelect(
-	config: TableDynamic,
-	ssr?: boolean,
-	extras?: string[]
-) {
+export async function getSelect(config: TableDynamic, ssr?: boolean, extras?: string[]) {
 	// destructure the props and create the URL
 	let { main, count, sortDirection, columns, index } = config
 

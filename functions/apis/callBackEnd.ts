@@ -23,25 +23,15 @@ export async function getSSR(page: string) {
 	return respondSSR(response)
 }
 
-export async function getPageDataSSR(
-	page: string,
-	symbol: string,
-	type?: 'stocks' | 'etf'
-) {
+export async function getPageDataSSR(page: string, symbol: string, type?: 'stocks' | 'etf') {
 	const response = type
 		? await getData(`${page}?symbol=${symbol}&t=${type}`)
 		: await getData(`${page}?symbol=${symbol}`)
 	return respondSSR(response)
 }
 
-export async function getStockFinancialsSSR(
-	statement: Statement,
-	symbol: string,
-	range: Range
-) {
-	const response = await getData(
-		`financials?type=${statement}&symbol=${symbol}&range=${range}`
-	)
+export async function getStockFinancialsSSR(statement: Statement, symbol: string, range: Range) {
+	const response = await getData(`financials?type=${statement}&symbol=${symbol}&range=${range}`)
 	return respondSSR(response)
 }
 
@@ -56,20 +46,11 @@ export async function getChartData(
 	let response
 
 	if (!period && !candles) {
-		response = await getData(
-			`chart?s=${symbol}&t=${type}&r=${time}`,
-			abortController?.signal
-		)
+		response = await getData(`chart?s=${symbol}&t=${type}&r=${time}`, abortController?.signal)
 	} else if (!period) {
-		response = await getData(
-			`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`,
-			abortController?.signal
-		)
+		response = await getData(`chart?s=${symbol}&t=${type}&r=${time}&f=${candles}`, abortController?.signal)
 	} else {
-		response = await getData(
-			`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`,
-			abortController?.signal
-		)
+		response = await getData(`chart?s=${symbol}&t=${type}&p=${period}&r=${time}`, abortController?.signal)
 	}
 
 	return response
@@ -85,14 +66,8 @@ export async function getPageDataFull(page: string, symbol: string) {
 	return []
 }
 
-export async function getStockFinancialsFull(
-	statement: Statement,
-	symbol: string,
-	range: Range
-) {
-	const response = await getData(
-		`financials?type=${statement}&s=${symbol}&f=${PRO_KEY}&range=${range}`
-	)
+export async function getStockFinancialsFull(statement: Statement, symbol: string, range: Range) {
+	const response = await getData(`financials?type=${statement}&s=${symbol}&f=${PRO_KEY}&range=${range}`)
 	if (response.status === 200) {
 		return response.data
 	}

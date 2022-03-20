@@ -15,15 +15,7 @@ type Props = {
 
 // A memoized wrapper around the chart cnomponent
 function DisplayChartComponent({ data, time, symbol, close, change }: Props) {
-	return (
-		<Chart
-			key={symbol + '-' + time}
-			data={data}
-			time={time}
-			close={close}
-			change={change}
-		/>
-	)
+	return <Chart key={symbol + '-' + time} data={data} time={time} close={close} change={change} />
 }
 
 export const DisplayChart = memo(DisplayChartComponent)

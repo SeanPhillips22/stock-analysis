@@ -48,10 +48,8 @@ export default function ElderRayComponent() {
 		return zip(data, meanAlgorithm(data)).map(d => {
 			const datum = d[0]
 			const meanValue = d[1]
-			const bullPower =
-				meanValue !== undefined ? ohlc(datum).high - meanValue : undefined
-			const bearPower =
-				meanValue !== undefined ? ohlc(datum).low - meanValue : undefined
+			const bullPower = meanValue !== undefined ? ohlc(datum).high - meanValue : undefined
+			const bearPower = meanValue !== undefined ? ohlc(datum).low - meanValue : undefined
 			return { bullPower, bearPower }
 		})
 	}

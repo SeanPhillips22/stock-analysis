@@ -14,9 +14,7 @@ type ProviderProps = {
 }
 
 export function SymbolContextProvider({ value, children }: ProviderProps) {
-	return (
-		<SymbolContext.Provider value={value}>{children}</SymbolContext.Provider>
-	)
+	return <SymbolContext.Provider value={value}>{children}</SymbolContext.Provider>
 }
 
 /**

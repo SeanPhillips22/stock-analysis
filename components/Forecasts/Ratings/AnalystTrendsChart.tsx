@@ -4,11 +4,7 @@ import { authState } from 'state/authState'
 import { forecastState } from '../forecast.state'
 import { AnalystBarChart } from './AnalystBarChart'
 import { AnalystLineChart } from './AnalystLineChart'
-import {
-	isOldSafari,
-	Unavailable,
-	UnavailableSafari
-} from 'components/Unavailable'
+import { isOldSafari, Unavailable, UnavailableSafari } from 'components/Unavailable'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { Info } from 'types/Info'
 
@@ -45,11 +41,7 @@ export function AnalystTrendsChart() {
 
 	return (
 		<div className="h-[240px]">
-			{chartType == 'Bar Chart' ? (
-				<AnalystBarChart data={months} />
-			) : (
-				<AnalystLineChart data={months} />
-			)}
+			{chartType == 'Bar Chart' ? <AnalystBarChart data={months} /> : <AnalystLineChart data={months} />}
 		</div>
 	)
 }

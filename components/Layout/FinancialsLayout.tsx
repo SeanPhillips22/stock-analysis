@@ -14,26 +14,14 @@ type Props = {
 	range: Range
 }
 
-export function FinancialsLayout({
-	children,
-	info,
-	url,
-	title,
-	description,
-	statement,
-	range
-}: Props) {
+export function FinancialsLayout({ children, info, url, title, description, statement, range }: Props) {
 	let rangePath = range !== 'annual' ? `${range}/` : ''
 
 	return (
 		<Stock info={info} url={url + rangePath}>
 			<SEO title={title} description={description} canonical={url} />
 			<div className="mx-auto px-4 lg:px-6">
-				<FinancialsNavigation
-					info={info}
-					statement={statement}
-					range={range}
-				/>
+				<FinancialsNavigation info={info} statement={statement} range={range} />
 				{children}
 			</div>
 		</Stock>

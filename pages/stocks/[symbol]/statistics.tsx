@@ -28,125 +28,64 @@ export default function StatisticsPage({ info, data }: Props) {
 			<div className="contain mt-5 space-y-5 pt-1 pb-0 xs:space-y-6 xs:pt-1.5 lg:grid lg:grid-cols-3 lg:gap-10 lg:space-y-0 lg:pt-1">
 				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
 					<div>
-						<StatsWidget
-							title="Total Valuation"
-							data={data.valuation}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Total Valuation" data={data.valuation} map={MAP_STATISTICS} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Important Dates"
-							data={data.dates}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Important Dates" data={data.dates} map={MAP_STATISTICS} />
 					</div>
 
 					<div className="pb-2">
-						<StatsWidget
-							title="Share Statistics"
-							data={data.shares}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Share Statistics" data={data.shares} map={MAP_STATISTICS} />
 					</div>
 
 					<Mobile1 key={url} />
 
 					<div>
-						<StatsWidget
-							title="Valuation Ratios"
-							data={data.ratios}
-							map={MAP_STATISTICS}
-						/>
-						<Button
-							text="Financial Ratio History"
-							url={`/stocks/${info.symbol}/financials/ratios/`}
-						/>
+						<StatsWidget title="Valuation Ratios" data={data.ratios} map={MAP_STATISTICS} />
+						<Button text="Financial Ratio History" url={`/stocks/${info.symbol}/financials/ratios/`} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Enterprise Valuation"
-							data={data.evratios}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Enterprise Valuation" data={data.evratios} map={MAP_STATISTICS} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Financial Position"
-							data={data.financialPosition}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Financial Position" data={data.financialPosition} map={MAP_STATISTICS} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Financial Efficiency"
-							data={data.financialEfficiency}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Financial Efficiency" data={data.financialEfficiency} map={MAP_STATISTICS} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Taxes"
-							data={data.taxes}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Taxes" data={data.taxes} map={MAP_STATISTICS} />
 					</div>
 				</div>
 
 				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
 					<div>
-						<StatsWidget
-							title="Stock Price Statistics"
-							data={data.stockprice}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Stock Price Statistics" data={data.stockprice} map={MAP_STATISTICS} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Short Selling Information"
-							data={data.short}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Short Selling Information" data={data.short} map={MAP_STATISTICS} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Income Statement"
-							data={data.income}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Income Statement" data={data.income} map={MAP_STATISTICS} />
 
-						<Button
-							text="Full Income Statement"
-							url={`/stocks/${info.symbol}/financials/`}
-						/>
+						<Button text="Full Income Statement" url={`/stocks/${info.symbol}/financials/`} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Balance Sheet"
-							data={data.balance}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Balance Sheet" data={data.balance} map={MAP_STATISTICS} />
 
-						<Button
-							text="Full Balance Sheet"
-							url={`/stocks/${info.symbol}/financials/balance-sheet/`}
-						/>
+						<Button text="Full Balance Sheet" url={`/stocks/${info.symbol}/financials/balance-sheet/`} />
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Cash Flow"
-							data={data.cashflow}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Cash Flow" data={data.cashflow} map={MAP_STATISTICS} />
 
 						<Button
 							text="Full Cash Flow Statement"
@@ -155,49 +94,27 @@ export default function StatisticsPage({ info, data }: Props) {
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Margins"
-							data={data.margins}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Margins" data={data.margins} map={MAP_STATISTICS} />
 					</div>
 				</div>
 
 				<div className="flex flex-col space-y-5 xs:space-y-6 lg:space-y-8">
 					<div>
-						<StatsWidget
-							title="Dividends & Yields"
-							data={data.dividends}
-							map={MAP_STATISTICS}
-						/>
-						<Button
-							text="Dividend Details"
-							url={`/stocks/${info.symbol}/dividend/`}
-						/>
+						<StatsWidget title="Dividends & Yields" data={data.dividends} map={MAP_STATISTICS} />
+						<Button text="Dividend Details" url={`/stocks/${info.symbol}/dividend/`} />
 					</div>
 
 					<Sidebar1Wide key={url} />
 
 					<div>
-						<StatsWidget
-							title="Analyst Forecast"
-							data={data.forecast}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Analyst Forecast" data={data.forecast} map={MAP_STATISTICS} />
 						{!info.exceptions.hideForecast && (
-							<Button
-								text="Stock Forecasts"
-								url={`/stocks/${info.symbol}/forecast/`}
-							/>
+							<Button text="Stock Forecasts" url={`/stocks/${info.symbol}/forecast/`} />
 						)}
 					</div>
 
 					<div>
-						<StatsWidget
-							title="Stock Splits"
-							data={data.splits}
-							map={MAP_STATISTICS}
-						/>
+						<StatsWidget title="Stock Splits" data={data.splits} map={MAP_STATISTICS} />
 					</div>
 				</div>
 			</div>

@@ -8,12 +8,7 @@ export const CloseIcon = ({ classes }: { classes: string }) => {
 			stroke="currentColor"
 			style={{ maxWidth: '40px' }}
 		>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M6 18L18 6M6 6l12 12"
-			/>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
 		</svg>
 	)
 }

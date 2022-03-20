@@ -11,12 +11,7 @@ function getChange(target: number, current: number) {
 	if (change > 0) formatted = '+' + formatted
 
 	// Get the color to show
-	let color =
-		change > 0
-			? 'text-green-800'
-			: change < 0
-			? 'text-red-700'
-			: 'text-gray-800'
+	let color = change > 0 ? 'text-green-800' : change < 0 ? 'text-red-700' : 'text-gray-800'
 
 	return [formatted, color]
 }
@@ -34,9 +29,7 @@ export function SummaryTable() {
 			<table className="w-full text-right text-tiny text-gray-800 xs:text-sm sm:text-base">
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">
-						<th className="py-[3px] text-left font-semibold lg:py-0.5">
-							Target
-						</th>
+						<th className="py-[3px] text-left font-semibold lg:py-0.5">Target</th>
 						<th className="font-semibold">Low</th>
 						<th className="font-semibold">Average</th>
 						<th className="font-semibold">Median</th>

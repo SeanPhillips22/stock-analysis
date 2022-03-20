@@ -20,20 +20,10 @@
 
 	@media screen and (max-width: 600px) {
 		.navmenu:not(.noshadow) {
-			background-image: linear-gradient(to right, white, white),
-				linear-gradient(to right, white, white),
-				linear-gradient(
-					to right,
-					rgba(150, 150, 150, 0.15),
-					rgba(255, 255, 255, 0)
-				),
-				linear-gradient(
-					to left,
-					rgba(150, 150, 150, 0.15),
-					rgba(255, 255, 255, 0)
-				);
-			background-position: left center, right center, left center,
-				right center;
+			background-image: linear-gradient(to right, white, white), linear-gradient(to right, white, white),
+				linear-gradient(to right, rgba(150, 150, 150, 0.15), rgba(255, 255, 255, 0)),
+				linear-gradient(to left, rgba(150, 150, 150, 0.15), rgba(255, 255, 255, 0));
+			background-position: left center, right center, left center, right center;
 			background-repeat: no-repeat;
 			background-color: white;
 			background-size: 10px 100%, 10px 100%, 10px 100%, 10px 100%;

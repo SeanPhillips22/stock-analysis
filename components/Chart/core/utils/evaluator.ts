@@ -2,20 +2,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { max, min } from 'd3-array'
 import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale'
-import {
-	getClosestItemIndexes,
-	head,
-	isDefined,
-	isNotDefined,
-	last
-} from '../utils'
+import { getClosestItemIndexes, head, isDefined, isNotDefined, last } from '../utils'
 
 function getNewEnd<T, TAccessor extends number | Date>(
 	fallbackEnd: { lastItem: T; lastItemX: TAccessor },
 	xAccessor: (item: T) => TAccessor,
-	initialXScale:
-		| ScaleContinuousNumeric<number, number>
-		| ScaleTime<number, number>,
+	initialXScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>,
 	start: any
 ) {
 	const { lastItem, lastItemX } = fallbackEnd
@@ -25,8 +17,7 @@ function getNewEnd<T, TAccessor extends number | Date>(
 	const [rangeStart, rangeEnd] = initialXScale.range()
 
 	const newEnd =
-		((rangeEnd - rangeStart) / (lastItemX.valueOf() - rangeStart)) *
-			(lastItemXValue.valueOf() - start.valueOf()) +
+		((rangeEnd - rangeStart) / (lastItemX.valueOf() - rangeStart)) * (lastItemXValue.valueOf() - start.valueOf()) +
 		start.valueOf()
 
 	return newEnd
@@ -39,10 +30,7 @@ function extentsWrapper<TDomain extends number | Date>(
 		| 'left'
 		| 'right'
 		| 'both'
-		| ((
-				domain: [TDomain, TDomain],
-				headTail: [TDomain, TDomain]
-		  ) => [TDomain, TDomain]),
+		| ((domain: [TDomain, TDomain], headTail: [TDomain, TDomain]) => [TDomain, TDomain]),
 	pointsPerPxThreshold: number,
 	minPointsPerPxThreshold: number,
 	flipXScale: boolean
@@ -51,16 +39,8 @@ function extentsWrapper<TDomain extends number | Date>(
 		data: T[],
 		inputDomain: [TDomain, TDomain],
 		xAccessor: (item: T) => TDomain,
-		initialXScale:
-			| ScaleContinuousNumeric<number, number>
-			| ScaleTime<number, number>,
-		{
-			currentPlotData,
-			currentDomain,
-			fallbackStart,
-			fallbackEnd,
-			ignoreThresholds = false
-		}: any = {}
+		initialXScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>,
+		{ currentPlotData, currentDomain, fallbackStart, fallbackEnd, ignoreThresholds = false }: any = {}
 	) {
 		if (useWholeData) {
 			return { plotData: data, domain: inputDomain }
@@ -80,33 +60,19 @@ function extentsWrapper<TDomain extends number | Date>(
 		}
 
 		if (typeof clamp === 'function') {
-			clampedDomain = clamp(clampedDomain, [
-				xAccessor(head(data)),
-				xAccessor(last(data))
-			])
+			clampedDomain = clamp(clampedDomain, [xAccessor(head(data)), xAccessor(last(data))])
 		} else {
 			if (clamp === 'left' || clamp === 'both' || clamp === true) {
-				clampedDomain = [
-					max([left, xAccessor(head(data))])!,
-					clampedDomain[1]
-				]
+				clampedDomain = [max([left, xAccessor(head(data))])!, clampedDomain[1]]
 			}
 
 			if (clamp === 'right' || clamp === 'both' || clamp === true) {
-				clampedDomain = [
-					clampedDomain[0],
-					min([right, xAccessor(last(data))])!
-				]
+				clampedDomain = [clampedDomain[0], min([right, xAccessor(last(data))])!]
 			}
 		}
 
 		if (clampedDomain !== inputDomain) {
-			filteredData = getFilteredResponse(
-				data,
-				clampedDomain[0],
-				clampedDomain[1],
-				xAccessor
-			)
+			filteredData = getFilteredResponse(data, clampedDomain[0], clampedDomain[1], xAccessor)
 		}
 
 		const realInputDomain = clampedDomain
@@ -115,10 +81,7 @@ function extentsWrapper<TDomain extends number | Date>(
 			| ScaleContinuousNumeric<number, number>
 			| ScaleTime<number, number>
 
-		let width = Math.floor(
-			xScale(xAccessor(last(filteredData))) -
-				xScale(xAccessor(head(filteredData)))
-		)
+		let width = Math.floor(xScale(xAccessor(last(filteredData))) - xScale(xAccessor(head(filteredData))))
 
 		// prevent negative width when flipXScale
 		if (flipXScale && width < 0) {
@@ -132,38 +95,18 @@ function extentsWrapper<TDomain extends number | Date>(
 
 		if (
 			(ignoreThresholds && filteredData.length > 1) ||
-			canShowTheseManyPeriods(
-				width,
-				filteredData.length,
-				pointsPerPxThreshold,
-				minPointsPerPxThreshold
-			)
+			canShowTheseManyPeriods(width, filteredData.length, pointsPerPxThreshold, minPointsPerPxThreshold)
 		) {
 			plotData = filteredData
 			domain = realInputDomain
 		} else {
-			if (
-				chartWidth > showMaxThreshold(width, pointsPerPxThreshold) &&
-				isDefined(fallbackEnd)
-			) {
+			if (chartWidth > showMaxThreshold(width, pointsPerPxThreshold) && isDefined(fallbackEnd)) {
 				plotData = filteredData
-				const newEnd = getNewEnd(
-					fallbackEnd,
-					xAccessor,
-					initialXScale,
-					head(realInputDomain)
-				)
+				const newEnd = getNewEnd(fallbackEnd, xAccessor, initialXScale, head(realInputDomain))
 				domain = [head(realInputDomain), newEnd]
 			} else {
-				plotData =
-					currentPlotData ??
-					filteredData.slice(
-						filteredData.length - showMax(width, pointsPerPxThreshold)
-					)
-				domain = currentDomain ?? [
-					xAccessor(head(plotData)),
-					xAccessor(last(plotData))
-				]
+				plotData = currentPlotData ?? filteredData.slice(filteredData.length - showMax(width, pointsPerPxThreshold))
+				domain = currentDomain ?? [xAccessor(head(plotData)), xAccessor(last(plotData))]
 			}
 		}
 		return { plotData, domain }
@@ -171,18 +114,10 @@ function extentsWrapper<TDomain extends number | Date>(
 	return { filterData }
 }
 
-function canShowTheseManyPeriods(
-	width: number,
-	arrayLength: number,
-	maxThreshold: number,
-	minThreshold: number
-) {
+function canShowTheseManyPeriods(width: number, arrayLength: number, maxThreshold: number, minThreshold: number) {
 	const widthAdjustedMinThreshold = showMinThreshold(width, minThreshold)
 	const widthAdjustedMaxTheshold = showMaxThreshold(width, maxThreshold)
-	return (
-		arrayLength >= widthAdjustedMinThreshold &&
-		arrayLength < widthAdjustedMaxTheshold
-	)
+	return arrayLength >= widthAdjustedMinThreshold && arrayLength < widthAdjustedMaxTheshold
 }
 
 function showMinThreshold(width: number, threshold: number) {

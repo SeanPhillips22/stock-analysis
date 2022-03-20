@@ -41,10 +41,7 @@ export class CurrentCoordinate extends React.Component<CurrentCoordinateProps> {
 		)
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
 		const circle = this.getCircle(moreProps)
 		if (circle === undefined) {
 			return
@@ -52,18 +49,12 @@ export class CurrentCoordinate extends React.Component<CurrentCoordinateProps> {
 
 		const { fillStyle, r, strokeStyle } = this.props
 
-		const fillColor =
-			fillStyle instanceof Function
-				? fillStyle(moreProps.currentItem)
-				: fillStyle
+		const fillColor = fillStyle instanceof Function ? fillStyle(moreProps.currentItem) : fillStyle
 		if (fillColor !== undefined) {
 			ctx.fillStyle = fillColor
 		}
 
-		const strokeColor =
-			strokeStyle instanceof Function
-				? strokeStyle(moreProps.currentItem)
-				: strokeStyle
+		const strokeColor = strokeStyle instanceof Function ? strokeStyle(moreProps.currentItem) : strokeStyle
 		if (strokeColor !== undefined) {
 			ctx.strokeStyle = strokeColor
 		}

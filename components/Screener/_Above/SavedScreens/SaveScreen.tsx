@@ -1,17 +1,17 @@
 import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
-import { screenerState } from 'components/Screener/screener.state'
 import { ScreenerTypes } from 'components/Screener/screener.types'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 import { useAuthState } from 'hooks/useAuthState'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useSavedScreens } from './useSavedScreens'
 
 export function SaveScreen({ type }: { type: ScreenerTypes }) {
+	const { state } = useScreenerContext()
 	const { checked, isPro } = useAuthState()
 	const { add, msg, err, setErr, clearMessages } = useSavedScreens(type)
 	const router = useRouter()
 	const [name, setName] = useState('')
-	const filters = screenerState(state => state.filters)
 
 	async function handleSubmit(name: string) {
 		clearMessages()
@@ -20,7 +20,7 @@ export function SaveScreen({ type }: { type: ScreenerTypes }) {
 		} else {
 			if (!name) {
 				setErr('Please enter a name')
-			} else if (!filters || !filters.length) {
+			} else if (!state.filters || !state.filters.length) {
 				setErr('No filters have been set')
 			} else {
 				add.mutate(name)
@@ -52,24 +52,11 @@ export function SaveScreen({ type }: { type: ScreenerTypes }) {
 					onClick={() => handleSubmit(name)}
 				>
 					Save
-					{!isPro && (
-						<LockClosedIcon
-							className="ml-1 h-4 w-4 text-white"
-							aria-hidden="true"
-						/>
-					)}
+					{!isPro && <LockClosedIcon className="ml-1 h-4 w-4 text-white" aria-hidden="true" />}
 				</button>
 			</div>
-			{msg && (
-				<div className="border-l-2 border-green-400 bg-green-50 p-2 text-sm text-green-700">
-					{msg}
-				</div>
-			)}
-			{err && (
-				<div className="border-l-2 border-red-400 bg-red-50 p-2 text-sm text-red-700">
-					{err}
-				</div>
-			)}
+			{msg && <div className="border-l-2 border-green-400 bg-green-50 p-2 text-sm text-green-700">{msg}</div>}
+			{err && <div className="border-l-2 border-red-400 bg-red-50 p-2 text-sm text-red-700">{err}</div>}
 		</>
 	)
 }

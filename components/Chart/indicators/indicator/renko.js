@@ -8,13 +8,7 @@ export default function Renko() {
 	const underlyingAlgorithm = renko()
 	const indicator = underlyingAlgorithm
 	rebind(indicator, base, 'id', 'stroke', 'fill', 'echo', 'type')
-	rebind(
-		indicator,
-		underlyingAlgorithm,
-		'options',
-		'dateAccessor',
-		'dateMutator'
-	)
+	rebind(indicator, underlyingAlgorithm, 'options', 'dateAccessor', 'dateMutator')
 	return indicator
 }
 // # sourceMappingURL=renko.js.map

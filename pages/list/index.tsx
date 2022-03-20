@@ -29,26 +29,11 @@ export default function StockListPage() {
 				<div>
 					<h2 className="hh3 mb-2">Popular Lists</h2>
 					<ul className="list-outside list-disc space-y-1 p-1 pl-6 md:columns-2">
-						<ListItem
-							url="/list/biggest-companies/"
-							title="Biggest Companies By Market Cap"
-						/>
-						<ListItem
-							url="/list/highest-revenue/"
-							title="Companies With The Most Revenue"
-						/>
-						<ListItem
-							url="/list/most-employees/"
-							title="Companies With The Most Employees"
-						/>
-						<ListItem
-							url="/list/top-rated-dividend-stocks/"
-							title="Top-Rated Dividend Stocks"
-						/>
-						<ListItem
-							url="/list/monthly-dividend-stocks/"
-							title="Stocks That Pay Monthly Dividends"
-						/>
+						<ListItem url="/list/biggest-companies/" title="Biggest Companies By Market Cap" />
+						<ListItem url="/list/highest-revenue/" title="Companies With The Most Revenue" />
+						<ListItem url="/list/most-employees/" title="Companies With The Most Employees" />
+						<ListItem url="/list/top-rated-dividend-stocks/" title="Top-Rated Dividend Stocks" />
+						<ListItem url="/list/monthly-dividend-stocks/" title="Stocks That Pay Monthly Dividends" />
 						{/* <ListItem
 							url="/list/oldest-companies/"
 							title="Oldest Companies"
@@ -59,27 +44,12 @@ export default function StockListPage() {
 				<div>
 					<h2 className="hh3 mb-2">Companies Ranked by Market Cap</h2>
 					<ul className="list-inside list-disc space-y-1 p-1 md:columns-2">
-						<ListItem
-							url="/list/biggest-car-companies/"
-							title="Biggest Car Companies"
-						/>
-						<ListItem
-							url="/list/biggest-pharmaceutical-companies/"
-							title="Biggest Pharmaceutical Companies"
-						/>
-						<ListItem
-							url="/list/biggest-semiconductor-companies/"
-							title="Biggest Semiconductor Companies"
-						/>
-						<ListItem
-							url="/list/biggest-biotech-companies/"
-							title="Biggest Biotech Companies"
-						/>
+						<ListItem url="/list/biggest-car-companies/" title="Biggest Car Companies" />
+						<ListItem url="/list/biggest-pharmaceutical-companies/" title="Biggest Pharmaceutical Companies" />
+						<ListItem url="/list/biggest-semiconductor-companies/" title="Biggest Semiconductor Companies" />
+						<ListItem url="/list/biggest-biotech-companies/" title="Biggest Biotech Companies" />
 						<ListItem url="/list/biggest-banks/" title="Biggest Banks" />
-						<ListItem
-							url="/list/biggest-social-media-companies/"
-							title="Biggest Social Media Companies"
-						/>
+						<ListItem url="/list/biggest-social-media-companies/" title="Biggest Social Media Companies" />
 					</ul>
 				</div>
 			</div>

@@ -39,24 +39,9 @@ export class CanvasContainer extends React.PureComponent<CanvasContainerProps> {
 
 		return (
 			<div style={{ ...style, position: 'absolute' }}>
-				<canvas
-					ref={this.bgRef}
-					width={adjustedWidth}
-					height={adjustedHeight}
-					style={canvasStyle}
-				/>
-				<canvas
-					ref={this.axesRef}
-					width={adjustedWidth}
-					height={adjustedHeight}
-					style={canvasStyle}
-				/>
-				<canvas
-					ref={this.mouseRef}
-					width={adjustedWidth}
-					height={adjustedHeight}
-					style={canvasStyle}
-				/>
+				<canvas ref={this.bgRef} width={adjustedWidth} height={adjustedHeight} style={canvasStyle} />
+				<canvas ref={this.axesRef} width={adjustedWidth} height={adjustedHeight} style={canvasStyle} />
+				<canvas ref={this.mouseRef} width={adjustedWidth} height={adjustedHeight} style={canvasStyle} />
 			</div>
 		)
 	}

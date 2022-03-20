@@ -50,8 +50,7 @@ export function ReActivate({ email, status }: Props) {
 						email: data?.user?.email,
 						status: 'trialing',
 						plan: data?.product?.name,
-						currency:
-							data?.checkout?.recurring_prices?.customer?.currency,
+						currency: data?.checkout?.recurring_prices?.customer?.currency,
 						unit_price: data?.checkout?.recurring_prices?.customer?.unit,
 						country: data?.user?.country,
 						registered_date: formatDateToString()

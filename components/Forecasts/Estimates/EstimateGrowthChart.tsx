@@ -11,10 +11,7 @@ import {
 	defaults
 } from 'chart.js'
 
-import {
-	BarWithErrorBarsController,
-	BarWithErrorBar
-} from 'chartjs-chart-error-bars'
+import { BarWithErrorBarsController, BarWithErrorBar } from 'chartjs-chart-error-bars'
 
 ChartJS.register(
 	LineController,
@@ -26,11 +23,7 @@ ChartJS.register(
 	BarWithErrorBar
 )
 
-import {
-	isOldSafari,
-	Unavailable,
-	UnavailableSafari
-} from 'components/Unavailable'
+import { isOldSafari, Unavailable, UnavailableSafari } from 'components/Unavailable'
 
 import { abbreviateNumber } from 'functions/numbers/abbreviateNumber'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
@@ -102,19 +95,13 @@ export function EstimateGrowthChart({ type, title }: Props) {
 
 	let combinedActualandEstimates = actual.concat(estimateArr)
 
-	const backgroundColorCodings = combinedActualandEstimates.map(
-		(item, index) => {
-			if (item.y < 0) {
-				return index <= lastDate
-					? 'rgba(220, 38, 38, 0.8)'
-					: 'rgba(220, 38, 38, 0.6)'
-			}
-			//If ymax is undefined, then it's not an estimate.
-			return typeof item.yMax == 'undefined'
-				? 'rgba(4, 120, 87, 0.8)'
-				: 'rgba(4, 120, 87, 0.6)'
+	const backgroundColorCodings = combinedActualandEstimates.map((item, index) => {
+		if (item.y < 0) {
+			return index <= lastDate ? 'rgba(220, 38, 38, 0.8)' : 'rgba(220, 38, 38, 0.6)'
 		}
-	)
+		//If ymax is undefined, then it's not an estimate.
+		return typeof item.yMax == 'undefined' ? 'rgba(4, 120, 87, 0.8)' : 'rgba(4, 120, 87, 0.6)'
+	})
 
 	// Format the name of the data series
 	let seriesName = title.includes('Forecast') ? title.split(' ')[0] : title
@@ -156,11 +143,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 										autoSkip: false,
 										maxRotation: 0,
 										minRotation: 0,
-										maxTicksLimit:
-											typeof window !== 'undefined' &&
-											window.innerWidth < 600
-												? 7
-												: 10
+										maxTicksLimit: typeof window !== 'undefined' && window.innerWidth < 600 ? 7 : 10
 									}
 								},
 								y: {
@@ -218,21 +201,13 @@ export function EstimateGrowthChart({ type, title }: Props) {
 											// Don't show multiple labels on the same dataset
 
 											if (context.dataIndex <= lastDate) {
-												return `${label}: ${dec2.format(
-													parseFloat(context.parsed.y) || 0
-												)}%`
+												return `${label}: ${dec2.format(parseFloat(context.parsed.y) || 0)}%`
 											}
 
 											return [
-												`High: ${dec2.format(
-													parseFloat(context.parsed.yMax) || 0
-												)}%`,
-												`Average: ${dec2.format(
-													parseFloat(context.parsed.y) || 0
-												)}%`,
-												`Low: ${dec2.format(
-													parseFloat(context.parsed.yMin) || 0
-												)}%`
+												`High: ${dec2.format(parseFloat(context.parsed.yMax) || 0)}%`,
+												`Average: ${dec2.format(parseFloat(context.parsed.y) || 0)}%`,
+												`Low: ${dec2.format(parseFloat(context.parsed.yMin) || 0)}%`
 											]
 										}
 									}
@@ -241,12 +216,7 @@ export function EstimateGrowthChart({ type, title }: Props) {
 						}}
 					/>
 				</div>
-				<EstimateChartTable
-					title={seriesName}
-					data={estimatesData}
-					type={type}
-					lastActualDate={lastActualDate}
-				/>
+				<EstimateChartTable title={seriesName} data={estimatesData} type={type} lastActualDate={lastActualDate} />
 			</div>
 		</div>
 	)

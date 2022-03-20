@@ -25,10 +25,7 @@ export const loadStockTwits = symbol => {
 				this.toString = function () {
 					const t = []
 					for (let n = 0; n < ea.length; n++) {
-						t[n] =
-							encodeURIComponent(ea[n].name) +
-							'=' +
-							encodeURIComponent(ea[n].value)
+						t[n] = encodeURIComponent(ea[n].name) + '=' + encodeURIComponent(ea[n].value)
 					}
 					return t.join('&')
 				}
@@ -39,13 +36,10 @@ export const loadStockTwits = symbol => {
 		}
 		STWT.Widget = function (t) {
 			function c() {
-				const e =
-					'https://api.stocktwits.com/addon/widget/2/widget-streams.min.js?1370378977'
+				const e = 'https://api.stocktwits.com/addon/widget/2/widget-streams.min.js?1370378977'
 				return [
 					'<body style="border:0;margin:0" onload="',
-					'var d=document;d._stwtWidgetIdx=' +
-						window._stwtWidget.num +
-						';',
+					'var d=document;d._stwtWidgetIdx=' + window._stwtWidget.num + ';',
 					"d.getElementsByTagName('head')[0].appendChild(d.createElement('script')).src='",
 					e,
 					'\';"></body>'
@@ -136,10 +130,7 @@ export const loadStockTwits = symbol => {
 			try {
 				n.contentWindow.document.open()
 			} catch (h) {
-				l =
-					"javascript:var d=document.open();d.domain='" +
-					document.domain +
-					"';"
+				l = "javascript:var d=document.open();d.domain='" + document.domain + "';"
 				n.src = l + 'void(0);'
 			}
 			try {

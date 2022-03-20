@@ -29,13 +29,7 @@ ChartJS.register(
 	CategoryScale,
 	Filler
 )
-import {
-	formatY,
-	formatCell,
-	formatYear,
-	countDecimals,
-	reducePrecisionFix
-} from './FinancialTable.functions'
+import { formatY, formatCell, formatYear, countDecimals, reducePrecisionFix } from './FinancialTable.functions'
 import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 import { dec0 } from 'functions/tables/formatTableCell'
 
@@ -54,17 +48,7 @@ interface Props {
 	showTTM: boolean
 }
 
-export const HoverChart = ({
-	data,
-	count,
-	row,
-	range,
-	ticker,
-	divider,
-	reversed,
-	statement,
-	showTTM
-}: Props) => {
+export const HoverChart = ({ data, count, row, range, ticker, divider, reversed, statement, showTTM }: Props) => {
 	// Chart.js causes critical errors on older Safari versions
 	if (isOldSafari()) {
 		return <UnavailableSafari classes="whitespace-normal" />
@@ -80,11 +64,7 @@ export const HoverChart = ({
 
 	// Exception: If recent IPO and only 6 quarters, use 3 quarter offset to calculate growth
 	let offs = 4
-	if (
-		row.format === 'growth' &&
-		(range === 'quarterly' || range === 'trailing') &&
-		count === 6
-	) {
+	if (row.format === 'growth' && (range === 'quarterly' || range === 'trailing') && count === 6) {
 		if (data?.datekey?.length === 6) {
 			const firstDate = data.datekey[0]
 			const compareDate = data.datekey[3]
@@ -117,9 +97,7 @@ export const HoverChart = ({
 				  })
 				: current
 
-		return typeof cellContent === 'string'
-			? parseFloat(cellContent)
-			: cellContent
+		return typeof cellContent === 'string' ? parseFloat(cellContent) : cellContent
 	})
 
 	// Format dates as years if annual
@@ -149,13 +127,10 @@ export const HoverChart = ({
 	const ymin = yaxis[0]
 	const ymax = yaxis[yaxis.length - 1]
 
-	let chartType: string =
-		type === 'ratio' || type === 'percentage' ? 'line' : 'bar'
-	if ((type === 'ratio' || type === 'percentage') && yaxis.length === 1)
-		chartType = 'bar'
+	let chartType: string = type === 'ratio' || type === 'percentage' ? 'line' : 'bar'
+	if ((type === 'ratio' || type === 'percentage') && yaxis.length === 1) chartType = 'bar'
 
-	const bgColor =
-		chartType === 'line' ? 'rgba(44, 98, 136, 0.4)' : 'rgba(44, 98, 136, 1)'
+	const bgColor = chartType === 'line' ? 'rgba(44, 98, 136, 0.4)' : 'rgba(44, 98, 136, 1)'
 
 	let padding = chartType == 'line' ? 15 : 0
 	if (xaxis.length === 1 && type === 'percentage') padding = 20
@@ -234,11 +209,7 @@ export const HoverChart = ({
 				callbacks: {
 					label: function (context: { parsed: { y: any } }) {
 						const val = parseFloat(context.parsed.y) || 0
-						if (
-							type === 'growth' ||
-							type === 'percentage' ||
-							type === 'margin'
-						) {
+						if (type === 'growth' || type === 'percentage' || type === 'margin') {
 							return `${val.toFixed(3)}%`
 						} else if (type === 'ratio') {
 							return `${val.toFixed(3)}`
@@ -269,9 +240,7 @@ export const HoverChart = ({
 
 				// numericals are offsets for positional purposes, x and y marks the exact coordinates of the graph end.
 
-				const x =
-					meta.vScale._labelItems[meta.vScale._labelItems.length - 1]
-						.translation[0] - 0.5
+				const x = meta.vScale._labelItems[meta.vScale._labelItems.length - 1].translation[0] - 0.5
 
 				const y = meta.data[last].y - 7.5
 

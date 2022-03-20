@@ -30,10 +30,7 @@ export default function Login() {
 		setLoading(false)
 
 		if (error) {
-			if (
-				error.message ===
-				'You must provide either an email, phone number or a third-party provider.'
-			) {
+			if (error.message === 'You must provide either an email, phone number or a third-party provider.') {
 				setErrorMsg('You must provide a valid email address.')
 			} else {
 				setErrorMsg(error.message)

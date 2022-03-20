@@ -15,16 +15,10 @@ export const ProfileExecutives = ({ executives }: Props) => {
 			<table className="mb-6 w-full text-base xs:mb-8">
 				<thead className="bg-gray-50">
 					<tr className="border-b border-t border-gray-200">
-						<th
-							scope="col"
-							className="py-2.5 px-2 text-left font-medium text-gray-800 xs:py-3 xs:px-3 sm:px-4"
-						>
+						<th scope="col" className="py-2.5 px-2 text-left font-medium text-gray-800 xs:py-3 xs:px-3 sm:px-4">
 							Name
 						</th>
-						<th
-							scope="col"
-							className="py-2.5 px-2 text-left font-medium text-gray-800 xs:py-3 xs:px-3 sm:px-4"
-						>
+						<th scope="col" className="py-2.5 px-2 text-left font-medium text-gray-800 xs:py-3 xs:px-3 sm:px-4">
 							Position
 						</th>
 					</tr>
@@ -35,9 +29,7 @@ export const ProfileExecutives = ({ executives }: Props) => {
 							<td className="py-2.5 px-2 align-top font-medium text-gray-900 xs:py-3 xs:px-3 sm:px-4">
 								{item.Name}
 							</td>
-							<td className="py-2.5 px-2 align-top text-gray-800 xs:py-3 xs:px-3 sm:px-4">
-								{item.Title}
-							</td>
+							<td className="py-2.5 px-2 align-top text-gray-800 xs:py-3 xs:px-3 sm:px-4">{item.Title}</td>
 						</tr>
 					))}
 				</tbody>

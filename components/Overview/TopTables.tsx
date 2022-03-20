@@ -74,19 +74,11 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 				</tr>
 				<tr>
 					<td>Day&apos;s Range</td>
-					<td>
-						{q?.l && q?.h && q.l !== '0.00' && q.h !== '0.00'
-							? q.l + ' - ' + q.h
-							: 'n/a'}
-					</td>
+					<td>{q?.l && q?.h && q.l !== '0.00' && q.h !== '0.00' ? q.l + ' - ' + q.h : 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>52-Week Range</td>
-					<td>
-						{q?.l52 && q?.h52 && q.l52 !== '0.00' && q.h52 !== '0.00'
-							? q.l52 + ' - ' + q.h52
-							: 'n/a'}
-					</td>
+					<td>{q?.l52 && q?.h52 && q.l52 !== '0.00' && q.h52 !== '0.00' ? q.l52 + ' - ' + q.h52 : 'n/a'}</td>
 				</tr>
 				<tr>
 					<td>Beta</td>

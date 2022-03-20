@@ -65,8 +65,7 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/monthly-dividend-stocks/',
 			metaTitle: 'List of Stocks That Pay Monthly Dividends',
-			metaDescription:
-				'A list of dividend stocks that pay their shareholder each and every month.',
+			metaDescription: 'A list of dividend stocks that pay their shareholder each and every month.',
 			pageTitle: 'Stocks That Pay Monthly Dividends',
 			tableTitleObject: 'Monthly Payers',
 			headingType: 'div'
@@ -102,15 +101,7 @@ export const StockLists: StockList = {
 			count: 100,
 			sort: [{ id: 'employees', desc: true }],
 			sortDirection: 'desc',
-			columns: [
-				'rank',
-				's',
-				'n',
-				'employees',
-				'price',
-				'change',
-				'marketCap'
-			]
+			columns: ['rank', 's', 'n', 'employees', 'price', 'change', 'marketCap']
 		}
 	},
 	'highest-revenue': {
@@ -183,8 +174,7 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/biggest-car-companies/',
 			metaTitle: 'List of The Biggest Car Companies by Market Cap',
-			metaDescription:
-				"A list of the world's biggest car companies and automakers, ranked by market cap.",
+			metaDescription: "A list of the world's biggest car companies and automakers, ranked by market cap.",
 			pageTitle: 'Biggest Car Companies by Market Cap',
 			tableTitleObject: 'Companies',
 			headingType: 'div'
@@ -205,8 +195,7 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/biggest-pharmaceutical-companies/',
 			metaTitle: 'The Biggest Pharmaceutical Companies by Market Cap',
-			metaDescription:
-				"A list of the world's biggest pharmaceutical and drug companies, ranked by market cap.",
+			metaDescription: "A list of the world's biggest pharmaceutical and drug companies, ranked by market cap.",
 			pageTitle: 'Biggest Pharmaceutical Companies by Market Cap',
 			tableTitleObject: 'Companies',
 			headingType: 'div'
@@ -249,8 +238,7 @@ export const StockLists: StockList = {
 		page: {
 			path: '/list/biggest-biotech-companies/',
 			metaTitle: 'The Biggest Biotechnology Companies by Market Cap',
-			metaDescription:
-				'A list of the biggest publicly traded biotechnology companies, ranked by market cap.',
+			metaDescription: 'A list of the biggest publicly traded biotechnology companies, ranked by market cap.',
 			pageTitle: 'Biggest Biotech Companies by Market Cap',
 			tableTitleObject: 'Companies',
 			headingType: 'div'

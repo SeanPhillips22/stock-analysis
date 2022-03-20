@@ -9,6 +9,6 @@
 	}
 
 	.symbol-table.index tr td {
-		@apply whitespace-nowrap truncate max-w-[260px] lg:max-w-[220px] xl:max-w-[260px] xxxl:max-w-[300px];
+		@apply max-w-[260px] truncate whitespace-nowrap lg:max-w-[220px] xl:max-w-[260px] xxxl:max-w-[300px];
 	}
 }

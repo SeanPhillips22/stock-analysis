@@ -10,11 +10,7 @@ export function LogOut({ email, signOut }: Props) {
 				<h1 className="mt-2 text-center text-2xl font-bold text-gray-900 xs:mt-4 xs:text-3xl sm:mt-6">
 					You are logged in
 				</h1>
-				{email && (
-					<p className="mt-2 text-center text-smaller font-medium text-gray-600">
-						Logged in as {email}
-					</p>
-				)}
+				{email && <p className="mt-2 text-center text-smaller font-medium text-gray-600">Logged in as {email}</p>}
 			</div>
 
 			<div className="mt-6 xs:mt-8 sm:mx-auto sm:w-full sm:max-w-md">

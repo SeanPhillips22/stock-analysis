@@ -9,11 +9,7 @@ export const ArrowSmDownIcon = ({ classes }: { classes: string }) => {
 			strokeWidth={2}
 			style={{ maxWidth: '40px' }}
 		>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="M17 13l-5 5m0 0l-5-5m5 5V6"
-			/>
+			<path strokeLinecap="round" strokeLinejoin="round" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
 		</svg>
 	)
 }

@@ -59,14 +59,7 @@ export default function RecentIpos(props: Props) {
 											columns: true
 										},
 										columnOptions: RecentIpoDataPoints,
-										columnOrder: [
-											'ipoDate',
-											's',
-											'n',
-											'ipp',
-											'ippc',
-											'ipr'
-										]
+										columnOrder: ['ipoDate', 's', 'n', 'ipp', 'ippc', 'ipr']
 									},
 									dynamic: query
 								}}

@@ -1,14 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable camelcase */
 /* eslint-disable no-invalid-this */
-import {
-	first,
-	getAxisCanvas,
-	GenericChartComponent,
-	getStrokeDasharrayCanvas,
-	last,
-	strokeDashTypes
-} from '../core'
+import { first, getAxisCanvas, GenericChartComponent, getStrokeDasharrayCanvas, last, strokeDashTypes } from '../core'
 import { max, range as d3Range, zip } from 'd3-array'
 import { forceCollide, forceSimulation, forceX } from 'd3-force'
 import { ScaleContinuousNumeric } from 'd3-scale'
@@ -30,21 +23,12 @@ interface AxisProps {
 	readonly fontSize?: number
 	readonly fontWeight?: number
 	readonly getMaxTicks?: (data: number) => void
-	readonly getMouseDelta: (
-		startXY: [number, number],
-		mouseXY: [number, number]
-	) => number
+	readonly getMouseDelta: (startXY: [number, number], mouseXY: [number, number]) => number
 	readonly getScale: (moreProps: any) => ScaleContinuousNumeric<number, number>
 	readonly innerTickSize?: number
 	readonly inverted?: boolean
-	readonly onContextMenu?: (
-		e: React.MouseEvent,
-		mousePosition: [number, number]
-	) => void
-	readonly onDoubleClick?: (
-		e: React.MouseEvent,
-		mousePosition: [number, number]
-	) => void
+	readonly onContextMenu?: (e: React.MouseEvent, mousePosition: [number, number]) => void
+	readonly onDoubleClick?: (e: React.MouseEvent, mousePosition: [number, number]) => void
 	readonly orient?: 'top' | 'left' | 'right' | 'bottom'
 	readonly outerTickSize: number
 	readonly range: number[]
@@ -64,11 +48,7 @@ interface AxisProps {
 	readonly tickStrokeDasharray?: strokeDashTypes
 	readonly tickValues?: number[] | ((domain: number[]) => number[])
 	readonly tickInterval?: number
-	readonly tickIntervalFunction?: (
-		min: number,
-		max: number,
-		tickInterval: number
-	) => number[]
+	readonly tickIntervalFunction?: (min: number, max: number, tickInterval: number) => number[]
 	readonly transform: number[]
 	readonly zoomEnabled?: boolean
 	readonly zoomCursorClassName?: string
@@ -133,20 +113,9 @@ export class Axis extends React.Component<AxisProps> {
 		return this.chartRef.current!.getMoreProps()
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
-		const {
-			showDomain,
-			showGridLines,
-			showTickLabel,
-			showTicks,
-			transform,
-			range,
-			getScale,
-			tickLabelFill
-		} = this.props
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
+		const { showDomain, showGridLines, showTickLabel, showTicks, transform, range, getScale, tickLabelFill } =
+			this.props
 
 		ctx.save()
 		ctx.translate(transform[0], transform[1])
@@ -170,8 +139,7 @@ export class Axis extends React.Component<AxisProps> {
 			if (tickLabelFill !== undefined) {
 				ctx.fillStyle = tickLabelFill
 			}
-			ctx.textAlign =
-				textAnchor === 'middle' ? 'center' : (textAnchor as CanvasTextAlign)
+			ctx.textAlign = textAnchor === 'middle' ? 'center' : (textAnchor as CanvasTextAlign)
 			tickProps.ticks.forEach((tick: any) => {
 				drawEachTickLabel(ctx, tick, tickProps)
 			})
@@ -185,10 +153,7 @@ export class Axis extends React.Component<AxisProps> {
 	}
 }
 
-const tickHelper = (
-	props: AxisProps,
-	scale: ScaleContinuousNumeric<number, number>
-) => {
+const tickHelper = (props: AxisProps, scale: ScaleContinuousNumeric<number, number>) => {
 	const {
 		orient,
 		innerTickSize = 4,
@@ -221,9 +186,7 @@ const tickHelper = (
 		const [min, max] = scale.domain()
 		const baseTickValues = d3Range(min, max, (max - min) / tickInterval)
 
-		tickValues = tickIntervalFunction
-			? tickIntervalFunction(min, max, tickInterval)
-			: baseTickValues
+		tickValues = tickIntervalFunction ? tickIntervalFunction(min, max, tickInterval) : baseTickValues
 	} else if (scale.ticks !== undefined) {
 		tickValues = scale.ticks(tickArguments)
 		if (props.getMaxTicks != undefined && tickValues !== undefined) {
@@ -235,10 +198,7 @@ const tickHelper = (
 		tickValues = scale.domain()
 	}
 
-	const format =
-		tickFormat === undefined
-			? scale.tickFormat(tickArguments)
-			: (d: any) => tickFormat(d) || ''
+	const format = tickFormat === undefined ? scale.tickFormat(tickArguments) : (d: any) => tickFormat(d) || ''
 
 	const sign = orient === 'top' || orient === 'left' ? -1 : 1
 	const tickSpacing = Math.max(innerTickSize, 0) + tickPadding
@@ -343,11 +303,7 @@ const tickHelper = (
 	}
 }
 
-const drawAxisLine = (
-	ctx: CanvasRenderingContext2D,
-	props: AxisProps,
-	range: any
-) => {
+const drawAxisLine = (ctx: CanvasRenderingContext2D, props: AxisProps, range: any) => {
 	const { orient, outerTickSize, strokeStyle, strokeWidth } = props
 
 	const sign = orient === 'top' || orient === 'left' ? -1 : 1
@@ -389,18 +345,8 @@ const drawTicks = (ctx: CanvasRenderingContext2D, result: any) => {
 	})
 }
 
-const drawGridLine = (
-	ctx: CanvasRenderingContext2D,
-	tick: any,
-	result: any,
-	moreProps: any
-) => {
-	const {
-		orient,
-		gridLinesStrokeWidth,
-		gridLinesStrokeStyle,
-		gridLinesStrokeDasharray
-	} = result
+const drawGridLine = (ctx: CanvasRenderingContext2D, tick: any, result: any, moreProps: any) => {
+	const { orient, gridLinesStrokeWidth, gridLinesStrokeStyle, gridLinesStrokeDasharray } = result
 
 	const { chartConfig } = moreProps
 
@@ -432,11 +378,7 @@ const drawGridLine = (
 	ctx.stroke()
 }
 
-const drawEachTick = (
-	ctx: CanvasRenderingContext2D,
-	tick: any,
-	result: any
-) => {
+const drawEachTick = (ctx: CanvasRenderingContext2D, tick: any, result: any) => {
 	const { tickStrokeWidth, tickStrokeDasharray } = result
 
 	ctx.beginPath()
@@ -451,11 +393,7 @@ const drawEachTick = (
 	ctx.stroke()
 }
 
-const drawEachTickLabel = (
-	ctx: CanvasRenderingContext2D,
-	tick: any,
-	result: any
-) => {
+const drawEachTickLabel = (ctx: CanvasRenderingContext2D, tick: any, result: any) => {
 	const { canvas_dy, format } = result
 
 	const text = format(tick.value)

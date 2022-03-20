@@ -52,8 +52,7 @@ export default function Sto() {
 					return undefined
 				}
 				const currentClose = close(values[values.length - 1])
-				const k =
-					((currentClose - lowestLow) / (highestHigh - lowestLow)) * 100
+				const k = ((currentClose - lowestLow) / (highestHigh - lowestLow)) * 100
 				return k
 			})
 		const kSmoothed = slidingWindow()

@@ -5,26 +5,26 @@
 
 @layer components {
 	.symbol-title {
-		@apply text-2xl sm:text-[26px] font-bold text-gray-900;
+		@apply text-2xl font-bold text-gray-900 sm:text-[26px];
 	}
 
 	.sh-notice {
-		@apply text-base text-gray-700 mt-3;
+		@apply mt-3 text-base text-gray-700;
 	}
 
 	.sh-notice-ipo {
-		@apply text-base sm:text-lg text-gray-800 mt-2;
+		@apply mt-2 text-base text-gray-800 sm:text-lg;
 	}
 
 	.sh-info {
-		@apply h-4 xs:h-5 w-4 xs:w-5 text-blue-400 inline mb-1 mr-1;
+		@apply mb-1 mr-1 inline h-4 w-4 text-blue-400 xs:h-5 xs:w-5;
 	}
 
 	.sh-info-ipo {
-		@apply h-4 xs:h-5 sm:h-6 w-4 xs:w-5 sm:w-6 text-blue-400 inline mb-1 mr-1;
+		@apply mb-1 mr-1 inline h-4 w-4 text-blue-400 xs:h-5 xs:w-5 sm:h-6 sm:w-6;
 	}
 
 	.sh-details {
-		@apply text-tiny text-gray-600 mt-[1px];
+		@apply mt-[1px] text-tiny text-gray-600;
 	}
 }

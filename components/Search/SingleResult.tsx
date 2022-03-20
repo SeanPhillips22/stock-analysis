@@ -19,9 +19,7 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 
 	switch (type) {
 		case 's':
-			url = symbol.includes('.')
-				? `/stocks/${symbol.toLowerCase()}`
-				: `/stocks/${symbol.toLowerCase()}/`
+			url = symbol.includes('.') ? `/stocks/${symbol.toLowerCase()}` : `/stocks/${symbol.toLowerCase()}/`
 			tag = 'Stock'
 			break
 
@@ -107,11 +105,7 @@ export const SingleResult = ({ index, result, setOpen }: Props) => {
 	return (
 		<li className="border-b border-gray-200 first:border-t last:border-none">
 			<Link href={url} prefetch={false}>
-				<a
-					data-num={index + 1}
-					className={searchResultStyles}
-					onClick={() => setOpen(false)}
-				>
+				<a data-num={index + 1} className={searchResultStyles} onClick={() => setOpen(false)}>
 					<span className="min-w-[3rem]">{symbol}</span>
 					<span className="grow">{name}</span>
 					<span className="hidden text-sm sm:block">{tag}</span>

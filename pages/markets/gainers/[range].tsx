@@ -52,12 +52,7 @@ let query: TableDynamic = {
 	sort: [{ id: 'change', desc: true }],
 	sortDirection: 'desc',
 	columns: ['s', 'n', 'price', 'volume', 'marketCap'],
-	filters: [
-		'price-over-1',
-		'close-over-1',
-		'volume-over-1000',
-		'marketCap-over-100000000'
-	]
+	filters: ['price-over-1', 'close-over-1', 'volume-over-1000', 'marketCap-over-100000000']
 }
 
 type Props = {
@@ -66,11 +61,7 @@ type Props = {
 	tradingTimestamps: TableTimestamp
 }
 
-export default function GainersPageRange({
-	data,
-	rangePath,
-	tradingTimestamps
-}: Props) {
+export default function GainersPageRange({ data, rangePath, tradingTimestamps }: Props) {
 	const { id, title, metaTitle } = rangeMap[rangePath]
 
 	// the page's config and settings
@@ -101,11 +92,7 @@ export default function GainersPageRange({
 								columns: true
 							},
 							columnOptions: MoverDataPoints,
-							excludeColumns: [
-								'premarketPrice',
-								'premarketChange',
-								'premarketChangePercent'
-							]
+							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent']
 						},
 						dynamic: {
 							...query,

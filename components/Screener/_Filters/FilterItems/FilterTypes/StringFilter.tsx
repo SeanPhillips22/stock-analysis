@@ -1,13 +1,9 @@
-import {
-	FilterOption,
-	FilterProps,
-	VariableFilter
-} from 'components/Screener/screener.types'
+import { FilterOption, FilterProps, VariableFilter } from 'components/Screener/screener.types'
 import { getData } from 'functions/apis/API'
 import { useEffect, useState } from 'react'
 import { PresetChoice } from './Choices/PresetChoice'
-import { getScreenerUrl } from 'components/Screener/functions/getScreenerUrl'
 import { screenerState } from 'components/Screener/screener.state'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	filter: FilterProps
@@ -15,7 +11,7 @@ type Props = {
 }
 
 export function StringFilter({ filter, active }: Props) {
-	const type = screenerState(state => state.type)
+	const { endpoint } = useScreenerContext()
 	const variableFilters = screenerState(state => state.variableFilters)
 	const addVariableFilter = screenerState(state => state.addVariableFilter)
 	const [search, setSearch] = useState('')
@@ -28,18 +24,14 @@ export function StringFilter({ filter, active }: Props) {
 	// If the filter is set as "variable", then we need to fetch the options from the backend
 	useEffect(() => {
 		async function getOptions() {
-			const findFilter = variableFilters.find(
-				(f: VariableFilter) => f.id === filter.id
-			)
+			const findFilter = variableFilters.find((f: VariableFilter) => f.id === filter.id)
 
 			if (findFilter) {
 				filter.options = findFilter.options
 				setOptions(findFilter.options)
 				setCount(findFilter.options.length)
 			} else {
-				const fetched = await getData(
-					getScreenerUrl(type) + `?type=${filter.id}&action=getOptions`
-				)
+				const fetched = await getData(endpoint + `?type=${filter.id}&action=getOptions`)
 				addVariableFilter(fetched, filter.id)
 				filter.options = fetched
 				setOptions(fetched)
@@ -56,9 +48,7 @@ export function StringFilter({ filter, active }: Props) {
 	useEffect(() => {
 		if (filterType === 'stringmatch') {
 			if (search.length > 0) {
-				const filtered = filter.options.filter(option =>
-					option.name.toLowerCase().includes(search.toLowerCase())
-				)
+				const filtered = filter.options.filter(option => option.name.toLowerCase().includes(search.toLowerCase()))
 				setOptions(filtered)
 			} else {
 				setOptions(filter.options)
@@ -90,12 +80,7 @@ export function StringFilter({ filter, active }: Props) {
 			<div className="thin-scroll max-h-[300px] overflow-y-auto overflow-x-hidden overscroll-contain lg:max-h-[400px]">
 				{options &&
 					options.map(option => (
-						<PresetChoice
-							key={option.value}
-							option={option}
-							filter={filter}
-							active={active}
-						/>
+						<PresetChoice key={option.value} option={option} filter={filter} active={active} />
 					))}
 			</div>
 		</div>

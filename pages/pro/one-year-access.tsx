@@ -32,8 +32,7 @@ export default function FreeTrial() {
 						email: data?.user?.email,
 						status: 'trialing',
 						plan: data?.product?.name,
-						currency:
-							data?.checkout?.recurring_prices?.customer?.currency,
+						currency: data?.checkout?.recurring_prices?.customer?.currency,
 						unit_price: data?.checkout?.recurring_prices?.customer?.unit,
 						country: data?.user?.country,
 						registered_date: formatDateToString()
@@ -47,11 +46,7 @@ export default function FreeTrial() {
 
 	return (
 		<>
-			<SEO
-				title="1-Year Subscription to Stock Analysis Pro"
-				canonical="/pro/one-year-access/"
-				noindex={true}
-			/>
+			<SEO title="1-Year Subscription to Stock Analysis Pro" canonical="/pro/one-year-access/" noindex={true} />
 			<UserLayout url="/pro/confirmation/">
 				<div className="space-y-5 bp:space-y-6">
 					<h1 className="mb-5 text-3xl font-bold text-gray-800 bp:text-4xl">
@@ -59,20 +54,16 @@ export default function FreeTrial() {
 					</h1>
 
 					<p className="text-lg leading-relaxed text-gray-900 sm:text-xl">
-						Use the checkout link below to purchase your 1-year
-						subscription to Stock Analysis Pro.
+						Use the checkout link below to purchase your 1-year subscription to Stock Analysis Pro.
 					</p>
 					<p className="text-lg leading-relaxed text-gray-900 sm:text-xl">
-						The price is $79.00 for the full year, just a one-time payment
-						with no rebill.
+						The price is $79.00 for the full year, just a one-time payment with no rebill.
 					</p>
 					<p className="text-lg leading-relaxed text-gray-900 sm:text-xl">
-						This is a 33% discount off of the full price of $9.99 per
-						month.
+						This is a 33% discount off of the full price of $9.99 per month.
 					</p>
 					<p className="text-lg leading-relaxed text-gray-900 sm:text-xl">
-						If you have any questions or problems, please send a message
-						to support@stockanalysis.com.
+						If you have any questions or problems, please send a message to support@stockanalysis.com.
 					</p>
 					<button
 						onClick={() => {

@@ -34,21 +34,9 @@ export const ETFLink = ({ symbol, className, prefetch = false }: ILinks) => {
 
 export const SymbolLink = ({ symbol, className, prefetch = false }: ILinks) => {
 	if (symbol.startsWith('$')) {
-		return (
-			<StockLink
-				symbol={symbol.slice(1)}
-				className={className}
-				prefetch={prefetch}
-			/>
-		)
+		return <StockLink symbol={symbol.slice(1)} className={className} prefetch={prefetch} />
 	} else if (symbol.startsWith('#')) {
-		return (
-			<ETFLink
-				symbol={symbol.slice(1)}
-				className={className}
-				prefetch={prefetch}
-			/>
-		)
+		return <ETFLink symbol={symbol.slice(1)} className={className} prefetch={prefetch} />
 	} else {
 		return <>{symbol.toUpperCase()}</>
 	}

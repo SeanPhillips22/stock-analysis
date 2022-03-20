@@ -16,9 +16,8 @@ export function Hero({ trending }: { trending: Trending[] }) {
 						Search for a stock to start your analysis
 					</h1>
 					<p className="mb-4 text-base xs:text-lg md:mb-5 md:text-xl lg:mb-7 lg:text-[22px]">
-						Detailed information on 5000+ stocks, including all the
-						companies in the S&P500 index. See stock price quotes, news,
-						financial statements and more.
+						Detailed information on 5000+ stocks, including all the companies in the S&P500 index. See stock price
+						quotes, news, financial statements and more.
 					</p>
 					<form action="/search/" method="get" role="search">
 						<div className="relative mx-auto mb-5 flex max-w-[95%] items-center text-left md:max-w-[75%] lg:max-w-lg">
@@ -32,10 +31,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 								return (
 									<span key={t.s}>
 										,{' '}
-										<Link
-											href={`/stocks/${t.s.toLowerCase()}/`}
-											prefetch={false}
-										>
+										<Link href={`/stocks/${t.s.toLowerCase()}/`} prefetch={false}>
 											<a className="bll">{t.s}</a>
 										</Link>
 									</span>
@@ -43,10 +39,7 @@ export function Hero({ trending }: { trending: Trending[] }) {
 							}
 							return (
 								<span key={t.s}>
-									<Link
-										href={`/stocks/${t.s.toLowerCase()}/`}
-										prefetch={false}
-									>
+									<Link href={`/stocks/${t.s.toLowerCase()}/`} prefetch={false}>
 										<a className="bll">{t.s}</a>
 									</Link>
 								</span>

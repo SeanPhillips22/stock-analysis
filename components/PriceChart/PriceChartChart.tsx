@@ -3,11 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { createChart, PriceLineOptions, LineStyle } from 'lightweight-charts'
 import { ChartDataPoint } from 'types/Charts'
-import {
-	formatPriceChartTicks,
-	formatPriceChartTime,
-	setPriceChartColor
-} from './PriceChart.functions'
+import { formatPriceChartTicks, formatPriceChartTime, setPriceChartColor } from './PriceChart.functions'
 
 type Props = {
 	data: ChartDataPoint[]
@@ -56,8 +52,7 @@ export default function PriceChart({ data, time, close, change }: Props) {
 			timeScale: {
 				...(['1D', '5D', '1M', 'YTD'].includes(time) && {
 					// Use TickType to determine whether its hour, day, month or year on the timescale itself
-					tickMarkFormatter: (t: any, tickType: any) =>
-						formatPriceChartTicks(t, time, tickType)
+					tickMarkFormatter: (t: any, tickType: any) => formatPriceChartTicks(t, time, tickType)
 				}),
 				borderColor: '#DEDEDE',
 				timeVisible: true,
@@ -102,10 +97,7 @@ export default function PriceChart({ data, time, close, change }: Props) {
 		// Configure the "Previous Close" line and label
 		const lastPrice = data[data.length - 1]?.c
 		let showPriceLineTitle =
-			lastPrice &&
-			close &&
-			(lastPrice > Number(close) * 1.002 ||
-				lastPrice < Number(close) * 0.998)
+			lastPrice && close && (lastPrice > Number(close) * 1.002 || lastPrice < Number(close) * 0.998)
 
 		//@ts-ignore
 		const plOptions: PriceLineOptions = time === '1D' && {

@@ -28,11 +28,7 @@ export type FormatFunction =
 	| 'stringright'
 
 // Names of functions that perform sorting of table rows
-export type SortFunction =
-	| 'dateSort'
-	| 'priceSort'
-	| 'stringNullFix'
-	| 'numberNullFix'
+export type SortFunction = 'dateSort' | 'priceSort' | 'stringNullFix' | 'numberNullFix'
 
 /**
  * Timestamps for a stock table

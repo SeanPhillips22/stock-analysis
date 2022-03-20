@@ -13,8 +13,7 @@ export default function zipper() {
 		if (n === 0) {
 			return []
 		}
-		const m =
-			(_a = min(arguments, d3_zipLength)) !== null && _a !== void 0 ? _a : 0
+		const m = (_a = min(arguments, d3_zipLength)) !== null && _a !== void 0 ? _a : 0
 		const zips = new Array(m)
 		for (let i = -1; ++i < m; ) {
 			// tslint:disable-next-line: no-shadowed-variable

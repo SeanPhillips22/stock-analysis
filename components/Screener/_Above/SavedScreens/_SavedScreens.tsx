@@ -1,9 +1,9 @@
 import { useSavedScreens } from './useSavedScreens'
 import { DataId } from 'types/DataId'
-import { ScreenerTypes } from 'components/Screener/screener.types'
 import { SavedItem } from './SavedItem'
 import { SaveScreen } from './SaveScreen'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type SavedFilter = {
 	id: DataId
@@ -17,19 +17,14 @@ type Screen = {
 	filters: SavedFilter[]
 }
 
-type Props = {
-	type: ScreenerTypes
-}
-
-export function SavedScreens({ type }: Props) {
+export function SavedScreens() {
+	const { type } = useScreenerContext()
 	const { data } = useSavedScreens(type)
 	const screeners = data && data.screeners[type]
 
 	return (
 		<div className="flex w-[50%] md:block md:w-auto">
-			<div className="hidden text-sm font-medium text-gray-800 md:block">
-				Saved Screens
-			</div>
+			<div className="hidden text-sm font-medium text-gray-800 md:block">Saved Screens</div>
 			<Dropdown
 				title="Select saved"
 				classes="py-0"
@@ -44,20 +39,13 @@ export function SavedScreens({ type }: Props) {
 							<div className="divide-y">
 								{Object.keys(screeners).map(key => {
 									let screen = screeners[key] as Screen
-									return (
-										<SavedItem
-											key={key}
-											name={screen.name}
-											type={type}
-										/>
-									)
+									return <SavedItem key={key} name={screen.name} type={type} />
 								})}
 							</div>
 						</>
 					) : (
 						<div className="p-2 text-sm text-gray-700">
-							No screens have been saved yet. Choose some filters, then
-							enter a screen name and click Save.
+							No screens have been saved yet. Choose some filters, then enter a screen name and click Save.
 						</div>
 					)}
 				</div>

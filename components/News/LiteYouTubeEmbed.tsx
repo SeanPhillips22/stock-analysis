@@ -32,8 +32,7 @@ export function LiteYouTubeEmbed({ id, title }: Props) {
 		setIframe(true)
 	}
 
-	const inactive =
-		'yt-lite focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-brand_light rounded-sm'
+	const inactive = 'yt-lite focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-brand_light rounded-sm'
 	const active = 'yt-lite lyt-activated'
 
 	return (

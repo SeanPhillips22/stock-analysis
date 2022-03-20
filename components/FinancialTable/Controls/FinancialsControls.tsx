@@ -31,9 +31,7 @@ export function FinancialsControls({ info, statement, range }: Props) {
 			>
 				<LeftRightIcon classes="w-4 bp:w-5 h-4 bp:h-5 pointer-events-none" />
 			</button>
-			{!info.exceptions.hideTTM && (
-				<ShowTrailing range={range} statement={statement} />
-			)}
+			{!info.exceptions.hideTTM && <ShowTrailing range={range} statement={statement} />}
 			<SelectFormat />
 			<div
 				onMouseEnter={() => {

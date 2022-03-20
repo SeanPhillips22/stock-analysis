@@ -80,11 +80,9 @@ export default function KagiComponent() {
 			const priceMovement = source(d) - line.close
 			if (
 				// @ts-ignore
-				(line.close >= line.open /* going up */ &&
-					priceMovement > 0) /* and moving in same direction */ ||
+				(line.close >= line.open /* going up */ && priceMovement > 0) /* and moving in same direction */ ||
 				// @ts-ignore
-				(line.close < line.open /* going down */ &&
-					priceMovement < 0) /* and moving in same direction */
+				(line.close < line.open /* going down */ && priceMovement < 0) /* and moving in same direction */
 			) {
 				line.close = source(d)
 				// @ts-ignore
@@ -111,10 +109,7 @@ export default function KagiComponent() {
 				// @ts-ignore
 				(line.close >= line.open /* going up */ &&
 					priceMovement < 0 /* and moving in other direction */ &&
-					Math.abs(priceMovement) >
-						reversalThreshold(
-							d
-						)) /* and the movement is big enough for reversal */ ||
+					Math.abs(priceMovement) > reversalThreshold(d)) /* and the movement is big enough for reversal */ ||
 				// @ts-ignore
 				(line.close < line.open /* going down */ &&
 					priceMovement > 0 /* and moving in other direction */ &&
@@ -124,8 +119,7 @@ export default function KagiComponent() {
 				// reverse direction
 				const nextLineOpen = line.close
 				// @ts-ignore
-				direction =
-					(line.close - line.open) / Math.abs(line.close - line.open)
+				direction = (line.close - line.open) / Math.abs(line.close - line.open)
 				let nextChangePoint
 				let nextChangeTo
 				if (direction < 0 /* if direction so far has been -ve*/) {
@@ -172,10 +166,7 @@ export default function KagiComponent() {
 			let dir = line.close - line.open
 			dir = dir === 0 ? 1 : dir / Math.abs(dir)
 			// @ts-ignore
-			line.reverseAt =
-				dir > 0
-					? line.close - reversalThreshold(d)
-					: line.open - reversalThreshold(d)
+			line.reverseAt = dir > 0 ? line.close - reversalThreshold(d) : line.open - reversalThreshold(d)
 		})
 		if (!line.added) {
 			kagiData.push(line)

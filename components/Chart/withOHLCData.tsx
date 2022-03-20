@@ -9,10 +9,7 @@ const parseDate = timeParse('%Y-%m-%d')
 const parseDate1D5D = timeParse('%b %d, %Y %H:%M')
 
 const errorHandling = (error: any, setLoading: any) => {
-	console.error(
-		'Error: There was an error loading the data for the chart |',
-		error
-	)
+	console.error('Error: There was an error loading the data for the chart |', error)
 	setLoading(false)
 }
 
@@ -97,13 +94,8 @@ interface WithOHLCState {
 }
 
 export function withOHLCData() {
-	return <TProps extends WithOHLCDataProps>(
-		OriginalComponent: React.ComponentClass<TProps>
-	) => {
-		return class WithOHLCData extends React.Component<
-			Omit<TProps, 'data'>,
-			WithOHLCState
-		> {
+	return <TProps extends WithOHLCDataProps>(OriginalComponent: React.ComponentClass<TProps>) => {
+		return class WithOHLCData extends React.Component<Omit<TProps, 'data'>, WithOHLCState> {
 			public constructor(props: Omit<TProps, 'data'>) {
 				super(props)
 				this.state = {
@@ -131,20 +123,9 @@ export function withOHLCData() {
 
 				// Case where user is switching from MAX to 1D/5D
 
-				if (
-					(prevProps.time == '1D' || prevProps.time == '5D') &&
-					newProps.time != '1D' &&
-					newProps.time != '5D'
-				) {
+				if ((prevProps.time == '1D' || prevProps.time == '5D') && newProps.time != '1D' && newProps.time != '5D') {
 					loading(true)
-					getChartData(
-						abort,
-						newProps.stockSymbol,
-						newProps.stockType,
-						newProps.period,
-						'MAX',
-						undefined
-					)
+					getChartData(abort, newProps.stockSymbol, newProps.stockType, newProps.period, 'MAX', undefined)
 						.then(res => {
 							const forDateParse = res.map(fixDataHeaders)
 							data = forDateParse.map(parseData())
@@ -174,14 +155,7 @@ export function withOHLCData() {
 				) {
 					loading(true)
 
-					getChartData(
-						abort,
-						newProps.stockSymbol,
-						newProps.stockType,
-						undefined,
-						newProps.time,
-						undefined
-					)
+					getChartData(abort, newProps.stockSymbol, newProps.stockType, undefined, newProps.time, undefined)
 						.then(res => {
 							const forDateParse = res.map(fixDataHeaders1D5D)
 							data = forDateParse.map(parseData1D5D())
@@ -201,23 +175,12 @@ export function withOHLCData() {
 				}
 				// Case where using is switching between 1D and 5D
 				else if (
-					(newProps.time == '1D' &&
-						prevProps.time != '1D' &&
-						data != undefined) ||
-					(newProps.time == '5D' &&
-						prevProps.time != '5D' &&
-						data != undefined)
+					(newProps.time == '1D' && prevProps.time != '1D' && data != undefined) ||
+					(newProps.time == '5D' && prevProps.time != '5D' && data != undefined)
 				) {
 					loading(true)
 
-					getChartData(
-						abort,
-						newProps.stockSymbol,
-						newProps.stockType,
-						undefined,
-						newProps.time,
-						'candles'
-					)
+					getChartData(abort, newProps.stockSymbol, newProps.stockType, undefined, newProps.time, 'candles')
 						.then(res => {
 							setTimeout(function () {
 								loading(false)
@@ -245,14 +208,7 @@ export function withOHLCData() {
 				) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
-						getChartData(
-							abort,
-							newProps.stockSymbol,
-							newProps.stockType,
-							undefined,
-							newProps.time,
-							undefined
-						)
+						getChartData(abort, newProps.stockSymbol, newProps.stockType, undefined, newProps.time, undefined)
 							.then(res => {
 								const forDateParse = res.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
@@ -271,14 +227,7 @@ export function withOHLCData() {
 							})
 					} else {
 						loading(true)
-						getChartData(
-							abort,
-							newProps.stockSymbol,
-							newProps.stockType,
-							newProps.period,
-							'MAX',
-							undefined
-						)
+						getChartData(abort, newProps.stockSymbol, newProps.stockType, newProps.period, 'MAX', undefined)
 							.then(res => {
 								const forDateParse = res.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
@@ -302,14 +251,7 @@ export function withOHLCData() {
 				} else if (data == undefined) {
 					if (newProps.time == '1D' || newProps.time == '5D') {
 						loading(true)
-						getChartData(
-							abort,
-							newProps.stockSymbol,
-							newProps.stockType,
-							undefined,
-							newProps.time,
-							undefined
-						)
+						getChartData(abort, newProps.stockSymbol, newProps.stockType, undefined, newProps.time, undefined)
 							.then(res => {
 								const forDateParse = res.map(fixDataHeaders1D5D)
 								data = forDateParse.map(parseData1D5D())
@@ -324,14 +266,7 @@ export function withOHLCData() {
 							})
 					} else {
 						loading(true)
-						getChartData(
-							abort,
-							newProps.stockSymbol,
-							newProps.stockType,
-							newProps.period,
-							'MAX',
-							undefined
-						)
+						getChartData(abort, newProps.stockSymbol, newProps.stockType, newProps.period, 'MAX', undefined)
 							.then(res => {
 								const forDateParse = res.map(fixDataHeaders)
 								data = forDateParse.map(parseData())
@@ -360,18 +295,10 @@ export function withOHLCData() {
 				const { data } = this.state
 
 				if (typeof data == 'undefined') {
-					return (
-						<Unavailable message="Unable to load the data for this chart." />
-					)
+					return <Unavailable message="Unable to load the data for this chart." />
 				}
 
-				return (
-					<OriginalComponent
-						{...(this.props as TProps)}
-						data={data}
-						height={900}
-					/>
-				)
+				return <OriginalComponent {...(this.props as TProps)} data={data} height={900} />
 			}
 		}
 	}

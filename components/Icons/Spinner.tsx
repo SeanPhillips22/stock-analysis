@@ -11,14 +11,7 @@ export const SpinnerIcon = ({ classes }: Props) => (
 		aria-hidden="true"
 		style={{ maxWidth: '100px' }}
 	>
-		<circle
-			className="opacity-25"
-			cx="12"
-			cy="12"
-			r="10"
-			stroke="currentColor"
-			strokeWidth="4"
-		></circle>
+		<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
 		<path
 			className="opacity-75"
 			fill="currentColor"

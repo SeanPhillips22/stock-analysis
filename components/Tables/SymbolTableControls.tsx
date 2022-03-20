@@ -30,11 +30,7 @@ export const SymbolTableControls = ({
 			<h2 className="mr-1 whitespace-nowrap text-xl font-semibold xs:mr-2 bp:mr-3 bp:text-2xl sm:mr-auto">
 				{`${append && append + ' '}${count} ${title}`}
 			</h2>
-			<Export
-				tableId={tableId}
-				data={data}
-				fileName={title === 'Stocks' ? 'stocks-list' : 'etfs-list'}
-			/>
+			<Export tableId={tableId} data={data} fileName={title === 'Stocks' ? 'stocks-list' : 'etfs-list'} />
 			<Filter
 				useAsyncDebounce={useAsyncDebounce}
 				globalFilter={globalFilter}

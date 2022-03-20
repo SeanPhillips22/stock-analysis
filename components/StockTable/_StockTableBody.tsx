@@ -1,13 +1,7 @@
 import { SortObject, SortProps } from 'components/Screener/screener.types'
 import { HeaderCell } from 'components/Tables/HeaderCell'
 import { useSort } from 'hooks/useSort'
-import {
-	useTable,
-	useSortBy,
-	useGlobalFilter,
-	useAsyncDebounce,
-	useColumnOrder
-} from 'react-table'
+import { useTable, useSortBy, useGlobalFilter, useAsyncDebounce, useColumnOrder } from 'react-table'
 import { StockTableControls } from './_StockTableControls'
 import { useState } from 'react'
 import { DataPoints as DP } from 'data/StockDataPoints'
@@ -28,15 +22,7 @@ type Props = {
 	description?: string
 }
 
-export function StockTableBody({
-	data,
-	columns,
-	sortProps,
-	sort,
-	tableId,
-	columnOrder,
-	description
-}: Props) {
+export function StockTableBody({ data, columns, sortProps, sort, tableId, columnOrder, description }: Props) {
 	const [search, setSearch] = useState('')
 	const { updateSort } = useSort(sortProps)
 
@@ -56,12 +42,7 @@ export function StockTableBody({
 
 	return (
 		<div>
-			{description && (
-				<Information
-					message={description}
-					classes="p-3 mb-4 sm:mb-5 text-blue-900"
-				/>
-			)}
+			{description && <Information message={description} classes="p-3 mb-4 sm:mb-5 text-blue-900" />}
 			<div className="mt-3 sm:mt-0">
 				<StockTableControls
 					filter={{
@@ -78,11 +59,7 @@ export function StockTableBody({
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
-									<HeaderCell
-										key={index}
-										column={column}
-										updateSort={updateSort}
-									/>
+									<HeaderCell key={index} column={column} updateSort={updateSort} />
 								))}
 							</tr>
 						))}
@@ -110,13 +87,7 @@ export function StockTableBody({
 
 										return (
 											<td key={uniqueKey} className={css}>
-												{id === 'rank'
-													? i + 1
-													: formatTableCell(
-															format,
-															value,
-															'stocks'
-													  )}
+												{id === 'rank' ? i + 1 : formatTableCell(format, value, 'stocks')}
 											</td>
 										)
 									})}

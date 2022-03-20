@@ -40,14 +40,8 @@ export function SelectStatement({ info, statement, range }: Props) {
 
 					return (
 						<li key={id}>
-							<Link
-								href={`/stocks/${info.symbol}/financials/${path}${rangePath}`}
-								prefetch={false}
-							>
-								<a
-									className={statement == id ? 'active' : 'inactive'}
-									data-title={title}
-								>
+							<Link href={`/stocks/${info.symbol}/financials/${path}${rangePath}`} prefetch={false}>
+								<a className={statement == id ? 'active' : 'inactive'} data-title={title}>
 									{title}
 								</a>
 							</Link>

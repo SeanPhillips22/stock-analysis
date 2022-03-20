@@ -51,9 +51,7 @@ export function LoadMore({
 
 	async function fetchData() {
 		setLoading(true)
-		const fresh = await getData(
-			`news?s=${info.symbol}&t=${info.type}&f=${show}&full=true`
-		)
+		const fresh = await getData(`news?s=${info.symbol}&t=${info.type}&f=${show}&full=true`)
 		setLoading(false)
 		setData(fresh)
 		setLoaded(true)
@@ -68,12 +66,8 @@ export function LoadMore({
 
 		let infinite =
 			searched && query.length > 0
-				? await getData(
-						`news-search?s=${info.symbol}&t=${info.type}&q=${query}&p=${dataPage}&k=${PRO_KEY}`
-				  )
-				: await getData(
-						`news-infinite?s=${info.symbol}&t=${info.type}&f=${show}&p=${dataPage}&k=${PRO_KEY}`
-				  )
+				? await getData(`news-search?s=${info.symbol}&t=${info.type}&q=${query}&p=${dataPage}&k=${PRO_KEY}`)
+				: await getData(`news-infinite?s=${info.symbol}&t=${info.type}&f=${show}&p=${dataPage}&k=${PRO_KEY}`)
 
 		if (infinite.data) {
 			infinite = infinite.data
@@ -89,14 +83,7 @@ export function LoadMore({
 	}
 
 	if (data.length === 25 && !loaded) {
-		return (
-			<ButtonMore
-				fn={fetchData}
-				tag="fetchData"
-				loading={loading}
-				end={end}
-			/>
-		)
+		return <ButtonMore fn={fetchData} tag="fetchData" loading={loading} end={end} />
 	}
 
 	if (loaded && data.length === 50 && !isPro) {
@@ -104,14 +91,7 @@ export function LoadMore({
 	}
 
 	if (loaded && data.length >= 50 && isPro) {
-		return (
-			<ButtonMore
-				fn={fetchInfiniteData}
-				tag="fetchDataPro"
-				loading={loading}
-				end={end}
-			/>
-		)
+		return <ButtonMore fn={fetchInfiniteData} tag="fetchDataPro" loading={loading} end={end} />
 	}
 
 	return null

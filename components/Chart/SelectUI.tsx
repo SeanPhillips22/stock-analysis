@@ -62,8 +62,7 @@ export const SelectType = (props: SelectTypeProps) => {
 export const Buttons = ({ state, dispatch }: ButtonUIProps) => {
 	const common = 'py-0.5 px-0.5 xs:px-[3px] bp:px-1.5 sm:px-3 rounded-md'
 	const active = common + ' bp:bg-gray-100 text-gray-800 font-semibold'
-	const inactive =
-		common + ' text-gray-900 hover:text-gray-900 hover:text-shadow'
+	const inactive = common + ' text-gray-900 hover:text-gray-900 hover:text-shadow'
 
 	let defaultValue = !state ? undefined : state
 

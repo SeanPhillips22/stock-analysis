@@ -1,24 +1,24 @@
 import { screenerState } from 'components/Screener/screener.state'
 import { DataId } from 'types/DataId'
-import { ScreenerTypes } from 'components/Screener/screener.types'
 import { useModifyColumns } from 'components/Screener/functions/useModifyColumns'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	name: string
 	id: DataId
-	type: ScreenerTypes
 }
 
 /**
  * A checkbox that activates/deactivates a custom column for the screener results table
  * @return {JSX.Element}
  */
-export function ColumnItem({ name, id, type }: Props): JSX.Element {
-	const { fetchColumn, toggle, isShowing } = useModifyColumns()
+export function ColumnItem({ name, id }: Props): JSX.Element {
+	const { endpoint } = useScreenerContext()
+	const { fetchColumn, toggle, isShowing } = useModifyColumns(endpoint)
 	const setOpen = screenerState(state => state.setColumnDropdownOpen)
 
 	function handleKeyDown(e: React.KeyboardEvent) {
-		if (e.key === 'Enter') toggle(id, type)
+		if (e.key === 'Enter') toggle(id)
 		if (e.key === 'Escape') setOpen(false)
 	}
 
@@ -28,9 +28,9 @@ export function ColumnItem({ name, id, type }: Props): JSX.Element {
 				type="checkbox"
 				id={id}
 				checked={isShowing(id)}
-				onChange={() => toggle(id, type)}
-				onMouseEnter={() => fetchColumn(id, type)}
-				onFocus={() => fetchColumn(id, type)}
+				onChange={() => toggle(id)}
+				onMouseEnter={() => fetchColumn(id)}
+				onFocus={() => fetchColumn(id)}
 				onKeyDown={handleKeyDown}
 				className="h-4 w-4 rounded border border-gray-500 text-blue-600 focus:ring-blue-500"
 			/>

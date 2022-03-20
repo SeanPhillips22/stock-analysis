@@ -24,23 +24,14 @@ type Props = {
 }
 
 // ! This is currently not being used for anything
-export function DropdownSelect({
-	selected,
-	setSelected,
-	selectOptions
-}: Props) {
+export function DropdownSelect({ selected, setSelected, selectOptions }: Props) {
 	return (
 		<Listbox value={selected} onChange={setSelected}>
 			<div>
 				<Listbox.Button className="relative max-w-[130px] cursor-pointer rounded-md border border-gray-300 bg-white py-2 pl-2 pr-8 text-left text-sm font-medium text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 bp:pl-3 bp:pr-10 sm:text-base">
-					<span className="block truncate">
-						{getName(selected, selectOptions)}
-					</span>
+					<span className="block truncate">{getName(selected, selectOptions)}</span>
 					<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-1 bp:pr-2">
-						<SelectorIcon
-							className="h-5 w-5 text-gray-400"
-							aria-hidden="true"
-						/>
+						<SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
 					</span>
 				</Listbox.Button>
 
@@ -65,20 +56,14 @@ export function DropdownSelect({
 								{({ selected }) => (
 									<>
 										<span
-											className={classNames(
-												selected ? 'font-semibold' : 'font-normal',
-												'block truncate'
-											)}
+											className={classNames(selected ? 'font-semibold' : 'font-normal', 'block truncate')}
 										>
 											{option.name}
 										</span>
 
 										{selected ? (
 											<span className="absolute inset-y-0 right-0 flex items-center pr-3 text-blue-600">
-												<CheckIcon
-													className="h-5 w-5"
-													aria-hidden="true"
-												/>
+												<CheckIcon className="h-5 w-5" aria-hidden="true" />
 											</span>
 										) : null}
 									</>

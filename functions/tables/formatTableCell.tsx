@@ -34,12 +34,7 @@ function format(value: number, decimals: 0 | 1 | 2 | 3) {
 	return value
 }
 
-export function formatCellRaw(
-	fn: Fn | undefined,
-	value: string | number,
-	type: Type = 'stocks',
-	noDec = false
-) {
+export function formatCellRaw(fn: Fn | undefined, value: string | number, type: Type = 'stocks', noDec = false) {
 	return formatTableCell(fn, value, type, '', true, noDec)
 }
 
@@ -65,8 +60,7 @@ export function formatTableCell(
 	if (fn === 'colorPercentage') return colorPercentage(value as number)
 	if (fn === 'abbreviate') return abbreviate(value as number, raw, noDec)
 	if (fn === 'formatDate') return formatDate(value as string)
-	if (fn === 'string' || fn === 'stringright')
-		return formatString(value as string)
+	if (fn === 'string' || fn === 'stringright') return formatString(value as string)
 	return null
 }
 
@@ -176,8 +170,7 @@ export function abbreviate(value: number, raw: boolean, noDec: boolean) {
 	if (value >= 1000000000) num = formatter.format(value / 1000000000) + 'B'
 	else if (value >= 1000000) num = formatter.format(value / 1000000) + 'M'
 	else if (value > 1000) num = formatter.format(value / 1000) + 'K'
-	else if (value <= -1000000000)
-		num = formatter.format(value / 1000000000) + 'B'
+	else if (value <= -1000000000) num = formatter.format(value / 1000000000) + 'B'
 	else if (value <= -1000000) num = formatter.format(value / 1000000) + 'M'
 	else if (value <= -1000) num = formatter.format(value / 1000) + 'K'
 	else num = formatter.format(value)
@@ -190,20 +183,7 @@ export function formatDate(value: string) {
 	if (!value) return '-'
 	if (value === 'n/a') return '-'
 
-	const months = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec'
-	]
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 	const dt = new Date(value)
 	return `${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`

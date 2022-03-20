@@ -23,10 +23,7 @@ export function getColumns(cols: DataId[], main: DataId) {
 			Header: colName || name,
 			accessor: col,
 			sortType: sort || 'basic',
-			sortInverted:
-				col !== main && format !== 'string' && format !== 'linkSymbol'
-					? true
-					: false
+			sortInverted: col !== main && format !== 'string' && format !== 'linkSymbol' ? true : false
 		}
 	})
 

@@ -1,7 +1,6 @@
 function checkIfDateIsEqualOrSetLater(yearAgo: Date, oldestDate: Date) {
 	return (
-		(oldestDate.getMonth() != yearAgo.getMonth() ||
-			oldestDate.getFullYear() != yearAgo.getFullYear()) &&
+		(oldestDate.getMonth() != yearAgo.getMonth() || oldestDate.getFullYear() != yearAgo.getFullYear()) &&
 		oldestDate > yearAgo
 	)
 }
@@ -22,10 +21,7 @@ export function fillWhitespaceLine(chart: any) {
 	if (checkIfDateIsEqualOrSetLater(yearAgo, oldestDate)) {
 		for (let i = 0; i < 12; i++) {
 			// This case handles specifically if month is set to January and year needs to be changed
-			if (
-				yearAgo.getFullYear() != oldestDate.getFullYear() &&
-				oldestDate.getMonth() == 0
-			) {
+			if (yearAgo.getFullYear() != oldestDate.getFullYear() && oldestDate.getMonth() == 0) {
 				oldestDate.setMonth(11)
 				oldestDate.setFullYear(oldestDate.getFullYear() - 1)
 				//Month is set to the one before it.
@@ -154,13 +150,7 @@ export function collisionOffset(coords: priceRects) {
 	}
 }
 
-function compareTwoLabels(
-	yTop: number,
-	yBottom: number,
-	yTop2: number,
-	yBottom2: number,
-	shiftLabelsUp: boolean
-) {
+function compareTwoLabels(yTop: number, yBottom: number, yTop2: number, yBottom2: number, shiftLabelsUp: boolean) {
 	const result = findCollision(yTop, yBottom, yTop2, yBottom2)
 	if (result == 'none') return 0
 	if (shiftLabelsUp) {
@@ -169,12 +159,7 @@ function compareTwoLabels(
 }
 
 //y is the top of the rectangle, yy is the bottom.
-function findCollision(
-	yTop: number,
-	yBottom: number,
-	yTop2: number,
-	yBottom2: number
-) {
+function findCollision(yTop: number, yBottom: number, yTop2: number, yBottom2: number) {
 	let bottom = compareY(yTop, yBottom, yBottom2)
 	let top = compareY(yTop, yBottom, yTop2)
 

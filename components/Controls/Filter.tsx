@@ -18,9 +18,7 @@ export function Filter({
 	setFilterState,
 	filterText = 'Filter...'
 }: Props) {
-	const [value, setValue] = useState<string | undefined>(
-		globalFilter || undefined
-	)
+	const [value, setValue] = useState<string | undefined>(globalFilter || undefined)
 
 	const setFilterValues = useAsyncDebounce((value: string | undefined) => {
 		if (setGlobalFilter) setGlobalFilter(value)

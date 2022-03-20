@@ -79,11 +79,7 @@ export function TableRange() {
 	}
 
 	return (
-		<Dropdown
-			title={getLabel(main) || 'Range'}
-			hoverTitle="Change date range"
-			classes="dd-right"
-		>
+		<Dropdown title={getLabel(main) || 'Range'} hoverTitle="Change date range" classes="dd-right">
 			{OPTIONS.map(i => (
 				/* One Dropdown Item */
 				<Menu.Item key={i.id}>
@@ -96,14 +92,10 @@ export function TableRange() {
 						{i.long}
 
 						{/* Icon - if option selected */}
-						{i.id === main && (
-							<CheckIcon className="h-5 w-5" aria-hidden="true" />
-						)}
+						{i.id === main && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
 
 						{/* Icon - if option is only for pro members */}
-						{i.pro && !isPro && (
-							<LockClosedIcon className="lock-icon" aria-hidden="true" />
-						)}
+						{i.pro && !isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 					</div>
 				</Menu.Item>
 			))}

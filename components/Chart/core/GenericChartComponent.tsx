@@ -20,8 +20,7 @@ export class GenericChartComponent extends GenericComponent {
 		displayXAccessor: PropTypes.func.isRequired,
 		plotData: PropTypes.array.isRequired,
 		fullData: PropTypes.array.isRequired,
-		chartConfig: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-			.isRequired,
+		chartConfig: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
 		morePropsDecorator: PropTypes.func,
 		generateSubscriptionId: PropTypes.func,
 		getMutableState: PropTypes.func.isRequired,
@@ -62,12 +61,7 @@ export class GenericChartComponent extends GenericComponent {
 		ctx.scale(ratio, ratio)
 		if (edgeClip) {
 			ctx.beginPath()
-			ctx.rect(
-				-1,
-				canvasOriginY - 10,
-				width + margin.left + margin.right + 1,
-				height + 20
-			)
+			ctx.rect(-1, canvasOriginY - 10, width + margin.left + margin.right + 1, height + 20)
 			ctx.clip()
 		}
 
@@ -119,11 +113,7 @@ export class GenericChartComponent extends GenericComponent {
 		if ((type === 'mousemove' || type === 'click') && this.props.disablePan) {
 			return true
 		}
-		if (
-			ALWAYS_TRUE_TYPES.indexOf(type) === -1 &&
-			isDefined(moreProps) &&
-			isDefined(moreProps.currentCharts)
-		) {
+		if (ALWAYS_TRUE_TYPES.indexOf(type) === -1 && isDefined(moreProps) && isDefined(moreProps.currentCharts)) {
 			return moreProps.currentCharts.indexOf(this.context.chartId) > -1
 		}
 		return true

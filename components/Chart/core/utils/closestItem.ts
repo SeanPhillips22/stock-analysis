@@ -52,8 +52,7 @@ export const getClosestItem = <T, TAccessor extends number | Date>(
 	const rightItem = accessor(array[right])
 
 	const closest =
-		Math.abs(leftItem.valueOf() - value.valueOf()) <
-		Math.abs(rightItem.valueOf() - value.valueOf())
+		Math.abs(leftItem.valueOf() - value.valueOf()) < Math.abs(rightItem.valueOf() - value.valueOf())
 			? array[left]
 			: array[right]
 

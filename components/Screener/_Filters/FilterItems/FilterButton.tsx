@@ -2,6 +2,7 @@ import { screenerState } from 'components/Screener/screener.state'
 import { DataId } from 'types/DataId'
 import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { createLabelFromString } from 'components/Screener/functions/filterString/createLabelFromString'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	active: string | false
@@ -9,19 +10,17 @@ type Props = {
 }
 
 export function FilterButton({ active, id }: Props) {
-	const filters = screenerState(state => state.filters)
+	const { state } = useScreenerContext()
 	const openFilter = screenerState(state => state.openFilter)
 	const setOpenFilter = screenerState(state => state.setOpenFilter)
 
 	function findName() {
-		const filter = filters.find(filter => filter.id === id)
+		const filter = state.filters.find(filter => filter.id === id)
 		const value = filter?.value
 
 		if (
 			value &&
-			(filter?.filterType === 'numeric' ||
-				filter?.filterType === 'date' ||
-				filter?.filterType === 'numericRange')
+			(filter?.filterType === 'numeric' || filter?.filterType === 'date' || filter?.filterType === 'numericRange')
 		) {
 			return createLabelFromString(value, filter)
 		} else if (value && filter?.filterType === 'stringmatch') {
@@ -56,10 +55,7 @@ export function FilterButton({ active, id }: Props) {
 		>
 			<span className="overflow-hidden text-ellipsis">{buttonText}</span>
 
-			<ChevronDownIcon
-				className="pointer-events-none -mr-1 ml-2 h-5 w-5"
-				aria-hidden="true"
-			/>
+			<ChevronDownIcon className="pointer-events-none -mr-1 ml-2 h-5 w-5" aria-hidden="true" />
 		</div>
 	)
 }

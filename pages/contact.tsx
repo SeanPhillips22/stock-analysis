@@ -10,9 +10,8 @@ export default function Contact() {
 			<CrispChat />
 			<LayoutSidebar heading="Contact Us" url="/contact/">
 				<p>
-					We would love to hear from you. Please submit a message using the
-					contact form below and we will get back to you as soon as
-					possible. You can also send an email directly to{' '}
+					We would love to hear from you. Please submit a message using the contact form below and we will get back
+					to you as soon as possible. You can also send an email directly to{' '}
 					<a className="bll" href="mailto:contact@stockanalysis.com">
 						contact@stockanalysis.com
 					</a>

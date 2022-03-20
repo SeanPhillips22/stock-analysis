@@ -31,9 +31,7 @@ interface EventCaptureProps {
 	readonly height: number
 	readonly chartConfig: { origin: number[]; height: number }[]
 	readonly xAccessor: any // func
-	readonly xScale:
-		| ScaleContinuousNumeric<number, number>
-		| ScaleTime<number, number>
+	readonly xScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>
 	readonly disableInteraction: boolean
 	readonly getAllPanConditions: () => {
 		panEnabled: boolean
@@ -42,43 +40,22 @@ interface EventCaptureProps {
 	readonly onClick?: (mouseXY: number[], event: React.MouseEvent) => void
 	readonly onContextMenu?: (mouseXY: number[], event: React.MouseEvent) => void
 	readonly onDoubleClick?: (mouseXY: number[], event: React.MouseEvent) => void
-	readonly onDragStart?: (
-		details: { startPos: number[] },
-		event: React.MouseEvent
-	) => void
-	readonly onDrag?: (
-		details: { startPos: number[]; mouseXY: number[] },
-		event: React.MouseEvent
-	) => void
-	readonly onDragComplete?: (
-		details: { mouseXY: number[] },
-		event: React.MouseEvent
-	) => void
-	readonly onMouseDown?: (
-		mouseXY: number[],
-		currentCharts: string[],
-		event: React.MouseEvent
-	) => void
-	readonly onMouseMove?: (
-		touchXY: number[],
-		eventType: string,
-		event: React.MouseEvent | React.TouchEvent
-	) => void
+	readonly onDragStart?: (details: { startPos: number[] }, event: React.MouseEvent) => void
+	readonly onDrag?: (details: { startPos: number[]; mouseXY: number[] }, event: React.MouseEvent) => void
+	readonly onDragComplete?: (details: { mouseXY: number[] }, event: React.MouseEvent) => void
+	readonly onMouseDown?: (mouseXY: number[], currentCharts: string[], event: React.MouseEvent) => void
+	readonly onMouseMove?: (touchXY: number[], eventType: string, event: React.MouseEvent | React.TouchEvent) => void
 	readonly onMouseEnter?: (event: React.MouseEvent) => void
 	readonly onMouseLeave?: (event: React.MouseEvent) => void
 	readonly onPinchZoom?: (
 		initialPinch: {
-			readonly xScale:
-				| ScaleContinuousNumeric<number, number>
-				| ScaleTime<number, number>
+			readonly xScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>
 			readonly touch1Pos: [number, number]
 			readonly touch2Pos: [number, number]
 			readonly range: number[]
 		},
 		currentPinch: {
-			readonly xScale:
-				| ScaleContinuousNumeric<number, number>
-				| ScaleTime<number, number>
+			readonly xScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>
 			readonly touch1Pos: [number, number]
 			readonly touch2Pos: [number, number]
 		},
@@ -86,9 +63,7 @@ interface EventCaptureProps {
 	) => void
 	readonly onPinchZoomEnd?: (
 		initialPinch: {
-			readonly xScale:
-				| ScaleContinuousNumeric<number, number>
-				| ScaleTime<number, number>
+			readonly xScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>
 			readonly touch1Pos: [number, number]
 			readonly touch2Pos: [number, number]
 			readonly range: number[]
@@ -97,27 +72,19 @@ interface EventCaptureProps {
 	) => void
 	readonly onPan?: (
 		mouseXY: number[],
-		panStartXScale:
-			| ScaleContinuousNumeric<number, number>
-			| ScaleTime<number, number>,
+		panStartXScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>,
 		panOrigin: { dx: number; dy: number },
 		chartsToPan: string[],
 		e: React.MouseEvent
 	) => void
 	readonly onPanEnd?: (
 		mouseXY: number[],
-		panStartXScale:
-			| ScaleContinuousNumeric<number, number>
-			| ScaleTime<number, number>,
+		panStartXScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>,
 		panOrigin: { dx: number; dy: number },
 		chartsToPan: string[],
 		e: React.MouseEvent | React.TouchEvent
 	) => void
-	readonly onZoom?: (
-		zoomDir: 1 | -1,
-		mouseXY: number[],
-		event: React.WheelEvent
-	) => void
+	readonly onZoom?: (zoomDir: 1 | -1, mouseXY: number[], event: React.WheelEvent) => void
 }
 
 interface EventCaptureState {
@@ -126,9 +93,7 @@ interface EventCaptureState {
 	dragStartPosition?: number[]
 	panInProgress: boolean
 	panStart?: {
-		panStartXScale:
-			| ScaleContinuousNumeric<number, number>
-			| ScaleTime<number, number>
+		panStartXScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>
 		panOrigin: number[]
 		chartsToPan: string[]
 	}
@@ -141,10 +106,7 @@ interface EventCaptureState {
 	}
 }
 
-export class EventCapture extends React.Component<
-	EventCaptureProps,
-	EventCaptureState
-> {
+export class EventCapture extends React.Component<EventCaptureProps, EventCaptureState> {
 	public static defaultProps = {
 		mouseMove: false,
 		zoom: false,
@@ -185,9 +147,7 @@ export class EventCapture extends React.Component<
 
 		if (!disableInteraction) {
 			// @ts-ignore
-			select(current)
-				.on(MOUSEENTER, this.handleEnter)
-				.on(MOUSELEAVE, this.handleLeave)
+			select(current).on(MOUSEENTER, this.handleEnter).on(MOUSELEAVE, this.handleLeave)
 
 			// @ts-ignore
 			current.addEventListener('wheel', this.handleWheel, {
@@ -257,8 +217,7 @@ export class EventCapture extends React.Component<
 
 		const { panInProgress } = this.state
 
-		const yZoom =
-			Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 0
+		const yZoom = Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 0
 		const mouseXY = mousePosition(e)
 		e.preventDefault()
 
@@ -355,10 +314,7 @@ export class EventCapture extends React.Component<
 		e.preventDefault()
 		const { onContextMenu, onPanEnd } = this.props
 
-		const mouseXY = mousePosition(
-			e,
-			this.ref.current!.getBoundingClientRect()
-		)
+		const mouseXY = mousePosition(e, this.ref.current!.getBoundingClientRect())
 
 		if (this.state.panStart !== undefined) {
 			const {
@@ -448,19 +404,18 @@ export class EventCapture extends React.Component<
 		const { getAllPanConditions } = this.props
 		const { pan: initialPanEnabled } = this.props
 
-		const { panEnabled, draggable: somethingSelected } =
-			getAllPanConditions().reduce(
-				(returnObj, a) => {
-					return {
-						draggable: returnObj.draggable || a.draggable,
-						panEnabled: returnObj.panEnabled && a.panEnabled
-					}
-				},
-				{
-					draggable: false,
-					panEnabled: initialPanEnabled
+		const { panEnabled, draggable: somethingSelected } = getAllPanConditions().reduce(
+			(returnObj, a) => {
+				return {
+					draggable: returnObj.draggable || a.draggable,
+					panEnabled: returnObj.panEnabled && a.panEnabled
 				}
-			)
+			},
+			{
+				draggable: false,
+				panEnabled: initialPanEnabled
+			}
+		)
 
 		return {
 			panEnabled,
@@ -495,9 +450,7 @@ export class EventCapture extends React.Component<
 				})
 
 				const win = d3Window(this.ref.current)
-				select(win)
-					.on(MOUSEMOVE, this.handlePan)
-					.on(MOUSEUP, this.handlePanEnd)
+				select(win).on(MOUSEMOVE, this.handlePan).on(MOUSEUP, this.handlePanEnd)
 			} else if (somethingSelected) {
 				this.setState({
 					panInProgress: false,
@@ -513,9 +466,7 @@ export class EventCapture extends React.Component<
 				}
 
 				const win = d3Window(this.ref.current)
-				select(win)
-					.on(MOUSEMOVE, this.handleDrag)
-					.on(MOUSEUP, this.handleDragEnd)
+				select(win).on(MOUSEMOVE, this.handleDrag).on(MOUSEUP, this.handleDragEnd)
 			}
 
 			if (onMouseDown !== undefined) {
@@ -581,13 +532,7 @@ export class EventCapture extends React.Component<
 				delete this.dx
 				delete this.dy
 				if (this.lastNewPos !== undefined) {
-					onPanEnd(
-						this.lastNewPos,
-						panStartXScale,
-						{ dx, dy },
-						chartsToPan,
-						e
-					)
+					onPanEnd(this.lastNewPos, panStartXScale, { dx, dy }, chartsToPan, e)
 				}
 			}
 
@@ -611,13 +556,7 @@ export class EventCapture extends React.Component<
 
 	public handleTouchStart = (e: React.TouchEvent) => {
 		this.mouseInteraction = false
-		const {
-			pan: panEnabled,
-			chartConfig,
-			onMouseMove,
-			xScale,
-			onPanEnd
-		} = this.props
+		const { pan: panEnabled, chartConfig, onMouseMove, xScale, onPanEnd } = this.props
 
 		if (e.touches.length === 1) {
 			this.panHappened = false
@@ -639,21 +578,14 @@ export class EventCapture extends React.Component<
 				})
 
 				const win = d3Window(this.ref.current)
-				select(win)
-					.on(TOUCHMOVE, this.handlePan, false)
-					.on(TOUCHEND, this.handlePanEnd, false)
+				select(win).on(TOUCHMOVE, this.handlePan, false).on(TOUCHEND, this.handlePanEnd, false)
 			}
 		} else if (e.touches.length === 2) {
 			// pinch zoom begin
 			// do nothing pinch zoom is handled in handleTouchMove
 			const { panInProgress, panStart } = this.state
 
-			if (
-				panInProgress &&
-				panEnabled &&
-				onPanEnd &&
-				panStart !== undefined
-			) {
+			if (panInProgress && panEnabled && onPanEnd && panStart !== undefined) {
 				const {
 					panStartXScale,
 					panOrigin: [dx, dy],
@@ -671,19 +603,8 @@ export class EventCapture extends React.Component<
 				const touch1Pos = touchPosition(getTouchProps(e.touches[0]), e)
 				const touch2Pos = touchPosition(getTouchProps(e.touches[1]), e)
 
-				if (
-					this.panHappened &&
-					panEnabled &&
-					onPanEnd &&
-					this.lastNewPos !== undefined
-				) {
-					onPanEnd(
-						this.lastNewPos,
-						panStartXScale,
-						{ dx, dy },
-						chartsToPan,
-						e
-					)
+				if (this.panHappened && panEnabled && onPanEnd && this.lastNewPos !== undefined) {
+					onPanEnd(this.lastNewPos, panStartXScale, { dx, dy }, chartsToPan, e)
 				}
 
 				this.setState({
@@ -756,8 +677,7 @@ export class EventCapture extends React.Component<
 	}
 
 	public render() {
-		const { height, width, disableInteraction, useCrossHairStyleCursor } =
-			this.props
+		const { height, width, disableInteraction, useCrossHairStyleCursor } = this.props
 
 		const className = disableInteraction
 			? undefined

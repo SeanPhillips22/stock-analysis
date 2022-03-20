@@ -48,11 +48,7 @@ export const ActionsDelistedYear = ({ year, data }: ActionProps) => {
 					type="delisted"
 					year={year}
 				/>
-				<ActionsPaywall
-					count={data.data.length}
-					fullCount={data.fullCount}
-					title="Delistings"
-				/>
+				<ActionsPaywall count={data.data.length} fullCount={data.fullCount} title="Delistings" />
 			</ActionsLayout>
 		</>
 	)

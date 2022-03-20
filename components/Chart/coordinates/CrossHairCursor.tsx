@@ -1,19 +1,12 @@
 /* eslint-disable no-invalid-this */
 import * as PropTypes from 'prop-types'
 import * as React from 'react'
-import {
-	getStrokeDasharrayCanvas,
-	strokeDashTypes,
-	GenericComponent,
-	getMouseCanvas
-} from '../core'
+import { getStrokeDasharrayCanvas, strokeDashTypes, GenericComponent, getMouseCanvas } from '../core'
 
 const defaultCustomX = (props: CrossHairCursorProps, moreProps: any) => {
 	const { xScale, xAccessor, currentItem, mouseXY } = moreProps
 	const { snapX } = props
-	const x = snapX
-		? Math.round(xScale(xAccessor(currentItem)))
-		: mouseXY[0] + 0.5
+	const x = snapX ? Math.round(xScale(xAccessor(currentItem))) : mouseXY[0] + 0.5
 	return x
 }
 
@@ -50,10 +43,7 @@ export class CrossHairCursor extends React.Component<CrossHairCursorProps> {
 		)
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
 		const lines = this.getLines(this.props, moreProps)
 		if (lines === undefined) {
 			return
@@ -84,10 +74,7 @@ export class CrossHairCursor extends React.Component<CrossHairCursorProps> {
 		ctx.restore()
 	}
 
-	private readonly getLines = (
-		props: CrossHairCursorProps,
-		moreProps: any
-	) => {
+	private readonly getLines = (props: CrossHairCursorProps, moreProps: any) => {
 		const { mouseXY, currentItem, show, height, width } = moreProps
 
 		const {

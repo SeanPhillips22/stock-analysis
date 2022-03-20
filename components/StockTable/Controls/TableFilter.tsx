@@ -6,8 +6,7 @@ type Props = {
 }
 
 export function TableFilter({ filter }: Props) {
-	const { useAsyncDebounce, setGlobalFilter, setFilterState, globalFilter } =
-		filter
+	const { useAsyncDebounce, setGlobalFilter, setFilterState, globalFilter } = filter
 
 	if (useAsyncDebounce && setGlobalFilter) {
 		return (

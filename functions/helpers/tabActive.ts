@@ -4,11 +4,7 @@
  * @param tabName string or number
  * @returns
  */
-export function tabActive(
-	current: string | number,
-	tabName: string | number,
-	lvl?: number
-): 'active' | 'inactive' {
+export function tabActive(current: string | number, tabName: string | number, lvl?: number): 'active' | 'inactive' {
 	// If the tab is a parent of a submenu, then match its level in the hierary
 	// in order to determine if it is active or not
 	// For example, if /markets/premarket/ has children, then it should always be active

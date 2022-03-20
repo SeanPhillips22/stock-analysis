@@ -1,10 +1,9 @@
 import { useModifyFilters } from '../../functions/useModifyFilters'
 import { useModifyColumns } from '../../functions/useModifyColumns'
-import { screenerState } from '../../screener.state'
 import { useSavedScreens } from './useSavedScreens'
 import { ScreenerTypes } from 'components/Screener/screener.types'
 import { XIcon } from 'components/Icons/XIcon'
-import { getDataPoints } from 'components/Screener/maps/dataPoints'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	name: string
@@ -12,30 +11,23 @@ type Props = {
 }
 
 export function SavedItem({ name, type }: Props) {
-	const setFilterMenu = screenerState(state => state.setFilterMenu)
+	const { endpoint, dispatch, dataPoints } = useScreenerContext()
 	const { data, del } = useSavedScreens(type)
 	const { add, clear } = useModifyFilters()
-	const { fetchColumn } = useModifyColumns()
+	const { fetchColumn } = useModifyColumns(endpoint)
 
 	function renderPresetFilters(value: string) {
-		const DataPoints = getDataPoints(type)
 		clear()
-		setFilterMenu('Active')
+		dispatch({ type: 'SET_FILTERS_MENU', value: 'Active' })
 
 		let screens = data.screeners[type]
 		Object.keys(screens).forEach(key => {
 			if (screens[key].name === value) {
 				screens[key].filters.map((filter: any) => {
-					let dp = DataPoints.find(item => item.id === filter.id)
+					let dp = dataPoints.find(item => item.id === filter.id)
 					if (dp) {
-						add(
-							filter.id,
-							dp.name,
-							filter.value,
-							dp.filterType,
-							dp.numberType
-						)
-						fetchColumn(filter.id, type)
+						add(filter.id, dp.name, filter.value, dp.filterType, dp.numberType)
+						fetchColumn(filter.id)
 					}
 				})
 			}

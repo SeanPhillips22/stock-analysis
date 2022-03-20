@@ -1,6 +1,23 @@
 import { DataId } from 'types/DataId'
 export type ScreenerTypes = 'stocks' | 'ipo' | 'etf' | ''
 
+// Dynamic State
+export type ScreenerState = {
+	resultsMenu: ColumnName
+	filtersMenu: string
+	filtersShowing: boolean
+	activePreset: string
+	columns: {
+		all: ColumnsMap
+		filtered: DataId[]
+		default: DataId[]
+	}
+	filters: FilterValue[]
+}
+
+export type ScreenerIDs = 'stocks-screener' | 'ipo-screener' | 'etf-screener'
+export type ScreenerEndpoints = 'screener' | 'iposcreener' | 'etfscreener'
+
 // Results columns
 export type ColumnName =
 	| 'Filtered'
@@ -32,27 +49,6 @@ export type SingleETF = {
 }
 
 export type SingleDataPoint = string[]
-
-export type ScreenerData = {
-	stocks: {
-		count: number
-		data: SingleStock[]
-	}
-}
-
-export type IPOScreenerData = {
-	ipos: {
-		count: number
-		data: SingleIPO[]
-	}
-}
-
-export type ETFScreenerData = {
-	etfs: {
-		count: number
-		data: SingleETF[]
-	}
-}
 
 export type FilterProps = {
 	name: string
@@ -108,22 +104,10 @@ export type FilterObject = {
 	second: string
 }
 
-export type FilterType =
-	| 'numeric'
-	| 'stringmatch'
-	| 'date'
-	| 'dateYear'
-	| 'numericRange'
-	| 'isSpac'
-	| 'none'
+export type FilterType = 'numeric' | 'stringmatch' | 'date' | 'dateYear' | 'numericRange' | 'isSpac' | 'none'
 
 export type NumberType = 'percentage'
-export type ComparisonOption =
-	| 'over'
-	| 'under'
-	| 'between'
-	| 'exactly'
-	| 'notzero'
+export type ComparisonOption = 'over' | 'under' | 'between' | 'exactly' | 'notzero'
 
 export type SortObject = {
 	id: DataId | 'm' | 'a'

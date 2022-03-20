@@ -59,14 +59,7 @@ export default function IposWithdrawn(props: Props) {
 											columns: true
 										},
 										columnOptions: FutureIpoDataPoints,
-										columnOrder: [
-											'withdrawnDateFB',
-											's',
-											'n',
-											'exchange',
-											'ipoPriceRange',
-											'sharesOffered'
-										]
+										columnOrder: ['withdrawnDateFB', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered']
 									},
 									dynamic: query
 								}}

@@ -2,13 +2,7 @@
 import React, { useEffect, useRef, useCallback, useState } from 'react'
 import { Chart, defaults } from 'chart.js'
 
-import type {
-	ChartOptions,
-	ChartData,
-	ChartType,
-	Plugin,
-	UpdateMode
-} from 'chart.js'
+import type { ChartOptions, ChartData, ChartType, Plugin, UpdateMode } from 'chart.js'
 
 const noop = () => {
 	/* Do Nothing */
@@ -26,16 +20,7 @@ export interface ReactChartProps {
 	defaultsFont?: string
 }
 
-export const ReactChart = ({
-	id,
-	data,
-	options,
-	type,
-	plugins,
-	updateMode,
-	height,
-	width
-}: ReactChartProps) => {
+export const ReactChart = ({ id, data, options, type, plugins, updateMode, height, width }: ReactChartProps) => {
 	const chartInstance = useRef<Chart>({
 		update: noop,
 		destroy: noop

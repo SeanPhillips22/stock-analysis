@@ -65,20 +65,14 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 							<tr key={index}>
 								{headerGroup.headers.map((column, index) => (
 									<th key={index}>
-										{column.render('Header') ===
-										'Ex-Dividend Date' ? (
+										{column.render('Header') === 'Ex-Dividend Date' ? (
 											<div>
 												Ex-Div
-												<span className="hidden sm:inline">
-													idend
-												</span>{' '}
-												Date
+												<span className="hidden sm:inline">idend</span> Date
 											</div>
 										) : column.render('Header') === 'Cash Amount' ? (
 											<>
-												<span className="hidden sm:inline">
-													Cash{' '}
-												</span>
+												<span className="hidden sm:inline">Cash </span>
 												Amount
 											</>
 										) : (
@@ -104,8 +98,7 @@ export const HistoryTable = ({ rawdata, disclaimer }: Props) => {
 				</table>
 				{disclaimer && (
 					<div className="mt-1 text-sm text-gray-600">
-						* Dividend amounts are adjusted for stock splits when
-						applicable.
+						* Dividend amounts are adjusted for stock splits when applicable.
 					</div>
 				)}
 			</div>

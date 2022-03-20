@@ -32,12 +32,7 @@ export function StockTableControls({ filter }: Props) {
 			</div>
 
 			{/* Button group */}
-			<div
-				className={cn(
-					'btn-group',
-					dynamic.showOnMobile ? 'block' : 'hidem'
-				)}
-			>
+			<div className={cn('btn-group', dynamic.showOnMobile ? 'block' : 'hidem')}>
 				{/* MoverType Select */}
 				{fixed.controls?.moverType && <TableMoverType />}
 				{/* Time Range */}

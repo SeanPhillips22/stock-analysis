@@ -3,8 +3,7 @@ export const MAP_STATISTICS = [
 		id: 'marketcap',
 		title: 'Market Capitalization',
 		format: 'reduce_precision',
-		tooltip:
-			"Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
+		tooltip: "Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
 		formula: 'Market Cap = Shares Outstanding * Stock Price',
 		bold: true
 	},
@@ -14,8 +13,7 @@ export const MAP_STATISTICS = [
 		format: 'reduce_precision',
 		tooltip:
 			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and levels of cash and short-term investments.",
-		formula:
-			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents - Short-Term Investments'
+		formula: 'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents - Short-Term Investments'
 	},
 	{
 		id: 'earningsdate',
@@ -28,8 +26,7 @@ export const MAP_STATISTICS = [
 		id: 'exdivdate',
 		title: 'Ex-Dividend Date',
 		format: 'none',
-		tooltip:
-			'Only shareholders that buy the stock before the ex-dividend date will receive the dividend payment.'
+		tooltip: 'Only shareholders that buy the stock before the ex-dividend date will receive the dividend payment.'
 	},
 	{
 		id: 'sharesout',
@@ -61,8 +58,7 @@ export const MAP_STATISTICS = [
 	{
 		id: 'sharesInstitutions',
 		title: 'Owned by Institutions (%)',
-		tooltip:
-			'The percentage of shares outstanding held by institutions, such as fund companies, pensions and others.'
+		tooltip: 'The percentage of shares outstanding held by institutions, such as fund companies, pensions and others.'
 	},
 	{
 		id: 'float',
@@ -174,8 +170,7 @@ export const MAP_STATISTICS = [
 		title: 'Quick Ratio',
 		tooltip:
 			"The quick ratio measure a company's short-term liquidity. A low number indicates that the company may have trouble paying its upcoming financial obligations.",
-		formula:
-			'Quick Ratio = (Cash + Short-Term Investments + Accounts Receivable) / Current Liabilities'
+		formula: 'Quick Ratio = (Cash + Short-Term Investments + Accounts Receivable) / Current Liabilities'
 	},
 	{
 		id: 'debtequity',
@@ -229,8 +224,7 @@ export const MAP_STATISTICS = [
 	{
 		id: 'revenueperemployee',
 		title: 'Revenue Per Employee',
-		tooltip:
-			'The amount of revenue that the company generates per each employee.',
+		tooltip: 'The amount of revenue that the company generates per each employee.',
 		formula: 'Revenue Per Employee = Total Revenue / Employee Count'
 	},
 	{
@@ -242,8 +236,7 @@ export const MAP_STATISTICS = [
 	{
 		id: 'employees',
 		title: 'Employees',
-		tooltip:
-			"The company's number of employees as of the latest quarterly report."
+		tooltip: "The company's number of employees as of the latest quarterly report."
 	},
 	{
 		id: 'assetturnover',
@@ -271,8 +264,7 @@ export const MAP_STATISTICS = [
 		id: 'taxrate',
 		title: 'Effective Tax Rate',
 		format: 'percentage',
-		tooltip:
-			'The effective tax rate is the percentage of taxable income paid in corporate income tax.',
+		tooltip: 'The effective tax rate is the percentage of taxable income paid in corporate income tax.',
 		formula: 'Effective Tax Rate = (Income Tax / Pretax Income) * 100%',
 		border: true
 	},
@@ -285,14 +277,12 @@ export const MAP_STATISTICS = [
 	{
 		id: 'price1yipo',
 		title: 'Total Price Change',
-		tooltip:
-			'The percentage change in the stock price since the company started trading.'
+		tooltip: 'The percentage change in the stock price since the company started trading.'
 	},
 	{
 		id: 'price1y',
 		title: '52-Week Price Change',
-		tooltip:
-			'The percentage change in the stock price compared to 1 year ago.'
+		tooltip: 'The percentage change in the stock price compared to 1 year ago.'
 	},
 	{
 		id: 'sma50',
@@ -307,26 +297,22 @@ export const MAP_STATISTICS = [
 	{
 		id: 'volumeavg',
 		title: 'Average Volume (30 Days)',
-		tooltip:
-			'The 30-day average of the number of shares traded in a single day.'
+		tooltip: 'The 30-day average of the number of shares traded in a single day.'
 	},
 	{
 		id: 'shortshares',
 		title: 'Short Interest',
-		tooltip:
-			"The total number of the company's shares that have been sold short."
+		tooltip: "The total number of the company's shares that have been sold short."
 	},
 	{
 		id: 'shortsharesout',
 		title: 'Short % of Shares Out',
-		tooltip:
-			'The percentage of the shares outstanding that have been sold short.'
+		tooltip: 'The percentage of the shares outstanding that have been sold short.'
 	},
 	{
 		id: 'shortfloat',
 		title: 'Short % of Float',
-		tooltip:
-			"The percentage of the stock's public float that has been sold short."
+		tooltip: "The percentage of the stock's public float that has been sold short."
 	},
 	{
 		id: 'shortratio',
@@ -355,16 +341,14 @@ export const MAP_STATISTICS = [
 		title: 'Operating Income',
 		tooltip:
 			'Operating income is the amount of profit in a company after paying for all the expenses related to its core operations.',
-		formula:
-			'Operating Income = Revenue - Cost of Revenue - Operating Expenses',
+		formula: 'Operating Income = Revenue - Cost of Revenue - Operating Expenses',
 		border: true,
 		bold: true
 	},
 	{
 		id: 'pretax',
 		title: 'Pretax Income',
-		tooltip:
-			"Pretax income is a company's profits before accounting for income taxes.",
+		tooltip: "Pretax income is a company's profits before accounting for income taxes.",
 		formula: 'Pretax Income = Net Income + Income Taxes',
 		bold: true
 	},
@@ -388,8 +372,7 @@ export const MAP_STATISTICS = [
 		title: 'EBITDA',
 		tooltip:
 			'EBITDA stands for "Earnings Before Interest, Taxes, Depreciation and Amortization." It is a commonly used measure of profitability.',
-		formula:
-			'EBITDA = Net Income + Interest + Taxes + Depreciation and Amortization'
+		formula: 'EBITDA = Net Income + Interest + Taxes + Depreciation and Amortization'
 	},
 	{
 		id: 'ebit',
@@ -412,8 +395,7 @@ export const MAP_STATISTICS = [
 		title: 'Cash & Cash Equivalents',
 		tooltip:
 			'Cash and cash equivalents is the sum of "Cash & Equivalents" and "Short-Term Investments." This is the amount of money that a company has quick access to, assuming that the cash equivalents and short-term investments can be sold at a short notice.',
-		formula:
-			'Cash & Cash Equivalents = Cash & Equivalents + Short-Term Investments',
+		formula: 'Cash & Cash Equivalents = Cash & Equivalents + Short-Term Investments',
 		bold: true
 	},
 	{
@@ -435,8 +417,7 @@ export const MAP_STATISTICS = [
 		id: 'netcashpershare',
 		title: 'Net Cash Per Share',
 		format: 'pershare',
-		tooltip:
-			'Net cash per share shows how much net cash is owned by each outstanding stock.',
+		tooltip: 'Net cash per share shows how much net cash is owned by each outstanding stock.',
 		formula: 'Net Cash Per Share = (Net Cash / Debt) / Shares Outstanding'
 	},
 	{
@@ -488,8 +469,7 @@ export const MAP_STATISTICS = [
 		id: 'fcfps',
 		title: 'Free Cash Flow Per Share',
 		format: 'pershare',
-		tooltip:
-			'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
+		tooltip: 'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
 		formula: 'FCF Per Share = Free Cash Flow / Shares Outstanding'
 	},
 	{
@@ -513,8 +493,7 @@ export const MAP_STATISTICS = [
 	{
 		id: 'pretaxmargin',
 		title: 'Pretax Margin',
-		tooltip:
-			'Pretax margin is the percentage of revenue left as profits before subtracting taxes.',
+		tooltip: 'Pretax margin is the percentage of revenue left as profits before subtracting taxes.',
 		formula: 'Pretax Margin = (Pretax Income / Revenue) * 100%'
 	},
 	{
@@ -560,8 +539,7 @@ export const MAP_STATISTICS = [
 		id: 'dps',
 		title: 'Dividend Per Share',
 		format: 'pershare',
-		tooltip:
-			'Total amount paid to each outstanding share in dividends during the period.',
+		tooltip: 'Total amount paid to each outstanding share in dividends during the period.',
 		bold: true
 	},
 	{
@@ -570,8 +548,7 @@ export const MAP_STATISTICS = [
 		format: 'percentage',
 		tooltip:
 			'The dividend yield is how much a stock pays in dividends each year, as a percentage of the stock price.',
-		formula:
-			'Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%'
+		formula: 'Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%'
 	},
 	{
 		id: 'earningsyield',
@@ -594,10 +571,8 @@ export const MAP_STATISTICS = [
 		data: 'dps',
 		title: 'Dividend Growth',
 		format: 'growth',
-		tooltip:
-			'The change in dividend payments per share, compared to the previous period.',
-		formula:
-			'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%'
+		tooltip: 'The change in dividend payments per share, compared to the previous period.',
+		formula: 'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%'
 	},
 	{
 		id: 'payoutratio',
@@ -605,8 +580,7 @@ export const MAP_STATISTICS = [
 		format: 'percentage',
 		tooltip:
 			"The payout ratio is the percentage of a company's profits that are paid out as dividends. A high ratio implies that the dividend payments may not be sustainable.",
-		formula:
-			'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
+		formula: 'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
 	},
 	{
 		id: 'buybackYield',
@@ -614,8 +588,7 @@ export const MAP_STATISTICS = [
 		format: 'percentage',
 		tooltip:
 			'The buyback yield measures how much cash the company is returning to investors via share buybacks. A positive number indicates that the company is buying back shares. A negative number implies that the company is issuing shares and causing ownership dilution for shareholders.',
-		formula:
-			'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%'
+		formula: 'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%'
 	},
 	{
 		id: 'shareholderYield',
@@ -645,14 +618,12 @@ export const MAP_STATISTICS = [
 	{
 		id: 'priceTarget',
 		title: 'Price Target',
-		tooltip:
-			'The average 12-month price target forecast predicted by stock analysts.'
+		tooltip: 'The average 12-month price target forecast predicted by stock analysts.'
 	},
 	{
 		id: 'priceTargetChange',
 		title: 'Price Target Difference',
-		tooltip:
-			'The difference between the price target forecast and the current price, expressed as a percentage.'
+		tooltip: 'The difference between the price target forecast and the current price, expressed as a percentage.'
 	},
 	{
 		id: 'analystRatings',
@@ -662,7 +633,6 @@ export const MAP_STATISTICS = [
 	{
 		id: 'analystCount',
 		title: 'Analyst Count',
-		tooltip:
-			'The number of analysts that have provided price targets and ratings for this stock.'
+		tooltip: 'The number of analysts that have provided price targets and ratings for this stock.'
 	}
 ]

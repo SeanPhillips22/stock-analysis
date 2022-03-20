@@ -23,12 +23,8 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 			<table className="w-full border border-gray-200 text-sm sm:text-base">
 				<thead>
 					<tr className="border-b border-t border-gray-200">
-						<th className="border-r border-gray-200 py-1.5 px-2 text-left">
-							Date
-						</th>
-						<th className="border-r border-gray-200 py-1.5 px-2 text-left">
-							Symbol
-						</th>
+						<th className="border-r border-gray-200 py-1.5 px-2 text-left">Date</th>
+						<th className="border-r border-gray-200 py-1.5 px-2 text-left">Symbol</th>
 						<th className="py-1.5 px-2 text-left">Name</th>
 					</tr>
 				</thead>
@@ -36,13 +32,8 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 					{ipos.map((item, index) => {
 						if (item.symbol) {
 							return (
-								<tr
-									key={index}
-									className="border-b border-gray-200 hover:bg-gray-50"
-								>
-									<td className="whitespace-nowrap border-r border-gray-200 py-1.5 px-2">
-										{item.date}
-									</td>
+								<tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
+									<td className="whitespace-nowrap border-r border-gray-200 py-1.5 px-2">{item.date}</td>
 									<td className="border-r border-gray-200 py-1.5 px-2">
 										<StockLink symbol={item.symbol} className="bll" />
 									</td>
@@ -65,11 +56,7 @@ export const IPOwidgets = ({ recent, upcoming }: Props) => {
 					<IPOTable ipos={recent} />
 				</section>
 				<section className="px-3 xs:px-4 sm:px-5 lg:px-0">
-					<HeadingLink
-						url="/ipos/calendar/"
-						title="Upcoming IPOs"
-						classes="mb-1"
-					/>
+					<HeadingLink url="/ipos/calendar/" title="Upcoming IPOs" classes="mb-1" />
 					{upcoming.length ? (
 						<IPOTable ipos={upcoming} />
 					) : (

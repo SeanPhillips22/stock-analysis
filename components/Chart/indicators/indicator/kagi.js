@@ -8,13 +8,7 @@ export default function Kagi() {
 	const underlyingAlgorithm = kagi()
 	const indicator = underlyingAlgorithm
 	rebind(indicator, base, 'id', 'stroke', 'fill', 'echo', 'type')
-	rebind(
-		indicator,
-		underlyingAlgorithm,
-		'dateAccessor',
-		'dateMutator',
-		'options'
-	)
+	rebind(indicator, underlyingAlgorithm, 'dateAccessor', 'dateMutator', 'options')
 	return indicator
 }
 // # sourceMappingURL=kagi.js.map

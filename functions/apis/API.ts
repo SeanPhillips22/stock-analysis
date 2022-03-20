@@ -4,10 +4,7 @@
  */
 
 export async function getData(params: string, controller?: AbortSignal) {
-	const url =
-		process.env.NEXT_PUBLIC_API_URL ||
-		process.env.API_URL ||
-		'https://api.stockanalysis.com/wp-json/sa'
+	const url = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || 'https://api.stockanalysis.com/wp-json/sa'
 
 	const response =
 		typeof controller === 'undefined'
@@ -21,7 +18,5 @@ export async function getData(params: string, controller?: AbortSignal) {
 		return await response.json()
 	}
 
-	throw new Error(
-		`API/getData not ok: ${response.status} ${response.statusText}`
-	)
+	throw new Error(`API/getData not ok: ${response.status} ${response.statusText}`)
 }

@@ -28,20 +28,11 @@ export interface AxisZoomCaptureProps {
 	readonly className?: string
 	readonly getMoreProps: () => any
 	readonly getScale: (moreProps: any) => ScaleContinuousNumeric<number, number>
-	readonly getMouseDelta: (
-		startXY: [number, number],
-		mouseXY: [number, number]
-	) => number
+	readonly getMouseDelta: (startXY: [number, number], mouseXY: [number, number]) => number
 	readonly innerTickSize?: number
 	readonly inverted?: boolean
-	readonly onDoubleClick?: (
-		e: React.MouseEvent,
-		mousePosition: [number, number]
-	) => void
-	readonly onContextMenu?: (
-		e: React.MouseEvent,
-		mousePosition: [number, number]
-	) => void
+	readonly onDoubleClick?: (e: React.MouseEvent, mousePosition: [number, number]) => void
+	readonly onContextMenu?: (e: React.MouseEvent, mousePosition: [number, number]) => void
 	readonly outerTickSize?: number
 	readonly showDomain?: boolean
 	readonly showTicks?: boolean
@@ -60,10 +51,7 @@ interface AxisZoomCaptureState {
 	} | null
 }
 
-export class AxisZoomCapture extends React.Component<
-	AxisZoomCaptureProps,
-	AxisZoomCaptureState
-> {
+export class AxisZoomCapture extends React.Component<AxisZoomCaptureProps, AxisZoomCaptureState> {
 	private readonly ref = React.createRef<SVGRectElement>()
 	private clicked = false
 	private dragHappened = false
@@ -79,10 +67,7 @@ export class AxisZoomCapture extends React.Component<
 	public render() {
 		const { bg, className, zoomCursorClassName } = this.props
 
-		const cursor =
-			this.state.startPosition !== null
-				? zoomCursorClassName
-				: 'react-financial-charts-default-cursor'
+		const cursor = this.state.startPosition !== null ? zoomCursorClassName : 'react-financial-charts-default-cursor'
 
 		return (
 			<rect
@@ -121,11 +106,7 @@ export class AxisZoomCapture extends React.Component<
 			}
 		}
 
-		select(d3Window(container))
-			.on(MOUSEMOVE, null)
-			.on(MOUSEUP, null)
-			.on(TOUCHMOVE, null)
-			.on(TOUCHEND, null)
+		select(d3Window(container)).on(MOUSEMOVE, null).on(MOUSEUP, null).on(TOUCHMOVE, null).on(TOUCHEND, null)
 
 		this.setState({
 			startPosition: null
@@ -157,18 +138,11 @@ export class AxisZoomCapture extends React.Component<
 
 			const tempRange = startScale
 				.range()
-				.map(d =>
-					inverted
-						? d - sign(d - center) * diff
-						: d + sign(d - center) * diff
-				)
+				.map(d => (inverted ? d - sign(d - center) * diff : d + sign(d - center) * diff))
 
 			const newDomain = tempRange.map(startScale.invert)
 
-			if (
-				sign(last(startScale.range()) - first(startScale.range())) ===
-				sign(last(tempRange) - first(tempRange))
-			) {
+			if (sign(last(startScale.range()) - first(startScale.range())) === sign(last(tempRange) - first(tempRange))) {
 				const { axisZoomCallback } = this.props
 				if (axisZoomCallback !== undefined) {
 					axisZoomCallback(newDomain)
@@ -177,9 +151,7 @@ export class AxisZoomCapture extends React.Component<
 		}
 	}
 
-	private readonly handleDragStartTouch = (
-		event: React.TouchEvent<SVGRectElement>
-	) => {
+	private readonly handleDragStartTouch = (event: React.TouchEvent<SVGRectElement>) => {
 		const container = this.ref.current
 		if (container === null) {
 			return
@@ -192,9 +164,7 @@ export class AxisZoomCapture extends React.Component<
 		const startScale = getScale(allProps)
 
 		if (event.touches.length === 1 && startScale.invert !== undefined) {
-			select(d3Window(container))
-				.on(TOUCHMOVE, this.handleDrag)
-				.on(TOUCHEND, this.handleDragEnd)
+			select(d3Window(container)).on(TOUCHMOVE, this.handleDrag).on(TOUCHEND, this.handleDragEnd)
 
 			const startXY = touchPosition(getTouchProps(event.touches[0]), event)
 
@@ -207,9 +177,7 @@ export class AxisZoomCapture extends React.Component<
 		}
 	}
 
-	private readonly handleDragStartMouse = (
-		event: React.MouseEvent<SVGRectElement, MouseEvent>
-	) => {
+	private readonly handleDragStartMouse = (event: React.MouseEvent<SVGRectElement, MouseEvent>) => {
 		event.preventDefault()
 
 		const container = this.ref.current
@@ -224,9 +192,7 @@ export class AxisZoomCapture extends React.Component<
 		const startScale = getScale(allProps)
 
 		if (startScale.invert !== undefined) {
-			select(d3Window(container))
-				.on(MOUSEMOVE, this.handleDrag, false)
-				.on(MOUSEUP, this.handleDragEnd, false)
+			select(d3Window(container)).on(MOUSEMOVE, this.handleDrag, false).on(MOUSEUP, this.handleDragEnd, false)
 
 			const startXY = mousePosition(event)
 
@@ -239,9 +205,7 @@ export class AxisZoomCapture extends React.Component<
 		}
 	}
 
-	private readonly handleRightClick = (
-		event: React.MouseEvent<SVGRectElement, MouseEvent>
-	) => {
+	private readonly handleRightClick = (event: React.MouseEvent<SVGRectElement, MouseEvent>) => {
 		event.stopPropagation()
 		event.preventDefault()
 

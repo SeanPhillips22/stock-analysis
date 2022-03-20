@@ -23,15 +23,15 @@
 
 	/* Regular hours quote */
 	.quote .p {
-		@apply text-4xl font-bold inline-block;
+		@apply inline-block text-4xl font-bold;
 	}
 
 	.quote .pc {
-		@apply text-2xl font-semibold inline-block;
+		@apply inline-block text-2xl font-semibold;
 	}
 
 	.quote .u {
-		@apply text-sm text-gray-700 flex items-center mt-1;
+		@apply mt-1 flex items-center text-sm text-gray-700;
 	}
 
 	/* EXTENDED */
@@ -45,15 +45,15 @@
 	}
 
 	.quote .p-ext {
-		@apply block sm:inline text-[1.7rem] leading-5 font-semibold text-gray-700;
+		@apply block text-[1.7rem] font-semibold leading-5 text-gray-700 sm:inline;
 	}
 
 	.quote .pc-ext {
-		@apply block sm:inline text-sm xs:text-base sm:text-lg mt-1.5 sm:mt-0;
+		@apply mt-1.5 block text-sm xs:text-base sm:mt-0 sm:inline sm:text-lg;
 	}
 
 	.quote.ext .und {
-		@apply mt-1 text-gray-700 sm:flex text-xxs xs:text-tiny;
+		@apply mt-1 text-xxs text-gray-700 xs:text-tiny sm:flex;
 	}
 
 	.quote.ext .sp1 {
@@ -76,14 +76,14 @@
 	}
 
 	.quote.er .pc {
-		@apply block sm:inline sm:ml-1 text-lg xs:text-xl sm:text-2xl font-semibold;
+		@apply block text-lg font-semibold xs:text-xl sm:ml-1 sm:inline sm:text-2xl;
 	}
 
 	.quote.er .und {
-		@apply text-xxs xs:text-tiny bp:text-sm text-gray-700 mt-0.5;
+		@apply mt-0.5 text-xxs text-gray-700 xs:text-tiny bp:text-sm;
 	}
 
 	.quote.er .und span {
-		@apply block sm:inline font-semibold;
+		@apply block font-semibold sm:inline;
 	}
 }

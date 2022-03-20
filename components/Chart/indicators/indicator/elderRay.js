@@ -16,9 +16,7 @@ export default function ElderRay() {
 	const indicator = (data, options = { merge: true }) => {
 		if (options.merge) {
 			if (!base.accessor()) {
-				throw new Error(
-					`Set an accessor to ${ALGORITHM_TYPE} before calculating`
-				)
+				throw new Error(`Set an accessor to ${ALGORITHM_TYPE} before calculating`)
 			}
 			return mergedAlgorithm(data)
 		}

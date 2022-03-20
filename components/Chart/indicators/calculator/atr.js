@@ -19,11 +19,7 @@ export default function Atr() {
 			.accumulator(values => {
 				const prev = values[0]
 				const d = values[1]
-				return Math.max(
-					d.high - d.low,
-					d.high - prev.close,
-					d.low - prev.close
-				)
+				return Math.max(d.high - d.low, d.high - prev.close, d.low - prev.close)
 			})
 		let prevATR
 		const atrAlgorithm = slidingWindow()
@@ -32,9 +28,7 @@ export default function Atr() {
 			.accumulator(values => {
 				const tr = values[values.length - 1]
 				const atr =
-					prevATR !== undefined
-						? (prevATR * (windowSize - 1) + tr) / windowSize
-						: sum(values) / windowSize
+					prevATR !== undefined ? (prevATR * (windowSize - 1) + tr) / windowSize : sum(values) / windowSize
 				prevATR = atr
 				return atr
 			})

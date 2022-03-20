@@ -21,14 +21,7 @@ type Props = {
 
 export function Export({ buttons, data, time }: Props) {
 	const { isPro } = useAuthState()
-	const [expData, setExpData] = useState<any[]>([
-		'Date',
-		'Open',
-		'Close',
-		'High',
-		'Low',
-		'Volume'
-	])
+	const [expData, setExpData] = useState<any[]>(['Date', 'Open', 'Close', 'High', 'Low', 'Volume'])
 
 	useEffect(() => {
 		const result: any[] = []
@@ -36,16 +29,7 @@ export function Export({ buttons, data, time }: Props) {
 			if (time == '1D' || time == '5D') {
 				result.push(['Date', 'Open', 'Close', 'High', 'Low', 'Volume'])
 			} else {
-				result.push([
-					'Date',
-					'Open',
-					'Close',
-					'High',
-					'Low',
-					'Volume',
-					'MA1',
-					'MA2'
-				])
+				result.push(['Date', 'Open', 'Close', 'High', 'Low', 'Volume', 'MA1', 'MA2'])
 			}
 
 			for (let i = 0; i < data.length; i++) {
@@ -62,14 +46,7 @@ export function Export({ buttons, data, time }: Props) {
 						data[i].date.getHours() +
 						':' +
 						data[i].date.getMinutes()
-					arr = [
-						dateString,
-						data[i].open,
-						data[i].close,
-						data[i].high,
-						data[i].low,
-						data[i].volume
-					]
+					arr = [dateString, data[i].open, data[i].close, data[i].high, data[i].low, data[i].volume]
 				} else {
 					arr = [
 						data[i].date,
@@ -101,12 +78,7 @@ export function Export({ buttons, data, time }: Props) {
 						stroke="currentColor"
 						style={{ maxWidth: '40px' }}
 					>
-						<path
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							strokeWidth="1.5"
-							d="M6 8l4 4 4-4"
-						/>
+						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 8l4 4 4-4" />
 					</svg>
 				</Menu.Button>
 			</div>
@@ -125,18 +97,9 @@ export function Export({ buttons, data, time }: Props) {
 						{buttons &&
 							buttons.map((button, index) =>
 								button.restricted && !isPro ? (
-									<ExportItemRestricted
-										key={index}
-										title={button.title}
-										type={button.type}
-									/>
+									<ExportItemRestricted key={index} title={button.title} type={button.type} />
 								) : (
-									<ExportItem
-										key={index}
-										title={button.title}
-										type={button.type}
-										data={expData}
-									/>
+									<ExportItem key={index} title={button.title} type={button.type} data={expData} />
 								)
 							)}
 					</div>

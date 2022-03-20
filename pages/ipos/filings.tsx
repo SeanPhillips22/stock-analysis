@@ -60,14 +60,7 @@ export default function IpoFilings(props: Props) {
 											columns: true
 										},
 										columnOptions: FutureIpoDataPoints,
-										columnOrder: [
-											'filingDateFB',
-											's',
-											'n',
-											'exchange',
-											'ipoPriceRange',
-											'sharesOffered'
-										]
+										columnOrder: ['filingDateFB', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered']
 									},
 									dynamic: query
 								}}

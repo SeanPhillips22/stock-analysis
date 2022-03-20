@@ -35,10 +35,7 @@ export default function IpoYear(props: Props) {
 	const { year } = props
 	const url = `/ipos/${year}/`
 
-	const title =
-		year === '2022'
-			? 'All 2022 IPOs (so far)'
-			: `All ${year} IPOs - A Complete List`
+	const title = year === '2022' ? 'All 2022 IPOs (so far)' : `All ${year} IPOs - A Complete List`
 
 	const description =
 		year === '2022'
@@ -70,14 +67,7 @@ export default function IpoYear(props: Props) {
 											columns: true
 										},
 										columnOptions: RecentIpoDataPoints,
-										columnOrder: [
-											'ipoDate',
-											's',
-											'n',
-											'ipp',
-											'ippc',
-											'ipr'
-										]
+										columnOrder: ['ipoDate', 's', 'n', 'ipp', 'ippc', 'ipr']
 									},
 									dynamic: {
 										...query,

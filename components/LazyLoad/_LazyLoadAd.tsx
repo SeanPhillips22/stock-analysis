@@ -18,13 +18,7 @@ export function LazyLoadAd({ children, offset, className }: Props) {
 	// If intersection observer is not defined, then just show the ad
 	// without lazy loading
 	if (typeof window !== 'undefined' && !('IntersectionObserver' in window)) {
-		return (
-			<>
-				{checked && !isPro && !noAds(path) && (
-					<div className={className}>{children}</div>
-				)}
-			</>
-		)
+		return <>{checked && !isPro && !noAds(path) && <div className={className}>{children}</div>}</>
 	}
 
 	// Only load the observer if: a) not pro user and b) not on an excluded page

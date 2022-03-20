@@ -12,22 +12,15 @@ type Props = {
 
 export function EstimatesTable({ range }: Props) {
 	const { info, data }: { info: Info; data: ForecastData } = useSymbolContext()
-	const table =
-		range === 'Annual'
-			? data.estimates.table.annual
-			: data.estimates.table.quarterly
+	const table = range === 'Annual' ? data.estimates.table.annual : data.estimates.table.quarterly
 
 	if (!table) return null
 
 	const lastDate = table.lastDate
 
 	// Add note below financials table
-	let tableNote =
-		'White columns are actual numbers, blue columns are estimates.'
-	tableNote =
-		info.currency !== 'USD'
-			? 'Financials in ' + info.currency + '. ' + tableNote
-			: tableNote
+	let tableNote = 'White columns are actual numbers, blue columns are estimates.'
+	tableNote = info.currency !== 'USD' ? 'Financials in ' + info.currency + '. ' + tableNote : tableNote
 
 	return (
 		<>
@@ -45,20 +38,11 @@ export function EstimatesTable({ range }: Props) {
 					</thead>
 					<tbody>
 						<tr>
-							<TableRowTitle
-								title="Revenue"
-								styles={styles.hovericon}
-								range={range}
-								id="revenue"
-							/>
+							<TableRowTitle title="Revenue" styles={styles.hovericon} range={range} id="revenue" />
 							{table.revenue?.map((i, ii) => (
 								<td
 									key={`revenue-${range}-${ii}`}
-									title={
-										i
-											? (formatTableCell('format0dec', i) as string)
-											: undefined
-									}
+									title={i ? (formatTableCell('format0dec', i) as string) : undefined}
 									className={ii > lastDate ? styles.est : undefined}
 								>
 									{i === 0 ? 0 : formatTableCell('abbreviate', i)}
@@ -66,20 +50,11 @@ export function EstimatesTable({ range }: Props) {
 							))}
 						</tr>
 						<tr>
-							<TableRowTitle
-								title="Revenue Growth"
-								styles={styles.hovericon}
-								range={range}
-								id="revenueGrowth"
-							/>
+							<TableRowTitle title="Revenue Growth" styles={styles.hovericon} range={range} id="revenueGrowth" />
 							{table.revenueGrowth?.map((i, ii) => (
 								<td
 									key={`revenueGrowth-${range}-${ii}`}
-									title={
-										i
-											? formatTableCell('format3dec', i) + '%'
-											: undefined
-									}
+									title={i ? formatTableCell('format3dec', i) + '%' : undefined}
 									className={ii > lastDate ? styles.est : undefined}
 								>
 									{formatTableCell('colorPercentage', i)}
@@ -87,12 +62,7 @@ export function EstimatesTable({ range }: Props) {
 							))}
 						</tr>
 						<tr>
-							<TableRowTitle
-								title="EPS"
-								styles={styles.hovericon}
-								range={range}
-								id="eps"
-							/>
+							<TableRowTitle title="EPS" styles={styles.hovericon} range={range} id="eps" />
 							{table.eps?.map((i, ii) => (
 								<td
 									key={`eps-${range}-${ii}`}
@@ -104,20 +74,11 @@ export function EstimatesTable({ range }: Props) {
 							))}
 						</tr>
 						<tr>
-							<TableRowTitle
-								title="EPS Growth"
-								styles={styles.hovericon}
-								range={range}
-								id="epsGrowth"
-							/>
+							<TableRowTitle title="EPS Growth" styles={styles.hovericon} range={range} id="epsGrowth" />
 							{table.epsGrowth?.map((i, ii) => (
 								<td
 									key={`epsGrowth-${range}-${ii}`}
-									title={
-										i
-											? formatTableCell('format3dec', i) + '%'
-											: undefined
-									}
+									title={i ? formatTableCell('format3dec', i) + '%' : undefined}
 									className={ii > lastDate ? styles.est : undefined}
 								>
 									{formatTableCell('colorPercentage', i)}
@@ -129,11 +90,7 @@ export function EstimatesTable({ range }: Props) {
 							{table.analysts?.map((i, ii) => (
 								<td
 									key={`analysts-${range}-${ii}`}
-									title={
-										i
-											? (formatTableCell('format0dec', i) as string)
-											: undefined
-									}
+									title={i ? (formatTableCell('format0dec', i) as string) : undefined}
 									className={ii > lastDate ? styles.est : undefined}
 								>
 									{formatTableCell('integer', i)}
@@ -143,11 +100,7 @@ export function EstimatesTable({ range }: Props) {
 					</tbody>
 				</table>
 			</div>
-			{tableNote && (
-				<div className="mt-0.5 text-[0.8rem] text-gray-600">
-					{tableNote}
-				</div>
-			)}
+			{tableNote && <div className="mt-0.5 text-[0.8rem] text-gray-600">{tableNote}</div>}
 		</>
 	)
 }
