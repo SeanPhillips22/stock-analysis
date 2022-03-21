@@ -658,6 +658,66 @@ export const DataPoints: Props = {
 		format: 'array',
 		only: 'screener'
 	},
+	epsThisQuarter: {
+		id: 'epsThisQuarter',
+		name: 'EPS Growth This Quarter',
+		colName: 'EPS Gr. This Q',
+		format: 'formatPercentage'
+	},
+	epsNextQuarter: {
+		id: 'epsNextQuarter',
+		name: 'EPS Growth Next Quarter',
+		colName: 'EPS Gr. Next Q',
+		format: 'formatPercentage'
+	},
+	epsThisYear: {
+		id: 'epsThisYear',
+		name: 'EPS Growth This Year',
+		colName: 'EPS Gr. This Y',
+		format: 'formatPercentage'
+	},
+	epsNextYear: {
+		id: 'epsNextYear',
+		name: 'EPS Growth Next Year',
+		colName: 'EPS Gr. Next Y',
+		format: 'formatPercentage'
+	},
+	revenueThisQuarter: {
+		id: 'revenueThisQuarter',
+		name: 'Revenue Growth This Quarter',
+		colName: 'Rev Gr. This Q',
+		format: 'formatPercentage'
+	},
+	revenueNextQuarter: {
+		id: 'revenueNextQuarter',
+		name: 'Revenue Growth Next Quarter',
+		colName: 'Rev Gr. Next Q',
+		format: 'formatPercentage'
+	},
+	revenueThisYear: {
+		id: 'revenueThisYear',
+		name: 'Revenue Growth This Year',
+		colName: 'Rev Gr. This Y',
+		format: 'formatPercentage'
+	},
+	revenueNextYear: {
+		id: 'revenueNextYear',
+		name: 'Revenue Grpwth Next Year',
+		colName: 'Rev Gr. Next Y',
+		format: 'formatPercentage'
+	},
+	eps5y: {
+		id: 'eps5y',
+		name: 'EPS Growth Next 5Y',
+		colName: 'EPS Gr. Next 5Y',
+		format: 'formatPercentage'
+	},
+	revenue5y: {
+		id: 'revenue5y',
+		name: 'Revenue Growth Next 5Y',
+		colName: 'Rev Gr. Next 5Y',
+		format: 'formatPercentage'
+	},
 	/* IPOs
 	
 

@@ -1,19 +1,19 @@
 // All possible data points
 export type DataId =
-	// > Symbol and name always included
+	// ? Symbol and name always included
 	| 's' // Symbol
 	| 'n' // Name
-	// > Quotes - regular trading hours
+	// ? Quotes - regular trading hours
 	| 'price' // Stock Price
 	| 'chg' // Stock Price Change
 	| 'change' // Price Change 1D
 	| 'volume' // Volume
 	| 'close' // Previous Close
-	// > Quotes - premarket
+	// ? Quotes - premarket
 	| 'premarketPrice' // Pre-Market Price
 	| 'premarketChange' // Pre-Market Change
 	| 'premarketChangePercent' // Pre-Market Percentage Change
-	// > IPO details
+	// ? IPO details
 	// TODO add to screener
 	| 'ipoDate' // IPO Date
 	| 'ipoStatus' // IPO Date
@@ -45,10 +45,21 @@ export type DataId =
 	| 'ch1y' // Price Change 1Y
 	| 'ch3y' // Price Change 3Y
 	| 'ch5y' // Price Change 5Y
+	// ? Forecasts
 	| 'analystRatings' // Analyst Rating
 	| 'analystCount' // Analyst Count
 	| 'priceTarget' // Price Target
 	| 'priceTargetChange' // Price Target (%)
+	| 'epsThisQuarter' // EPS growth this quarter
+	| 'epsNextQuarter' // EPS growth next quarter
+	| 'epsThisYear' // EPS growth this year
+	| 'epsNextYear' // EPS growth next year
+	| 'revenueThisQuarter' // Revenue growth this quarter
+	| 'revenueNextQuarter' // Revenue growth next quarter
+	| 'revenueThisYear' // Revenue growth this year
+	| 'revenueNextYear' // Revenue growth next year
+	| 'eps5y' // EPS growth 5Y
+	| 'revenue5y' // Revenue growth 5Y
 	| 'country' // Country
 	| 'employees' // Employees
 	| 'founded' // Founded
