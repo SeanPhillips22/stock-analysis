@@ -52,6 +52,9 @@ export function createLabelFromString(value: string, filter?: FilterValue): stri
 		case 'future':
 			return `Next ${first}`
 
+		case 'past':
+			return `Past ${first}`
+
 		case 'today':
 			return 'Today'
 

@@ -26,6 +26,7 @@ export type FormatFunction =
 	| 'formatDate'
 	| 'string'
 	| 'stringright'
+	| 'array'
 
 // Names of functions that perform sorting of table rows
 export type SortFunction = 'dateSort' | 'priceSort' | 'stringNullFix' | 'numberNullFix'

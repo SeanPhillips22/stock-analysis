@@ -8,14 +8,14 @@ import {
 } from 'components/Screener/functions/sort/sortFunctions'
 import { IndexTypes } from 'components/StockTable/TableTypes'
 
-type SymbolType = 'stocks' | 'ipo' | 'etf'
+type TableType = 'stocks' | 'ipo' | 'etf' | 'screener'
 
 export type DataPointType = {
 	id: DataId
 	name: string
 	colName?: string
 	format?: FormatFunction
-	only?: SymbolType
+	only?: TableType
 	sort?: any
 	css?: string
 }
@@ -651,6 +651,12 @@ export const DataPoints: Props = {
 		id: 'views',
 		name: 'Views',
 		format: 'integer'
+	},
+	inIndex: {
+		id: 'inIndex',
+		name: 'In Index',
+		format: 'array',
+		only: 'screener'
 	},
 	/* IPOs
 	

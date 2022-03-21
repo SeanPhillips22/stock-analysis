@@ -2034,6 +2034,8 @@ export const StockDataPoints: FilterProps[] = [
 			{ name: 'Yesterday', value: 'yesterday' },
 			{ name: 'Next 7D', value: 'future-7D' },
 			{ name: 'Next 30D', value: 'future-30D' },
+			{ name: 'Past 7D', value: 'past-7D' },
+			{ name: 'Past 30D', value: 'past-30D' },
 			{ name: 'This Month', value: 'this-month' }
 		],
 		format: 'date',

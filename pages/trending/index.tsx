@@ -20,7 +20,7 @@ const query: TableDynamic = {
 	count: 20,
 	sort: [{ id: 'views', desc: true }],
 	sortDirection: 'desc',
-	columns: ['rank', 's', 'n', 'views', 'marketCap', 'price', 'change', 'volume']
+	columns: ['rank', 's', 'n', 'views', 'marketCap', 'change', 'volume']
 }
 
 export default function Trending(props: Props) {
