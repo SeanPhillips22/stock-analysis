@@ -76,6 +76,7 @@ export type FilterProps = {
 		| 'date'
 		| 'marketcap'
 		| 'padleft'
+		| 'array'
 	sortType?: any
 	sortInverted?: string
 	tooltipTitle?: any
@@ -112,12 +113,13 @@ export type FilterObject = {
 export type FilterType =
 	| 'numeric'
 	| 'stringmatch'
+	| 'multiselect'
+	| 'arraymatch' // Check if the stock's value is inside array of values
 	| 'date'
 	| 'dateYear'
 	| 'numericRange'
 	| 'isSpac'
 	| 'none'
-	| 'multiselect'
 
 export type NumberType = 'percentage'
 export type ComparisonOption = 'over' | 'under' | 'between' | 'exactly' | 'notzero'

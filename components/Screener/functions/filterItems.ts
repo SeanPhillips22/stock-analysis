@@ -38,6 +38,13 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 				}
 			}
 
+			// Array match
+			if (filter.filterType === 'arraymatch') {
+				if (stock[filter.id]?.includes(filter.value)) {
+					matched = true
+				}
+			}
+
 			// Numeric
 			else if (filter.filterType === 'numeric') {
 				matched = numericMatch(stock, filter.id, filter.value)

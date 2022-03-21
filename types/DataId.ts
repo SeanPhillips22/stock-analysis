@@ -52,6 +52,7 @@ export type DataId =
 	| 'country' // Country
 	| 'employees' // Employees
 	| 'founded' // Founded
+	| 'inIndex' // In index (S&P500 or Nasdaq 100)
 	| 'revenue' // Revenue
 	| 'revenueGrowth' // Revenue Growth
 	| 'revenueGrowthQ' // Revenue Growth (Quarterly)

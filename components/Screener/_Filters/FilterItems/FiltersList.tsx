@@ -69,7 +69,9 @@ export function FiltersList() {
 			<div className={`pt-1 sm:grid sm:grid-cols-2 sm:gap-x-2.5 lg:grid-cols-3 xl:grid-cols-4`}>
 				{dataPoints.map(f => {
 					if (f.category?.includes(state.filtersMenu) || state.filtersMenu === 'All') {
-						return <FilterWrap f={f} key={f.id} />
+						if (f.id !== 's' && f.id !== 'n') {
+							return <FilterWrap f={f} key={f.id} />
+						}
 					}
 					return null
 				})}

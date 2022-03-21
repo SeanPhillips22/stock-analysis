@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { CellNumber } from 'types/Tables'
 import { ResultsTable } from './ResultsTable/_ResultsTable'
 import { formatCells } from 'functions/tables/formatCells'
@@ -64,7 +65,7 @@ function formatColumns(type: ScreenerTypes, dataPoints: FilterProps[]) {
 				case 'align': {
 					header = formatHeader(column.columnName || column.name)
 					cell = function formatCells({ cell: { value } }: CellNumber) {
-						return <div className="text-right">{value || '-'}</div>
+						return <div className="tr">{value || '-'}</div>
 					}
 					break
 				}
@@ -94,6 +95,12 @@ function formatColumns(type: ScreenerTypes, dataPoints: FilterProps[]) {
 						return <div className="ml-1">{value}</div>
 					}
 					sortInverted = false
+					break
+				}
+
+				case 'array': {
+					header = formatHeader(column.columnName || column.name)
+					cell = () => <div className="tr">Yes</div>
 					break
 				}
 

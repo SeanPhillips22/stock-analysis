@@ -20,7 +20,7 @@ export function FilterButton({ active, id }: Props) {
 
 		if (value && filterType && ['numeric', 'date', 'numericRange'].includes(filterType)) {
 			return createLabelFromString(value, filter)
-		} else if (value && filterType === 'stringmatch') {
+		} else if (value && filterType && ['stringmatch', 'arraymatch'].includes(filterType)) {
 			return value
 		} else if (array && filterType === 'multiselect') {
 			return array.join(', ')

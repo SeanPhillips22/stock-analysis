@@ -2518,5 +2518,17 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipText:
 			"The Piotroski F-Score is a score between 0 and 9 that determine the strength of a company's financial position. The higher, the better.",
 		columnName: 'F-Score'
+	},
+	{
+		name: 'In Index',
+		id: 'inIndex',
+		category: ['Popular'],
+		filterType: 'arraymatch',
+		options: [
+			{ name: 'S&P500', value: 'S&P500' },
+			{ name: 'Nasdaq 100', value: 'NASDAQ100' }
+		],
+		format: 'array',
+		tooltipText: 'Whether the stock is part of a certain index or not.'
 	}
 ]
