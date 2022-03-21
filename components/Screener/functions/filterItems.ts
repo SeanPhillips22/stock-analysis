@@ -31,6 +31,13 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 				}
 			}
 
+			// Multiselect match
+			if (filter.filterType === 'multiselect') {
+				if (filter.array?.includes(stock[filter.id])) {
+					matched = true
+				}
+			}
+
 			// Numeric
 			else if (filter.filterType === 'numeric') {
 				matched = numericMatch(stock, filter.id, filter.value)

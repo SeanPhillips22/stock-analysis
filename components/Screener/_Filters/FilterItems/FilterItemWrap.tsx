@@ -1,7 +1,7 @@
 import { useModifyColumns } from 'components/Screener/functions/useModifyColumns'
 import { FilterProps } from 'components/Screener/screener.types'
 import { Tooltip } from 'components/Tooltips/Tooltip'
-import { SingleFilter } from './_Filter'
+import { Filter } from './_Filter'
 import { TooltipContent } from './TooltipContent'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
@@ -28,7 +28,7 @@ export function FilterWrap({ f }: Props) {
 				</Tooltip>
 			</div>
 			<div onMouseEnter={() => fetchColumn(f.id)} onFocus={() => fetchColumn(f.id)}>
-				<SingleFilter filter={f} />
+				<Filter filter={f} />
 			</div>
 		</div>
 	)

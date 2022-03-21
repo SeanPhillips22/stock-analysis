@@ -5,5 +5,8 @@ import { FilterValue } from 'components/Screener/screener.types'
 export function isFilterSelected(id: DataId, filters: FilterValue[]) {
 	if (filters.length === 0) return false
 	const findFilter = filters.find(filter => filter.id === id)
-	return findFilter ? findFilter.value : false
+
+	if (findFilter && findFilter.value) return findFilter.value
+	else if (findFilter && findFilter.array) return findFilter.array[0]
+	else return false
 }

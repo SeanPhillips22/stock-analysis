@@ -67,7 +67,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Industry',
 		id: 'industry',
 		category: ['Popular', 'Company'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
 		tooltipText:
@@ -123,7 +123,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Exchange',
 		id: 'exchange',
 		category: ['Company'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		options: [
 			{ name: 'NASDAQ', value: 'NASDAQ' },
 			{ name: 'NYSE', value: 'NYSE' },
@@ -159,7 +159,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Sector',
 		id: 'sector',
 		category: ['Popular', 'Company'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
 		format: 'padleft',
@@ -414,7 +414,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Analyst Rating',
 		id: 'analystRatings',
 		category: ['Popular'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		options: [
 			{ name: 'Strong Buy', value: 'Strong Buy' },
 			{ name: 'Buy', value: 'Buy' },
@@ -560,7 +560,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Country',
 		id: 'country',
 		category: ['Company'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
 		tooltipText: 'The country that the company is from and/or has its primary headquarters.'

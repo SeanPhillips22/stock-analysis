@@ -43,7 +43,7 @@ export const IpoDataPoints: FilterProps[] = [
 		name: 'Industry',
 		id: 'industry',
 		category: ['General'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
 		tooltipText:
@@ -53,7 +53,7 @@ export const IpoDataPoints: FilterProps[] = [
 		name: 'Sector',
 		id: 'sector',
 		category: ['General'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
 		format: 'padleft',
@@ -115,7 +115,7 @@ export const IpoDataPoints: FilterProps[] = [
 		name: 'Country',
 		id: 'country',
 		category: ['General'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
 		tooltipText: 'The country that the company is from and/or has its primary headquarters.'
@@ -124,7 +124,7 @@ export const IpoDataPoints: FilterProps[] = [
 		name: 'Exchange',
 		id: 'exchange',
 		category: ['General'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		options: [
 			{ name: 'NASDAQ', value: 'NASDAQ' },
 			{ name: 'NYSE', value: 'NYSE' },

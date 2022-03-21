@@ -98,6 +98,7 @@ export type FilterValue = {
 	id: DataId
 	name: string
 	value: string
+	array?: string[]
 	filterType: FilterType
 	numberType?: 'percentage'
 }
@@ -108,7 +109,15 @@ export type FilterObject = {
 	second: string
 }
 
-export type FilterType = 'numeric' | 'stringmatch' | 'date' | 'dateYear' | 'numericRange' | 'isSpac' | 'none'
+export type FilterType =
+	| 'numeric'
+	| 'stringmatch'
+	| 'date'
+	| 'dateYear'
+	| 'numericRange'
+	| 'isSpac'
+	| 'none'
+	| 'multiselect'
 
 export type NumberType = 'percentage'
 export type ComparisonOption = 'over' | 'under' | 'between' | 'exactly' | 'notzero'

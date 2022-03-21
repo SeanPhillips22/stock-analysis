@@ -6,6 +6,7 @@ import { FilterButton } from './FilterButton'
 import { CloseCircleIcon } from 'components/Icons/CloseCircle'
 import { NumericFilter } from './FilterTypes/NumericFilter'
 import { StringFilter } from './FilterTypes/StringFilter'
+import { SelectFilter } from './FilterTypes/SelectFilter'
 import { useModifyFilters } from 'components/Screener/functions/useModifyFilters'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
@@ -16,7 +17,7 @@ import { useScreenerContext } from 'components/Screener/ScreenerContext'
  * @return Component
  */
 
-export function SingleFilter({ filter }: { filter: FilterProps }) {
+export function Filter({ filter }: { filter: FilterProps }) {
 	const { state } = useScreenerContext()
 	const ref = useRef<HTMLDivElement>(null)
 	const openFilter = screenerState(state => state.openFilter)
@@ -48,6 +49,8 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 
 	if (filterType === 'numeric' || filterType === 'numericRange') {
 		Filter = NumericFilter
+	} else if (filterType === 'multiselect') {
+		Filter = SelectFilter
 	} else {
 		Filter = StringFilter
 	}

@@ -1,9 +1,6 @@
-import { FilterOption, FilterProps, VariableFilter } from 'components/Screener/screener.types'
-import { getData } from 'functions/apis/API'
+import { FilterOption, FilterProps } from 'components/Screener/screener.types'
 import { useEffect, useState } from 'react'
 import { PresetChoice } from './Choices/PresetChoice'
-import { screenerState } from 'components/Screener/screener.state'
-import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	filter: FilterProps
@@ -11,39 +8,11 @@ type Props = {
 }
 
 export function StringFilter({ filter, active }: Props) {
-	const { endpoint } = useScreenerContext()
-	const variableFilters = screenerState(state => state.variableFilters)
-	const addVariableFilter = screenerState(state => state.addVariableFilter)
 	const [search, setSearch] = useState('')
 	const [options, setOptions] = useState<FilterOption[]>(filter.options)
-	const [count, setCount] = useState(filter.options.length)
+	const [count] = useState(filter.options.length)
 
 	const filterType = filter.filterType
-	const variable = filter.variable
-
-	// If the filter is set as "variable", then we need to fetch the options from the backend
-	useEffect(() => {
-		async function getOptions() {
-			const findFilter = variableFilters.find((f: VariableFilter) => f.id === filter.id)
-
-			if (findFilter) {
-				filter.options = findFilter.options
-				setOptions(findFilter.options)
-				setCount(findFilter.options.length)
-			} else {
-				const fetched = await getData(endpoint + `?type=${filter.id}&action=getOptions`)
-				addVariableFilter(fetched, filter.id)
-				filter.options = fetched
-				setOptions(fetched)
-				setCount(fetched.length)
-			}
-		}
-
-		if (variable && !options.length) {
-			getOptions()
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
 
 	useEffect(() => {
 		if (filterType === 'stringmatch') {

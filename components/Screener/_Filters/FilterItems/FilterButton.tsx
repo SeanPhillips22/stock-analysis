@@ -16,15 +16,14 @@ export function FilterButton({ active, id }: Props) {
 
 	function findName() {
 		const filter = state.filters.find(filter => filter.id === id)
-		const value = filter?.value
+		const { value, array, filterType } = filter || {}
 
-		if (
-			value &&
-			(filter?.filterType === 'numeric' || filter?.filterType === 'date' || filter?.filterType === 'numericRange')
-		) {
+		if (value && filterType && ['numeric', 'date', 'numericRange'].includes(filterType)) {
 			return createLabelFromString(value, filter)
-		} else if (value && filter?.filterType === 'stringmatch') {
+		} else if (value && filterType === 'stringmatch') {
 			return value
+		} else if (array && filterType === 'multiselect') {
+			return array.join(', ')
 		}
 		return false
 	}
