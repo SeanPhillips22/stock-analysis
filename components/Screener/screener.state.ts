@@ -5,7 +5,6 @@ import {
 	SingleDataPoint,
 	VariableFilter,
 	FilterOption,
-	SortObject,
 	ScreenerTypes
 } from 'components/Screener/screener.types'
 import { mergeColumns } from 'components/Screener/functions/mergeColumns'
@@ -54,13 +53,6 @@ interface ScreenerState {
 	setFetchedColumns: (newArray: DataId[]) => void
 	columnDropdownOpen: boolean
 	setColumnDropdownOpen: (open: boolean) => void
-
-	// Sort
-	defaultSort: SortObject[]
-	sort: SortObject[]
-	setSort: (newSort: SortObject[]) => void
-	resetSort: boolean
-	setResetSort: (reset: boolean) => void
 
 	// Pagination
 	tablePage: number
@@ -133,19 +125,6 @@ export const screenerState = create<ScreenerState>(set => ({
 	setFetchedColumns: (newArray: DataId[]) => set({ fetchedColumns: newArray }),
 	columnDropdownOpen: false,
 	setColumnDropdownOpen: (open: boolean) => set({ columnDropdownOpen: open }),
-
-	// Sort
-	defaultSort: [
-		{ id: 'marketCap', desc: false },
-		{ id: 'aum', desc: false }
-	],
-	sort: [
-		{ id: 'marketCap', desc: false },
-		{ id: 'aum', desc: false }
-	],
-	setSort: (newSort: SortObject[]) => set(state => ({ ...state, sort: newSort })),
-	resetSort: false,
-	setResetSort: (reset: boolean) => set(state => ({ ...state, resetSort: reset })),
 
 	// Pagination
 	tablePage: 0,

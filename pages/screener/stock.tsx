@@ -26,7 +26,11 @@ const INITIAL_STATE: ScreenerState = {
 		filtered: initialStockColumns.Filtered,
 		default: initialStockColumns.General
 	},
-	filters: []
+	filters: [],
+	sort: {
+		active: [{ id: 'marketCap', desc: false }],
+		default: [{ id: 'marketCap', desc: false }]
+	}
 }
 
 export default function StockScreenerPage() {

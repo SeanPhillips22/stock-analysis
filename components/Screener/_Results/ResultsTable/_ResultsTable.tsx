@@ -6,34 +6,29 @@ import { Pagination } from './Pagination/_Pagination'
 
 import { filterItems } from 'components/Screener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
-import { useSortReset } from 'components/Screener/functions/sort/useSortReset'
 import { ColumnSort } from 'components/Tables/ColumnSort'
-import { useSort } from 'hooks/useSort'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { useScreenerSort } from 'components/Screener/functions/useScreenerSort'
 
 export function ResultsTable({ cols }: { cols: any }) {
-	const { type, state } = useScreenerContext()
+	const { type, state, dispatch } = useScreenerContext()
 	const datarows = screenerState(state => state.data)
 	const loaded = screenerState(state => state.loaded)
-	const sort = screenerState(state => state.sort)
 	const tablePage = screenerState(state => state.tablePage)
 	const tableSize = screenerState(state => state.tableSize)
 	const fetching = screenerState(state => state.fetching)
 	const setResultsCount = screenerState(state => state.setResultsCount)
-	const setSort = screenerState(state => state.setSort)
-	const defaultSort = screenerState(state => state.defaultSort)
 	const searchFilter = screenerState(state => state.searchFilter)
 	const setFilterState = screenerState(state => state.setSearchFilter)
-	const { updateSort } = useSort({
-		defaultSort,
-		setSort
+	const { updateSort } = useScreenerSort({
+		defaultSort: state.sort.default,
+		dispatch
 	})
-	const resetSort = useSortReset()
 
 	// Memoize data and settings for the table
 	const data = useMemo(() => filterItems(datarows, state.filters), [datarows, state.filters])
 	const columns = useMemo(() => cols, [cols])
-	const sortResultsBy = useMemo(() => sort, [sort])
+	const sortResultsBy = useMemo(() => state.sort.active, [state.sort.active])
 
 	// Add the results count into global state
 	useEffect(() => {
@@ -65,7 +60,6 @@ export function ResultsTable({ cols }: { cols: any }) {
 					.map((col: any) => col.accessor),
 				sortBy: sortResultsBy
 			},
-			autoResetSortBy: resetSort,
 			autoResetGlobalFilter: false
 		},
 		useGlobalFilter,

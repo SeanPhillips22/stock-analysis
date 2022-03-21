@@ -61,6 +61,7 @@ function reducer(state: ScreenerState, action: { type: string; value: any }) {
 			state.activePreset = ''
 			state.filters = []
 			state.columns.all.Filtered = state.columns.filtered
+			state.sort.active = state.sort.default
 			break
 
 		case 'TOGGLE_FILTERS_SHOWING':
@@ -78,11 +79,19 @@ function reducer(state: ScreenerState, action: { type: string; value: any }) {
 			break
 
 		case 'REMOVE_FILTERED_COLUMN':
-			state.columns.all.Filtered = state.columns.filtered.filter((column: string) => column !== action.value)
+			state.columns.all.Filtered = state.columns.all.Filtered.filter((column: string) => column !== action.value)
 			break
 
 		case 'SET_ACTIVE_PRESET':
 			state.activePreset = action.value
+			break
+
+		case 'SET_SORT':
+			state.sort.active = action.value
+			break
+
+		case 'RESET_SORT':
+			state.sort.active = state.sort.default
 			break
 	}
 	return state

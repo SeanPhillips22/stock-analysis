@@ -26,7 +26,11 @@ const INITIAL_STATE: ScreenerState = {
 		filtered: initialEtfColumns.Filtered,
 		default: initialEtfColumns.General
 	},
-	filters: []
+	filters: [],
+	sort: {
+		active: [{ id: 'aum', desc: false }],
+		default: [{ id: 'aum', desc: false }]
+	}
 }
 
 export default function ETFScreenerPage() {

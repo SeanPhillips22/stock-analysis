@@ -26,7 +26,11 @@ const INITIAL_STATE: ScreenerState = {
 		filtered: initialIpoColumns.Filtered,
 		default: initialIpoColumns.General
 	},
-	filters: []
+	filters: [],
+	sort: {
+		active: [{ id: 'marketCap', desc: false }],
+		default: [{ id: 'marketCap', desc: false }]
+	}
 }
 
 export default function IpoScreenerPage() {

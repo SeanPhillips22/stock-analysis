@@ -13,6 +13,10 @@ export type ScreenerState = {
 		default: DataId[]
 	}
 	filters: FilterValue[]
+	sort: {
+		active: SortObject[]
+		default: SortObject[]
+	}
 }
 
 export type ScreenerIDs = 'stocks-screener' | 'ipo-screener' | 'etf-screener'
@@ -117,4 +121,9 @@ export type SortObject = {
 export type SortProps = {
 	defaultSort?: SortObject[]
 	setSort: (sort: SortObject[]) => void
+}
+
+export type ScreenerSortProps = {
+	defaultSort?: SortObject[]
+	dispatch: React.Dispatch<{ type: string; value: any }>
 }

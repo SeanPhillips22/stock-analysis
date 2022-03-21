@@ -1,6 +1,5 @@
 import { useModifyFilters } from '../../functions/useModifyFilters'
 import { useModifyColumns } from '../../functions/useModifyColumns'
-import { screenerState } from '../../screener.state'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { Menu } from '@headlessui/react'
 import { cn } from 'functions/helpers/classNames'
@@ -9,8 +8,6 @@ import { FilterValue } from 'components/Screener/screener.types'
 
 export function PresetScreens() {
 	const { endpoint, state, dispatch, presets, dataPoints } = useScreenerContext()
-	const setSort = screenerState(state => state.setSort)
-	const setResetSort = screenerState(state => state.setResetSort)
 	const { clear } = useModifyFilters()
 	const { fetchColumn } = useModifyColumns(endpoint)
 
@@ -18,7 +15,6 @@ export function PresetScreens() {
 		clear()
 		dispatch({ type: 'SET_FILTERS_MENU', value: 'Active' })
 		dispatch({ type: 'SET_ACTIVE_PRESET', value })
-		setResetSort(true)
 		let addFilters: FilterValue[] = []
 		presets.map(item => {
 			if (item.name === value) {
@@ -36,7 +32,10 @@ export function PresetScreens() {
 					}
 				})
 				if (item.sort) {
-					setSort([item.sort])
+					dispatch({
+						type: 'SET_SORT',
+						value: [item.sort]
+					})
 				}
 				// Add all the preset filter values to the "Filtered" column
 				// Then set the active results menu to "Filtered"

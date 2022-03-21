@@ -11,7 +11,7 @@ export const initialStockColumns: ColumnsMap = {
 }
 
 export const initialIpoColumns: ColumnsMap = {
-	General: ['s', 'n', 'marketCap', 'industry', 'ipoPriceRange', 'ipoDate', 'revenue'],
+	General: ['s', 'n', 'marketCap', 'industry', 'ipoPriceRange', 'revenue'],
 	Filtered: ['s', 'n', 'marketCap'],
 	Company: ['s', 'n', 'marketCap', 'sector', 'industry', 'country', 'exchange', 'employees', 'founded'],
 	Income: ['s', 'n', 'marketCap', 'revenue', 'grossProfit', 'operatingIncome', 'netIncome', 'eps', 'ebit', 'ebitda'],
