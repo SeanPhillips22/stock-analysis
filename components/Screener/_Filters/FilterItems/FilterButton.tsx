@@ -3,6 +3,7 @@ import { DataId } from 'types/DataId'
 import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { createLabelFromString } from 'components/Screener/functions/filterString/createLabelFromString'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { cn } from 'functions/helpers/classNames'
 
 type Props = {
 	active: string | false
@@ -45,9 +46,10 @@ export function FilterButton({ active, id }: Props) {
 
 	return (
 		<div
-			className={`inline-flex w-[125px] justify-between rounded border border-gray-200 bg-white px-3 py-1 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 xs:w-[140px] sm:w-[125px] cursor-pointer${
+			className={cn(
+				'inline-flex w-[125px] cursor-pointer justify-between whitespace-nowrap rounded border border-gray-200 bg-white px-3 py-1 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 xs:w-[140px] sm:w-[125px]',
 				active ? ' bg-yellow-100 px-2' : ''
-			}`}
+			)}
 			onClick={handleClick}
 			onKeyDown={handleKeyDown}
 			tabIndex={0}
