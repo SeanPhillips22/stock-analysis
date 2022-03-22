@@ -280,8 +280,8 @@ export const StockLists: StockList = {
 	'social-media-stocks': {
 		page: {
 			path: '/list/social-media-stocks/',
-			metaTitle: 'The Biggest Social Media Stocks by Market Cap',
-			pageTitle: 'Biggest Social Media Stocks',
+			metaTitle: 'A List of Social Media Company Stocks by Market Cap',
+			pageTitle: 'Biggest Social Media Stocks by Market Cap',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
@@ -301,8 +301,8 @@ export const StockLists: StockList = {
 	'gaming-stocks': {
 		page: {
 			path: '/list/gaming-stocks/',
-			metaTitle: 'A List of Gaming Company Stocks',
-			pageTitle: 'Biggest Gaming Stocks',
+			metaTitle: 'A List of Gaming Company Stocks by Market Cap',
+			pageTitle: 'Biggest Gaming Stocks by Market Cap',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
