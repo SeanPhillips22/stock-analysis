@@ -13,7 +13,7 @@ interface InitialScreenerProps {
 	presets: PresetFilter[]
 	dataPoints: FilterProps[]
 	initial: ScreenerState
-	resetState?: () => void
+	// resetState?: () => void
 }
 
 // Used to remove "columns" from the state passed via context
@@ -99,9 +99,9 @@ function reducer(state: ScreenerState, action: { type: string; value: any }) {
 			state.sort.active = state.sort.default
 			break
 
-		case 'RESET_STATE':
-			state = action.value
-			break
+		// case 'RESET_STATE':
+		// 	state = action.value
+		// 	break
 	}
 	return state
 }
@@ -115,9 +115,9 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 	/**
 	 * Reset the entire state to its initial value
 	 */
-	function resetState() {
-		dispatch({ type: 'RESET_STATE', value: initial })
-	}
+	// function resetState() {
+	// 	dispatch({ type: 'RESET_STATE', value: initial })
+	// }
 
 	// Load the required data columns on mount
 	useEffect(() => {
@@ -130,7 +130,7 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 	}, [loaded])
 
 	// The main state object to be passed via the context provider
-	const stateObject = { id, endpoint, type, title, state, dispatch, presets, dataPoints, resetState, initial }
+	const stateObject = { id, endpoint, type, title, state, dispatch, presets, dataPoints, initial }
 
 	return <ScreenerContext.Provider value={stateObject}>{children}</ScreenerContext.Provider>
 }

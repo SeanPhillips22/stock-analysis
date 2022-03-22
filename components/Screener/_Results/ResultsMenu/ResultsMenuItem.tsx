@@ -12,9 +12,7 @@ export function ResultsMenuItem({ name }: Props) {
 
 	// When hovering over a results tab, fetch the required columns
 	function handleHover(name: ColumnName) {
-		if (name !== 'Filtered' && name !== 'General') {
-			fetchManyColumns(state.columns.all[name])
-		}
+		fetchManyColumns(state.columns.all[name])
 	}
 
 	// Change the active results menu
