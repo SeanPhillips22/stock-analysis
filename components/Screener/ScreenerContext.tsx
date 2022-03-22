@@ -13,12 +13,13 @@ interface InitialScreenerProps {
 	presets: PresetFilter[]
 	dataPoints: FilterProps[]
 	initial: ScreenerState
+	resetState?: () => void
 }
 
 // Used to remove "columns" from the state passed via context
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+// type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
-interface ScreenerContextProps extends Omit<InitialScreenerProps, 'initial'> {
+interface ScreenerContextProps extends InitialScreenerProps {
 	state: ScreenerState
 	dispatch: React.Dispatch<{ type: string; value: any }>
 }
@@ -82,6 +83,10 @@ function reducer(state: ScreenerState, action: { type: string; value: any }) {
 			state.columns.all.Filtered = state.columns.all.Filtered.filter((column: string) => column !== action.value)
 			break
 
+		case 'SET_COLUMNS':
+			state.columns.all[state.resultsMenu] = action.value
+			break
+
 		case 'SET_ACTIVE_PRESET':
 			state.activePreset = action.value
 			break
@@ -93,6 +98,10 @@ function reducer(state: ScreenerState, action: { type: string; value: any }) {
 		case 'RESET_SORT':
 			state.sort.active = state.sort.default
 			break
+
+		case 'RESET_STATE':
+			state = action.value
+			break
 	}
 	return state
 }
@@ -102,6 +111,13 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 	const [state, dispatch] = usePersistedReducer(reducer, id, initial)
 	const loaded = screenerState(state => state.loaded)
 	const { fetchManyColumns } = useModifyColumns(endpoint)
+
+	/**
+	 * Reset the entire state to its initial value
+	 */
+	function resetState() {
+		dispatch({ type: 'RESET_STATE', value: initial })
+	}
 
 	// Load the required data columns on mount
 	useEffect(() => {
@@ -114,7 +130,7 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 	}, [loaded])
 
 	// The main state object to be passed via the context provider
-	const stateObject = { id, endpoint, type, title, state, dispatch, presets, dataPoints }
+	const stateObject = { id, endpoint, type, title, state, dispatch, presets, dataPoints, resetState, initial }
 
 	return <ScreenerContext.Provider value={stateObject}>{children}</ScreenerContext.Provider>
 }

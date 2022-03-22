@@ -6,16 +6,15 @@ interface Props {
 export function ResultsNav({ type }: Props) {
 	return (
 		<nav className="grow py-3 lg:py-1">
-			<ul className="flex flex-row items-center space-x-0.5 whitespace-nowrap text-base">
+			<ul className="flex flex-row items-center space-x-1 whitespace-nowrap text-base">
 				{(type == 'stocks' && (
 					<>
 						<ResultsMenuItem name="General" />
 						<ResultsMenuItem name="Filtered" />
 						<ResultsMenuItem name="Performance" />
-						<ResultsMenuItem name="Financials" />
-						<ResultsMenuItem name="Valuation" />
-						<ResultsMenuItem name="Dividends" />
 						<ResultsMenuItem name="Analysts" />
+						<ResultsMenuItem name="Dividends" />
+						<ResultsMenuItem name="Financials" />
 					</>
 				)) ||
 					(type == 'ipo' && (
