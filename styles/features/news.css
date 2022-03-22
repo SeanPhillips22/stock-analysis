@@ -5,11 +5,11 @@
 
 @layer components {
 	.news-feed {
-		@apply bg-gray-200 sm:bg-white flex flex-col space-y-3 sm:space-y-0 sm:divide-y mb-2 sm:divide-gray-100 lg:border-0;
+		@apply mb-2 flex flex-col space-y-3 bg-gray-200 sm:space-y-0 sm:divide-y sm:divide-gray-100 sm:bg-white lg:border-0;
 	}
 
 	.news-article {
-		@apply bg-white p-4 md:px-0 sm:py-6 last:pb-1 shadow sm:shadow-none sm:grid sm:grid-cols-news gap-4 lg:gap-5 last:shadow-none;
+		@apply gap-4 bg-white p-4 shadow last:pb-1 last:shadow-none sm:grid sm:grid-cols-news sm:py-6 sm:shadow-none md:px-0 lg:gap-5;
 	}
 
 	.news-article > a {
@@ -25,15 +25,15 @@
 	}
 
 	.news-article > div > h3 {
-		@apply text-xl font-bold mb-2 mt-3 sm:mt-0 leading-snug sm:leading-tight sm:order-2 hover:text-blue-brand_sharp;
+		@apply mb-2 mt-3 text-xl font-bold leading-snug hover:text-blue-brand_sharp sm:order-2 sm:mt-0 sm:leading-tight;
 	}
 
 	.news-article > div > p {
-		@apply text-gray-800 sm:order-3 text-[0.95rem];
+		@apply text-[0.95rem] text-gray-800 sm:order-3;
 	}
 
 	.news-article .news-t {
-		@apply mt-1.5 sm:mt-1 sm:order-4;
+		@apply mt-1.5 sm:order-4 sm:mt-1;
 	}
 
 	.news-bl {
@@ -41,15 +41,15 @@
 	}
 
 	.news-spns {
-		@apply bg-white p-4 md:px-0 sm:py-6 lg:pt-6 lg:pb-4 shadow sm:shadow-none;
+		@apply bg-white p-4 shadow sm:py-6 sm:shadow-none md:px-0 lg:pt-6 lg:pb-4;
 	}
 
 	.news-video {
-		@apply flex flex-col bg-white p-4 md:px-0 sm:py-6 last:pb-1 sm:first:pt-4 shadow sm:shadow-none last:shadow-none;
+		@apply flex flex-col bg-white p-4 shadow last:pb-1 last:shadow-none sm:py-6 sm:shadow-none sm:first:pt-4 md:px-0;
 	}
 
 	.news-video > h3 {
-		@apply text-xl font-bold mb-2.5 xs:mb-3 leading-snug sm:leading-tight sm:order-2;
+		@apply mb-2.5 text-xl font-bold leading-snug xs:mb-3 sm:order-2 sm:leading-tight;
 	}
 
 	.news-video > div.news-e {
@@ -57,18 +57,18 @@
 	}
 
 	.news-video > p {
-		@apply text-gray-800 sm:order-4 text-[0.95rem];
+		@apply text-[0.95rem] text-gray-800 sm:order-4;
 	}
 
 	.news-video .news-t {
-		@apply mt-1.5 sm:mt-1 sm:order-5;
+		@apply mt-1.5 sm:order-5 sm:mt-1;
 	}
 
 	.tickers {
-		@apply text-gray-800 inline;
+		@apply inline text-gray-800;
 	}
 
 	.tickers a {
-		@apply inline-flex items-center px-1.5 py-0.5 ml-1 sm:ml-1.5 mb-1 rounded-md text-sm font-medium bg-gray-100 hover:bg-gray-200 bll;
+		@apply bll ml-1 mb-1 inline-flex items-center rounded-md bg-gray-100 px-1.5 py-0.5 text-sm font-medium hover:bg-gray-200 sm:ml-1.5;
 	}
 }

@@ -3,8 +3,7 @@ import { mappedSlidingWindow } from '../utils'
 import { SAR as defaultOptions } from './defaultOptionsForComputation'
 function calc(prev, now) {
 	const risingSar = prev.risingSar + prev.af * (prev.risingEp - prev.risingSar)
-	const fallingSar =
-		prev.fallingSar - prev.af * (prev.fallingSar - prev.fallingEp)
+	const fallingSar = prev.fallingSar - prev.af * (prev.fallingSar - prev.fallingEp)
 	const risingEp = Math.max(prev.risingEp, now.high)
 	const fallingEp = Math.min(prev.fallingEp, now.low)
 	return {
@@ -31,15 +30,8 @@ export default function Sar() {
 				}
 			})
 			.accumulator(([prev, now]) => {
-				const { risingSar, fallingSar, risingEp, fallingEp } = calc(
-					prev,
-					now
-				)
-				if (
-					prev.use === undefined &&
-					risingSar > now.low &&
-					fallingSar < now.high
-				) {
+				const { risingSar, fallingSar, risingEp, fallingEp } = calc(prev, now)
+				if (prev.use === undefined && risingSar > now.low && fallingSar < now.high) {
 					return {
 						risingSar,
 						fallingSar,
@@ -62,10 +54,7 @@ export default function Sar() {
 				const current =
 					prev.use === use
 						? {
-								af: Math.min(
-									maxAccelerationFactor,
-									prev.af + accelerationFactor
-								),
+								af: Math.min(maxAccelerationFactor, prev.af + accelerationFactor),
 								fallingEp,
 								risingEp,
 								fallingSar,

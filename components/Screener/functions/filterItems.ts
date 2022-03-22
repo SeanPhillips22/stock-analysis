@@ -6,7 +6,7 @@ import { numericRangeMatch } from './filters/numericRangeMatch'
 // Execute the filtering of the items in the filters array
 export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 	// Count the number of filters
-	const filterCount = filters.length
+	const filterCount = filters.length || 0
 
 	// If no filters, return the data
 	if (filterCount === 0) {
@@ -27,6 +27,20 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 			// String match
 			if (filter.filterType === 'stringmatch') {
 				if (stock[filter.id] === filter.value) {
+					matched = true
+				}
+			}
+
+			// Multiselect match
+			if (filter.filterType === 'multiselect') {
+				if (filter.array?.includes(stock[filter.id])) {
+					matched = true
+				}
+			}
+
+			// Array match
+			if (filter.filterType === 'arraymatch') {
+				if (stock[filter.id]?.includes(filter.value)) {
 					matched = true
 				}
 			}

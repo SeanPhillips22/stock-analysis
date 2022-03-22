@@ -1,12 +1,6 @@
 /* eslint-disable no-invalid-this */
 /* eslint-disable valid-jsdoc */
-import {
-	functor,
-	head,
-	getAxisCanvas,
-	GenericChartComponent,
-	plotDataLengthBarWidth
-} from '../core'
+import { functor, head, getAxisCanvas, GenericChartComponent, plotDataLengthBarWidth } from '../core'
 import { group } from 'd3-array'
 import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale'
 import * as React from 'react'
@@ -24,9 +18,7 @@ export interface BarSeriesProps {
 	readonly baseAt?:
 		| number
 		| ((
-				xScale:
-					| ScaleContinuousNumeric<number, number>
-					| ScaleTime<number, number>,
+				xScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>,
 				yScale: ScaleContinuousNumeric<number, number>,
 				d: [number, number],
 				moreProps: any
@@ -35,9 +27,7 @@ export interface BarSeriesProps {
 	readonly fillStyle?: string | ((data: any) => string)
 	readonly strokeStyle?: string
 	readonly swapScales?: boolean
-	readonly width?:
-		| number
-		| ((props: { widthRatio: number }, moreProps: any) => number)
+	readonly width?: number | ((props: { widthRatio: number }, moreProps: any) => number)
 	readonly widthRatio?: number
 	readonly yAccessor: (data: any) => number | undefined
 }
@@ -71,20 +61,11 @@ export class BarSeries extends React.Component<BarSeriesProps> {
 		)
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
 		if (this.props.swapScales) {
 			const { xAccessor } = moreProps
 
-			drawOnCanvasHelper(
-				ctx,
-				this.props,
-				moreProps,
-				xAccessor,
-				identityStack
-			)
+			drawOnCanvasHelper(ctx, this.props, moreProps, xAccessor, identityStack)
 		} else {
 			const bars = this.getBars(moreProps)
 

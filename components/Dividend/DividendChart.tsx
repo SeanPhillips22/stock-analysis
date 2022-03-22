@@ -49,23 +49,12 @@ export const DividendChart = ({ data, options, ticker }: Props) => {
 				<h2 className="hh2 mb-1 mt-6 sm:mb-2">Dividend Charts</h2>
 				{options.trailing && data.amount.length > 1 && (
 					<div className="flex flex-row space-x-2">
-						<span
-							onClick={() => setAll()}
-							className={
-								active === 'all'
-									? 'text-gray-900'
-									: 'bll cursor-pointer'
-							}
-						>
+						<span onClick={() => setAll()} className={active === 'all' ? 'text-gray-900' : 'bll cursor-pointer'}>
 							All
 						</span>
 						<span
 							onClick={() => setTrailing()}
-							className={
-								active === 'trailing'
-									? 'text-gray-900'
-									: 'bll cursor-pointer'
-							}
+							className={active === 'trailing' ? 'text-gray-900' : 'bll cursor-pointer'}
 						>
 							Trailing
 						</span>
@@ -77,11 +66,7 @@ export const DividendChart = ({ data, options, ticker }: Props) => {
 					xdata={data.date}
 					ydata={y1}
 					type="amount"
-					title={
-						active === 'trailing'
-							? `${ticker} Dividends (ttm)`
-							: `${ticker} Dividends`
-					}
+					title={active === 'trailing' ? `${ticker} Dividends (ttm)` : `${ticker} Dividends`}
 				/>
 				{countNotZero(y2) > 1 && (
 					<SingleChart
@@ -89,9 +74,7 @@ export const DividendChart = ({ data, options, ticker }: Props) => {
 						ydata={y2}
 						type="percentage"
 						title={
-							active === 'trailing'
-								? `${ticker} Dividend Growth (TTM YoY)`
-								: `${ticker} Dividend Growth (YoY)`
+							active === 'trailing' ? `${ticker} Dividend Growth (TTM YoY)` : `${ticker} Dividend Growth (YoY)`
 						}
 					/>
 				)}

@@ -55,15 +55,8 @@ export function TableTitle({ info, statement, range }: Props) {
 					<div className="block text-sm text-gray-600 lg:hidden">
 						{`${dividerTextMobile}${currency}. Fiscal year is ${info.fiscalYearShort}.`}
 					</div>
-					<button
-						className="text-gray-600 md:hidden"
-						onClick={toggleControls}
-					>
-						{controls ? (
-							<ChevronUpIcon className="h-6 w-6" />
-						) : (
-							<ChevronDownIcon className="h-6 w-6" />
-						)}
+					<button className="text-gray-600 md:hidden" onClick={toggleControls}>
+						{controls ? <ChevronUpIcon className="h-6 w-6" /> : <ChevronDownIcon className="h-6 w-6" />}
 					</button>
 				</div>
 			)}

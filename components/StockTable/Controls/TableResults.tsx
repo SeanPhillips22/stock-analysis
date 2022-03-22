@@ -52,19 +52,12 @@ export function TableResults() {
 	let title = count ? count.toString() + ' Rows' : 'Rows'
 
 	return (
-		<Dropdown
-			title={title}
-			hoverTitle="Change results count"
-			classes="leftmost"
-		>
+		<Dropdown title={title} hoverTitle="Change results count" classes="leftmost">
 			{OPTIONS.map(i => (
 				/* One Dropdown Item */
 				<Menu.Item key={i.value}>
 					<div
-						className={cn(
-							'dd',
-							i.value === count ? 'active' : 'inactive'
-						)}
+						className={cn('dd', i.value === count ? 'active' : 'inactive')}
 						title={hoverTitle(i.value, i.pro)}
 						onClick={() => handleClick(i.value, i.pro)}
 					>
@@ -72,14 +65,10 @@ export function TableResults() {
 						{i.value.toString() + ' Rows'}
 
 						{/* Icon - if option selected */}
-						{i.value === count && (
-							<CheckIcon className="h-5 w-5" aria-hidden="true" />
-						)}
+						{i.value === count && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
 
 						{/* Icon - if option is only for pro members */}
-						{i.pro && !isPro && (
-							<LockClosedIcon className="lock-icon" aria-hidden="true" />
-						)}
+						{i.pro && !isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 					</div>
 				</Menu.Item>
 			))}

@@ -25,22 +25,14 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 	return (
 		<>
 			<div
-				className={
-					matchParentPath(path, item.href)
-						? 'nav-menu-wrap current group'
-						: 'nav-menu-wrap group'
-				}
+				className={matchParentPath(path, item.href) ? 'nav-menu-wrap current group' : 'nav-menu-wrap group'}
 				onClick={() => {
 					if (!expanded) expand()
 				}}
 			>
 				<Link href={item.href} prefetch={false}>
 					<a
-						className={
-							matchParentPath(path, item.href)
-								? 'nav-item current parent'
-								: 'nav-item parent'
-						}
+						className={matchParentPath(path, item.href) ? 'nav-item current parent' : 'nav-item parent'}
 						title={item.name}
 					>
 						<item.icon className="nav-icon" />
@@ -48,11 +40,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 					</a>
 				</Link>
 				<div className="nav-arrow-wrap" onClick={openClose}>
-					<NavArrowIcon
-						classes={
-							isOpen[item.name] ? 'nav-arrow open' : 'nav-arrow closed'
-						}
-					/>
+					<NavArrowIcon classes={isOpen[item.name] ? 'nav-arrow open' : 'nav-arrow closed'} />
 				</div>
 			</div>
 
@@ -61,11 +49,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 					{item.children.map(subItem => (
 						<Link key={subItem.name} href={subItem.href} prefetch={false}>
 							<a
-								className={
-									matchPath(path, subItem.href)
-										? 'nav-item current subitem'
-										: 'nav-item subitem'
-								}
+								className={matchPath(path, subItem.href) ? 'nav-item current subitem' : 'nav-item subitem'}
 								onClick={close}
 								title={subItem.name}
 							>

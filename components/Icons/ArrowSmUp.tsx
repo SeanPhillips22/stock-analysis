@@ -9,11 +9,7 @@ export const ArrowSmUpIcon = ({ classes }: { classes: string }) => {
 			strokeWidth={2}
 			style={{ maxWidth: '40px' }}
 		>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="M7 11l5-5m0 0l5 5m-5-5v12"
-			/>
+			<path strokeLinecap="round" strokeLinejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
 		</svg>
 	)
 }

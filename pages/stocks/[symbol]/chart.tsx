@@ -79,11 +79,7 @@ export default function ChartPage({ info }: { info: Info }) {
 				<div className="py-2">
 					<div className="mb-2 flex flex-row items-center justify-between border border-gray-200 text-sm bp:text-base">
 						<Buttons state={time} dispatch={setTime} />
-						<SelectPeriod
-							time={time}
-							dispatcher={setPeriod}
-							period={period}
-						/>
+						<SelectPeriod time={time} dispatcher={setPeriod} period={period} />
 						<SelectType type={type} dispatcher={setType} />
 						<Export
 							buttons={[

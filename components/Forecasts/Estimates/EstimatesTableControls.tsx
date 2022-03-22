@@ -12,10 +12,7 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 
 	// Hide export button if no data
 	let showExport = true
-	if (
-		data.estimates.table.annual.length === 0 &&
-		data.estimates.table.quarterly.length === 0
-	) {
+	if (data.estimates.table.annual.length === 0 && data.estimates.table.quarterly.length === 0) {
 		showExport = false
 	}
 
@@ -47,10 +44,7 @@ export function EstimatesTableControls({ range, setRange }: Props) {
 			</span>
 			{showExport && (
 				<div className="hidden md:block">
-					<Export
-						tableId="estimates-table"
-						fileName={`${info.symbol}-estimates`}
-					/>
+					<Export tableId="estimates-table" fileName={`${info.symbol}-estimates`} />
 				</div>
 			)}
 		</div>

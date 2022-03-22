@@ -1,16 +1,14 @@
 import { DataId } from 'types/DataId'
-import { ScreenerTypes } from '../screener.types'
 import { screenerState } from 'components/Screener/screener.state'
 import { getData } from 'functions/apis/API'
-import { getScreenerUrl } from './getScreenerUrl'
+import { useScreenerContext } from '../ScreenerContext'
+import { ScreenerEndpoints } from '../screener.types'
 
 /**
  * A custom hook with functions to manipulate the columns in the stock screener results table
- * @return {functions}
  */
-export function useModifyColumns() {
-	const showColumns = screenerState(state => state.showColumns)
-	const setShowColumns = screenerState(state => state.setShowColumns)
+export function useModifyColumns(endpoint: ScreenerEndpoints) {
+	const { state, dispatch } = useScreenerContext()
 	const fetchedColumns = screenerState(state => state.fetchedColumns)
 	const addFetchedColumn = screenerState(state => state.addFetchedColumn)
 	const addDataColumn = screenerState(state => state.addDataColumn)
@@ -18,21 +16,21 @@ export function useModifyColumns() {
 	const removeFetching = screenerState(state => state.removeFetching)
 
 	// Fetch a new data column
-	async function fetchColumn(id: DataId, type: ScreenerTypes) {
+	async function fetchColumn(id: DataId) {
 		if (!isFetched(id)) {
 			addFetching(id)
 			addFetchedColumn(id)
-			const fetched = await getData(getScreenerUrl(type) + `?type=${id}`)
+			const fetched = await getData(endpoint + `?type=${id}`)
 			addDataColumn(fetched, id)
 			removeFetching(id)
 		}
 	}
 
 	// Fetch many data columns at a time
-	async function fetchManyColumns(columns: DataId[], type: ScreenerTypes) {
+	async function fetchManyColumns(columns: DataId[]) {
 		columns.forEach(async id => {
 			if (!fetchedColumns.includes(id)) {
-				fetchColumn(id, type)
+				fetchColumn(id)
 			}
 		})
 	}
@@ -43,20 +41,16 @@ export function useModifyColumns() {
 	}
 
 	// Toggle a column to either show or hide
-	function toggle(id: DataId, type: ScreenerTypes) {
-		if (showColumns.includes(id)) {
-			setShowColumns(showColumns.filter(filter => filter !== id))
-		} else {
-			if (!isFetched(id)) {
-				fetchColumn(id, type)
-			}
-			setShowColumns([...showColumns, id])
+	function toggle(id: DataId) {
+		dispatch({ type: 'TOGGLE_COLUMN', value: id })
+		if (!isFetched(id)) {
+			fetchColumn(id)
 		}
 	}
 
 	// Check if a column is showing
 	function isShowing(id: DataId) {
-		return showColumns.includes(id)
+		return state.columns.all[state.resultsMenu].includes(id)
 	}
 
 	return { fetchColumn, fetchManyColumns, isFetched, toggle, isShowing }

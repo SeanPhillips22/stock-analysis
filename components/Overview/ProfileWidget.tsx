@@ -34,27 +34,19 @@ export const Profile = ({ info, data }: Props) => {
 							<div
 								key={index}
 								className={
-									info.type === 'etf' &&
-									data.infoTable[number][0] === 'Index Tracked'
+									info.type === 'etf' && data.infoTable[number][0] === 'Index Tracked'
 										? 'col-span-2'
 										: 'col-span-1'
 								}
 							>
-								<span className="block font-semibold">
-									{data.infoTable[number][0]}
-								</span>
+								<span className="block font-semibold">{data.infoTable[number][0]}</span>
 								<span>{data.infoTable[number][1]}</span>
 							</div>
 						)
 					})}
 			</div>
 
-			{info.type === 'stocks' && (
-				<Button
-					url={`/stocks/${info.symbol}/company/`}
-					text="Full Company Profile"
-				/>
-			)}
+			{info.type === 'stocks' && <Button url={`/stocks/${info.symbol}/company/`} text="Full Company Profile" />}
 		</div>
 	)
 }

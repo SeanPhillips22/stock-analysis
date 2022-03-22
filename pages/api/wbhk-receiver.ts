@@ -22,10 +22,7 @@ function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	// Check if the webhook signature is correct
 	if (!verifyPaddleWebhook(PUBLIC_KEY, req.body)) {
 		return res.status(400).json({
@@ -39,31 +36,22 @@ export default async function handler(
 	// Get the user email and webhook type from the request body
 	const { alert_name, email } = req.body
 
-	const emailLookup: string = email
-		? email.toLowerCase()
-		: req.body.customer_email_address?.toLowerCase()
+	const emailLookup: string = email ? email.toLowerCase() : req.body.customer_email_address?.toLowerCase()
 
 	// If no email, return 404
 	if (!emailLookup) return res.status(402).json({ error: 'No email' })
 
 	// Find the user from the email
-	let { data: returned } = await supabaseAdmin
-		.from('userdata')
-		.select()
-		.eq('email', emailLookup)
+	let { data: returned } = await supabaseAdmin.from('userdata').select().eq('email', emailLookup)
 
 	// If not found, try again in a few seconds
 	if (!returned || !returned[0]) {
 		let wait = alert_name === 'subscription_created' ? 4000 : 2000
 		await sleep(wait)
 
-		let { data: returned } = await supabaseAdmin
-			.from('userdata')
-			.select()
-			.eq('email', emailLookup)
+		let { data: returned } = await supabaseAdmin.from('userdata').select().eq('email', emailLookup)
 
-		if (!returned || !returned[0])
-			return res.status(404).json({ error: 'No data returned' })
+		if (!returned || !returned[0]) return res.status(404).json({ error: 'No data returned' })
 	}
 
 	// User was found -- proceed to update the user's details
@@ -77,13 +65,9 @@ export default async function handler(
 				await sleep(2000)
 				waited += 2000
 
-				let { data: returnedAgain } = await supabaseAdmin
-					.from('userdata')
-					.select()
-					.eq('email', emailLookup)
+				let { data: returnedAgain } = await supabaseAdmin.from('userdata').select().eq('email', emailLookup)
 
-				if (!returnedAgain)
-					return res.status(406).json({ error: 'No data returned' })
+				if (!returnedAgain) return res.status(406).json({ error: 'No data returned' })
 
 				user = returnedAgain ? returnedAgain[0] : null
 			}
@@ -117,21 +101,15 @@ export default async function handler(
 		if (payment_method) user.payment_method = payment_method
 		if (next_payment_amount) user.next_payment_amount = next_payment_amount
 		if (next_bill_date) user.next_bill_date = next_bill_date
-		if (cancellation_effective_date)
-			user.cancelled_date = cancellation_effective_date
+		if (cancellation_effective_date) user.cancelled_date = cancellation_effective_date
 		if (paused_from) user.paused_date = paused_from
 
-		const { data, error } = await supabaseAdmin
-			.from('userdata')
-			.update(user)
-			.eq('id', user.id)
+		const { data, error } = await supabaseAdmin.from('userdata').update(user).eq('id', user.id)
 
 		if (error) {
 			return res.status(407).json({ error })
 		} else if (data) {
-			return res
-				.status(200)
-				.json({ success: 'Webhook received and processed successfully' })
+			return res.status(200).json({ success: 'Webhook received and processed successfully' })
 		}
 	}
 

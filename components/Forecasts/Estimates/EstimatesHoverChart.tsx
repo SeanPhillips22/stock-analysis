@@ -1,7 +1,4 @@
-import {
-	formatY,
-	formatYear
-} from 'components/FinancialTable/FinancialTable.functions'
+import { formatY, formatYear } from 'components/FinancialTable/FinancialTable.functions'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { Bar } from 'react-chartjs-2'
 import { Chart as ChartJS, Title, defaults } from 'chart.js'
@@ -31,10 +28,7 @@ export function EstimatesHoverChart({ id, range, title }: Props) {
 
 	// Get the table data
 	// It contains the data we want to display
-	const table =
-		range === 'Annual'
-			? data.estimates.table.annual
-			: data.estimates.table.quarterly
+	const table = range === 'Annual' ? data.estimates.table.annual : data.estimates.table.quarterly
 
 	if (!table || !table.dates) return null
 
@@ -42,10 +36,7 @@ export function EstimatesHoverChart({ id, range, title }: Props) {
 	const lastDate = table.lastDate
 
 	// Format the x-axis
-	const xAxis =
-		range === 'Annual'
-			? table.dates.map(i => formatYear(i).toString())
-			: table.dates
+	const xAxis = range === 'Annual' ? table.dates.map(i => formatYear(i).toString()) : table.dates
 
 	// Format the y-axis
 	const yAxis = table[id]
@@ -98,12 +89,7 @@ export function EstimatesHoverChart({ id, range, title }: Props) {
 								if (value === 0) return 0
 								return isGrowth
 									? formatY(value, 'growth')
-									: (formatCellRaw(
-											'abbreviate',
-											value,
-											'stocks',
-											true
-									  ) as string)
+									: (formatCellRaw('abbreviate', value, 'stocks', true) as string)
 							}
 						}
 					}

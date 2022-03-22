@@ -12,11 +12,7 @@ const TooltipContent = ({ data }: { data?: FinancialsMapType }) => {
 		<div>
 			<h4 className="mb-2 text-xl font-semibold">{data.title}</h4>
 			<div className="border-t border-gray-300 pt-2">{data.tooltip}</div>
-			{data.formula && (
-				<div className="mt-3 border-t border-gray-300 pt-2 text-sm">
-					{data.formula}
-				</div>
-			)}
+			{data.formula && <div className="mt-3 border-t border-gray-300 pt-2 text-sm">{data.formula}</div>}
 		</div>
 	)
 }

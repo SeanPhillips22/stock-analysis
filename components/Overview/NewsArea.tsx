@@ -31,8 +31,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	const updatedTime = new Date(timestamp * 1000)
 	const currentTime = new Date()
 
-	const minutesBetween =
-		(currentTime.getTime() - updatedTime.getTime()) / 1000 / 60
+	const minutesBetween = (currentTime.getTime() - updatedTime.getTime()) / 1000 / 60
 
 	// Check for fresh news if it's been more than 60 minutes
 	useEffect(() => {
@@ -40,10 +39,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 
 		async function fetchData() {
 			try {
-				const fresh = await getData(
-					`news-fresh?s=${info.symbol}&t=${info.type}`,
-					controller.signal
-				)
+				const fresh = await getData(`news-fresh?s=${info.symbol}&t=${info.type}`, controller.signal)
 				if (news[0] && fresh[0] && news[0].title !== fresh[0].title) {
 					setData(fresh)
 				}
@@ -64,10 +60,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 	useEffect(() => {
 		let controller = new AbortController()
 		async function fetchData() {
-			const fresh = await getData(
-				`news?s=${info.symbol}&t=${info.type}&f=${show}`,
-				controller?.signal
-			)
+			const fresh = await getData(`news?s=${info.symbol}&t=${info.type}&f=${show}`, controller?.signal)
 			if (fresh.length) {
 				setData(fresh)
 			} else {
@@ -131,11 +124,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 			)}
 			{show !== 'chat' ? (
 				<>
-					<NewsFeed
-						data={data}
-						related="Other symbols"
-						paywalled={paywalled}
-					/>
+					<NewsFeed data={data} related="Other symbols" paywalled={paywalled} />
 					<LoadMore
 						info={info}
 						show={show}

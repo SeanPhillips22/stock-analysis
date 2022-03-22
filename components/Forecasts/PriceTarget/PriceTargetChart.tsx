@@ -12,31 +12,16 @@ import {
 	defaults
 } from 'chart.js'
 
-ChartJS.register(
-	LineController,
-	LineElement,
-	LinearScale,
-	CategoryScale,
-	TimeScale,
-	PointElement
-)
+ChartJS.register(LineController, LineElement, LinearScale, CategoryScale, TimeScale, PointElement)
 
-import {
-	isOldSafari,
-	Unavailable,
-	UnavailableSafari
-} from 'components/Unavailable'
+import { isOldSafari, Unavailable, UnavailableSafari } from 'components/Unavailable'
 
 import { format } from 'd3-format'
 import 'chartjs-adapter-date-fns'
 import { useMemo } from 'react'
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { formatMonthLong } from 'functions/datetime/formatDates'
-import {
-	fillWhitespaceLine,
-	formatTarget,
-	collisionOffset
-} from './target.functions'
+import { fillWhitespaceLine, formatTarget, collisionOffset } from './target.functions'
 
 defaults.font.family =
 	"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"
@@ -75,18 +60,9 @@ export function PriceTargetChart() {
 
 	const priceAxis = useMemo(() => chart.map((item: any) => item.c), [chart])
 
-	const redOrGreen =
-		currentPrice - initialPrice > 0
-			? 'rgba(4, 120, 87, 1)'
-			: 'rgba(220, 38, 38, 1)'
+	const redOrGreen = currentPrice - initialPrice > 0 ? 'rgba(4, 120, 87, 1)' : 'rgba(220, 38, 38, 1)'
 
-	const pointSize = useMemo(
-		() =>
-			chart.map((i: any, index: number) =>
-				index == chart.length - 2 ? 4 : 2.7
-			),
-		[chart]
-	)
+	const pointSize = useMemo(() => chart.map((i: any, index: number) => (index == chart.length - 2 ? 4 : 2.7)), [chart])
 
 	// Chart.js causes critical errors on older Safari versions
 	if (isOldSafari()) {
@@ -189,19 +165,16 @@ export function PriceTargetChart() {
 							const accuracyOffset = -7.6
 
 							const highY =
-								chartInstance.getDatasetMeta(2).data[
-									chartInstance.getDatasetMeta(2).data.length - 1
-								].y + accuracyOffset
+								chartInstance.getDatasetMeta(2).data[chartInstance.getDatasetMeta(2).data.length - 1].y +
+								accuracyOffset
 
 							const avgY =
-								chartInstance.getDatasetMeta(3).data[
-									chartInstance.getDatasetMeta(3).data.length - 1
-								].y + accuracyOffset
+								chartInstance.getDatasetMeta(3).data[chartInstance.getDatasetMeta(3).data.length - 1].y +
+								accuracyOffset
 
 							const lowY =
-								chartInstance.getDatasetMeta(4).data[
-									chartInstance.getDatasetMeta(4).data.length - 1
-								].y + accuracyOffset
+								chartInstance.getDatasetMeta(4).data[chartInstance.getDatasetMeta(4).data.length - 1].y +
+								accuracyOffset
 
 							let highBoundaryOffset = 0
 
@@ -221,16 +194,12 @@ export function PriceTargetChart() {
 							const width =
 								max([
 									ctx.measureText(lowData[lowData.length - 1].y).width,
-									ctx.measureText(highData[highData.length - 1].y)
-										.width,
+									ctx.measureText(highData[highData.length - 1].y).width,
 									ctx.measureText(avgData[avgData.length - 1].y).width,
 									ctx.measureText('Average').width
 								]) + 10
 
-							chartInstance.data.datasets.forEach(function (
-								dataset: { data: any[]; label: string },
-								i: any
-							) {
+							chartInstance.data.datasets.forEach(function (dataset: { data: any[]; label: string }, i: any) {
 								if (dataset.label == 'Monthly') {
 									const meta = chartInstance.getDatasetMeta(i)
 
@@ -241,35 +210,19 @@ export function PriceTargetChart() {
 									ctx.lineJoin = 'round'
 
 									ctx.fillText(
+										window.innerWidth > 428 ? 'Past 12 Months' : 'Past Year',
 										window.innerWidth > 428
-											? 'Past 12 Months'
-											: 'Past Year',
-										window.innerWidth > 428
-											? meta.iScale._gridLineItems[
-													meta.iScale._gridLineItems.length - 2
-											  ].tx1 - 55
-											: meta.iScale._gridLineItems[
-													meta.iScale._gridLineItems.length - 2
-											  ].tx1 - 37,
-										meta.iScale._gridLineItems[
-											meta.iScale._gridLineItems.length - 2
-										].y1
+											? meta.iScale._gridLineItems[meta.iScale._gridLineItems.length - 2].tx1 - 55
+											: meta.iScale._gridLineItems[meta.iScale._gridLineItems.length - 2].tx1 - 37,
+										meta.iScale._gridLineItems[meta.iScale._gridLineItems.length - 2].y1
 									)
 
 									ctx.fillText(
+										window.innerWidth > 428 ? '12 Month Forecast' : 'Next Year',
 										window.innerWidth > 428
-											? '12 Month Forecast'
-											: 'Next Year',
-										window.innerWidth > 428
-											? meta.iScale._gridLineItems[
-													meta.iScale._gridLineItems.length - 2
-											  ].tx1 + 65
-											: meta.iScale._gridLineItems[
-													meta.iScale._gridLineItems.length - 2
-											  ].tx1 + 40,
-										meta.iScale._gridLineItems[
-											meta.iScale._gridLineItems.length - 2
-										].y1
+											? meta.iScale._gridLineItems[meta.iScale._gridLineItems.length - 2].tx1 + 65
+											: meta.iScale._gridLineItems[meta.iScale._gridLineItems.length - 2].tx1 + 40,
+										meta.iScale._gridLineItems[meta.iScale._gridLineItems.length - 2].y1
 									)
 
 									ctx.restore()
@@ -280,10 +233,7 @@ export function PriceTargetChart() {
 									const last = meta.data.length - 1
 
 									const xPos = meta.data[last].x + 10.2
-									const yPos =
-										meta.data[last].y +
-										accuracyOffset +
-										collisionOffsets.avg
+									const yPos = meta.data[last].y + accuracyOffset + collisionOffsets.avg
 
 									const raw = dataset.data[last]
 
@@ -305,14 +255,8 @@ export function PriceTargetChart() {
 									ctx.lineTo(xPos, yPos - sideHeight)
 									ctx.lineTo(xPos + width, yPos - sideHeight)
 
-									ctx.lineTo(
-										xPos + width,
-										yPos + sideHeight + pointerHeight
-									)
-									ctx.lineTo(
-										xPos + 0.7,
-										yPos + sideHeight + pointerHeight
-									)
+									ctx.lineTo(xPos + width, yPos + sideHeight + pointerHeight)
+									ctx.lineTo(xPos + 0.7, yPos + sideHeight + pointerHeight)
 
 									ctx.lineTo(xPos, yPos + pointerHeight)
 
@@ -324,18 +268,12 @@ export function PriceTargetChart() {
 									ctx.fillText(
 										str,
 										xPos + width - width / 2,
-										yPos -
-											sideHeight +
-											(sideHeight * 2 + pointerHeight) / 2 +
-											13
+										yPos - sideHeight + (sideHeight * 2 + pointerHeight) / 2 + 13
 									)
 									ctx.fillText(
 										'Average',
 										xPos + width - width / 2,
-										yPos -
-											sideHeight +
-											(sideHeight * 2 + pointerHeight) / 2 -
-											1
+										yPos - sideHeight + (sideHeight * 2 + pointerHeight) / 2 - 1
 									)
 									ctx.restore()
 								}
@@ -356,11 +294,7 @@ export function PriceTargetChart() {
 									ctx.lineJoin = 'round'
 
 									const xPos = meta.data[last].x + 10.2
-									const yPos =
-										meta.data[last].y +
-										accuracyOffset +
-										highBoundaryOffset +
-										collisionOffsets.high
+									const yPos = meta.data[last].y + accuracyOffset + highBoundaryOffset + collisionOffsets.high
 
 									ctx.beginPath()
 									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
@@ -383,18 +317,12 @@ export function PriceTargetChart() {
 									ctx.fillText(
 										str,
 										xPos + width - width / 2,
-										yPos -
-											sideHeight * 2 +
-											(sideHeight * 2 + pointerHeight) / 2 +
-											13
+										yPos - sideHeight * 2 + (sideHeight * 2 + pointerHeight) / 2 + 13
 									)
 									ctx.fillText(
 										'High',
 										xPos + width - width / 2,
-										yPos -
-											sideHeight * 2 +
-											(sideHeight * 2 + pointerHeight) / 2 -
-											1
+										yPos - sideHeight * 2 + (sideHeight * 2 + pointerHeight) / 2 - 1
 									)
 									ctx.restore()
 								}
@@ -414,10 +342,7 @@ export function PriceTargetChart() {
 									ctx.lineJoin = 'round'
 
 									const xPos = meta.data[last].x + 10.2
-									const yPos =
-										meta.data[last].y +
-										accuracyOffset +
-										collisionOffsets.low
+									const yPos = meta.data[last].y + accuracyOffset + collisionOffsets.low
 
 									ctx.beginPath()
 									ctx.moveTo(xPos - 8.4, yPos + pointerHeight / 2)
@@ -429,15 +354,9 @@ export function PriceTargetChart() {
 
 									ctx.lineTo(xPos + width, yPos)
 
-									ctx.lineTo(
-										xPos + width,
-										yPos + sideHeight * 2 + pointerHeight
-									)
+									ctx.lineTo(xPos + width, yPos + sideHeight * 2 + pointerHeight)
 
-									ctx.lineTo(
-										xPos,
-										yPos + sideHeight * 2 + pointerHeight
-									)
+									ctx.lineTo(xPos, yPos + sideHeight * 2 + pointerHeight)
 
 									ctx.lineTo(xPos, yPos + pointerHeight)
 									ctx.stroke()
@@ -445,11 +364,7 @@ export function PriceTargetChart() {
 									ctx.closePath()
 
 									ctx.fillStyle = 'rgba(220, 38, 38, 1)'
-									ctx.fillText(
-										str,
-										xPos + width - width / 2,
-										yPos + (sideHeight * 2 + pointerHeight) / 2 + 13
-									)
+									ctx.fillText(str, xPos + width - width / 2, yPos + (sideHeight * 2 + pointerHeight) / 2 + 13)
 									ctx.fillText(
 										'Low',
 										xPos + width - width / 2,
@@ -550,10 +465,7 @@ export function PriceTargetChart() {
 							callbacks: {
 								title: function (tooltipItem: any) {
 									let dataset = tooltipItem[0].dataset.label
-									let index =
-										dataset === 'Monthly'
-											? tooltipItem[0].dataIndex
-											: timeAxis.length - 1
+									let index = dataset === 'Monthly' ? tooltipItem[0].dataIndex : timeAxis.length - 1
 									return formatMonthLong(timeAxis[index])
 								},
 								label: function (context: any) {
@@ -562,16 +474,12 @@ export function PriceTargetChart() {
 									let value = context.parsed.y || ''
 									let date = context.label.split(', 12')[0]
 									let longDate = formatMonthLong(date)
-									let currentDate = formatMonthLong(
-										timeAxis[timeAxis.length - 2]
-									)
+									let currentDate = formatMonthLong(timeAxis[timeAxis.length - 2])
 									if (currlabel !== 'Monthly') {
 										if (dataIndex === 0) return ''
 										let change = (value - currentPrice) / currentPrice
-										let percentageChange =
-											(change * 100).toFixed(2) + '%'
-										if (change > 0)
-											percentageChange = '+' + percentageChange
+										let percentageChange = (change * 100).toFixed(2) + '%'
+										if (change > 0) percentageChange = '+' + percentageChange
 										return `${currlabel}: ${value} (${percentageChange})`
 									} else if (longDate === currentDate) {
 										return 'Latest Price: ' + value

@@ -35,14 +35,7 @@ interface Props {
 	range: 'annual' | 'quarterly' | 'trailing'
 }
 
-export const FinancialTable = ({
-	statement,
-	financials,
-	info,
-	map,
-	count,
-	range
-}: Props) => {
+export const FinancialTable = ({ statement, financials, info, map, count, range }: Props) => {
 	const divider = financialsState(state => state.divider)
 	const reversed = financialsState(state => state.reversed)
 	const trailing = financialsState(state => state.trailing)
@@ -58,11 +51,7 @@ export const FinancialTable = ({
 	const paywalled = showcount < fullcount ? 'true' : false
 
 	let showTTM =
-		range === 'annual' && statement !== 'ratios' && trailing
-			? true
-			: statement === 'ratios' && current
-			? true
-			: false
+		range === 'annual' && statement !== 'ratios' && trailing ? true : statement === 'ratios' && current ? true : false
 
 	useEffect(() => {
 		setDataRows(financials)
@@ -83,10 +72,7 @@ export const FinancialTable = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [info.symbol, isPro, statement, range])
 
-	let data = useMemo(
-		() => sliceData(dataRows, showcount, reversed),
-		[dataRows, showcount, reversed]
-	)
+	let data = useMemo(() => sliceData(dataRows, showcount, reversed), [dataRows, showcount, reversed])
 
 	// If count is empty, show message
 	if ((range === 'annual' && showcount < 2) || showcount === 0) {
@@ -94,10 +80,7 @@ export const FinancialTable = ({
 			<div>
 				<TableTitle info={info} statement={statement} range={range} />
 				<Unavailable
-					message={`No ${range} ${statement.replace(
-						/-/g,
-						' '
-					)} data available for this stock.`}
+					message={`No ${range} ${statement.replace(/-/g, ' ')} data available for this stock.`}
 					classes="min-h-[300px] lg:min-h-[500px]"
 				/>
 			</div>
@@ -126,13 +109,7 @@ export const FinancialTable = ({
 			return (
 				<th
 					key={index}
-					title={
-						cell !== 'TTM'
-							? cell
-							: statement === 'ratios'
-							? 'Current values'
-							: 'Trailing-Twelve Months'
-					}
+					title={cell !== 'TTM' ? cell : statement === 'ratios' ? 'Current values' : 'Trailing-Twelve Months'}
 				>
 					{cellBody}
 				</th>
@@ -159,15 +136,9 @@ export const FinancialTable = ({
 	const IndicatorTooltip = ({ row }: { row: FinancialsMapType }) => {
 		return (
 			<div>
-				<h4 className="mb-2 text-xl font-semibold">
-					{row.tooltipTitle || row.title}
-				</h4>
+				<h4 className="mb-2 text-xl font-semibold">{row.tooltipTitle || row.title}</h4>
 				<div className="border-t border-gray-300 pt-2">{row.tooltip}</div>
-				{row.formula && (
-					<div className="mt-3 border-t border-gray-300 pt-2 text-sm">
-						{row.formula}
-					</div>
-				)}
+				{row.formula && <div className="mt-3 border-t border-gray-300 pt-2 text-sm">{row.formula}</div>}
 			</div>
 		)
 	}
@@ -183,11 +154,7 @@ export const FinancialTable = ({
 	const BodyRow = ({ row }: { row: FinancialsMapType }) => {
 		// Exception: If recent IPO and only 6 quarters, use 3 quarter offset to calculate growth
 		let offs = 4
-		if (
-			row.format === 'growth' &&
-			['quarterly', 'trailing'].includes(range) &&
-			showcount === 6
-		) {
+		if (row.format === 'growth' && ['quarterly', 'trailing'].includes(range) && showcount === 6) {
 			if (data?.datekey?.length === 6) {
 				const firstDate = data.datekey[0]
 				const compareDate = data.datekey[3]
@@ -240,10 +207,7 @@ export const FinancialTable = ({
 					isTTMcolumn
 				})
 
-				const cellClass =
-					format === 'growth' && cellContent
-						? redOrGreen(cellContent, id)
-						: undefined
+				const cellClass = format === 'growth' && cellContent ? redOrGreen(cellContent, id) : undefined
 
 				if (cell != 0 && cellContent != '-') {
 					total++
@@ -251,11 +215,7 @@ export const FinancialTable = ({
 
 				return (
 					<td key={index} className={cellClass}>
-						{cellContent !== '-' ? (
-							<span title={titleTag}>{cellContent}</span>
-						) : (
-							'-'
-						)}
+						{cellContent !== '-' ? <span title={titleTag}>{cellContent}</span> : '-'}
 					</td>
 				)
 			} else {
@@ -281,10 +241,7 @@ export const FinancialTable = ({
 							delay={300}
 							className="bigTooltipText"
 						>
-							<RowTitle
-								title={row.title}
-								indent={row.format === 'growth' || row.indent}
-							/>
+							<RowTitle title={row.title} indent={row.format === 'growth' || row.indent} />
 						</Tooltip>
 						<TooltipChart
 							render={attrs => (
@@ -321,13 +278,7 @@ export const FinancialTable = ({
 						</TooltipChart>
 					</td>
 					{dataRows}
-					{paywalled && !isPro && (
-						<PaywallBodyCell
-							range={range}
-							showcount={showcount}
-							fullcount={fullcount}
-						/>
-					)}
+					{paywalled && !isPro && <PaywallBodyCell range={range} showcount={showcount} fullcount={fullcount} />}
 				</tr>
 			</>
 		)
@@ -337,32 +288,15 @@ export const FinancialTable = ({
 		<div>
 			<div className="md:flex md:flex-row md:items-end md:justify-between">
 				<TableTitle info={info} statement={statement} range={range} />
-				<FinancialsControls
-					info={info}
-					statement={statement}
-					range={range}
-				/>
+				<FinancialsControls info={info} statement={statement} range={range} />
 			</div>
-			<div
-				className={
-					'overflow-x-auto border border-gray-300' +
-					(paywalled ? ' flex flex-row' : '')
-				}
-			>
+			<div className={'overflow-x-auto border border-gray-300' + (paywalled ? ' flex flex-row' : '')}>
 				<table className="fintbl" id="financial-table">
 					<thead>
 						<tr className="border-b-2 border-gray-300">
 							<th className="flex flex-row items-center justify-between">
-								<Tooltip
-									content={getPeriodTooltip(range)}
-									theme="light"
-									delay={100}
-									className="bigTooltipText"
-								>
-									<RowTitle
-										title={getPeriodLabel(range)}
-										indent={false}
-									/>
+								<Tooltip content={getPeriodTooltip(range)} theme="light" delay={100} className="bigTooltipText">
+									<RowTitle title={getPeriodLabel(range)} indent={false} />
 								</Tooltip>
 							</th>
 							{headerRow()}

@@ -1,9 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	// Extract the key and path from the request
 	const key = req.query.key[0]
 	const path = req.query.path[0]

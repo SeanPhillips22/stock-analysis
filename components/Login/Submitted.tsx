@@ -5,9 +5,8 @@ export function Submitted() {
 				Click the login link in your email
 			</h1>
 			<p className="mt-4 text-center text-smaller font-medium text-gray-600">
-				Open your email and click the login link, no password required. Your
-				browser will remember so you do not have to repeat this all the
-				time.
+				Open your email and click the login link, no password required. Your browser will remember so you do not
+				have to repeat this all the time.
 			</p>
 		</div>
 	)

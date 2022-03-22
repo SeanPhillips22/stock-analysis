@@ -1,10 +1,7 @@
 import { screenerState } from 'components/Screener/screener.state'
 import { SelectComparison } from './Blocks/SelectComparison'
 import { isFilterSelected } from 'components/Screener/functions/isFilterSelected'
-import {
-	ComparisonOption,
-	FilterProps
-} from 'components/Screener/screener.types'
+import { ComparisonOption, FilterProps } from 'components/Screener/screener.types'
 import { useEffect, useState } from 'react'
 import { getFilterFromString } from 'components/Screener/functions/filterString/getFilterFromString'
 import { createFilterString } from 'components/Screener/functions/filterString/createFilterString'
@@ -12,6 +9,7 @@ import { useModifyFilters } from 'components/Screener/functions/useModifyFilters
 import { incrementFilter } from 'components/Screener/functions/filterString/incrementFilter'
 import { decrementFilter } from 'components/Screener/functions/filterString/decrementFilter'
 import { Increment } from './Blocks/Increment'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 /**
  * Screener component that renders the custom filter where it is possible to select your own comparison. Over/Under/Between plus values.
@@ -19,19 +17,19 @@ import { Increment } from './Blocks/Increment'
  * @return {JSX.Element}
  */
 export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
+	const { state } = useScreenerContext()
 	const { id, name, filterType, numberType } = filter
 	const [compare, setCompare] = useState<ComparisonOption>('over')
 	const [first, setFirst] = useState<string>('')
 	const [second, setSecond] = useState<string>('')
 	const [active, setActive] = useState<string | false>()
-	const filters = screenerState(state => state.filters)
 	const openFilter = screenerState(state => state.openFilter)
 	const setOpenFilter = screenerState(state => state.setOpenFilter)
 	const { add } = useModifyFilters()
 
 	// Extract the filter values in order to populate the custom choice inputs
 	useEffect(() => {
-		setActive(isFilterSelected(id, filters))
+		setActive(isFilterSelected(id, state.filters))
 
 		if (active && openFilter === id) {
 			const filterObject = getFilterFromString(active, false)
@@ -51,7 +49,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 			setFirst('')
 			setSecond('')
 		}
-	}, [filters, active, id, openFilter])
+	}, [active, id, openFilter, state.filters])
 
 	// Update the filter if the values in the custom choice inputs change
 	useEffect(() => {
@@ -100,9 +98,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 						className="block max-w-[4rem] rounded-sm border-gray-300 p-1 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
 					/>
 					{/* Add two icons that increase and decrease the input value */}
-					{compare !== 'notzero' && compare !== 'between' && (
-						<Increment first={first} setFirst={setFirst} />
-					)}
+					{compare !== 'notzero' && compare !== 'between' && <Increment first={first} setFirst={setFirst} />}
 				</div>
 				<div className={compare === 'between' ? 'block' : 'hidden'}>&</div>
 				<input
@@ -120,9 +116,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 			{(first || second) && (
 				<div className="ml-2 whitespace-normal text-gray-600">{`"${name} is ${compare} ${
 					first ? firstValue : '...'
-				}${
-					second && compare === 'between' ? ` and ${secondValue}` : ''
-				}"`}</div>
+				}${second && compare === 'between' ? ` and ${secondValue}` : ''}"`}</div>
 			)}
 		</div>
 	)

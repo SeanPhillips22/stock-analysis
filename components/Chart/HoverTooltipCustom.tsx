@@ -57,11 +57,7 @@ const defaultBackgroundShapeCanvas = (
 	}
 }
 
-const defaultTooltipCanvas = (
-	props: HoverTooltipProps,
-	content: any,
-	ctx: CanvasRenderingContext2D
-) => {
+const defaultTooltipCanvas = (props: HoverTooltipProps, content: any, ctx: CanvasRenderingContext2D) => {
 	const { fontSize = 14, fontFamily, fontFill } = props
 
 	const startY = Y + fontSize * 0.9
@@ -70,8 +66,7 @@ const defaultTooltipCanvas = (
 		ctx.fillStyle = fontFill
 	}
 
-	const maxLabel =
-		max(content.y, (y: any) => ctx.measureText(y.label as string).width) ?? 0
+	const maxLabel = max(content.y, (y: any) => ctx.measureText(y.label as string).width) ?? 0
 
 	for (let i = 0; i < content.y.length; i++) {
 		const y = content.y[i]
@@ -125,11 +120,7 @@ const drawOnCanvas = (
 	ctx.restore()
 }
 
-const calculateTooltipSize = (
-	props: HoverTooltipProps,
-	content: any,
-	ctx: CanvasRenderingContext2D
-) => {
+const calculateTooltipSize = (props: HoverTooltipProps, content: any, ctx: CanvasRenderingContext2D) => {
 	const { fontFamily, fontSize = 12, fontFill } = props
 
 	ctx.font = `bold ${fontSize}px ${fontFamily}`
@@ -146,10 +137,7 @@ const calculateTooltipSize = (
 	const { width, height } = content.y
 		.map(({ label, value }: any) => measureText(`${label}  ${value}`))
 		// Sum all y and x sizes (begin with x label size)
-		.reduce(
-			(res: any, size: any) => sumSizes(res, size),
-			measureText(String(content.x))
-		)
+		.reduce((res: any, size: any) => sumSizes(res, size), measureText(String(content.x)))
 
 	return {
 		width: width + 2 * X,
@@ -198,11 +186,7 @@ export interface HoverTooltipProps {
 	}
 	readonly toolTipFillStyle?: string
 	readonly toolTipStrokeStyle?: string
-	readonly tooltipCanvas: (
-		props: HoverTooltipProps,
-		content: any,
-		ctx: CanvasRenderingContext2D
-	) => void
+	readonly tooltipCanvas: (props: HoverTooltipProps, content: any, ctx: CanvasRenderingContext2D) => void
 	readonly yAccessor: (data: any) => number
 	readonly coord: any[]
 }
@@ -218,8 +202,7 @@ export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {
 		origin: defaultOrigin,
 		backgroundShapeCanvas: defaultBackgroundShapeCanvas,
 		fontFill: '#000000',
-		fontFamily:
-			"-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
+		fontFamily: "-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
 		fontSize: 12
 	}
 
@@ -229,18 +212,10 @@ export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {
 	}
 
 	public render() {
-		return (
-			<GenericComponent
-				canvasDraw={this.drawOnCanvas}
-				drawOn={['mousemove', 'pan']}
-			/>
-		)
+		return <GenericComponent canvasDraw={this.drawOnCanvas} drawOn={['mousemove', 'pan']} />
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
 		const pointer = this.helper(ctx, moreProps)
 		if (pointer === undefined) {
 			return
@@ -251,21 +226,10 @@ export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {
 		drawOnCanvas(ctx, this.props, this.context, pointer, height)
 	}
 
-	private readonly helper = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
-		const {
-			show,
-			xScale,
-			currentItem,
-			plotData,
-			xAccessor,
-			displayXAccessor
-		} = moreProps
+	private readonly helper = (ctx: CanvasRenderingContext2D, moreProps: any) => {
+		const { show, xScale, currentItem, plotData, xAccessor, displayXAccessor } = moreProps
 
-		const { origin = HoverTooltipCustom.defaultProps.origin, tooltip } =
-			this.props
+		const { origin = HoverTooltipCustom.defaultProps.origin, tooltip } = this.props
 
 		if (!show || currentItem === undefined) {
 			return
@@ -282,11 +246,7 @@ export class HoverTooltipCustom extends React.Component<HoverTooltipProps> {
 		})
 		const centerX = xScale(xValue)
 		const pointWidth =
-			Math.abs(
-				xScale(xAccessor(last(plotData))) -
-					xScale(xAccessor(first(plotData)))
-			) /
-			(plotData.length - 1)
+			Math.abs(xScale(xAccessor(last(plotData))) - xScale(xAccessor(first(plotData)))) / (plotData.length - 1)
 
 		const bgSize = calculateTooltipSize(this.props, content, ctx)
 

@@ -16,9 +16,7 @@ function getChangeType(val: number) {
 export function EstimatesStats({ range }: Props) {
 	const { data } = useSymbolContext()
 	const { revenueThis, revenueNext, epsThis, epsNext } =
-		range === 'Annual'
-			? data.estimates.stats.annual
-			: data.estimates.stats.quarterly
+		range === 'Annual' ? data.estimates.stats.annual : data.estimates.stats.quarterly
 
 	let rangeTitle = range === 'Annual' ? 'Year' : 'Quarter'
 
@@ -26,10 +24,7 @@ export function EstimatesStats({ range }: Props) {
 		{
 			name: `Revenue This ${rangeTitle}`,
 			stat: formatCellRaw('abbreviate', revenueThis?.this),
-			previousStat:
-				revenueThis?.last === 0
-					? 0
-					: formatCellRaw('abbreviate', revenueThis?.last),
+			previousStat: revenueThis?.last === 0 ? 0 : formatCellRaw('abbreviate', revenueThis?.last),
 			change: formatCellRaw('formatPercentage', revenueThis?.growth),
 			changeType: getChangeType(revenueThis?.growth)
 		},
@@ -61,16 +56,12 @@ export function EstimatesStats({ range }: Props) {
 			<dl className="mb-4 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg border bg-white shadow md:grid-cols-4 md:divide-y-0 md:divide-x">
 				{stats.map(item => (
 					<div key={item.name} className="px-4 py-5 sm:p-6">
-						<dt className="text-base font-normal text-gray-900">
-							{item.name}
-						</dt>
+						<dt className="text-base font-normal text-gray-900">{item.name}</dt>
 						<dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
 							<div className="flex items-baseline text-2xl font-semibold text-blue-700">
 								{item.stat}
 								{item.previousStat !== '-' && (
-									<div className="ml-2 text-sm font-medium text-gray-500">
-										{`from ${item.previousStat}`}
-									</div>
+									<div className="ml-2 text-sm font-medium text-gray-500">{`from ${item.previousStat}`}</div>
 								)}
 							</div>
 
@@ -96,10 +87,7 @@ export function EstimatesStats({ range }: Props) {
 									)}
 
 									<span className="sr-only">
-										{item.changeType === 'increase'
-											? 'Increased'
-											: 'Decreased'}{' '}
-										by
+										{item.changeType === 'increase' ? 'Increased' : 'Decreased'} by
 									</span>
 									{item.change}
 								</div>

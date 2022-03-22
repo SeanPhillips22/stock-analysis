@@ -6,7 +6,9 @@ import { FilterButton } from './FilterButton'
 import { CloseCircleIcon } from 'components/Icons/CloseCircle'
 import { NumericFilter } from './FilterTypes/NumericFilter'
 import { StringFilter } from './FilterTypes/StringFilter'
+import { SelectFilter } from './FilterTypes/SelectFilter'
 import { useModifyFilters } from 'components/Screener/functions/useModifyFilters'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 /**
  * SingleFilter
@@ -15,15 +17,15 @@ import { useModifyFilters } from 'components/Screener/functions/useModifyFilters
  * @return Component
  */
 
-export function SingleFilter({ filter }: { filter: FilterProps }) {
+export function Filter({ filter }: { filter: FilterProps }) {
+	const { state } = useScreenerContext()
 	const ref = useRef<HTMLDivElement>(null)
-	const filters = screenerState(state => state.filters)
 	const openFilter = screenerState(state => state.openFilter)
 	const setOpenFilter = screenerState(state => state.setOpenFilter)
 	const { remove } = useModifyFilters()
 
 	const { id, filterType } = filter
-	const active = isFilterSelected(id, filters)
+	const active = isFilterSelected(id, state.filters)
 
 	// Close dropdown if clicked outside of filter dropdown
 	useEffect(() => {
@@ -47,6 +49,8 @@ export function SingleFilter({ filter }: { filter: FilterProps }) {
 
 	if (filterType === 'numeric' || filterType === 'numericRange') {
 		Filter = NumericFilter
+	} else if (filterType === 'multiselect') {
+		Filter = SelectFilter
 	} else {
 		Filter = StringFilter
 	}

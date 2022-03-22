@@ -12,16 +12,9 @@ export function Tab({ symbol, title, append }: TabI) {
 
 	return (
 		<li>
-			<Link
-				href={`/stocks/${symbol}/${append ? append + '/' : ''}`}
-				prefetch={false}
-			>
+			<Link href={`/stocks/${symbol}/${append ? append + '/' : ''}`} prefetch={false}>
 				<a
-					className={
-						path.three === append || (!path.three && title === 'Overview')
-							? 'active'
-							: 'inactive'
-					}
+					className={path.three === append || (!path.three && title === 'Overview') ? 'active' : 'inactive'}
 					data-title={title}
 				>
 					{title}

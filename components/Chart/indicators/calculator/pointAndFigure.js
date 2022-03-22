@@ -109,25 +109,15 @@ export default function PointAndFigureComponent() {
 				}
 			}
 			if (columnData.length === 1 && column.boxes.length === 0) {
-				const upwardMovement = Math.max(
-					pricingMethod(d).high - column.open,
-					0
-				) // upward movement
-				const downwardMovement = Math.abs(
-					Math.min(column.open - pricingMethod(d).low, 0)
-				) // downward movement
+				const upwardMovement = Math.max(pricingMethod(d).high - column.open, 0) // upward movement
+				const downwardMovement = Math.abs(Math.min(column.open - pricingMethod(d).low, 0)) // downward movement
 				column.direction = upwardMovement > downwardMovement ? 1 : -1
-				if (
-					boxSize * reversal < upwardMovement ||
-					boxSize * reversal < downwardMovement
-				) {
+				if (boxSize * reversal < upwardMovement || boxSize * reversal < downwardMovement) {
 					// enough movement to trigger a reversal
 					box.toDate = dateAccessor(d)
 					box.open = column.open
 					const noOfBoxes =
-						column.direction > 0
-							? Math.floor(upwardMovement / boxSize)
-							: Math.floor(downwardMovement / boxSize)
+						column.direction > 0 ? Math.floor(upwardMovement / boxSize) : Math.floor(downwardMovement / boxSize)
 					for (let i = 0; i < noOfBoxes; i++) {
 						// @ts-ignore
 						box.close = box.open + column.direction * boxSize
@@ -145,16 +135,10 @@ export default function PointAndFigureComponent() {
 			} else {
 				// one or more boxes already formed in the current column
 				const upwardMovement = Math.max(pricingMethod(d).high - box.open, 0) // upward movement
-				const downwardMovement = Math.abs(
-					Math.min(pricingMethod(d).low - box.open, 0)
-				) // downward movement
+				const downwardMovement = Math.abs(Math.min(pricingMethod(d).low - box.open, 0)) // downward movement
 				if (
-					(column.direction > 0 &&
-						upwardMovement >
-							boxSize) /* rising column AND box can be formed */ ||
-					(column.direction < 0 &&
-						downwardMovement >
-							boxSize) /* falling column AND box can be formed */
+					(column.direction > 0 && upwardMovement > boxSize) /* rising column AND box can be formed */ ||
+					(column.direction < 0 && downwardMovement > boxSize) /* falling column AND box can be formed */
 				) {
 					// form another box
 					// @ts-ignore
@@ -169,8 +153,7 @@ export default function PointAndFigureComponent() {
 					dateMutator(box, dateAccessor(d))
 				} else if (
 					/* rising column and there is downward movement to trigger a reversal */
-					(column.direction > 0 &&
-						downwardMovement > boxSize * reversal) ||
+					(column.direction > 0 && downwardMovement > boxSize * reversal) ||
 					/* falling column and there is downward movement to trigger a reversal */
 					(column.direction < 0 && upwardMovement > boxSize * reversal)
 				) {
@@ -191,9 +174,7 @@ export default function PointAndFigureComponent() {
 						direction: -1 * column.direction
 					}
 					const noOfBoxes =
-						column.direction > 0
-							? Math.floor(upwardMovement / boxSize)
-							: Math.floor(downwardMovement / boxSize)
+						column.direction > 0 ? Math.floor(upwardMovement / boxSize) : Math.floor(downwardMovement / boxSize)
 					for (let i = 0; i < noOfBoxes; i++) {
 						// @ts-ignore
 						box.close = box.open + column.direction * boxSize

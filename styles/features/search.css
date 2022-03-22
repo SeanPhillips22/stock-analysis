@@ -5,11 +5,11 @@
 
 @layer components {
 	.search-input {
-		@apply border border-gray-200 placeholder-gray-700 text-sm xs:text-base py-1.5 md:py-2 pl-7 tiny:pl-8 xs:pl-10 grow focus:ring-0 focus:border-gray-200 focus:outline-none focus:shadow-lg rounded-sm;
+		@apply grow rounded-sm border border-gray-200 py-1.5 pl-7 text-sm placeholder-gray-700 focus:border-gray-200 focus:shadow-lg focus:outline-none focus:ring-0 tiny:pl-8 xs:pl-10 xs:text-base md:py-2;
 	}
 
 	.hd-inner .search-input {
-		@apply hover:bg-white bg-gray-50 focus:bg-white w-full;
+		@apply w-full bg-gray-50 hover:bg-white focus:bg-white;
 	}
 
 	.home-hero .search-input {
@@ -17,7 +17,7 @@
 	}
 
 	.dropd {
-		@apply w-full bg-white absolute top-9 md:top-10 border border-gray-200 shadow-lg opacity-0 transition-opacity duration-150;
+		@apply absolute top-9 w-full border border-gray-200 bg-white opacity-0 shadow-lg transition-opacity duration-150 md:top-10;
 	}
 
 	.dropd.active {

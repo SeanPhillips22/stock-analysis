@@ -15,27 +15,12 @@ export function RatingExport({ data }: { data: ForecastData }) {
 		}
 	}, [data.recommendations, isPro])
 
-	return (
-		<Export
-			tableId="ratings-table"
-			data={exportData}
-			fileName={`${info.symbol}-analyst-ratings`}
-		/>
-	)
+	return <Export tableId="ratings-table" data={exportData} fileName={`${info.symbol}-analyst-ratings`} />
 }
 
 function rewrite(data: Recommendations[]) {
 	let newData = []
-	newData[0] = [
-		'Date',
-		'Consensus',
-		'Strong Sell',
-		'Sell',
-		'Hold',
-		'Buy',
-		'Strong Buy',
-		'Total'
-	]
+	newData[0] = ['Date', 'Consensus', 'Strong Sell', 'Sell', 'Hold', 'Buy', 'Strong Buy', 'Total']
 	data.forEach((item: { [x: string]: any }) => {
 		newData.push([
 			item.month,

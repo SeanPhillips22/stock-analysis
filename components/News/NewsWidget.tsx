@@ -23,12 +23,7 @@ export const NewsWidget = ({ title, news, button }: Props) => {
 					<li key={index} className="mb-3 last:mb-1">
 						{item.time}
 						{' - '}
-						<a
-							href={item.url}
-							target="_blank"
-							rel="noopener noreferrer nofollow"
-							className="bll"
-						>
+						<a href={item.url} target="_blank" rel="noopener noreferrer nofollow" className="bll">
 							{item.title}
 						</a>
 						{' - '}

@@ -53,24 +53,17 @@ export const setBorder = (rowname: string) => {
 }
 
 // Format the Y axis on hover charts
-export const formatY = (
-	value: number,
-	format?: string,
-	ymin?: number,
-	ymax?: number
-) => {
+export const formatY = (value: number, format?: string, ymin?: number, ymax?: number) => {
 	if (
 		!format &&
-		((ymax && (ymax > 10000000 || ymax < -10000000)) ||
-			(ymin && (ymin > 10000000 || ymin < -10000000)))
+		((ymax && (ymax > 10000000 || ymax < -10000000)) || (ymin && (ymin > 10000000 || ymin < -10000000)))
 	) {
 		return formatNumber(value / 1000000, 0, 0)
 	}
 
 	if (
 		format === 'reduce_precision' &&
-		((ymax && (ymax > 1000000 || ymax < -1000000)) ||
-			(ymin && (ymin > 1000000 || ymin < -1000000)))
+		((ymax && (ymax > 1000000 || ymax < -1000000)) || (ymin && (ymin > 1000000 || ymin < -1000000)))
 	) {
 		return formatNumber(value / 1000000, 0, 0) // new Intl.NumberFormat('en-US').format(value / 1000000);
 	}
@@ -98,15 +91,7 @@ type FormatCell = {
 }
 
 // Format the number in the cells
-export function formatCell({
-	type,
-	current,
-	previous,
-	revenue,
-	divider,
-	isTTMcolumn,
-	isHover
-}: FormatCell) {
+export function formatCell({ type, current, previous, revenue, divider, isTTMcolumn, isHover }: FormatCell) {
 	const decimals = divider === 1 ? 3 : 2
 
 	switch (type) {
@@ -169,12 +154,7 @@ export function formatCell({
 }
 
 // Format the number in the cells
-export function formatCellExport({
-	type,
-	current,
-	previous,
-	revenue
-}: FormatCell) {
+export function formatCellExport({ type, current, previous, revenue }: FormatCell) {
 	const decimals = 3
 
 	switch (type) {
@@ -287,11 +267,7 @@ export function getDivider(divider: number) {
 }
 
 // Slice financial data if paywalled
-export function sliceData(
-	data: FinancialReport,
-	showcount: number,
-	reversed: boolean
-) {
+export function sliceData(data: FinancialReport, showcount: number, reversed: boolean) {
 	const sliced = {} as FinancialReport
 
 	if (data) {

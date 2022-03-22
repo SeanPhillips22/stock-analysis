@@ -34,20 +34,10 @@ export const PriceChange = ({ chartData, chartTime, info, show }: Props) => {
 
 		raw = first ? (last / first - 1) * 100 : null
 
-		formatted = raw
-			? raw > 0
-				? '+' + raw.toFixed(dec) + '%'
-				: raw.toFixed(dec) + '%'
-			: 'n/a'
+		formatted = raw ? (raw > 0 ? '+' + raw.toFixed(dec) + '%' : raw.toFixed(dec) + '%') : 'n/a'
 	}
 
-	const css = raw
-		? raw > 0
-			? 'text-green-700'
-			: raw < 0
-			? 'text-red-600'
-			: 'text-gray-600'
-		: 'text-gray-600'
+	const css = raw ? (raw > 0 ? 'text-green-700' : raw < 0 ? 'text-red-600' : 'text-gray-600') : 'text-gray-600'
 
 	// Don't show while chart is loading
 	if (!show) return null

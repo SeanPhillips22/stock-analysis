@@ -20,10 +20,7 @@ export function RatingHistory() {
 	return (
 		<Dropdown title={history}>
 			<Menu.Item>
-				<div
-					className={cn('dd', history === '1 Year' ? 'active' : '')}
-					onClick={() => handleClick('1 Year')}
-				>
+				<div className={cn('dd', history === '1 Year' ? 'active' : '')} onClick={() => handleClick('1 Year')}>
 					1 Year
 				</div>
 			</Menu.Item>
@@ -34,9 +31,7 @@ export function RatingHistory() {
 					title={isPro ? '' : 'Upgrade to Pro to see 2 years of data'}
 				>
 					2 Years
-					{!isPro && (
-						<LockClosedIcon className="lock-icon" aria-hidden="true" />
-					)}
+					{!isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 				</div>
 			</Menu.Item>
 			<Menu.Item>
@@ -46,9 +41,7 @@ export function RatingHistory() {
 					title={isPro ? '' : 'Upgrade to Pro to see 5+ years of data'}
 				>
 					5 Years
-					{!isPro && (
-						<LockClosedIcon className="lock-icon" aria-hidden="true" />
-					)}
+					{!isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 				</div>
 			</Menu.Item>
 		</Dropdown>

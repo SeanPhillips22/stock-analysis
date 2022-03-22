@@ -2,14 +2,8 @@ import { Dispatch, Fragment, SetStateAction } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { ComparisonOption } from 'components/Screener/screener.types'
-
-function capitalize(word: string) {
-	return word.charAt(0).toUpperCase() + word.slice(1)
-}
-
-function classNames(...classes: string[]) {
-	return classes.filter(Boolean).join(' ')
-}
+import { capitalize } from 'functions/helpers/capitalize'
+import { cn } from 'functions/helpers/classNames'
 
 const options = ['over', 'under', 'between', 'exactly', 'notzero']
 
@@ -18,6 +12,9 @@ type Props = {
 	setCompare: Dispatch<SetStateAction<ComparisonOption>>
 }
 
+/**
+ * Screener component that enables selection of over/under/between/etc in a numeric filter
+ */
 export function SelectComparison({ compare, setCompare }: Props) {
 	return (
 		<Listbox value={compare} onChange={setCompare}>
@@ -25,16 +22,9 @@ export function SelectComparison({ compare, setCompare }: Props) {
 				<>
 					<div className="relative">
 						<Listbox.Button className="relative w-full cursor-pointer py-2 pl-2 pr-7 text-left text-smaller font-semibold text-gray-800 focus:outline-none focus:ring-0">
-							<span className="block truncate">
-								{compare === 'notzero'
-									? 'Not Zero'
-									: capitalize(compare)}
-							</span>
+							<span className="block truncate">{compare === 'notzero' ? 'Not Zero' : capitalize(compare)}</span>
 							<span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-								<ChevronDownIcon
-									className="h-5 w-5 text-gray-700"
-									aria-hidden="true"
-								/>
+								<ChevronDownIcon className="h-5 w-5 text-gray-700" aria-hidden="true" />
 							</span>
 						</Listbox.Button>
 
@@ -50,26 +40,17 @@ export function SelectComparison({ compare, setCompare }: Props) {
 									<Listbox.Option
 										key={option}
 										className={({ active }) =>
-											classNames(
-												active ? 'bg-gray-100' : '',
-												'relative cursor-pointer select-none py-2 pl-2 pr-4 text-gray-900'
+											cn(
+												'relative cursor-pointer select-none py-2 pl-2 pr-4 text-gray-900',
+												active ? 'bg-gray-100' : ''
 											)
 										}
 										value={option}
 									>
 										{({ selected }) => (
 											<>
-												<span
-													className={classNames(
-														selected
-															? 'font-semibold'
-															: 'font-normal',
-														'block truncate'
-													)}
-												>
-													{option === 'notzero'
-														? 'Not Zero'
-														: capitalize(option)}
+												<span className={cn('block truncate', selected ? 'font-semibold' : 'font-normal')}>
+													{option === 'notzero' ? 'Not Zero' : capitalize(option)}
 												</span>
 											</>
 										)}

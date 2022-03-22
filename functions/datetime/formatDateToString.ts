@@ -5,9 +5,7 @@
 export function formatDateToString(date?: Date): string {
 	const dt = date ?? new Date()
 
-	let dateString = new Date(dt.getTime() - dt.getTimezoneOffset() * 60000)
-		.toISOString()
-		.split('T')[0]
+	let dateString = new Date(dt.getTime() - dt.getTimezoneOffset() * 60000).toISOString().split('T')[0]
 
 	return dateString
 }

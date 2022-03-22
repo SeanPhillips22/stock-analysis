@@ -1,49 +1,34 @@
 import { screenerState } from 'components/Screener/screener.state'
 import { useEffect, useMemo } from 'react'
-import {
-	useTable,
-	useSortBy,
-	usePagination,
-	useGlobalFilter,
-	useAsyncDebounce
-} from 'react-table'
+import { useTable, useSortBy, usePagination, useGlobalFilter, useAsyncDebounce } from 'react-table'
 import { ResultsMenu } from '../ResultsMenu/ResultsMenu'
 import { Pagination } from './Pagination/_Pagination'
 
 import { filterItems } from 'components/Screener/functions/filterItems'
 import { Loading } from 'components/Loading/Loading'
-import { useSortReset } from 'components/Screener/functions/sort/useSortReset'
 import { ColumnSort } from 'components/Tables/ColumnSort'
-import { useSort } from 'hooks/useSort'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { useScreenerSort } from 'components/Screener/functions/useScreenerSort'
 
 export function ResultsTable({ cols }: { cols: any }) {
-	const type = screenerState(state => state.type)
+	const { type, state, dispatch } = useScreenerContext()
 	const datarows = screenerState(state => state.data)
 	const loaded = screenerState(state => state.loaded)
-	const filters = screenerState(state => state.filters)
-	const sort = screenerState(state => state.sort)
 	const tablePage = screenerState(state => state.tablePage)
 	const tableSize = screenerState(state => state.tableSize)
-	const showColumns = screenerState(state => state.showColumns)
 	const fetching = screenerState(state => state.fetching)
 	const setResultsCount = screenerState(state => state.setResultsCount)
-	const setSort = screenerState(state => state.setSort)
-	const defaultSort = screenerState(state => state.defaultSort)
 	const searchFilter = screenerState(state => state.searchFilter)
 	const setFilterState = screenerState(state => state.setSearchFilter)
-	const { updateSort } = useSort({
-		defaultSort,
-		setSort
+	const { updateSort } = useScreenerSort({
+		defaultSort: state.sort.default,
+		dispatch
 	})
-	const resetSort = useSortReset()
 
 	// Memoize data and settings for the table
-	const data = useMemo(
-		() => filterItems(datarows, filters),
-		[datarows, filters]
-	)
+	const data = useMemo(() => filterItems(datarows, state.filters), [datarows, state.filters])
 	const columns = useMemo(() => cols, [cols])
-	const sortResultsBy = useMemo(() => sort, [sort])
+	const sortResultsBy = useMemo(() => state.sort.active, [state.sort.active])
 
 	// Add the results count into global state
 	useEffect(() => {
@@ -71,11 +56,10 @@ export function ResultsTable({ cols }: { cols: any }) {
 				pageIndex: tablePage,
 				pageSize: tableSize,
 				hiddenColumns: columns
-					.filter((col: any) => !showColumns.includes(col.accessor))
+					.filter((col: any) => !state.columns.all[state.resultsMenu].includes(col.accessor))
 					.map((col: any) => col.accessor),
 				sortBy: sortResultsBy
 			},
-			autoResetSortBy: resetSort,
 			autoResetGlobalFilter: false
 		},
 		useGlobalFilter,
@@ -104,10 +88,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 				tableId="screener-table"
 			/>
 			<div className="overflow-x-auto">
-				<table
-					className={`symbol-table w-full ${type}`}
-					id="screener-table"
-				>
+				<table className={`symbol-table w-full ${type}`} id="screener-table">
 					<thead>
 						{headerGroups.map((headerGroup, index) => (
 							<tr key={index}>
@@ -115,15 +96,10 @@ export function ResultsTable({ cols }: { cols: any }) {
 									<th
 										key={index}
 										{...column.getSortByToggleProps({
-											title: `Sort by: ${
-												column.name || column.Header
-											}`
+											title: `Sort by: ${column.name || column.Header}`
 										})}
 									>
-										<span
-											className="flex flex-row items-center"
-											onClick={() => updateSort(column)}
-										>
+										<span className="flex flex-row items-center" onClick={() => updateSort(column)}>
 											{column.render('Header')}
 											<ColumnSort column={column} />
 										</span>

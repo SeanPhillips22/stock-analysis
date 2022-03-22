@@ -41,12 +41,7 @@ export default function SymbolStatistics({ info, data }: Props) {
 
 				<div className="lg:profilewrap float-none mb-2 lg:float-left">
 					<ProfileExecutives executives={data.executives} />
-					<ProfileSECfilings
-						key={info.symbol}
-						info={info}
-						cik={data.stockDetails.cik}
-						filings={data.secFilings}
-					/>
+					<ProfileSECfilings key={info.symbol} info={info} cik={data.stockDetails.cik} filings={data.secFilings} />
 				</div>
 			</div>
 			<div className="min-h-5 clear-both"></div>

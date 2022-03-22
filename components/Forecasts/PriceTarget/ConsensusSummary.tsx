@@ -38,8 +38,7 @@ export function ConsensusSummary() {
 
 	return (
 		<div className="text-center text-xl font-semibold">
-			Analyst Consensus:{' '}
-			<span className={cn('font-bold', color)}>{consensus}</span>
+			Analyst Consensus: <span className={cn('font-bold', color)}>{consensus}</span>
 		</div>
 	)
 }

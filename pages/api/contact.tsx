@@ -4,10 +4,7 @@ const postmark = require('postmark')
 
 const KEY = process.env.POSTMARK_SERVER_API_TOKEN || ''
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const client = new postmark.Client(KEY)
 	const { name, email, subject, message } = req.body
 

@@ -48,11 +48,7 @@ export const ActionsListedYear = ({ year, data }: ActionProps) => {
 					type="listed"
 					year={year}
 				/>
-				<ActionsPaywall
-					count={data.data.length}
-					fullCount={data.fullCount}
-					title="Listings"
-				/>
+				<ActionsPaywall count={data.data.length} fullCount={data.fullCount} title="Listings" />
 			</ActionsLayout>
 		</>
 	)

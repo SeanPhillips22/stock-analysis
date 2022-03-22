@@ -5,6 +5,7 @@ import { Filter } from 'components/Controls/Filter'
 import { ResultsNav } from './ResultsNav'
 import { ColumnDropdown } from 'components/Screener/_Results/ResultsMenu/ColumnSelection/ColumnDropdown'
 import { ScreenerTypes } from 'components/Screener/screener.types'
+// import { OptionsMenu } from './OptionsMenu'
 
 interface Props {
 	count: number
@@ -34,7 +35,7 @@ export function ResultsMenu({
 					{`${count} Results`}
 				</h2>
 			</div>
-			<div className="flex flex-row justify-end py-2 md:space-x-4 lg:order-3 lg:space-x-3 lg:py-0">
+			<div className="flex flex-row justify-end space-x-2 py-2 md:space-x-2.5 lg:order-3 lg:py-0">
 				<div className="hidden max-w-[110px] md:block">
 					<Filter
 						useAsyncDebounce={useAsyncDebounce}
@@ -48,10 +49,13 @@ export function ResultsMenu({
 					<Export tableId={tableId} />
 				</div>
 				<div className="ml-auto md:ml-0">
-					<ColumnDropdown type={type} />
+					<ColumnDropdown />
 				</div>
+				{/* <div>
+					<OptionsMenu />
+				</div> */}
 			</div>
-			<div className="hide-scroll col-span-2 overflow-x-auto border-t lg:order-2 lg:grow lg:border-0 lg:pl-1 xl:pl-2">
+			<div className="hide-scroll col-span-2 overflow-x-auto border-t lg:order-2 lg:grow lg:border-0 lg:pl-1 xl:pl-3">
 				<ResultsNav type={type} />
 			</div>
 		</div>

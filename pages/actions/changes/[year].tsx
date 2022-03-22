@@ -58,11 +58,7 @@ export const ActionsChangesYear = ({ year, data }: ActionProps) => {
 					type="changes"
 					year={year}
 				/>
-				<ActionsPaywall
-					count={data.data.length}
-					fullCount={data.fullCount}
-					title="Symbol Changes"
-				/>
+				<ActionsPaywall count={data.data.length} fullCount={data.fullCount} title="Symbol Changes" />
 			</ActionsLayout>
 		</>
 	)

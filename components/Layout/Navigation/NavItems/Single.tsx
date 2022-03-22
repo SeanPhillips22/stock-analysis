@@ -9,11 +9,7 @@ export function SingleNavItem({ item, path }: NavItemProps) {
 	return (
 		<Link href={item.href} prefetch={false}>
 			<a
-				className={
-					matchPath(path, item.href)
-						? 'nav-item current group'
-						: 'nav-item group'
-				}
+				className={matchPath(path, item.href) ? 'nav-item current group' : 'nav-item group'}
 				onClick={close}
 				title={item.name}
 			>

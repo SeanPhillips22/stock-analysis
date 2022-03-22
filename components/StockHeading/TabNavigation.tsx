@@ -30,14 +30,10 @@ export function TabNavigation({ info, hideChart }: Props) {
 				<Tab symbol={info.symbol} title="Overview" append="" />
 				<Tab symbol={info.symbol} title="Financials" append="financials" />
 				<Tab symbol={info.symbol} title="Statistics" append="statistics" />
-				{!info.exceptions.hideForecast && (
-					<Tab symbol={info.symbol} title="Forecast" append="forecast" />
-				)}
+				{!info.exceptions.hideForecast && <Tab symbol={info.symbol} title="Forecast" append="forecast" />}
 				<Tab symbol={info.symbol} title="Dividends" append="dividend" />
 				<Tab symbol={info.symbol} title="Profile" append="company" />
-				{!hideChart && (
-					<Tab symbol={info.symbol} title="Chart" append="chart" />
-				)}
+				{!hideChart && <Tab symbol={info.symbol} title="Chart" append="chart" />}
 			</ul>
 		</nav>
 	)

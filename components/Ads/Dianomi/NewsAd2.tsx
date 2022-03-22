@@ -22,16 +22,8 @@ export default function NewsAd2() {
 
 	return (
 		<>
-			<div
-				id="ad-banner"
-				className="dianomi_context nwsdia"
-				data-dianomi-context-id="411"
-			></div>
-			<Script
-				strategy="lazyOnload"
-				src="https://www.dianomi.com/js/contextfeed.js"
-				id="dianomi_context_script"
-			/>
+			<div id="ad-banner" className="dianomi_context nwsdia" data-dianomi-context-id="411"></div>
+			<Script strategy="lazyOnload" src="https://www.dianomi.com/js/contextfeed.js" id="dianomi_context_script" />
 		</>
 	)
 }

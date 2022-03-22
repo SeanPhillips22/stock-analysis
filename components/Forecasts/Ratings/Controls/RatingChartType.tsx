@@ -10,18 +10,12 @@ export function RatingChartType() {
 	return (
 		<Dropdown title={type}>
 			<Menu.Item>
-				<div
-					className={cn('dd', type === 'Bar Chart' ? 'active' : '')}
-					onClick={() => setType('Bar Chart')}
-				>
+				<div className={cn('dd', type === 'Bar Chart' ? 'active' : '')} onClick={() => setType('Bar Chart')}>
 					Bar Chart
 				</div>
 			</Menu.Item>
 			<Menu.Item>
-				<div
-					className={cn('dd', type === 'Line Chart' ? 'active' : '')}
-					onClick={() => setType('Line Chart')}
-				>
+				<div className={cn('dd', type === 'Line Chart' ? 'active' : '')} onClick={() => setType('Line Chart')}>
 					Line Chart
 				</div>
 			</Menu.Item>

@@ -10,14 +10,7 @@ import {
 	defaults
 } from 'chart.js'
 
-ChartJS.register(
-	BarController,
-	BarElement,
-	Tooltip,
-	LinearScale,
-	Title,
-	CategoryScale
-)
+ChartJS.register(BarController, BarElement, Tooltip, LinearScale, Title, CategoryScale)
 
 import { isOldSafari, UnavailableSafari } from 'components/Unavailable'
 
@@ -30,9 +23,7 @@ interface Props {
 export const StatsChart = ({ title, x, y }: Props) => {
 	// Chart.js causes critical errors on older Safari versions
 	if (isOldSafari()) {
-		return (
-			<UnavailableSafari classes="mt-4 mb-3 h-[300px] sm:mb-4 sm:h-[390px]" />
-		)
+		return <UnavailableSafari classes="mt-4 mb-3 h-[300px] sm:mb-4 sm:h-[390px]" />
 	}
 
 	defaults.font.family =
@@ -120,9 +111,7 @@ export const StatsChart = ({ title, x, y }: Props) => {
 							},
 							displayColors: false,
 							callbacks: {
-								label: function (tooltipItem: {
-									formattedValue: string
-								}) {
+								label: function (tooltipItem: { formattedValue: string }) {
 									return 'IPOs: ' + tooltipItem.formattedValue
 								}
 							}
@@ -131,10 +120,7 @@ export const StatsChart = ({ title, x, y }: Props) => {
 					animation: {
 						duration: 1,
 						onProgress: function (animation) {
-							if (
-								typeof window !== 'undefined' &&
-								window.innerWidth > 500
-							) {
+							if (typeof window !== 'undefined' && window.innerWidth > 500) {
 								const instance = animation.chart
 								const ctx = instance.ctx
 								const size = x.length > 12 ? '13px' : '14 px'
@@ -146,15 +132,9 @@ export const StatsChart = ({ title, x, y }: Props) => {
 								ctx.textAlign = 'center'
 								ctx.textBaseline = 'bottom'
 
-								instance.data.datasets.forEach(function (
-									dataset: any,
-									i: any
-								) {
+								instance.data.datasets.forEach(function (dataset: any, i: any) {
 									const meta = instance.getDatasetMeta(i)
-									meta.data.forEach(function (
-										bar: { x: any; y: number },
-										index: number
-									) {
+									meta.data.forEach(function (bar: { x: any; y: number }, index: number) {
 										const data = y[index]
 										ctx.fillText(data.toString(), bar.x, bar.y - 5)
 									})

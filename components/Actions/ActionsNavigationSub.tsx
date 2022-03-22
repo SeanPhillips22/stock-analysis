@@ -9,10 +9,7 @@ export const ActionsNavigationSub = () => {
 	const setAll = actionsState(state => state.setAll)
 	const [count, setCount] = useState<number>(2)
 
-	const type =
-		path.two && !path.two.includes('20') && !path.two.includes('19')
-			? path.two
-			: ''
+	const type = path.two && !path.two.includes('20') && !path.two.includes('19') ? path.two : ''
 
 	const tabs = [
 		'2022',
@@ -55,41 +52,19 @@ export const ActionsNavigationSub = () => {
 		<nav className="mb-2 lg:mb-3">
 			<ul className="navmenu submenu tight flex-wrap md:space-x-1">
 				<li className="mb-0.5">
-					<Link
-						href={type ? `/actions/${type}/` : '/actions/'}
-						prefetch={false}
-					>
+					<Link href={type ? `/actions/${type}/` : '/actions/'} prefetch={false}>
 						<a
 							data-title="Recent"
-							className={
-								!path.two || (path.two === type && !path.three)
-									? 'active'
-									: 'inactive'
-							}
+							className={!path.two || (path.two === type && !path.three) ? 'active' : 'inactive'}
 						>
 							Recent
 						</a>
 					</Link>
 				</li>
 				{tabs.map((tab, index) => (
-					<li
-						key={tab}
-						className={`mb-0.5${index > count ? ' hidden' : ''}`}
-					>
-						<Link
-							href={
-								type ? `/actions/${type}/${tab}/` : `/actions/${tab}/`
-							}
-							prefetch={false}
-						>
-							<a
-								data-title={tab}
-								className={
-									path.two === tab || path.three === tab
-										? 'active'
-										: 'inactive'
-								}
-							>
+					<li key={tab} className={`mb-0.5${index > count ? ' hidden' : ''}`}>
+						<Link href={type ? `/actions/${type}/${tab}/` : `/actions/${tab}/`} prefetch={false}>
+							<a data-title={tab} className={path.two === tab || path.three === tab ? 'active' : 'inactive'}>
 								{tab}
 							</a>
 						</Link>
@@ -97,17 +72,11 @@ export const ActionsNavigationSub = () => {
 				))}
 				<li>
 					{all ? (
-						<span
-							className="inactive font-semibold"
-							onClick={() => setAll(false)}
-						>
+						<span className="inactive font-semibold" onClick={() => setAll(false)}>
 							Show Less &uarr;
 						</span>
 					) : (
-						<span
-							className="inactive font-semibold"
-							onClick={() => setAll(true)}
-						>
+						<span className="inactive font-semibold" onClick={() => setAll(true)}>
 							Show All &darr;
 						</span>
 					)}

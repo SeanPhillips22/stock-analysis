@@ -39,8 +39,7 @@ export default function LandingPage() {
 						email: data?.user?.email,
 						status: 'trialing',
 						plan: data?.product?.name,
-						currency:
-							data?.checkout?.recurring_prices?.customer?.currency,
+						currency: data?.checkout?.recurring_prices?.customer?.currency,
 						unit_price: data?.checkout?.recurring_prices?.customer?.unit,
 						country: data?.user?.country,
 						registered_date: formatDateToString()
@@ -67,9 +66,8 @@ export default function LandingPage() {
 						</h1>
 
 						<p className="text-lg leading-relaxed text-gray-900 sm:text-[21px]">
-							Get unlimited access to all of our financial data while
-							getting rid of ads and helping to support our mission of
-							making the world&apos;s best investing website.
+							Get unlimited access to all of our financial data while getting rid of ads and helping to support
+							our mission of making the world&apos;s best investing website.
 						</p>
 					</div>
 				</header>
@@ -79,47 +77,32 @@ export default function LandingPage() {
 						<table className="w-full border border-gray-200">
 							<thead>
 								<tr className="border-b border-gray-200">
-									<th className="p-3 text-left text-xl sm:px-4">
-										Pro
-									</th>
+									<th className="p-3 text-left text-xl sm:px-4">Pro</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr className="border-b border-gray-200">
 									<td className="p-3 text-lg sm:px-4">
-										Free for 30 days, then $9.99 a month. Cancel
-										anytime.
+										Free for 30 days, then $9.99 a month. Cancel anytime.
 									</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Unlimited access to all available data.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Unlimited access to all available data.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Unlimited exports to excel and csv files.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Unlimited exports to excel and csv files.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Financial history: Up to 30 years and growing.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Financial history: Up to 30 years and growing.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Full access to ETF holdings.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Full access to ETF holdings.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Full corporate actions data.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Full corporate actions data.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										More features coming soon.
-									</td>
+									<td className="p-3 text-lg sm:px-4">More features coming soon.</td>
 								</tr>
 								<tr>
 									<td className="p-3 text-lg sm:px-4">No ads.</td>
@@ -149,36 +132,24 @@ export default function LandingPage() {
 						<table className="w-full border border-gray-200">
 							<thead>
 								<tr className="border-b border-gray-200">
-									<th className="p-3 text-left text-xl sm:px-4">
-										Free
-									</th>
+									<th className="p-3 text-left text-xl sm:px-4">Free</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										No registration required.
-									</td>
+									<td className="p-3 text-lg sm:px-4">No registration required.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Limited financial history.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Limited financial history.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Limited ETF holdings.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Limited ETF holdings.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Limited corporate actions.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Limited corporate actions.</td>
 								</tr>
 								<tr className="border-b border-gray-200">
-									<td className="p-3 text-lg sm:px-4">
-										Ad supported.
-									</td>
+									<td className="p-3 text-lg sm:px-4">Ad supported.</td>
 								</tr>
 							</tbody>
 						</table>
@@ -187,60 +158,43 @@ export default function LandingPage() {
 
 				<section className="mt-16 border-t border-gray-200 bg-gray-100 py-8 px-5 sm:mt-24 md:py-10">
 					<div className="mx-auto max-w-[750px]">
-						<h2 className="mb-5 text-3xl font-bold text-gray-800 sm:text-4xl">
-							Common Questions
-						</h2>
+						<h2 className="mb-5 text-3xl font-bold text-gray-800 sm:text-4xl">Common Questions</h2>
 
-						<h3 className="mb-5 text-2xl font-bold text-gray-800">
-							How to sign up
-						</h3>
+						<h3 className="mb-5 text-2xl font-bold text-gray-800">How to sign up</h3>
 
 						<p className="mb-5 text-lg">
-							Click &quot;Start Free Trial&quot; above and enter your
-							details. Then you will get access right away.
+							Click &quot;Start Free Trial&quot; above and enter your details. Then you will get access right
+							away.
 						</p>
 
-						<h3 className="mb-5 text-2xl font-bold text-gray-800">
-							How to get support?
-						</h3>
+						<h3 className="mb-5 text-2xl font-bold text-gray-800">How to get support?</h3>
 
 						<p className="mb-5 text-lg">
-							You can send an email directly to
-							support@stockanalysis.com. You can also go to the contact
-							page and send a message via the form.
+							You can send an email directly to support@stockanalysis.com. You can also go to the contact page
+							and send a message via the form.
 						</p>
 
-						<h3 className="mb-5 text-2xl font-bold text-gray-800">
-							Can I cancel at any time?
-						</h3>
+						<h3 className="mb-5 text-2xl font-bold text-gray-800">Can I cancel at any time?</h3>
 
 						<p className="mb-5 text-lg">
-							Of course. There is a &quot;Cancel subscription&quot;
-							button in the my account area that you get access to after
-							signing up. You can also send us a message and we will
-							cancel for you.
+							Of course. There is a &quot;Cancel subscription&quot; button in the my account area that you get
+							access to after signing up. You can also send us a message and we will cancel for you.
 						</p>
 
-						<h3 className="mb-5 text-2xl font-bold text-gray-800">
-							Will my card be charged?
-						</h3>
+						<h3 className="mb-5 text-2xl font-bold text-gray-800">Will my card be charged?</h3>
 
 						<p className="mb-5 text-lg">
-							Your card will not be charged until after 30 days. If you
-							cancel before the 30 days are over then you will not be
-							charged at all. We will send you an email reminder a few
-							days before the trial ends.
+							Your card will not be charged until after 30 days. If you cancel before the 30 days are over then
+							you will not be charged at all. We will send you an email reminder a few days before the trial
+							ends.
 						</p>
 
-						<h3 className="mb-5 text-2xl font-bold text-gray-800">
-							What about the existing free site?
-						</h3>
+						<h3 className="mb-5 text-2xl font-bold text-gray-800">What about the existing free site?</h3>
 
 						<p className="mb-5 text-lg">
-							We plan on making the world&apos;s best <em>free</em>{' '}
-							investing website, and that includes building more useful
-							features. But some features and data will only be available
-							to &quot;Pro&quot; accounts.
+							We plan on making the world&apos;s best <em>free</em> investing website, and that includes building
+							more useful features. But some features and data will only be available to &quot;Pro&quot;
+							accounts.
 						</p>
 					</div>
 				</section>

@@ -44,8 +44,7 @@ export default function Macd() {
 		return zip(diff, averageDiff).map(d => ({
 			macd: d[0],
 			signal: d[1],
-			divergence:
-				d[0] !== undefined && d[1] !== undefined ? d[0] - d[1] : undefined
+			divergence: d[0] !== undefined && d[1] !== undefined ? d[0] - d[1] : undefined
 		}))
 	}
 	calculator.undefinedLength = () => {

@@ -19,9 +19,7 @@ export function LayoutContextProvider({ value, children }: ProviderProps) {
 		path: value.path
 	}
 
-	return (
-		<LayoutContext.Provider value={state}>{children}</LayoutContext.Provider>
-	)
+	return <LayoutContext.Provider value={state}>{children}</LayoutContext.Provider>
 }
 
 export function useLayoutContext() {

@@ -45,9 +45,7 @@ export function Pagination({
 				disabled={!canPreviousPage}
 				className={cn(
 					'flex items-center rounded-md border border-gray-300 bg-white py-2 pl-1.5 pr-2.5 font-medium text-gray-700 hover:bg-gray-50 sm:pr-3',
-					!canPreviousPage
-						? ' cursor-default hover:bg-white'
-						: ' cursor-pointer'
+					!canPreviousPage ? ' cursor-default hover:bg-white' : ' cursor-pointer'
 				)}
 			>
 				<ChevronLeftIcon className="-mb-px h-4 w-4" />
@@ -68,9 +66,7 @@ export function Pagination({
 				disabled={!canNextPage}
 				className={cn(
 					'flex items-center rounded-md border border-gray-300 bg-white py-2 pr-1.5 pl-2.5 font-medium text-gray-700 hover:bg-gray-50 sm:pl-3',
-					!canNextPage
-						? ' cursor-default hover:bg-white'
-						: ' cursor-pointer'
+					!canNextPage ? ' cursor-default hover:bg-white' : ' cursor-pointer'
 				)}
 			>
 				<div className="hidden xs:inline">Next</div>

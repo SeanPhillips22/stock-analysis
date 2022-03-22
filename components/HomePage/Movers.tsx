@@ -1,8 +1,7 @@
 import { HeadingLink } from 'components/Buttons/HeadingLink'
 import { StockLink } from 'components/Links'
 
-const cellStyles =
-	'py-1.5 sm:py-2 px-1.5 xs:px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200'
+const cellStyles = 'py-1.5 sm:py-2 px-1.5 xs:px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200'
 
 interface Mover {
 	s: string
@@ -33,10 +32,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 				{items.map((item, index) => {
 					if (item.s) {
 						return (
-							<tr
-								key={index}
-								className="border-b border-gray-200 transition duration-100 hover:bg-gray-50"
-							>
+							<tr key={index} className="border-b border-gray-200 transition duration-100 hover:bg-gray-50">
 								<td className={cellStyles + ' border-r text-left'}>
 									<StockLink symbol={item.s} className="bll" />
 								</td>
@@ -49,19 +45,8 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 									{item.n}
 								</td>
 
-								<td
-									className={
-										cellStyles +
-										' hidden border-r text-right tiny:table-cell'
-									}
-								>
-									${item.p}
-								</td>
-								<td
-									className={cellStyles + ' text-right ' + redOrGreen}
-								>
-									{item.c}%
-								</td>
+								<td className={cellStyles + ' hidden border-r text-right tiny:table-cell'}>${item.p}</td>
+								<td className={cellStyles + ' text-right ' + redOrGreen}>{item.c}%</td>
 							</tr>
 						)
 					}
@@ -74,9 +59,7 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 	const Table = ({ movers, type }: InnerProps) => {
 		const titlePrefix = marketStatus === 'premarket' ? 'Pre-Market' : 'Top'
 		const url =
-			marketStatus === 'premarket'
-				? `/markets/premarket/${type.toLowerCase()}/`
-				: `/markets/${type.toLowerCase()}/`
+			marketStatus === 'premarket' ? `/markets/premarket/${type.toLowerCase()}/` : `/markets/${type.toLowerCase()}/`
 
 		return (
 			<div className="grow">
@@ -90,20 +73,9 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 				<table className="w-full border border-gray-200">
 					<thead>
 						<tr className="border-t border-b border-gray-200">
-							<th className={cellStyles + ' border-r text-left'}>
-								Symbol
-							</th>
-							<th className={cellStyles + ' border-r text-left'}>
-								Name
-							</th>
-							<th
-								className={
-									cellStyles +
-									' hidden border-r text-right tiny:table-cell'
-								}
-							>
-								Price
-							</th>
+							<th className={cellStyles + ' border-r text-left'}>Symbol</th>
+							<th className={cellStyles + ' border-r text-left'}>Name</th>
+							<th className={cellStyles + ' hidden border-r text-right tiny:table-cell'}>Price</th>
 							<th className={cellStyles + ' text-right'}>Change</th>
 						</tr>
 					</thead>

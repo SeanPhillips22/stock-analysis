@@ -7,9 +7,7 @@ export function AboutActions() {
 			<div className="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
 				<div className="lg:grid lg:grid-cols-3 lg:gap-8">
 					<div>
-						<h2 className="text-3xl font-bold text-gray-900">
-							What to do next
-						</h2>
+						<h2 className="text-3xl font-bold text-gray-900">What to do next</h2>
 						<p className="mt-4 text-lg text-gray-600">
 							Reach out to our{' '}
 							<Link href="/contact/" prefetch={false}>
@@ -21,23 +19,17 @@ export function AboutActions() {
 					<div className="mt-12 lg:col-span-2 lg:mt-0">
 						<div className="space-y-12">
 							<div>
-								<div className="text-xl font-medium leading-6 text-gray-900">
-									Are you a serious investor?
-								</div>
+								<div className="text-xl font-medium leading-6 text-gray-900">Are you a serious investor?</div>
 								<div className="mt-2 text-lg text-gray-600">
 									Consider upgrading to{' '}
 									<Link href="/pro/" prefetch={false}>
-										<a className="bll font-medium">
-											Stock Analysis Pro
-										</a>
+										<a className="bll font-medium">Stock Analysis Pro</a>
 									</Link>{' '}
 									for even more data and unlimited export ability.
 								</div>
 							</div>
 							<div>
-								<div className="text-xl font-medium leading-6 text-gray-900">
-									Are you a developer?
-								</div>
+								<div className="text-xl font-medium leading-6 text-gray-900">Are you a developer?</div>
 								<div className="mt-2 text-lg text-gray-600">
 									Help us code the site on{' '}
 									<a
@@ -50,9 +42,7 @@ export function AboutActions() {
 									</a>{' '}
 									or check out our{' '}
 									<Link href="/apis/" prefetch={false}>
-										<a className="bll font-medium">
-											API and data offerings
-										</a>
+										<a className="bll font-medium">API and data offerings</a>
 									</Link>
 									.
 								</div>
@@ -62,13 +52,10 @@ export function AboutActions() {
 									See something that can be improved?
 								</div>
 								<div className="mt-2 text-lg text-gray-600">
-									We are committed to the absolute highest standards of
-									data accuracy. If you see anything that looks
-									inaccurate,{' '}
+									We are committed to the absolute highest standards of data accuracy. If you see anything that
+									looks inaccurate,{' '}
 									<Link href="/contact/" prefetch={false}>
-										<a className="bll font-medium">
-											send us a message
-										</a>
+										<a className="bll font-medium">send us a message</a>
 									</Link>{' '}
 									and we will look into it immediately.
 								</div>
@@ -78,8 +65,7 @@ export function AboutActions() {
 									Want to keep up-to-date with the latest news?
 								</div>
 								<div className="mt-2 text-lg text-gray-600">
-									In that case, you can subscribe to our newsletter or
-									follow our site on{' '}
+									In that case, you can subscribe to our newsletter or follow our site on{' '}
 									<a
 										href="https://github.com/stockanalysisdev"
 										target="_blank"

@@ -1,10 +1,6 @@
 import * as React from 'react'
 
-import {
-	getStrokeDasharray,
-	getStrokeDasharrayCanvas,
-	isDefined
-} from '../core'
+import { getStrokeDasharray, getStrokeDasharrayCanvas, isDefined } from '../core'
 
 export const renderSVG = (props: any) => {
 	const { className } = props
@@ -36,21 +32,14 @@ export const renderSVG = (props: any) => {
 
 		const path =
 			edge.orient === 'left'
-				? `M0,0L0,${rectHeight}L${rectWidth},${rectHeight}L${
-						rectWidth + arrowWidth
-				  },10L${rectWidth},0L0,0L0,0`
-				: `M0,${arrowWidth}L${arrowWidth},${rectHeight}L${
-						rectWidth + arrowWidth
-				  },${rectHeight}L${
+				? `M0,0L0,${rectHeight}L${rectWidth},${rectHeight}L${rectWidth + arrowWidth},10L${rectWidth},0L0,0L0,0`
+				: `M0,${arrowWidth}L${arrowWidth},${rectHeight}L${rectWidth + arrowWidth},${rectHeight}L${
 						rectWidth + arrowWidth
 				  },0L${arrowWidth},0L0,${arrowWidth}`
 
 		coordinateBase =
 			edge.orient === 'left' || edge.orient === 'right' ? (
-				<g
-					key={1}
-					transform={`translate(${edge.coordinateBase.edgeXRect},${edge.coordinateBase.edgeYRect})`}
-				>
+				<g key={1} transform={`translate(${edge.coordinateBase.edgeXRect},${edge.coordinateBase.edgeYRect})`}>
 					<path
 						d={path}
 						className="react-financial-charts-text-background"
@@ -140,24 +129,16 @@ const helper = (props: any) => {
 		let edgeYText
 
 		if (type === 'horizontal') {
-			edgeXRect =
-				dx + (orient === 'right' ? edgeAt + 1 : edgeAt - rectWidth - 1)
+			edgeXRect = dx + (orient === 'right' ? edgeAt + 1 : edgeAt - rectWidth - 1)
 			edgeYRect = y1 - rectHeight / 2 - strokeWidth
-			edgeXText =
-				dx +
-				(orient === 'right'
-					? edgeAt + rectWidth / 2
-					: edgeAt - rectWidth / 2)
+			edgeXText = dx + (orient === 'right' ? edgeAt + rectWidth / 2 : edgeAt - rectWidth / 2)
 			edgeYText = y1
 		} else {
 			const dy = orient === 'bottom' ? strokeWidth - 1 : -strokeWidth + 1
 			edgeXRect = x1 - rectWidth / 2
 			edgeYRect = (orient === 'bottom' ? edgeAt : edgeAt - rectHeight) + dy
 			edgeXText = x1
-			edgeYText =
-				(orient === 'bottom'
-					? edgeAt + rectHeight / 2
-					: edgeAt - rectHeight / 2) + dy
+			edgeYText = (orient === 'bottom' ? edgeAt + rectHeight / 2 : edgeAt - rectHeight / 2) + dy
 		}
 
 		coordinateBase = {
@@ -231,8 +212,7 @@ export const drawOnCanvas = (ctx: CanvasRenderingContext2D, props: any) => {
 	ctx.setLineDash([])
 
 	if (edge.coordinateBase !== undefined) {
-		const { arrowWidth, rectWidth, rectHeight, rectRadius } =
-			edge.coordinateBase
+		const { arrowWidth, rectWidth, rectHeight, rectRadius } = edge.coordinateBase
 
 		ctx.fillStyle = edge.coordinateBase.fill
 		if (edge.coordinateBase.stroke !== undefined) {
@@ -276,14 +256,8 @@ export const drawOnCanvas = (ctx: CanvasRenderingContext2D, props: any) => {
 		if (edge.coordinate !== undefined) {
 			ctx.fillStyle = edge.coordinate.textFill
 			ctx.textAlign =
-				edge.coordinate.textAnchor === 'middle'
-					? 'center'
-					: (edge.coordinate.textAnchor as CanvasTextAlign)
-			ctx.fillText(
-				edge.coordinate.displayCoordinate,
-				edge.coordinate.edgeXText,
-				edge.coordinate.edgeYText
-			)
+				edge.coordinate.textAnchor === 'middle' ? 'center' : (edge.coordinate.textAnchor as CanvasTextAlign)
+			ctx.fillText(edge.coordinate.displayCoordinate, edge.coordinate.edgeXText, edge.coordinate.edgeYText)
 		}
 	}
 }

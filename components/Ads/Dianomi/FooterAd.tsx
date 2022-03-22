@@ -26,16 +26,8 @@ export default function FooterAd() {
 
 	return (
 		<>
-			<div
-				id="ad-banner"
-				className="dianomi_context ftdia"
-				data-dianomi-context-id="443"
-			></div>
-			<Script
-				strategy="lazyOnload"
-				src="https://www.dianomi.com/js/contextfeed.js"
-				id="dianomi_context_script"
-			/>
+			<div id="ad-banner" className="dianomi_context ftdia" data-dianomi-context-id="443"></div>
+			<Script strategy="lazyOnload" src="https://www.dianomi.com/js/contextfeed.js" id="dianomi_context_script" />
 		</>
 	)
 }

@@ -2,11 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { Controls } from './PriceChartControls'
 import { PriceChange } from './PriceChange'
 import { Info } from 'types/Info'
-import {
-	getPriceChange,
-	translateTime,
-	UnavailableIpo
-} from './PriceChart.functions'
+import { getPriceChange, translateTime, UnavailableIpo } from './PriceChart.functions'
 import { Unavailable } from 'components/Unavailable'
 import { useChart } from 'hooks/useChart'
 import { useQuote } from 'hooks/useQuote'
@@ -71,18 +67,9 @@ export function PriceChart({ info, initial }: Props) {
 	return (
 		<div className="mb-4 border-t border-b border-gray-200 py-0.5 xs:py-1 sm:py-3 sm:px-2 lg:mb-0 lg:border-0 lg:border-l lg:border-gray-300 lg:py-0 lg:px-0 lg:pl-3">
 			<div className="flex flex-row items-center justify-between space-x-1 py-1 sm:pt-0.5">
-				<Controls
-					chartTime={chartTime}
-					setChartTime={setChartTime}
-					setInitialFetch={setInitialFetch}
-				/>
+				<Controls chartTime={chartTime} setChartTime={setChartTime} setInitialFetch={setInitialFetch} />
 				{data && data.length > 0 && (
-					<PriceChange
-						chartData={data}
-						chartTime={chartTime}
-						info={info}
-						show={!spinner}
-					/>
+					<PriceChange chartData={data} chartTime={chartTime} info={info} show={!spinner} />
 				)}
 			</div>
 			<div className="hide-scroll h-[250px] overflow-x-auto sm:h-[300px]">
@@ -94,13 +81,7 @@ export function PriceChart({ info, initial }: Props) {
 				{spinner ? (
 					<LoadingLight />
 				) : data?.length ? (
-					<DisplayChart
-						data={data}
-						time={chartTime}
-						symbol={info.symbol}
-						close={quote.cl}
-						change={change}
-					/>
+					<DisplayChart data={data} time={chartTime} symbol={info.symbol} close={quote.cl} change={change} />
 				) : !isFetching ? (
 					<div className="h-full pt-1.5">
 						<Unavailable message="No data available" />

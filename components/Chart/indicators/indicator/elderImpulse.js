@@ -6,23 +6,16 @@ const ALGORITHM_TYPE = 'ElderImpulse'
 export default function ElderImpulseComponent() {
 	let macdSource
 	let emaSource
-	const base = baseIndicator()
-		.type(ALGORITHM_TYPE)
-		.stroke(appearanceOptions.stroke)
-		.fill(undefined)
+	const base = baseIndicator().type(ALGORITHM_TYPE).stroke(appearanceOptions.stroke).fill(undefined)
 	const underlyingAlgorithm = slidingWindow()
 		.windowSize(2)
 		.undefinedValue('neutral')
 		.accumulator(([prev, curr]) => {
 			if (macdSource === undefined) {
-				throw new Error(
-					`macdSource not defined for ${ALGORITHM_TYPE} calculator`
-				)
+				throw new Error(`macdSource not defined for ${ALGORITHM_TYPE} calculator`)
 			}
 			if (emaSource === undefined) {
-				throw new Error(
-					`emaSource not defined for ${ALGORITHM_TYPE} calculator`
-				)
+				throw new Error(`emaSource not defined for ${ALGORITHM_TYPE} calculator`)
 			}
 			const prevMacd = macdSource(prev)
 			const prevEMA = emaSource(prev)
@@ -30,16 +23,10 @@ export default function ElderImpulseComponent() {
 				const prevMACDDivergence = prevMacd.divergence
 				const currMACDDivergence = macdSource(curr).divergence
 				const currEMA = emaSource(curr)
-				if (
-					currMACDDivergence >= prevMACDDivergence &&
-					currEMA >= prevEMA
-				) {
+				if (currMACDDivergence >= prevMACDDivergence && currEMA >= prevEMA) {
 					return 'up'
 				}
-				if (
-					currMACDDivergence <= prevMACDDivergence &&
-					currEMA <= prevEMA
-				) {
+				if (currMACDDivergence <= prevMACDDivergence && currEMA <= prevEMA) {
 					return 'down'
 				}
 			}
@@ -51,9 +38,7 @@ export default function ElderImpulseComponent() {
 			datum.elderImpulse = i
 		})
 	const indicator = function (data, options = { merge: true }) {
-		const newData = options.merge
-			? mergedAlgorithm(data)
-			: underlyingAlgorithm(data)
+		const newData = options.merge ? mergedAlgorithm(data) : underlyingAlgorithm(data)
 		return newData
 	}
 	indicator.macdSource = function (x) {

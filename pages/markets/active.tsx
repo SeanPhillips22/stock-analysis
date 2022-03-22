@@ -50,11 +50,7 @@ export default function ActivePage({ data, tradingTimestamps }: Props) {
 								columns: true
 							},
 							columnOptions: MoverDataPoints,
-							excludeColumns: [
-								'premarketPrice',
-								'premarketChange',
-								'premarketChangePercent'
-							]
+							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent']
 						},
 						dynamic: query
 					}}

@@ -20,16 +20,7 @@ const query: TableDynamic = {
 	count: 20,
 	sort: [{ id: 'views', desc: true }],
 	sortDirection: 'desc',
-	columns: [
-		'rank',
-		's',
-		'n',
-		'views',
-		'marketCap',
-		'price',
-		'change',
-		'volume'
-	]
+	columns: ['rank', 's', 'n', 'views', 'marketCap', 'change', 'volume']
 }
 
 export default function Trending(props: Props) {
@@ -44,9 +35,7 @@ export default function Trending(props: Props) {
 			/>
 			<Layout url={url}>
 				<div className="contain py-5 xs:py-6" id="trending">
-					<h1 className="hh1 mb-0 border-b-[3px] border-blue-brand_sharp pb-3">
-						Trending Today
-					</h1>
+					<h1 className="hh1 mb-0 border-b-[3px] border-blue-brand_sharp pb-3">Trending Today</h1>
 
 					<div className="lg:right-sidebar mt-3 sm:mt-4 lg:mt-5">
 						<div>
@@ -68,8 +57,8 @@ export default function Trending(props: Props) {
 								<StockTable _data={props.data} />
 							</TableContextProvider>
 							<div className="mt-1.5 text-sm text-gray-600">
-								Updated: {props.getTrendingTimestamp}. Stocks are sorted
-								by pageviews according to Google Analytics.
+								Updated: {props.getTrendingTimestamp}. Stocks are sorted by pageviews according to Google
+								Analytics.
 							</div>
 						</div>
 						<aside className="space-y-8 py-0">

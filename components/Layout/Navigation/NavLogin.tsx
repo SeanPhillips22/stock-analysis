@@ -8,16 +8,8 @@ export function NavLogin() {
 	if (isLoggedIn) {
 		return (
 			<div className="nav-login">
-				<ButtonWhite
-					text="Log Out"
-					onClick={signOut}
-					className="px-0 text-base"
-				/>
-				<ButtonWhite
-					text="My Account"
-					url="/pro/my-account/"
-					className="mt-3 px-0 text-base"
-				/>
+				<ButtonWhite text="Log Out" onClick={signOut} className="px-0 text-base" />
+				<ButtonWhite text="My Account" url="/pro/my-account/" className="mt-3 px-0 text-base" />
 			</div>
 		)
 	}
@@ -30,12 +22,7 @@ export function NavLogin() {
 				className="eventbtn text-base"
 				id="Trial_Layout_MobileNav_FreeTrialBtn"
 			/>
-			<ButtonWhite
-				text="Log In"
-				url="/login/"
-				className="eventbtn mt-3 text-base"
-				id="Layout_MobileNav_LoginBtn"
-			/>
+			<ButtonWhite text="Log In" url="/login/" className="eventbtn mt-3 text-base" id="Layout_MobileNav_LoginBtn" />
 		</div>
 	)
 }

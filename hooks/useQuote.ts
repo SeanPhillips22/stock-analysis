@@ -1,8 +1,5 @@
 import { getData } from 'functions/apis/API'
-import {
-	isTradingHours,
-	isTradingHoursOpen
-} from 'functions/datetime/isTradingHours'
+import { isTradingHours, isTradingHoursOpen } from 'functions/datetime/isTradingHours'
 import { useQuery } from 'react-query'
 import { Info } from 'types/Info'
 import { Quote } from 'types/Quote'
@@ -26,9 +23,7 @@ export function useQuote(info: Info) {
 		refetchInterval: tradingHours && !isOTC ? 5000 : false,
 		refetchOnWindowFocus: tradingHours ? true : false,
 		initialData: info.quote,
-		initialDataUpdatedAt: info.quote.lf
-			? info.quote.lf + expire
-			: Date.now() - 60000,
+		initialDataUpdatedAt: info.quote.lf ? info.quote.lf + expire : Date.now() - 60000,
 		enabled: info.state !== 'upcomingipo' && !info.archived,
 		notifyOnChangeProps: 'tracked',
 		retry: false

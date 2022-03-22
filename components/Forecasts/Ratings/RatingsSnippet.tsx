@@ -15,8 +15,7 @@ export function RatingsSnippet() {
 
 		switch (consensus) {
 			case 'Strong Buy':
-				explanation =
-					'perform very well in the near future and significantly outperform the market'
+				explanation = 'perform very well in the near future and significantly outperform the market'
 				break
 
 			case 'Buy':

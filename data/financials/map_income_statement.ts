@@ -14,8 +14,7 @@ export const MAP_INCOME_STATEMENT = [
 		format: 'growth',
 		tooltip:
 			"Year-over-year (YoY) revenue growth is how much a company's revenue has increased compared to the same time period one year ago.",
-		formula:
-			'Revenue Growth = ((Current Revenue / Previous Revenue) - 1) * 100%',
+		formula: 'Revenue Growth = ((Current Revenue / Previous Revenue) - 1) * 100%',
 		indent: true
 	},
 	{
@@ -51,8 +50,7 @@ export const MAP_INCOME_STATEMENT = [
 	{
 		id: 'otheropex',
 		title: 'Other Operating Expenses',
-		tooltip:
-			'Other operating expenses are operating expenses that do not fit into the SG&A and R&D categories.',
+		tooltip: 'Other operating expenses are operating expenses that do not fit into the SG&A and R&D categories.',
 		indent: true
 	},
 	{
@@ -66,8 +64,7 @@ export const MAP_INCOME_STATEMENT = [
 		title: 'Operating Income',
 		tooltip:
 			'Operating income is the amount of profit in a company after paying for all the expenses related to its core operations.',
-		formula:
-			'Operating Income = Revenue - Cost of Revenue - Operating Expenses',
+		formula: 'Operating Income = Revenue - Cost of Revenue - Operating Expenses',
 		border: true,
 		bold: true
 	},
@@ -80,14 +77,12 @@ export const MAP_INCOME_STATEMENT = [
 	{
 		id: 'interestIncome',
 		title: 'Interest Income',
-		tooltip:
-			'Interest income is the amount that the company received in interest.'
+		tooltip: 'Interest income is the amount that the company received in interest.'
 	},
 	{
 		id: 'interestExpense',
 		title: 'Interest Expense',
-		tooltip:
-			'Interest expense is the amount that the company paid in interest.'
+		tooltip: 'Interest expense is the amount that the company paid in interest.'
 	},
 	{
 		id: 'otherincome',
@@ -99,8 +94,7 @@ export const MAP_INCOME_STATEMENT = [
 	{
 		id: 'pretax',
 		title: 'Pretax Income',
-		tooltip:
-			"Pretax income is a company's profits before accounting for income taxes.",
+		tooltip: "Pretax income is a company's profits before accounting for income taxes.",
 		formula: 'Pretax Income = Net Income + Income Taxes',
 		bold: true
 	},
@@ -148,8 +142,7 @@ export const MAP_INCOME_STATEMENT = [
 		id: 'shareswa',
 		title: 'Shares Outstanding (Basic)',
 		format: 'reduce_precision',
-		tooltip:
-			"Basic shares outstanding is the total amount of common stock held by all of a company's shareholders."
+		tooltip: "Basic shares outstanding is the total amount of common stock held by all of a company's shareholders."
 	},
 	{
 		id: 'shareswadil',
@@ -199,15 +192,13 @@ export const MAP_INCOME_STATEMENT = [
 		id: 'fcfps',
 		title: 'Free Cash Flow Per Share',
 		format: 'pershare',
-		tooltip:
-			'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.'
+		tooltip: 'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.'
 	},
 	{
 		id: 'dps',
 		title: 'Dividend Per Share',
 		format: 'pershare',
-		tooltip:
-			'Total amount paid to each outstanding share in dividends during the period.',
+		tooltip: 'Total amount paid to each outstanding share in dividends during the period.',
 		bold: true
 	},
 	{
@@ -216,10 +207,8 @@ export const MAP_INCOME_STATEMENT = [
 		title: 'Dividend Growth',
 		tooltipTitle: 'Dividend Growth (YoY)',
 		format: 'growth',
-		tooltip:
-			'The change in dividend payments per share, compared to the previous period.',
-		formula:
-			'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%'
+		tooltip: 'The change in dividend payments per share, compared to the previous period.',
+		formula: 'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%'
 	},
 	{
 		id: 'grossmargin',
@@ -261,8 +250,7 @@ export const MAP_INCOME_STATEMENT = [
 		id: 'taxrate',
 		title: 'Effective Tax Rate',
 		format: 'percentage',
-		tooltip:
-			'The effective tax rate is the percentage of taxable income paid in corporate income tax.',
+		tooltip: 'The effective tax rate is the percentage of taxable income paid in corporate income tax.',
 		formula: 'Effective Tax Rate = (Income Tax / Pretax Income) * 100%',
 		border: true
 	},
@@ -271,8 +259,7 @@ export const MAP_INCOME_STATEMENT = [
 		title: 'EBITDA',
 		tooltip:
 			'EBITDA stands for "Earnings Before Interest, Taxes, Depreciation and Amortization." It is a commonly used measure of profitability.',
-		formula:
-			'EBITDA = Net Income + Interest + Taxes + Depreciation and Amortization'
+		formula: 'EBITDA = Net Income + Interest + Taxes + Depreciation and Amortization'
 	},
 	{
 		id: 'ebitdamargin',

@@ -32,24 +32,15 @@ export default function Dividend({ info, data, news }: Props) {
 			<div className="contain-content mt-3 sm:mt-4">
 				<div className="lg:right-sidebar gap-8 py-1">
 					<div>
-						<h2 className="text-xl font-bold bp:text-2xl">
-							{title} Dividend Information
-						</h2>
+						<h2 className="text-xl font-bold bp:text-2xl">{title} Dividend Information</h2>
 						{data.infoBox && (
 							<div className="mt-4 mb-2 lg:mb-3">
 								<InfoBox text={data.infoBox} />
 							</div>
 						)}
 						<InfoTable data={data.infoTable} />
-						{data.history.length > 0 && (
-							<HistoryTable rawdata={data.history} disclaimer={true} />
-						)}
-						<DividendChart
-							key={url}
-							data={data.chartData}
-							options={data.chartOptions}
-							ticker={info.ticker}
-						/>
+						{data.history.length > 0 && <HistoryTable rawdata={data.history} disclaimer={true} />}
+						<DividendChart key={url} data={data.chartData} options={data.chartOptions} ticker={info.ticker} />
 					</div>
 					<aside className="mt-7 space-y-8 lg:mt-0">
 						{data.history.length > 0 && <Sidebar1 key={url} />}

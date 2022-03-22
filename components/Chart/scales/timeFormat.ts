@@ -1,12 +1,4 @@
-import {
-	timeSecond,
-	timeMinute,
-	timeHour,
-	timeDay,
-	timeWeek,
-	timeMonth,
-	timeYear
-} from 'd3-time'
+import { timeSecond, timeMinute, timeHour, timeDay, timeWeek, timeMonth, timeYear } from 'd3-time'
 import { timeFormat as d3TimeFormat } from 'd3-time-format'
 
 const formatMillisecond = d3TimeFormat('.%L')

@@ -37,11 +37,7 @@ export function TableMoverType() {
 	}
 
 	return (
-		<Dropdown
-			title={getLabel(sortDirection) || 'Range'}
-			hoverTitle="Change mover type"
-			classes="dd-right"
-		>
+		<Dropdown title={getLabel(sortDirection) || 'Range'} hoverTitle="Change mover type" classes="dd-right">
 			{OPTIONS.map(i => (
 				/* One Dropdown Item */
 				<Menu.Item key={i.sort}>
@@ -54,9 +50,7 @@ export function TableMoverType() {
 						{i.long}
 
 						{/* Icon - if option selected */}
-						{i.sort === sortDirection && (
-							<CheckIcon className="h-5 w-5" aria-hidden="true" />
-						)}
+						{i.sort === sortDirection && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
 					</div>
 				</Menu.Item>
 			))}

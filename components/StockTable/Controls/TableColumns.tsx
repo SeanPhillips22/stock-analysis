@@ -22,19 +22,9 @@ export function TableColumns() {
 
 	function toggle(id: DataId) {
 		setState({
-			columns: dynamic.columns.includes(id)
-				? dynamic.columns.filter(c => c !== id)
-				: [...dynamic.columns, id]
+			columns: dynamic.columns.includes(id) ? dynamic.columns.filter(c => c !== id) : [...dynamic.columns, id]
 		})
 	}
 
-	return (
-		<SelectColumns
-			active={cols}
-			options={colSelect}
-			toggle={toggle}
-			clear={clearState}
-			enabled={enabled}
-		/>
-	)
+	return <SelectColumns active={cols} options={colSelect} toggle={toggle} clear={clearState} enabled={enabled} />
 }

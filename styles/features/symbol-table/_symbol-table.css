@@ -9,7 +9,7 @@
 	}
 
 	.symbol-table a {
-		@apply bll;
+		@apply bll py-1 pr-px;
 	}
 
 	.symbol-table tr > * {

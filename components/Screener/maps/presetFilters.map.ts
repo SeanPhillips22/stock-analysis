@@ -1,14 +1,12 @@
 import { DataId } from 'types/DataId'
 import { SortObject } from '../screener.types'
 
-type Single = {
-	id: DataId
-	value: string
-}
-
 export type PresetFilter = {
 	name: string
-	filters: Single[]
+	filters: {
+		id: DataId
+		value: string
+	}[]
 	sort?: SortObject
 }
 

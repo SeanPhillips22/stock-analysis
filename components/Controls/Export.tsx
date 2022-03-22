@@ -26,18 +26,11 @@ export function Export({ buttons = Buttons, tableId, fileName, data }: Props) {
 	const { isPro } = useAuthState()
 
 	return (
-		<Dropdown
-			title="Export"
-			id={`tag-feat-export${isPro ? '-pro' : '-notpro'}`}
-		>
+		<Dropdown title="Export" id={`tag-feat-export${isPro ? '-pro' : '-notpro'}`}>
 			{buttons &&
 				buttons.map(button =>
 					!isPro ? (
-						<ExportItemRestricted
-							key={button.type}
-							title={button.title}
-							type={button.type}
-						/>
+						<ExportItemRestricted key={button.type} title={button.title} type={button.type} />
 					) : (
 						<ExportItem
 							key={button.title}

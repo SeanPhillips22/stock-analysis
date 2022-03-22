@@ -2,9 +2,7 @@
 function createReboundMethod(target, source, name) {
 	const method = source[name]
 	if (typeof method !== 'function') {
-		throw new Error(
-			`Attempt to rebind ${name} which isn't a function on the source object`
-		)
+		throw new Error(`Attempt to rebind ${name} which isn't a function on the source object`)
 	}
 	return (...args) => {
 		const value = method.apply(source, args)

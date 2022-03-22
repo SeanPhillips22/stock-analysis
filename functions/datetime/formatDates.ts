@@ -60,20 +60,7 @@ export const formatDateDay = (string: string) => {
 // Input: 2022-02-09
 // Output: Feb 2022
 export const formatDateMonth = (string: string) => {
-	const months = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec'
-	]
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 	const dt = new Date(string)
 	return `${months[dt.getMonth()]} ${dt.getFullYear()}`

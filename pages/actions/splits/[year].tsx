@@ -56,11 +56,7 @@ export const ActionsSplitsYear = ({ year, data }: ActionProps) => {
 					type="splits"
 					year={year}
 				/>
-				<ActionsPaywall
-					count={data.data.length}
-					fullCount={data.fullCount}
-					title="Stock Splits"
-				/>
+				<ActionsPaywall count={data.data.length} fullCount={data.fullCount} title="Stock Splits" />
 			</ActionsLayout>
 		</>
 	)

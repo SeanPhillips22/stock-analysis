@@ -1,11 +1,5 @@
 /* eslint-disable no-unused-vars */
-import {
-	useTable,
-	useGlobalFilter,
-	useAsyncDebounce,
-	Column,
-	useFilters
-} from 'react-table'
+import { useTable, useGlobalFilter, useAsyncDebounce, Column, useFilters } from 'react-table'
 import { useState, useEffect, useMemo } from 'react'
 import styles from './ActionsTable.module.css'
 import { useAuthState } from 'hooks/useAuthState'
@@ -22,14 +16,7 @@ type Props = {
 	year?: string
 }
 
-export function ActionsTable({
-	title,
-	columndata,
-	rowdata,
-	fullCount,
-	type,
-	year
-}: Props) {
+export function ActionsTable({ title, columndata, rowdata, fullCount, type, year }: Props) {
 	const [dataRows, setDataRows] = useState(rowdata)
 	const filter = actionsState(state => state.filter)
 	const setParamFilter = actionsState(state => state.setFilter)
@@ -48,9 +35,7 @@ export function ActionsTable({
 					setGlobalFilter(filter)
 				}
 			} else {
-				throw new Error(
-					'Unable to fetch full data, response was invalid or empty array'
-				)
+				throw new Error('Unable to fetch full data, response was invalid or empty array')
 			}
 		}
 		if (isPro && fullCount > count) {
@@ -62,15 +47,14 @@ export function ActionsTable({
 	const columns = useMemo(() => columndata, [columndata])
 	const data = useMemo(() => dataRows, [dataRows])
 
-	const { headerGroups, prepareRow, rows, setGlobalFilter, setFilter } =
-		useTable(
-			{
-				columns,
-				data
-			},
-			useFilters,
-			useGlobalFilter
-		)
+	const { headerGroups, prepareRow, rows, setGlobalFilter, setFilter } = useTable(
+		{
+			columns,
+			data
+		},
+		useFilters,
+		useGlobalFilter
+	)
 
 	const setDualFilter = (filterValue: string) => {
 		setGlobalFilter(filterValue)

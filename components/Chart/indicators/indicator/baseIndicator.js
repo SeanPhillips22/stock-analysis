@@ -1,15 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { scaleOrdinal } from 'd3-scale'
-const defaultColors = [
-	'#F44336',
-	'#2196F3',
-	'#8BC34A',
-	'#FF5722',
-	'#3F51B5',
-	'#03A9F4',
-	'#9C27B0',
-	'#4CAF50'
-]
+const defaultColors = ['#F44336', '#2196F3', '#8BC34A', '#FF5722', '#3F51B5', '#03A9F4', '#9C27B0', '#4CAF50']
 let i = 0
 const overlayColors = scaleOrdinal(defaultColors)
 export default function BaseIndicator() {

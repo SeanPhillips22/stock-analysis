@@ -16,9 +16,7 @@ export const HoldingsWidget = ({ ticker, data }: Props) => {
 		<div>
 			<div className="mb-2 flex-row items-end justify-between xs:mb-1 xs:flex">
 				<h2 className="hh2 mb-0 xs:mb-1">Top 10 Holdings</h2>
-				<span className="text-smaller text-gray-800">
-					{data.top10.toFixed(2) + '% of assets'}
-				</span>
+				<span className="text-smaller text-gray-800">{data.top10.toFixed(2) + '% of assets'}</span>
 			</div>
 			<table className="w-full text-smaller xs:text-base">
 				<thead>
@@ -31,15 +29,11 @@ export const HoldingsWidget = ({ ticker, data }: Props) => {
 				<tbody>
 					{data.list.map((item, index) => (
 						<tr key={index} className="border-b border-gray-200">
-							<td className="py-1.5 px-1.5 text-left font-semibold xs:px-2">
-								{item.name}
-							</td>
+							<td className="py-1.5 px-1.5 text-left font-semibold xs:px-2">{item.name}</td>
 							<td className="py-1.5 px-1.5 text-left xs:px-2">
 								<SymbolLink symbol={item.symbol} />
 							</td>
-							<td className="py-1.5 px-1.5 text-right xs:px-2">
-								{item.assets}
-							</td>
+							<td className="py-1.5 px-1.5 text-right xs:px-2">{item.assets}</td>
 						</tr>
 					))}
 				</tbody>

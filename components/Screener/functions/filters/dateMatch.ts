@@ -35,8 +35,7 @@ export function dateMatch(stock: SingleStock, id: DataId, filter: string) {
 	}
 
 	// Format the values before comparing
-	const value =
-		raw.toString().length === 4 ? new Date(Number(raw), 0) : new Date(raw)
+	const value = raw.toString().length === 4 ? new Date(Number(raw), 0) : new Date(raw)
 
 	// If there is no compare, or no value, then return false
 	if (!compare || !value) {
@@ -90,16 +89,10 @@ export function dateMatch(stock: SingleStock, id: DataId, filter: string) {
 			return value.getTime() < changeDate(now, first).getTime()
 
 		case 'future':
-			return (
-				value.getTime() > now.getTime() &&
-				value.getTime() < changeDate(now, `-${first}`).getTime()
-			)
+			return value.getTime() > now.getTime() && value.getTime() < changeDate(now, `-${first}`).getTime()
 
 		case 'past':
-			return (
-				value.getTime() < now.getTime() &&
-				value.getTime() > changeDate(now, `${first}`).getTime()
-			)
+			return value.getTime() < now.getTime() && value.getTime() > changeDate(now, `${first}`).getTime()
 
 		case 'Unscheduled':
 			return value.getFullYear() === 1970
@@ -109,10 +102,7 @@ export function dateMatch(stock: SingleStock, id: DataId, filter: string) {
 			sunday.setDate(sunday.getDate() - day)
 			const saturday = new Date(sunday)
 			saturday.setDate(saturday.getDate() + 6)
-			return (
-				sunday.getTime() < value.getTime() &&
-				value.getTime() < saturday.getTime()
-			)
+			return sunday.getTime() < value.getTime() && value.getTime() < saturday.getTime()
 		}
 
 		case 'Next Week': {
@@ -120,10 +110,7 @@ export function dateMatch(stock: SingleStock, id: DataId, filter: string) {
 			sundayNext.setDate(sundayNext.getDate() + 7 - day)
 			const saturdayNext = new Date(sundayNext)
 			saturdayNext.setDate(saturdayNext.getDate() + 6)
-			return (
-				sundayNext.getTime() < value.getTime() &&
-				value.getTime() < saturdayNext.getTime()
-			)
+			return sundayNext.getTime() < value.getTime() && value.getTime() < saturdayNext.getTime()
 		}
 
 		case 'Later': {

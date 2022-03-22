@@ -35,12 +35,7 @@ export function formatHeader(fn: Fn, value: string) {
 	return value
 }
 
-export function formatCells(
-	fn: Fn,
-	cell: Cell,
-	type: Type = 'stocks',
-	appendClass = ''
-) {
+export function formatCells(fn: Fn, cell: Cell, type: Type = 'stocks', appendClass = '') {
 	if (fn === 'linkSymbol') return formatSymbol(cell as CellString, type)
 	if (fn === 'linkName') return formatName(cell as CellString, type)
 	if (fn === 'format2dec') return format2dec(cell as CellNumber)
@@ -178,27 +173,10 @@ export function formatDate(cell: CellString) {
 	let { value } = cell.cell
 	if (!value) return <div className="text-right">-</div>
 
-	const months = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec'
-	]
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 	const dt = new Date(value)
-	return (
-		<div className="tr">
-			{`${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`}
-		</div>
-	)
+	return <div className="tr">{`${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`}</div>
 }
 
 // Format a string

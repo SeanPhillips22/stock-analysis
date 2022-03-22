@@ -31,18 +31,11 @@ export function SelectRange({ info, statement, range }: Props) {
 		<nav>
 			<ul className="navmenu submenu">
 				{Ranges.map(({ title, id, path }) => {
-					let statementPath =
-						statement !== 'income-statement' ? `${statement}/` : ''
+					let statementPath = statement !== 'income-statement' ? `${statement}/` : ''
 					return (
 						<li key={id}>
-							<Link
-								href={`/stocks/${info.symbol}/financials/${statementPath}${path}`}
-								prefetch={false}
-							>
-								<a
-									className={range === id ? 'active' : 'inactive'}
-									data-title={title}
-								>
+							<Link href={`/stocks/${info.symbol}/financials/${statementPath}${path}`} prefetch={false}>
+								<a className={range === id ? 'active' : 'inactive'} data-title={title}>
 									{title}
 								</a>
 							</Link>

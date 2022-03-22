@@ -91,13 +91,7 @@ export function collisionOffset(coords: priceRects) {
 	}
 }
 
-function compareTwoLabels(
-	yTop: number,
-	yBottom: number,
-	yTop2: number,
-	yBottom2: number,
-	shiftLabelsUp: boolean
-) {
+function compareTwoLabels(yTop: number, yBottom: number, yTop2: number, yBottom2: number, shiftLabelsUp: boolean) {
 	const result = findCollision(yTop, yBottom, yTop2, yBottom2)
 	if (result == 'none') return 0
 	if (shiftLabelsUp) {
@@ -106,12 +100,7 @@ function compareTwoLabels(
 }
 
 //y is the top of the rectangle, yy is the bottom.
-function findCollision(
-	yTop: number,
-	yBottom: number,
-	yTop2: number,
-	yBottom2: number
-) {
+function findCollision(yTop: number, yBottom: number, yTop2: number, yBottom2: number) {
 	let bottom = compareY(yTop, yBottom, yBottom2)
 	let top = compareY(yTop, yBottom, yTop2)
 

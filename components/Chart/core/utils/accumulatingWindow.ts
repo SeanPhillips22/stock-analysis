@@ -53,9 +53,7 @@ export default function AccumulatingWindowComponent() {
 	let discardTillEnd = false
 
 	const accumulatingWindow = function (data: any[]) {
-		let accumulatedWindow: any[] | undefined = discardTillStart
-			? undefined
-			: []
+		let accumulatedWindow: any[] | undefined = discardTillStart ? undefined : []
 		const response: any[] = []
 		let accumulatorIdx = 0
 		let i = 0
@@ -64,9 +62,7 @@ export default function AccumulatingWindowComponent() {
 			if (accumulateTill(d, i, accumulatedWindow || [])) {
 				if (accumulatedWindow && accumulatedWindow.length > 0) {
 					// @ts-error
-					response.push(
-						accumulator(accumulatedWindow, i, accumulatorIdx++)
-					)
+					response.push(accumulator(accumulatedWindow, i, accumulatorIdx++))
 				}
 
 				accumulatedWindow = [value(d)]

@@ -38,11 +38,7 @@ export default function IncomeStatement({ info, data, count, range }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const symbol = context?.params?.symbol as string
-	const data = await getStockFinancialsSSR(
-		'income-statement',
-		symbol,
-		'annual'
-	)
+	const data = await getStockFinancialsSSR('income-statement', symbol, 'annual')
 
 	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=1800')
 

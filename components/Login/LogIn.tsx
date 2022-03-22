@@ -16,9 +16,7 @@ export function LogIn({ signIn, loading, errorMsg }: Props) {
 	return (
 		<>
 			<div className="sm:mx-auto sm:w-full sm:max-w-md">
-				<h1 className="text-center text-2xl font-bold text-gray-900 xs:text-3xl">
-					Log in to your account
-				</h1>
+				<h1 className="text-center text-2xl font-bold text-gray-900 xs:text-3xl">Log in to your account</h1>
 				<p className="mt-2 text-center text-smaller font-medium text-gray-600">
 					Or{' '}
 					<Link href="/pro/" prefetch={false}>
@@ -38,10 +36,7 @@ export function LogIn({ signIn, loading, errorMsg }: Props) {
 				)}
 				<div className="border border-gray-300 bg-white py-6 px-4 xs:py-8 sm:rounded-lg sm:px-10">
 					<div>
-						<label
-							htmlFor="email"
-							className="block text-sm font-medium text-gray-700"
-						>
+						<label htmlFor="email" className="block text-sm font-medium text-gray-700">
 							Email address
 						</label>
 						<div className="mt-1">

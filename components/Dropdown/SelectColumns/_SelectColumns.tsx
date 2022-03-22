@@ -13,24 +13,13 @@ type Props = {
 	enabled: boolean
 }
 
-export function SelectColumns({
-	active,
-	options,
-	toggle,
-	clear,
-	enabled
-}: Props) {
+export function SelectColumns({ active, options, toggle, clear, enabled }: Props) {
 	const [search, setSearch] = useState<string>('')
 
 	return (
 		<Dropdown title="Columns" classes="wide">
 			<ColumnSearch search={search} setSearch={setSearch} />
-			<ColumnList
-				_active={active}
-				options={options}
-				search={search}
-				toggle={toggle}
-			/>
+			<ColumnList _active={active} options={options} search={search} toggle={toggle} />
 			{enabled && <ClearColumns clear={clear} />}
 		</Dropdown>
 	)

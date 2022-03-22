@@ -14,10 +14,7 @@ export function Unavailable({ message, small, classes }: props) {
 }
 
 export function isOldSafari() {
-	return (
-		typeof window !== 'undefined' &&
-		typeof window.ResizeObserver === 'undefined'
-	)
+	return typeof window !== 'undefined' && typeof window.ResizeObserver === 'undefined'
 }
 
 export function UnavailableSafari({ classes }: { classes?: string }) {

@@ -61,11 +61,7 @@ export function ContactForm() {
 
 			<div>
 				<label htmlFor="email">
-					{errors.email ? (
-						<span className="error">{errors.email.message}</span>
-					) : (
-						'Email'
-					)}
+					{errors.email ? <span className="error">{errors.email.message}</span> : 'Email'}
 				</label>
 
 				<input
@@ -87,11 +83,7 @@ export function ContactForm() {
 
 			<div>
 				<label htmlFor="message">
-					{errors.message ? (
-						<span className="error">{errors.message.message}</span>
-					) : (
-						'Message'
-					)}
+					{errors.message ? <span className="error">{errors.message.message}</span> : 'Message'}
 				</label>
 
 				<textarea

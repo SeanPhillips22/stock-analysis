@@ -15,10 +15,7 @@ export function TableTitle({ title, tableId }: Props) {
 
 	// Change the title from "Today" if a different time range is selected
 	if ((tableId === 'gainers' || tableId === 'losers') && main !== 'change') {
-		printTitle = printTitle.replace(
-			/Today/,
-			main.replace(/ch/, '').toUpperCase()
-		)
+		printTitle = printTitle.replace(/Today/, main.replace(/ch/, '').toUpperCase())
 	}
 
 	if (tableId === 'premarket' && sortDirection === 'asc') {

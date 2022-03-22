@@ -1,14 +1,6 @@
 import { Bar } from 'react-chartjs-2'
 
-import {
-	Chart as ChartJS,
-	BarController,
-	BarElement,
-	Tooltip,
-	LinearScale,
-	CategoryScale,
-	defaults
-} from 'chart.js'
+import { Chart as ChartJS, BarController, BarElement, Tooltip, LinearScale, CategoryScale, defaults } from 'chart.js'
 
 ChartJS.register(BarController, BarElement, Tooltip, LinearScale, CategoryScale)
 
@@ -41,8 +33,7 @@ export function AnalystBarChart({ data }: Props) {
 
 	const labelAxis = () => data.map(item => item.month)
 
-	const analystAxis = (s: string) =>
-		data.map((item: { [x: string]: any }) => item[s])
+	const analystAxis = (s: string) => data.map((item: { [x: string]: any }) => item[s])
 
 	let d: any[] = [
 		{
@@ -161,10 +152,7 @@ export function AnalystBarChart({ data }: Props) {
 							},
 							boxPadding: 3,
 							itemSort: (a, b) => {
-								if (
-									a.datasetIndex !== undefined ||
-									b.datasetIndex !== undefined
-								) {
+								if (a.datasetIndex !== undefined || b.datasetIndex !== undefined) {
 									return a.datasetIndex < b.datasetIndex ? -1 : 1
 								}
 

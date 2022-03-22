@@ -60,11 +60,7 @@ export function SelectRowCount({ pageSize, setSelected }: Props) {
 	let title = pageSize ? pageSize.toString() + ' Rows' : 'Rows'
 
 	return (
-		<Dropdown
-			title={title}
-			hoverTitle="Change results count"
-			btnClasses="text-sm"
-		>
+		<Dropdown title={title} hoverTitle="Change results count" btnClasses="text-sm">
 			{OPTIONS.map(i => {
 				return (
 					/* One Dropdown Item */
@@ -78,17 +74,10 @@ export function SelectRowCount({ pageSize, setSelected }: Props) {
 							{i.title || i.value.toString() + ' Rows'}
 
 							{/* Icon - if option selected */}
-							{i.value === pageSize && (
-								<CheckIcon className="h-5 w-5" aria-hidden="true" />
-							)}
+							{i.value === pageSize && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
 
 							{/* Icon - if option is only for pro members */}
-							{i.pro && !isPro && (
-								<LockClosedIcon
-									className="lock-icon"
-									aria-hidden="true"
-								/>
-							)}
+							{i.pro && !isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 						</div>
 					</Menu.Item>
 				)

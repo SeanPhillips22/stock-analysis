@@ -22,10 +22,7 @@ export default function SplitsFilter({ setColumnFilter }: Props) {
 			<div>
 				<Menu.Button className="controls-btn">
 					{title}
-					<ChevronDownIcon
-						className="-mr-1 ml-2 h-5 w-5"
-						aria-hidden="true"
-					/>
+					<ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
 				</Menu.Button>
 			</div>
 

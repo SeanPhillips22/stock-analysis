@@ -4,14 +4,9 @@ import { levelDefinition } from './levels'
 
 const MAX_LEVEL = levelDefinition.length - 1
 
-export default function financeDiscontinuousScale(
-	index: any[],
-	backingLinearScale = scaleLinear()
-) {
+export default function financeDiscontinuousScale(index: any[], backingLinearScale = scaleLinear()) {
 	if (index === undefined) {
-		throw new Error(
-			'Use the discontinuousTimeScaleProvider to create financeDiscontinuousScale'
-		)
+		throw new Error('Use the discontinuousTimeScaleProvider to create financeDiscontinuousScale')
 	}
 
 	function scale(newScale: number) {
@@ -65,13 +60,9 @@ export default function financeDiscontinuousScale(
 		const dStart = Math.ceil(domainStart)
 		const dHead = index[0]?.index
 		const start = Math.max(dStart, dHead) + Math.abs(dHead)
-		const end =
-			Math.min(Math.floor(domainEnd), index[index.length - 1]?.index) +
-			Math.abs(dHead)
+		const end = Math.min(Math.floor(domainEnd), index[index.length - 1]?.index) + Math.abs(dHead)
 
-		const desiredTickCount = Math.ceil(
-			((end - start) / (domainEnd - domainStart)) * backingTicks.length
-		)
+		const desiredTickCount = Math.ceil(((end - start) / (domainEnd - domainStart)) * backingTicks.length)
 
 		for (let i = MAX_LEVEL; i >= 0; i--) {
 			const ticksAtLevel = ticksMap.get(i)
@@ -89,10 +80,7 @@ export default function financeDiscontinuousScale(
 		let unsortedTicks: number[] = []
 		for (let k = MAX_LEVEL; k >= 0; k--) {
 			const selectedTicks = ticksMap.get(k) ?? []
-			if (
-				selectedTicks.length + unsortedTicks.length >
-				desiredTickCount * 1.5
-			) {
+			if (selectedTicks.length + unsortedTicks.length > desiredTickCount * 1.5) {
 				break
 			}
 			unsortedTicks = unsortedTicks.concat(selectedTicks.map(d => d.index))
@@ -108,20 +96,14 @@ export default function financeDiscontinuousScale(
 			// ignore ticks within this distance
 			const distance = Math.ceil(
 				(backingTicks.length > 0
-					? (backingTicks[backingTicks.length - 1] - backingTicks[0]) /
-					  backingTicks.length /
-					  4
+					? (backingTicks[backingTicks.length - 1] - backingTicks[0]) / backingTicks.length / 4
 					: 1) * 1.5
 			)
 
 			for (let i = 0; i < ticks.length - 1; i++) {
 				for (let j = i + 1; j < ticks.length; j++) {
 					if (ticks[j] - ticks[i] <= distance) {
-						ticksSet.delete(
-							index[ticks[i] + d].level >= index[ticks[j] + d].level
-								? ticks[j]
-								: ticks[i]
-						)
+						ticksSet.delete(index[ticks[i] + d].level >= index[ticks[j] + d].level ? ticks[j] : ticks[i])
 					}
 				}
 			}

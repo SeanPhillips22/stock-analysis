@@ -11,22 +11,13 @@ export interface XAxisProps<T extends number | Date> {
 	readonly fontFamily?: string
 	readonly fontSize?: number
 	readonly fontWeight?: number
-	readonly getMouseDelta?: (
-		startXY: [number, number],
-		mouseXY: [number, number]
-	) => number
+	readonly getMouseDelta?: (startXY: [number, number], mouseXY: [number, number]) => number
 	readonly gridLinesStrokeStyle?: string
 	readonly gridLinesStrokeWidth?: number
 	readonly gridLinesStrokeDasharray?: strokeDashTypes
 	readonly innerTickSize?: number
-	readonly onContextMenu?: (
-		e: React.MouseEvent,
-		mousePosition: [number, number]
-	) => void
-	readonly onDoubleClick?: (
-		e: React.MouseEvent,
-		mousePosition: [number, number]
-	) => void
+	readonly onContextMenu?: (e: React.MouseEvent, mousePosition: [number, number]) => void
+	readonly onDoubleClick?: (e: React.MouseEvent, mousePosition: [number, number]) => void
 	readonly orient?: 'top' | 'bottom'
 	readonly outerTickSize?: number
 	readonly showDomain?: boolean
@@ -49,19 +40,15 @@ export interface XAxisProps<T extends number | Date> {
 	readonly zoomCursorClassName?: string
 }
 
-export class XAxis<T extends number | Date> extends React.Component<
-	XAxisProps<T>
-> {
+export class XAxis<T extends number | Date> extends React.Component<XAxisProps<T>> {
 	public static defaultProps = {
 		axisAt: 'bottom',
 		className: 'react-financial-charts-x-axis',
 		domainClassName: 'react-financial-charts-axis-domain',
-		fontFamily:
-			"-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
+		fontFamily: "-apple-system, system-ui, Roboto, 'Helvetica Neue', Ubuntu, sans-serif",
 		fontSize: 12,
 		fontWeight: 400,
-		getMouseDelta: (startXY: [number, number], mouseXY: [number, number]) =>
-			startXY[0] - mouseXY[0],
+		getMouseDelta: (startXY: [number, number], mouseXY: [number, number]) => startXY[0] - mouseXY[0],
 		gridLinesStrokeStyle: '#E2E4EC',
 		gridLinesStrokeWidth: 1,
 		orient: 'bottom',
@@ -122,12 +109,7 @@ export class XAxis<T extends number | Date> extends React.Component<
 	}
 
 	private readonly helper = () => {
-		const {
-			axisAt,
-			xZoomHeight = XAxis.defaultProps.xZoomHeight,
-			orient,
-			ticks
-		} = this.props
+		const { axisAt, xZoomHeight = XAxis.defaultProps.xZoomHeight, orient, ticks } = this.props
 		const {
 			chartConfig: { width, height }
 		} = this.context

@@ -14,18 +14,11 @@ export function RatingsTable() {
 
 	return (
 		<div className="mt-3 overflow-x-auto text-center lg:mt-5">
-			<table
-				className="w-full text-right text-tiny xs:text-sm md:text-smaller"
-				id="ratings-table"
-			>
+			<table className="w-full text-right text-tiny xs:text-sm md:text-smaller" id="ratings-table">
 				<thead>
 					<tr className="border-b border-gray-200 font-normal hover:bg-gray-50">
-						<th className="px-1 py-[3px] text-left font-semibold">
-							Rating
-						</th>
-						{!months.length && (
-							<th>{formatDateMonth(new Date().toDateString())}</th>
-						)}
+						<th className="px-1 py-[3px] text-left font-semibold">Rating</th>
+						{!months.length && <th>{formatDateMonth(new Date().toDateString())}</th>}
 						{makeRow(months, 'month', 6).map((item: any) => (
 							<th className="px-1 font-semibold" key={item}>
 								{item}
@@ -35,9 +28,7 @@ export function RatingsTable() {
 				</thead>
 				<tbody>
 					<tr className="border-b border-gray-200 hover:bg-gray-50">
-						<td className="whitespace-nowrap px-1 py-[3px] text-left">
-							Strong Buy
-						</td>
+						<td className="whitespace-nowrap px-1 py-[3px] text-left">Strong Buy</td>
 						{!months.length && <td>n/a</td>}
 						{makeRow(months, 'strongBuy', 6).map((item: any, i) => (
 							<td className="px-1" key={`strongBuy-${i}`}>
@@ -82,9 +73,7 @@ export function RatingsTable() {
 						))}
 					</tr>
 					<tr className="font-semibold hover:bg-gray-50">
-						<td className="whitespace-nowrap px-1 py-[3px] text-left">
-							Total
-						</td>
+						<td className="whitespace-nowrap px-1 py-[3px] text-left">Total</td>
 						{!months.length && <td>n/a</td>}
 						{makeRow(months, 'total', 6).map((item: any, i) => (
 							<td className="px-1" key={`total-${i}`}>

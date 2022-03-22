@@ -2,12 +2,10 @@ import { useQuote } from 'hooks/useQuote'
 import { Info } from 'types/Info'
 import { Overview } from 'types/Overview'
 
-const cssRows =
-	'flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0'
+const cssRows = 'flex flex-col sm:table-row border-b border-gray-200 py-1 sm:py-0'
 const cssCells = 'py-[1px] sm:py-2 px-1 whitespace-nowrap'
 const cssCellLeft = cssCells
-const cssCellRight =
-	cssCells + ' text-left sm:text-right text-base sm:text-small font-semibold'
+const cssCellRight = cssCells + ' text-left sm:text-right text-base sm:text-small font-semibold'
 
 export const InfoTable = ({ data }: { data: Overview }) => {
 	return (
@@ -74,9 +72,7 @@ export const QuoteTable = ({ data, info }: { data: Overview; info: Info }) => {
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>Day&apos;s Range</td>
-					<td className={cssCellRight}>
-						{q?.l && q?.h ? q.l + ' - ' + q.h : 'n/a'}
-					</td>
+					<td className={cssCellRight}>{q?.l && q?.h ? q.l + ' - ' + q.h : 'n/a'}</td>
 				</tr>
 				<tr className={cssRows}>
 					<td className={cssCellLeft}>52-Week Low</td>

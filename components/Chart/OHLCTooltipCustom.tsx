@@ -32,9 +32,7 @@ export interface OHLCTooltipProps {
 	readonly labelFontWeight?: number
 	readonly ohlcFormat?: (n: number | { valueOf(): number }) => string
 	readonly onClick?: (event: React.MouseEvent<SVGGElement, MouseEvent>) => void
-	readonly origin?:
-		| [number, number]
-		| ((width: number, height: number) => [number, number])
+	readonly origin?: [number, number] | ((width: number, height: number) => [number, number])
 	readonly percentFormat?: (n: number | { valueOf(): number }) => string
 	readonly textFill?: string | ((item: any) => string)
 	readonly time?: string | null
@@ -47,21 +45,14 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 		className: 'react-financial-charts-tooltip-hover',
 		displayTexts: displayTextsDefault,
 		displayValuesFor: (_: any, props: any) => props.currentItem,
-		fontFamily:
-			"-apple-system, system-ui, 'Helvetica Neue', Ubuntu, sans-serif",
+		fontFamily: "-apple-system, system-ui, 'Helvetica Neue', Ubuntu, sans-serif",
 		ohlcFormat: format('.2f'),
 		origin: [0, 0],
 		percentFormat: format('.2%')
 	}
 
 	public render() {
-		return (
-			<GenericChartComponent
-				clip={false}
-				svgDraw={this.renderSVG}
-				drawOn={['mousemove']}
-			/>
-		)
+		return <GenericChartComponent clip={false} svgDraw={this.renderSVG} drawOn={['mousemove']} />
 	}
 
 	private readonly renderSVG = (moreProps: any) => {
@@ -85,8 +76,7 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			fullData
 		} = moreProps
 
-		const currentItem =
-			displayValuesFor(this.props, moreProps) ?? last(fullData)
+		const currentItem = displayValuesFor(this.props, moreProps) ?? last(fullData)
 
 		let change: string = displayTexts.na
 		let date: Date = new Date('August 19, 1975 23:15:30 GMT+11:00')
@@ -95,9 +85,7 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 			const item = accessor(currentItem)
 			if (item !== undefined) {
 				date = item.date
-				change = `${changeFormat(item.close - item.open)} (${percentFormat(
-					(item.close - item.open) / item.open
-				)})`
+				change = `${changeFormat(item.close - item.open)} (${percentFormat((item.close - item.open) / item.open)})`
 			}
 		}
 
@@ -106,23 +94,11 @@ export class OHLCTooltipCustom extends React.Component<OHLCTooltipProps> {
 		const valueFill = functor(textFill)(currentItem)
 
 		return (
-			<g
-				className={className}
-				transform={`translate(${x}, ${y})`}
-				onClick={onClick}
-			>
-				<ToolTipText
-					x={0}
-					y={0}
-					fontFamily={fontFamily}
-					fontSize={fontSize}
-					fontWeight={fontWeight}
-				>
+			<g className={className} transform={`translate(${x}, ${y})`} onClick={onClick}>
+				<ToolTipText x={0} y={0} fontFamily={fontFamily} fontSize={fontSize} fontWeight={fontWeight}>
 					{time == '1D' || time == '5D' ? (
 						<tspan key="value_Change" fill={valueFill}>
-							{`${timeFormat('%Y-%m-%d %H:%M')(date)}` +
-								'  ' +
-								`${change}`}
+							{`${timeFormat('%Y-%m-%d %H:%M')(date)}` + '  ' + `${change}`}
 						</tspan>
 					) : (
 						<tspan key="value_Change" fill={valueFill}>

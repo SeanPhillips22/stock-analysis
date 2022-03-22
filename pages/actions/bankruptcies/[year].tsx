@@ -48,11 +48,7 @@ export const ActionsBankruptciesYear = ({ year, data }: ActionProps) => {
 					type="bankruptcies"
 					year={year}
 				/>
-				<ActionsPaywall
-					count={data.data.length}
-					fullCount={data.fullCount}
-					title="Bankruptcies"
-				/>
+				<ActionsPaywall count={data.data.length} fullCount={data.fullCount} title="Bankruptcies" />
 			</ActionsLayout>
 		</>
 	)

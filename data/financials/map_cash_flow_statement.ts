@@ -68,8 +68,7 @@ export const MAP_CASH_FLOW_STATEMENT = [
 	{
 		id: 'otherinvesting',
 		title: 'Other Investing Activities',
-		tooltip:
-			'Other investing activities are investing activities that do not belong to any of the categories above.',
+		tooltip: 'Other investing activities are investing activities that do not belong to any of the categories above.',
 		indent: true
 	},
 	{
@@ -103,8 +102,7 @@ export const MAP_CASH_FLOW_STATEMENT = [
 	{
 		id: 'otherfinancing',
 		title: 'Other Financing Activities',
-		tooltip:
-			'Other financing activities are financing activites that do not belong to the categories above.',
+		tooltip: 'Other financing activities are financing activites that do not belong to the categories above.',
 		indent: true
 	},
 	{
@@ -120,8 +118,7 @@ export const MAP_CASH_FLOW_STATEMENT = [
 		title: 'Net Cash Flow',
 		tooltip:
 			'Net cash flow is the sum of the operating, investing and financing cash flow numbers. It is the change in cash and equivalents on the company\'s balance sheet during the accounting period. It is often shown as "increase/decrease in cash and equivalents" on the cash flow statement.',
-		formula:
-			'Net Cash Flow = Operating Cash Flow + Investing Cash Flow + Financing Cash Flow',
+		formula: 'Net Cash Flow = Operating Cash Flow + Investing Cash Flow + Financing Cash Flow',
 		bold: true
 	},
 	{
@@ -137,8 +134,7 @@ export const MAP_CASH_FLOW_STATEMENT = [
 		title: 'Free Cash Flow Growth',
 		tooltipTitle: 'Free Cash Flow Growth (YoY)',
 		format: 'growth',
-		tooltip:
-			'Free cash flow growth is the percentage change in free cash flow compared to a previous period.',
+		tooltip: 'Free cash flow growth is the percentage change in free cash flow compared to a previous period.',
 		formula: 'FCF Growth = ((Current FCF / Previous FCF) - 1) * 100%'
 	},
 	{
@@ -146,16 +142,14 @@ export const MAP_CASH_FLOW_STATEMENT = [
 		data: 'fcf',
 		title: 'Free Cash Flow Margin',
 		format: 'margin',
-		tooltip:
-			'FCF margin is the percentage of revenue left as free cash flow.',
+		tooltip: 'FCF margin is the percentage of revenue left as free cash flow.',
 		formula: 'FCF Margin = (Free Cash Flow / Revenue) * 100%'
 	},
 	{
 		id: 'fcfps',
 		title: 'Free Cash Flow Per Share',
 		format: 'pershare',
-		tooltip:
-			'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
+		tooltip: 'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
 		formula: 'FCF Per Share = Free Cash Flow / Shares Outstanding'
 	}
 ]

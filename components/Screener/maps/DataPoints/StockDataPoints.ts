@@ -1,17 +1,5 @@
-import { FilterProps, ScreenerTypes } from 'components/Screener/screener.types'
-import {
-	dateSort,
-	priceSort,
-	stringNullFix,
-	numberNullFix
-} from 'components/Screener/functions/sort/sortFunctions'
-
-export function getDataPoints(type: ScreenerTypes) {
-	if (type === 'stocks') return StockDataPoints
-	if (type === 'etf') return EtfDataPoints
-	if (type === 'ipo') return IpoDataPoints
-	return StockDataPoints
-}
+import { FilterProps } from 'components/Screener/screener.types'
+import { dateSort } from 'components/Screener/functions/sort/sortFunctions'
 
 export const StockDataPoints: FilterProps[] = [
 	{
@@ -48,8 +36,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'marketcap',
 		tooltipTitle: 'Market Capitalization',
-		tooltipText:
-			"Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
+		tooltipText: "Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
 		tooltipFormula: 'Market Cap = Shares Outstanding * Stock Price'
 	},
 	{
@@ -74,14 +61,13 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'abbreviate',
 		tooltipText:
 			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and cash levels.",
-		tooltipFormula:
-			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents'
+		tooltipFormula: 'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents'
 	},
 	{
 		name: 'Industry',
 		id: 'industry',
 		category: ['Popular', 'Company'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
 		tooltipText:
@@ -110,8 +96,7 @@ export const StockDataPoints: FilterProps[] = [
 			{ name: 'Under 1', value: 'under-1' }
 		],
 		format: 'amount',
-		tooltipText:
-			'The stock price is the current price of a single share, in US dollars.',
+		tooltipText: 'The stock price is the current price of a single share, in US dollars.',
 		columnName: 'Price'
 	},
 	{
@@ -138,7 +123,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Exchange',
 		id: 'exchange',
 		category: ['Company'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		options: [
 			{ name: 'NASDAQ', value: 'NASDAQ' },
 			{ name: 'NYSE', value: 'NYSE' },
@@ -167,20 +152,18 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'percentage',
 		tooltipText:
 			'The dividend yield is how much a stock pays in dividends each year, as a percentage of the stock price.',
-		tooltipFormula:
-			'Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%',
+		tooltipFormula: 'Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%',
 		columnName: 'Yield (%)'
 	},
 	{
 		name: 'Sector',
 		id: 'sector',
 		category: ['Popular', 'Company'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
 		format: 'padleft',
-		tooltipText:
-			'The sector that the company is in, according to the Global Industry Classification Standard (GICS).'
+		tooltipText: 'The sector that the company is in, according to the Global Industry Classification Standard (GICS).'
 	},
 	{
 		name: 'Price Change 1D',
@@ -206,8 +189,7 @@ export const StockDataPoints: FilterProps[] = [
 		columnName: '% Change',
 		format: 'changePcColor',
 		tooltipTitle: 'Price Change (1D)',
-		tooltipText:
-			'The percentage change in the stock price on the current or latest trading day.'
+		tooltipText: 'The percentage change in the stock price on the current or latest trading day.'
 	},
 	{
 		name: 'Price Change 1M',
@@ -232,8 +214,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'changePcColor',
 		tooltipTitle: '1-Month Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 1 month ago.',
+		tooltipText: 'The percentage change in the stock price compared to 1 month ago.',
 		columnName: 'Chg. 1M'
 	},
 	{
@@ -259,8 +240,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'changePcColor',
 		tooltipTitle: '6-Month Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 6 months ago.',
+		tooltipText: 'The percentage change in the stock price compared to 6 months ago.',
 		columnName: 'Chg. 6M'
 	},
 	{
@@ -290,8 +270,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'changePcColor',
 		tooltipTitle: 'Year-to-Date Price Change',
-		tooltipText:
-			'The percentage change in the stock price since January 1st of the current year.',
+		tooltipText: 'The percentage change in the stock price since January 1st of the current year.',
 		columnName: 'Chg. YTD'
 	},
 	{
@@ -321,8 +300,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'changePcColor',
 		tooltipTitle: '1-Year Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 1 year ago.',
+		tooltipText: 'The percentage change in the stock price compared to 1 year ago.',
 		columnName: 'Chg. 1Y'
 	},
 	{
@@ -353,8 +331,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'changePcColor',
 		tooltipTitle: '3-Year Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 3 years ago.',
+		tooltipText: 'The percentage change in the stock price compared to 3 years ago.',
 		columnName: 'Chg. 3Y'
 	},
 	{
@@ -386,8 +363,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'changePcColor',
 		tooltipTitle: '5-Year Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 5 years ago.',
+		tooltipText: 'The percentage change in the stock price compared to 5 years ago.',
 		columnName: 'Chg. 5Y'
 	},
 	{
@@ -412,8 +388,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'format0dec',
 		tooltipTitle: 'Current Volume',
-		tooltipText:
-			'The number of shares traded during the current or latest trading day.'
+		tooltipText: 'The number of shares traded during the current or latest trading day.'
 	},
 	{
 		name: 'PE Ratio',
@@ -439,7 +414,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Analyst Rating',
 		id: 'analystRatings',
 		category: ['Popular'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		options: [
 			{ name: 'Strong Buy', value: 'Strong Buy' },
 			{ name: 'Buy', value: 'Buy' },
@@ -466,13 +441,14 @@ export const StockDataPoints: FilterProps[] = [
 			{ name: 'Over 0', value: 'over-0' }
 		],
 		format: 'align',
-		tooltipText:
-			'The number of analysts that have given a rating and price target for the stock.',
+		tooltipText: 'The number of analysts that have given a rating and price target for the stock.',
 		columnName: 'Count'
 	},
 	{
 		name: 'Price Target',
 		id: 'priceTarget',
+		columnsOnly: true,
+		searchMatches: 'forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -493,8 +469,7 @@ export const StockDataPoints: FilterProps[] = [
 			{ name: 'Under 1', value: 'under-1' }
 		],
 		format: 'amount',
-		tooltipText:
-			'The average 12-month price target given to the stock by stock analysts.',
+		tooltipText: 'The average 12-month price target given to the stock by stock analysts.',
 		columnName: 'Target'
 	},
 	{
@@ -519,8 +494,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'changePcColor',
 		tooltipTitle: 'Price Target Difference',
-		tooltipText:
-			'The difference between the average 12-month analyst price target and the current stock price.',
+		tooltipText: 'The difference between the average 12-month analyst price target and the current stock price.',
 		columnName: 'Target (%)'
 	},
 	{
@@ -560,8 +534,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		columnName: 'Premkt. Price',
 		format: 'format2dec',
-		tooltipText:
-			'The price of the stock during premarket trading hours, from 4:00 am until 9:30 am Eastern Time.'
+		tooltipText: 'The price of the stock during premarket trading hours, from 4:00 am until 9:30 am Eastern Time.'
 	},
 	{
 		name: 'Premkt. % Change',
@@ -583,18 +556,16 @@ export const StockDataPoints: FilterProps[] = [
 		columnName: 'Premkt. % Chg.',
 		format: 'changePcColor',
 		tooltipTitle: 'Premarket % Change',
-		tooltipText:
-			'The percentage change in the price of the stock during premarket trading hours.'
+		tooltipText: 'The percentage change in the price of the stock during premarket trading hours.'
 	},
 	{
 		name: 'Country',
 		id: 'country',
 		category: ['Company'],
-		filterType: 'stringmatch',
+		filterType: 'multiselect',
 		variable: true,
 		options: [],
-		tooltipText:
-			'The country that the company is from and/or has its primary headquarters.'
+		tooltipText: 'The country that the company is from and/or has its primary headquarters.'
 	},
 	{
 		name: 'Employees',
@@ -674,6 +645,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Revenue',
 		id: 'revenue',
+		searchMatches: 'sales',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -694,6 +666,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Revenue Growth',
 		id: 'revenueGrowth',
+		searchMatches: 'sales',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -715,13 +688,13 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipTitle: 'Revenue Growth (YoY)',
 		tooltipText:
 			"Revenue growth is how much a company's trailing 12-month (ttm) revenue has increased compared to the previous 12-month period, expressed as a percentage.",
-		tooltipFormula:
-			'Revenue Growth = ((Current Revenue / Previous Revenue) - 1) * 100%',
+		tooltipFormula: 'Revenue Growth = ((Current Revenue / Previous Revenue) - 1) * 100%',
 		columnName: 'Rev. Growth (1Y)'
 	},
 	{
 		name: 'Rev. Growth (Q)',
 		id: 'revenueGrowthQ',
+		searchMatches: 'sales',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -808,8 +781,7 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipTitle: 'Operating Income',
 		tooltipText:
 			'Operating income is the amount of profit in a company after paying for all the expenses related to its core operations.',
-		tooltipFormula:
-			'Operating Income = Revenue - Cost of Revenue - Operating Expenses'
+		tooltipFormula: 'Operating Income = Revenue - Cost of Revenue - Operating Expenses'
 	},
 	{
 		name: 'Op. Income Growth',
@@ -839,6 +811,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Net Income',
 		id: 'netIncome',
+		searchMatches: 'earnings-profits',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -859,6 +832,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Net Inc. Growth',
 		id: 'netIncomeGrowth',
+		searchMatches: 'earnings-profits',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -880,13 +854,13 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipTitle: 'Net Income Growth (YoY)',
 		tooltipText:
 			"Net income growth is how much a company's trailing 12-month (ttm) earnings have increased or decreased compared to the 12-month period a year ago.",
-		tooltipFormula:
-			'Net Income Growth = ((Current Net Income / Previous Net Income) - 1) * 100%',
+		tooltipFormula: 'Net Income Growth = ((Current Net Income / Previous Net Income) - 1) * 100%',
 		columnName: 'Net Income Growth'
 	},
 	{
 		name: 'EPS',
 		id: 'eps',
+		searchMatches: 'earnings-profits',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -907,6 +881,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EPS Growth',
 		id: 'epsGrowth',
+		searchMatches: 'earnings-profits',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -968,8 +943,7 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'abbreviate',
 		tooltipText:
 			'EBITDA stands for "Earnings Before Interest, Taxes, Depreciation and Amortization." It is a commonly used measure of profitability.',
-		tooltipFormula:
-			'EBITDA = Net Income + Interest + Taxes + Depreciation and Amortization'
+		tooltipFormula: 'EBITDA = Net Income + Interest + Taxes + Depreciation and Amortization'
 	},
 	{
 		name: 'Op. Cash Flow',
@@ -1075,6 +1049,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'CapEx',
 		id: 'capex',
+		searchMatches: 'capital-expenditures',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -1114,12 +1089,12 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'abbreviate',
 		tooltipText:
 			'Free cash flow is the cash remaining after the company spends on everything required to maintain and grow the business. It is calculated by subtracting capital expenditures from operating cash flow.',
-		tooltipFormula:
-			'Free Cash Flow = Operating Cash Flow - Capital Expenditures'
+		tooltipFormula: 'Free Cash Flow = Operating Cash Flow - Capital Expenditures'
 	},
 	{
 		name: 'FCF Growth',
 		id: 'fcfGrowth',
+		searchMatches: 'free%cash%flow',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1146,6 +1121,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'FCF / Share',
 		id: 'fcfPerShare',
+		searchMatches: 'free%cash%flow',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -1159,8 +1135,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'format2dec',
 		tooltipTitle: 'Free Cash Flow Per Share',
-		tooltipText:
-			'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
+		tooltipText: 'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
 		tooltipFormula: 'FCF Per Share = Free Cash Flow / Shares Outstanding'
 	},
 	{
@@ -1183,8 +1158,7 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipTitle: 'Cash & Cash Equivalents',
 		tooltipText:
 			'Cash and cash equivalents is the sum of "Cash & Equivalents" and "Short-Term Investments." This is the amount of money that a company has quick access to, assuming that the cash equivalents and short-term investments can be sold at a short notice.',
-		tooltipFormula:
-			'Cash & Cash Equivalents = Cash & Equivalents + Short-Term Investments'
+		tooltipFormula: 'Cash & Cash Equivalents = Cash & Equivalents + Short-Term Investments'
 	},
 	{
 		name: 'Total Debt',
@@ -1258,8 +1232,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'percentage',
 		tooltipTitle: 'Net Cash / Debt Growth (YoY)',
-		tooltipText:
-			'Net cash/debt growth is the change in net cash position of the company in one year.'
+		tooltipText: 'Net cash/debt growth is the change in net cash position of the company in one year.'
 	},
 	{
 		name: 'Cash/Market Cap',
@@ -1278,8 +1251,7 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipTitle: 'Net Cash / Market Cap',
 		tooltipText:
 			"Net cash by market cap is the percentage of a company's net cash relative to its total market capitalization.",
-		tooltipFormula:
-			'Net Cash / Market Cap = (Total Cash - Total Debt) / Market Cap',
+		tooltipFormula: 'Net Cash / Market Cap = (Total Cash - Total Debt) / Market Cap',
 		columnName: 'Cash / M. Cap'
 	},
 	{
@@ -1404,6 +1376,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'FCF Margin',
 		id: 'fcfMargin',
+		searchMatches: 'free%cash%flow',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1480,6 +1453,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'PS Ratio',
 		id: 'psRatio',
+		searchMatches: 'p/s',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1500,6 +1474,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'PB Ratio',
 		id: 'pbRatio',
+		searchMatches: 'p/b',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1520,6 +1495,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'P/FCF Ratio',
 		id: 'pFcfRatio',
+		searchMatches: 'p/fcf',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1558,6 +1534,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/Sales',
 		id: 'evSales',
+		searchMatches: 'enterprise%value',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1576,6 +1553,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/Earnings',
 		id: 'evEarnings',
+		searchMatches: 'enterprise%value',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1595,6 +1573,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/EBITDA',
 		id: 'evEbitda',
+		searchMatches: 'enterprise%value',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1614,6 +1593,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/EBIT',
 		id: 'evEbit',
+		searchMatches: 'enterprise%value',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1633,6 +1613,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/FCF',
 		id: 'evFcf',
+		searchMatches: 'enterprise%value-free%cash%flow',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1669,13 +1650,13 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'percentage',
 		tooltipText:
 			"The earnings yield is a valuation metric that measures a company's profits relative to stock price, expressed as a percentage yield. It is the inverse of the P/E ratio.",
-		tooltipFormula:
-			'Earnings Yield = (Earnings Per Share / Stock Price) * 100%',
+		tooltipFormula: 'Earnings Yield = (Earnings Per Share / Stock Price) * 100%',
 		columnName: 'Earn. Yield'
 	},
 	{
 		name: 'FCF Yield',
 		id: 'fcfYield',
+		searchMatches: 'free%cash%flow',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1698,6 +1679,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Dividend ($)',
 		id: 'dps',
+		searchMatches: 'dividend%per%share',
 		category: ['Dividends'],
 		filterType: 'numeric',
 		options: [
@@ -1710,8 +1692,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'format2dec',
 		tooltipTitle: 'Dividend Per Share',
-		tooltipText:
-			'Total amount paid to each outstanding share in dividends during the last 12 months.',
+		tooltipText: 'Total amount paid to each outstanding share in dividends during the last 12 months.',
 		columnName: 'Dividend'
 	},
 	{
@@ -1733,10 +1714,8 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'percentage',
 		tooltipTitle: 'Dividend Growth (1Y)',
-		tooltipText:
-			'The percentage change in dividends paid per share, compared to one year ago.',
-		tooltipFormula:
-			'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%'
+		tooltipText: 'The percentage change in dividends paid per share, compared to one year ago.',
+		tooltipFormula: 'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%'
 	},
 	{
 		name: 'Payout Ratio',
@@ -1760,8 +1739,7 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'percentage',
 		tooltipText:
 			"The payout ratio is the percentage of a company's profits that are paid out as dividends. A high ratio implies that the dividend payments may not be sustainable.",
-		tooltipFormula:
-			'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
+		tooltipFormula: 'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
 	},
 	{
 		name: 'Payout Freq.',
@@ -1797,8 +1775,7 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipTitle: 'Buyback Yield / Dilution',
 		tooltipText:
 			'The buyback yield measures how much cash the company is returning to investors via share buybacks. A positive number indicates that the company is buying back shares. A negative number implies that the company is issuing shares and causing ownership dilution for shareholders.',
-		tooltipFormula:
-			'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%'
+		tooltipFormula: 'Buyback Yield = - (Share Repurchase or Issuance / Market Cap) * 100%'
 	},
 	{
 		name: 'Shareholder Yield',
@@ -1837,8 +1814,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'format0dec',
 		tooltipTitle: 'Average Volume (30 Days)',
-		tooltipText:
-			'The 30-day average of the number of shares traded in a single day.',
+		tooltipText: 'The 30-day average of the number of shares traded in a single day.',
 		columnName: 'Av. Volume'
 	},
 	{
@@ -1883,8 +1859,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'percentage',
 		tooltipTitle: 'Short % of Float',
-		tooltipText:
-			"The percentage of the stock's public float that has been sold short.",
+		tooltipText: "The percentage of the stock's public float that has been sold short.",
 		columnName: 'Short/Float'
 	},
 	{
@@ -1904,8 +1879,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'percentage',
 		tooltipTitle: 'Short % of Shares Out',
-		tooltipText:
-			'The percentage of the shares outstanding that have been sold short.',
+		tooltipText: 'The percentage of the shares outstanding that have been sold short.',
 		columnName: 'Short/Shares'
 	},
 	{
@@ -1930,6 +1904,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Out',
 		id: 'sharesOut',
+		searchMatches: 'shares%outstanding',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -1950,8 +1925,7 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'abbreviate',
 		tooltipTitle: 'Shares Outstanding',
-		tooltipText:
-			"The total amount of outstanding common stock currently held by all of the company's shareholders."
+		tooltipText: "The total amount of outstanding common stock currently held by all of the company's shareholders."
 	},
 	{
 		name: 'Float',
@@ -1981,6 +1955,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Ch. (YoY)',
 		id: 'sharesYoY',
+		searchMatches: 'year',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2000,13 +1975,13 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'percentage',
 		tooltipTitle: 'Shares Change (YoY)',
-		tooltipText:
-			'The change in the number of shares outstanding compared to one year ago.',
+		tooltipText: 'The change in the number of shares outstanding compared to one year ago.',
 		columnName: 'Shares Change (YoY)'
 	},
 	{
 		name: 'Shares Ch. (QoQ)',
 		id: 'sharesQoQ',
+		searchMatches: 'quarter',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2033,6 +2008,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Insiders',
 		id: 'sharesInsiders',
+		searchMatches: 'shares%owned-shares%held',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2055,6 +2031,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Institut.',
 		id: 'sharesInstitutions',
+		searchMatches: 'shares%owned-shares%held',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2085,6 +2062,8 @@ export const StockDataPoints: FilterProps[] = [
 			{ name: 'Yesterday', value: 'yesterday' },
 			{ name: 'Next 7D', value: 'future-7D' },
 			{ name: 'Next 30D', value: 'future-30D' },
+			{ name: 'Past 7D', value: 'past-7D' },
+			{ name: 'Past 30D', value: 'past-30D' },
 			{ name: 'This Month', value: 'this-month' }
 		],
 		format: 'date',
@@ -2094,6 +2073,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Is SPAC',
 		id: 'isSpac',
+		searchMatches: 'blank%check',
 		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [
@@ -2108,6 +2088,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Ex-Div Date',
 		id: 'exDivDate',
+		searchMatches: 'ex-dividend-ex%dividend',
 		category: ['Dividends'],
 		filterType: 'date',
 		options: [
@@ -2119,12 +2100,12 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'date',
 		tooltipTitle: 'Ex-Dividend Date',
-		tooltipText:
-			'Only shareholders that buy the stock before the ex-dividend date will receive the dividend payment.'
+		tooltipText: 'Only shareholders that buy the stock before the ex-dividend date will receive the dividend payment.'
 	},
 	{
 		name: 'Next Ex-Div',
 		id: 'nextDivDate',
+		searchMatches: 'ex-dividend-ex%dividend',
 		category: ['Dividends'],
 		filterType: 'date',
 		options: [
@@ -2194,6 +2175,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Return on Capital',
 		id: 'roic',
+		searchMatches: 'return%on%invested%capital',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2220,6 +2202,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Rev / Employee',
 		id: 'revPerEmployee',
+		searchMatches: 'revenue-sales',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2234,13 +2217,13 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'format0dec',
 		tooltipTitle: 'Revenue Per Employee',
-		tooltipText:
-			'The amount of revenue that the company generates per each employee.',
+		tooltipText: 'The amount of revenue that the company generates per each employee.',
 		tooltipFormula: 'Revenue Per Employee = Revenue / Employee Count'
 	},
 	{
 		name: 'Prof. / Employee',
 		id: 'profitPerEmployee',
+		searchMatches: 'net%income-earnings',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2298,8 +2281,7 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipTitle: 'Inventory Turnover',
 		tooltipText:
 			'The inventory turnover ratio measures how many times inventory has been sold and replaced during a time period.',
-		tooltipFormula:
-			'Inventory Turnover Ratio = Cost of Revenue / Average Inventory',
+		tooltipFormula: 'Inventory Turnover Ratio = Cost of Revenue / Average Inventory',
 		columnName: 'Inv. Turn.'
 	},
 	{
@@ -2342,8 +2324,7 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'format2dec',
 		tooltipText:
 			"The quick ratio measure a company's short-term liquidity. A low number indicates that the company may have trouble paying its upcoming financial obligations.",
-		tooltipFormula:
-			'Quick Ratio = (Cash + Short-Term Investments + Accounts Receivable) / Current Liabilities'
+		tooltipFormula: 'Quick Ratio = (Cash + Short-Term Investments + Accounts Receivable) / Current Liabilities'
 	},
 	{
 		name: 'Debt / Equity',
@@ -2392,6 +2373,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Debt / FCF',
 		id: 'debtFcf',
+		searchMatches: 'free%cash%flow',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2414,6 +2396,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Eff. Tax Rate',
 		id: 'taxRate',
+		searchMatches: 'effective-taxes',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2435,15 +2418,14 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'percentage',
 		tooltipTitle: 'Effective Tax Rate',
-		tooltipText:
-			'The effective tax rate is the percentage of taxable income paid in corporate income tax.',
-		tooltipFormula:
-			'Effective Tax Rate = (Income Tax / Pretax Income) * 100%',
+		tooltipText: 'The effective tax rate is the percentage of taxable income paid in corporate income tax.',
+		tooltipFormula: 'Effective Tax Rate = (Income Tax / Pretax Income) * 100%',
 		columnName: 'Tax Rate'
 	},
 	{
 		name: 'Tax / Revenue',
 		id: 'taxByRevenue',
+		searchMatches: 'taxes',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2462,13 +2444,13 @@ export const StockDataPoints: FilterProps[] = [
 		],
 		format: 'percentage',
 		tooltipTitle: 'Taxes / Revenue (%)',
-		tooltipText:
-			"Tax / revenue is the percentage of the company's revenue paid as corporate income tax.",
+		tooltipText: "Tax / revenue is the percentage of the company's revenue paid as corporate income tax.",
 		tooltipFormula: 'Taxes / Revenue = (Income Tax / Revenue) * 100%'
 	},
 	{
 		name: 'Shareh. Equity',
 		id: 'equity',
+		searchMatches: 'shareholder',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -2545,6 +2527,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Altman Z-Score',
 		id: 'zScore',
+		searchMatches: 'z%score',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2562,6 +2545,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Piotroski F-Score',
 		id: 'fScore',
+		searchMatches: 'f%score',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2576,2102 +2560,255 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipText:
 			"The Piotroski F-Score is a score between 0 and 9 that determine the strength of a company's financial position. The higher, the better.",
 		columnName: 'F-Score'
-	}
-]
-
-/**
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- */
-export const IpoDataPoints: FilterProps[] = [
-	{
-		name: 'Symbol',
-		id: 's',
-		format: 'linkSymbol',
-		options: [],
-		filterType: 'none'
 	},
 	{
-		name: 'Name',
-		id: 'n',
-		format: 'string',
-		options: [],
-		filterType: 'none'
+		name: 'In Index',
+		id: 'inIndex',
+		searchMatches: 's&p500-s&p%500-nasdaq-100-nasdaq%100',
+		category: ['Popular'],
+		filterType: 'arraymatch',
+		options: [
+			{ name: 'S&P500', value: 'S&P500' },
+			{ name: 'Nasdaq 100', value: 'NASDAQ100' }
+		],
+		format: 'array',
+		tooltipText: 'Whether the stock is part of a certain index or not.'
 	},
 	{
-		name: 'Market Cap',
-		id: 'marketCap',
-		category: ['General'],
+		name: 'EPS Growth This Quarter',
+		columnName: 'EPS Gr. This Q',
+		searchMatches: 'earnings-quarterly-forecast-analysts',
+		id: 'epsThisQuarter',
+		category: ['Other'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 100B', value: 'over-100B' },
-			{ name: 'Over 50B', value: 'over-50B' },
-			{ name: 'Over 10B', value: 'over-10B' },
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 300M', value: 'over-300M' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Mega-Cap: 200B+', value: 'over-200B' },
-			{ name: 'Large-Cap: 10-200B', value: 'between-10B-200B' },
-			{ name: 'Mid-Cap: 10-20B', value: 'between-2B-10B' },
-			{ name: 'Small-Cap: 300M-20B', value: 'between-300M-2B' },
-			{ name: 'Micro-Cap: Under 300M', value: 'under-300M' }
-		],
-		format: 'marketcap',
-		tooltipTitle: 'Market Capitalization',
-		tooltipText:
-			"Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
-		tooltipFormula: 'Market Cap = Shares Outstanding * Stock Price'
-	},
-	{
-		name: 'Industry',
-		id: 'industry',
-		category: ['General'],
-		filterType: 'stringmatch',
-		variable: true,
-		options: [],
-		tooltipText:
-			'The industry that the company is in, according to the Global Industry Classification Standard (GICS).'
-	},
-	{
-		name: 'Sector',
-		id: 'sector',
-		category: ['General'],
-		filterType: 'stringmatch',
-		variable: true,
-		options: [],
-		format: 'padleft',
-		tooltipText:
-			'The sector that the company is in, according to the Global Industry Classification Standard (GICS).'
-	},
-	{
-		name: 'Revenue',
-		id: 'revenue',
-		category: ['Financials', 'Income'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Exactly Zero', value: 'exactly-0' }
-		],
-		format: 'abbreviate',
-		tooltipTitle: 'Revenue (ttm)',
-		tooltipText:
-			'Revenue is the amount of money a company receives from its main business activities, such as sales of products or services. Revenue is also called sales.'
-	},
-	{
-		name: 'IPO Date',
-		id: 'ipoDate',
-		category: ['General'],
-		filterType: 'date',
-		options: [
-			{ name: 'Today', value: 'today' },
-			{ name: 'Tomorrow', value: 'tomorrow' },
-			{ name: 'This Week', value: 'This Week' },
-			{ name: 'Next Week', value: 'Next Week' },
-			{ name: 'Later', value: 'Later' },
-			{ name: 'Unscheduled', value: 'Unscheduled' }
-		],
-		format: 'date',
-		sortType: dateSort,
-		tooltipText:
-			"The date of the company's Initial Public Offering (IPO), or when it originally started trading on the stock exchange."
-	},
-	{
-		name: 'IPO Price',
-		id: 'ipoPriceRange',
-		category: ['General'],
-		filterType: 'numericRange',
-		options: [
-			{ name: 'Under $5', value: 'under-5' },
-			{ name: 'Under $10', value: 'under-10' },
-			{ name: '$10 - $15', value: 'between-10-15' },
-			{ name: '$15 - $20', value: 'between-15-20' },
-			{ name: 'Over $20', value: 'over-20' }
-		],
-		format: 'align',
-		sortType: priceSort,
-		tooltipText:
-			'The price of the shares during the IPO process. It usually starts as a range, but ends with a final number the day before or day of the IPO.'
-	},
-	{
-		name: 'Country',
-		id: 'country',
-		category: ['General'],
-		filterType: 'stringmatch',
-		variable: true,
-		options: [],
-		tooltipText:
-			'The country that the company is from and/or has its primary headquarters.'
-	},
-	{
-		name: 'Exchange',
-		id: 'exchange',
-		category: ['General'],
-		filterType: 'stringmatch',
-		options: [
-			{ name: 'NASDAQ', value: 'NASDAQ' },
-			{ name: 'NYSE', value: 'NYSE' },
-			{ name: 'NYSE AMERICAN', value: 'NYSEAMERICAN' }
-		],
-		tooltipTitle: 'Stock Exchange',
-		tooltipText: 'The stock exchange that the stock is listed on.'
-	},
-	{
-		name: 'Employees',
-		id: 'employees',
-		category: ['General'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100K', value: 'over-100K' },
-			{ name: 'Over 10K', value: 'over-10K' },
-			{ name: 'Over 1K', value: 'over-1K' },
-			{ name: 'Over 100', value: 'over-100' },
-			{ name: 'Over 0', value: 'over-0' },
-			{ name: 'Under 1K', value: 'under-1K' },
-			{ name: 'Under 10K', value: 'under-10K' },
-			{ name: 'Under 100K', value: 'under-100K' }
-		],
-		format: 'format0dec',
-		tooltipText: "The company's last reported total number of employees."
-	},
-	{
-		name: 'Founded',
-		id: 'founded',
-		category: ['General'],
-		filterType: 'date',
-		options: [
-			{ name: 'Over 20 Years', value: 'over-20Y' },
-			{ name: 'Over 10 Years', value: 'over-10Y' },
-			{ name: 'Over 5 Years', value: 'over-5Y' },
-			{ name: 'Over 3 Years', value: 'over-3Y', div: true },
-			{ name: 'Last Year', value: 'last-year' },
-			{ name: 'This Year', value: 'this-year', div: true },
-			{ name: 'Within 3 Years', value: 'under-3Y' },
-			{ name: 'Within 5 Years', value: 'under-5Y' },
-			{ name: 'Within 10 Years', value: 'under-10Y' },
-			{ name: 'Within 20 Years', value: 'under-20Y' },
-			{ name: 'Within 50 Years', value: 'under-50Y' },
-			{ name: 'Within 100 Years', value: 'under-100Y' }
-		],
-		format: 'align',
-		tooltipText: 'The year that the company was originally founded in.'
-	},
-	{
-		name: 'Is SPAC',
-		id: 'isSpac',
-		category: ['General'],
-		filterType: 'stringmatch',
-		options: [
-			{ name: 'Exclude SPACs', value: 'No' },
-			{ name: 'Show Only SPACs', value: 'Yes' }
-		],
-		format: 'string',
-		tooltipTitle: 'Is SPAC / Blank Check',
-		tooltipText:
-			'Whether the stock is a Special Purpose Acquisition Company (SPAC), also known as a blank check company. This means that the business has no operations but plans to merge with a private company to take it public.'
-	},
-	{
-		name: 'Total Assets',
-		id: 'assets',
-		category: ['Balance Sheet'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Not Zero', value: 'notzero' }
-		],
-		columnName: 'Assets',
-		format: 'abbreviate',
-		tooltipText:
-			'Total assets is the sum of all current and non-current assets on the balance sheet. Assets are everything that the company owns.'
-	},
-	{
-		name: 'Total Cash',
-		id: 'cash',
-		category: ['Balance Sheet'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Not Zero', value: 'notzero' }
-		],
-		format: 'abbreviate',
-		tooltipTitle: 'Cash & Cash Equivalents',
-		tooltipText:
-			'Cash and cash equivalents is the sum of "Cash & Equivalents" and "Short-Term Investments." This is the amount of money that a company has quick access to, assuming that the cash equivalents and short-term investments can be sold at a short notice.',
-		tooltipFormula:
-			'Cash & Cash Equivalents = Cash & Equivalents + Short-Term Investments'
-	},
-	{
-		name: 'Total Debt',
-		id: 'debt',
-		category: ['Balance Sheet'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Not Zero', value: 'notzero' }
-		],
-		format: 'abbreviate',
-		tooltipText:
-			'Total debt is the total amount of liabilities categorized as "debt" on the balance sheet. It includes both current and long-term (non-current) debt.',
-		tooltipFormula: 'Total Debt = Current Debt + Long-Term Debt'
-	},
-	{
-		name: 'Total Liabilities',
-		id: 'liabilities',
-		category: ['Balance Sheet'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Not Zero', value: 'notzero' }
-		],
-		columnName: 'Liabilities',
-		format: 'abbreviate',
-		tooltipText:
-			'Total liabilities is the sum of all current and non-current liabilities on the balance sheet. Liabilities are everything that the company owes to others.'
-	},
-	{
-		name: 'Shareh. Equity',
-		id: 'equity',
-		category: ['Balance Sheet'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 50M', value: 'over-50M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		columnName: 'Equity',
-		format: 'abbreviate',
-		tooltipTitle: "Shareholders' Equity",
-		tooltipText:
-			'Shareholders’ equity is also called book value or net worth. It can be seen as the amount of money held by investors inside the company. It is calculated by subtracting all liabilities from all assets.',
-		tooltipFormula: "Shareholders' Equity = Total Assets - Total Liabilities"
-	},
-	{
-		name: 'Gross Profit',
-		id: 'grossProfit',
-		category: ['Income'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'abbreviate',
-		tooltipText:
-			'Gross profit is a company’s profit after subtracting the costs directly linked to making and delivering its products and services.',
-		tooltipFormula: 'Gross Profit = Revenue - Cost of Revenue'
-	},
-	{
-		name: 'Op. Income',
-		id: 'operatingIncome',
-		category: ['Income'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'abbreviate',
-		tooltipTitle: 'Operating Income',
-		tooltipText:
-			'Operating income is the amount of profit in a company after paying for all the expenses related to its core operations.',
-		tooltipFormula:
-			'Operating Income = Revenue - Cost of Revenue - Operating Expenses'
-	},
-	{
-		name: 'Net Income',
-		id: 'netIncome',
-		category: ['Income'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'abbreviate',
-		tooltipText:
-			'Net income is a company\'s accounting profits after subtracting all costs and expenses from the revenue. It is also called earnings, profits or "the bottom line"',
-		tooltipFormula: 'Net Income = Revenue - All Expenses'
-	},
-	{
-		name: 'EPS',
-		id: 'eps',
-		category: ['Income'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 10', value: 'over-10' },
-			{ name: 'Over 5', value: 'over-5' },
-			{ name: 'Over 3', value: 'over-3' },
-			{ name: 'Over 2', value: 'over-2' },
-			{ name: 'Over 1', value: 'over-1' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'format2dec',
-		tooltipTitle: 'EPS (Diluted)',
-		tooltipText:
-			"Earnings per share (EPS) is the portion of a company's profit that is allocated to each individual stock. EPS is calculated by dividing net income by shares outstanding.",
-		tooltipFormula: 'EPS = Net Income / Shares Outstanding'
-	},
-	{
-		name: 'EBIT',
-		id: 'ebit',
-		category: ['Income'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'abbreviate',
-		tooltipText:
-			'EBIT stands for "Earnings Before Interest and Taxes" and is a commonly used measure of earnings or profits. It is similar to operating income.',
-		tooltipFormula: 'EBIT = Net Income + Interest + Taxes'
-	},
-	{
-		name: 'EBITDA',
-		id: 'ebitda',
-		category: ['Income'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'abbreviate',
-		tooltipText:
-			'EBITDA stands for "Earnings Before Interest, Taxes, Depreciation and Amortization." It is a commonly used measure of profitability.',
-		tooltipFormula:
-			'EBITDA = Net Income + Interest + Taxes + Depreciation and Amortization'
-	},
-	{
-		name: 'Gross Margin',
-		id: 'grossMargin',
-		category: ['Income'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
+			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
 			{ name: 'Over 0%', value: 'over-0' },
 			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
 			{ name: 'Under -10%', value: 'under-X10' },
 			{ name: 'Under -20%', value: 'under-X20' },
 			{ name: 'Under -50%', value: 'under-X50' }
 		],
-		columnName: 'Gross Mrg.',
 		format: 'percentage',
-		tooltipText:
-			'Gross margin is the percentage of revenue left as gross profits, after subtracting cost of goods sold from the revenue.',
-		tooltipFormula: 'Gross Margin = (Gross Profit / Revenue) * 100%'
+		tooltipTitle: 'EPS Growth This Quarter',
+		tooltipText: 'Estimated growth in earnings per share (EPS) in the current fiscal quarter.'
 	},
 	{
-		name: 'Operating Margin',
-		id: 'operatingMargin',
-		category: ['Income'],
+		name: 'EPS Growth Next Quarter',
+		columnName: 'EPS Gr. Next Q',
+		id: 'epsNextQuarter',
+		searchMatches: 'earnings-quarterly-forecast-analysts',
+		category: ['Other'],
 		filterType: 'numeric',
-		numberType: 'percentage',
 		options: [
+			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
 			{ name: 'Over 0%', value: 'over-0' },
 			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
 			{ name: 'Under -10%', value: 'under-X10' },
 			{ name: 'Under -20%', value: 'under-X20' },
 			{ name: 'Under -50%', value: 'under-X50' }
 		],
-		columnName: 'Oper. Mrg.',
 		format: 'percentage',
-		tooltipText:
-			'Operating margin is the percentage of revenue left as operating income, after subtracting cost of revenue and all operating expenses from the revenue.',
-		tooltipFormula: 'Operating Margin = (Operating Income / Revenue) * 100%'
+		tooltipTitle: 'EPS Growth Next Quarter',
+		tooltipText: 'Estimated growth in earnings per share (EPS) in the next fiscal quarter.'
 	},
 	{
-		name: 'Profit Margin',
-		id: 'profitMargin',
-		category: ['Income'],
+		name: 'EPS Growth This Year',
+		columnName: 'EPS Gr. This Y',
+		id: 'epsThisYear',
+		searchMatches: 'earnings-annual-forecast-analysts',
+		category: ['Other'],
 		filterType: 'numeric',
-		numberType: 'percentage',
 		options: [
+			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
 			{ name: 'Over 0%', value: 'over-0' },
 			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
 			{ name: 'Under -10%', value: 'under-X10' },
 			{ name: 'Under -20%', value: 'under-X20' },
 			{ name: 'Under -50%', value: 'under-X50' }
 		],
-		columnName: 'Profit Mrg.',
 		format: 'percentage',
-		tooltipText:
-			'Profit margin is the percentage of revenue left as net income, or profits, after subtracting all costs and expenses from the revenue.',
-		tooltipFormula: 'Profit Margin = (Net Income / Revenue) * 100%'
+		tooltipTitle: 'EPS Growth This Year',
+		tooltipText: 'Estimated growth in earnings per share (EPS) in the current fiscal year.'
 	},
 	{
-		name: 'EBITDA Margin',
-		id: 'ebitdaMargin',
-		category: ['Income'],
+		name: 'EPS Gr. Next Year',
+		columnName: 'EPS Gr. Next Y',
+		id: 'epsNextYear',
+		searchMatches: 'earnings-annual-forecast-analysts',
+		category: ['Other'],
 		filterType: 'numeric',
-		numberType: 'percentage',
 		options: [
+			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
 			{ name: 'Over 0%', value: 'over-0' },
 			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
 			{ name: 'Under -10%', value: 'under-X10' },
 			{ name: 'Under -20%', value: 'under-X20' },
 			{ name: 'Under -50%', value: 'under-X50' }
 		],
-		columnName: 'EBITDA Mrg.',
 		format: 'percentage',
-		tooltipText:
-			'EBITDA margin is the percentage of revenue left as EBITDA, after subtracting all expenses except interest, taxes, depreciation and amortization from revenue.',
-		tooltipFormula: 'EBITDA Margin = (EBITDA / Revenue) * 100%'
+		tooltipTitle: 'EPS Growth Next Year',
+		tooltipText: 'Estimated growth in earnings per share (EPS) in the next fiscal year.'
 	},
 	{
-		name: 'EBIT Margin',
-		id: 'ebitMargin',
-		category: ['Income'],
+		name: 'Revenue Growth This Quarter',
+		columnName: 'Rev Gr. This Q',
+		id: 'revenueThisQuarter',
+		searchMatches: 'sales-quarterly-forecast-analysts',
+		category: ['Other'],
 		filterType: 'numeric',
-		numberType: 'percentage',
 		options: [
+			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
 			{ name: 'Over 0%', value: 'over-0' },
 			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
 			{ name: 'Under -10%', value: 'under-X10' },
 			{ name: 'Under -20%', value: 'under-X20' },
 			{ name: 'Under -50%', value: 'under-X50' }
 		],
-		columnName: 'EBIT Mrg.',
 		format: 'percentage',
-		tooltipText:
-			'EBIT Margin is a profitability ratio that measures the percentage of revenue left as EBIT (Earnings Before Interest and Taxes).',
-		tooltipFormula: 'EBIT Margin = (EBIT / Revenue) * 100%'
+		tooltipTitle: 'Revenue Growth This Quarter',
+		tooltipText: 'Estimated growth in revenue in the current fiscal quarter.'
 	},
 	{
-		name: 'Op. Cash Flow',
-		id: 'operatingCF',
-		category: ['Cash Flow'],
+		name: 'Revenue Growth Next Quarter',
+		columnName: 'Rev Gr. Next Q',
+		id: 'revenueNextQuarter',
+		searchMatches: 'sales-quarterly-forecast-analysts',
+		category: ['Other'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'abbreviate',
-		tooltipTitle: 'Operating Cash Flow',
-		tooltipText:
-			'Operating cash flow, also called cash flow from operating activities, measures the amount of cash that a company generates from normal business activities. It is the amount of cash left after all cash income has been received, and all cash expenses have been paid.'
-	},
-	{
-		name: 'Inv. Cash Flow',
-		id: 'investingCF',
-		category: ['Cash Flow'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		columnName: 'Investing CF',
-		format: 'abbreviate',
-		tooltipTitle: 'Investing Cash Flow',
-		tooltipText:
-			'Investing cash flow, also called cash flow from investing activities, is the cash used to buy and sell investments and long-term assets. Capital expenditures are included in this category.'
-	},
-	{
-		name: 'Fin. Cash Flow',
-		id: 'financingCF',
-		category: ['Cash Flow'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		columnName: 'Financing CF',
-		format: 'abbreviate',
-		tooltipTitle: 'Financing Cash Flow',
-		tooltipText:
-			'Financing cash flow, also called cash flow from financing activities, is the cash that flows to and from owners, investors, and creditors (like banks). It includes changes in debt and equity, along with dividends and share buybacks.'
-	},
-	{
-		name: 'Net Cash Flow',
-		id: 'netCF',
-		category: ['Cash Flow'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		columnName: 'Net CF',
-		format: 'abbreviate',
-		tooltipText:
-			'Net cash flow is the sum of operating, investing and financing cash flows. It is equal to the changes in cash and cash equivalents on the balance sheet.'
-	},
-	{
-		name: 'CapEx',
-		id: 'capex',
-		category: ['Cash Flow'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'abbreviate',
-		tooltipTitle: 'Capital Expenditures',
-		tooltipText:
-			'Capital Expenditures (CapEx) is the cash spent on acquiring long-term assets that will be used to run the business. It is often called "payments for property, plants and equipment."'
-	},
-	{
-		name: 'Free Cash Flow',
-		id: 'fcf',
-		category: ['Cash Flow'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'abbreviate',
-		tooltipText:
-			'Free cash flow is the cash remaining after the company spends on everything required to maintain and grow the business. It is calculated by subtracting capital expenditures from operating cash flow.',
-		tooltipFormula:
-			'Free Cash Flow = Operating Cash Flow - Capital Expenditures'
-	},
-	{
-		name: 'FCF / Share',
-		id: 'fcfPerShare',
-		category: ['Cash Flow'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 10', value: 'over-10' },
-			{ name: 'Over 5', value: 'over-5' },
-			{ name: 'Over 3', value: 'over-3' },
-			{ name: 'Over 2', value: 'over-2' },
-			{ name: 'Over 1', value: 'over-1' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under Zero', value: 'under-0' }
-		],
-		format: 'format2dec',
-		tooltipTitle: 'Free Cash Flow Per Share',
-		tooltipText:
-			'Free cash flow per share is the amount of free cash flow attributed to each outstanding stock.',
-		tooltipFormula: 'FCF Per Share = Free Cash Flow / Shares Outstanding'
-	},
-	{
-		name: 'FCF Margin',
-		id: 'fcfMargin',
-		category: ['Cash Flow'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
+			{ name: 'Over 100%', value: 'over-100' },
 			{ name: 'Over 50%', value: 'over-50' },
 			{ name: 'Over 20%', value: 'over-20' },
 			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
 			{ name: 'Over 0%', value: 'over-0' },
 			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
 			{ name: 'Under -10%', value: 'under-X10' },
 			{ name: 'Under -20%', value: 'under-X20' },
 			{ name: 'Under -50%', value: 'under-X50' }
 		],
-		columnName: 'FCF Mrg.',
 		format: 'percentage',
-		tooltipTitle: 'Free Cash Flow Margin',
-		tooltipText:
-			'FCF margin is the percentage of revenue left as free cash flow. FCF is calculated by subtracting capital expenditures (CapEx) from the operating cash flow (OCF). Both CapEx and OCF are shown on the cash flow statement.',
-		tooltipFormula: 'FCF Margin = (Free Cash Flow / Revenue) * 100%'
+		tooltipTitle: 'Revenue Growth Next Quarter',
+		tooltipText: 'Estimated growth in revenue in the next fiscal quarter.'
 	},
 	{
-		name: 'Shares Out',
-		id: 'sharesOut',
-		category: ['Income'],
+		name: 'Revenue Growth This Year',
+		columnName: 'Rev Gr. This Y',
+		id: 'revenueThisYear',
+		searchMatches: 'sales-annual-forecast-analysts',
+		category: ['Other'],
 		filterType: 'numeric',
 		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 50M', value: 'over-50M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under 1M', value: 'under-1M' },
-			{ name: 'Under 10M', value: 'under-10M' },
-			{ name: 'Under 50M', value: 'under-50M' },
-			{ name: 'Under 100M', value: 'under-100M' },
-			{ name: 'Under 1B', value: 'under-1B' },
-			{ name: 'Under 5B', value: 'under-5B' }
-		],
-		format: 'abbreviate',
-		tooltipTitle: 'Shares Outstanding',
-		tooltipText:
-			"The total amount of outstanding common stock currently held by all of the company's shareholders."
-	},
-	{
-		name: 'Shares Offered',
-		id: 'sharesOffered',
-		category: ['General'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 50M', value: 'over-50M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over 1M', value: 'over-1M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Under 1M', value: 'under-1M' },
-			{ name: 'Under 10M', value: 'under-10M' },
-			{ name: 'Under 50M', value: 'under-50M' },
-			{ name: 'Under 100M', value: 'under-100M' },
-			{ name: 'Under 1B', value: 'under-1B' },
-			{ name: 'Under 5B', value: 'under-5B' }
-		],
-		tooltipText:
-			'The total amount of shares that are being offered for sale during the IPO.'
-	}
-]
-
-/**
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- */
-export const EtfDataPoints: FilterProps[] = [
-	{
-		name: 'Symbol',
-		id: 's',
-		format: 'linkSymbol',
-		options: [],
-		filterType: 'none'
-	},
-	{
-		name: 'Name',
-		id: 'n',
-		format: 'string',
-		options: [],
-		filterType: 'none'
-	},
-	{
-		name: 'Assets',
-		id: 'aum',
-		category: ['Popular'],
-		filterType: 'numeric',
-		options: [
-			{
-				name: 'Over 100B',
-				value: 'over-100B'
-			},
-			{
-				name: 'Over 10B',
-				value: 'over-10B'
-			},
-			{
-				name: 'Over 1B',
-				value: 'over-1B'
-			},
-			{
-				name: 'Over 100M',
-				value: 'over-100M'
-			},
-			{
-				name: 'Over 10M',
-				value: 'over-10M'
-			},
-			{
-				name: 'Over 1M',
-				value: 'over-1M'
-			},
-			{
-				name: 'Not Zero',
-				value: 'notzero'
-			}
-		],
-		format: 'marketcap',
-		tooltipTitle: 'Assets Under Management',
-		tooltipText:
-			'Assets under management (AUM) is the total value of all assets held by the exchange-traded fund.'
-	},
-	{
-		name: 'Stock Price',
-		id: 'price',
-		category: ['Popular'],
-		filterType: 'numeric',
-		options: [
-			{
-				name: 'Over 100',
-				value: 'over-100'
-			},
-			{
-				name: 'Over 10',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1',
-				value: 'over-1'
-			},
-			{
-				name: 'From 100-500',
-				value: 'between-100-500'
-			},
-			{
-				name: 'From 50-100',
-				value: 'between-50-100'
-			},
-			{
-				name: 'From 20-50',
-				value: 'between-20-50'
-			},
-			{
-				name: 'From 10-20',
-				value: 'between-10-20'
-			},
-			{
-				name: 'Under 20',
-				value: 'under-20'
-			},
-			{
-				name: 'Under 10',
-				value: 'under-10'
-			},
-			{
-				name: 'Under 5',
-				value: 'under-5'
-			},
-			{
-				name: 'Under 1',
-				value: 'under-1'
-			}
-		],
-		columnName: 'Price',
-		format: 'amount',
-		tooltipText:
-			'The stock price is the current price of a single share, in US dollars.'
-	},
-	{
-		name: 'Price Change 1D',
-		id: 'change',
-		category: ['Performance'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'From 0-1%',
-				value: 'between-0-1'
-			},
-			{
-				name: 'From -1-0%',
-				value: 'between-X1-0'
-			},
-			{
-				name: 'Under -1%',
-				value: 'under-X1'
-			},
-			{
-				name: 'Under -5%',
-				value: 'under-X5'
-			}
-		],
-		columnName: '% Change',
-		format: 'changePcColor',
-		tooltipTitle: 'Price Change (1D)',
-		tooltipText:
-			'The percentage change in the stock price on the current or latest trading day.'
-	},
-	{
-		name: 'Volume',
-		id: 'volume',
-		category: ['Popular'],
-		filterType: 'numeric',
-		options: [
-			{
-				name: 'Over 10M',
-				value: 'over-10M'
-			},
-			{
-				name: 'Over 1M',
-				value: 'over-1M'
-			},
-			{
-				name: 'Over 100K',
-				value: 'over-100K'
-			},
-			{
-				name: 'Over 10K',
-				value: 'over-10K'
-			},
-			{
-				name: 'Over 1K',
-				value: 'over-1K'
-			},
-			{
-				name: 'Not Zero',
-				value: 'notzero'
-			},
-			{
-				name: 'Under 1K',
-				value: 'under-1K'
-			},
-			{
-				name: 'Under 10K',
-				value: 'under-10K'
-			},
-			{
-				name: 'Under 100K',
-				value: 'under-100K'
-			},
-			{
-				name: 'Under 1M',
-				value: 'under-1M'
-			},
-			{
-				name: 'Under 10M',
-				value: 'under-10M'
-			},
-			{
-				name: 'Under 100M',
-				value: 'under-100M'
-			}
-		],
-		format: 'format0dec',
-		tooltipTitle: 'Current Volume',
-		tooltipText:
-			'The number of shares traded during the current or latest trading day.'
-	},
-	{
-		name: 'Expense Ratio',
-		id: 'expenseRatio',
-		category: ['Popular'],
-		filterType: 'numeric',
-		options: [
-			{
-				name: 'Over 2%',
-				value: 'over-2'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'Under 1%',
-				value: 'under-1'
-			},
-			{
-				name: 'Under 0.5%',
-				value: 'under-0.5'
-			},
-			{
-				name: 'Under 0.3%',
-				value: 'under-0.3'
-			},
-			{
-				name: 'Under 0.2%',
-				value: 'under-0.2'
-			},
-			{
-				name: 'Under 0.1%',
-				value: 'under-0.1'
-			},
-			{
-				name: 'Under 0.05%',
-				value: 'under-0.05'
-			}
-		],
-		format: 'format2dec',
-		tooltipText:
-			"Expense ratio is the percentage of the fund's assets that are charged as expenses by the company that issues the fund. The lower the expense ratio, the better."
-	},
-	{
-		name: 'Asset Class',
-		id: 'assetClass',
-		category: ['Popular'],
-		filterType: 'stringmatch',
-		options: [
-			{
-				name: 'Alternative',
-				value: 'Alternative'
-			},
-			{
-				name: 'Commodity',
-				value: 'Commodity'
-			},
-			{
-				name: 'Currency',
-				value: 'Currency'
-			},
-			{
-				name: 'Equity',
-				value: 'Equity'
-			},
-			{
-				name: 'Fixed Income',
-				value: 'Fixed Income'
-			},
-			{
-				name: 'Portfolio-Multi Asset',
-				value: 'Portfolio-Multi Asset'
-			}
-		],
-		format: 'string',
-		sortType: stringNullFix,
-		tooltipText:
-			'Assets class is the type of asset that the fund primarily holds. For example, ETFs with the "Equity" asset class mostly hold stocks.'
-	},
-	{
-		name: 'Holdings',
-		id: 'holdings',
-		category: ['Popular'],
-		filterType: 'numeric',
-		options: [
-			{
-				name: 'Over 5000',
-				value: 'over-5000'
-			},
-			{
-				name: 'Over 1000',
-				value: 'over-1000'
-			},
-			{
-				name: 'Over 500',
-				value: 'over-500'
-			},
-			{
-				name: 'Over 100',
-				value: 'over-100'
-			},
-			{
-				name: 'Over 10',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1',
-				value: 'over-1'
-			},
-			{
-				name: 'From 500-1000',
-				value: 'between-500-1000'
-			},
-			{
-				name: 'From 100-500',
-				value: 'between-100-500'
-			},
-			{
-				name: 'From 50-100',
-				value: 'between-50-100'
-			},
-			{
-				name: 'From 20-50',
-				value: 'between-20-50'
-			},
-			{
-				name: 'From 10-20',
-				value: 'between-10-20'
-			},
-			{
-				name: 'Under 20',
-				value: 'under-20'
-			},
-			{
-				name: 'Under 10',
-				value: 'under-10'
-			},
-			{
-				name: 'Under 5',
-				value: 'under-5'
-			},
-			{
-				name: 'Under 1',
-				value: 'under-1'
-			}
-		],
-		format: 'format0dec',
-		sortInverted: 'true',
-		tooltipTitle: 'ETF Holdings',
-		tooltipText: 'The number of individual securities that the fund holds.'
-	},
-	{
-		name: 'Sector',
-		id: 'etfSector',
-		category: ['Popular', 'Company'],
-		filterType: 'stringmatch',
-		variable: true,
-		options: [],
-		format: 'padleft',
-		sortType: stringNullFix,
-		tooltipTitle: 'ETF Sector',
-		tooltipText: 'The sector or category that the ETF primarily invests in.'
-	},
-	{
-		name: 'Issuer',
-		id: 'issuer',
-		category: ['Popular'],
-		filterType: 'stringmatch',
-		variable: true,
-		options: [],
-		format: 'string',
-		sortType: stringNullFix,
-		tooltipTitle: 'ETF Issuer',
-		tooltipText:
-			'The company or organization that manages the exchange-traded fund.'
-	},
-	{
-		name: 'Index',
-		id: 'etfIndex',
-		category: ['Popular'],
-		filterType: 'stringmatch',
-		variable: true,
-		options: [],
-		format: 'string',
-		sortType: stringNullFix,
-		tooltipTitle: 'ETF Index',
-		tooltipText:
-			'Many ETFs are designed to track the performance of an index. Examples include the S&P500 or the Nasdaq-100.'
-	},
-	{
-		name: 'Inception Date',
-		id: 'inceptionDate',
-		category: ['Popular'],
-		filterType: 'date',
-		options: [
-			{
-				name: 'Past Month',
-				value: 'under-1M'
-			},
-			{
-				name: 'Past 3 Months',
-				value: 'under-3M'
-			},
-			{
-				name: 'Past 6 Months',
-				value: 'under-6M'
-			},
-			{
-				name: 'Past 12 Months',
-				value: 'under-12M',
-				div: true
-			},
-			{
-				name: 'This Year',
-				value: 'this-year'
-			},
-			{
-				name: 'Last Year',
-				value: 'last-year',
-				div: true
-			},
-			{
-				name: 'Within 3 Years',
-				value: 'under-3Y'
-			},
-			{
-				name: 'Within 5 Years',
-				value: 'under-5Y'
-			},
-			{
-				name: 'Within 10 Years',
-				value: 'under-10Y'
-			},
-			{
-				name: 'Within 20 Years',
-				value: 'under-20Y',
-				div: true
-			},
-			{
-				name: 'Over 1 Years Ago',
-				value: 'over-1Y'
-			},
-			{
-				name: 'Over 3 Years Ago',
-				value: 'over-3Y'
-			},
-			{
-				name: 'Over 5 Years Ago',
-				value: 'over-5Y'
-			},
-			{
-				name: 'Over 10 Years Ago',
-				value: 'over-10Y'
-			},
-			{
-				name: 'Over 20 Years Ago',
-				value: 'over-20Y'
-			}
-		],
-		format: 'date',
-		tooltipText:
-			'The inception date is the date that the exchange-traded fund (ETF) was launched and able to be traded on a stock exchange.'
-	},
-	{
-		name: 'PE Ratio',
-		id: 'etfPeRatio',
-		category: ['Popular'],
-		filterType: 'numeric',
-		options: [
-			{
-				name: 'Over 50',
-				value: 'over-50'
-			},
-			{
-				name: 'From 30-50',
-				value: 'between-30-50'
-			},
-			{
-				name: 'From 20-30',
-				value: 'between-20-30'
-			},
-			{
-				name: 'From 15-20',
-				value: 'between-15-20'
-			},
-			{
-				name: 'From 10-15',
-				value: 'between-10-15'
-			},
-			{
-				name: 'Under 20',
-				value: 'under-20'
-			},
-			{
-				name: 'Under 10',
-				value: 'under-10'
-			},
-			{
-				name: 'Under 5',
-				value: 'under-5'
-			}
-		],
-		format: 'format2dec',
-		sortType: numberNullFix,
-		tooltipText:
-			'The average price-to-earnings (PE) ratio of the assets held by the fund.'
-	},
-	{
-		name: 'Beta (1Y)',
-		id: 'beta',
-		category: ['Performance'],
-		filterType: 'numeric',
-		options: [
-			{
-				name: 'Over 4',
-				value: 'over-4'
-			},
-			{
-				name: 'Over 3',
-				value: 'over-3'
-			},
-			{
-				name: 'Over 2',
-				value: 'over-2'
-			},
-			{
-				name: 'Over 1',
-				value: 'over-1'
-			},
-			{
-				name: 'Under 1',
-				value: 'under-1'
-			},
-			{
-				name: 'Under 0.8',
-				value: 'under-0.8'
-			},
-			{
-				name: 'Under 0.5',
-				value: 'under-0.5'
-			},
-			{
-				name: 'Under 0.2',
-				value: 'under-0.2'
-			},
-			{
-				name: 'Under 0',
-				value: 'under-0'
-			},
-			{
-				name: 'Under -0.2',
-				value: 'under-X0.2'
-			},
-			{
-				name: 'Under -0.5',
-				value: 'under-X0.5'
-			},
-			{
-				name: 'Under -0.8',
-				value: 'under-X0.8'
-			},
-			{
-				name: 'Under -1',
-				value: 'under-X1'
-			},
-			{
-				name: 'Under -1.5',
-				value: 'under-X1.5'
-			},
-			{
-				name: 'Under -2',
-				value: 'under-X2'
-			},
-			{
-				name: 'Under -3',
-				value: 'under-X3'
-			}
-		],
-		columnName: 'Beta',
-		format: 'format2dec',
-		tooltipText:
-			'Beta measures the price volatility of a stock in comparison to the overall stock market. A value over 1 indicates higher volatility, while a value under 1 indicates lower volatility.'
-	},
-	{
-		name: 'Dividend ($)',
-		id: 'dps',
-		category: ['Dividends'],
-		filterType: 'numeric',
-		options: [
-			{
-				name: 'Over 10',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 3',
-				value: 'over-3'
-			},
-			{
-				name: 'Over 2',
-				value: 'over-2'
-			},
-			{
-				name: 'Over 1',
-				value: 'over-1'
-			},
-			{
-				name: 'Not Zero',
-				value: 'notzero'
-			}
-		],
-		columnName: 'Dividend',
-		format: 'format2dec',
-		tooltipTitle: 'Dividend Per Share',
-		tooltipText:
-			'Total amount paid to each outstanding share in dividends during the last 12 months.'
-	},
-	{
-		name: 'Dividend Yield',
-		id: 'dividendYield',
-		category: ['Popular', 'Dividends'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
-			{
-				name: 'Over 10%',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 3%',
-				value: 'over-3'
-			},
-			{
-				name: 'Over 2%',
-				value: 'over-2'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: '2-3%',
-				value: 'between-2-3'
-			},
-			{
-				name: '1-2%',
-				value: 'between-1-2'
-			},
-			{
-				name: '0-1%',
-				value: 'between-0-1'
-			},
-			{
-				name: 'Not Zero',
-				value: 'notzero'
-			}
-		],
-		columnName: 'Yield (%)',
-		format: 'percentage',
-		tooltipText:
-			'The dividend yield is how much a stock pays in dividends each year, as a percentage of the stock price.',
-		tooltipFormula:
-			'Dividend Yield = (Annual Dividends Per Share / Stock Price) * 100%'
-	},
-	{
-		name: 'Div. Growth',
-		id: 'dividendGrowth',
-		category: ['Dividends'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
-			{
-				name: 'Over 10%',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 3%',
-				value: 'over-3'
-			},
-			{
-				name: 'Over 2%',
-				value: 'over-2'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'Over Zero',
-				value: 'over-0'
-			}
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' },
+			{ name: 'Under -50%', value: 'under-X50' }
 		],
 		format: 'percentage',
-		tooltipTitle: 'Dividend Growth (1Y)',
-		tooltipText:
-			'The percentage change in dividends paid per share, compared to one year ago.',
-		tooltipFormula:
-			'Dividend Growth = ((Current Dividend / Previous Dividend) - 1) * 100%'
+		tooltipTitle: 'Revenue Growth This Year',
+		tooltipText: 'Estimated growth in revenue in the current fiscal year.'
 	},
 	{
-		name: 'Payout Ratio',
-		id: 'payoutRatio',
-		category: ['Dividends'],
+		name: 'Revenue Growth Next Year',
+		columnName: 'Rev Gr. Next Y',
+		id: 'revenueNextYear',
+		searchMatches: 'sales-annual-forecast-analysts',
+		category: ['Other'],
 		filterType: 'numeric',
-		numberType: 'percentage',
 		options: [
-			{
-				name: 'Over 100%',
-				value: 'over-100'
-			},
-			{
-				name: 'Under 100%',
-				value: 'under-100'
-			},
-			{
-				name: 'Under 90%',
-				value: 'under-90'
-			},
-			{
-				name: 'Under 80%',
-				value: 'under-80'
-			},
-			{
-				name: 'Under 70%',
-				value: 'under-70'
-			},
-			{
-				name: 'Under 60%',
-				value: 'under-60'
-			},
-			{
-				name: 'Under 50%',
-				value: 'under-50'
-			},
-			{
-				name: 'Under 40%',
-				value: 'under-40'
-			},
-			{
-				name: 'Under 30%',
-				value: 'under-30'
-			},
-			{
-				name: 'Under 20%',
-				value: 'under-20'
-			},
-			{
-				name: 'Under 10%',
-				value: 'under-10'
-			}
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' },
+			{ name: 'Under -50%', value: 'under-X50' }
 		],
 		format: 'percentage',
-		tooltipText:
-			"The payout ratio is the percentage of a company's profits that are paid out as dividends. A high ratio implies that the dividend payments may not be sustainable.",
-		tooltipFormula:
-			'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
+		tooltipTitle: 'Revenue Growth Next Year',
+		tooltipText: 'Estimated growth in revenue in the next fiscal year.'
 	},
 	{
-		name: 'Payout Freq.',
-		id: 'payoutFrequency',
-		category: ['Dividends'],
-		filterType: 'stringmatch',
-		options: [
-			{
-				name: 'Weekly',
-				value: 'Weekly'
-			},
-			{
-				name: 'Monthly',
-				value: 'Monthly'
-			},
-			{
-				name: 'Quarterly',
-				value: 'Quarterly'
-			},
-			{
-				name: 'Semi-Annual',
-				value: 'Semi-Annual'
-			},
-			{
-				name: 'Annual',
-				value: 'Annual'
-			}
-		],
-		format: 'align',
-		tooltipTitle: 'Payout Frequency',
-		tooltipText:
-			'Payout frequency is the schedule at which the dividends are paid. For example, a "Quarterly" payout ratio implies that dividends are paid every three months.'
-	},
-	{
-		name: 'Ex-Div Date',
-		id: 'exDivDate',
-		category: ['Dividends'],
-		filterType: 'date',
-		options: [
-			{
-				name: 'Today',
-				value: 'today'
-			},
-			{
-				name: 'Yesterday',
-				value: 'yesterday'
-			},
-			{
-				name: 'Past Week',
-				value: 'under-7D'
-			},
-			{
-				name: 'Past Month',
-				value: 'under-1M'
-			},
-			{
-				name: 'Past 3 Months',
-				value: 'under-3M'
-			},
-			{
-				name: 'Past 6 Months',
-				value: 'under-6M'
-			},
-			{
-				name: 'Past 12 Months',
-				value: 'under-12M',
-				div: true
-			}
-		],
-		format: 'date',
-		tooltipTitle: 'Ex-Dividend Date',
-		tooltipText:
-			'Only those who own shares before the ex-dividend date will receive the payment.'
-	},
-	{
-		name: 'Exchange',
-		id: 'exchange',
-		category: ['Popular'],
-		filterType: 'stringmatch',
-		options: [
-			{
-				name: 'BATS',
-				value: 'BATS'
-			},
-			{
-				name: 'NASDAQ',
-				value: 'NASDAQ'
-			},
-			{
-				name: 'NYSEARCA',
-				value: 'NYSEARCA'
-			}
-		],
-		tooltipTitle: 'Stock Exchange',
-		tooltipText: 'The stock exchange that the ETF shares are listed on.'
-	},
-	{
-		name: 'Region',
-		id: 'etfRegion',
-		category: ['Popular'],
-		filterType: 'stringmatch',
-		variable: true,
-		options: [],
-		format: 'string',
-		sortType: stringNullFix,
-		tooltipTitle: 'ETF Region',
-		tooltipText: 'The geographic region that the ETF primarily invests in.'
-	},
-	{
-		name: 'Shares Out',
-		id: 'sharesOut',
-		category: ['Popular'],
+		name: 'EPS Growth Next 5Y',
+		columnName: 'EPS Gr. Next 5Y',
+		id: 'eps5y',
+		searchMatches: 'earnings-annual-forecast-analysts',
+		category: ['Popular', 'Other'],
 		filterType: 'numeric',
 		options: [
-			{
-				name: 'Over 1B',
-				value: 'over-1B'
-			},
-			{
-				name: 'Over 100M',
-				value: 'over-100M'
-			},
-			{
-				name: 'Over 50M',
-				value: 'over-50M'
-			},
-			{
-				name: 'Over 10M',
-				value: 'over-10M'
-			},
-			{
-				name: 'Over 1M',
-				value: 'over-1M'
-			},
-			{
-				name: 'Not Zero',
-				value: 'notzero'
-			},
-			{
-				name: 'Under 1M',
-				value: 'under-1M'
-			},
-			{
-				name: 'Under 10M',
-				value: 'under-10M'
-			},
-			{
-				name: 'Under 50M',
-				value: 'under-50M'
-			},
-			{
-				name: 'Under 100M',
-				value: 'under-100M'
-			}
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' }
 		],
-		format: 'abbreviate',
-		tooltipTitle: 'Shares Outstanding',
+		format: 'percentage',
+		tooltipTitle: 'EPS Growth Next 5 Years',
 		tooltipText:
-			'The total number of outstanding ETF shares that been issued.'
+			'Estimated compound annual growth rate (CAGR) for earnings per share (EPS) over the next five fiscal years.'
 	},
 	{
-		name: 'Price Change 1M',
-		id: 'ch1m',
-		category: ['Performance'],
+		name: 'Rev. Growth Next 5Y',
+		columnName: 'Rev Gr. Next 5Y',
+		id: 'revenue5y',
+		searchMatches: 'sales-annual-forecast-analysts',
+		category: ['Popular', 'Other'],
 		filterType: 'numeric',
-		numberType: 'percentage',
 		options: [
-			{
-				name: 'Over 20%',
-				value: 'over-20'
-			},
-			{
-				name: 'Over 10%',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'From 0-1%',
-				value: 'between-0-1'
-			},
-			{
-				name: 'From -1-0%',
-				value: 'between-X1-0'
-			},
-			{
-				name: 'Under -1%',
-				value: 'under-X1'
-			},
-			{
-				name: 'Under -5%',
-				value: 'under-X5'
-			},
-			{
-				name: 'Under -10%',
-				value: 'under-X10'
-			},
-			{
-				name: 'Under -20%',
-				value: 'under-X20'
-			}
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' }
 		],
-		columnName: 'Chg. 1M',
-		format: 'changePcColor',
-		tooltipTitle: '1-Month Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 1 month ago.'
-	},
-	{
-		name: 'Price Change 6M',
-		id: 'ch6m',
-		category: ['Performance'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
-			{
-				name: 'Over 50%',
-				value: 'over-50'
-			},
-			{
-				name: 'Over 20%',
-				value: 'over-20'
-			},
-			{
-				name: 'Over 10%',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'From 0-1%',
-				value: 'between-0-1'
-			},
-			{
-				name: 'From -1-0%',
-				value: 'between-X1-0'
-			},
-			{
-				name: 'Under -1%',
-				value: 'under-X1'
-			},
-			{
-				name: 'Under -5%',
-				value: 'under-X5'
-			},
-			{
-				name: 'Under -10%',
-				value: 'under-X10'
-			},
-			{
-				name: 'Under -20%',
-				value: 'under-X20'
-			},
-			{
-				name: 'Under -50%',
-				value: 'under-X50'
-			}
-		],
-		columnName: 'Chg. 6M',
-		format: 'changePcColor',
-		tooltipTitle: '6-Month Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 6 months ago.'
-	},
-	{
-		name: 'Price Change YTD',
-		id: 'chYTD',
-		category: ['Performance'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
-			{
-				name: 'Over 50%',
-				value: 'over-50'
-			},
-			{
-				name: 'Over 20%',
-				value: 'over-20'
-			},
-			{
-				name: 'Over 10%',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'From 0-1%',
-				value: 'between-0-1'
-			},
-			{
-				name: 'From -1-0%',
-				value: 'between-X1-0'
-			},
-			{
-				name: 'Under -1%',
-				value: 'under-X1'
-			},
-			{
-				name: 'Under -5%',
-				value: 'under-X5'
-			},
-			{
-				name: 'Under -10%',
-				value: 'under-X10'
-			},
-			{
-				name: 'Under -20%',
-				value: 'under-X20'
-			},
-			{
-				name: 'Under -50%',
-				value: 'under-X50'
-			}
-		],
-		columnName: 'Chg. YTD',
-		format: 'changePcColor',
-		tooltipTitle: 'Year-to-Date Price Change',
-		tooltipText:
-			'The percentage change in the stock price since January 1st of the current year.'
-	},
-	{
-		name: 'Price Change 1Y',
-		id: 'ch1y',
-		category: ['Popular', 'Performance'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
-			{
-				name: 'Over 50%',
-				value: 'over-50'
-			},
-			{
-				name: 'Over 20%',
-				value: 'over-20'
-			},
-			{
-				name: 'Over 10%',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'From 0-1%',
-				value: 'between-0-1'
-			},
-			{
-				name: 'From -1-0%',
-				value: 'between-X1-0'
-			},
-			{
-				name: 'Under -1%',
-				value: 'under-X1'
-			},
-			{
-				name: 'Under -5%',
-				value: 'under-X5'
-			},
-			{
-				name: 'Under -10%',
-				value: 'under-X10'
-			},
-			{
-				name: 'Under -20%',
-				value: 'under-X20'
-			},
-			{
-				name: 'Under -50%',
-				value: 'under-X50'
-			}
-		],
-		columnName: 'Chg. 1Y',
-		format: 'changePcColor',
-		tooltipTitle: '1-Year Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 1 year ago.'
-	},
-	{
-		name: 'Price Change 3Y',
-		id: 'ch3y',
-		category: ['Performance'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
-			{
-				name: 'Over 200%',
-				value: 'over-200'
-			},
-			{
-				name: 'Over 100%',
-				value: 'over-100'
-			},
-			{
-				name: 'Over 50%',
-				value: 'over-50'
-			},
-			{
-				name: 'Over 20%',
-				value: 'over-20'
-			},
-			{
-				name: 'Over 10%',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'From 0-1%',
-				value: 'between-0-1'
-			},
-			{
-				name: 'From -1-0%',
-				value: 'between-X1-0'
-			},
-			{
-				name: 'Under -1%',
-				value: 'under-X1'
-			},
-			{
-				name: 'Under -5%',
-				value: 'under-X5'
-			},
-			{
-				name: 'Under -10%',
-				value: 'under-X10'
-			},
-			{
-				name: 'Under -20%',
-				value: 'under-X20'
-			},
-			{
-				name: 'Under -50%',
-				value: 'under-X50'
-			},
-			{
-				name: 'Under -90%',
-				value: 'under-X90'
-			}
-		],
-		columnName: 'Chg. 3Y',
-		format: 'changePcColor',
-		tooltipTitle: '3-Year Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 3 years ago.'
-	},
-	{
-		name: 'Price Change 5Y',
-		id: 'ch5y',
-		category: ['Performance'],
-		filterType: 'numeric',
-		numberType: 'percentage',
-		options: [
-			{
-				name: 'Over 300%',
-				value: 'over-300'
-			},
-			{
-				name: 'Over 200%',
-				value: 'over-200'
-			},
-			{
-				name: 'Over 100%',
-				value: 'over-100'
-			},
-			{
-				name: 'Over 50%',
-				value: 'over-50'
-			},
-			{
-				name: 'Over 20%',
-				value: 'over-20'
-			},
-			{
-				name: 'Over 10%',
-				value: 'over-10'
-			},
-			{
-				name: 'Over 5%',
-				value: 'over-5'
-			},
-			{
-				name: 'Over 1%',
-				value: 'over-1'
-			},
-			{
-				name: 'From 0-1%',
-				value: 'between-0-1'
-			},
-			{
-				name: 'From -1-0%',
-				value: 'between-X1-0'
-			},
-			{
-				name: 'Under -1%',
-				value: 'under-X1'
-			},
-			{
-				name: 'Under -5%',
-				value: 'under-X5'
-			},
-			{
-				name: 'Under -10%',
-				value: 'under-X10'
-			},
-			{
-				name: 'Under -20%',
-				value: 'under-X20'
-			},
-			{
-				name: 'Under -50%',
-				value: 'under-X50'
-			},
-			{
-				name: 'Under -90%',
-				value: 'under-X90'
-			}
-		],
-		columnName: 'Chg. 5Y',
-		format: 'changePcColor',
-		tooltipTitle: '5-Year Price Change',
-		tooltipText:
-			'The percentage change in the stock price compared to 5 years ago.'
+		format: 'percentage',
+		tooltipTitle: 'Revenue Growth Next 5 Years',
+		tooltipText: 'Estimated compound annual growth rate (CAGR) for revenue over the next five fiscal years.'
 	}
 ]

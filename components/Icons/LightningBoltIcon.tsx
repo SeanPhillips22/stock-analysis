@@ -8,12 +8,7 @@ export function LightningBoltIcon(props: React.ComponentProps<'svg'>) {
 			stroke="currentColor"
 			style={{ maxWidth: '40px' }}
 		>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				strokeWidth={2}
-				d="M13 10V3L4 14h7v7l9-11h-7z"
-			/>
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
 		</svg>
 	)
 }

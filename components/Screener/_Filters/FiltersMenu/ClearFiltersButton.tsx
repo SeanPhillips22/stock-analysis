@@ -1,13 +1,13 @@
-import { screenerState } from '../../screener.state'
 import { CloseCircleIcon } from 'components/Icons/CloseCircle'
 import { cn } from 'functions/helpers/classNames'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	showLabel?: boolean
 }
 
 export function ClearFiltersButton({ showLabel }: Props) {
-	const clearFilters = screenerState(state => state.clearFilters)
+	const { dispatch } = useScreenerContext()
 
 	return (
 		<>
@@ -18,13 +18,11 @@ export function ClearFiltersButton({ showLabel }: Props) {
 						'flex cursor-pointer items-center text-base font-semibold text-gray-500 hover:text-red-500'
 					)}
 					title="Clear All Filters"
-					onClick={() => clearFilters()}
-					onKeyPress={e => e.key === 'Enter' && clearFilters()}
+					onClick={() => dispatch({ type: 'CLEAR_FILTERS', value: null })}
+					onKeyPress={e => e.key === 'Enter' && dispatch({ type: 'CLEAR_FILTERS', value: null })}
 					tabIndex={0}
 				>
-					<CloseCircleIcon
-						classes={cn(showLabel ? '' : 'ml-1.5', 'w-5 h-5 sm:ml-1')}
-					/>
+					<CloseCircleIcon classes={cn(showLabel ? '' : 'ml-1.5', 'w-5 h-5 sm:ml-1')} />
 					{showLabel && <div className="ml-0.5">Clear All Filters</div>}
 				</div>
 			</div>

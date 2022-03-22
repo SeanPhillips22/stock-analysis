@@ -15,13 +15,10 @@ export function ExtendedQuote({ quote }: Props) {
 	return (
 		<div className="quote ext">
 			<div className={`p-ext${animation}`}>{quote.epd}</div>{' '}
-			<div className={`pc-ext ${color}`}>
-				{`${quote.ec} (${quote.ecp}%)`}
-			</div>
+			<div className={`pc-ext ${color}`}>{`${quote.ec} (${quote.ecp}%)`}</div>
 			<div className="und">
 				<span className="sp1">
-					{quote.es === 'Pre-market' ? <SunIcon /> : <MoonIcon />}{' '}
-					<span className="sp2">{quote.es}:</span>
+					{quote.es === 'Pre-market' ? <SunIcon /> : <MoonIcon />} <span className="sp2">{quote.es}:</span>
 				</span>
 				<span className="sp3">{quote.eu}</span>
 			</div>

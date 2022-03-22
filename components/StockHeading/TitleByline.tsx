@@ -6,9 +6,7 @@ export function TitleByline({ info }: { info: Info }) {
 	// The server-rendered text deciding whether to show delayed or real-time price
 	// if OTC, or quote is extended and market closed
 	const [timing, setTiming] = useState(
-		info.isOTC || (info.quote.e && isExtended)
-			? 'Delayed Price'
-			: 'IEX Real-Time Price'
+		info.isOTC || (info.quote.e && isExtended) ? 'Delayed Price' : 'IEX Real-Time Price'
 	)
 
 	// On the client, check whether to change from extended to RTH or vice versa
@@ -19,9 +17,5 @@ export function TitleByline({ info }: { info: Info }) {
 		}
 	}, [info.isOTC, timing])
 
-	return (
-		<div className="sh-details">
-			{`${info.exchange}: ${info.ticker} · ${timing} · USD`}
-		</div>
-	)
+	return <div className="sh-details">{`${info.exchange}: ${info.ticker} · ${timing} · USD`}</div>
 }

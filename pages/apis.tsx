@@ -62,9 +62,8 @@ export default function ApisPage() {
 								IPO Calendar API
 							</h1>
 							<p className="mx-auto mt-6 max-w-xl text-xl text-gray-600">
-								We have partnered with Rapid API to offer our
-								comprehensive upcoming IPO calendar as an API. There are
-								both free and paid plans available.
+								We have partnered with Rapid API to offer our comprehensive upcoming IPO calendar as an API.
+								There are both free and paid plans available.
 							</p>
 							<a
 								href="https://rapidapi.com/stock-analysis-stock-analysis-default/api/upcoming-ipo-calendar"
@@ -85,13 +84,10 @@ export default function ApisPage() {
 								Example JSON response
 							</h2>
 							<div className="mt-4 text-left text-xl text-gray-600">
-								This shows what an individual IPO data point looks like
-								in the API response.
+								This shows what an individual IPO data point looks like in the API response.
 							</div>
 							<div className="mx-auto mt-5 overflow-x-auto text-left text-xl text-gray-600">
-								<pre className="whitespace-pre-wrap">
-									{JSON.stringify(ExampleJSON, null, 2)}
-								</pre>
+								<pre className="whitespace-pre-wrap">{JSON.stringify(ExampleJSON, null, 2)}</pre>
 							</div>
 						</div>
 					</div>
@@ -100,15 +96,11 @@ export default function ApisPage() {
 					<div className="mx-auto max-w-7xl py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
 						<div className="lg:grid lg:grid-cols-3 lg:gap-8">
 							<div>
-								<h2 className="text-3xl font-extrabold text-gray-900">
-									Frequently asked questions
-								</h2>
+								<h2 className="text-3xl font-extrabold text-gray-900">Frequently asked questions</h2>
 								<p className="mt-4 text-lg text-gray-600">
 									If you have any other questions, reach out to our{' '}
 									<Link href="/contact/">
-										<a className="bll font-medium">
-											customer support
-										</a>
+										<a className="bll font-medium">customer support</a>
 									</Link>{' '}
 									team.
 								</p>
@@ -117,12 +109,8 @@ export default function ApisPage() {
 								<dl className="space-y-12">
 									{faqs.map(faq => (
 										<div key={faq.question}>
-											<dt className="text-lg font-medium leading-6 text-gray-900">
-												{faq.question}
-											</dt>
-											<dd className="mt-2 text-base text-gray-600">
-												{faq.answer}
-											</dd>
+											<dt className="text-lg font-medium leading-6 text-gray-900">{faq.question}</dt>
+											<dd className="mt-2 text-base text-gray-600">{faq.answer}</dd>
 										</div>
 									))}
 								</dl>
@@ -151,10 +139,7 @@ export default function ApisPage() {
 								</div>
 								<div>2. Click "Test Endpoint".</div>
 								<div>3. Follow the steps to create an account.</div>
-								<div>
-									4. Click "Subscribe to Test" to start working with
-									the API.
-								</div>
+								<div>4. Click "Subscribe to Test" to start working with the API.</div>
 							</div>
 						</div>
 					</div>

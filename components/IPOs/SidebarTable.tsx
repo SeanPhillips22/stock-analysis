@@ -38,19 +38,12 @@ export function SidebarTable({ data, title, btnTitle, btnUrl, count }: Props) {
 					</thead>
 					<tbody>
 						{data.map((item, index) => (
-							<tr
-								key={index}
-								className="border-b border-gray-200 last:border-0"
-							>
-								<td className="whitespace-nowrap border-r border-gray-200 p-2">
-									{item.date}
-								</td>
+							<tr key={index} className="border-b border-gray-200 last:border-0">
+								<td className="whitespace-nowrap border-r border-gray-200 p-2">{item.date}</td>
 								<td className="border-r border-gray-200 p-2">
 									<StockLink symbol={item.symbol} className="bll" />
 								</td>
-								<td className="p-2 lg:max-w-[150px] lg:truncate">
-									{item.name}
-								</td>
+								<td className="p-2 lg:max-w-[150px] lg:truncate">{item.name}</td>
 							</tr>
 						))}
 					</tbody>

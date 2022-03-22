@@ -5,11 +5,11 @@
 
 @layer components {
 	.finnav-wrap {
-		@apply flex flex-col md:flex-row md:justify-between mb-2 md:mb-3 space-y-2 md:space-y-0;
+		@apply mb-2 flex flex-col space-y-2 md:mb-3 md:flex-row md:justify-between md:space-y-0;
 	}
 
 	.finctrl {
-		@apply hidden md:flex md:space-x-2 pb-2;
+		@apply hidden pb-2 md:flex md:space-x-2;
 	}
 
 	.finctrl.vis {
@@ -53,7 +53,7 @@
 	}
 
 	.fintbl tr > *:not(:last-child) svg {
-		@apply w-[22px] h-[22px] my-0 mx-1 stroke-[#777];
+		@apply my-0 mx-1 h-[22px] w-[22px] stroke-[#777];
 	}
 
 	@media screen and (min-width: 1025px) {
@@ -72,11 +72,11 @@
 	}
 
 	.iconcelldiv {
-		@apply relative p-[3px] border border-t-0 border-transparent z-10 delay-200;
+		@apply relative z-10 border border-t-0 border-transparent p-[3px] delay-200;
 	}
 
 	.iconcelldiv:hover {
-		@apply bg-white border-gray-200 z-50;
+		@apply z-50 border-gray-200 bg-white;
 	}
 
 	.iconcelldiv:hover svg {
@@ -111,6 +111,6 @@
 	}
 
 	.fintbl .lockcell > div {
-		@apply flex items-center justify-center font-medium text-small text-gray-500 py-0.5 cursor-pointer hover:text-gray-700;
+		@apply flex cursor-pointer items-center justify-center py-0.5 text-small font-medium text-gray-500 hover:text-gray-700;
 	}
 }

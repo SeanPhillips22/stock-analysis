@@ -6,9 +6,7 @@ export interface IZoomAnchorOptions<TData, TXAxis extends number | Date> {
 	readonly plotData: TData[]
 	readonly mouseXY: number[]
 	readonly xAccessor: (data: TData) => TXAxis
-	readonly xScale:
-		| ScaleContinuousNumeric<number, number>
-		| ScaleTime<number, number>
+	readonly xScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>
 }
 
 export const mouseBasedZoomAnchor = <TData, TXAxis extends number | Date>(
@@ -19,10 +17,7 @@ export const mouseBasedZoomAnchor = <TData, TXAxis extends number | Date>(
 	return xAccessor(currentItem)
 }
 
-export const lastVisibleItemBasedZoomAnchor = <
-	TData,
-	TXAxis extends number | Date
->(
+export const lastVisibleItemBasedZoomAnchor = <TData, TXAxis extends number | Date>(
 	options: IZoomAnchorOptions<TData, TXAxis>
 ) => {
 	const { xAccessor, plotData } = options

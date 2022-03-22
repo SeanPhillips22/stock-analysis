@@ -18,36 +18,23 @@ export const ProfileContact = ({ contact }: { contact: Contact }) => {
 						{contact.address && (
 							<tr>
 								<td colSpan={2} className="pb-3">
-									<div className="mb-2 text-lg font-bold">
-										Address:
-									</div>
-									<div
-										dangerouslySetInnerHTML={address(contact.address)}
-									/>
+									<div className="mb-2 text-lg font-bold">Address:</div>
+									<div dangerouslySetInnerHTML={address(contact.address)} />
 								</td>
 							</tr>
 						)}
 						{contact.phone && (
 							<tr className="border-t border-gray-200">
 								<td className="py-2 px-0.5 font-semibold">Phone</td>
-								<td className="py-2 px-0.5 text-right">
-									{contact.phone}
-								</td>
+								<td className="py-2 px-0.5 text-right">{contact.phone}</td>
 							</tr>
 						)}
 						{contact.website && contact.domain && (
 							<tr className="border-t border-gray-200">
 								<td className="py-2 px-0.5 font-semibold">Website</td>
 								<td className="py-2 px-0.5 text-right">
-									<a
-										href={contact.website}
-										target="_blank"
-										rel="noopener noreferrer nofollow"
-										className="bll"
-									>
-										{contact.domain.length > 30
-											? 'Visit Website'
-											: contact.domain}
+									<a href={contact.website} target="_blank" rel="noopener noreferrer nofollow" className="bll">
+										{contact.domain.length > 30 ? 'Visit Website' : contact.domain}
 									</a>
 								</td>
 							</tr>

@@ -32,13 +32,9 @@ export function ActionsControls({
 	return (
 		<div className="controls groups">
 			<div className="title-group">
-				<h2 className="whitespace-nowrap text-xl font-semibold bp:text-2xl">
-					{title}
-				</h2>
+				<h2 className="whitespace-nowrap text-xl font-semibold bp:text-2xl">{title}</h2>
 			</div>
-			<div
-				className={cn('btn-group', !setColumnFilter ? 'btn-stretch' : '')}
-			>
+			<div className={cn('btn-group', !setColumnFilter ? 'btn-stretch' : '')}>
 				{useAsyncDebounce && setGlobalFilter && (
 					<Filter
 						useAsyncDebounce={useAsyncDebounce}
@@ -47,9 +43,7 @@ export function ActionsControls({
 						setFilterState={setFilterState}
 					/>
 				)}
-				{setColumnFilter && (
-					<SplitsFilter setColumnFilter={setColumnFilter} />
-				)}
+				{setColumnFilter && <SplitsFilter setColumnFilter={setColumnFilter} />}
 				<Export tableId={tableId} />
 			</div>
 		</div>

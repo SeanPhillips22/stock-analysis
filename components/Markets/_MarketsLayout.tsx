@@ -13,11 +13,7 @@ export function MarketsLayout({ children, SubNav }: Props) {
 
 	return (
 		<Layout url={page.path}>
-			<SEO
-				title={page.metaTitle}
-				description={page.metaDescription}
-				canonical={page.path}
-			/>
+			<SEO title={page.metaTitle} description={page.metaDescription} canonical={page.path} />
 			<div className="contain">
 				<div className="hh1">Market Movers</div>
 				<MarketsNavigation path={page.path} SubNav={SubNav} />

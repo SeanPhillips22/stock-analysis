@@ -37,9 +37,7 @@ export function NewsMenuSearch({
 		setSearching(true)
 		const keyref = inputRef.current ?? null
 		if (keyref) keyref.blur()
-		const results = await getData(
-			`news-search?s=${symbol}&t=${type}&q=${query}`
-		)
+		const results = await getData(`news-search?s=${symbol}&t=${type}&q=${query}`)
 		setSearching(false)
 		setSearched(true)
 		setLoaded(true)
@@ -72,10 +70,7 @@ export function NewsMenuSearch({
 				{searching ? (
 					<SpinnerIcon classes="animate-spin h-5 w-5 text-gray-400" />
 				) : (
-					<SearchIcon
-						className="h-5 w-5 text-gray-400"
-						aria-hidden="true"
-					/>
+					<SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
 				)}
 			</div>
 		</div>

@@ -12,11 +12,7 @@ export function HeaderMenuToggle() {
 
 	return (
 		<div className="hd-menu" onClick={() => toggle()}>
-			{visible ? (
-				<CloseIcon classes="menu-icon" />
-			) : (
-				<HamburgerIcon classes="menu-icon" />
-			)}
+			{visible ? <CloseIcon classes="menu-icon" /> : <HamburgerIcon classes="menu-icon" />}
 		</div>
 	)
 }

@@ -12,10 +12,7 @@ import { line, CurveFactoryLineOnly, CurveFactory } from 'd3-shape'
 import * as React from 'react'
 
 export interface LineSeriesProps {
-	readonly canvasClip?: (
-		context: CanvasRenderingContext2D,
-		moreProps: any
-	) => void
+	readonly canvasClip?: (context: CanvasRenderingContext2D, moreProps: any) => void
 	/**
 	 * Wether to connect the line between undefined data points.
 	 */
@@ -94,15 +91,8 @@ export class LineSeries extends React.Component<LineSeriesProps> {
 	}
 
 	public render() {
-		const {
-			highlightOnHover,
-			onClick,
-			onContextMenu,
-			onDoubleClick,
-			onHover,
-			onUnHover,
-			strokeDasharray
-		} = this.props
+		const { highlightOnHover, onClick, onContextMenu, onDoubleClick, onHover, onUnHover, strokeDasharray } =
+			this.props
 
 		const hoverProps =
 			highlightOnHover || onHover || onUnHover
@@ -131,70 +121,64 @@ export class LineSeries extends React.Component<LineSeriesProps> {
 		)
 	}
 
-	private readonly drawOnCanvas =
-		(lineDash?: number[]) =>
-		(ctx: CanvasRenderingContext2D, moreProps: any) => {
-			const {
-				connectNulls,
-				yAccessor,
-				hoverStrokeWidth = LineSeries.defaultProps.hoverStrokeWidth,
-				defined = LineSeries.defaultProps.defined,
-				curve,
-				canvasClip,
-				strokeStyle,
-				strokeWidth = LineSeries.defaultProps.strokeWidth
-			} = this.props
+	private readonly drawOnCanvas = (lineDash?: number[]) => (ctx: CanvasRenderingContext2D, moreProps: any) => {
+		const {
+			connectNulls,
+			yAccessor,
+			hoverStrokeWidth = LineSeries.defaultProps.hoverStrokeWidth,
+			defined = LineSeries.defaultProps.defined,
+			curve,
+			canvasClip,
+			strokeStyle,
+			strokeWidth = LineSeries.defaultProps.strokeWidth
+		} = this.props
 
-			const {
-				xAccessor,
-				xScale,
-				chartConfig: { yScale },
-				plotData,
-				hovering
-			} = moreProps
+		const {
+			xAccessor,
+			xScale,
+			chartConfig: { yScale },
+			plotData,
+			hovering
+		} = moreProps
 
-			if (canvasClip !== undefined) {
-				ctx.save()
-				canvasClip(ctx, moreProps)
-			}
-
-			ctx.lineWidth = hovering ? hoverStrokeWidth : strokeWidth
-
-			if (strokeStyle !== undefined) {
-				ctx.strokeStyle = strokeStyle
-			}
-
-			if (lineDash !== undefined) {
-				ctx.setLineDash(lineDash)
-			}
-
-			const dataSeries = line()
-				.x((d: any) => Math.round(xScale(xAccessor(d))))
-				.y((d: any) => Math.round(yScale(yAccessor(d))))
-
-			if (curve !== undefined) {
-				dataSeries.curve(curve)
-			}
-
-			if (!connectNulls) {
-				dataSeries.defined((d: any) => defined(yAccessor(d)))
-			}
-
-			ctx.beginPath()
-			dataSeries.context(ctx)(plotData)
-			ctx.stroke()
-
-			if (canvasClip !== undefined) {
-				ctx.restore()
-			}
+		if (canvasClip !== undefined) {
+			ctx.save()
+			canvasClip(ctx, moreProps)
 		}
 
+		ctx.lineWidth = hovering ? hoverStrokeWidth : strokeWidth
+
+		if (strokeStyle !== undefined) {
+			ctx.strokeStyle = strokeStyle
+		}
+
+		if (lineDash !== undefined) {
+			ctx.setLineDash(lineDash)
+		}
+
+		const dataSeries = line()
+			.x((d: any) => Math.round(xScale(xAccessor(d))))
+			.y((d: any) => Math.round(yScale(yAccessor(d))))
+
+		if (curve !== undefined) {
+			dataSeries.curve(curve)
+		}
+
+		if (!connectNulls) {
+			dataSeries.defined((d: any) => defined(yAccessor(d)))
+		}
+
+		ctx.beginPath()
+		dataSeries.context(ctx)(plotData)
+		ctx.stroke()
+
+		if (canvasClip !== undefined) {
+			ctx.restore()
+		}
+	}
+
 	private readonly isHover = (moreProps: any) => {
-		const {
-			highlightOnHover,
-			yAccessor,
-			hoverTolerance = LineSeries.defaultProps.hoverTolerance
-		} = this.props
+		const { highlightOnHover, yAccessor, hoverTolerance = LineSeries.defaultProps.hoverTolerance } = this.props
 		if (!highlightOnHover) {
 			return false
 		}
@@ -211,17 +195,12 @@ export class LineSeries extends React.Component<LineSeriesProps> {
 		const [x, y] = mouseXY
 		const radius = hoverTolerance
 
-		const { left, right } = getClosestItemIndexes(
-			plotData,
-			xScale.invert(x),
-			xAccessor
-		)
+		const { left, right } = getClosestItemIndexes(plotData, xScale.invert(x), xAccessor)
 		if (left === right) {
 			const cy = yScale(yAccessor(currentItem)) + origin[1]
 			const cx = xScale(xAccessor(currentItem)) + origin[0]
 
-			const hovering1 =
-				Math.pow(x - cx, 2) + Math.pow(y - cy, 2) < Math.pow(radius, 2)
+			const hovering1 = Math.pow(x - cx, 2) + Math.pow(y - cy, 2) < Math.pow(radius, 2)
 
 			return hovering1
 		} else {

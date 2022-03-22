@@ -5,9 +5,7 @@ export default function Algorithm() {
 	let accumulator = identity
 	let mergeAs = identity
 	function algorithm(data) {
-		const defaultAlgorithm = slidingWindow()
-			.windowSize(windowSize)
-			.accumulator(accumulator)
+		const defaultAlgorithm = slidingWindow().windowSize(windowSize).accumulator(accumulator)
 		const calculator = merge().algorithm(defaultAlgorithm).merge(mergeAs)
 		const newData = calculator(data)
 		return newData

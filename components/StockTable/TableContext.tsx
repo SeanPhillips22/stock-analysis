@@ -100,9 +100,7 @@ export function TableContextProvider({ value, children }: ProviderProps) {
 		enabled
 	}
 
-	return (
-		<TableContext.Provider value={state}>{children}</TableContext.Provider>
-	)
+	return <TableContext.Provider value={state}>{children}</TableContext.Provider>
 }
 
 export function useTableContext() {

@@ -1,10 +1,6 @@
 import ExcellentExport from 'excellentexport'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
-import {
-	extractFinancialValues,
-	extractTextFromHTML,
-	removeNanValues
-} from './export.functions'
+import { extractFinancialValues, extractTextFromHTML, removeNanValues } from './export.functions'
 import { Menu } from '@headlessui/react'
 
 interface Props {
@@ -16,21 +12,10 @@ interface Props {
 	bulkData?: any
 }
 
-export default function Download({
-	title,
-	type,
-	data,
-	tableId,
-	fileName,
-	bulkData
-}: Props) {
+export default function Download({ title, type, data, tableId, fileName, bulkData }: Props) {
 	const { path } = useLayoutContext()
 
-	let name = fileName
-		? fileName
-		: `${path.one}${path.two ? '-' + path.two : ''}${
-				path.three ? '-' + path.three : ''
-		  }`
+	let name = fileName ? fileName : `${path.one}${path.two ? '-' + path.two : ''}${path.three ? '-' + path.three : ''}`
 
 	let returnArray: any[] = []
 

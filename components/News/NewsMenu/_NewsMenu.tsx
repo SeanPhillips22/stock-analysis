@@ -35,12 +35,7 @@ export function NewsMenu({
 }: Props) {
 	return (
 		<div className="flex flex-row items-center justify-between border-b">
-			<NewsMenuNav
-				show={show}
-				setShow={setShow}
-				setError={setError}
-				pageType={pageType}
-			/>
+			<NewsMenuNav show={show} setShow={setShow} setError={setError} pageType={pageType} />
 			<NewsMenuSearch
 				symbol={symbol}
 				type={pageType}

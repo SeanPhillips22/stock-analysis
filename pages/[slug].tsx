@@ -102,11 +102,7 @@ export default function Page({ content, meta, slug }: Props) {
 			/>
 			<ArticleLayout meta={meta} url={`/${slug}/`}>
 				<div>
-					<MDXRemote
-						{...content}
-						compiledSource={content.compiledSource}
-						components={components}
-					/>
+					<MDXRemote {...content} compiledSource={content.compiledSource} components={components} />
 				</div>
 			</ArticleLayout>
 		</>

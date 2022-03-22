@@ -34,8 +34,7 @@ export const priceSort = (a: Row, b: Row) => {
 	let bNumber
 
 	if (splitA.length > 1) {
-		aNumber =
-			(Number(splitA[0].substring(1)) + Number(splitA[4].substring(1))) / 2
+		aNumber = (Number(splitA[0].substring(1)) + Number(splitA[4].substring(1))) / 2
 	} else {
 		if (a.values.ipoPriceRange == 'n/a') {
 			aNumber = 0
@@ -45,8 +44,7 @@ export const priceSort = (a: Row, b: Row) => {
 	}
 
 	if (splitB.length > 1) {
-		bNumber =
-			(Number(splitB[0].substring(1)) + Number(splitB[4].substring(1))) / 2
+		bNumber = (Number(splitB[0].substring(1)) + Number(splitB[4].substring(1))) / 2
 	} else {
 		if (b.values.ipoPriceRange == 'n/a') {
 			bNumber = 0

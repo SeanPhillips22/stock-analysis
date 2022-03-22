@@ -3,14 +3,7 @@ import { group, merge } from 'd3-array'
 import { ScaleContinuousNumeric } from 'd3-scale'
 import { stack as d3Stack } from 'd3-shape'
 import * as React from 'react'
-import {
-	functor,
-	head,
-	identity,
-	getAxisCanvas,
-	GenericChartComponent,
-	plotDataLengthBarWidth
-} from '../core'
+import { functor, head, identity, getAxisCanvas, GenericChartComponent, plotDataLengthBarWidth } from '../core'
 
 export interface StackedBarSeriesProps {
 	readonly baseAt?:
@@ -27,21 +20,15 @@ export interface StackedBarSeriesProps {
 	readonly spaceBetweenBar?: number
 	readonly stroke?: boolean
 	readonly swapScales?: boolean
-	readonly yAccessor:
-		| ((data: any) => number | undefined)
-		| ((d: any) => number)[]
-	readonly width?:
-		| number
-		| ((props: StackedBarSeriesProps, moreProps: any) => number)
+	readonly yAccessor: ((data: any) => number | undefined) | ((d: any) => number)[]
+	readonly width?: number | ((props: StackedBarSeriesProps, moreProps: any) => number)
 	readonly widthRatio?: number
 }
 
 export class StackedBarSeries extends React.Component<StackedBarSeriesProps> {
 	public static defaultProps = {
-		baseAt: (
-			xScale: ScaleContinuousNumeric<number, number>,
-			yScale: ScaleContinuousNumeric<number, number>
-		) => head(yScale.range()),
+		baseAt: (xScale: ScaleContinuousNumeric<number, number>, yScale: ScaleContinuousNumeric<number, number>) =>
+			head(yScale.range()),
 		direction: 'up',
 		stroke: false,
 		fillStyle: 'rgba(70, 130, 180, 0.5)',
@@ -64,10 +51,7 @@ export class StackedBarSeries extends React.Component<StackedBarSeriesProps> {
 		)
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
 		const { xAccessor } = moreProps
 
 		drawOnCanvasHelper(ctx, this.props, moreProps, xAccessor, d3Stack)
@@ -116,16 +100,7 @@ export function drawOnCanvasHelper(
 		plotData
 	} = moreProps
 
-	const bars = doStuff(
-		props,
-		xAccessor,
-		plotData,
-		xScale,
-		yScale,
-		stackFn,
-		postRotateAction,
-		defaultPostAction
-	)
+	const bars = doStuff(props, xAccessor, plotData, xScale, yScale, stackFn, postRotateAction, defaultPostAction)
 
 	drawOnCanvas2(props, ctx, bars)
 }
@@ -146,9 +121,7 @@ const doStuff = (
 ) => {
 	const { yAccessor, swapScales } = props
 
-	const modifiedYAccessor = swapScales
-		? convertToArray(xAccessor)
-		: convertToArray(yAccessor)
+	const modifiedYAccessor = swapScales ? convertToArray(xAccessor) : convertToArray(yAccessor)
 	const modifiedXAccessor = swapScales ? yAccessor : xAccessor
 
 	const modifiedXScale = swapScales ? yScale : xScale
@@ -181,11 +154,7 @@ export const rotateXY = (array: any[]) =>
 		}
 	})
 
-export const drawOnCanvas2 = (
-	props: { stroke?: boolean },
-	ctx: CanvasRenderingContext2D,
-	bars: any
-) => {
+export const drawOnCanvas2 = (props: { stroke?: boolean }, ctx: CanvasRenderingContext2D, bars: any) => {
 	const { stroke } = props
 
 	const nest = group(bars, (d: any) => d.fillStyle)
@@ -235,8 +204,7 @@ export function getBars(
 
 	const barWidth = Math.round(width)
 
-	const eachBarWidth =
-		(barWidth - spaceBetweenBar * (yAccessor.length - 1)) / yAccessor.length
+	const eachBarWidth = (barWidth - spaceBetweenBar * (yAccessor.length - 1)) / yAccessor.length
 
 	const offset = barWidth === 1 ? 0 : 0.5 * width
 
@@ -292,12 +260,7 @@ export function getBars(
 				...d.data.appearance,
 				x: Math.round(xScale(d.data.x) - width / 2),
 				y,
-				groupOffset: Math.round(
-					offset -
-						(d.data.i > 0
-							? (eachBarWidth + spaceBetweenBar) * d.data.i
-							: 0)
-				),
+				groupOffset: Math.round(offset - (d.data.i > 0 ? (eachBarWidth + spaceBetweenBar) * d.data.i : 0)),
 				groupWidth: Math.round(eachBarWidth),
 				offset: Math.round(offset),
 				height: h,

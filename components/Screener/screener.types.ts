@@ -1,6 +1,27 @@
 import { DataId } from 'types/DataId'
 export type ScreenerTypes = 'stocks' | 'ipo' | 'etf' | ''
 
+// Dynamic State
+export type ScreenerState = {
+	resultsMenu: ColumnName
+	filtersMenu: string
+	filtersShowing: boolean
+	activePreset: string
+	columns: {
+		all: ColumnsMap
+		filtered: DataId[]
+		default: DataId[]
+	}
+	filters: FilterValue[]
+	sort: {
+		active: SortObject[]
+		default: SortObject[]
+	}
+}
+
+export type ScreenerIDs = 'stocks-screener' | 'ipo-screener' | 'etf-screener'
+export type ScreenerEndpoints = 'screener' | 'iposcreener' | 'etfscreener'
+
 // Results columns
 export type ColumnName =
 	| 'Filtered'
@@ -33,27 +54,6 @@ export type SingleETF = {
 
 export type SingleDataPoint = string[]
 
-export type ScreenerData = {
-	stocks: {
-		count: number
-		data: SingleStock[]
-	}
-}
-
-export type IPOScreenerData = {
-	ipos: {
-		count: number
-		data: SingleIPO[]
-	}
-}
-
-export type ETFScreenerData = {
-	etfs: {
-		count: number
-		data: SingleETF[]
-	}
-}
-
 export type FilterProps = {
 	name: string
 	id: DataId
@@ -76,11 +76,14 @@ export type FilterProps = {
 		| 'date'
 		| 'marketcap'
 		| 'padleft'
+		| 'array'
 	sortType?: any
 	sortInverted?: string
 	tooltipTitle?: any
 	tooltipText?: string
 	tooltipFormula?: string
+	searchMatches?: string
+	columnsOnly?: boolean
 }
 
 export type FilterOption = {
@@ -98,6 +101,7 @@ export type FilterValue = {
 	id: DataId
 	name: string
 	value: string
+	array?: string[]
 	filterType: FilterType
 	numberType?: 'percentage'
 }
@@ -111,6 +115,8 @@ export type FilterObject = {
 export type FilterType =
 	| 'numeric'
 	| 'stringmatch'
+	| 'multiselect'
+	| 'arraymatch' // Check if the stock's value is inside array of values
 	| 'date'
 	| 'dateYear'
 	| 'numericRange'
@@ -118,12 +124,7 @@ export type FilterType =
 	| 'none'
 
 export type NumberType = 'percentage'
-export type ComparisonOption =
-	| 'over'
-	| 'under'
-	| 'between'
-	| 'exactly'
-	| 'notzero'
+export type ComparisonOption = 'over' | 'under' | 'between' | 'exactly' | 'notzero'
 
 export type SortObject = {
 	id: DataId | 'm' | 'a'
@@ -133,4 +134,9 @@ export type SortObject = {
 export type SortProps = {
 	defaultSort?: SortObject[]
 	setSort: (sort: SortObject[]) => void
+}
+
+export type ScreenerSortProps = {
+	defaultSort?: SortObject[]
+	dispatch: React.Dispatch<{ type: string; value: any }>
 }

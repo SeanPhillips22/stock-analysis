@@ -1,10 +1,5 @@
 import { Holding } from 'types/Holdings'
-import {
-	useTable,
-	useGlobalFilter,
-	useAsyncDebounce,
-	Column
-} from 'react-table'
+import { useTable, useGlobalFilter, useAsyncDebounce, Column } from 'react-table'
 import { useState, useEffect, useMemo } from 'react'
 import { StockLink, ETFLink } from 'components/Links'
 import { useAuthState } from 'hooks/useAuthState'
@@ -32,9 +27,7 @@ export const HoldingsTable = ({ symbol, rawdata, fullCount }: Props) => {
 			if (res && res.data.list && res.data.list.length > count) {
 				setdataRows(res.data.list)
 			} else {
-				throw new Error(
-					'Unable to fetch full data, response was invalid or empty array'
-				)
+				throw new Error('Unable to fetch full data, response was invalid or empty array')
 			}
 		}
 

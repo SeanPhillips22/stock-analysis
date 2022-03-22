@@ -37,9 +37,7 @@ const Holdings = ({ info, data, news }: Props) => {
 									rawdata={data.list}
 									fullCount={data.count}
 								/>
-								<div className="mt-1 text-small text-gray-700">
-									As of {data.updated}
-								</div>
+								<div className="mt-1 text-small text-gray-700">As of {data.updated}</div>
 								<HoldingsPaywall total={data.count} />
 							</>
 						) : (
@@ -48,9 +46,7 @@ const Holdings = ({ info, data, news }: Props) => {
 									{info.ticker} Holdings
 								</h2>
 
-								<span className="mt-2 text-lg">
-									No holdings were found for the {info.ticker} ETF
-								</span>
+								<span className="mt-2 text-lg">No holdings were found for the {info.ticker} ETF</span>
 							</div>
 						)}
 					</div>

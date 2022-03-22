@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useQuery, useMutation, useQueryClient } from 'react-query'
-import { screenerState } from 'components/Screener/screener.state'
 import { useState } from 'react'
 import { ScreenerTypes } from 'components/Screener/screener.types'
 import { supabase } from 'functions/supabase'
 import { useAuthState } from 'hooks/useAuthState'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 // if there are no saved screens, return this initial state
 const initialState = {
@@ -22,23 +22,18 @@ const initialState = {
  * @returns
  */
 export function useSavedScreens(type: ScreenerTypes) {
+	const { state } = useScreenerContext()
 	const { user } = useAuthState()
-	const filters = screenerState(state => state.filters)
 	const [msg, setMsg] = useState('')
 	const [err, setErr] = useState('')
 	const queryClient = useQueryClient()
 
 	// Fetch all the saved screens
 	async function fetchScreener() {
-		let { data: fetchedData } = await supabase
-			.from('userdata')
-			.select('screener')
+		let { data: fetchedData } = await supabase.from('userdata').select('screener')
 
 		if (!fetchedData![0].screener) {
-			await supabase
-				.from('userdata')
-				.update({ screener: initialState })
-				.eq('id', user?.id)
+			await supabase.from('userdata').update({ screener: initialState }).eq('id', user?.id)
 
 			return initialState
 		}
@@ -59,7 +54,7 @@ export function useSavedScreens(type: ScreenerTypes) {
 	async function addScreen(name: string) {
 		clearMessages()
 
-		let save = filters.map(filter => {
+		let save = state.filters.map(filter => {
 			return { id: filter.id, value: filter.value }
 		})
 
@@ -71,15 +66,10 @@ export function useSavedScreens(type: ScreenerTypes) {
 			filters: save
 		}
 
-		let { error } = await supabase
-			.from('userdata')
-			.update({ screener: data })
-			.eq('id', user?.id)
+		let { error } = await supabase.from('userdata').update({ screener: data }).eq('id', user?.id)
 
 		if (error) {
-			setErr(
-				'There was an error, try again or email support@stockanalysis.com'
-			)
+			setErr('There was an error, try again or email support@stockanalysis.com')
 		} else {
 			setMsg('Successfully saved new screen: ' + name)
 			setTimeout(() => {
@@ -92,15 +82,10 @@ export function useSavedScreens(type: ScreenerTypes) {
 		clearMessages()
 
 		delete data.screeners[type][name]
-		let { error } = await supabase
-			.from('userdata')
-			.update({ screener: data })
-			.eq('id', user?.id)
+		let { error } = await supabase.from('userdata').update({ screener: data }).eq('id', user?.id)
 
 		if (error) {
-			setErr(
-				'There was an error, try again or email support@stockanalysis.com'
-			)
+			setErr('There was an error, try again or email support@stockanalysis.com')
 		}
 	}
 

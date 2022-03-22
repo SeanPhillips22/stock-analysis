@@ -10,8 +10,7 @@ export function extractTextFromHTML(value: string): string | number | null {
 	}
 
 	if (value.split('class=').length === 3) {
-		return new DOMParser().parseFromString(value, 'text/html').documentElement
-			.textContent
+		return new DOMParser().parseFromString(value, 'text/html').documentElement.textContent
 	}
 
 	// If value is just a dash, return null

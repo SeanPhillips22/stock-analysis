@@ -28,15 +28,9 @@ export function Dropdown({
 }: Props) {
 	return (
 		<Menu as="div" className={cn('controls-menu', menuClasses)} id={id}>
-			<Menu.Button
-				className={cn('controls-btn', active ? 'active' : '', btnClasses)}
-				title={hoverTitle}
-			>
+			<Menu.Button className={cn('controls-btn', active ? 'active' : '', btnClasses)} title={hoverTitle}>
 				{title}
-				<ChevronDownIcon
-					className={cn('controls-icon', icnClasses)}
-					aria-hidden="true"
-				/>
+				<ChevronDownIcon className={cn('controls-icon', icnClasses)} aria-hidden="true" />
 			</Menu.Button>
 
 			<Transition
@@ -48,9 +42,7 @@ export function Dropdown({
 				leaveFrom="opacity-100 scale-100"
 				leaveTo="opacity-0 scale-95"
 			>
-				<Menu.Items className={cn('dropdown', classes ? classes : '')}>
-					{children}
-				</Menu.Items>
+				<Menu.Items className={cn('dropdown', classes ? classes : '')}>{children}</Menu.Items>
 			</Transition>
 		</Menu>
 	)

@@ -42,12 +42,7 @@ export const IpoNews = ({ data, upcoming, recent }: Props) => {
 							data={upcoming}
 						/>
 						<Sidebar1 key={url} />
-						<SidebarTable
-							title="Latest IPOs"
-							btnTitle="All Recent IPOs"
-							btnUrl="/ipos/"
-							data={recent}
-						/>
+						<SidebarTable title="Latest IPOs" btnTitle="All Recent IPOs" btnUrl="/ipos/" data={recent} />
 					</aside>
 				</div>
 			</Layout>

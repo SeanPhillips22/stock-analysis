@@ -45,18 +45,8 @@ export default function EtfOverview({ info, data, news, chart }: Props) {
 				<div className="space-y-7 px-4 md:px-0 lg:order-2">
 					{news.data.length > 5 && <Sidebar1All key={url} />}
 					<Profile info={info} data={data} />
-					{data.holdingsTable && (
-						<HoldingsWidget
-							ticker={info.ticker}
-							data={data.holdingsTable}
-						/>
-					)}
-					{data.dividendTable && (
-						<DividendWidget
-							ticker={info.ticker}
-							data={data.dividendTable}
-						/>
-					)}
+					{data.holdingsTable && <HoldingsWidget ticker={info.ticker} data={data.holdingsTable} />}
+					{data.dividendTable && <DividendWidget ticker={info.ticker} data={data.dividendTable} />}
 				</div>
 				<div className="lg:order-1">
 					<NewsArea info={info} news={news.data} updated={news.updated} />

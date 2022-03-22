@@ -36,6 +36,5 @@ export const authState = create<AuthState>(set => ({
 
 	// Whether pro status is being checked
 	checking: false,
-	setChecking: newChecking =>
-		set(state => ({ ...state, checking: newChecking }))
+	setChecking: newChecking => set(state => ({ ...state, checking: newChecking }))
 }))

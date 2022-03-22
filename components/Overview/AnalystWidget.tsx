@@ -11,31 +11,19 @@ function PriceTarget({ target }: { target: string[] }) {
 	if (updown === 'upside') {
 		return (
 			<>
-				<div className="mb-0.5 text-center text-4xl font-semibold text-green-700">
-					{priceTarget}
-				</div>
-				<div className="mb-1.5 text-center text-xl">
-					({difference} upside)
-				</div>
+				<div className="mb-0.5 text-center text-4xl font-semibold text-green-700">{priceTarget}</div>
+				<div className="mb-1.5 text-center text-xl">({difference} upside)</div>
 			</>
 		)
 	} else if (updown === 'downside') {
 		return (
 			<>
-				<div className="mb-0.5 text-center text-4xl font-semibold text-red-600">
-					{priceTarget}
-				</div>
-				<div className="mb-1.5 text-center text-xl">
-					({difference} downside)
-				</div>
+				<div className="mb-0.5 text-center text-4xl font-semibold text-red-600">{priceTarget}</div>
+				<div className="mb-1.5 text-center text-xl">({difference} downside)</div>
 			</>
 		)
 	} else {
-		return (
-			<div className="mb-0.5 text-center text-4xl font-semibold text-gray-800">
-				{priceTarget}
-			</div>
-		)
+		return <div className="mb-0.5 text-center text-4xl font-semibold text-gray-800">{priceTarget}</div>
 	}
 }
 
@@ -54,18 +42,8 @@ function AnalystConsensus({ consensus }: { consensus: string }) {
 	}
 }
 
-export const AnalystWidget = ({
-	info,
-	data
-}: {
-	info: Info
-	data: Overview
-}) => {
-	if (
-		typeof data.analystTarget === 'undefined' ||
-		data.analystTarget[0] === '0' ||
-		data.analysts === 'n/a'
-	) {
+export const AnalystWidget = ({ info, data }: { info: Info; data: Overview }) => {
+	if (typeof data.analystTarget === 'undefined' || data.analystTarget[0] === '0' || data.analysts === 'n/a') {
 		return null
 	}
 
@@ -74,13 +52,9 @@ export const AnalystWidget = ({
 	return (
 		<div>
 			<h2 className="hh2 mb-2">Analyst Forecast</h2>
-			{data.analystIntro && (
-				<p className="mb-4 text-gray-900">{data.analystIntro}</p>
-			)}
+			{data.analystIntro && <p className="mb-4 text-gray-900">{data.analystIntro}</p>}
 			<div className="border border-gray-200 p-2 xs:p-3">
-				<div className="m-auto mb-2 text-center text-xl font-semibold text-gray-900">
-					Price Target
-				</div>
+				<div className="m-auto mb-2 text-center text-xl font-semibold text-gray-900">Price Target</div>
 
 				<PriceTarget target={data.analystTarget} />
 				<div className="py-1 text-center text-lg font-semibold text-gray-900">
@@ -91,12 +65,7 @@ export const AnalystWidget = ({
 					<AnalystWidgetChart ratings={ratings} />
 				</div>
 			</div>
-			{!info.exceptions.hideForecast && (
-				<Button
-					url={`/stocks/${info.symbol}/forecast/`}
-					text="Stock Forecasts"
-				/>
-			)}
+			{!info.exceptions.hideForecast && <Button url={`/stocks/${info.symbol}/forecast/`} text="Stock Forecasts" />}
 		</div>
 	)
 }

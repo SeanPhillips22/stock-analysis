@@ -20,12 +20,7 @@ export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
 				Showing {count} of {fullCount} {title.toLowerCase()}
 			</h4>
 			<div className="text-xl">Subscribe to see the full list</div>
-			<Button
-				text="Start Free Trial"
-				url="/pro/"
-				className="w-44"
-				id="tag-upgr-actions-below"
-			/>
+			<Button text="Start Free Trial" url="/pro/" className="w-44" id="tag-upgr-actions-below" />
 		</div>
 	)
 }

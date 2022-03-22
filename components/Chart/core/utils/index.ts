@@ -40,18 +40,13 @@ export function getClosestValue(inputValue: any, currentValue: any) {
 
 	const diff = values
 		.map(each => each - currentValue)
-		.reduce((diff1, diff2) =>
-			Math.abs(diff1) < Math.abs(diff2) ? diff1 : diff2
-		)
+		.reduce((diff1, diff2) => (Math.abs(diff1) < Math.abs(diff2) ? diff1 : diff2))
 	return currentValue + diff
 }
 
 export function d3Window(node: any) {
 	const d3win =
-		node &&
-		((node.ownerDocument && node.ownerDocument.defaultView) ||
-			(node.document && node) ||
-			node.defaultView)
+		node && ((node.ownerDocument && node.ownerDocument.defaultView) || (node.document && node) || node.defaultView)
 	return d3win
 }
 
@@ -118,10 +113,7 @@ export function isObject(d: any) {
 	return isDefined(d) && typeof d === 'object' && !Array.isArray(d)
 }
 
-export function touchPosition(
-	touch: { clientX: number; clientY: number },
-	e: React.TouchEvent
-): [number, number] {
+export function touchPosition(touch: { clientX: number; clientY: number }, e: React.TouchEvent): [number, number] {
 	const container = e.currentTarget
 	const rect = container.getBoundingClientRect()
 	const x = touch.clientX - rect.left - container.clientLeft
@@ -140,10 +132,7 @@ export function mousePosition(
 	return [Math.round(x), Math.round(y)]
 }
 
-export function clearCanvas(
-	canvasList: CanvasRenderingContext2D[],
-	ratio: number
-) {
+export function clearCanvas(canvasList: CanvasRenderingContext2D[], ratio: number) {
 	canvasList.forEach(each => {
 		each.setTransform(1, 0, 0, 1, 0, 0)
 		each.clearRect(-1, -1, each.canvas.width + 2, each.canvas.height + 2)

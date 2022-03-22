@@ -3,23 +3,16 @@ export function AboutDetails() {
 		<section className="bg-gray-100">
 			<div className="mx-auto max-w-4xl py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
 				<div>
-					<h2 className="text-3xl font-bold text-gray-900">
-						More details
-					</h2>
+					<h2 className="text-3xl font-bold text-gray-900">More details</h2>
 					<p className="mt-4 text-lg text-gray-600">
-						Stock Analysis is owned by a company called Vefir ehf. Kris
-						Gunnars owns 90% of the company while Orn Orri owns 10%.
+						Stock Analysis is owned by a company called Vefir ehf. Kris Gunnars owns 90% of the company while Orn
+						Orri owns 10%.
 					</p>
 					<p className="mt-4 text-lg text-gray-600">
-						Vefir ehf. is registered in Iceland but also has operations in
-						Bangkok, Thailand.
+						Vefir ehf. is registered in Iceland but also has operations in Bangkok, Thailand.
 					</p>
-					<h2 className="mt-5 text-3xl font-bold text-gray-900">
-						Contact Info
-					</h2>
-					<p className="mt-4 text-lg text-gray-600">
-						Our official mailing address is:
-					</p>
+					<h2 className="mt-5 text-3xl font-bold text-gray-900">Contact Info</h2>
+					<p className="mt-4 text-lg text-gray-600">Our official mailing address is:</p>
 					<p className="mt-4 text-lg text-gray-600">
 						Vefir ehf.
 						<br />

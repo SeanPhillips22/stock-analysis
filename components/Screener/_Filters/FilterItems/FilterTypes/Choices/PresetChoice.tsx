@@ -1,6 +1,6 @@
-import { useModifyFilters } from 'components/Screener/functions/useModifyFilters'
 import { screenerState } from 'components/Screener/screener.state'
 import { FilterOption, FilterProps } from 'components/Screener/screener.types'
+import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 type Props = {
 	option: FilterOption
@@ -8,15 +8,20 @@ type Props = {
 	active: string | false
 }
 
+/**
+ * A preset filter option, as opposed to custom.
+ * This is a list of named filters that can be screened for, like "PE under 10"
+ */
 export function PresetChoice({ option, filter }: Props) {
+	const { dispatch } = useScreenerContext()
 	const setOpenFilter = screenerState(state => state.setOpenFilter)
 	const { id, filterType, numberType } = filter
-	const { add } = useModifyFilters()
 
 	function handleSelection(name: string, value: string) {
 		if (id) {
 			// Add the new filter
-			add(id, name, value, filterType, numberType)
+			let newFilter = { id, name, value, filterType, numberType }
+			dispatch({ type: 'ADD_FILTER', value: newFilter })
 
 			// Close the dropdown
 			setOpenFilter('')

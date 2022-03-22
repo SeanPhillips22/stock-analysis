@@ -1,10 +1,5 @@
 /* eslint-disable no-invalid-this */
-import {
-	functor,
-	getAxisCanvas,
-	GenericChartComponent,
-	plotDataLengthBarWidth
-} from '../core'
+import { functor, getAxisCanvas, GenericChartComponent, plotDataLengthBarWidth } from '../core'
 import { group } from 'd3-array'
 import { ScaleContinuousNumeric, ScaleTime } from 'd3-scale'
 import * as React from 'react'
@@ -33,13 +28,9 @@ export interface CandlestickSeriesProps {
 	readonly fill?: string | ((data: any) => string)
 	readonly stroke?: string | ((data: any) => string)
 	readonly wickStroke?: string | ((data: any) => string)
-	readonly width?:
-		| number
-		| ((props: CandlestickSeriesProps, moreProps: any) => number)
+	readonly width?: number | ((props: CandlestickSeriesProps, moreProps: any) => number)
 	readonly widthRatio?: number
-	readonly yAccessor: (
-		data: any
-	) => { open: number; high: number; low: number; close: number } | undefined
+	readonly yAccessor: (data: any) => { open: number; high: number; low: number; close: number } | undefined
 }
 
 export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
@@ -72,13 +63,8 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 		)
 	}
 
-	private readonly drawOnCanvas = (
-		ctx: CanvasRenderingContext2D,
-		moreProps: any
-	) => {
-		const {
-			candleStrokeWidth = CandlestickSeries.defaultProps.candleStrokeWidth
-		} = this.props
+	private readonly drawOnCanvas = (ctx: CanvasRenderingContext2D, moreProps: any) => {
+		const { candleStrokeWidth = CandlestickSeries.defaultProps.candleStrokeWidth } = this.props
 		const {
 			xScale,
 			chartConfig: { yScale },
@@ -136,18 +122,11 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 
 	private readonly getCandleData = (
 		xAccessor: (data: any) => number | Date,
-		xScale:
-			| ScaleContinuousNumeric<number, number>
-			| ScaleTime<number, number>,
+		xScale: ScaleContinuousNumeric<number, number> | ScaleTime<number, number>,
 		yScale: ScaleContinuousNumeric<number, number>,
 		plotData: any[]
 	) => {
-		const {
-			fill: fillProp,
-			stroke: strokeProp,
-			yAccessor,
-			wickStroke: wickStrokeProp
-		} = this.props
+		const { fill: fillProp, stroke: strokeProp, yAccessor, wickStroke: wickStrokeProp } = this.props
 
 		const fill = functor(fillProp)
 		const stroke = functor(strokeProp)
@@ -160,8 +139,7 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 		})
 
 		const trueOffset = 0.5 * width
-		const offset =
-			trueOffset > 0.7 ? Math.round(trueOffset) : Math.floor(trueOffset)
+		const offset = trueOffset > 0.7 ? Math.round(trueOffset) : Math.floor(trueOffset)
 
 		return plotData
 			.filter(d => d.close !== undefined)
@@ -174,10 +152,7 @@ export class CandlestickSeries extends React.Component<CandlestickSeriesProps> {
 				const xValue = xAccessor(d)
 				const x = Math.round(xScale(xValue))
 				const y = Math.round(yScale(Math.max(ohlc.open, ohlc.close)))
-				const height = Math.max(
-					1,
-					Math.round(Math.abs(yScale(ohlc.open) - yScale(ohlc.close)))
-				)
+				const height = Math.max(1, Math.round(Math.abs(yScale(ohlc.open) - yScale(ohlc.close))))
 
 				return {
 					x: x - offset,

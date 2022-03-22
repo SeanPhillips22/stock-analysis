@@ -31,8 +31,7 @@ export const plotDataLengthBarWidth = <T>(
 			return width * widthRatio
 		}
 
-		const width =
-			xScale(xAccessor(last(plotData))) - xScale(xAccessor(first(plotData)))
+		const width = xScale(xAccessor(last(plotData))) - xScale(xAccessor(first(plotData)))
 
 		return (width / plotData.length) * widthRatio * 0.7
 	}

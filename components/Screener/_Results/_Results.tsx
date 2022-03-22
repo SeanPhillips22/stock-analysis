@@ -1,20 +1,17 @@
-import { screenerState } from 'components/Screener/screener.state'
+/* eslint-disable react/display-name */
 import { CellNumber } from 'types/Tables'
 import { ResultsTable } from './ResultsTable/_ResultsTable'
 import { formatCells } from 'functions/tables/formatCells'
-import { getDataPoints } from 'components/Screener/maps/dataPoints'
+import { useScreenerContext } from '../ScreenerContext'
+import { FilterProps, ScreenerTypes } from '../screener.types'
 
 function formatHeader(text: string) {
 	return <div className="ml-auto">{text}</div>
 }
 
-function formatColumns() {
-	// get the data points to use
-	const type = screenerState(state => state.type)
-	const DataPoints = getDataPoints(type)
-
+function formatColumns(type: ScreenerTypes, dataPoints: FilterProps[]) {
 	// loop through the data points to configure the settings for each column
-	const columns = DataPoints.map(column => {
+	const columns = dataPoints.map(column => {
 		// If column has a "format" property, use it to format the value
 		if (column.format) {
 			let header
@@ -68,7 +65,7 @@ function formatColumns() {
 				case 'align': {
 					header = formatHeader(column.columnName || column.name)
 					cell = function formatCells({ cell: { value } }: CellNumber) {
-						return <div className="text-right">{value || '-'}</div>
+						return <div className="tr">{value || '-'}</div>
 					}
 					break
 				}
@@ -87,20 +84,23 @@ function formatColumns() {
 
 				case 'marketcap': {
 					header = formatHeader(column.columnName || column.name)
-					cell = (props: any) =>
-						formatCells('abbreviate', props, 'stocks', 'mr-2')
+					cell = (props: any) => formatCells('abbreviate', props, 'stocks', 'mr-2')
 
 					break
 				}
 
 				case 'padleft': {
-					header = (
-						<div className="ml-1">{column.columnName || column.name}</div>
-					)
+					header = <div className="ml-1">{column.columnName || column.name}</div>
 					cell = function FormatCell({ cell: { value } }: CellNumber) {
 						return <div className="ml-1">{value}</div>
 					}
 					sortInverted = false
+					break
+				}
+
+				case 'array': {
+					header = formatHeader(column.columnName || column.name)
+					cell = () => <div className="tr">Yes</div>
 					break
 				}
 
@@ -131,12 +131,12 @@ function formatColumns() {
 }
 
 export function Results() {
-	const showColumns = screenerState(state => state.showColumns)
+	const { type, state, dataPoints } = useScreenerContext()
 
-	const columns = formatColumns()
+	const columns = formatColumns(type, dataPoints)
 
 	const displayColumns = columns.filter((column: any) =>
-		showColumns.includes(column.accessor)
+		state.columns.all[state.resultsMenu].includes(column.accessor)
 	)
 
 	return <ResultsTable cols={displayColumns} />

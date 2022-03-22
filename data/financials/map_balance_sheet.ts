@@ -16,8 +16,7 @@ export const MAP_BALANCE_SHEET = [
 		title: 'Cash & Cash Equivalents',
 		tooltip:
 			'Cash and cash equivalents is the sum of "Cash & Equivalents" and "Short-Term Investments." This is the amount of money that a company has quick access to, assuming that the cash equivalents and short-term investments can be sold at a short notice.',
-		formula:
-			'Cash & Cash Equivalents = Cash & Equivalents + Short-Term Investments',
+		formula: 'Cash & Cash Equivalents = Cash & Equivalents + Short-Term Investments',
 		bold: true
 	},
 	{
@@ -45,8 +44,7 @@ export const MAP_BALANCE_SHEET = [
 	{
 		id: 'othercurrent',
 		title: 'Other Current Assets',
-		tooltip:
-			'Other current assets includes all current assets that do not fit into any of the above categories.'
+		tooltip: 'Other current assets includes all current assets that do not fit into any of the above categories.'
 	},
 	{
 		id: 'assetsc',
@@ -77,8 +75,7 @@ export const MAP_BALANCE_SHEET = [
 	{
 		id: 'othernoncurrent',
 		title: 'Other Long-Term Assets',
-		tooltip:
-			'Other long-term assets include all long-term assets that do not fit into any of the categories above.'
+		tooltip: 'Other long-term assets include all long-term assets that do not fit into any of the categories above.'
 	},
 	{
 		id: 'assetsnc',
@@ -116,8 +113,7 @@ export const MAP_BALANCE_SHEET = [
 	{
 		id: 'otherliabilitiescurrent',
 		title: 'Other Current Liabilities',
-		tooltip:
-			'Other current liabilities are all current liabilities that do not fit into the categories above.'
+		tooltip: 'Other current liabilities are all current liabilities that do not fit into the categories above.'
 	},
 	{
 		id: 'liabilitiesc',
@@ -151,8 +147,7 @@ export const MAP_BALANCE_SHEET = [
 		title: 'Total Liabilities',
 		tooltip:
 			'Total liabilities are all financial obligations of the company, including both current and long-term (non-current) liabilities. Liabilities are everything that the company owes.',
-		formula:
-			'Total Liabilities = Current Liabilities + Long-Term Liabilities',
+		formula: 'Total Liabilities = Current Liabilities + Long-Term Liabilities',
 		extrabold: true,
 		border: true
 	},
@@ -170,8 +165,7 @@ export const MAP_BALANCE_SHEET = [
 		title: 'Debt Growth',
 		tooltipTitle: 'Debt Growth (YoY)',
 		format: 'growth',
-		tooltip:
-			'Debt growth is the change in total debt compared to a previous period.',
+		tooltip: 'Debt growth is the change in total debt compared to a previous period.',
 		formula: 'Debt Growth = ((Current Debt / Previous Debt) - 1) * 100%'
 	},
 	{
@@ -190,8 +184,7 @@ export const MAP_BALANCE_SHEET = [
 	{
 		id: 'accoci',
 		title: 'Comprehensive Income',
-		tooltip:
-			'Comprehensive income includes unrealized gains and losses that do not fall under retained earnings.'
+		tooltip: 'Comprehensive income includes unrealized gains and losses that do not fall under retained earnings.'
 	},
 	{
 		id: 'equity',
@@ -222,16 +215,14 @@ export const MAP_BALANCE_SHEET = [
 		title: 'Net Cash / Debt Growth',
 		tooltipTitle: 'Net Cash / Debt Growth (YoY)',
 		format: 'growth',
-		tooltip:
-			'The change in the net cash / debt position compared to a previous time period.',
+		tooltip: 'The change in the net cash / debt position compared to a previous time period.',
 		formula: 'Net Cash / Debt Growth = ((Current / Previous) - 1) * 100%'
 	},
 	{
 		id: 'netcashpershare',
 		title: 'Net Cash Per Share',
 		format: 'pershare',
-		tooltip:
-			'Net cash per share shows how much net cash is owned by each outstanding stock.',
+		tooltip: 'Net cash per share shows how much net cash is owned by each outstanding stock.',
 		formula: 'Net Cash Per Share = (Net Cash / Debt) / Shares Outstanding'
 	},
 	{

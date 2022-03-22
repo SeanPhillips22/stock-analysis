@@ -4,11 +4,7 @@ export type FinancialReport = {
 
 export type Range = 'annual' | 'quarterly' | 'trailing'
 
-export type Statement =
-	| 'income-statement'
-	| 'balance-sheet'
-	| 'cash-flow-statement'
-	| 'ratios'
+export type Statement = 'income-statement' | 'balance-sheet' | 'cash-flow-statement' | 'ratios'
 
 export type FinancialsMapType = {
 	id: string

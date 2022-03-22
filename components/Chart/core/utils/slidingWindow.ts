@@ -64,9 +64,7 @@ export default function SlidingWindowComponent() {
 
 		// @ts-ignore
 		const size = functor(windowSize).apply(this, arguments)
-		const windowData = data
-			.slice(skipInitial, size + skipInitial)
-			.map(sourceFunction)
+		const windowData = data.slice(skipInitial, size + skipInitial).map(sourceFunction)
 
 		let accumulatorIdx = 0
 		const undef = functor(undefinedValue)

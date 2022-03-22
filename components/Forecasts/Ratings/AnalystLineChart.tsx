@@ -1,22 +1,8 @@
 import { Line } from 'react-chartjs-2'
 
-import {
-	Chart as ChartJS,
-	LineController,
-	LineElement,
-	Tooltip,
-	LinearScale,
-	CategoryScale,
-	defaults
-} from 'chart.js'
+import { Chart as ChartJS, LineController, LineElement, Tooltip, LinearScale, CategoryScale, defaults } from 'chart.js'
 
-ChartJS.register(
-	LineController,
-	LineElement,
-	Tooltip,
-	LinearScale,
-	CategoryScale
-)
+ChartJS.register(LineController, LineElement, Tooltip, LinearScale, CategoryScale)
 
 import { Recommendations } from 'types/Forecast'
 
@@ -30,8 +16,7 @@ type Props = {
 export function AnalystLineChart({ data }: Props) {
 	const labelAxis = () => data.map(item => item.month)
 
-	const analystAxis = (s: string) =>
-		data.map((item: { [x: string]: any }) => item[s])
+	const analystAxis = (s: string) => data.map((item: { [x: string]: any }) => item[s])
 
 	let d: any[] = [
 		{
@@ -140,10 +125,7 @@ export function AnalystLineChart({ data }: Props) {
 							},
 							boxPadding: 3,
 							itemSort: (a, b) => {
-								if (
-									a.datasetIndex !== undefined ||
-									b.datasetIndex !== undefined
-								) {
+								if (a.datasetIndex !== undefined || b.datasetIndex !== undefined) {
 									return a.datasetIndex < b.datasetIndex ? -1 : 1
 								}
 

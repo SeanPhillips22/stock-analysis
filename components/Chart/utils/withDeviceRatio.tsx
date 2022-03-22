@@ -16,13 +16,8 @@ export interface WithRatioState {
 }
 
 export const withDeviceRatio = () => {
-	return <TProps extends WithRatioProps>(
-		OriginalComponent: React.ComponentClass<TProps>
-	) => {
-		return class WithRatio extends React.Component<
-			Omit<TProps, 'ratio'>,
-			WithRatioState
-		> {
+	return <TProps extends WithRatioProps>(OriginalComponent: React.ComponentClass<TProps>) => {
+		return class WithRatio extends React.Component<Omit<TProps, 'ratio'>, WithRatioState> {
 			public readonly ref = React.createRef<HTMLCanvasElement>()
 
 			public componentDidMount() {
@@ -55,12 +50,7 @@ export const withDeviceRatio = () => {
 			public render() {
 				const state = this.state
 				if (state !== null) {
-					return (
-						<OriginalComponent
-							{...(this.props as TProps)}
-							ratio={state.ratio}
-						/>
-					)
+					return <OriginalComponent {...(this.props as TProps)} ratio={state.ratio} />
 				}
 
 				return <canvas ref={this.ref} />

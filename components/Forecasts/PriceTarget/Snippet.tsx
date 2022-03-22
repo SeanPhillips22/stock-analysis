@@ -12,11 +12,7 @@ export function Snippet() {
 
 	// Format the text that says how much the price is forecasted to change
 	let diffString =
-		change > 0
-			? 'an increase of ' + change + '%'
-			: change < 0
-			? 'a decrease of ' + change + '%'
-			: 'no change'
+		change > 0 ? 'an increase of ' + change + '%' : change < 0 ? 'a decrease of ' + change + '%' : 'no change'
 
 	// Format the text describing the price target and analyst consensus
 	let consensusText = ''
@@ -25,9 +21,7 @@ export function Snippet() {
 	} else {
 		consensusText = `According to ${total} stock analysts, the average 12-month stock price forecast for ${displayName} stock is $${formatTarget(
 			average
-		)}, which predicts ${diffString}. The lowest target is $${formatTarget(
-			low
-		)} and the highest is $${formatTarget(
+		)}, which predicts ${diffString}. The lowest target is $${formatTarget(low)} and the highest is $${formatTarget(
 			high
 		)}. On average, analysts rate ${displayName} stock as a ${consensus.toLowerCase()}.`
 	}

@@ -3,8 +3,7 @@ export const MAP_RATIOS = [
 		id: 'marketcap',
 		title: 'Market Capitalization',
 		format: 'reduce_precision',
-		tooltip:
-			"Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
+		tooltip: "Market capitalization, or market cap, is the total value of all of a company's outstanding shares.",
 		formula: 'Market Cap = Shares Outstanding * Stock Price',
 		bold: true
 	},
@@ -16,8 +15,7 @@ export const MAP_RATIOS = [
 		format: 'growth',
 		tooltip:
 			"Market cap growth is how much a company's market cap has increased compared to a previous point in time.",
-		formula:
-			'Market Cap Growth = ((Current Market Cap / Previous Market Cap) - 1) * 100%'
+		formula: 'Market Cap Growth = ((Current Market Cap / Previous Market Cap) - 1) * 100%'
 	},
 	{
 		id: 'ev',
@@ -25,8 +23,7 @@ export const MAP_RATIOS = [
 		format: 'reduce_precision',
 		tooltip:
 			"Enterprise value measures the total value of a company's outstanding shares, adjusted for debt and levels of cash and short-term investments.",
-		formula:
-			'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents - Short-Term Investments'
+		formula: 'Enterprise Value = Market Cap + Total Debt - Cash & Equivalents - Short-Term Investments'
 	},
 	{
 		id: 'pe',
@@ -192,8 +189,7 @@ export const MAP_RATIOS = [
 		format: 'percentage',
 		tooltip:
 			'The dividend yield is how much a stock pays in dividends each year, as a percentage of the stock price.',
-		formula:
-			'Dividend Yield = (Annual Dividends Per Share / (Market Cap / Shares Outstanding)) * 100%'
+		formula: 'Dividend Yield = (Annual Dividends Per Share / (Market Cap / Shares Outstanding)) * 100%'
 	},
 	{
 		id: 'payoutratio',
@@ -201,8 +197,7 @@ export const MAP_RATIOS = [
 		format: 'percentage',
 		tooltip:
 			"The payout ratio is the percentage of a company's profits that are paid out as dividends. A high ratio implies that the dividend payments may not be sustainable.",
-		formula:
-			'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
+		formula: 'Payout Ratio = (Dividends Per Share / Earnings Per Share) * 100%'
 	},
 	{
 		id: 'buybackyield',
@@ -210,8 +205,7 @@ export const MAP_RATIOS = [
 		format: 'percentage',
 		tooltip:
 			'The buyback yield measures whether the company is returning cash to shareholders via share buybacks or diluting shareholder ownership by issuing shares. A positive number indicates net buybacks. A negative number implies net share issuance and shareholder dilution.',
-		formula:
-			'Buyback Yield = (Shares Before - Shares Now) / Shares Before * 100%'
+		formula: 'Buyback Yield = (Shares Before - Shares Now) / Shares Before * 100%'
 	},
 	{
 		id: 'totalreturn',

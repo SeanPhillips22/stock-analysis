@@ -34,11 +34,7 @@ type PropsBodyCell = {
 	fullcount: number
 }
 
-export function PaywallBodyCell({
-	range,
-	showcount,
-	fullcount
-}: PropsBodyCell) {
+export function PaywallBodyCell({ range, showcount, fullcount }: PropsBodyCell) {
 	const type = range === 'annual' ? 'years' : 'quarters'
 	const countShown = range === 'annual' ? showcount - 1 : showcount
 	const countFull = range === 'annual' ? fullcount - 1 : fullcount

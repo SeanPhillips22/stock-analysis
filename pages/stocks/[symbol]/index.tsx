@@ -59,11 +59,7 @@ export default function StockOverview({ info, data, news, chart }: Props) {
 				</div>
 				{news && (
 					<div className="lg:order-1">
-						<NewsArea
-							info={info}
-							news={news.data}
-							updated={news.updated}
-						/>
+						<NewsArea info={info} news={news.data} updated={news.updated} />
 					</div>
 				)}
 			</div>

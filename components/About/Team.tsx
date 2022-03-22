@@ -30,9 +30,8 @@ export function AboutTeam() {
 					<div className="space-y-5 sm:space-y-4">
 						<h2 className="text-3xl font-bold sm:text-4xl">Our Team</h2>
 						<p className="text-lg text-gray-500 sm:text-xl">
-							We have a small but highly efficient team. The three of us
-							currently develop and manage the entire site and everything
-							that comes with it.
+							We have a small but highly efficient team. The three of us currently develop and manage the entire
+							site and everything that comes with it.
 						</p>
 					</div>
 					<div className="lg:col-span-2">
@@ -44,31 +43,19 @@ export function AboutTeam() {
 								<li key={person.name} className="sm:py-8">
 									<div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
 										<div>
-											<img
-												className="rounded-lg object-cover shadow-lg"
-												src={person.imageUrl}
-												alt=""
-											/>
+											<img className="rounded-lg object-cover shadow-lg" src={person.imageUrl} alt="" />
 										</div>
 										<div className="sm:col-span-2">
 											<div className="space-y-4">
 												<div className="space-y-1 text-lg font-medium leading-6">
 													<h3>{person.name}</h3>
-													<p className="text-blue-600">
-														{person.role}
-													</p>
+													<p className="text-blue-600">{person.role}</p>
 												</div>
 												<div className="text-lg">
-													<p className="text-gray-500">
-														{person.bio}
-													</p>
+													<p className="text-gray-500">{person.bio}</p>
 												</div>
-												{(person.twitterUrl ||
-													person.linkedinUrl) && (
-													<ul
-														role="list"
-														className="flex space-x-5"
-													>
+												{(person.twitterUrl || person.linkedinUrl) && (
+													<ul role="list" className="flex space-x-5">
 														<li>
 															<a
 																href={person.twitterUrl}
@@ -76,9 +63,7 @@ export function AboutTeam() {
 																target="_blank"
 																rel="noopener noreferrer"
 															>
-																<span className="sr-only">
-																	Twitter
-																</span>
+																<span className="sr-only">Twitter</span>
 																<svg
 																	className="h-5 w-5"
 																	aria-hidden="true"
@@ -97,9 +82,7 @@ export function AboutTeam() {
 																target="_blank"
 																rel="noopener noreferrer"
 															>
-																<span className="sr-only">
-																	LinkedIn
-																</span>
+																<span className="sr-only">LinkedIn</span>
 																<svg
 																	className="h-5 w-5"
 																	aria-hidden="true"
