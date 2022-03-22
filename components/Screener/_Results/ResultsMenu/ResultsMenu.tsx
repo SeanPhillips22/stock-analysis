@@ -5,7 +5,7 @@ import { Filter } from 'components/Controls/Filter'
 import { ResultsNav } from './ResultsNav'
 import { ColumnDropdown } from 'components/Screener/_Results/ResultsMenu/ColumnSelection/ColumnDropdown'
 import { ScreenerTypes } from 'components/Screener/screener.types'
-import { OptionsMenu } from './OptionsMenu'
+// import { OptionsMenu } from './OptionsMenu'
 
 interface Props {
 	count: number
@@ -51,9 +51,9 @@ export function ResultsMenu({
 				<div className="ml-auto md:ml-0">
 					<ColumnDropdown />
 				</div>
-				<div>
+				{/* <div>
 					<OptionsMenu />
-				</div>
+				</div> */}
 			</div>
 			<div className="hide-scroll col-span-2 overflow-x-auto border-t lg:order-2 lg:grow lg:border-0 lg:pl-1 xl:pl-2">
 				<ResultsNav type={type} />

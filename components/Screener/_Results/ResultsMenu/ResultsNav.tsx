@@ -15,6 +15,7 @@ export function ResultsNav({ type }: Props) {
 						<ResultsMenuItem name="Analysts" />
 						<ResultsMenuItem name="Dividends" />
 						<ResultsMenuItem name="Financials" />
+						<ResultsMenuItem name="Valuation" />
 					</>
 				)) ||
 					(type == 'ipo' && (
