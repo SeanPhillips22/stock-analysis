@@ -15,7 +15,9 @@ const Screener = dynamic(() => import('components/Screener/_Screener'), {
 		return (
 			<div className="contain py-5 xs:py-6">
 				<h1 className="hh1">IPO Screener</h1>
-				<div className="mt-6 flex h-[1000px] items-center justify-center bg-gray-50">Loading screener...</div>
+				<div className="mt-6 flex h-[400px] items-center justify-center bg-gray-50 md:h-[800px]">
+					Loading screener...
+				</div>
 			</div>
 		)
 	}
