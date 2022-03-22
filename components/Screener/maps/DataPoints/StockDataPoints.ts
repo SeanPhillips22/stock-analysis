@@ -447,6 +447,8 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Price Target',
 		id: 'priceTarget',
+		columnsOnly: true,
+		searchMatches: 'forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -643,6 +645,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Revenue',
 		id: 'revenue',
+		searchMatches: 'sales',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -663,6 +666,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Revenue Growth',
 		id: 'revenueGrowth',
+		searchMatches: 'sales',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -690,6 +694,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Rev. Growth (Q)',
 		id: 'revenueGrowthQ',
+		searchMatches: 'sales',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -806,6 +811,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Net Income',
 		id: 'netIncome',
+		searchMatches: 'earnings-profits',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -826,6 +832,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Net Inc. Growth',
 		id: 'netIncomeGrowth',
+		searchMatches: 'earnings-profits',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -853,6 +860,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EPS',
 		id: 'eps',
+		searchMatches: 'earnings-profits',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -873,6 +881,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EPS Growth',
 		id: 'epsGrowth',
+		searchMatches: 'earnings-profits',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1040,6 +1049,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'CapEx',
 		id: 'capex',
+		searchMatches: 'capital-expenditures',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -1084,6 +1094,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'FCF Growth',
 		id: 'fcfGrowth',
+		searchMatches: 'free%cash%flow',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1110,6 +1121,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'FCF / Share',
 		id: 'fcfPerShare',
+		searchMatches: 'free%cash%flow',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -1364,6 +1376,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'FCF Margin',
 		id: 'fcfMargin',
+		searchMatches: 'free%cash%flow',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1440,6 +1453,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'PS Ratio',
 		id: 'psRatio',
+		searchMatches: 'p/s',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1460,6 +1474,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'PB Ratio',
 		id: 'pbRatio',
+		searchMatches: 'p/b',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1480,6 +1495,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'P/FCF Ratio',
 		id: 'pFcfRatio',
+		searchMatches: 'p/fcf',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1518,6 +1534,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/Sales',
 		id: 'evSales',
+		searchMatches: 'enterprise%value',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1536,6 +1553,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/Earnings',
 		id: 'evEarnings',
+		searchMatches: 'enterprise%value',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1555,6 +1573,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/EBITDA',
 		id: 'evEbitda',
+		searchMatches: 'enterprise%value',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1574,6 +1593,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/EBIT',
 		id: 'evEbit',
+		searchMatches: 'enterprise%value',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1593,6 +1613,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EV/FCF',
 		id: 'evFcf',
+		searchMatches: 'enterprise%value-free%cash%flow',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		options: [
@@ -1635,6 +1656,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'FCF Yield',
 		id: 'fcfYield',
+		searchMatches: 'free%cash%flow',
 		category: ['Valuation'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1657,6 +1679,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Dividend ($)',
 		id: 'dps',
+		searchMatches: 'dividend%per%share',
 		category: ['Dividends'],
 		filterType: 'numeric',
 		options: [
@@ -1881,6 +1904,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Out',
 		id: 'sharesOut',
+		searchMatches: 'shares%outstanding',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -1931,6 +1955,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Ch. (YoY)',
 		id: 'sharesYoY',
+		searchMatches: 'year',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1956,6 +1981,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Ch. (QoQ)',
 		id: 'sharesQoQ',
+		searchMatches: 'quarter',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -1982,6 +2008,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Insiders',
 		id: 'sharesInsiders',
+		searchMatches: 'shares%owned-shares%held',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2004,6 +2031,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shares Institut.',
 		id: 'sharesInstitutions',
+		searchMatches: 'shares%owned-shares%held',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2045,6 +2073,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Is SPAC',
 		id: 'isSpac',
+		searchMatches: 'blank%check',
 		category: ['Company'],
 		filterType: 'stringmatch',
 		options: [
@@ -2059,6 +2088,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Ex-Div Date',
 		id: 'exDivDate',
+		searchMatches: 'ex-dividend-ex%dividend',
 		category: ['Dividends'],
 		filterType: 'date',
 		options: [
@@ -2075,6 +2105,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Next Ex-Div',
 		id: 'nextDivDate',
+		searchMatches: 'ex-dividend-ex%dividend',
 		category: ['Dividends'],
 		filterType: 'date',
 		options: [
@@ -2144,6 +2175,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Return on Capital',
 		id: 'roic',
+		searchMatches: 'return%on%invested%capital',
 		category: ['Other'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2170,6 +2202,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Rev / Employee',
 		id: 'revPerEmployee',
+		searchMatches: 'revenue-sales',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2190,6 +2223,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Prof. / Employee',
 		id: 'profitPerEmployee',
+		searchMatches: 'net%income-earnings',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2339,6 +2373,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Debt / FCF',
 		id: 'debtFcf',
+		searchMatches: 'free%cash%flow',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2361,6 +2396,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Eff. Tax Rate',
 		id: 'taxRate',
+		searchMatches: 'effective-taxes',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2389,6 +2425,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Tax / Revenue',
 		id: 'taxByRevenue',
+		searchMatches: 'taxes',
 		category: ['Financials'],
 		filterType: 'numeric',
 		numberType: 'percentage',
@@ -2413,6 +2450,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Shareh. Equity',
 		id: 'equity',
+		searchMatches: 'shareholder',
 		category: ['Financials'],
 		filterType: 'numeric',
 		options: [
@@ -2489,6 +2527,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Altman Z-Score',
 		id: 'zScore',
+		searchMatches: 'z%score',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2506,6 +2545,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Piotroski F-Score',
 		id: 'fScore',
+		searchMatches: 'f%score',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2524,6 +2564,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'In Index',
 		id: 'inIndex',
+		searchMatches: 's&p500-s&p%500-nasdaq-100-nasdaq%100',
 		category: ['Popular'],
 		filterType: 'arraymatch',
 		options: [
@@ -2536,6 +2577,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'EPS Growth This Quarter',
 		columnName: 'EPS Gr. This Q',
+		searchMatches: 'earnings-quarterly-forecast-analysts',
 		id: 'epsThisQuarter',
 		category: ['Other'],
 		filterType: 'numeric',
@@ -2560,6 +2602,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'EPS Growth Next Quarter',
 		columnName: 'EPS Gr. Next Q',
 		id: 'epsNextQuarter',
+		searchMatches: 'earnings-quarterly-forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2583,6 +2626,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'EPS Growth This Year',
 		columnName: 'EPS Gr. This Y',
 		id: 'epsThisYear',
+		searchMatches: 'earnings-annual-forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2606,6 +2650,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'EPS Gr. Next Year',
 		columnName: 'EPS Gr. Next Y',
 		id: 'epsNextYear',
+		searchMatches: 'earnings-annual-forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2629,6 +2674,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Revenue Growth This Quarter',
 		columnName: 'Rev Gr. This Q',
 		id: 'revenueThisQuarter',
+		searchMatches: 'sales-quarterly-forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2652,6 +2698,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Revenue Growth Next Quarter',
 		columnName: 'Rev Gr. Next Q',
 		id: 'revenueNextQuarter',
+		searchMatches: 'sales-quarterly-forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2675,6 +2722,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Revenue Growth This Year',
 		columnName: 'Rev Gr. This Y',
 		id: 'revenueThisYear',
+		searchMatches: 'sales-annual-forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2698,6 +2746,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Revenue Growth Next Year',
 		columnName: 'Rev Gr. Next Y',
 		id: 'revenueNextYear',
+		searchMatches: 'sales-annual-forecast-analysts',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [
@@ -2721,6 +2770,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'EPS Growth Next 5Y',
 		columnName: 'EPS Gr. Next 5Y',
 		id: 'eps5y',
+		searchMatches: 'earnings-annual-forecast-analysts',
 		category: ['Popular', 'Other'],
 		filterType: 'numeric',
 		options: [
@@ -2743,6 +2793,7 @@ export const StockDataPoints: FilterProps[] = [
 		name: 'Rev. Growth Next 5Y',
 		columnName: 'Rev Gr. Next 5Y',
 		id: 'revenue5y',
+		searchMatches: 'sales-annual-forecast-analysts',
 		category: ['Popular', 'Other'],
 		filterType: 'numeric',
 		options: [

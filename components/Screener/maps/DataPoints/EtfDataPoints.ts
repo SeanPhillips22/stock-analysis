@@ -56,6 +56,42 @@ export const EtfDataPoints: FilterProps[] = [
 		tooltipText: 'Assets under management (AUM) is the total value of all assets held by the exchange-traded fund.'
 	},
 	{
+		name: 'Asset Class',
+		id: 'assetClass',
+		category: ['Popular'],
+		filterType: 'multiselect',
+		options: [
+			{
+				name: 'Alternative',
+				value: 'Alternative'
+			},
+			{
+				name: 'Commodity',
+				value: 'Commodity'
+			},
+			{
+				name: 'Currency',
+				value: 'Currency'
+			},
+			{
+				name: 'Equity',
+				value: 'Equity'
+			},
+			{
+				name: 'Fixed Income',
+				value: 'Fixed Income'
+			},
+			{
+				name: 'Portfolio-Multi Asset',
+				value: 'Portfolio-Multi Asset'
+			}
+		],
+		format: 'string',
+		sortType: stringNullFix,
+		tooltipText:
+			'Assets class is the type of asset that the fund primarily holds. For example, ETFs with the "Equity" asset class mostly hold stocks.'
+	},
+	{
 		name: 'Stock Price',
 		id: 'price',
 		category: ['Popular'],
@@ -252,42 +288,6 @@ export const EtfDataPoints: FilterProps[] = [
 		format: 'format2dec',
 		tooltipText:
 			"Expense ratio is the percentage of the fund's assets that are charged as expenses by the company that issues the fund. The lower the expense ratio, the better."
-	},
-	{
-		name: 'Asset Class',
-		id: 'assetClass',
-		category: ['Popular'],
-		filterType: 'multiselect',
-		options: [
-			{
-				name: 'Alternative',
-				value: 'Alternative'
-			},
-			{
-				name: 'Commodity',
-				value: 'Commodity'
-			},
-			{
-				name: 'Currency',
-				value: 'Currency'
-			},
-			{
-				name: 'Equity',
-				value: 'Equity'
-			},
-			{
-				name: 'Fixed Income',
-				value: 'Fixed Income'
-			},
-			{
-				name: 'Portfolio-Multi Asset',
-				value: 'Portfolio-Multi Asset'
-			}
-		],
-		format: 'string',
-		sortType: stringNullFix,
-		tooltipText:
-			'Assets class is the type of asset that the fund primarily holds. For example, ETFs with the "Equity" asset class mostly hold stocks.'
 	},
 	{
 		name: 'Holdings',

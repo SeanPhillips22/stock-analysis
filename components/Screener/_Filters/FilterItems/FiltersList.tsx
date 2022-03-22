@@ -18,7 +18,8 @@ export function FiltersList() {
 		dataPoints.map(f => {
 			if (
 				f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
-				f.id.toLowerCase().includes(filterSearch.toLowerCase())
+				f.id.toLowerCase().includes(filterSearch.toLowerCase()) ||
+				f.searchMatches?.replaceAll('%', ' ').includes(filterSearch.toLowerCase())
 			) {
 				searched.push(f.id)
 			}
@@ -32,7 +33,9 @@ export function FiltersList() {
 			<div className="gap-x-2.5 pt-1 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{dataPoints.map(f => {
 					if (searched.includes(f.id)) {
-						return <FilterWrap f={f} key={f.id} />
+						if (f.id !== 's' && f.id !== 'n' && !f.columnsOnly) {
+							return <FilterWrap f={f} key={f.id} />
+						}
 					}
 					return null
 				})}
@@ -69,7 +72,7 @@ export function FiltersList() {
 			<div className={`pt-1 sm:grid sm:grid-cols-2 sm:gap-x-2.5 lg:grid-cols-3 xl:grid-cols-4`}>
 				{dataPoints.map(f => {
 					if (f.category?.includes(state.filtersMenu) || state.filtersMenu === 'All') {
-						if (f.id !== 's' && f.id !== 'n') {
+						if (f.id !== 's' && f.id !== 'n' && !f.columnsOnly) {
 							return <FilterWrap f={f} key={f.id} />
 						}
 					}

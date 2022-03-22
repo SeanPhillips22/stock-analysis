@@ -60,23 +60,6 @@ export const IpoDataPoints: FilterProps[] = [
 		tooltipText: 'The sector that the company is in, according to the Global Industry Classification Standard (GICS).'
 	},
 	{
-		name: 'Revenue',
-		id: 'revenue',
-		category: ['Financials', 'Income'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 1B', value: 'over-1B' },
-			{ name: 'Over 100M', value: 'over-100M' },
-			{ name: 'Over 10M', value: 'over-10M' },
-			{ name: 'Over Zero', value: 'over-0' },
-			{ name: 'Exactly Zero', value: 'exactly-0' }
-		],
-		format: 'abbreviate',
-		tooltipTitle: 'Revenue (ttm)',
-		tooltipText:
-			'Revenue is the amount of money a company receives from its main business activities, such as sales of products or services. Revenue is also called sales.'
-	},
-	{
 		name: 'IPO Date',
 		id: 'ipoDate',
 		category: ['General'],
@@ -92,7 +75,22 @@ export const IpoDataPoints: FilterProps[] = [
 		format: 'date',
 		sortType: dateSort,
 		tooltipText:
-			"The date of the company's Initial Public Offering (IPO), or when it originally started trading on the stock exchange."
+			"The date of the company's Initial Public Offering (IPO), or when it originally starts trading on the stock exchange."
+	},
+	{
+		name: 'Filing Date',
+		id: 'filingDate',
+		category: ['General'],
+		filterType: 'date',
+		options: [
+			{ name: 'Past Week', value: 'past-7D' },
+			{ name: 'Past Month', value: 'past-30D' },
+			{ name: 'Past Year', value: 'past-1Y' }
+		],
+		format: 'date',
+		sortType: dateSort,
+		tooltipText:
+			'The date when the company initially filed their S-1 documents to the SEC to initiate the initial public offering (IPO) process.'
 	},
 	{
 		name: 'IPO Price',
@@ -110,6 +108,43 @@ export const IpoDataPoints: FilterProps[] = [
 		sortType: priceSort,
 		tooltipText:
 			'The price of the shares during the IPO process. It usually starts as a range, but ends with a final number the day before or day of the IPO.'
+	},
+	{
+		name: 'IPO Deal Size',
+		id: 'ds',
+		category: ['General'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 1B', value: 'over-1B' },
+			{ name: 'Over 500M', value: 'over-500M' },
+			{ name: 'Over 200M', value: 'over-200M' },
+			{ name: 'Over 100M', value: 'over-100M' },
+			{ name: 'Over 50M', value: 'over-50M' },
+			{ name: 'Over 20M', value: 'over-20M' },
+			{ name: 'Over 10M', value: 'over-10M' }
+		],
+		format: 'abbreviate',
+		tooltipTitle: 'IPO Deal Size',
+		tooltipText:
+			'The total amount of money that will be raised during the IPO, calculated by multiplying the shares offered by the average IPO price per share.',
+		tooltipFormula: 'IPO Deal Size = Shares Offered * IPO Price'
+	},
+	{
+		name: 'Revenue',
+		id: 'revenue',
+		category: ['Financials', 'Income'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 1B', value: 'over-1B' },
+			{ name: 'Over 100M', value: 'over-100M' },
+			{ name: 'Over 10M', value: 'over-10M' },
+			{ name: 'Over Zero', value: 'over-0' },
+			{ name: 'Exactly Zero', value: 'exactly-0' }
+		],
+		format: 'abbreviate',
+		tooltipTitle: 'Revenue (ttm)',
+		tooltipText:
+			'Revenue is the amount of money a company receives from its main business activities, such as sales of products or services. Revenue is also called sales.'
 	},
 	{
 		name: 'Country',

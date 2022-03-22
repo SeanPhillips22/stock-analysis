@@ -82,6 +82,8 @@ export type FilterProps = {
 	tooltipTitle?: any
 	tooltipText?: string
 	tooltipFormula?: string
+	searchMatches?: string
+	columnsOnly?: boolean
 }
 
 export type FilterOption = {
