@@ -12,7 +12,14 @@ import dynamic from 'next/dynamic'
 const Screener = dynamic(() => import('components/Screener/_Screener'), {
 	ssr: false,
 	loading: () => {
-		return <div className="mt-6 h-[1000px]">Loading...</div>
+		return (
+			<div className="contain py-5 xs:py-6">
+				<h1 className="hh1">Stock Screener</h1>
+				<div className="mt-6 flex h-[400px] items-center justify-center bg-gray-50 md:h-[1000px]">
+					Loading screener...
+				</div>
+			</div>
+		)
 	}
 })
 
