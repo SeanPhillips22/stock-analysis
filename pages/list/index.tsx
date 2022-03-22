@@ -42,14 +42,15 @@ export default function StockListPage() {
 				</div>
 
 				<div>
-					<h2 className="hh3 mb-2">Companies Ranked by Market Cap</h2>
+					<h2 className="hh3 mb-2">Stocks Ranked by Market Cap</h2>
 					<ul className="list-inside list-disc space-y-1 p-1 md:columns-2">
 						<ListItem url="/list/biggest-car-companies/" title="Biggest Car Companies" />
 						<ListItem url="/list/biggest-pharmaceutical-companies/" title="Biggest Pharmaceutical Companies" />
 						<ListItem url="/list/biggest-semiconductor-companies/" title="Biggest Semiconductor Companies" />
 						<ListItem url="/list/biggest-biotech-companies/" title="Biggest Biotech Companies" />
 						<ListItem url="/list/biggest-banks/" title="Biggest Banks" />
-						<ListItem url="/list/biggest-social-media-companies/" title="Biggest Social Media Companies" />
+						<ListItem url="/list/social-media-stocks/" title="Biggest Social Media Stccks" />
+						<ListItem url="/list/gaming-stocks/" title="Gaming Stocks" />
 					</ul>
 				</div>
 			</div>

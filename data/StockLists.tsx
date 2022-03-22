@@ -277,12 +277,12 @@ export const StockLists: StockList = {
 			filters: ['industry-is-banks']
 		}
 	},
-	'biggest-social-media-companies': {
+	'social-media-stocks': {
 		page: {
-			path: '/list/biggest-social-media-companies/',
-			metaTitle: 'The Biggest Social Media Companies by Market Cap',
-			pageTitle: 'Biggest Social Media Companies by Market Cap',
-			tableTitleObject: 'Companies',
+			path: '/list/social-media-stocks/',
+			metaTitle: 'The Biggest Social Media Stocks by Market Cap',
+			pageTitle: 'Biggest Social Media Stocks',
+			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
 		fixed: {
@@ -296,6 +296,27 @@ export const StockLists: StockList = {
 			sortDirection: 'desc',
 			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
 			filters: ['tags-includes-social=media']
+		}
+	},
+	'gaming-stocks': {
+		page: {
+			path: '/list/gaming-stocks/',
+			metaTitle: 'A List of Gaming Company Stocks',
+			pageTitle: 'Biggest Gaming Stocks',
+			tableTitleObject: 'Stocks',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			count: 100,
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['tags-includes-gaming']
 		}
 	}
 }

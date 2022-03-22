@@ -54,6 +54,11 @@ module.exports = {
 				source: '/author/krisgunnars/',
 				destination: '/about/',
 				permanent: true
+			},
+			{
+				source: '/list/biggest-social-media-companies/',
+				destination: '/list/social-media-stocks/',
+				permanent: true
 			}
 		]
 	},
