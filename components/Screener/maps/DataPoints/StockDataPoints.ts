@@ -1801,6 +1801,7 @@ export const StockDataPoints: FilterProps[] = [
 	{
 		name: 'Average Volume',
 		id: 'averageVolume',
+		searchMatches: 'avg.',
 		category: ['Other'],
 		filterType: 'numeric',
 		options: [

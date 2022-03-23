@@ -43,7 +43,7 @@ export function StockTableControls({ filter }: Props) {
 				{/* Results Count */}
 				{fixed.controls?.results && <TableResults />}
 				{/* Export Button */}
-				{fixed.controls?.export && <TableExport tableId={tableId} />}
+				{fixed.controls?.export && <TableExport tableId={tableId} hideOnMobile={fixed.controls?.options} />}
 				{/* Select Columns */}
 				{fixed.controls?.columns && <TableColumns />}
 				{/* Options Menu*/}

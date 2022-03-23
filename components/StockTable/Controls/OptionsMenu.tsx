@@ -2,10 +2,10 @@ import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { useRouter } from 'next/router'
 import { useTableContext } from '../TableContext'
 import { INITIAL_STOCK_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialStockScreenerState'
+import { ExportButtons } from 'components/Controls/Export/ExportButtons'
 
-// TODO make it possible to open IPO screener from here
 export function OptionsMenu() {
-	const { clearState, fixed } = useTableContext()
+	const { tableId, fixed, clearState } = useTableContext()
 	const router = useRouter()
 
 	// This function adds the filters to the stock screener settings in localStorage
@@ -35,9 +35,12 @@ export function OptionsMenu() {
 	}
 
 	return (
-		<Dropdown title="Options" menuClasses="hidden md:block">
+		<Dropdown title="Options" classes="divide-y divide-gray-100">
 			<div className="dd" title="Open list in stock screener" onClick={addFiltersAndGoToScreener}>
 				Open in Screener
+			</div>
+			<div className="block md:hidden">
+				<ExportButtons tableId={tableId} />
 			</div>
 			<div className="dd" title="Reset all settings to their default values" onClick={clearState}>
 				Reset Table Defaults
