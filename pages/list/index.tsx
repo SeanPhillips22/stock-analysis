@@ -48,7 +48,7 @@ export default function StockListPage() {
 						<ListItem url="/list/biggest-pharmaceutical-companies/" title="Biggest Pharmaceutical Companies" />
 						<ListItem url="/list/biggest-semiconductor-companies/" title="Biggest Semiconductor Companies" />
 						<ListItem url="/list/biggest-biotech-companies/" title="Biggest Biotech Companies" />
-						<ListItem url="/list/biggest-banks/" title="Biggest Banks" />
+						<ListItem url="/list/bank-stocks/" title="Biggest Banks" />
 						<ListItem url="/list/social-media-stocks/" title="Social Media Stocks" />
 						<ListItem url="/list/gaming-stocks/" title="Gaming Stocks" />
 					</ul>

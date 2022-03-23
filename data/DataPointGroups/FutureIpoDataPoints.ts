@@ -1,6 +1,9 @@
 import { DataId } from 'types/DataId'
 
 export const FutureIpoDataPoints: DataId[] = [
+	'ipoDate',
+	'filingDateFB',
+	'withdrawnDateFB',
 	's',
 	'n',
 	'marketCap',

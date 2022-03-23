@@ -11,6 +11,7 @@ import { TableMoverType } from './Controls/TableMoverType'
 import { useTableContext } from './TableContext'
 import { ToggleVisible } from './Controls/ToggleVisible'
 import { cn } from 'functions/helpers/classNames'
+import { OptionsMenu } from './Controls/OptionsMenu'
 
 type Props = {
 	filter: FilterObject
@@ -45,6 +46,8 @@ export function StockTableControls({ filter }: Props) {
 				{fixed.controls?.export && <TableExport tableId={tableId} />}
 				{/* Select Columns */}
 				{fixed.controls?.columns && <TableColumns />}
+				{/* Options Menu*/}
+				{fixed.controls?.options && <OptionsMenu />}
 			</div>
 		</div>
 	)

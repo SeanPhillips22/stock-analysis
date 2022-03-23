@@ -7,18 +7,14 @@ import { useTableContext } from '../TableContext'
 export function TableColumns() {
 	const { fixed, dynamic, setState, clearState, enabled } = useTableContext()
 	const { columnOptions, excludeColumns } = fixed
-	const { main, columns, index } = dynamic
-
-	// The columns that are currently selected or shown
-	let cols = columns.filter(c => c !== main)
+	const { columns, index } = dynamic
 
 	// The columns that are available to select
 	const colSelect = useMemo(() => {
 		let raw = columnOptions ? columnOptions : getDataPointsArray(index)
 		let exclude = excludeColumns ? excludeColumns : []
-		let filterAway = [main, ...exclude]
-		return raw.filter(c => !filterAway.includes(c))
-	}, [columnOptions, excludeColumns, main, index])
+		return raw.filter(c => !exclude.includes(c))
+	}, [columnOptions, excludeColumns, index])
 
 	function toggle(id: DataId) {
 		setState({
@@ -26,5 +22,14 @@ export function TableColumns() {
 		})
 	}
 
-	return <SelectColumns active={cols} options={colSelect} toggle={toggle} clear={clearState} enabled={enabled} />
+	return (
+		<SelectColumns
+			active={columns}
+			options={colSelect}
+			toggle={toggle}
+			clear={clearState}
+			enabled={enabled}
+			fixedColumns={fixed.fixedColumns}
+		/>
+	)
 }

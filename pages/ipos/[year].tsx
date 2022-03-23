@@ -65,9 +65,11 @@ export default function IpoYear(props: Props) {
 											filter: true,
 											export: true,
 											columns: true
+											// options: true
 										},
 										columnOptions: RecentIpoDataPoints,
-										columnOrder: ['ipoDate', 's', 'n', 'ipp', 'ippc', 'ipr']
+										columnOrder: ['ipoDate', 's', 'n', 'ipp', 'ippc', 'ipr'],
+										fixedColumns: ['ipoDate', 's']
 									},
 									dynamic: {
 										...query,

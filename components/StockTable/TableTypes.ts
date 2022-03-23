@@ -16,22 +16,19 @@ export type TableFixed = {
 		export?: boolean // Export button
 		columns?: boolean // Columns dropdown
 		moverType?: boolean // Switch between gainers and losers
+		options?: boolean // More options
 	}
 
 	columnOptions?: DataId[] // The columns available to select
 	excludeColumns?: DataId[] // Columns to exclude
 	columnOrder?: DataId[] // The order of the columns
+	fixedColumns?: DataId[] // The columns that can not be removed
 
 	// Fallback if no data is found
 	fallback?: {
 		title: string
 		text: string
 	}
-
-	// Other options to customize the table
-	// other?: {
-	// 	showNumberColumn?: boolean // Show the number column
-	// }
 }
 
 // Dynamic data that becomes state and is used to modify the table

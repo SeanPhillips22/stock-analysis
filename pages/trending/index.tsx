@@ -49,7 +49,8 @@ export default function Trending(props: Props) {
 											export: true,
 											columns: true,
 											results: true
-										}
+										},
+										columnOrder: query.columns
 									},
 									dynamic: query
 								}}

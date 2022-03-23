@@ -59,6 +59,11 @@ module.exports = {
 				source: '/list/biggest-social-media-companies/',
 				destination: '/list/social-media-stocks/',
 				permanent: true
+			},
+			{
+				source: '/list/biggest-banks/',
+				destination: '/list/bank-stocks/',
+				permanent: true
 			}
 		]
 	},

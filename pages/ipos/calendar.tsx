@@ -31,7 +31,7 @@ const queryWeek: TableDynamic = {
 	main: 'ipoDate',
 	sort: [{ id: 'ipoDate', desc: false }],
 	sortDirection: 'asc',
-	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
+	columns: ['ipoDate', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 	filters: ['ipoDate-is-thisweek']
 }
 
@@ -41,7 +41,7 @@ const queryLater: TableDynamic = {
 	main: 'ipoDate',
 	sort: [{ id: 'ipoDate', desc: false }],
 	sortDirection: 'asc',
-	columns: ['s', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
+	columns: ['ipoDate', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 	filters: ['ipoDate-is-nextweek']
 }
 
@@ -75,7 +75,9 @@ export default function IpoCalendar(props: Props) {
 												columns: true
 											},
 											columnOptions: FutureIpoDataPoints,
+											excludeColumns: ['withdrawnDateFB'],
 											columnOrder: ['ipoDate', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
+											fixedColumns: ['ipoDate', 's'],
 											fallback: {
 												title: 'This Week · 0 IPOs',
 												text: 'There are no upcoming IPOs remaining for this week.'

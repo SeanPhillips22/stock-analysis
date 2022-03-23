@@ -26,7 +26,10 @@ export default function StockList({ listId, data, page, fixed, query }: Props) {
 							title: page.tableTitle,
 							description: page.pageDescription,
 							tableId: listId,
-							fixed,
+							fixed: {
+								...fixed,
+								columnOrder: query.columns
+							},
 							dynamic: query
 						}}
 					>

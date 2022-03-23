@@ -256,12 +256,12 @@ export const StockLists: StockList = {
 			filters: ['industry-is-biotechnology']
 		}
 	},
-	'biggest-banks': {
+	'bank-stocks': {
 		page: {
-			path: '/list/biggest-banks/',
-			metaTitle: '100 Biggest Banks by Market Cap',
-			pageTitle: 'Biggest Banks by Market Cap',
-			tableTitleObject: 'Companies',
+			path: '/list/bank-stocks/',
+			metaTitle: '100 Biggest Bank Stocks by Market Cap',
+			pageTitle: 'Biggest Bank Stocks by Market Cap',
+			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
 		fixed: {
