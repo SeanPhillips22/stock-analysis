@@ -8,4 +8,5 @@ export type PageConfig = {
 	metaDescription?: string
 	pageDescription?: string
 	headingType?: 'h1' | 'div' // Set the table heading as h1
+	noindex?: boolean
 }

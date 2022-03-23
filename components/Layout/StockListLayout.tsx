@@ -13,7 +13,7 @@ export function StockListLayout({ children, list }: Props) {
 
 	return (
 		<Layout url={page.path}>
-			<SEO title={page.metaTitle} description={page.metaDescription} canonical={page.path} />
+			<SEO title={page.metaTitle} description={page.metaDescription} canonical={page.path} noindex={page.noindex} />
 			<div className="contain">
 				<h1 className="hh1 mb-0 border-b-[3px] border-blue-brand_sharp pb-3">{page.pageTitle || page.metaTitle}</h1>
 				<div className="lg:right-sidebar mt-3 sm:mt-4 lg:mt-5">

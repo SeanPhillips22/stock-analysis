@@ -64,6 +64,26 @@ module.exports = {
 				source: '/list/biggest-banks/',
 				destination: '/list/bank-stocks/',
 				permanent: true
+			},
+			{
+				source: '/list/biggest-biotech-companies/',
+				destination: '/list/biotech-stocks/',
+				permanent: true
+			},
+			{
+				source: '/list/biggest-pharmaceutical-companies/',
+				destination: '/list/pharmaceutical-stocks/',
+				permanent: true
+			},
+			{
+				source: '/list/biggest-semiconductor-companies/',
+				destination: '/list/semiconductor-stocks/',
+				permanent: true
+			},
+			{
+				source: '/list/biggest-car-companies/',
+				destination: '/list/car-company-stocks/',
+				permanent: true
 			}
 		]
 	},

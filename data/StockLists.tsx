@@ -126,57 +126,36 @@ export const StockLists: StockList = {
 			columns: ['rank', 's', 'n', 'revenue', 'price', 'change', 'marketCap']
 		}
 	},
-	// 'highest-earnings': {
-	// 	page: {
-	// 		path: '/list/highest-revenue/',
-	// 		metaTitle: 'The Biggest Companies by Revenue or Sales',
-	// 		metaDescription:
-	// 			'A list of the biggest public companies ranked by the total sales or revenue in the past twelve months.',
-	// 		pageTitle: 'Biggest Companies by Revenue',
-	// 		tableTitleObject: 'Companies',
-	// 		headingType: 'div'
-	// 	},
-	// 	fixed: {
-	// 		defaultSort: [{ id: 'revenue', desc: true }]
-	// 	},
-	// 	query: {
-	// 		index: 'allstocks',
-	// 		main: 'revenue',
-	// 		count: 100,
-	// 		sort: [{ id: 'revenue', desc: true }],
-	// 		sortDirection: 'desc',
-	// 		columns: ['rank', 's', 'n', 'revenue', 'price', 'change', 'marketCap']
-	// 	}
-	// },
-	// 'oldest-companies': {
-	// 	page: {
-	// 		path: '/list/oldest-companies/',
-	// 		metaTitle: '100 Oldest Publicly Traded Companies',
-	// 		metaDescription:
-	// 			'A list of the top 100 oldest publicly traded companies, sorted by the year they were founded.',
-	// 		pageTitle: 'Oldest Publicly Traded Companies',
-	// 		tableTitleObject: 'Companies',
-	// 		headingType: 'div'
-	// 	},
-	// 	fixed: {
-	// 		defaultSort: [{ id: 'founded', desc: true }]
-	// 	},
-	// 	query: {
-	// 		index: 'allstocks',
-	// 		main: 'founded',
-	// 		count: 100,
-	// 		sort: [{ id: 'founded', desc: false }],
-	// 		sortDirection: 'asc',
-	// 		columns: ['rank', 's', 'n', 'founded', 'price', 'change', 'marketCap']
-	// 	}
-	// },
-	'biggest-car-companies': {
+	'oldest-companies': {
 		page: {
-			path: '/list/biggest-car-companies/',
-			metaTitle: 'List of The Biggest Car Companies by Market Cap',
-			metaDescription: "A list of the world's biggest car companies and automakers, ranked by market cap.",
-			pageTitle: 'Biggest Car Companies by Market Cap',
+			path: '/list/oldest-companies/',
+			metaTitle: '100 Oldest Publicly Traded Companies',
+			metaDescription:
+				'A list of the top 100 oldest publicly traded companies, sorted by the year they were founded.',
+			pageTitle: 'Oldest Publicly Traded Companies',
 			tableTitleObject: 'Companies',
+			headingType: 'div',
+			noindex: true
+		},
+		fixed: {
+			defaultSort: [{ id: 'founded', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'founded',
+			count: 100,
+			sort: [{ id: 'founded', desc: false }],
+			sortDirection: 'asc',
+			columns: ['rank', 's', 'n', 'founded', 'price', 'change', 'marketCap']
+		}
+	},
+	'car-company-stocks': {
+		page: {
+			path: '/list/car-company-stocks/',
+			metaTitle: 'List of Car Company Stocks by Market Cap',
+			metaDescription: "A list of the world's biggest car company and automaker stocks, ranked by market cap.",
+			pageTitle: 'Biggest Car Company Stocks by Market Cap',
+			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
 		fixed: {
@@ -191,13 +170,13 @@ export const StockLists: StockList = {
 			filters: ['industry-isin-automobiles|auto%manufacturers']
 		}
 	},
-	'biggest-pharmaceutical-companies': {
+	'pharmaceutical-stocks': {
 		page: {
-			path: '/list/biggest-pharmaceutical-companies/',
-			metaTitle: 'The Biggest Pharmaceutical Companies by Market Cap',
-			metaDescription: "A list of the world's biggest pharmaceutical and drug companies, ranked by market cap.",
-			pageTitle: 'Biggest Pharmaceutical Companies by Market Cap',
-			tableTitleObject: 'Companies',
+			path: '/list/pharmaceutical-stocks/',
+			metaTitle: 'The Biggest Pharmaceutical Stocks by Market Cap',
+			metaDescription: "A list of the world's biggest pharmaceutical and drug company stocks, ranked by market cap.",
+			pageTitle: 'Biggest Pharmaceutical Stocks by Market Cap',
+			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
 		fixed: {
@@ -212,14 +191,14 @@ export const StockLists: StockList = {
 			filters: ['industry-is-pharmaceuticals']
 		}
 	},
-	'biggest-semiconductor-companies': {
+	'semiconductor-stocks': {
 		page: {
-			path: '/list/biggest-semiconductor-companies/',
-			metaTitle: 'The Biggest Semiconductor Companies by Market Cap',
+			path: '/list/semiconductor-stocks/',
+			metaTitle: 'The Biggest Semiconductor Stocks by Market Cap',
 			metaDescription:
-				"A list of the world's biggest semiconductor and chip manufacturing companies, ranked by market cap.",
-			pageTitle: 'Biggest Semiconductor Companies by Market Cap',
-			tableTitleObject: 'Companies',
+				"A list of the world's biggest semiconductor and chip manufacturing stocks, ranked by market cap.",
+			pageTitle: 'Biggest Semiconductor Stocks by Market Cap',
+			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
 		fixed: {
@@ -234,13 +213,13 @@ export const StockLists: StockList = {
 			filters: ['industry-contains-semiconductors']
 		}
 	},
-	'biggest-biotech-companies': {
+	'biotech-stocks': {
 		page: {
-			path: '/list/biggest-biotech-companies/',
-			metaTitle: 'The Biggest Biotechnology Companies by Market Cap',
+			path: '/list/biotech-stocks/',
+			metaTitle: 'The Biggest Biotech Stocks by Market Cap',
 			metaDescription: 'A list of the biggest publicly traded biotechnology companies, ranked by market cap.',
-			pageTitle: 'Biggest Biotech Companies by Market Cap',
-			tableTitleObject: 'Companies',
+			pageTitle: 'Biggest Biotech Stocks by Market Cap',
+			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
 		fixed: {

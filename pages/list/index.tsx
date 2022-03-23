@@ -25,7 +25,7 @@ export default function StockListPage() {
 				description="Lists of stocks that share common characteristics. See companies ranked by market cap, employee count, sales or others."
 				canonical="/list/"
 			/>
-			<div className="space-y-6">
+			<div className="mb-8 space-y-6">
 				<div>
 					<h2 className="hh3 mb-2">Popular Lists</h2>
 					<ul className="list-outside list-disc space-y-1 p-1 pl-6 md:columns-2">
@@ -44,13 +44,13 @@ export default function StockListPage() {
 				<div>
 					<h2 className="hh3 mb-2">Stocks Ranked by Market Cap</h2>
 					<ul className="list-inside list-disc space-y-1 p-1 md:columns-2">
-						<ListItem url="/list/biggest-car-companies/" title="Biggest Car Companies" />
-						<ListItem url="/list/biggest-pharmaceutical-companies/" title="Biggest Pharmaceutical Companies" />
-						<ListItem url="/list/biggest-semiconductor-companies/" title="Biggest Semiconductor Companies" />
-						<ListItem url="/list/biggest-biotech-companies/" title="Biggest Biotech Companies" />
-						<ListItem url="/list/bank-stocks/" title="Biggest Banks" />
-						<ListItem url="/list/social-media-stocks/" title="Social Media Stocks" />
-						<ListItem url="/list/gaming-stocks/" title="Gaming Stocks" />
+						<ListItem url="/list/car-company-stocks/" title="Cars & Automakers" />
+						<ListItem url="/list/pharmaceutical-stocks/" title="Pharmaceuticals" />
+						<ListItem url="/list/semiconductor-stocks/" title="Semiconductors" />
+						<ListItem url="/list/biotech-stocks/" title="Biotech" />
+						<ListItem url="/list/bank-stocks/" title="Banks" />
+						<ListItem url="/list/social-media-stocks/" title="Social Media" />
+						<ListItem url="/list/gaming-stocks/" title="Gaming" />
 					</ul>
 				</div>
 			</div>
