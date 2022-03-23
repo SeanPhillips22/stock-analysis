@@ -94,6 +94,9 @@ export function dateMatch(stock: SingleStock, id: DataId, filter: string) {
 		case 'past':
 			return value.getTime() < now.getTime() && value.getTime() > changeDate(now, `${first}`).getTime()
 
+		case 'year':
+			return value.getFullYear() === Number(first)
+
 		case 'Unscheduled':
 			return value.getFullYear() === 1970
 

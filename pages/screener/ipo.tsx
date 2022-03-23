@@ -5,8 +5,8 @@ import { useEffect } from 'react'
 import { useFetchFullData } from 'components/Screener/functions/useFetchFullData'
 import { initialIpoColumns } from 'components/Screener/maps/columns'
 import { ScreenerContextProvider } from 'components/Screener/ScreenerContext'
-import { ScreenerState } from 'components/Screener/screener.types'
 import { IpoDataPoints } from 'components/Screener/maps/DataPoints/IpoDataPoints'
+import { INITIAL_IPO_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialIpoScreenerState'
 import dynamic from 'next/dynamic'
 
 const Screener = dynamic(() => import('components/Screener/_Screener'), {
@@ -22,23 +22,6 @@ const Screener = dynamic(() => import('components/Screener/_Screener'), {
 		)
 	}
 })
-
-const INITIAL_STATE: ScreenerState = {
-	resultsMenu: 'General',
-	filtersMenu: 'Active',
-	filtersShowing: true,
-	activePreset: '',
-	columns: {
-		all: initialIpoColumns,
-		filtered: initialIpoColumns.Filtered,
-		default: initialIpoColumns.General
-	},
-	filters: [],
-	sort: {
-		active: [{ id: 'marketCap', desc: false }],
-		default: [{ id: 'marketCap', desc: false }]
-	}
-}
 
 export default function IpoScreenerPage() {
 	const type = screenerState(state => state.type)
@@ -76,7 +59,7 @@ export default function IpoScreenerPage() {
 					title: 'IPO Screener',
 					presets: PresetFiltersIpos,
 					dataPoints: IpoDataPoints,
-					initial: INITIAL_STATE
+					initial: INITIAL_IPO_SCREENER_STATE
 				}}
 			>
 				<Screener />

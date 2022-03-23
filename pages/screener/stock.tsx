@@ -5,8 +5,8 @@ import { useEffect } from 'react'
 import { useFetchFullData } from 'components/Screener/functions/useFetchFullData'
 import { initialStockColumns } from 'components/Screener/maps/columns'
 import { ScreenerContextProvider } from 'components/Screener/ScreenerContext'
-import { ScreenerState } from 'components/Screener/screener.types'
 import { StockDataPoints } from 'components/Screener/maps/DataPoints/StockDataPoints'
+import { INITIAL_STOCK_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialStockScreenerState'
 import dynamic from 'next/dynamic'
 
 const Screener = dynamic(() => import('components/Screener/_Screener'), {
@@ -22,23 +22,6 @@ const Screener = dynamic(() => import('components/Screener/_Screener'), {
 		)
 	}
 })
-
-const INITIAL_STATE: ScreenerState = {
-	resultsMenu: 'General',
-	filtersMenu: 'Active',
-	filtersShowing: true,
-	activePreset: '',
-	columns: {
-		all: initialStockColumns,
-		filtered: initialStockColumns.Filtered,
-		default: initialStockColumns.General
-	},
-	filters: [],
-	sort: {
-		active: [{ id: 'marketCap', desc: false }],
-		default: [{ id: 'marketCap', desc: false }]
-	}
-}
 
 export default function StockScreenerPage() {
 	const type = screenerState(state => state.type)
@@ -76,7 +59,7 @@ export default function StockScreenerPage() {
 					title: 'Stock Screener',
 					presets: PresetFiltersStocks,
 					dataPoints: StockDataPoints,
-					initial: INITIAL_STATE
+					initial: INITIAL_STOCK_SCREENER_STATE
 				}}
 			>
 				<Screener />

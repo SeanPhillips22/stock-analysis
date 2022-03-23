@@ -6,7 +6,7 @@ import { useFetchFullData } from 'components/Screener/functions/useFetchFullData
 import { initialEtfColumns } from 'components/Screener/maps/columns'
 import { ScreenerContextProvider } from 'components/Screener/ScreenerContext'
 import { EtfDataPoints } from 'components/Screener/maps/DataPoints/EtfDataPoints'
-import { ScreenerState } from 'components/Screener/screener.types'
+import { INITIAL_ETF_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialEtfScreenerState'
 import dynamic from 'next/dynamic'
 
 const Screener = dynamic(() => import('components/Screener/_Screener'), {
@@ -22,23 +22,6 @@ const Screener = dynamic(() => import('components/Screener/_Screener'), {
 		)
 	}
 })
-
-const INITIAL_STATE: ScreenerState = {
-	resultsMenu: 'General',
-	filtersMenu: 'Active',
-	filtersShowing: true,
-	activePreset: '',
-	columns: {
-		all: initialEtfColumns,
-		filtered: initialEtfColumns.Filtered,
-		default: initialEtfColumns.General
-	},
-	filters: [],
-	sort: {
-		active: [{ id: 'aum', desc: false }],
-		default: [{ id: 'aum', desc: false }]
-	}
-}
 
 export default function ETFScreenerPage() {
 	const type = screenerState(state => state.type)
@@ -76,7 +59,7 @@ export default function ETFScreenerPage() {
 					title: 'ETF Screener',
 					presets: PresetFiltersETFs,
 					dataPoints: EtfDataPoints,
-					initial: INITIAL_STATE
+					initial: INITIAL_ETF_SCREENER_STATE
 				}}
 			>
 				<Screener />

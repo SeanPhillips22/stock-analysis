@@ -70,6 +70,9 @@ export function createLabelFromString(value: string, filter?: FilterValue): stri
 		case 'last':
 			return first === 'year' ? 'Last Year' : 'Last Month'
 
+		case 'year':
+			return `Year ${first}`
+
 		default:
 			return value
 	}

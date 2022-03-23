@@ -1,4 +1,4 @@
-import { SortObject } from 'components/Screener/screener.types'
+import { FilterValue, ScreenerTypes, SortObject } from 'components/Screener/screener.types'
 import { DataId } from 'types/DataId'
 
 // Create a type that is an array of objects with keys as DataID
@@ -23,6 +23,10 @@ export type TableFixed = {
 	excludeColumns?: DataId[] // Columns to exclude
 	columnOrder?: DataId[] // The order of the columns
 	fixedColumns?: DataId[] // The columns that can not be removed
+	screener?: {
+		type: ScreenerTypes
+		filters: FilterValue[]
+	}
 
 	// Fallback if no data is found
 	fallback?: {

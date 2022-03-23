@@ -64,12 +64,18 @@ export default function IpoYear(props: Props) {
 										controls: {
 											filter: true,
 											export: true,
-											columns: true
-											// options: true
+											columns: true,
+											options: true
 										},
 										columnOptions: RecentIpoDataPoints,
 										columnOrder: ['ipoDate', 's', 'n', 'ipp', 'ippc', 'ipr'],
-										fixedColumns: ['ipoDate', 's']
+										fixedColumns: ['ipoDate', 's'],
+										screener: {
+											type: 'stocks',
+											filters: [
+												{ id: 'ipoDate', name: `Year ${year}`, value: `year-${year}`, filterType: 'date' }
+											]
+										}
 									},
 									dynamic: {
 										...query,

@@ -122,7 +122,12 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 	// Load the required data columns on mount
 	useEffect(() => {
 		if (loaded) {
-			let columnsToFetch = [...state.columns.all.Filtered, ...state.columns.all[state.resultsMenu]]
+			let activeFilterIds = state.filters.map(f => f.id)
+			let columnsToFetch = [
+				...state.columns.all.Filtered,
+				...state.columns.all[state.resultsMenu],
+				...activeFilterIds
+			]
 			columnsToFetch = columnsToFetch.filter(i => !state.columns.default.includes(i))
 			fetchManyColumns(columnsToFetch)
 		}

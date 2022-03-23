@@ -56,11 +56,18 @@ export default function RecentIpos(props: Props) {
 										controls: {
 											filter: true,
 											export: true,
-											columns: true
+											columns: true,
+											options: true
 										},
 										columnOptions: RecentIpoDataPoints,
 										columnOrder: ['ipoDate', 's', 'n', 'ipp', 'ippc', 'ipr'],
-										fixedColumns: ['ipoDate', 's']
+										fixedColumns: ['ipoDate', 's'],
+										screener: {
+											type: 'stocks',
+											filters: [
+												{ id: 'ipoDate', name: 'Past 12 Months', value: 'under-12M', filterType: 'date' }
+											]
+										}
 									},
 									dynamic: query
 								}}

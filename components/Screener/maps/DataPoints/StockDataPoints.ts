@@ -629,13 +629,13 @@ export const StockDataPoints: FilterProps[] = [
 			{ name: 'Last Year', value: 'last-year', div: true },
 			{ name: 'Within 3 Years', value: 'under-3Y' },
 			{ name: 'Within 5 Years', value: 'under-5Y' },
-			{ name: 'Within 10 Years', value: 'under-10Y' },
-			{ name: 'Within 20 Years', value: 'under-20Y', div: true },
 			{ name: 'Over 1 Years Ago', value: 'over-1Y' },
 			{ name: 'Over 3 Years Ago', value: 'over-3Y' },
 			{ name: 'Over 5 Years Ago', value: 'over-5Y' },
-			{ name: 'Over 10 Years Ago', value: 'over-10Y' },
-			{ name: 'Over 20 Years Ago', value: 'over-20Y' }
+			{ name: 'Year 2022', value: 'year-2022' },
+			{ name: 'Year 2021', value: 'year-2021' },
+			{ name: 'Year 2020', value: 'year-2020' },
+			{ name: 'Year 2019', value: 'year-2019' }
 		],
 		format: 'date',
 		sortType: dateSort,

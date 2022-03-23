@@ -37,7 +37,7 @@
 	}
 
 	.controls .btn-group {
-		@apply flex justify-between border-t border-gray-200 py-1.5 md:ml-auto md:space-x-2 md:border-0 md:py-0 lg:space-x-6;
+		@apply flex justify-between border-t border-gray-200 py-1.5 md:ml-auto md:space-x-2 md:border-0 md:py-0 lg:space-x-4;
 	}
 
 	/* Hide, but only on mobile */
