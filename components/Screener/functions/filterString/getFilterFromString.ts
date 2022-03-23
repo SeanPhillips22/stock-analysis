@@ -6,7 +6,7 @@ import { ComparisonOption } from 'components/Screener/screener.types'
 import { fillNumber } from './fillNumber'
 
 export function getFilterFromString(string: string, fill = false) {
-	string = string.replaceAll('--', '-X')
+	string = string.replace(/--/g, '-X')
 	// Split the string
 	const explode = string.split('-')
 

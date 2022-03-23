@@ -19,7 +19,7 @@ export function FiltersList() {
 			if (
 				f.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
 				f.id.toLowerCase().includes(filterSearch.toLowerCase()) ||
-				f.searchMatches?.replaceAll('%', ' ').includes(filterSearch.toLowerCase())
+				f.searchMatches?.replace(/%/g, ' ').includes(filterSearch.toLowerCase())
 			) {
 				searched.push(f.id)
 			}

@@ -11,7 +11,7 @@ export function createLabelFromString(value: string, filter?: FilterValue): stri
 		return 'Not Zero'
 	}
 
-	value = value.replaceAll('--', '-X')
+	value = value.replace(/--/g, '-X')
 
 	// Split the string
 	const explode = value.split('-')
