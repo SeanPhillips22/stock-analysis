@@ -60,7 +60,7 @@
 
 	.navmenu li a.active,
 	.navmenu li span.active {
-		@apply bg-[#eee] font-semibold text-gray-900;
+		@apply bg-[#eee] font-semibold text-gray-900 focus:outline-none;
 		background-color: #eee;
 	}
 

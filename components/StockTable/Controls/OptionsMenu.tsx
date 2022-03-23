@@ -35,7 +35,7 @@ export function OptionsMenu() {
 	}
 
 	return (
-		<Dropdown title="Options" classes="divide-y divide-gray-100">
+		<Dropdown title="Options" classes="divide-y divide-gray-100 whitespace-nowrap">
 			<div className="dd" title="Open list in stock screener" onClick={addFiltersAndGoToScreener}>
 				Open in Screener
 			</div>
