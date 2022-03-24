@@ -26,16 +26,18 @@ const query: TableDynamic = {
 	count: 20,
 	sort: [{ id: 'change', desc: true }],
 	sortDirection: 'desc',
-	columns: ['s', 'n', 'price', 'volume', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
+	columns: ['rank', 's', 'n', 'change', 'price', 'volume', 'marketCap'],
+	filters: ['price-over-1', 'change-over-2', 'volume-over-10000'],
+	page: 1
 }
 
 type Props = {
 	data: any[]
 	tradingTimestamps: TableTimestamp
+	resultsCount: number
 }
 
-export default function GainersPage({ data, tradingTimestamps }: Props) {
+export default function GainersPage({ data, tradingTimestamps, resultsCount }: Props) {
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={GainersNav}>
@@ -43,6 +45,8 @@ export default function GainersPage({ data, tradingTimestamps }: Props) {
 					value={{
 						title: 'Gainers Today',
 						tableId: 'gainers',
+						// description:
+						// 	'The stocks with the highest percentage gain today, updated every five minutes. Includes stocks traded on the NASDAQ and NYSE, with stock price over $1, price change over 2% and trading volume over 10,000.',
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
@@ -50,8 +54,13 @@ export default function GainersPage({ data, tradingTimestamps }: Props) {
 								export: true,
 								columns: true
 							},
+							pagination: true,
+							resultsCount,
 							columnOptions: MoverDataPoints,
-							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent']
+							includeColumns: ['rank'],
+							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
+							columnOrder: query.columns,
+							fixedColumns: ['rank', 's', 'change']
 						},
 						dynamic: query
 					}}

@@ -8,6 +8,8 @@ import { DataPoints as DP } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
 import { formatTableCell } from 'functions/tables/formatTableCell'
 import { Information } from 'components/Alerts/Information'
+import { useTableContext } from './TableContext'
+import { Pagination } from './Pagination'
 
 type Props = {
 	data: any[]
@@ -17,12 +19,12 @@ type Props = {
 	}[]
 	sortProps: SortProps
 	sort?: SortObject[]
-	tableId: string
 	columnOrder?: DataId[]
-	description?: string
+	paginationOffset: number
 }
 
-export function StockTableBody({ data, columns, sortProps, sort, tableId, columnOrder, description }: Props) {
+export function StockTableBody({ data, columns, sortProps, sort, columnOrder, paginationOffset }: Props) {
+	const { fixed, tableId, description } = useTableContext()
 	const [search, setSearch] = useState('')
 	const { updateSort } = useSort(sortProps)
 
@@ -87,7 +89,9 @@ export function StockTableBody({ data, columns, sortProps, sort, tableId, column
 
 										return (
 											<td key={uniqueKey} className={css}>
-												{id === 'rank' ? i + 1 : formatTableCell(format, value, 'stocks')}
+												{id === 'rank'
+													? i + 1 + paginationOffset
+													: formatTableCell(format, value, 'stocks')}
 											</td>
 										)
 									})}
@@ -97,6 +101,7 @@ export function StockTableBody({ data, columns, sortProps, sort, tableId, column
 					</tbody>
 				</table>
 			</div>
+			{fixed.pagination && <Pagination resultsCount={fixed.resultsCount} />}
 		</div>
 	)
 }

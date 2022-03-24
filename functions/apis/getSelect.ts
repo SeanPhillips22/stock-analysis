@@ -27,6 +27,11 @@ export async function getSelect(config: TableDynamic, ssr?: boolean, extras?: st
 		url += `&extras=${extras.join(',')}`
 	}
 
+	// If pagination is enabled, add the page number
+	if (config.page) {
+		url += `&page=${config.page}`
+	}
+
 	// fetch the data from the back-end
 	let response = await getData(url)
 

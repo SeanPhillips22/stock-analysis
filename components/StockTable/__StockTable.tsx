@@ -11,7 +11,7 @@ import { TableTitle } from './Controls/TableTitle'
  */
 export function StockTable({ _data }: { _data: any[] }) {
 	// Get the table contexts
-	const { tableId, fixed, dynamic, setState, enabled, description } = useTableContext()
+	const { tableId, fixed, dynamic, setState, enabled } = useTableContext()
 
 	// Get the props
 	const { defaultSort, columnOrder } = fixed
@@ -28,6 +28,15 @@ export function StockTable({ _data }: { _data: any[] }) {
 	const sortProps = useMemo(
 		() => ({ defaultSort, setSort: (sort: any) => setState({ sort }) }),
 		[defaultSort, setState]
+	)
+
+	// If paginated and the table shows a rank/no column, then calculate the pagination offset
+	const paginationOffset = useMemo(
+		() =>
+			fixed.pagination && _columns.includes('rank') && dynamic.count && dynamic.page
+				? dynamic.count * (dynamic.page - 1)
+				: 0,
+		[_columns, dynamic.count, dynamic.page, fixed.pagination]
 	)
 
 	// If there's no data, display a fallback with title and text
@@ -49,8 +58,7 @@ export function StockTable({ _data }: { _data: any[] }) {
 			sortProps={sortProps}
 			sort={sort}
 			columnOrder={columnOrder}
-			tableId={tableId}
-			description={description}
+			paginationOffset={paginationOffset}
 		/>
 	)
 }

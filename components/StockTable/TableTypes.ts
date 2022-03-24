@@ -19,7 +19,10 @@ export type TableFixed = {
 		options?: boolean // More options
 	}
 
+	pagination?: boolean // Enable pagination
+	resultsCount?: number // The total number of available results
 	columnOptions?: DataId[] // The columns available to select
+	includeColumns?: DataId[] // Columns to include
 	excludeColumns?: DataId[] // Columns to exclude
 	columnOrder?: DataId[] // The order of the columns
 	fixedColumns?: DataId[] // The columns that can not be removed
@@ -53,6 +56,8 @@ export type TableDynamic = {
 	fetched?: boolean // Whether the original data has been fetched
 
 	showOnMobile?: boolean // Whether to show the controls on mobile
+
+	page?: number
 }
 
 // The stock index type (more specific is faster)

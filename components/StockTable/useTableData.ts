@@ -7,7 +7,7 @@ import { TableDynamic } from './TableTypes'
  */
 export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[], enabled?: boolean) {
 	// The params that  tell react-query when to update
-	const { main, count, columns, filters, sortDirection, index } = dynamic
+	const { main, count, columns, filters, sortDirection, index, page } = dynamic
 	const queryObject = {
 		main,
 		count,
@@ -15,7 +15,8 @@ export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[
 		filters,
 		sortDirection,
 		index,
-		tableId
+		tableId,
+		page
 	}
 
 	const { data } = useQuery([tableId, queryObject], async () => await getSelect(dynamic, false), {
@@ -24,7 +25,8 @@ export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[
 		refetchOnWindowFocus: false,
 		refetchOnMount: false,
 		staleTime: 60000,
-		notifyOnChangeProps: 'tracked'
+		notifyOnChangeProps: 'tracked',
+		keepPreviousData: true
 	})
 
 	return {

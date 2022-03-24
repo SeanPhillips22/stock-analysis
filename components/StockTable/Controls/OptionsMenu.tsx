@@ -36,13 +36,23 @@ export function OptionsMenu() {
 
 	return (
 		<Dropdown title="Options" classes="divide-y divide-gray-100 whitespace-nowrap">
-			<div className="dd" title="Open list in stock screener" onClick={addFiltersAndGoToScreener}>
+			<div
+				className="dd"
+				title="Open list in stock screener"
+				id="tag-feat-options-open-in-screener"
+				onClick={addFiltersAndGoToScreener}
+			>
 				Open in Screener
 			</div>
 			<div className="block md:hidden">
 				<ExportButtons tableId={tableId} />
 			</div>
-			<div className="dd" title="Reset all settings to their default values" onClick={clearState}>
+			<div
+				className="dd"
+				title="Reset all settings to their default values"
+				id="tag-feat-options-reset-table-defaults"
+				onClick={clearState}
+			>
 				Reset Table Defaults
 			</div>
 		</Dropdown>

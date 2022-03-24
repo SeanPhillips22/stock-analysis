@@ -6,15 +6,16 @@ import { useTableContext } from '../TableContext'
 
 export function TableColumns() {
 	const { fixed, dynamic, setState, clearState, enabled } = useTableContext()
-	const { columnOptions, excludeColumns } = fixed
+	const { columnOptions, includeColumns, excludeColumns } = fixed
 	const { columns, index } = dynamic
 
 	// The columns that are available to select
 	const colSelect = useMemo(() => {
 		let raw = columnOptions ? columnOptions : getDataPointsArray(index)
+		if (includeColumns) raw = [...includeColumns, ...raw]
 		let exclude = excludeColumns ? excludeColumns : []
 		return raw.filter(c => !exclude.includes(c))
-	}, [columnOptions, excludeColumns, index])
+	}, [columnOptions, excludeColumns, includeColumns, index])
 
 	function toggle(id: DataId) {
 		setState({
