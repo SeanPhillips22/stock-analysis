@@ -4,10 +4,10 @@ import { StockLink } from 'components/Links'
 const cellStyles = 'py-1.5 sm:py-2 px-1.5 xs:px-2 sm:px-3 xl:px-4 text-sm sm:text-base border-gray-200'
 
 interface Mover {
-	s: string
-	n: string
-	p: string
-	c: string
+	symbol: string
+	name: string
+	price: string
+	change: string
 }
 
 interface Props {
@@ -30,11 +30,11 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 		return (
 			<>
 				{items.map((item, index) => {
-					if (item.s) {
+					if (item.symbol) {
 						return (
 							<tr key={index} className="border-b border-gray-200 transition duration-100 hover:bg-gray-50">
 								<td className={cellStyles + ' border-r text-left'}>
-									<StockLink symbol={item.s} className="bll" />
+									<StockLink symbol={item.symbol} className="bll" />
 								</td>
 								<td
 									className={
@@ -42,11 +42,11 @@ export const Movers = ({ date, marketStatus, gainers, losers }: Props) => {
 										' max-w-[90px] overflow-hidden text-ellipsis border-r text-left xs:max-w-[170px] md:max-w-[350px] xl:whitespace-nowrap'
 									}
 								>
-									{item.n}
+									{item.name}
 								</td>
 
-								<td className={cellStyles + ' hidden border-r text-right tiny:table-cell'}>${item.p}</td>
-								<td className={cellStyles + ' text-right ' + redOrGreen}>{item.c}%</td>
+								<td className={cellStyles + ' hidden border-r text-right tiny:table-cell'}>${item.price}</td>
+								<td className={cellStyles + ' text-right ' + redOrGreen}>{item.change}%</td>
 							</tr>
 						)
 					}
