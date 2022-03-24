@@ -7,9 +7,9 @@ import { useState } from 'react'
 import { DataPoints as DP } from 'data/StockDataPoints'
 import { DataId } from 'types/DataId'
 import { formatTableCell } from 'functions/tables/formatTableCell'
-import { Information } from 'components/Alerts/Information'
 import { useTableContext } from './TableContext'
 import { Pagination } from './Pagination'
+import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
 
 type Props = {
 	data: any[]
@@ -44,7 +44,7 @@ export function StockTableBody({ data, columns, sortProps, sort, columnOrder, pa
 
 	return (
 		<div>
-			{description && <Information message={description} classes="p-3 mb-4 sm:mb-5 text-blue-900" />}
+			{description && <SmallInfoBox text={description} classes="mb-4 sm:mb-5" />}
 			<div className="mt-3 sm:mt-0">
 				<StockTableControls
 					filter={{

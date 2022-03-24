@@ -283,7 +283,9 @@ export const StockLists: StockList = {
 			metaTitle: 'A List of Gaming Company Stocks by Market Cap',
 			pageTitle: 'Biggest Gaming Stocks by Market Cap',
 			tableTitleObject: 'Stocks',
-			headingType: 'div'
+			headingType: 'div',
+			pageDescription:
+				'The biggest gaming company stocks, ranked by market cap. This list includes stocks of companies who get a significant percentage of their revenue from gaming or gaming-related products.'
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }]
