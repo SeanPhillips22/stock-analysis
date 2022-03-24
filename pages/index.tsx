@@ -27,10 +27,10 @@ type NewsMin = {
 }
 
 type Mover = {
-	s: string
-	n: string
-	p: string
-	c: string
+	symbol: string
+	name: string
+	price: string
+	change: string
 }
 
 interface FrontPageProps {
