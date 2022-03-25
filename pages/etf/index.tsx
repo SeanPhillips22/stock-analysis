@@ -58,6 +58,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	return {
 		props: {
 			stocks: etfs
-		}
+		},
+		revalidate: 7200
 	}
 }

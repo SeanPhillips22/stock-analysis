@@ -70,6 +70,9 @@ export default function ActivePage({ data, tradingTimestamps, resultsCount }: Pr
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['tradingTimestamps']
-	const data = await getSelect(query, true, extras)
-	return data
+	const data = await getSelect(query, false, extras)
+	return {
+		props: data,
+		revalidate: 120
+	}
 }

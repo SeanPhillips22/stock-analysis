@@ -109,11 +109,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		page: 1
 	}
 
-	const data = await getSelect(query, true, extras)
-	data.props.rangePath = rangePath
-	data.props.query = query
+	const data = await getSelect(query, false, extras)
+	data.rangePath = rangePath
+	data.query = query
 
-	return data
+	return {
+		props: data,
+		revalidate: 3600
+	}
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
