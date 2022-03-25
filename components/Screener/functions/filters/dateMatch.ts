@@ -29,7 +29,7 @@ export function dateMatch(stock: SingleStock, id: DataId, filter: string) {
 	const first = filterBits[1] ?? null
 
 	// Check if the date exists in the data
-	const raw = stock[id]
+	const raw = stock[id] ?? 0
 	if (!raw && compare != 'Unscheduled') {
 		return false
 	}
