@@ -764,6 +764,7 @@ export const DataPoints: Props = {
 	*/
 	aum: {
 		id: 'aum',
+		colName: 'Assets',
 		name: 'Assets Under Management',
 		format: 'abbreviate',
 		only: 'etf'

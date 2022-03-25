@@ -1,22 +1,21 @@
-import { cn } from 'functions/helpers/classNames'
 import Link from 'next/link'
 
 type Props = {
 	lists: { name: string; url: string }[]
-	classes?: string
 }
 
-export function RelatedStockLists({ lists, classes }: Props) {
+export function RelatedStockLists({ lists }: Props) {
 	return (
-		<div className="relative mt-5 mb-5 rounded border border-gray-300 px-1 pt-4 pb-3">
-			<div className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-sm font-semibold text-gray-900">
+		<div>
+			<h2 className="mb-2 whitespace-nowrap pl-0.5 text-lg font-semibold tiny:text-xl bp:text-2xl">
 				Related Categories
-			</div>
-
-			<div className={cn('tickers', classes ? classes : '')}>
+			</h2>
+			<div className="flex flex-wrap gap-3 whitespace-nowrap border-t border-gray-200 pt-3">
 				{lists.map(list => (
 					<Link href={list.url} key={list.url} prefetch={false}>
-						<a>{list.name}</a>
+						<a className="inline-flex items-center rounded-md border border-transparent bg-blue-100 px-4 py-1.5 text-sm font-medium text-blue-700 hover:bg-blue-200 xs:py-2 xs:text-base">
+							{list.name}
+						</a>
 					</Link>
 				))}
 			</div>

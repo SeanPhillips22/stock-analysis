@@ -7,6 +7,8 @@ import { getSelect } from 'functions/apis/getSelect'
 import { PageConfig } from 'types/PageConfig'
 import { TableDynamic, TableFixed } from 'components/StockTable/TableTypes'
 import { StockListLayout } from 'components/Layout/StockListLayout'
+import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
+import { RelatedStockLists } from 'components/StockLists/RelatedStockLists'
 
 type Props = {
 	listId: string
@@ -14,13 +16,20 @@ type Props = {
 	page: PageConfig
 	fixed: TableFixed
 	query: TableDynamic
+	etfQuery?: TableDynamic
+	etfData?: any
+	relatedLists?: { name: string; url: string }[]
 }
 
-export default function StockList({ listId, data, page, fixed, query }: Props) {
+export default function StockList({ listId, data, page, fixed, query, etfQuery, etfData, relatedLists }: Props) {
 	return (
 		<>
 			<PageContextProvider value={{ page, count: data.data.length }}>
 				<StockListLayout key={page.path}>
+					{/* Info Box */}
+					{page.pageDescription && <SmallInfoBox text={page.pageDescription} classes="mb-4 sm:mb-5" />}
+
+					{/* Main Table */}
 					<TableContextProvider
 						value={{
 							title: page.tableTitle,
@@ -35,6 +44,27 @@ export default function StockList({ listId, data, page, fixed, query }: Props) {
 					>
 						<StockTable _data={data} />
 					</TableContextProvider>
+
+					<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
+						{/* If list is set to show ETFs */}
+						{etfQuery && (
+							<TableContextProvider
+								value={{
+									title: page.etfTitle || 'Related ETFs',
+									tableId: `${listId}-etf`,
+									fixed: {
+										defaultSort: [{ id: 'aum', desc: true }]
+									},
+									dynamic: etfQuery
+								}}
+							>
+								<StockTable _data={etfData} />
+							</TableContextProvider>
+						)}
+
+						{/* Related Lists */}
+						{relatedLists && <RelatedStockLists lists={relatedLists} />}
+					</div>
 				</StockListLayout>
 			</PageContextProvider>
 		</>
@@ -51,10 +81,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const fixed = StockLists[listId]?.fixed || {
 		defaultSort: [{ id: 'marketCap', desc: true }]
 	}
+	const relatedLists = StockLists[listId].relatedLists || null
+
+	// Get the main query config
 	const query = StockLists[listId].query
 
+	// Get the ETF query config
+	const etfQuery = StockLists[listId].etfQuery || null
+
 	// Fetch the data
-	const data = await getSelect(query, false)
+	let data
+	let etfData
+	if (etfQuery) {
+		let res = await Promise.all([getSelect(query, false), getSelect(etfQuery)])
+		data = res[0]
+		etfData = res[1]
+	} else {
+		data = await getSelect(query, false)
+		etfData = null
+	}
 
 	return {
 		props: {
@@ -62,7 +107,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			data,
 			page,
 			fixed,
-			query
+			query,
+			etfQuery,
+			etfData,
+			relatedLists
 		},
 		revalidate: 3600 // Cache for 1 hour
 	}

@@ -6,6 +6,8 @@ type StockList = {
 		page: PageConfig
 		fixed?: TableFixed
 		query: TableDynamic
+		etfQuery?: TableDynamic
+		relatedLists?: { name: string; url: string }[]
 	}
 }
 
@@ -259,12 +261,7 @@ export const StockLists: StockList = {
 			headingType: 'div',
 			pageDescription:
 				'The biggest gaming company stocks, ranked by market cap. This list includes stocks of companies who get a significant percentage of their revenue from gaming or gaming-related products.',
-			relatedETFs: ['HERO', 'ESPO', 'NERD'],
-			relatedLists: [
-				{ name: 'Mobile Games', url: '/list/mobile-games/' },
-				{ name: 'E-Sports', url: '/list/esports/' },
-				{ name: 'Online Gambling', url: '/list/online-gambling' }
-			]
+			etfTitle: 'Gaming ETFs'
 		},
 		query: {
 			index: 'allstocks',
@@ -274,7 +271,21 @@ export const StockLists: StockList = {
 			sortDirection: 'desc',
 			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
 			filters: ['tags-includes-gaming']
-		}
+		},
+		etfQuery: {
+			index: 'etf',
+			main: 'aum',
+			count: 100,
+			sort: [{ id: 'aum', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'aum'],
+			filters: ['tags-includes-gaming']
+		},
+		relatedLists: [
+			{ name: 'Mobile Games', url: '/list/mobile-games/' },
+			{ name: 'E-Sports', url: '/list/esports/' },
+			{ name: 'Online Gambling', url: '/list/online-gambling' }
+		]
 	},
 	esports: {
 		page: {
