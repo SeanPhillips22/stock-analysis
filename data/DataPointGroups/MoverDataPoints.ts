@@ -1,6 +1,7 @@
 import { DataId } from 'types/DataId'
 
 export const MoverDataPoints: DataId[] = [
+	'rank',
 	's',
 	'n',
 	'change',
@@ -84,6 +85,8 @@ export const MoverDataPoints: DataId[] = [
 	'ch6m',
 	'chYTD',
 	'ch1y',
+	'ch3y',
+	'ch5y',
 	'shortFloat',
 	'shortShares',
 	'shortRatio',

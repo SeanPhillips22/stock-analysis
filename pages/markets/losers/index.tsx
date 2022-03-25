@@ -26,23 +26,25 @@ const query: TableDynamic = {
 	count: 20,
 	sort: [{ id: 'change', desc: true }],
 	sortDirection: 'asc',
-	columns: ['s', 'n', 'price', 'volume', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
+	columns: ['rank', 's', 'n', 'change', 'price', 'volume', 'marketCap'],
+	filters: ['close-over-1', 'change-under-0', 'volume-over-10000'],
+	page: 1
 }
 
 type Props = {
 	data: any[]
 	tradingTimestamps: TableTimestamp
+	resultsCount: number
 }
 
-export default function LosersPage({ data, tradingTimestamps }: Props) {
+export default function LosersPage({ data, tradingTimestamps, resultsCount }: Props) {
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={LosersNav}>
 				<TableContextProvider
 					value={{
 						title: 'Losers Today',
-						tableId: 'losers',
+						tableId: 'losers-v2',
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
@@ -50,8 +52,12 @@ export default function LosersPage({ data, tradingTimestamps }: Props) {
 								export: true,
 								columns: true
 							},
+							pagination: true,
+							resultsCount,
 							columnOptions: MoverDataPoints,
-							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent']
+							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
+							columnOrder: query.columns,
+							fixedColumns: ['rank', 's', 'change']
 						},
 						dynamic: query
 					}}

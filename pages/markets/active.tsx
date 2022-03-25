@@ -25,23 +25,25 @@ const query: TableDynamic = {
 	count: 20,
 	sort: [{ id: 'volume', desc: true }],
 	sortDirection: 'desc',
-	columns: ['s', 'n', 'change', 'price', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1']
+	columns: ['rank', 's', 'n', 'volume', 'change', 'price', 'marketCap'],
+	filters: ['price-over-1', 'volume-over-0'],
+	page: 1
 }
 
 type Props = {
 	data: any[]
 	tradingTimestamps: TableTimestamp
+	resultsCount: number
 }
 
-export default function ActivePage({ data, tradingTimestamps }: Props) {
+export default function ActivePage({ data, tradingTimestamps, resultsCount }: Props) {
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout>
 				<TableContextProvider
 					value={{
 						title: 'Active Today',
-						tableId: 'active',
+						tableId: 'active-v2',
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
@@ -49,8 +51,12 @@ export default function ActivePage({ data, tradingTimestamps }: Props) {
 								export: true,
 								columns: true
 							},
+							pagination: true,
+							resultsCount,
 							columnOptions: MoverDataPoints,
-							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent']
+							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
+							columnOrder: query.columns,
+							fixedColumns: ['rank', 's', 'volume']
 						},
 						dynamic: query
 					}}

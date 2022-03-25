@@ -44,24 +44,15 @@ const rangeMap: any = {
 	}
 }
 
-// the initial config for the select endpoint to fetch data
-let query: TableDynamic = {
-	index: 'stocks',
-	main: 'change',
-	count: 20,
-	sort: [{ id: 'change', desc: true }],
-	sortDirection: 'desc',
-	columns: ['s', 'n', 'price', 'volume', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1', 'volume-over-1000', 'marketCap-over-100000000']
-}
-
 type Props = {
 	data: any[]
+	query: TableDynamic
 	rangePath: string
 	tradingTimestamps: TableTimestamp
+	resultsCount: number
 }
 
-export default function GainersPageRange({ data, rangePath, tradingTimestamps }: Props) {
+export default function GainersPageRange({ data, query, rangePath, tradingTimestamps, resultsCount }: Props) {
 	const { id, title, metaTitle } = rangeMap[rangePath]
 
 	// the page's config and settings
@@ -71,19 +62,13 @@ export default function GainersPageRange({ data, rangePath, tradingTimestamps }:
 		headingType: 'h1'
 	}
 
-	query = {
-		...query,
-		main: id,
-		sort: [{ id: id, desc: true }]
-	}
-
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
-			<MarketsLayout SubNav={GainersNav}>
+			<MarketsLayout SubNav={GainersNav} key={id}>
 				<TableContextProvider
 					value={{
 						title: `${title} Gainers`,
-						tableId: `gainers-${rangePath}`,
+						tableId: `gainers-${rangePath}-v2`,
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
@@ -91,13 +76,14 @@ export default function GainersPageRange({ data, rangePath, tradingTimestamps }:
 								export: true,
 								columns: true
 							},
+							pagination: true,
+							resultsCount,
 							columnOptions: MoverDataPoints,
-							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent']
+							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
+							columnOrder: ['rank', 's', 'n', id, 'price', 'volume', 'marketCap'],
+							fixedColumns: ['rank', 's', id]
 						},
-						dynamic: {
-							...query,
-							main: id
-						}
+						dynamic: query
 					}}
 				>
 					<StockTable _data={data} />
@@ -112,14 +98,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const id = rangeMap[rangePath].id
 	let extras = ['tradingTimestamps']
 
-	query = {
-		...query,
+	let query: TableDynamic = {
+		index: 'stocks',
 		main: id,
-		sort: [{ id: id, desc: true }]
+		count: 20,
+		sort: [{ id: id, desc: true }],
+		sortDirection: 'desc',
+		columns: ['rank', 's', 'n', 'price', 'volume', 'marketCap'],
+		filters: ['price-over-1', 'close-over-1', 'volume-over-10000', 'marketCap-over-100000000', `${id}-over-0`],
+		page: 1
 	}
 
 	const data = await getSelect(query, true, extras)
 	data.props.rangePath = rangePath
+	data.props.query = query
 
 	return data
 }

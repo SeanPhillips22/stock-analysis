@@ -25,8 +25,8 @@ const queryGainers: TableDynamic = {
 	count: 10,
 	sort: [{ id: 'premarketChangePercent', desc: true }],
 	sortDirection: 'desc',
-	columns: ['s', 'n', 'premarketChange', 'premarketPrice', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
+	columns: ['rank', 's', 'n', 'premarketChangePercent', 'premarketChange', 'premarketPrice', 'marketCap'],
+	filters: ['price-over-1', 'close-over-1']
 }
 
 const queryLosers: TableDynamic = {
@@ -35,8 +35,8 @@ const queryLosers: TableDynamic = {
 	count: 10,
 	sort: [{ id: 'premarketChangePercent', desc: true }],
 	sortDirection: 'asc',
-	columns: ['s', 'n', 'premarketChange', 'premarketPrice', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
+	columns: ['rank', 's', 'n', 'premarketChangePercent', 'premarketChange', 'premarketPrice', 'marketCap'],
+	filters: ['price-over-1', 'close-over-1']
 }
 
 type Props = {
@@ -57,7 +57,7 @@ export default function PreMarket(props: Props) {
 					<TableContextProvider
 						value={{
 							title: 'Premarket Gainers',
-							tableId: 'premarket-index-gainers',
+							tableId: 'premarket-index-gainers-v2',
 							fixed: {
 								defaultSort: queryGainers.sort,
 								controls: {
@@ -65,7 +65,9 @@ export default function PreMarket(props: Props) {
 									export: true,
 									columns: true
 								},
-								columnOptions: MoverDataPoints
+								columnOptions: MoverDataPoints,
+								columnOrder: queryGainers.columns,
+								fixedColumns: ['rank', 's', 'premarketChangePercent']
 							},
 							dynamic: queryGainers
 						}}
@@ -75,7 +77,7 @@ export default function PreMarket(props: Props) {
 					<TableContextProvider
 						value={{
 							title: 'Premarket Losers',
-							tableId: 'premarket-index-losers',
+							tableId: 'premarket-index-losers-v2',
 							fixed: {
 								defaultSort: queryLosers.sort,
 								controls: {
@@ -83,7 +85,9 @@ export default function PreMarket(props: Props) {
 									export: true,
 									columns: true
 								},
-								columnOptions: MoverDataPoints
+								columnOptions: MoverDataPoints,
+								columnOrder: queryLosers.columns,
+								fixedColumns: ['rank', 's', 'premarketChangePercent']
 							},
 							dynamic: queryLosers
 						}}

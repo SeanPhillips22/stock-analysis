@@ -27,7 +27,7 @@ const query: TableDynamic = {
 	sort: [{ id: 'change', desc: true }],
 	sortDirection: 'desc',
 	columns: ['rank', 's', 'n', 'change', 'price', 'volume', 'marketCap'],
-	filters: ['price-over-1', 'change-over-2', 'volume-over-10000'],
+	filters: ['price-over-1', 'change-over-0', 'volume-over-10000'],
 	page: 1
 }
 
@@ -44,7 +44,7 @@ export default function GainersPage({ data, tradingTimestamps, resultsCount }: P
 				<TableContextProvider
 					value={{
 						title: 'Gainers Today',
-						tableId: 'gainers',
+						tableId: 'gainers-v2',
 						// description:
 						// 	'The stocks with the highest percentage gain today, updated every five minutes. Includes stocks traded on the NASDAQ and NYSE, with stock price over $1, price change over 2% and trading volume over 10,000.',
 						fixed: {
@@ -57,7 +57,6 @@ export default function GainersPage({ data, tradingTimestamps, resultsCount }: P
 							pagination: true,
 							resultsCount,
 							columnOptions: MoverDataPoints,
-							includeColumns: ['rank'],
 							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
 							columnOrder: query.columns,
 							fixedColumns: ['rank', 's', 'change']

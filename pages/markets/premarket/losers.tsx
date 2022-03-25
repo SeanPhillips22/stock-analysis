@@ -24,23 +24,25 @@ const query: TableDynamic = {
 	count: 20,
 	sort: [{ id: 'premarketChangePercent', desc: true }],
 	sortDirection: 'asc',
-	columns: ['s', 'n', 'premarketChange', 'premarketPrice', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1', 'volume-over-1000']
+	columns: ['rank', 's', 'n', 'premarketChangePercent', 'premarketChange', 'premarketPrice', 'marketCap'],
+	filters: ['price-over-1', 'close-over-1', 'volume-over-1000'],
+	page: 1
 }
 
 type Props = {
 	data: any[]
 	tradingTimestamps: TableTimestamp
+	resultsCount: number
 }
 
-export default function PreMarket({ data, tradingTimestamps }: Props) {
+export default function PreMarket({ data, tradingTimestamps, resultsCount }: Props) {
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={PremarketNav}>
 				<TableContextProvider
 					value={{
 						title: 'Premarket Losers',
-						tableId: 'premarket-losers',
+						tableId: 'premarket-losers-v2',
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
@@ -48,7 +50,11 @@ export default function PreMarket({ data, tradingTimestamps }: Props) {
 								export: true,
 								columns: true
 							},
-							columnOptions: MoverDataPoints
+							pagination: true,
+							resultsCount,
+							columnOptions: MoverDataPoints,
+							columnOrder: query.columns,
+							fixedColumns: ['rank', 's', 'premarketChangePercent']
 						},
 						dynamic: query
 					}}
