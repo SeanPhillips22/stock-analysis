@@ -29,7 +29,7 @@ export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[
 		keepPreviousData: true
 	})
 
-	const fetching = isFetching && page && page !== 1
+	const fetching = isFetching && page && page !== 1 ? true : false
 
 	return {
 		data,
