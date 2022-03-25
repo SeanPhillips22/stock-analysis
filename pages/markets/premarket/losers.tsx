@@ -25,7 +25,7 @@ const query: TableDynamic = {
 	sort: [{ id: 'premarketChangePercent', desc: true }],
 	sortDirection: 'asc',
 	columns: ['rank', 's', 'n', 'premarketChangePercent', 'premarketChange', 'premarketPrice', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1', 'volume-over-1000'],
+	filters: ['price-over-1', 'close-over-1'],
 	page: 1
 }
 
