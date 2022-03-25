@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next/types'
+import { GetStaticPaths, GetStaticProps } from 'next/types'
 import { StockLists } from 'data/StockLists'
 import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
@@ -41,15 +41,9 @@ export default function StockList({ listId, data, page, fixed, query }: Props) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
-	const listId = context?.params?.slug as string
-
-	// If list ID is not in StocksLists, return not found
-	if (!StockLists[listId]) {
-		return {
-			notFound: true
-		}
-	}
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	// This is the object key used to get data from StockLists.tsx
+	const listId = params?.slug as string
 
 	// Add the configs from StockLists to the props that are returned
 	// If undefined, add a default setting instead
@@ -62,9 +56,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	// Fetch the data
 	const data = await getSelect(query, false)
 
-	// Set the page cache to 10 minutes
-	context.res.setHeader('Cache-Control', 'public, max-age=0, s-max-age=600')
-
 	return {
 		props: {
 			listId,
@@ -72,6 +63,16 @@ export const getServerSideProps: GetServerSideProps = async context => {
 			page,
 			fixed,
 			query
-		}
+		},
+		revalidate: 3600 // Cache for 1 hour
+	}
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	const paths = Object.keys(StockLists).map(key => ({ params: { slug: key } }))
+
+	return {
+		paths,
+		fallback: false
 	}
 }

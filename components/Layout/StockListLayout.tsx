@@ -3,7 +3,7 @@ import { SEO } from 'components/SEO'
 import { usePageContext } from 'components/Markets/PageContext'
 import { Sidebar } from './Sidebar/_Sidebar'
 import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
-import { Related } from 'components/Other/Related'
+import { Related } from 'components/StockLists/Related'
 
 type Props = {
 	children: React.ReactNode
