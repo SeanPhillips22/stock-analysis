@@ -19,7 +19,7 @@ export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[
 		page
 	}
 
-	const { data } = useQuery([tableId, queryObject], async () => await getSelect(dynamic, false), {
+	const { data, isFetching } = useQuery([tableId, queryObject], async () => await getSelect(dynamic, false), {
 		placeholderData: _data,
 		enabled: enabled,
 		refetchOnWindowFocus: false,
@@ -30,6 +30,7 @@ export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[
 	})
 
 	return {
-		data
+		data,
+		isFetching
 	}
 }

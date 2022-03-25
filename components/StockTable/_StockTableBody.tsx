@@ -9,6 +9,7 @@ import { DataId } from 'types/DataId'
 import { formatTableCell } from 'functions/tables/formatTableCell'
 import { useTableContext } from './TableContext'
 import { Pagination } from './Pagination'
+import { cn } from 'functions/helpers/classNames'
 
 type Props = {
 	data: any[]
@@ -16,13 +17,14 @@ type Props = {
 		Header: string
 		accessor: DataId
 	}[]
+	isFetching: boolean
 	sortProps: SortProps
 	sort?: SortObject[]
 	columnOrder?: DataId[]
 	paginationOffset: number
 }
 
-export function StockTableBody({ data, columns, sortProps, sort, columnOrder, paginationOffset }: Props) {
+export function StockTableBody({ data, columns, isFetching, sortProps, sort, columnOrder, paginationOffset }: Props) {
 	const { fixed, tableId } = useTableContext()
 	const [search, setSearch] = useState('')
 	const { updateSort } = useSort(sortProps)
@@ -53,7 +55,7 @@ export function StockTableBody({ data, columns, sortProps, sort, columnOrder, pa
 					}}
 				/>
 			</div>
-			<div className="overflow-x-auto">
+			<div className={cn('overflow-x-auto', isFetching ? 'opacity-50' : '')}>
 				<table className="symbol-table stock-table" id={tableId}>
 					<thead>
 						{headerGroups.map((headerGroup, index) => (

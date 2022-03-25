@@ -4,7 +4,7 @@ import { PageConfig } from 'types/PageConfig'
 type StockList = {
 	[key: string]: {
 		page: PageConfig
-		fixed: TableFixed
+		fixed?: TableFixed
 		query: TableDynamic
 	}
 }
@@ -19,9 +19,6 @@ export const StockLists: StockList = {
 			pageTitle: 'Biggest Companies by Market Cap',
 			tableTitleObject: 'Companies',
 			headingType: 'div'
-		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'allstocks',
@@ -43,9 +40,6 @@ export const StockLists: StockList = {
 			pageTitle: 'Top-Rated Dividend Stocks',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
-		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'stocks',
@@ -69,9 +63,6 @@ export const StockLists: StockList = {
 			pageTitle: 'Stocks That Pay Monthly Dividends',
 			tableTitleObject: 'Monthly Payers',
 			headingType: 'div'
-		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'stocks',
@@ -158,9 +149,6 @@ export const StockLists: StockList = {
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
-		},
 		query: {
 			index: 'allstocks',
 			main: 'marketCap',
@@ -178,9 +166,6 @@ export const StockLists: StockList = {
 			pageTitle: 'Biggest Pharmaceutical Stocks by Market Cap',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
-		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'allstocks',
@@ -201,9 +186,6 @@ export const StockLists: StockList = {
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
-		},
 		query: {
 			index: 'allstocks',
 			main: 'marketCap',
@@ -221,9 +203,6 @@ export const StockLists: StockList = {
 			pageTitle: 'Biggest Biotech Stocks by Market Cap',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
-		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'allstocks',
@@ -243,9 +222,6 @@ export const StockLists: StockList = {
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
-		},
 		query: {
 			index: 'allstocks',
 			main: 'marketCap',
@@ -263,9 +239,6 @@ export const StockLists: StockList = {
 			pageTitle: 'Biggest Social Media Stocks by Market Cap',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
-		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'allstocks',
@@ -293,9 +266,6 @@ export const StockLists: StockList = {
 				{ name: 'Online Gambling', url: '/list/online-gambling' }
 			]
 		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
-		},
 		query: {
 			index: 'allstocks',
 			main: 'marketCap',
@@ -313,9 +283,6 @@ export const StockLists: StockList = {
 			pageTitle: 'Biggest E-Sports Stocks',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
-		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'allstocks',
@@ -335,9 +302,6 @@ export const StockLists: StockList = {
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
 		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
-		},
 		query: {
 			index: 'allstocks',
 			main: 'marketCap',
@@ -355,9 +319,6 @@ export const StockLists: StockList = {
 			pageTitle: 'Biggest Mobile Game Stocks',
 			tableTitleObject: 'Stocks',
 			headingType: 'div'
-		},
-		fixed: {
-			defaultSort: [{ id: 'marketCap', desc: true }]
 		},
 		query: {
 			index: 'allstocks',

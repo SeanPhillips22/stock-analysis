@@ -52,8 +52,11 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	}
 
 	// Add the configs from StockLists to the props that are returned
+	// If undefined, add a default setting instead
 	const page = StockLists[listId].page
-	const fixed = StockLists[listId].fixed
+	const fixed = StockLists[listId]?.fixed || {
+		defaultSort: [{ id: 'marketCap', desc: true }]
+	}
 	const query = StockLists[listId].query
 
 	// Fetch the data

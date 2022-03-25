@@ -55,6 +55,7 @@ export function StockTable({ _data }: { _data: any[] }) {
 		<StockTableBody
 			data={data}
 			columns={columns}
+			isFetching={query.isFetching}
 			sortProps={sortProps}
 			sort={sort}
 			columnOrder={columnOrder}
