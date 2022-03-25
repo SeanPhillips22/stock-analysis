@@ -20,7 +20,7 @@ export default function StockList({ listId, data, page, fixed, query }: Props) {
 	return (
 		<>
 			<PageContextProvider value={{ page, count: data.data.length }}>
-				<StockListLayout>
+				<StockListLayout key={page.path}>
 					<TableContextProvider
 						value={{
 							title: page.tableTitle,

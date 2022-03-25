@@ -9,4 +9,6 @@ export type PageConfig = {
 	pageDescription?: string
 	headingType?: 'h1' | 'div' // Set the table heading as h1
 	noindex?: boolean
+	relatedETFs?: string[]
+	relatedLists?: { name: string; url: string }[]
 }

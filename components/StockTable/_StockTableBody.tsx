@@ -9,7 +9,6 @@ import { DataId } from 'types/DataId'
 import { formatTableCell } from 'functions/tables/formatTableCell'
 import { useTableContext } from './TableContext'
 import { Pagination } from './Pagination'
-import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
 
 type Props = {
 	data: any[]
@@ -24,7 +23,7 @@ type Props = {
 }
 
 export function StockTableBody({ data, columns, sortProps, sort, columnOrder, paginationOffset }: Props) {
-	const { fixed, tableId, description } = useTableContext()
+	const { fixed, tableId } = useTableContext()
 	const [search, setSearch] = useState('')
 	const { updateSort } = useSort(sortProps)
 
@@ -44,7 +43,6 @@ export function StockTableBody({ data, columns, sortProps, sort, columnOrder, pa
 
 	return (
 		<div>
-			{description && <SmallInfoBox text={description} classes="mb-4 sm:mb-5" />}
 			<div className="mt-3 sm:mt-0">
 				<StockTableControls
 					filter={{

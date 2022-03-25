@@ -285,7 +285,13 @@ export const StockLists: StockList = {
 			tableTitleObject: 'Stocks',
 			headingType: 'div',
 			pageDescription:
-				'The biggest gaming company stocks, ranked by market cap. This list includes stocks of companies who get a significant percentage of their revenue from gaming or gaming-related products.'
+				'The biggest gaming company stocks, ranked by market cap. This list includes stocks of companies who get a significant percentage of their revenue from gaming or gaming-related products.',
+			relatedETFs: ['HERO', 'ESPO', 'NERD'],
+			relatedLists: [
+				{ name: 'Mobile Games', url: '/list/mobile-games/' },
+				{ name: 'E-Sports', url: '/list/esports/' },
+				{ name: 'Online Gambling', url: '/list/online-gambling' }
+			]
 		},
 		fixed: {
 			defaultSort: [{ id: 'marketCap', desc: true }]
@@ -298,6 +304,69 @@ export const StockLists: StockList = {
 			sortDirection: 'desc',
 			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
 			filters: ['tags-includes-gaming']
+		}
+	},
+	esports: {
+		page: {
+			path: '/list/esports/',
+			metaTitle: 'A List of E-Sports Stocks',
+			pageTitle: 'Biggest E-Sports Stocks',
+			tableTitleObject: 'Stocks',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			count: 100,
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['tags-includes-esports']
+		}
+	},
+	'online-gambling': {
+		page: {
+			path: '/list/online-gambling/',
+			metaTitle: 'A List of Online Gambling Stocks',
+			pageTitle: 'Biggest Online Gambling Stocks',
+			tableTitleObject: 'Stocks',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			count: 100,
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['tags-includes-online=gambling']
+		}
+	},
+	'mobile-games': {
+		page: {
+			path: '/list/mobile-games/',
+			metaTitle: 'A List of Mobile Game Stocks',
+			pageTitle: 'Biggest Mobile Game Stocks',
+			tableTitleObject: 'Stocks',
+			headingType: 'div'
+		},
+		fixed: {
+			defaultSort: [{ id: 'marketCap', desc: true }]
+		},
+		query: {
+			index: 'allstocks',
+			main: 'marketCap',
+			count: 100,
+			sort: [{ id: 'marketCap', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['tags-includes-mobile=games']
 		}
 	}
 }
