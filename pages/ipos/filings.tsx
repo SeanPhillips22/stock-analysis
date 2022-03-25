@@ -50,7 +50,7 @@ export default function IpoFilings(props: Props) {
 							<CalendarNavigation path={url} />
 							<TableContextProvider
 								value={{
-									tableId: 'ipo-filings',
+									tableId: 'ipo-filings-v2',
 									title: `${count} Filings`,
 									fixed: {
 										defaultSort: query.sort,

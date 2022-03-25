@@ -49,7 +49,7 @@ export default function IposWithdrawn(props: Props) {
 							<CalendarNavigation path={url} />
 							<TableContextProvider
 								value={{
-									tableId: 'ipos-withdrawn',
+									tableId: 'ipos-withdrawn-v2',
 									title: `${count} IPOs`,
 									fixed: {
 										defaultSort: query.sort,

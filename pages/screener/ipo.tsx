@@ -50,6 +50,7 @@ export default function IpoScreenerPage() {
 			url="/screener/ipo/"
 			title="IPO Screener: Search and Filter Upcoming IPOs"
 			description="An IPO screening tool to search, filter and compare all upcoming IPOs on the US stock market."
+			key="ipo-screener"
 		>
 			<ScreenerContextProvider
 				value={{

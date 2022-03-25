@@ -50,6 +50,7 @@ export default function ETFScreenerPage() {
 			url="/screener/etf/"
 			title="ETF Screener: Search and Filter ETFs"
 			description="An ETF screening tool to search, filter and compare all ETFs listed on the US stock market."
+			key="etf-screener"
 		>
 			<ScreenerContextProvider
 				value={{

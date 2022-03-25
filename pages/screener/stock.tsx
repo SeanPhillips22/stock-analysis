@@ -50,6 +50,7 @@ export default function StockScreenerPage() {
 			url="/screener/stock/"
 			title="Stock Screener: Filter and Analyze Stocks"
 			description="A free stock screening tool to search, filter and analyze stocks by almost 100 different indicators and metrics."
+			key="stock-screener"
 		>
 			<ScreenerContextProvider
 				value={{
