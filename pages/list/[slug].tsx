@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			etfData,
 			relatedLists
 		},
-		revalidate: 30 * 60
+		revalidate: 2 * 60
 	}
 }
 
