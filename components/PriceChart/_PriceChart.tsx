@@ -16,7 +16,7 @@ type Props = {
 }
 
 export function PriceChart({ info, initial }: Props) {
-	const [chartTime, setChartTime] = useState('1D')
+	const [chartTime, setChartTime] = useState(info.archived ? '1Y' : '1D')
 	const [message, setMessage] = useState('')
 	const [initialFetch, setInitialFetch] = useState(true)
 	const [spinner, setSpinner] = useState(false)

@@ -23,7 +23,7 @@ export function useChart(info: Info, time: string, initial: InitialData, initial
 			// initialData: initial.data,
 			// initialDataUpdatedAt: Date.now() - 60000, // expiration,
 			refetchOnWindowFocus: false,
-			enabled: info.state !== 'upcomingipo' && !info.archived,
+			enabled: info.state !== 'upcomingipo', // && !info.archived,
 			notifyOnChangeProps: 'tracked',
 			retry: false
 		}
