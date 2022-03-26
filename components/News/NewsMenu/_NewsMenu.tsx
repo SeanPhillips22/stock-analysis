@@ -16,6 +16,7 @@ type Props = {
 	searched: boolean
 	setSearched: (searched: boolean) => void
 	setEnd: (end: boolean) => void
+	setPaywalled: (paywalled: boolean) => void
 }
 
 export function NewsMenu({
@@ -31,7 +32,8 @@ export function NewsMenu({
 	setQuery,
 	searched,
 	setSearched,
-	setEnd
+	setEnd,
+	setPaywalled
 }: Props) {
 	return (
 		<div className="flex flex-row items-center justify-between border-b">
@@ -48,6 +50,7 @@ export function NewsMenu({
 				query={query}
 				setQuery={setQuery}
 				setEnd={setEnd}
+				setPaywalled={setPaywalled}
 			/>
 		</div>
 	)

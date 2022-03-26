@@ -115,6 +115,7 @@ export const NewsArea = ({ info, news, updated }: Props) => {
 					query={query}
 					setQuery={setQuery}
 					setEnd={setEnd}
+					setPaywalled={setPaywalled}
 				/>
 			</div>
 			{error && (

@@ -16,6 +16,7 @@ type Props = {
 	searched: boolean
 	setSearched: (searched: boolean) => void
 	setEnd: (end: boolean) => void
+	setPaywalled: (paywalled: boolean) => void
 }
 
 export function NewsMenuSearch({
@@ -27,12 +28,14 @@ export function NewsMenuSearch({
 	query,
 	setQuery,
 	setSearched,
-	setEnd
+	setEnd,
+	setPaywalled
 }: Props) {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [searching, setSearching] = useState(false) // If a search is in progress
 
 	async function doSearch() {
+		setPaywalled(false)
 		setSearched(false)
 		setSearching(true)
 		const keyref = inputRef.current ?? null
