@@ -240,7 +240,9 @@ export const StockLists: StockList = {
 			metaTitle: 'A List of Social Media Company Stocks by Market Cap',
 			pageTitle: 'Biggest Social Media Stocks by Market Cap',
 			tableTitleObject: 'Stocks',
-			headingType: 'div'
+			headingType: 'div',
+			pageDescription:
+				'This list includes stocks of companies who own social networks or have a significant percentage of their operations involved with social media.'
 		},
 		query: {
 			index: 'allstocks',
@@ -249,6 +251,15 @@ export const StockLists: StockList = {
 			sort: [{ id: 'marketCap', desc: true }],
 			sortDirection: 'desc',
 			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['tags-includes-social=media']
+		},
+		etfQuery: {
+			index: 'etf',
+			main: 'aum',
+			count: 100,
+			sort: [{ id: 'aum', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'holdings', 'aum'],
 			filters: ['tags-includes-social=media']
 		}
 	},
