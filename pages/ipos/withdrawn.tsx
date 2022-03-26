@@ -99,6 +99,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	return {
 		props: response,
-		revalidate: 1800
+		revalidate: 30 * 60
 	}
 }

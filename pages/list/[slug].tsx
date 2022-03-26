@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			etfData,
 			relatedLists
 		},
-		revalidate: 3600 // Cache for 1 hour
+		revalidate: 30 * 60
 	}
 }
 

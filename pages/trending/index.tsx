@@ -75,7 +75,10 @@ export default function Trending(props: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['getTrendingTimestamp']
-	const response = await getSelect(query, true, extras)
+	const response = await getSelect(query, false, extras)
 
-	return response
+	return {
+		props: response,
+		revalidate: 5 * 60
+	}
 }

@@ -136,7 +136,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			data: response.data,
 			...response
 		},
-		revalidate: year === '2022' ? 300 : 1800
+		revalidate: year === '2022' ? 5 * 60 : 30 * 60
 	}
 }
 

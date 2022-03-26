@@ -75,7 +75,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		props: {
 			year,
 			data
-		}
+		},
+		revalidate: year == '2022' ? 2 * 60 * 60 : 7 * 24 * 60 * 60
 	}
 }
 

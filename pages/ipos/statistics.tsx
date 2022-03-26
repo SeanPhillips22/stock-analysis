@@ -130,6 +130,6 @@ export const getStaticProps: GetStaticProps = async () => {
 			news,
 			recent
 		},
-		revalidate: 1800
+		revalidate: 30 * 60
 	}
 }

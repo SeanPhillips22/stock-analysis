@@ -76,6 +76,6 @@ export const getStaticProps: GetStaticProps = async () => {
 	const data = await getSelect(query, false, extras)
 	return {
 		props: data,
-		revalidate: 120
+		revalidate: 2 * 60
 	}
 }
