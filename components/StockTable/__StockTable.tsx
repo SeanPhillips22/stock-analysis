@@ -56,6 +56,7 @@ export function StockTable({ _data }: { _data: any[] }) {
 			data={data}
 			columns={columns}
 			isFetching={query.isFetching}
+			type={dynamic.index === 'etf' ? 'etf' : 'stocks'}
 			sortProps={sortProps}
 			sort={sort}
 			columnOrder={columnOrder}

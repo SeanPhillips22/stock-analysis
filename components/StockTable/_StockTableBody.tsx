@@ -18,13 +18,23 @@ type Props = {
 		accessor: DataId
 	}[]
 	isFetching: boolean
+	type: 'etf' | 'stocks'
 	sortProps: SortProps
 	sort?: SortObject[]
 	columnOrder?: DataId[]
 	paginationOffset: number
 }
 
-export function StockTableBody({ data, columns, isFetching, sortProps, sort, columnOrder, paginationOffset }: Props) {
+export function StockTableBody({
+	data,
+	columns,
+	isFetching,
+	type,
+	sortProps,
+	sort,
+	columnOrder,
+	paginationOffset
+}: Props) {
 	const { fixed, tableId } = useTableContext()
 	const [search, setSearch] = useState('')
 	const { updateSort } = useSort(sortProps)
@@ -89,9 +99,7 @@ export function StockTableBody({ data, columns, isFetching, sortProps, sort, col
 
 										return (
 											<td key={uniqueKey} className={css}>
-												{id === 'rank'
-													? i + 1 + paginationOffset
-													: formatTableCell(format, value, 'stocks')}
+												{id === 'rank' ? i + 1 + paginationOffset : formatTableCell(format, value, type)}
 											</td>
 										)
 									})}

@@ -60,6 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
 			data,
 			upcoming,
 			recent
-		}
+		},
+		revalidate: 300
 	}
 }

@@ -125,13 +125,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	ssrQuery.filters = ['ipoDate-year-' + year]
 
 	// Fetch the data
-	const response = await getSelect(ssrQuery, true, extras)
-	response.props.year = year
-	response.props.info = response.props[extraFn]
-	delete response.props[extraFn]
+	const response = await getSelect(ssrQuery, false, extras)
+	response.year = year
+	response.info = response[extraFn]
+	delete response[extraFn]
 
 	// Return the data to the page
-	return response
+	return {
+		props: {
+			data: response.data,
+			...response
+		},
+		revalidate: year === '2022' ? 300 : 1800
+	}
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

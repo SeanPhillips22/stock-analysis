@@ -101,7 +101,10 @@ export default function RecentIpos(props: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['getIpoCalendarDataMin', 'getIpoNewsMin']
-	const response = await getSelect(query, true, extras)
+	const response = await getSelect(query, false, extras)
 
-	return response
+	return {
+		props: response,
+		revalidate: 300
+	}
 }
