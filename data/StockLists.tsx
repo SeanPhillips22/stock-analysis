@@ -259,7 +259,7 @@ export const StockLists: StockList = {
 			count: 100,
 			sort: [{ id: 'aum', desc: true }],
 			sortDirection: 'desc',
-			columns: ['rank', 's', 'n', 'price', 'change', 'holdings', 'aum'],
+			columns: ['rank', 's', 'n', 'price', 'change', 'aum'],
 			filters: ['tags-includes-social=media']
 		}
 	},
@@ -304,7 +304,9 @@ export const StockLists: StockList = {
 			metaTitle: 'A List of E-Sports Stocks',
 			pageTitle: 'Biggest E-Sports Stocks',
 			tableTitleObject: 'Stocks',
-			headingType: 'div'
+			headingType: 'div',
+			pageDescription:
+				'E-Sports stands for "Electronic Sports." It is a term for competition in video games, often over the internet but also via in-person events. Below is a list of stocks of companies involved in e-sports.'
 		},
 		query: {
 			index: 'allstocks',
@@ -313,6 +315,15 @@ export const StockLists: StockList = {
 			sort: [{ id: 'marketCap', desc: true }],
 			sortDirection: 'desc',
 			columns: ['rank', 's', 'n', 'price', 'change', 'marketCap'],
+			filters: ['tags-includes-esports']
+		},
+		etfQuery: {
+			index: 'etf',
+			main: 'aum',
+			count: 100,
+			sort: [{ id: 'aum', desc: true }],
+			sortDirection: 'desc',
+			columns: ['rank', 's', 'n', 'price', 'change', 'aum'],
 			filters: ['tags-includes-esports']
 		}
 	},
