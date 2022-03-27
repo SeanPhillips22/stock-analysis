@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next/types'
-import { StockLists } from 'data/StockLists'
+import { getStockList, StockLists } from 'data/StockLists'
 import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { StockTable } from 'components/StockTable/__StockTable'
@@ -75,19 +75,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	// This is the object key used to get data from StockLists.tsx
 	const listId = params?.slug as string
 
-	// Add the configs from StockLists to the props that are returned
-	// If undefined, add a default setting instead
-	const page = StockLists[listId].page
-	const fixed = StockLists[listId]?.fixed || {
-		defaultSort: [{ id: 'marketCap', desc: true }]
+	// Get the stock list object
+	// If the list doesn't exist, return a 404
+	const list = getStockList(listId)
+	if (!list) {
+		return {
+			notFound: true
+		}
 	}
-	const relatedLists = StockLists[listId].relatedLists || null
+
+	// Add the configs from StockLists to the props that are returned
+	const page = list.page
+	const fixed = list.fixed
+	const relatedLists = list.relatedLists || null
 
 	// Get the main query config
-	const query = StockLists[listId].query
+	const query = list.query
 
 	// Get the ETF query config
-	const etfQuery = StockLists[listId].etfQuery || null
+	const etfQuery = list.etfQuery || null
 
 	// Fetch the data
 	let data

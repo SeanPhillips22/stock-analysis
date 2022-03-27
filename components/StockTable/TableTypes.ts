@@ -44,7 +44,7 @@ export type TableDynamic = {
 
 	main: DataId // The main column to sort by
 
-	count?: number // The number of symbols to show -- if empty, show all
+	count?: number | null // The number of symbols to show -- if empty, show all
 
 	sort?: SortObject[] // What is currently sorted by
 	sortDirection: 'desc' | 'asc' // The sort order

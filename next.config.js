@@ -84,6 +84,11 @@ module.exports = {
 				source: '/list/biggest-car-companies/',
 				destination: '/list/car-company-stocks/',
 				permanent: true
+			},
+			{
+				source: '/list/biggest-companies/',
+				destination: '/list/biggest-us-companies/',
+				permanent: true
 			}
 		]
 	},
