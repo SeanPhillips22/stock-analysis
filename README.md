@@ -20,7 +20,7 @@ The site is running on React/NextJS and is written in Javascript and Typescript.
 
 ## How to contribute
 
-Anyone is welcome to contribute to this project.
+Anyone is welcome to contribute to this project. It's best if you [join us on our Discord](https://discord.gg/b5Gu9CSBPU) to discuss ideas and get help.
 
 If you help drive significant improvements to the site, then you will get a free Stock Analysis Pro account as long as you remain an active contributor. Send an email to kris@stockanalysis.com for more info about that.
 

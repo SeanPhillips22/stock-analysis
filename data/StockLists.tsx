@@ -192,9 +192,11 @@ export const StockLists: StockListConfig = {
 	},
 	'car-company-stocks': {
 		page: {
-			metaTitle: 'Car Company Stocks, Ranked by Market Cap',
-			metaDescription: 'A list of the car company and automaker stocks, ranked by market capitalization.',
-			pageDescription: 'This is a list of car company and automaker stocks, ranked by market capitalization.',
+			metaTitle: 'A List of Car Company Stocks, Ranked by Market Cap',
+			metaDescription:
+				"A list of the world's biggest car company and automaker stocks, ranked by market capitalization.",
+			pageDescription:
+				'This is a list of the biggest car company and automaker stocks, ranked by market capitalization.',
 			pageTitle: 'Biggest Car Company Stocks'
 		},
 		query: {
