@@ -192,12 +192,13 @@ export const StockLists: StockListConfig = {
 	},
 	'car-company-stocks': {
 		page: {
-			metaTitle: 'List of Car Company Stocks by Market Cap',
-			metaDescription: 'A list of the biggest car company and automaker stocks, ranked by market cap.',
+			metaTitle: 'Car Company Stocks, Ranked by Market Cap',
+			metaDescription: 'A list of the car company and automaker stocks, ranked by market capitalization.',
+			pageDescription: 'This is a list of car company and automaker stocks, ranked by market capitalization.',
 			pageTitle: 'Biggest Car Company Stocks'
 		},
 		query: {
-			filters: ['industry-isin-automobiles|auto%manufacturers']
+			filters: ['tags-includes-car=company']
 		}
 	},
 	'pharmaceutical-stocks': {
