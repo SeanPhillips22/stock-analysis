@@ -35,6 +35,7 @@ export function getStockList(id: string) {
 		metaTitle: list.page.metaTitle,
 		metaDescription: list.page.metaDescription || null,
 		pageDescription: list.page.pageDescription || null,
+		disclaimer: list.page.disclaimer || null,
 		pageTitle: list.page.pageTitle || list.page.metaTitle,
 		tableTitleObject: list.page.tableTitleObject || ' Stocks',
 		headingType: 'div',
@@ -193,10 +194,11 @@ export const StockLists: StockListConfig = {
 	'car-company-stocks': {
 		page: {
 			metaTitle: 'A List of Car Company Stocks, Ranked by Market Cap',
-			metaDescription:
-				"A list of the world's biggest car company and automaker stocks, ranked by market capitalization.",
+			metaDescription: 'A list of the biggest car company and automaker stocks, ranked by market capitalization.',
 			pageDescription:
 				'This is a list of the biggest car company and automaker stocks, ranked by market capitalization.',
+			disclaimer:
+				'Includes stocks from companies listed on the NASDAQ, NYSE and NYSE American in the United States, as well as several non-US stocks that can be traded over-the-counter. Market cap and stock price are updated hourly during regular trading hours.',
 			pageTitle: 'Biggest Car Company Stocks'
 		},
 		query: {

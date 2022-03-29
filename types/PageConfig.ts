@@ -7,6 +7,7 @@ export type PageConfig = {
 	active?: string
 	metaDescription?: string
 	pageDescription?: string
+	disclaimer?: string
 	headingType?: 'h1' | 'div' // Set the table heading as h1
 	noindex?: boolean
 	etfTitle?: string

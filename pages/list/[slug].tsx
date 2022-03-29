@@ -9,6 +9,7 @@ import { TableDynamic, TableFixed } from 'components/StockTable/TableTypes'
 import { StockListLayout } from 'components/Layout/StockListLayout'
 import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
 import { RelatedStockLists } from 'components/StockLists/RelatedStockLists'
+import { BottomDisclaimer } from 'components/StockLists/BottomDisclaimer'
 
 type Props = {
 	listId: string
@@ -44,6 +45,7 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 					>
 						<StockTable _data={data} />
 					</TableContextProvider>
+					{page.disclaimer && <BottomDisclaimer text={page.disclaimer} />}
 
 					<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
 						{/* If list is set to show ETFs */}
