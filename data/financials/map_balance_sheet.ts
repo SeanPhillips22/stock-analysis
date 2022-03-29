@@ -42,6 +42,12 @@ export const MAP_BALANCE_SHEET = [
 			'Inventory is the value of product that is available for sale, as well as the value of purchased raw materials for making goods that will be sold. It also includes goods that are currently being produced from raw materials.'
 	},
 	{
+		id: 'prepaid',
+		title: 'Prepaid Assets',
+		tooltip:
+			'Prepaid assets are expenses that have already been paid for, but have not yet used or become available to use. Examples include prepaid rent or insurance.'
+	},
+	{
 		id: 'othercurrent',
 		title: 'Other Current Assets',
 		tooltip: 'Other current assets includes all current assets that do not fit into any of the above categories.'
@@ -109,6 +115,11 @@ export const MAP_BALANCE_SHEET = [
 		title: 'Current Debt',
 		tooltip:
 			'Current debt is company debt that needs to be paid within one year. It also includes the portion of long-term debt that is due within a year.'
+	},
+	{
+		id: 'taxpayablec',
+		title: 'Income Taxes Payable',
+		tooltip: 'Income tax payable includes taxes that are owed to the government and must be paid within one year.'
 	},
 	{
 		id: 'otherliabilitiescurrent',

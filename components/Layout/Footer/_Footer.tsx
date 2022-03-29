@@ -8,8 +8,7 @@ const navigation = {
 	],
 	company: [
 		{ name: 'About', href: '/about/' },
-		{ name: 'Sitemap', href: '/sitemap/' },
-		{ name: 'APIs & Data', href: '/apis/' }
+		{ name: 'Sitemap', href: '/sitemap/' }
 	],
 	legal: [
 		{ name: 'Privacy Policy', href: '/privacy-policy/' },
