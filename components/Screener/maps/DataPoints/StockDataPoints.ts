@@ -78,6 +78,7 @@ export const StockDataPoints: FilterProps[] = [
 		id: 'price',
 		category: ['Popular', 'Valuation'],
 		filterType: 'numeric',
+		searchMatches: 'penny%stock',
 		options: [
 			{ name: 'Over 1000', value: 'over-1000' },
 			{ name: 'Over 500', value: 'over-500' },

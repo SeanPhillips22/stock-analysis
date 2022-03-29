@@ -10,6 +10,7 @@ import { StockListLayout } from 'components/Layout/StockListLayout'
 import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
 import { RelatedStockLists } from 'components/StockLists/RelatedStockLists'
 import { BottomDisclaimer } from 'components/StockLists/BottomDisclaimer'
+import { EtfDataPoints } from 'data/DataPointGroups/EtfDataPoints'
 
 type Props = {
 	listId: string
@@ -55,7 +56,8 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 									title: page.etfTitle || 'Related ETFs',
 									tableId: `${listId}-etf`,
 									fixed: {
-										defaultSort: [{ id: 'aum', desc: true }]
+										defaultSort: [{ id: 'aum', desc: true }],
+										columnOptions: EtfDataPoints
 									},
 									dynamic: etfQuery
 								}}
