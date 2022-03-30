@@ -322,6 +322,9 @@ export const StockLists: StockListConfig = {
 		query: {
 			filters: ['tags-includes-gambling']
 		},
+		etfQuery: {
+			filters: ['tags-includes-gambling']
+		},
 		relatedLists: [
 			{ name: 'Online Gambling', url: '/list/online-gambling/' },
 			{ name: 'Sports Betting', url: '/list/sports-betting/' },
@@ -334,6 +337,9 @@ export const StockLists: StockListConfig = {
 			pageTitle: 'Biggest Online Gambling Stocks'
 		},
 		query: {
+			filters: ['tags-includes-online=gambling']
+		},
+		etfQuery: {
 			filters: ['tags-includes-online=gambling']
 		},
 		relatedLists: [
@@ -349,6 +355,9 @@ export const StockLists: StockListConfig = {
 		query: {
 			filters: ['tags-includes-sports=betting']
 		},
+		etfQuery: {
+			filters: ['tags-includes-sports=betting']
+		},
 		relatedLists: [
 			{ name: 'Gambling', url: '/list/gambling/' },
 			{ name: 'Online Gambling', url: '/list/online-gambling/' }
@@ -360,7 +369,10 @@ export const StockLists: StockListConfig = {
 			pageTitle: 'Biggest Casino Stocks'
 		},
 		query: {
-			filters: ['tags-includes-gambling']
+			filters: ['tags-includes-casinos']
+		},
+		etfQuery: {
+			filters: ['tags-includes-casinos']
 		},
 		relatedLists: [{ name: 'Gambling', url: '/list/gambling/' }]
 	},
