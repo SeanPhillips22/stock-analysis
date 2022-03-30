@@ -198,7 +198,7 @@ export const StockLists: StockListConfig = {
 			pageDescription:
 				'This is a list of the biggest car company and automaker stocks, ranked by market capitalization.',
 			disclaimer:
-				'Includes stocks from companies listed on the NASDAQ, NYSE and NYSE American in the United States, as well as several non-US stocks that can be traded over-the-counter. Market cap and stock price are updated hourly during regular trading hours.',
+				'Includes stocks from companies listed on the NASDAQ, NYSE and NYSE American in the United States, as well as several non-US stocks that can be traded over-the-counter. Market cap and stock price are updated every five minutes during trading hours.',
 			pageTitle: 'Biggest Car Company Stocks'
 		},
 		query: {
@@ -213,17 +213,8 @@ export const StockLists: StockListConfig = {
 		},
 		query: {
 			filters: ['industry-is-pharmaceuticals']
-		}
-	},
-	'semiconductor-stocks': {
-		page: {
-			metaTitle: 'The Biggest Semiconductor Stocks by Market Cap',
-			metaDescription: 'A list of the biggest semiconductor and chip manufacturing stocks, ranked by market cap.',
-			pageTitle: 'Biggest Semiconductor Stocks'
 		},
-		query: {
-			filters: ['industry-contains-semiconductors']
-		}
+		relatedLists: [{ name: 'Biotech', url: '/list/biotech-stocks/' }]
 	},
 	'biotech-stocks': {
 		page: {
@@ -234,6 +225,17 @@ export const StockLists: StockListConfig = {
 		query: {
 			count: 100,
 			filters: ['industry-is-biotechnology']
+		},
+		relatedLists: [{ name: 'Parhamceuticals', url: '/list/pharmaceutical-stocks/' }]
+	},
+	'semiconductor-stocks': {
+		page: {
+			metaTitle: 'The Biggest Semiconductor Stocks by Market Cap',
+			metaDescription: 'A list of the biggest semiconductor and chip manufacturing stocks, ranked by market cap.',
+			pageTitle: 'Biggest Semiconductor Stocks'
+		},
+		query: {
+			filters: ['industry-contains-semiconductors']
 		}
 	},
 	'bank-stocks': {
@@ -258,8 +260,8 @@ export const StockLists: StockListConfig = {
 		},
 		etfQuery: {
 			filters: ['tags-includes-social=media']
-		} //,
-		// relatedLists: [{ name: 'Online Dating', url: '/list/online-dating/' }]
+		},
+		relatedLists: [{ name: 'Online Dating', url: '/list/online-dating/' }]
 	},
 	'gaming-stocks': {
 		page: {
@@ -293,16 +295,11 @@ export const StockLists: StockListConfig = {
 		},
 		etfQuery: {
 			filters: ['tags-includes-esports']
-		}
-	},
-	'online-gambling': {
-		page: {
-			metaTitle: 'A List of Online Gambling Stocks',
-			pageTitle: 'Biggest Online Gambling Stocks'
 		},
-		query: {
-			filters: ['tags-includes-online=gambling']
-		}
+		relatedLists: [
+			{ name: 'Gaming', url: '/list/gaming/' },
+			{ name: 'Mobile Games', url: '/list/mobile-games/' }
+		]
 	},
 	'mobile-games': {
 		page: {
@@ -311,17 +308,70 @@ export const StockLists: StockListConfig = {
 		},
 		query: {
 			filters: ['tags-includes-mobile=games']
-		}
+		},
+		relatedLists: [
+			{ name: 'Gaming', url: '/list/gaming/' },
+			{ name: 'E-Sports', url: '/list/esports/' }
+		]
+	},
+	gambling: {
+		page: {
+			metaTitle: 'A List of Gambling Stocks',
+			pageTitle: 'Biggest Gambling Stocks'
+		},
+		query: {
+			filters: ['tags-includes-gambling']
+		},
+		relatedLists: [
+			{ name: 'Online Gambling', url: '/list/online-gambling/' },
+			{ name: 'Sports Betting', url: '/list/sports-betting/' },
+			{ name: 'Casinos', url: '/list/casinos/' }
+		]
+	},
+	'online-gambling': {
+		page: {
+			metaTitle: 'A List of Online Gambling Stocks',
+			pageTitle: 'Biggest Online Gambling Stocks'
+		},
+		query: {
+			filters: ['tags-includes-online=gambling']
+		},
+		relatedLists: [
+			{ name: 'Gambling', url: '/list/gambling/' },
+			{ name: 'Sports Betting', url: '/list/sports-betting/' }
+		]
+	},
+	'sports-betting': {
+		page: {
+			metaTitle: 'A List of Sports Betting Stocks',
+			pageTitle: 'Biggest Sports Betting Stocks'
+		},
+		query: {
+			filters: ['tags-includes-sports=betting']
+		},
+		relatedLists: [
+			{ name: 'Gambling', url: '/list/gambling/' },
+			{ name: 'Online Gambling', url: '/list/online-gambling/' }
+		]
+	},
+	casinos: {
+		page: {
+			metaTitle: 'A List of Casino Stocks',
+			pageTitle: 'Biggest Casino Stocks'
+		},
+		query: {
+			filters: ['tags-includes-gambling']
+		},
+		relatedLists: [{ name: 'Gambling', url: '/list/gambling/' }]
+	},
+	'online-dating': {
+		page: {
+			metaTitle: 'A List of Online Dating Stocks',
+			pageTitle: 'Biggest Online Dating Stocks'
+		},
+		query: {
+			filters: ['tags-includes-online=dating']
+		},
+		relatedLists: [{ name: 'Social Media', url: '/list/social-media-stocks/' }]
 	}
-	// },
-	// 'online-dating': {
-	// 	page: {
-	// 		metaTitle: 'A List of Online Dating Stocks',
-	// 		pageTitle: 'Biggest Online Dating Stocks'
-	// 	},
-	// 	query: {
-	// 		filters: ['tags-includes-online=dating']
-	// 	},
-	// 	relatedLists: [{ name: 'Social Media', url: '/list/social-media-stocks/' }]
-	// }
 }

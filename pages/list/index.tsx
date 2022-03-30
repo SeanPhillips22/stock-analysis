@@ -50,9 +50,13 @@ export default function StockListPage() {
 						<ListItem url="/list/biotech-stocks/" title="Biotech" />
 						<ListItem url="/list/bank-stocks/" title="Banks" />
 						<ListItem url="/list/social-media-stocks/" title="Social Media" />
+						<ListItem url="/list/online-dating/" title="Online Dating" />
 						<ListItem url="/list/gaming-stocks/" title="Gaming" />
 						<ListItem url="/list/esports/" title="E-Sports" />
+						<ListItem url="/list/gambling/" title="Gambling" />
 						<ListItem url="/list/online-gambling/" title="Online Gambling" />
+						<ListItem url="/list/sports-betting/" title="Sports Betting" />
+						<ListItem url="/list/casinos/" title="Casinos" />
 						<ListItem url="/list/mobile-games/" title="Mobile Games" />
 					</ul>
 				</div>
