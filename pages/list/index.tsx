@@ -1,13 +1,16 @@
+import { GetStaticProps } from 'next'
 import { LayoutSidebar } from 'components/Layout/LayoutSidebar'
 import { SEO } from 'components/SEO'
+import { getData } from 'functions/apis/API'
 import Link from 'next/link'
 
-type Props = {
+type Item = {
 	url: string
 	title: string
+	category?: string
 }
 
-function ListItem({ url, title }: Props) {
+function ListItem({ url, title }: Item) {
 	return (
 		<li>
 			<Link href={url} prefetch={false}>
@@ -17,7 +20,7 @@ function ListItem({ url, title }: Props) {
 	)
 }
 
-export default function StockListPage() {
+export default function StockListPage({ data }: { data: any }) {
 	return (
 		<LayoutSidebar heading="Stock Lists" url="/list/">
 			<SEO
@@ -29,38 +32,36 @@ export default function StockListPage() {
 				<div>
 					<h2 className="hh3 mb-2">Popular Lists</h2>
 					<ul className="list-outside list-disc space-y-1 p-1 pl-6 md:columns-2">
-						<ListItem url="/list/biggest-us-companies/" title="Biggest U.S. Companies By Market Cap" />
-						<ListItem url="/list/highest-revenue/" title="U.S. Companies With The Most Revenue" />
-						<ListItem url="/list/most-employees/" title="U.S. Companies With The Most Employees" />
-						<ListItem url="/list/top-rated-dividend-stocks/" title="Top-Rated Dividend Stocks" />
-						<ListItem url="/list/monthly-dividend-stocks/" title="Stocks That Pay Monthly Dividends" />
-						{/* <ListItem
-							url="/list/oldest-companies/"
-							title="Oldest Companies"
-						/> */}
+						{data
+							.filter((f: Item) => f.category === 'popular')
+							.map((item: Item) => (
+								<ListItem key={item.url} url={`/list/${item.url}/`} title={item.title} />
+							))}
 					</ul>
 				</div>
 
 				<div>
 					<h2 className="hh3 mb-2">Stocks Ranked by Market Cap</h2>
 					<ul className="list-inside list-disc space-y-1 p-1 md:columns-2">
-						<ListItem url="/list/car-company-stocks/" title="Cars & Automakers" />
-						<ListItem url="/list/pharmaceutical-stocks/" title="Pharmaceuticals" />
-						<ListItem url="/list/semiconductor-stocks/" title="Semiconductors" />
-						<ListItem url="/list/biotech-stocks/" title="Biotech" />
-						<ListItem url="/list/bank-stocks/" title="Banks" />
-						<ListItem url="/list/social-media-stocks/" title="Social Media" />
-						<ListItem url="/list/online-dating/" title="Online Dating" />
-						<ListItem url="/list/gaming-stocks/" title="Gaming" />
-						<ListItem url="/list/esports/" title="E-Sports" />
-						<ListItem url="/list/gambling/" title="Gambling" />
-						<ListItem url="/list/online-gambling/" title="Online Gambling" />
-						<ListItem url="/list/sports-betting/" title="Sports Betting" />
-						<ListItem url="/list/casinos/" title="Casinos" />
-						<ListItem url="/list/mobile-games/" title="Mobile Games" />
+						{data
+							.filter((f: Item) => f.category === 'tag')
+							.map((item: Item) => (
+								<ListItem key={item.url} url={`/list/${item.url}/`} title={item.title} />
+							))}
 					</ul>
 				</div>
 			</div>
 		</LayoutSidebar>
 	)
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+	const data = await getData('stocklists?type=list')
+
+	return {
+		props: {
+			data
+		},
+		revalidate: 3600
+	}
 }

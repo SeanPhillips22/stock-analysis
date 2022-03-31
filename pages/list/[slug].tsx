@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from 'next/types'
-import { getStockList, StockLists } from 'data/StockLists'
 import { PageContextProvider } from 'components/Markets/PageContext'
 import { TableContextProvider } from 'components/StockTable/TableContext'
 import { StockTable } from 'components/StockTable/__StockTable'
@@ -11,6 +10,7 @@ import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
 import { RelatedStockLists } from 'components/StockLists/RelatedStockLists'
 import { BottomDisclaimer } from 'components/StockLists/BottomDisclaimer'
 import { EtfDataPoints } from 'data/DataPointGroups/EtfDataPoints'
+import { getData } from 'functions/apis/API'
 
 type Props = {
 	listId: string
@@ -36,7 +36,7 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 						value={{
 							title: page.tableTitle,
 							description: page.pageDescription,
-							tableId: listId,
+							tableId: `${listId}-v2`,
 							fixed: {
 								...fixed,
 								columnOrder: query.columns
@@ -54,7 +54,7 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 							<TableContextProvider
 								value={{
 									title: page.etfTitle || 'Related ETFs',
-									tableId: `${listId}-etf`,
+									tableId: `${listId}-etf-v2`,
 									fixed: {
 										defaultSort: [{ id: 'aum', desc: true }],
 										columnOptions: EtfDataPoints
@@ -76,35 +76,75 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	// This is the object key used to get data from StockLists.tsx
+	// This is the object key used to get data from the backend
 	const listId = params?.slug as string
 
 	// Get the stock list object
 	// If the list doesn't exist, return a 404
-	const list = getStockList(listId)
+	let list = await getData('stocklists?type=path&path=' + listId)
 	if (!list) {
 		return {
 			notFound: true
 		}
 	}
 
+	// Populate the data to generate the page
+	const main = list.main_data || 'marketCap'
+
 	// Add the configs from StockLists to the props that are returned
-	const page = list.page
-	const fixed = list.fixed
-	const relatedLists = list.relatedLists || null
+	const page = {
+		path: list.url_path ? `/list/${list.url_path}/` : `/list/${list.tag}/`,
+		metaTitle: list.seo_title,
+		metaDescription: list.seo_description || null,
+		pageDescription: list.page_description || null,
+		disclaimer: list.disclaimer || null,
+		pageTitle: list.page_title || list.seo_title,
+		tableTitleObject: ' Stocks',
+		headingType: 'div',
+		etfTitle: list.etf_title || null
+	}
+
+	const fixed = {
+		defaultSort: [{ id: main, desc: true }],
+		fixedColumns: ['rank', 's', main]
+	}
+
+	const relatedLists = list.related || null
 
 	// Get the main query config
-	const query = list.query
+	const query: TableDynamic = {
+		index: 'allstocks',
+		main: main,
+		count: list.results_count ?? null,
+		sort: [{ id: main, desc: list.sort_direction !== 'asc' }],
+		sortDirection: list.sort_direction || 'desc',
+		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change'],
+		filters: list.filters
+			? list.filters === 'null'
+				? null
+				: list.filters
+			: [`tags-includes-${list.tag.replace('-', '=')}`]
+	}
 
 	// Get the ETF query config
-	const etfQuery = list.etfQuery || null
+	const etfQuery: TableDynamic | null = list.etfs
+		? {
+				index: 'etf',
+				main: 'aum',
+				count: null,
+				sort: [{ id: 'aum', desc: true }],
+				sortDirection: 'desc',
+				columns: ['rank', 's', 'n', 'price', 'change', 'aum'],
+				filters: [`tags-includes-${list.tag.replace('-', '=')}`]
+		  }
+		: null
 
 	// Fetch the data
 	let data
 	let etfData
 	if (etfQuery) {
 		let res = await Promise.all([getSelect(query, false), getSelect(etfQuery)])
-		data = res[0]
+		data = res[0] || null
 		etfData = res[1]
 	} else {
 		data = await getSelect(query, false)
@@ -127,10 +167,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const paths = Object.keys(StockLists).map(key => ({ params: { slug: key } }))
-
 	return {
-		paths,
-		fallback: false
+		paths: [],
+		fallback: 'blocking'
 	}
 }
