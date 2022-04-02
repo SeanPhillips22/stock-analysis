@@ -56,6 +56,7 @@ export default function IpoYear(props: Props) {
 								<InfoBox text={props.info} />
 							</div>
 							<TableContextProvider
+								key={`ipos-${year}`}
 								value={{
 									tableId: 'ipos-' + year,
 									title: props.data.length + ' IPOs',
