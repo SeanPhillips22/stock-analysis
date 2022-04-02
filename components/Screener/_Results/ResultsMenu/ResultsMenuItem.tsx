@@ -1,13 +1,16 @@
 import { ColumnName } from 'components/Screener/screener.types'
 import { useModifyColumns } from 'components/Screener/functions/useModifyColumns'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { screenerState } from 'components/Screener/screener.state'
 
 type Props = {
 	name: ColumnName
 }
 
 export function ResultsMenuItem({ name }: Props) {
-	const { endpoint, state, dispatch } = useScreenerContext()
+	const { endpoint, state } = useScreenerContext()
+	const resultsMenu = screenerState(state => state.resultsMenu)
+	const setResultsMenu = screenerState(state => state.setResultsMenu)
 	const { fetchManyColumns } = useModifyColumns(endpoint)
 
 	// When hovering over a results tab, fetch the required columns
@@ -17,10 +20,10 @@ export function ResultsMenuItem({ name }: Props) {
 
 	// Change the active results menu
 	function setMenu(name: ColumnName) {
-		dispatch({ type: 'SET_RESULTS_MENU', value: name })
+		setResultsMenu(name)
 	}
 
-	if (state.resultsMenu === name) {
+	if (resultsMenu === name) {
 		return (
 			<li>
 				<span

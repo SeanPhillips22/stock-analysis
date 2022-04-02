@@ -4,6 +4,7 @@ import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { useState } from 'react'
 import { ClearColumns } from 'components/Dropdown/SelectColumns/ClearColumns'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { screenerState } from 'components/Screener/screener.state'
 
 /**
  * The custom columns dropdown. It contains a search filter and checkbox for each column.
@@ -11,22 +12,21 @@ import { useScreenerContext } from 'components/Screener/ScreenerContext'
  */
 export function ColumnDropdown() {
 	const { state, dispatch, initial } = useScreenerContext()
+	const resultsMenu = screenerState(state => state.resultsMenu)
 	const [search, setSearch] = useState('')
 
 	/**
 	 * If the columns have been changed, this function resets them to their initial values
 	 */
 	function resetColumns() {
-		dispatch({ type: 'SET_COLUMNS', value: initial.columns.all[state.resultsMenu] })
+		dispatch({ type: 'SET_COLUMNS', value: [resultsMenu, initial.columns.all[resultsMenu]] })
 	}
 
 	return (
 		<Dropdown title="Columns" classes="wide">
 			<ColumnSearch search={search} setSearch={setSearch} />
 			<ColumnItemWrap search={search} />
-			{state.columns.all[state.resultsMenu] !== initial.columns.all[state.resultsMenu] && (
-				<ClearColumns clear={resetColumns} />
-			)}
+			{state.columns.all[resultsMenu] !== initial.columns.all[resultsMenu] && <ClearColumns clear={resetColumns} />}
 		</Dropdown>
 	)
 }

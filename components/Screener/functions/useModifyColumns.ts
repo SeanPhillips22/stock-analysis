@@ -14,6 +14,7 @@ export function useModifyColumns(endpoint: ScreenerEndpoints) {
 	const addDataColumn = screenerState(state => state.addDataColumn)
 	const addFetching = screenerState(state => state.addFetching)
 	const removeFetching = screenerState(state => state.removeFetching)
+	const resultsMenu = screenerState(state => state.resultsMenu)
 
 	// Fetch a new data column
 	async function fetchColumn(id: DataId) {
@@ -42,7 +43,11 @@ export function useModifyColumns(endpoint: ScreenerEndpoints) {
 
 	// Toggle a column to either show or hide
 	function toggle(id: DataId) {
-		dispatch({ type: 'TOGGLE_COLUMN', value: id })
+		if (state.columns.all[resultsMenu].includes(id)) {
+			dispatch({ type: 'REMOVE_COLUMN', value: [resultsMenu, id] })
+		} else {
+			dispatch({ type: 'ADD_COLUMN', value: [resultsMenu, id] })
+		}
 		if (!isFetched(id)) {
 			fetchColumn(id)
 		}
@@ -50,7 +55,7 @@ export function useModifyColumns(endpoint: ScreenerEndpoints) {
 
 	// Check if a column is showing
 	function isShowing(id: DataId) {
-		return state.columns.all[state.resultsMenu].includes(id)
+		return state.columns.all[resultsMenu].includes(id)
 	}
 
 	return { fetchColumn, fetchManyColumns, isFetched, toggle, isShowing }

@@ -1,17 +1,17 @@
 import { screenerState } from 'components/Screener/screener.state'
 import { CloseInput } from 'components/CloseInput'
-import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 export function FilterSearch() {
-	const { state, dispatch } = useScreenerContext()
 	const search = screenerState(state => state.filterSearch)
 	const setSearch = screenerState(state => state.setFilterSearch)
+	const filtersShown = screenerState(state => state.filtersShown)
+	const setFiltersShown = screenerState(state => state.setFiltersShown)
 
-	const addMargin = state.filtersShowing ? ' mb-1' : ''
+	const addMargin = filtersShown ? ' mb-1' : ''
 
 	// Perform the search, and expand the filters menu if it's hidden
 	const performSearch = (query: string) => {
-		if (!state.filtersShowing) dispatch({ type: 'TOGGLE_FILTERS_SHOWING', value: null })
+		if (!filtersShown) setFiltersShown(true)
 		setSearch(query)
 	}
 

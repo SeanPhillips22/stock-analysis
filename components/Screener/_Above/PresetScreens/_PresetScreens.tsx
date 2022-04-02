@@ -5,15 +5,17 @@ import { Menu } from '@headlessui/react'
 import { cn } from 'functions/helpers/classNames'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
 import { FilterValue } from 'components/Screener/screener.types'
+import { screenerState } from 'components/Screener/screener.state'
 
 export function PresetScreens() {
 	const { endpoint, state, dispatch, presets, dataPoints } = useScreenerContext()
+	const setFilterMenu = screenerState(state => state.setFilterMenu)
 	const { clear } = useModifyFilters()
 	const { fetchColumn } = useModifyColumns(endpoint)
 
 	function renderPresetFilters(value: string) {
 		clear()
-		dispatch({ type: 'SET_FILTERS_MENU', value: 'Active' })
+		setFilterMenu('Active')
 		dispatch({ type: 'SET_ACTIVE_PRESET', value })
 		let addFilters: FilterValue[] = []
 		presets.map(item => {
@@ -55,7 +57,7 @@ export function PresetScreens() {
 			<Dropdown
 				title={state.activePreset || 'Select preset'}
 				menuClasses="grow"
-				btnClasses="justify-between text-sm font-normal"
+				btnClasses={cn('justify-between text-sm font-normal', state.activePreset ? 'bg-yellow-100' : '')}
 				icnClasses="text-gray-700"
 				classes="min-w-[150px] -right-2 xs:min-w-[160px] xs:right-0"
 			>

@@ -7,8 +7,10 @@ import { useScreenerContext } from 'components/Screener/ScreenerContext'
 export function FiltersList() {
 	const { state, dataPoints } = useScreenerContext()
 	const filterSearch = screenerState(state => state.filterSearch)
+	const filterMenu = screenerState(state => state.filterMenu)
+	const filtersShown = screenerState(state => state.filtersShown)
 
-	if (!state.filtersShowing) {
+	if (!filtersShown) {
 		return null
 	}
 
@@ -43,7 +45,7 @@ export function FiltersList() {
 		)
 	}
 
-	if (state.filtersMenu === 'Active') {
+	if (filterMenu === 'Active') {
 		const active = state.filters.map(f => f.id)
 
 		if (active.length === 0) {
@@ -71,7 +73,7 @@ export function FiltersList() {
 		<>
 			<div className={`pt-1 sm:grid sm:grid-cols-2 sm:gap-x-2.5 lg:grid-cols-3 xl:grid-cols-4`}>
 				{dataPoints.map(f => {
-					if (f.category?.includes(state.filtersMenu) || state.filtersMenu === 'All') {
+					if (f.category?.includes(filterMenu) || filterMenu === 'All') {
 						if (f.id !== 's' && f.id !== 'n' && !f.columnsOnly) {
 							return <FilterWrap f={f} key={f.id} />
 						}

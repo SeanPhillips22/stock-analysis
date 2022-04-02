@@ -33,14 +33,6 @@ type ProviderProps = {
 
 function reducer(state: ScreenerState, action: { type: string; value: any }) {
 	switch (action.type) {
-		case 'SET_RESULTS_MENU':
-			state.resultsMenu = action.value
-			break
-
-		case 'SET_FILTERS_MENU':
-			state.filtersMenu = action.value
-			break
-
 		case 'SET_FILTERS':
 			state.filters = action.value
 			state.filters.forEach(filter => state.columns.all.Filtered.push(filter.id))
@@ -52,10 +44,12 @@ function reducer(state: ScreenerState, action: { type: string; value: any }) {
 			if (!state.columns.all.Filtered.includes(action.value.id)) {
 				state.columns.all.Filtered.push(action.value.id)
 			}
+			if (state.activePreset) state.activePreset = ''
 			break
 
 		case 'REMOVE_FILTER':
 			state.filters = state.filters.filter(filter => filter.id !== action.value)
+			if (state.activePreset) state.activePreset = ''
 			break
 
 		case 'CLEAR_FILTERS':
@@ -65,18 +59,14 @@ function reducer(state: ScreenerState, action: { type: string; value: any }) {
 			state.sort.active = state.sort.default
 			break
 
-		case 'TOGGLE_FILTERS_SHOWING':
-			state.filtersShowing = !state.filtersShowing
+		case 'ADD_COLUMN':
+			state.columns.all[action.value[0]].push(action.value[1])
 			break
 
-		case 'TOGGLE_COLUMN':
-			if (state.columns.all[state.resultsMenu].includes(action.value)) {
-				state.columns.all[state.resultsMenu] = state.columns.all[state.resultsMenu].filter(
-					column => column !== action.value
-				)
-			} else {
-				state.columns.all[state.resultsMenu].push(action.value)
-			}
+		case 'REMOVE_COLUMN':
+			state.columns.all[action.value[0]] = state.columns.all[action.value[0]].filter(
+				column => column !== action.value[1]
+			)
 			break
 
 		case 'REMOVE_FILTERED_COLUMN':
@@ -84,7 +74,7 @@ function reducer(state: ScreenerState, action: { type: string; value: any }) {
 			break
 
 		case 'SET_COLUMNS':
-			state.columns.all[state.resultsMenu] = action.value
+			state.columns.all[action.value[0]] = action.value[1]
 			break
 
 		case 'SET_ACTIVE_PRESET':
@@ -111,6 +101,7 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 	const [state, dispatch] = usePersistedReducer(reducer, id, initial)
 	const loaded = screenerState(state => state.loaded)
 	const { fetchManyColumns } = useModifyColumns(endpoint)
+	const resultsMenu = screenerState(state => state.resultsMenu)
 
 	/**
 	 * Reset the entire state to its initial value
@@ -123,11 +114,7 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 	useEffect(() => {
 		if (loaded) {
 			let activeFilterIds = state.filters.map(f => f.id)
-			let columnsToFetch = [
-				...state.columns.all.Filtered,
-				...state.columns.all[state.resultsMenu],
-				...activeFilterIds
-			]
+			let columnsToFetch = [...state.columns.all.Filtered, ...state.columns.all[resultsMenu], ...activeFilterIds]
 			columnsToFetch = columnsToFetch.filter(i => !state.columns.default.includes(i))
 			fetchManyColumns(columnsToFetch)
 		}

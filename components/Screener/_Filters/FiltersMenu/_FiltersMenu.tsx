@@ -4,15 +4,17 @@ import { FilterSearch } from './FilterSearch'
 import { FiltersMenuActive } from './FiltersMenuActive'
 import { cn } from 'functions/helpers/classNames'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { screenerState } from 'components/Screener/screener.state'
 
 export function FiltersMenu() {
-	const { type, state } = useScreenerContext()
+	const { type } = useScreenerContext()
+	const filtersShown = screenerState(state => state.filtersShown)
 
 	return (
 		<>
 			<div
 				className={cn(
-					state.filtersShowing ? 'border-b border-gray-300' : '',
+					filtersShown ? 'border-b border-gray-300' : '',
 					'grid grid-cols-2 items-end justify-between overflow-x-auto whitespace-nowrap xl:flex'
 				)}
 			>
@@ -24,7 +26,7 @@ export function FiltersMenu() {
 				</div>
 				<div
 					className={cn(
-						state.filtersShowing ? 'block' : 'hidden xl:block',
+						filtersShown ? 'block' : 'hidden xl:block',
 						'col-span-2 border-t border-gray-200 pt-2 xl:order-2 xl:border-0 xl:pt-0'
 					)}
 				>

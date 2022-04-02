@@ -5,7 +5,8 @@ import {
 	SingleDataPoint,
 	VariableFilter,
 	FilterOption,
-	ScreenerTypes
+	ScreenerTypes,
+	ColumnName
 } from 'components/Screener/screener.types'
 import { mergeColumns } from 'components/Screener/functions/mergeColumns'
 
@@ -29,16 +30,22 @@ interface ScreenerState {
 	removeFetching: (newFetching: DataId) => void
 
 	// Filter menu
+	filterMenu: string
+	setFilterMenu: (newMenu: string) => void
 	openFilter: DataId | ''
 	setOpenFilter: (newFilter: DataId | '') => void
 	filterSearch: string
 	setFilterSearch: (newSearch: string) => void
+	filtersShown: boolean
+	setFiltersShown: (filtersShown: boolean) => void
 
 	// Search filter
 	searchFilter: string
 	setSearchFilter: (newSearch: string) => void
 
 	// Results
+	resultsMenu: ColumnName
+	setResultsMenu: (newMenu: ColumnName) => void
 	resultsCount: number
 	setResultsCount: (newCount: number) => void
 
@@ -90,8 +97,12 @@ export const screenerState = create<ScreenerState>(set => ({
 			...state,
 			fetching: state.fetching.filter(fetching => fetching !== newFetching)
 		})),
+	filtersShown: true,
+	setFiltersShown: (show: boolean) => set({ filtersShown: show }),
 
 	// Filter Menu
+	filterMenu: 'Active',
+	setFilterMenu: (newMenu: string) => set({ filterMenu: newMenu, filterSearch: '' }),
 	openFilter: '', // The filter menu that is open
 	setOpenFilter: (newFilter: DataId | '') => set({ openFilter: newFilter }),
 	filterSearch: '',
@@ -111,6 +122,10 @@ export const screenerState = create<ScreenerState>(set => ({
 	// Search filter
 	searchFilter: '',
 	setSearchFilter: (newSearch: string) => set({ searchFilter: newSearch }),
+
+	// Results
+	resultsMenu: 'General',
+	setResultsMenu: (newMenu: ColumnName) => set({ resultsMenu: newMenu }),
 
 	// Results count
 	resultsCount: 0,

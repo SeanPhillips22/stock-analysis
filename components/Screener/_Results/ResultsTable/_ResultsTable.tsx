@@ -20,6 +20,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 	const setResultsCount = screenerState(state => state.setResultsCount)
 	const searchFilter = screenerState(state => state.searchFilter)
 	const setFilterState = screenerState(state => state.setSearchFilter)
+	const resultsMenu = screenerState(state => state.resultsMenu)
 	const { updateSort } = useScreenerSort({
 		defaultSort: state.sort.default,
 		dispatch
@@ -56,7 +57,7 @@ export function ResultsTable({ cols }: { cols: any }) {
 				pageIndex: tablePage,
 				pageSize: tableSize,
 				hiddenColumns: columns
-					.filter((col: any) => !state.columns.all[state.resultsMenu].includes(col.accessor))
+					.filter((col: any) => !state.columns.all[resultsMenu].includes(col.accessor))
 					.map((col: any) => col.accessor),
 				sortBy: sortResultsBy
 			},

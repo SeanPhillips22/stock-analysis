@@ -4,6 +4,7 @@ import { ResultsTable } from './ResultsTable/_ResultsTable'
 import { formatCells } from 'functions/tables/formatCells'
 import { useScreenerContext } from '../ScreenerContext'
 import { FilterProps, ScreenerTypes } from '../screener.types'
+import { screenerState } from '../screener.state'
 
 function formatHeader(text: string) {
 	return <div className="ml-auto">{text}</div>
@@ -132,12 +133,11 @@ function formatColumns(type: ScreenerTypes, dataPoints: FilterProps[]) {
 
 export function Results() {
 	const { type, state, dataPoints } = useScreenerContext()
+	const resultsMenu = screenerState(state => state.resultsMenu)
 
 	const columns = formatColumns(type, dataPoints)
 
-	const displayColumns = columns.filter((column: any) =>
-		state.columns.all[state.resultsMenu].includes(column.accessor)
-	)
+	const displayColumns = columns.filter((column: any) => state.columns.all[resultsMenu].includes(column.accessor))
 
 	return <ResultsTable cols={displayColumns} />
 }

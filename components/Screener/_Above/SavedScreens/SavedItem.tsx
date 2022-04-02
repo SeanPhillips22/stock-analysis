@@ -4,6 +4,7 @@ import { useSavedScreens } from './useSavedScreens'
 import { ScreenerTypes } from 'components/Screener/screener.types'
 import { XIcon } from 'components/Icons/XIcon'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { screenerState } from 'components/Screener/screener.state'
 
 type Props = {
 	name: string
@@ -11,14 +12,15 @@ type Props = {
 }
 
 export function SavedItem({ name, type }: Props) {
-	const { endpoint, dispatch, dataPoints } = useScreenerContext()
+	const { endpoint, dataPoints } = useScreenerContext()
+	const setFilterMenu = screenerState(state => state.setFilterMenu)
 	const { data, del } = useSavedScreens(type)
 	const { add, clear } = useModifyFilters()
 	const { fetchColumn } = useModifyColumns(endpoint)
 
 	function renderPresetFilters(value: string) {
 		clear()
-		dispatch({ type: 'SET_FILTERS_MENU', value: 'Active' })
+		setFilterMenu('Active')
 
 		let screens = data.screeners[type]
 		Object.keys(screens).forEach(key => {
