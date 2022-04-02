@@ -4,6 +4,7 @@ import { useTableData } from './useTableData'
 import { StockTableBody } from './_StockTableBody'
 import { useTableContext } from './TableContext'
 import { TableTitle } from './Controls/TableTitle'
+import { transientState } from './transient.state'
 
 /**
  * A re-usable screener mechanism that can output a table of stocks with specific properties
@@ -12,6 +13,7 @@ import { TableTitle } from './Controls/TableTitle'
 export function StockTable({ _data }: { _data: any[] }) {
 	// Get the table contexts
 	const { tableId, fixed, dynamic, setState, enabled } = useTableContext()
+	const page = transientState(state => state.page)
 
 	// Get the props
 	const { defaultSort, columnOrder } = fixed
@@ -33,10 +35,10 @@ export function StockTable({ _data }: { _data: any[] }) {
 	// If paginated and the table shows a rank/no column, then calculate the pagination offset
 	const paginationOffset = useMemo(
 		() =>
-			fixed.pagination && _columns.includes('rank') && dynamic.count && dynamic.page
-				? dynamic.count * (dynamic.page - 1)
+			fixed.pagination && _columns.includes('rank') && dynamic.count && page[tableId]
+				? dynamic.count * (page[tableId] - 1)
 				: 0,
-		[_columns, dynamic.count, dynamic.page, fixed.pagination]
+		[fixed.pagination, _columns, dynamic.count, page, tableId]
 	)
 
 	// If there's no data, display a fallback with title and text

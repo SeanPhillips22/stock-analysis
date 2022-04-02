@@ -57,7 +57,7 @@ export type TableDynamic = {
 
 	showOnMobile?: boolean // Whether to show the controls on mobile
 
-	page?: number
+	page?: number // pagination can get appended to the object
 }
 
 // The stock index type (more specific is faster)

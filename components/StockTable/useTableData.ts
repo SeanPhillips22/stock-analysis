@@ -1,13 +1,15 @@
 import { getSelect } from 'functions/apis/getSelect'
 import { useQuery } from 'react-query'
 import { TableDynamic } from './TableTypes'
+import { transientState } from './transient.state'
 
 /**
  * Handle the data for the stock table via react-query
  */
 export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[], enabled?: boolean) {
 	// The params that  tell react-query when to update
-	const { main, count, columns, filters, sortDirection, index, page } = dynamic
+	const { main, count, columns, filters, sortDirection, index } = dynamic
+	const page = transientState(state => state.page)
 	const queryObject = {
 		main,
 		count,
@@ -16,12 +18,12 @@ export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[
 		sortDirection,
 		index,
 		tableId,
-		page
+		page: page[tableId]
 	}
 
-	const { data, isFetching } = useQuery([tableId, queryObject], async () => await getSelect(dynamic, false), {
+	const { data, isFetching } = useQuery([tableId, queryObject], async () => await getSelect(queryObject, false), {
 		placeholderData: _data,
-		enabled: enabled,
+		enabled: enabled || page[tableId] ? true : false,
 		refetchOnWindowFocus: false,
 		refetchOnMount: false,
 		staleTime: 60000,
@@ -29,7 +31,7 @@ export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[
 		keepPreviousData: true
 	})
 
-	const fetching = isFetching && page && page !== 1 ? true : false
+	const fetching = isFetching && page[tableId] && page[tableId] !== 1 ? true : false
 
 	return {
 		data,
