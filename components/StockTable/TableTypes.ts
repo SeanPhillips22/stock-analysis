@@ -30,6 +30,7 @@ export type TableFixed = {
 		type: ScreenerTypes
 		filters: FilterValue[]
 		sort?: SortObject[]
+		showResultsMenu?: boolean
 	}
 
 	// Fallback if no data is found

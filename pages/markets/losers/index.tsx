@@ -50,14 +50,30 @@ export default function LosersPage({ data, tradingTimestamps, resultsCount }: Pr
 							controls: {
 								results: true,
 								export: true,
-								columns: true
+								columns: true,
+								options: true
 							},
 							pagination: true,
 							resultsCount,
 							columnOptions: MoverDataPoints,
 							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
 							columnOrder: query.columns,
-							fixedColumns: ['rank', 's', 'change']
+							fixedColumns: ['rank', 's', 'change'],
+							screener: {
+								type: 'stocks',
+								filters: [
+									{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
+									{
+										id: 'change',
+										name: '',
+										value: `under-0`,
+										filterType: 'numeric',
+										numberType: 'percentage'
+									},
+									{ id: 'volume', name: '', value: `over-10K`, filterType: 'numeric' }
+								],
+								sort: [{ id: 'change', desc: true }]
+							}
 						},
 						dynamic: query
 					}}

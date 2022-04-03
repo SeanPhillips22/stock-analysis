@@ -49,14 +49,23 @@ export default function ActivePage({ data, tradingTimestamps, resultsCount }: Pr
 							controls: {
 								results: true,
 								export: true,
-								columns: true
+								columns: true,
+								options: true
 							},
 							pagination: true,
 							resultsCount,
 							columnOptions: MoverDataPoints,
 							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
 							columnOrder: query.columns,
-							fixedColumns: ['rank', 's', 'volume']
+							fixedColumns: ['rank', 's', 'volume'],
+							screener: {
+								type: 'stocks',
+								filters: [
+									{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
+									{ id: 'volume', name: '', value: `over-0`, filterType: 'numeric' }
+								],
+								sort: [{ id: 'volume', desc: false }]
+							}
 						},
 						dynamic: query
 					}}

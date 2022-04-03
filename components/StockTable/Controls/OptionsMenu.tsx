@@ -3,8 +3,10 @@ import { useRouter } from 'next/router'
 import { useTableContext } from '../TableContext'
 import { INITIAL_STOCK_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialStockScreenerState'
 import { ExportButtons } from 'components/Controls/Export/ExportButtons'
+import { screenerState } from '../../Screener/screener.state'
 
 export function OptionsMenu() {
+	const setResultsMenu = screenerState(state => state.setResultsMenu)
 	const { tableId, fixed, clearState } = useTableContext()
 	const router = useRouter()
 
@@ -24,9 +26,14 @@ export function OptionsMenu() {
 			// Add the sort to the screener settings
 			if (fixed.screener?.sort) screenerSettings.sort.active = fixed.screener.sort
 
+			// Set the results menu as active, if applicable
+			if (fixed.screener?.showResultsMenu) {
+				let filteredColumns = fixed.screener?.filters?.map(i => i.id)
+				screenerSettings.columns.all.Filtered = screenerSettings.columns.filtered.concat(filteredColumns)
+				setResultsMenu('Filtered')
+			}
+
 			// Set the default menu items
-			screenerSettings.filtersMenu = 'Active'
-			screenerSettings.resultsMenu = 'General'
 			delete screenerSettings.activePreset
 
 			// Save the new screener settings in localStorage
@@ -47,7 +54,7 @@ export function OptionsMenu() {
 			>
 				Open in Screener
 			</div>
-			<div className="block md:hidden">
+			<div className="block py-0.5 md:hidden">
 				<ExportButtons tableId={tableId} />
 			</div>
 			<div

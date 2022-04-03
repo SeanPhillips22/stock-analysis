@@ -74,14 +74,27 @@ export default function LosersPageRange({ data, query, rangePath, tradingTimesta
 							controls: {
 								results: true,
 								export: true,
-								columns: true
+								columns: true,
+								options: true
 							},
 							pagination: true,
 							resultsCount,
 							columnOptions: MoverDataPoints,
 							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
 							columnOrder: ['rank', 's', 'n', id, 'price', 'volume', 'marketCap'],
-							fixedColumns: ['rank', 's', id]
+							fixedColumns: ['rank', 's', id],
+							screener: {
+								type: 'stocks',
+								filters: [
+									{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
+									{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
+									{ id: 'volume', name: '', value: `over-10K`, filterType: 'numeric' },
+									{ id: 'marketCap', name: '', value: `over-10M`, filterType: 'numeric' },
+									{ id: id, name: '', value: `under-0`, filterType: 'numeric', numberType: 'percentage' }
+								],
+								sort: [{ id: id, desc: true }],
+								showResultsMenu: true
+							}
 						},
 						dynamic: query
 					}}
