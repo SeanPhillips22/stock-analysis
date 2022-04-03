@@ -27,10 +27,16 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 	const setOpenFilter = screenerState(state => state.setOpenFilter)
 	const { add } = useModifyFilters()
 
-	// Extract the filter values in order to populate the custom choice inputs
+	// Set the currently active filter
+	// This is the filter that is currently active inside the
+	// custom choice dropdown
 	useEffect(() => {
 		setActive(isFilterSelected(id, state.filters))
+	}, [id, state.filters])
 
+	// Extract the filter values in order to populate the custom choice inputs
+	// These are the values inside over/under, first, second
+	useEffect(() => {
 		if (active && openFilter === id) {
 			const filterObject = getFilterFromString(active, false)
 
@@ -52,14 +58,16 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 	}, [active, id, openFilter, state.filters])
 
 	// Update the filter if the values in the custom choice inputs change
+	// This useEffect responds to changes in the custom choice inputs
+	// and updates the state
 	useEffect(() => {
 		// If the values are valid, create a new filter string and update the filter
 		if (first || second || compare === 'notzero') {
 			const filterString = createFilterString({ compare, first, second })
 
 			if (filterString !== active) {
-				setActive(filterString)
 				add(id, name, filterString, filterType, numberType)
+				setActive(filterString)
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,7 +95,7 @@ export function CustomChoice({ filter }: { filter: FilterProps }): JSX.Element {
 				<div>
 					<SelectComparison compare={compare} setCompare={setCompare} />
 				</div>
-				<div className={compare !== 'notzero' ? 'flex' : 'hidden'}>
+				<div className={compare !== 'notzero' ? 'flex' : 'pointer-events-none opacity-40'}>
 					<input
 						type="text"
 						placeholder="Value"

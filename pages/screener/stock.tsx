@@ -7,21 +7,7 @@ import { initialStockColumns } from 'components/Screener/maps/columns'
 import { ScreenerContextProvider } from 'components/Screener/ScreenerContext'
 import { StockDataPoints } from 'components/Screener/maps/DataPoints/StockDataPoints'
 import { INITIAL_STOCK_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialStockScreenerState'
-import dynamic from 'next/dynamic'
-
-const Screener = dynamic(() => import('components/Screener/_Screener'), {
-	ssr: false,
-	loading: () => {
-		return (
-			<div className="contain py-5 xs:py-6">
-				<h1 className="hh1">Stock Screener</h1>
-				<div className="mt-6 flex h-[400px] items-center justify-center bg-gray-50 md:h-[800px]">
-					Loading screener...
-				</div>
-			</div>
-		)
-	}
-})
+import { Screener } from 'components/Screener/_Screener'
 
 export default function StockScreenerPage() {
 	const type = screenerState(state => state.type)
@@ -30,6 +16,8 @@ export default function StockScreenerPage() {
 	const setLoaded = screenerState(state => state.setLoaded)
 	const clearVarFilters = screenerState(state => state.clearVarFilters)
 	const setFetchedColumns = screenerState(state => state.setFetchedColumns)
+	const setFilterMenu = screenerState(state => state.setFilterMenu)
+	const setResultsMenu = screenerState(state => state.setResultsMenu)
 	const fetchFullData = useFetchFullData()
 
 	// Reset everything when switching between screeners
@@ -41,6 +29,8 @@ export default function StockScreenerPage() {
 			clearVarFilters()
 			fetchFullData('screener')
 			setFetchedColumns(initialStockColumns.General)
+			setFilterMenu('Active')
+			setResultsMenu('General')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type])
@@ -53,6 +43,7 @@ export default function StockScreenerPage() {
 			key="stock-screener"
 		>
 			<ScreenerContextProvider
+				key="stocks-screener"
 				value={{
 					id: 'stocks-screener',
 					endpoint: 'screener',

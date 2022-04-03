@@ -2,7 +2,6 @@ import { screenerState } from 'components/Screener/screener.state'
 import { DataId } from 'types/DataId'
 import { FilterType, NumberType } from '../screener.types'
 import { useScreenerContext } from '../ScreenerContext'
-import { isFilterSelected } from './isFilterSelected'
 
 /**
  * Hook to organize and simplify functions that modify the screener filters
@@ -15,12 +14,6 @@ export function useModifyFilters() {
 
 	// Add a filter
 	function add(id: DataId, name: string, value: string, filterType: FilterType, numberType?: NumberType) {
-		// If filter is already selected, remove the filter first
-		if (isFilterSelected(id, state.filters)) {
-			remove(id)
-		}
-
-		// Add the filter
 		dispatch({
 			type: 'ADD_FILTER',
 			value: {

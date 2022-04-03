@@ -13,7 +13,11 @@ export function FiltersMenuItem({ name }: Props) {
 	if (filterMenu === name) {
 		return (
 			<li>
-				<span className="active cursor-pointer" data-title={name} tabIndex={search.length > 0 ? -1 : 0}>
+				<span
+					className="active cursor-pointer border border-transparent"
+					data-title={name}
+					tabIndex={search.length > 0 ? -1 : 0}
+				>
 					{name}
 				</span>
 			</li>
@@ -23,7 +27,7 @@ export function FiltersMenuItem({ name }: Props) {
 	return (
 		<li>
 			<span
-				className="inactive focus:bg-gray-200 focus:outline-none"
+				className="inactive border border-transparent focus:outline-none"
 				data-title={name}
 				onClick={() => setFilterMenu(name)}
 				onKeyPress={e => e.key === 'Enter' && setFilterMenu(name)}

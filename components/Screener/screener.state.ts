@@ -102,7 +102,7 @@ export const screenerState = create<ScreenerState>(set => ({
 
 	// Filter Menu
 	filterMenu: 'Active',
-	setFilterMenu: (newMenu: string) => set({ filterMenu: newMenu, filterSearch: '' }),
+	setFilterMenu: (newMenu: string) => set({ filterMenu: newMenu, filterSearch: '', filtersShown: true }),
 	openFilter: '', // The filter menu that is open
 	setOpenFilter: (newFilter: DataId | '') => set({ openFilter: newFilter }),
 	filterSearch: '',

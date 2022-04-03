@@ -7,21 +7,7 @@ import { initialIpoColumns } from 'components/Screener/maps/columns'
 import { ScreenerContextProvider } from 'components/Screener/ScreenerContext'
 import { IpoDataPoints } from 'components/Screener/maps/DataPoints/IpoDataPoints'
 import { INITIAL_IPO_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialIpoScreenerState'
-import dynamic from 'next/dynamic'
-
-const Screener = dynamic(() => import('components/Screener/_Screener'), {
-	ssr: false,
-	loading: () => {
-		return (
-			<div className="contain py-5 xs:py-6">
-				<h1 className="hh1">IPO Screener</h1>
-				<div className="mt-6 flex h-[400px] items-center justify-center bg-gray-50 md:h-[800px]">
-					Loading screener...
-				</div>
-			</div>
-		)
-	}
-})
+import { Screener } from 'components/Screener/_Screener'
 
 export default function IpoScreenerPage() {
 	const type = screenerState(state => state.type)
@@ -30,6 +16,8 @@ export default function IpoScreenerPage() {
 	const setLoaded = screenerState(state => state.setLoaded)
 	const clearVarFilters = screenerState(state => state.clearVarFilters)
 	const setFetchedColumns = screenerState(state => state.setFetchedColumns)
+	const setFilterMenu = screenerState(state => state.setFilterMenu)
+	const setResultsMenu = screenerState(state => state.setResultsMenu)
 	const fetchFullData = useFetchFullData()
 
 	// Reset everything when switching between screeners
@@ -41,6 +29,8 @@ export default function IpoScreenerPage() {
 			setData([])
 			fetchFullData('iposcreener')
 			setFetchedColumns(initialIpoColumns.General)
+			setFilterMenu('Active')
+			setResultsMenu('General')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [type])
@@ -53,6 +43,7 @@ export default function IpoScreenerPage() {
 			key="ipo-screener"
 		>
 			<ScreenerContextProvider
+				key="ipo-screener"
 				value={{
 					id: 'ipo-screener',
 					endpoint: 'iposcreener',

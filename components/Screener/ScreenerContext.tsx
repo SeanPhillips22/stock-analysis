@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { FilterProps, ScreenerEndpoints, ScreenerIDs, ScreenerState, ScreenerTypes } from './screener.types'
 import { usePersistedReducer } from 'hooks/usePersistedReducer'
 import { useModifyColumns } from './functions/useModifyColumns'
@@ -103,6 +103,26 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 	const { fetchManyColumns } = useModifyColumns(endpoint)
 	const resultsMenu = screenerState(state => state.resultsMenu)
 
+	// The main state object to be passed via the context provider
+	// It holds the state of the screener that will be synced into
+	// localStorage. It is set to its stored value via a useEffect
+	// in order to prevent hydration errors.
+	const [stateObject, setStateObject] = useState({
+		id,
+		endpoint,
+		type,
+		title,
+		state: initial,
+		dispatch,
+		presets,
+		dataPoints,
+		initial
+	})
+
+	useEffect(() => {
+		setStateObject({ id, endpoint, type, title, state, dispatch, presets, dataPoints, initial })
+	}, [id, endpoint, type, title, state, dispatch, presets, dataPoints, initial])
+
 	/**
 	 * Reset the entire state to its initial value
 	 */
@@ -120,9 +140,6 @@ export function ScreenerContextProvider({ value, children }: ProviderProps) {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loaded])
-
-	// The main state object to be passed via the context provider
-	const stateObject = { id, endpoint, type, title, state, dispatch, presets, dataPoints, initial }
 
 	return <ScreenerContext.Provider value={stateObject}>{children}</ScreenerContext.Provider>
 }
