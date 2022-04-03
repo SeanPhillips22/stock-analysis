@@ -21,6 +21,9 @@ export function OptionsMenu() {
 			fixed.screener?.filters?.map(filter => screenerSettings.columns.all.Filtered.push(filter.id))
 			screenerSettings.filters = fixed.screener?.filters || []
 
+			// Add the sort to the screener settings
+			if (fixed.screener?.sort) screenerSettings.sort.active = fixed.screener.sort
+
 			// Set the default menu items
 			screenerSettings.filtersMenu = 'Active'
 			screenerSettings.resultsMenu = 'General'

@@ -52,14 +52,24 @@ export default function GainersPage({ data, tradingTimestamps, resultsCount }: P
 							controls: {
 								results: true,
 								export: true,
-								columns: true
+								columns: true,
+								options: true
 							},
 							pagination: true,
 							resultsCount,
 							columnOptions: MoverDataPoints,
 							excludeColumns: ['premarketPrice', 'premarketChange', 'premarketChangePercent'],
 							columnOrder: query.columns,
-							fixedColumns: ['rank', 's', 'change']
+							fixedColumns: ['rank', 's', 'change'],
+							screener: {
+								type: 'stocks',
+								filters: [
+									{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
+									{ id: 'change', name: '', value: `over-0`, filterType: 'numeric' },
+									{ id: 'volume', name: '', value: `over-10000`, filterType: 'numeric' }
+								],
+								sort: [{id: 'change', desc: false}]
+							}
 						},
 						dynamic: query
 					}}
