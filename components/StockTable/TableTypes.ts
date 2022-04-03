@@ -31,6 +31,7 @@ export type TableFixed = {
 		filters: FilterValue[]
 		sort?: SortObject[]
 		showResultsMenu?: boolean
+		showColumns?: DataId[]
 	}
 
 	// Fallback if no data is found

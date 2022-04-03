@@ -89,7 +89,7 @@ export default function GainersPageRange({ data, query, rangePath, tradingTimest
 									{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
 									{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
 									{ id: 'volume', name: '', value: `over-10K`, filterType: 'numeric' },
-									{ id: 'marketCap', name: '', value: `over-10M`, filterType: 'numeric' },
+									{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' },
 									{ id: id, name: '', value: `over-0`, filterType: 'numeric', numberType: 'percentage' }
 								],
 								sort: [{ id: id, desc: false }],
@@ -118,7 +118,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		sort: [{ id: id, desc: true }],
 		sortDirection: 'desc',
 		columns: ['rank', 's', 'n', 'price', 'volume', 'marketCap'],
-		filters: ['price-over-1', 'close-over-1', 'volume-over-10000', 'marketCap-over-100000000', `${id}-over-0`],
+		filters: ['price-over-1', 'close-over-1', 'volume-over-10000', 'marketCap-over-10000000', `${id}-over-0`],
 		page: 1
 	}
 

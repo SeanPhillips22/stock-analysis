@@ -26,7 +26,7 @@ const queryGainers: TableDynamic = {
 	sort: [{ id: 'premarketChangePercent', desc: true }],
 	sortDirection: 'desc',
 	columns: ['rank', 's', 'n', 'premarketChangePercent', 'premarketChange', 'premarketPrice', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1']
+	filters: ['premarketChangePercent-over-0', 'price-over-1', 'close-over-1', 'marketCap-over-1000000']
 }
 
 const queryLosers: TableDynamic = {
@@ -36,7 +36,7 @@ const queryLosers: TableDynamic = {
 	sort: [{ id: 'premarketChangePercent', desc: true }],
 	sortDirection: 'asc',
 	columns: ['rank', 's', 'n', 'premarketChangePercent', 'premarketChange', 'premarketPrice', 'marketCap'],
-	filters: ['price-over-1', 'close-over-1']
+	filters: ['premarketChangePercent-under-0', 'price-over-1', 'close-over-1', 'marketCap-over-1000000']
 }
 
 type Props = {
@@ -63,11 +63,30 @@ export default function PreMarket(props: Props) {
 								controls: {
 									results: true,
 									export: true,
-									columns: true
+									columns: true,
+									options: true
 								},
 								columnOptions: MoverDataPoints,
 								columnOrder: queryGainers.columns,
-								fixedColumns: ['rank', 's', 'premarketChangePercent']
+								fixedColumns: ['rank', 's', 'premarketChangePercent'],
+								screener: {
+									type: 'stocks',
+									filters: [
+										{
+											id: 'premarketChangePercent',
+											name: '',
+											value: `over-0`,
+											filterType: 'numeric',
+											numberType: 'percentage'
+										},
+										{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
+										{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
+										{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' }
+									],
+									sort: [{ id: 'premarketChangePercent', desc: false }],
+									showColumns: ['s', 'n', 'premarketChangePercent', 'premarketPrice', 'marketCap'],
+									showResultsMenu: true
+								}
 							},
 							dynamic: queryGainers
 						}}
@@ -83,11 +102,30 @@ export default function PreMarket(props: Props) {
 								controls: {
 									results: true,
 									export: true,
-									columns: true
+									columns: true,
+									options: true
 								},
 								columnOptions: MoverDataPoints,
 								columnOrder: queryLosers.columns,
-								fixedColumns: ['rank', 's', 'premarketChangePercent']
+								fixedColumns: ['rank', 's', 'premarketChangePercent'],
+								screener: {
+									type: 'stocks',
+									filters: [
+										{
+											id: 'premarketChangePercent',
+											name: '',
+											value: `under-0`,
+											filterType: 'numeric',
+											numberType: 'percentage'
+										},
+										{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
+										{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
+										{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' }
+									],
+									sort: [{ id: 'premarketChangePercent', desc: true }],
+									showColumns: ['s', 'n', 'premarketChangePercent', 'premarketPrice', 'marketCap'],
+									showResultsMenu: true
+								}
 							},
 							dynamic: queryLosers
 						}}

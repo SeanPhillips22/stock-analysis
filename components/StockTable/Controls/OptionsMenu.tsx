@@ -27,9 +27,10 @@ export function OptionsMenu() {
 			if (fixed.screener?.sort) screenerSettings.sort.active = fixed.screener.sort
 
 			// Set the results menu as active, if applicable
+			let filteredColumns = fixed.screener?.filters?.map(i => i.id)
+			screenerSettings.columns.all.Filtered =
+				fixed.screener?.showColumns || screenerSettings.columns.filtered.concat(filteredColumns)
 			if (fixed.screener?.showResultsMenu) {
-				let filteredColumns = fixed.screener?.filters?.map(i => i.id)
-				screenerSettings.columns.all.Filtered = screenerSettings.columns.filtered.concat(filteredColumns)
 				setResultsMenu('Filtered')
 			}
 

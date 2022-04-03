@@ -27,7 +27,7 @@ const query: TableDynamic = {
 	sort: [{ id: 'change', desc: true }],
 	sortDirection: 'asc',
 	columns: ['rank', 's', 'n', 'change', 'price', 'volume', 'marketCap'],
-	filters: ['close-over-1', 'change-under-0', 'volume-over-10000'],
+	filters: ['close-over-1', 'change-under-0', 'volume-over-10000', 'marketCap-over-1000000'],
 	page: 1
 }
 
@@ -70,7 +70,8 @@ export default function LosersPage({ data, tradingTimestamps, resultsCount }: Pr
 										filterType: 'numeric',
 										numberType: 'percentage'
 									},
-									{ id: 'volume', name: '', value: `over-10K`, filterType: 'numeric' }
+									{ id: 'volume', name: '', value: `over-10K`, filterType: 'numeric' },
+									{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' }
 								],
 								sort: [{ id: 'change', desc: true }]
 							}

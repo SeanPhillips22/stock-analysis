@@ -14,7 +14,7 @@ export const PresetFiltersStocks: PresetFilter[] = [
 	{
 		name: 'Top Gainers (1D)',
 		filters: [
-			{ id: 'marketCap', value: 'over-10M' },
+			{ id: 'marketCap', value: 'over-1M' },
 			{ id: 'price', value: 'over-1' },
 			{ id: 'volume', value: 'over-10K' },
 			{ id: 'change', value: 'over-0' }

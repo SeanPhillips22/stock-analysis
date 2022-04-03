@@ -26,7 +26,7 @@ const query: TableDynamic = {
 	sort: [{ id: 'volume', desc: true }],
 	sortDirection: 'desc',
 	columns: ['rank', 's', 'n', 'volume', 'change', 'price', 'marketCap'],
-	filters: ['price-over-1', 'volume-over-0'],
+	filters: ['price-over-1', 'volume-over-0', 'marketCap-over-1000000'],
 	page: 1
 }
 
@@ -62,7 +62,8 @@ export default function ActivePage({ data, tradingTimestamps, resultsCount }: Pr
 								type: 'stocks',
 								filters: [
 									{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
-									{ id: 'volume', name: '', value: `over-0`, filterType: 'numeric' }
+									{ id: 'volume', name: '', value: `over-0`, filterType: 'numeric' },
+									{ id: 'marketCap', name: '', value: `over-1000000`, filterType: 'numeric' }
 								],
 								sort: [{ id: 'volume', desc: false }]
 							}

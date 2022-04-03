@@ -519,26 +519,7 @@ export const StockDataPoints: FilterProps[] = [
 			'The closing price of the previous trading day. This is used to calculate the change in price on the current trading day.'
 	},
 	{
-		name: 'Premarket Price',
-		id: 'premarketPrice',
-		category: ['Other'],
-		filterType: 'numeric',
-		options: [
-			{ name: 'Over 10', value: 'over-10' },
-			{ name: 'Over 5', value: 'over-5' },
-			{ name: 'Over 2', value: 'over-2' },
-			{ name: 'Over 1', value: 'over-1' },
-			{ name: 'Under 1', value: 'under-1' },
-			{ name: 'Under 2', value: 'under-2' },
-			{ name: 'Under 5', value: 'under-5' },
-			{ name: 'Under 10', value: 'under-10' }
-		],
-		columnName: 'Premkt. Price',
-		format: 'format2dec',
-		tooltipText: 'The price of the stock during premarket trading hours, from 4:00 am until 9:30 am Eastern Time.'
-	},
-	{
-		name: 'Premkt. % Change',
+		name: 'Premkt. % Chg.',
 		id: 'premarketChangePercent',
 		category: ['Other'],
 		filterType: 'numeric',
@@ -558,6 +539,25 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'changePcColor',
 		tooltipTitle: 'Premarket % Change',
 		tooltipText: 'The percentage change in the price of the stock during premarket trading hours.'
+	},
+	{
+		name: 'Premarket Price',
+		id: 'premarketPrice',
+		category: ['Other'],
+		filterType: 'numeric',
+		options: [
+			{ name: 'Over 10', value: 'over-10' },
+			{ name: 'Over 5', value: 'over-5' },
+			{ name: 'Over 2', value: 'over-2' },
+			{ name: 'Over 1', value: 'over-1' },
+			{ name: 'Under 1', value: 'under-1' },
+			{ name: 'Under 2', value: 'under-2' },
+			{ name: 'Under 5', value: 'under-5' },
+			{ name: 'Under 10', value: 'under-10' }
+		],
+		columnName: 'Premkt. Price',
+		format: 'format2dec',
+		tooltipText: 'The price of the stock during premarket trading hours, from 4:00 am until 9:30 am Eastern Time.'
 	},
 	{
 		name: 'Country',
