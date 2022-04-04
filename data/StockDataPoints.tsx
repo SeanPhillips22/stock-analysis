@@ -549,16 +549,34 @@ export const DataPoints: Props = {
 		colName: 'ROE',
 		format: 'formatPercentage'
 	},
+	roe5y: {
+		id: 'roe5y',
+		name: 'Return on Equity (5Y)',
+		colName: 'ROE (5Y)',
+		format: 'formatPercentage'
+	},
 	roa: {
 		id: 'roa',
 		name: 'Return on Assets',
 		colName: 'ROA',
 		format: 'formatPercentage'
 	},
+	roa5y: {
+		id: 'roa5y',
+		name: 'Return on Assets (5Y)',
+		colName: 'ROA (5Y)',
+		format: 'formatPercentage'
+	},
 	roic: {
 		id: 'roic',
 		name: 'Return on Capital',
 		colName: 'ROIC',
+		format: 'formatPercentage'
+	},
+	roic5y: {
+		id: 'roic5y',
+		name: 'Return on Capital (5Y)',
+		colName: 'ROIC (5Y)',
 		format: 'formatPercentage'
 	},
 	revPerEmployee: {
