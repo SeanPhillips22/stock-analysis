@@ -132,6 +132,9 @@ export type DataId =
 	| 'roe' // Return on Equity
 	| 'roa' // Return on Assets
 	| 'roic' // Return on Capital
+	| 'roe5y' // Return on Equity (5-year average)
+	| 'roa5y' // Return on Assets (5-year average)
+	| 'roic5y' // Return on Capital (5-year average)
 	| 'revPerEmployee' // Rev / Employee
 	| 'profitPerEmployee' // Prof. / Employee
 	| 'assetTurnover' // Asset Turnover

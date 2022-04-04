@@ -2149,6 +2149,31 @@ export const StockDataPoints: FilterProps[] = [
 		columnName: 'ROE'
 	},
 	{
+		name: 'Return on Equity (5Y)',
+		id: 'roe5y',
+		category: ['Other'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' },
+			{ name: 'Under -50%', value: 'under-X50' }
+		],
+		format: 'percentage',
+		tooltipTitle: 'Return on Equity - 5-Year Average',
+		tooltipText:
+			'Return on equity (ROE) is a profitability metric that shows how efficient a company is at using its equity (or "net" assets) to generate profits. This shows the average return on equity over the past 5 fiscal years.',
+		columnName: 'ROE 5Y'
+	},
+	{
 		name: 'Return on Assets',
 		id: 'roa',
 		category: ['Other'],
@@ -2173,6 +2198,31 @@ export const StockDataPoints: FilterProps[] = [
 			'Return on assets (ROA) is a metric that measures how much profit a company is able to generate using its assets. It is calculated by dividing net income by the average total assets over the past 12 months.',
 		tooltipFormula: 'ROA = (Net Income / Avg. Total Assets) * 100%',
 		columnName: 'ROA'
+	},
+	{
+		name: 'Return on Assets (5Y)',
+		id: 'roa5y',
+		category: ['Other'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' },
+			{ name: 'Under -50%', value: 'under-X50' }
+		],
+		format: 'percentage',
+		tooltipTitle: 'Return on Assets - 5-Year Average',
+		tooltipText:
+			'Return on assets (ROA) is a metric that measures how much profit a company is able to generate using its assets. This shows the average return on assets over the past 5 fiscal years.',
+		columnName: 'ROA 5Y'
 	},
 	{
 		name: 'Return on Capital',
@@ -2200,6 +2250,32 @@ export const StockDataPoints: FilterProps[] = [
 			'Return on invested capital (ROIC) measures how effective a company is at investing its capital in order to increase profits. It is calculated by dividing the NOPAT (Net Operating Income After Tax) by the average invested capital in the previous year.',
 		tooltipFormula: 'ROIC = (NOPAT / Average Invested Capital) * 100%',
 		columnName: 'ROIC'
+	},
+	{
+		name: 'Return on Capital (5Y)',
+		id: 'roic5y',
+		searchMatches: 'return%on%invested%capital',
+		category: ['Other'],
+		filterType: 'numeric',
+		numberType: 'percentage',
+		options: [
+			{ name: 'Over 100%', value: 'over-100' },
+			{ name: 'Over 50%', value: 'over-50' },
+			{ name: 'Over 20%', value: 'over-20' },
+			{ name: 'Over 10%', value: 'over-10' },
+			{ name: 'Over 5%', value: 'over-5' },
+			{ name: 'Over 0%', value: 'over-0' },
+			{ name: 'Under 0%', value: 'under-0' },
+			{ name: 'Under -5%', value: 'under-X5' },
+			{ name: 'Under -10%', value: 'under-X10' },
+			{ name: 'Under -20%', value: 'under-X20' },
+			{ name: 'Under -50%', value: 'under-X50' }
+		],
+		format: 'percentage',
+		tooltipTitle: 'Return on Capital - 5-Year Average',
+		tooltipText:
+			'Return on invested capital (ROIC) measures how effective a company is at investing its capital in order to increase profits. This shows the average return on invested capital over the past 5 fiscal years.',
+		columnName: 'ROIC 5Y'
 	},
 	{
 		name: 'Rev / Employee',

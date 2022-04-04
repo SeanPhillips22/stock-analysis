@@ -19,7 +19,7 @@ export function FilterWrap({ f }: Props) {
 
 	return (
 		<div
-			className="flex items-center justify-between space-x-1 border-b border-gray-200 px-1 text-smaller leading-none text-gray-900"
+			className="flex items-center justify-between space-x-1 border-b border-gray-200 px-1 text-smaller leading-tight text-gray-900"
 			key={f.name}
 		>
 			<div className="hide-scroll cursor-help overflow-x-auto">
