@@ -21,9 +21,10 @@ export function useEvent() {
 	const plausible = usePlausible()
 
 	function event(eventName: string, eventProps?: EventProps) {
-		// If in development mode, console.og the event
+		// If in development mode, console.log the event
 		if (isDev()) {
 			console.log(`Tracking event ${eventName}`, eventProps)
+			return
 		}
 
 		// Track via plausible analytics
