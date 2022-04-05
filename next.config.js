@@ -1,4 +1,7 @@
-module.exports = {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { withPlausibleProxy } = require('next-plausible')
+
+module.exports = withPlausibleProxy()({
 	trailingSlash: true,
 	experimental: {
 		scrollRestoration: true
@@ -115,4 +118,4 @@ module.exports = {
 			}
 		]
 	}
-}
+})
