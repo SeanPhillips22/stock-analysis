@@ -15,11 +15,8 @@ function getChangeType(val: number) {
 }
 
 export function StockListStats({ stockCount, totalMarketCap, totalYTDChange }: Props) {
-	// const { data } = useSymbolContext()
-
 	totalYTDChange = 11.25
 	const SP500 = -0.34
-	console.log(totalYTDChange)
 
 	const stats = [
 		{
@@ -31,13 +28,14 @@ export function StockListStats({ stockCount, totalMarketCap, totalYTDChange }: P
 		{
 			name: `Total Market Cap`,
 			stat: formatCellRaw('abbreviate', totalMarketCap),
-
-			changeType: 'nochange'
+			previousStat: 'YTD',
+			change: formatCellRaw('formatPercentage', totalYTDChange - SP500),
+			changeType: getChangeType(totalYTDChange - SP500)
 		},
 		{
-			name: `YTD Gain`,
+			name: `YTD Gain vs. S&P500`,
 			stat: formatCellRaw('formatPercentage', totalYTDChange),
-			previousStat: formatCellRaw('formatPercentage', SP500),
+			previousStat: 'S&P500',
 			change: formatCellRaw('formatPercentage', totalYTDChange - SP500),
 			changeType: getChangeType(totalYTDChange - SP500)
 		}
@@ -53,7 +51,7 @@ export function StockListStats({ stockCount, totalMarketCap, totalYTDChange }: P
 							<div className="flex items-baseline text-2xl font-semibold text-blue-700">
 								{item.stat}
 								{item.previousStat && (
-									<div className="ml-2 text-sm font-medium text-gray-500">{`vs. S&P 500`}</div>
+									<div className="ml-2 text-sm font-medium text-gray-500">{item.previousStat}</div>
 								)}
 							</div>
 

@@ -34,7 +34,7 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 					<StockListStats
 						stockCount={data.data.length}
 						totalMarketCap={data.data.reduce((a: number, b: any) => a + b.marketCap, 0)}
-						totalYTDChange={data.data.reduce((a: number, b: any) => a + b.chYTD, 0)}
+						totalYTDChange={121}
 					/>
 					{/* Main Table */}
 					<TableContextProvider
@@ -122,7 +122,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		count: list.results_count ?? null,
 		sort: [{ id: main, desc: list.sort_direction !== 'asc' }],
 		sortDirection: list.sort_direction || 'desc',
-		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change', 'chYTD'],
+		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change'],
 		filters: list.filters
 			? list.filters === 'null'
 				? null
@@ -154,9 +154,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		data = await getSelect(query, false)
 		etfData = null
 	}
-
-	//For removing chYTD after initial call (as it is not displayed by default but is used for widget)
-	query.columns.pop()
 
 	return {
 		props: {
