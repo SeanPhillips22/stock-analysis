@@ -38,7 +38,7 @@ export function HeaderLogin({ hideTrial }: Props) {
 					url="/pro/"
 					className="eventbtn mt-0 py-1"
 					id="Trial_Layout_Header_FreeTrialBtn"
-					onClick={() => event('Free_Trial_Click')}
+					onClick={() => event('Free_Trial_Click', { location: 'Header' })}
 				/>
 			)}
 		</div>

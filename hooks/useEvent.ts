@@ -8,24 +8,32 @@ declare global {
 	}
 }
 
+type EventProps = {
+	location?: string // where in the layout the event is
+}
+
 /**
  * A custom hook that returns an event tracking function
  */
 export function useEvent() {
 	const plausible = usePlausible()
 
-	function event(eventName: string, eventValue?: string, eventProps?: any) {
+	function event(eventName: string, eventProps?: EventProps) {
 		// If in development mode, console.og the event
 		if (isDev()) {
 			console.log(`Tracking event ${eventName}`, eventProps)
 		}
 
 		// Track via plausible analytics
-		plausible(eventName, eventProps)
+		if (eventProps) {
+			plausible(eventName, { props: eventProps })
+		} else {
+			plausible(eventName)
+		}
 
 		// Track via Microsoft Clarity
 		if (window.clarity) {
-			window.clarity('set', eventName, eventValue || eventName)
+			window.clarity('set', eventName, eventProps?.location || eventName)
 		}
 	}
 

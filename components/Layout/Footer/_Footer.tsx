@@ -1,3 +1,4 @@
+import { useEvent } from 'hooks/useEvent'
 import Link from 'next/link'
 
 const navigation = {
@@ -18,6 +19,8 @@ const navigation = {
 }
 
 export function Footer() {
+	const { event } = useEvent()
+
 	return (
 		<>
 			<footer className="clear-both bg-gray-800">
@@ -52,7 +55,12 @@ export function Footer() {
 										</li>
 										<li>
 											<Link href="/pro/" prefetch={false}>
-												<a className="text-base text-gray-300 hover:text-white">Free Trial</a>
+												<a
+													className="text-base text-gray-300 hover:text-white"
+													onClick={() => event('Free_Trial_Click', { location: 'Footer_Links' })}
+												>
+													Free Trial
+												</a>
 											</Link>
 										</li>
 									</ul>
