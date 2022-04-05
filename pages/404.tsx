@@ -1,7 +1,15 @@
 import { UserLayout } from 'components/Layout/UserLayout'
+import { useEvent } from 'hooks/useEvent'
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 export default function Custom404() {
+	const { event } = useEvent()
+
+	useEffect(() => {
+		event('404')
+	}, [event])
+
 	return (
 		<UserLayout url="/404/">
 			<Head>

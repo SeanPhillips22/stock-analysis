@@ -2,6 +2,7 @@ import { Button } from 'components/Buttons/Button'
 import { ButtonWhite } from 'components/Buttons/ButtonWhite'
 import { useAuth } from 'hooks/useAuth'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
+import { useEvent } from 'hooks/useEvent'
 
 type Props = {
 	hideTrial?: boolean
@@ -10,6 +11,7 @@ type Props = {
 export function HeaderLogin({ hideTrial }: Props) {
 	const { isLoggedIn, signOut } = useAuth()
 	const { url } = useLayoutContext()
+	const { event } = useEvent()
 
 	if (isLoggedIn) {
 		return (
@@ -36,6 +38,7 @@ export function HeaderLogin({ hideTrial }: Props) {
 					url="/pro/"
 					className="eventbtn mt-0 py-1"
 					id="Trial_Layout_Header_FreeTrialBtn"
+					onClick={() => event('Free_Trial_Click')}
 				/>
 			)}
 		</div>
