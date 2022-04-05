@@ -1,10 +1,42 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { withPlausibleProxy } = require('next-plausible')
-
-module.exports = withPlausibleProxy()({
+module.exports = {
 	trailingSlash: true,
 	experimental: {
 		scrollRestoration: true
+	},
+	async rewrites() {
+		return [
+			{
+				source: '/js/script.js',
+				destination: 'https://plausible.io/js/script.js'
+			},
+			{
+				source: '/api/event/',
+				destination: 'https://plausible.io/api/event'
+			}
+		];
+	},
+	async headers() {
+		return [
+			{
+				source: '/(.*)',
+				headers: [
+					{
+						key: 'X-Frame-Options',
+						value: 'sameorigin'
+					}
+				]
+			},
+			{
+				source: '/:all*(ico|jpg|png)',
+				locale: false,
+				headers: [
+					{
+						key: 'Cache-Control',
+						value: 'public, max-age=86400'
+					}
+				]
+			}
+		]
 	},
 	async redirects() {
 		return [
@@ -94,28 +126,5 @@ module.exports = withPlausibleProxy()({
 				permanent: true
 			}
 		]
-	},
-	async headers() {
-		return [
-			{
-				source: '/(.*)',
-				headers: [
-					{
-						key: 'X-Frame-Options',
-						value: 'sameorigin'
-					}
-				]
-			},
-			{
-				source: '/:all*(ico|jpg|png)',
-				locale: false,
-				headers: [
-					{
-						key: 'Cache-Control',
-						value: 'public, max-age=86400'
-					}
-				]
-			}
-		]
 	}
-})
+}
