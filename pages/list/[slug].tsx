@@ -8,6 +8,7 @@ import { TableDynamic, TableFixed } from 'components/StockTable/TableTypes'
 import { StockListLayout } from 'components/Layout/StockListLayout'
 import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
 import { RelatedStockLists } from 'components/StockLists/RelatedStockLists'
+import { StockListStats } from 'components/StockLists/StockListStats'
 import { BottomDisclaimer } from 'components/StockLists/BottomDisclaimer'
 import { EtfDataPoints } from 'data/DataPointGroups/EtfDataPoints'
 import { getData } from 'functions/apis/API'
@@ -30,7 +31,11 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 				<StockListLayout key={page.path}>
 					{/* Info Box */}
 					{page.pageDescription && <SmallInfoBox text={page.pageDescription} classes="mb-4 sm:mb-5" />}
-
+					<StockListStats
+						stockCount={data.data.length}
+						totalMarketCap={data.data.reduce((a: number, b: any) => a + b.marketCap, 0)}
+						totalYTDChange={data.data.reduce((a: number, b: any) => a + b.chYTD, 0)}
+					/>
 					{/* Main Table */}
 					<TableContextProvider
 						value={{
@@ -47,7 +52,6 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 						<StockTable _data={data} />
 					</TableContextProvider>
 					{page.disclaimer && <BottomDisclaimer text={page.disclaimer} />}
-
 					<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
 						{/* If list is set to show ETFs */}
 						{etfQuery && (
@@ -118,7 +122,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		count: list.results_count ?? null,
 		sort: [{ id: main, desc: list.sort_direction !== 'asc' }],
 		sortDirection: list.sort_direction || 'desc',
-		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change'],
+		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change', 'chYTD'],
 		filters: list.filters
 			? list.filters === 'null'
 				? null
@@ -150,6 +154,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		data = await getSelect(query, false)
 		etfData = null
 	}
+
+	//For removing chYTD after initial call (as it is not displayed by default but is used for widget)
+	query.columns.pop()
 
 	return {
 		props: {
