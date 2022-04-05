@@ -9,7 +9,7 @@ const queryClient = new QueryClient()
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<PlausibleProvider domain="stockanalysis.com">
+		<PlausibleProvider domain="stockanalysis.com" trackOutboundLinks={true}>
 			<GoogleTagManager />
 			<ProgressBar />
 			<QueryClientProvider client={queryClient}>
