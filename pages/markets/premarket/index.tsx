@@ -67,6 +67,7 @@ export default function PreMarket(props: Props) {
 									options: true
 								},
 								columnOptions: MoverDataPoints,
+								excludeColumns: ['price', 'volume'],
 								columnOrder: queryGainers.columns,
 								fixedColumns: ['rank', 's', 'premarketChangePercent'],
 								screener: {
@@ -106,6 +107,7 @@ export default function PreMarket(props: Props) {
 									options: true
 								},
 								columnOptions: MoverDataPoints,
+								excludeColumns: ['price', 'volume'],
 								columnOrder: queryLosers.columns,
 								fixedColumns: ['rank', 's', 'premarketChangePercent'],
 								screener: {

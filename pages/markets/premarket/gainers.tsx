@@ -9,6 +9,7 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
+import { InfoTutorial } from 'components/InfoTutorial/InfoTutorial'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -39,12 +40,16 @@ export default function PreMarket({ data, tradingTimestamps, resultsCount }: Pro
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={PremarketNav}>
+				<InfoTutorial
+					text="Stocks with the highest percentage gain during pre-market trading, updated every five minutes between 4:15 and 9:30 am ET on Mon-Fri."
+					docsLink="/docs/premarket-movers/"
+					storageKey="premarket-movers-infobox"
+					classes="mb-3"
+				/>
 				<TableContextProvider
 					value={{
 						title: 'Premarket Gainers',
 						tableId: 'premarket-gainers-v2',
-						// description:
-						// 	'The stocks with the highest percentage gain during pre-market trading, updated every five minutes between 4:15 am and 9:30 am ET.',
 						fixed: {
 							defaultSort: query.sort,
 							controls: {
@@ -56,6 +61,7 @@ export default function PreMarket({ data, tradingTimestamps, resultsCount }: Pro
 							pagination: true,
 							resultsCount,
 							columnOptions: MoverDataPoints,
+							excludeColumns: ['price', 'volume'],
 							columnOrder: query.columns,
 							fixedColumns: ['rank', 's', 'premarketChangePercent'],
 							screener: {
