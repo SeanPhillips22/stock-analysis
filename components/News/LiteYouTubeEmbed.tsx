@@ -1,4 +1,5 @@
 // Adapted from here: https://github.com/ibrahimcesar/react-lite-youtube-embed
+import { useEvent } from 'hooks/useEvent'
 import { useState } from 'react'
 import useInView from 'react-cool-inview'
 
@@ -9,6 +10,7 @@ type Props = {
 
 export function LiteYouTubeEmbed({ id, title }: Props) {
 	const [iframe, setIframe] = useState(false)
+	const { event } = useEvent()
 	const videoId = encodeURIComponent(id)
 
 	// Lazy load the background image
@@ -30,6 +32,7 @@ export function LiteYouTubeEmbed({ id, title }: Props) {
 	const addIframe = () => {
 		if (iframe) return
 		setIframe(true)
+		event('Play_Video', { title: videoTitle })
 	}
 
 	const inactive = 'yt-lite focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-brand_light rounded-sm'
