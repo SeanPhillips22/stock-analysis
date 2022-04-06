@@ -1,6 +1,7 @@
 import { SearchIcon } from 'components/Icons/SearchIcon'
 import { SpinnerIcon } from 'components/Icons/Spinner'
 import { getData } from 'functions/apis/API'
+import { useEvent } from 'hooks/useEvent'
 import { useRef, useState } from 'react'
 import { News } from 'types/News'
 
@@ -33,6 +34,7 @@ export function NewsMenuSearch({
 }: Props) {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const [searching, setSearching] = useState(false) // If a search is in progress
+	const { event } = useEvent()
 
 	async function doSearch() {
 		setPaywalled(false)
@@ -40,6 +42,7 @@ export function NewsMenuSearch({
 		setSearching(true)
 		const keyref = inputRef.current ?? null
 		if (keyref) keyref.blur()
+		event('News_Search', { query })
 		const results = await getData(`news-search?s=${symbol}&t=${type}&q=${query}`)
 		setSearching(false)
 		setSearched(true)

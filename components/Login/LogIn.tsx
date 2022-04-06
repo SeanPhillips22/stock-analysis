@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Error } from 'components/Alerts/Error'
 import { SpinnerIcon } from 'components/Icons/Spinner'
 import { CrispChat } from 'components/Scripts/CrispChat'
+import { useEvent } from 'hooks/useEvent'
 
 type Props = {
 	signIn: (email: string) => void
@@ -12,6 +13,7 @@ type Props = {
 
 export function LogIn({ signIn, loading, errorMsg }: Props) {
 	const [typed, setTyped] = useState('')
+	const { event } = useEvent()
 
 	return (
 		<>
@@ -20,7 +22,11 @@ export function LogIn({ signIn, loading, errorMsg }: Props) {
 				<p className="mt-2 text-center text-smaller font-medium text-gray-600">
 					Or{' '}
 					<Link href="/pro/" prefetch={false}>
-						<a className="bll" id="tag-upgr-login">
+						<a
+							className="bll"
+							id="tag-upgr-login"
+							onClick={() => event('Free_Trial_Click', { location: 'Login_Page' })}
+						>
 							start your free 30-day trial
 						</a>
 					</Link>

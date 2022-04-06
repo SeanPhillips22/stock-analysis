@@ -29,7 +29,7 @@ export function ExportButtons({ buttons = Buttons, tableId, fileName, data }: Pr
 			{buttons &&
 				buttons.map(button =>
 					!isPro ? (
-						<ExportItemRestricted key={button.type} title={button.title} type={button.type} />
+						<ExportItemRestricted key={button.title} title={button.title} type={button.type} />
 					) : (
 						<ExportItem
 							key={button.title}

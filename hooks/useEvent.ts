@@ -9,11 +9,13 @@ declare global {
 }
 
 type EventProps = {
+	type?: string
 	location?: string // where in the layout the event is
 	title?: string
 	statusCode?: string | number
 	isPro?: boolean
 	isLoggedIn?: boolean
+	query?: string
 }
 
 /**
@@ -38,7 +40,7 @@ export function useEvent() {
 
 		// Track via Microsoft Clarity
 		if (window.clarity) {
-			window.clarity('set', eventName, eventProps?.location || eventName)
+			window.clarity('set', eventName, eventProps?.type || eventProps?.location || eventName)
 		}
 	}
 

@@ -2,6 +2,7 @@ import ExcellentExport from 'excellentexport'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { extractFinancialValues, extractTextFromHTML, removeNanValues } from './export.functions'
 import { Menu } from '@headlessui/react'
+import { useEvent } from 'hooks/useEvent'
 
 interface Props {
 	title: string
@@ -14,6 +15,7 @@ interface Props {
 
 export default function Download({ title, type, data, tableId, fileName, bulkData }: Props) {
 	const { path } = useLayoutContext()
+	const { event } = useEvent()
 
 	let name = fileName ? fileName : `${path.one}${path.two ? '-' + path.two : ''}${path.three ? '-' + path.three : ''}`
 
@@ -64,6 +66,7 @@ export default function Download({ title, type, data, tableId, fileName, bulkDat
 			<div
 				className="dd"
 				onClick={() => {
+					event('Pro_Export', { type: title })
 					download(type)
 				}}
 			>

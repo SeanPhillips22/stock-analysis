@@ -1,4 +1,5 @@
 import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
+import { useEvent } from 'hooks/useEvent'
 import { useRouter } from 'next/router'
 
 interface ExportItemProps {
@@ -8,12 +9,16 @@ interface ExportItemProps {
 
 export default function Restricted({ title, type }: ExportItemProps) {
 	const router = useRouter()
+	const { event } = useEvent()
 	const id = `tag-upgr-controls-export-${title === 'Bulk Export' ? 'bulk' : type.toLowerCase()}`
 
 	return (
 		<div
 			className="dd"
-			onClick={() => router.push('/pro/')}
+			onClick={() => {
+				event('Free_Trial_Click', { location: 'Export_Menu', type: title })
+				router.push('/pro/')
+			}}
 			title="This feature is available for Pro members."
 			id={id}
 		>

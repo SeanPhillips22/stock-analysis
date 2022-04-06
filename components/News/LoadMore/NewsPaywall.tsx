@@ -1,7 +1,10 @@
 import { Button } from 'components/Buttons/Button'
 import { ButtonWhite } from 'components/Buttons/ButtonWhite'
+import { useEvent } from 'hooks/useEvent'
 
 export function NewsPaywall() {
+	const { event } = useEvent()
+
 	return (
 		<div className="relative -mt-8 flex h-[180px] justify-center bg-white sm:mt-3 sm:h-auto">
 			<div className="absolute max-w-[85%] text-center sm:static">
@@ -10,7 +13,13 @@ export function NewsPaywall() {
 					Keep scrolling with a free 30-day trial of Stock Analysis Pro
 				</p>
 				<div className="flex justify-center space-x-6">
-					<Button text="Free Trial" url="/pro/" className="w-44" id="tag-upgr-news-below" />
+					<Button
+						text="Free Trial"
+						url="/pro/"
+						className="w-44"
+						id="tag-upgr-news-below"
+						onClick={() => event('Free_Trial_Click', { location: 'Below_News_Feed' })}
+					/>
 					<ButtonWhite text="Sign In" url="/login/" className="w-44" id="tag-upgr-news-below-login" />
 				</div>
 			</div>

@@ -7,6 +7,7 @@ import { Range, Statement } from 'types/Financials'
 import { Info } from 'types/Info'
 import { useFetchBulk } from './Export/useFetchBulk'
 import { useState } from 'react'
+import { useEvent } from 'hooks/useEvent'
 
 type Props = {
 	info: Info
@@ -20,12 +21,16 @@ export function FinancialsControls({ info, statement, range }: Props) {
 	const controls = financialsState(state => state.controls)
 	const [fetchBulk, setFetchBulk] = useState(false)
 	const data = useFetchBulk(info.symbol, fetchBulk)
+	const { event } = useEvent()
 
 	return (
 		<div className={controls ? 'finctrl vis' : 'finctrl'}>
 			<button
 				className={reversed ? 'controls-btn active' : 'controls-btn'}
-				onClick={() => toggleReversed()}
+				onClick={() => {
+					toggleReversed()
+					event('Financial_Controls', { type: 'LeftRight' })
+				}}
 				id="tag-feat-fin-leftright"
 				title="Switch order of columns"
 			>

@@ -1,10 +1,12 @@
 import { CheckIcon } from 'components/Icons/CheckIcon'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { financialsState } from 'state/financialsState'
+import { useEvent } from 'hooks/useEvent'
 
 export function SelectFormat() {
 	const divider = financialsState(state => state.divider)
 	const setDivider = financialsState(state => state.setDivider)
+	const { event } = useEvent()
 
 	const DIVIDER_MAP = [
 		{
@@ -33,7 +35,10 @@ export function SelectFormat() {
 				<div
 					key={item.value}
 					className={item.value === divider ? 'dd active' : 'dd'}
-					onClick={() => setDivider(item.value)}
+					onClick={() => {
+						setDivider(item.value)
+						event('Financial_Controls', { type: 'Set_Divider', title: item.title })
+					}}
 				>
 					{item.title}
 					{item.value === divider && <CheckIcon className="h-5 w-5" aria-hidden="true" />}

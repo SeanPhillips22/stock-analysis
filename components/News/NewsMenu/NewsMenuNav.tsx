@@ -1,3 +1,5 @@
+import { useEvent } from 'hooks/useEvent'
+
 type Props = {
 	show: string
 	setShow: (value: string) => void
@@ -6,6 +8,8 @@ type Props = {
 }
 
 export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
+	const { event } = useEvent()
+
 	return (
 		<div className="mb-0.5 text-smaller xs:text-base">
 			<ul className="flex flex-row space-x-1 whitespace-nowrap bp:space-x-2 sm:space-x-5">
@@ -16,6 +20,7 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 						onClick={() => {
 							setError('')
 							setShow('all')
+							event('News_Menu', { type: 'All' })
 						}}
 					>
 						All
@@ -28,6 +33,7 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 						onClick={() => {
 							setError('')
 							setShow('v')
+							event('News_Menu', { type: 'Videos' })
 						}}
 					>
 						Videos
@@ -41,6 +47,7 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 							onClick={() => {
 								setError('')
 								setShow('pr')
+								event('News_Menu', { type: 'Press_Releases' })
 							}}
 						>
 							Press
@@ -55,6 +62,7 @@ export function NewsMenuNav({ show, setShow, setError, pageType }: Props) {
 						onClick={() => {
 							setError('')
 							setShow('chat')
+							event('News_Menu', { type: 'Conversation' })
 						}}
 					>
 						Conversation

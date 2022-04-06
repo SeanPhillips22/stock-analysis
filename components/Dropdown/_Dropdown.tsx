@@ -13,6 +13,7 @@ type Props = {
 	btnClasses?: string
 	icnClasses?: string
 	active?: boolean // if non-default is selected
+	onClick?: () => void
 }
 
 export function Dropdown({
@@ -24,7 +25,8 @@ export function Dropdown({
 	menuClasses = '',
 	btnClasses = '',
 	icnClasses = '',
-	active
+	active,
+	onClick
 }: Props) {
 	return (
 		<Menu as="div" className={cn('controls-menu', menuClasses)} id={id}>
@@ -41,6 +43,7 @@ export function Dropdown({
 				leave="transition ease-in duration-75"
 				leaveFrom="opacity-100 scale-100"
 				leaveTo="opacity-0 scale-95"
+				beforeEnter={onClick}
 			>
 				<Menu.Items className={cn('dropdown', classes ? classes : '')}>{children}</Menu.Items>
 			</Transition>

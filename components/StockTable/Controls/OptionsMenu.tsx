@@ -4,11 +4,13 @@ import { useTableContext } from '../TableContext'
 import { INITIAL_STOCK_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialStockScreenerState'
 import { ExportButtons } from 'components/Controls/Export/ExportButtons'
 import { screenerState } from '../../Screener/screener.state'
+import { useEvent } from 'hooks/useEvent'
 
 export function OptionsMenu() {
 	const setResultsMenu = screenerState(state => state.setResultsMenu)
 	const { tableId, fixed, clearState } = useTableContext()
 	const router = useRouter()
+	const { event } = useEvent()
 
 	// This function adds the filters to the stock screener settings in localStorage
 	// Then it redirects the user to the stock screener
@@ -51,7 +53,10 @@ export function OptionsMenu() {
 				className="dd"
 				title="Open list in stock screener"
 				id="tag-feat-options-open-in-screener"
-				onClick={addFiltersAndGoToScreener}
+				onClick={() => {
+					event('Open_In_Screener')
+					addFiltersAndGoToScreener()
+				}}
 			>
 				Open in Screener
 			</div>
@@ -62,7 +67,10 @@ export function OptionsMenu() {
 				className="dd"
 				title="Reset all settings to their default values"
 				id="tag-feat-options-reset-table-defaults"
-				onClick={clearState}
+				onClick={() => {
+					clearState()
+					event('Reset_Table_Defaults')
+				}}
 			>
 				Reset Table Defaults
 			</div>

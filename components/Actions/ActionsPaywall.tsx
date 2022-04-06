@@ -1,5 +1,6 @@
 import { Button } from 'components/Buttons/Button'
 import { useAuthState } from 'hooks/useAuthState'
+import { useEvent } from 'hooks/useEvent'
 
 interface Props {
 	count: number
@@ -9,6 +10,7 @@ interface Props {
 
 export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
 	const { isPro } = useAuthState()
+	const { event } = useEvent()
 
 	if (isPro || count === fullCount) {
 		return null
@@ -20,7 +22,13 @@ export const ActionsPaywall = ({ count, fullCount, title }: Props) => {
 				Showing {count} of {fullCount} {title.toLowerCase()}
 			</h4>
 			<div className="text-xl">Subscribe to see the full list</div>
-			<Button text="Start Free Trial" url="/pro/" className="w-44" id="tag-upgr-actions-below" />
+			<Button
+				text="Start Free Trial"
+				url="/pro/"
+				className="w-44"
+				id="tag-upgr-actions-below"
+				onClick={() => event('Free_Trial_Click', { location: 'Corporate_Actions_Below_Table' })}
+			/>
 		</div>
 	)
 }

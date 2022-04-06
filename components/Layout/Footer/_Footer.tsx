@@ -144,6 +144,7 @@ export function Footer() {
 								className="text-gray-400 hover:text-gray-300"
 								id="tag-social-footer-facebook"
 								aria-label="Follow on Facebook"
+								onClick={() => event('Social_Media_Click', { type: 'Facebook' })}
 							>
 								<svg
 									fill="currentColor"
@@ -166,6 +167,7 @@ export function Footer() {
 								className="text-gray-400 hover:text-gray-300"
 								id="tag-social-footer-twitter"
 								aria-label="Follow on Twitter"
+								onClick={() => event('Social_Media_Click', { type: 'Twitter' })}
 							>
 								<svg
 									fill="currentColor"
@@ -184,6 +186,7 @@ export function Footer() {
 								className="text-gray-400 hover:text-gray-300"
 								id="tag-social-footer-github"
 								aria-label="View our GitHub page"
+								onClick={() => event('Social_Media_Click', { type: 'Github' })}
 							>
 								<svg
 									fill="currentColor"

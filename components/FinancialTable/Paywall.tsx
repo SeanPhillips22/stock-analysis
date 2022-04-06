@@ -1,4 +1,5 @@
 import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
+import { useEvent } from 'hooks/useEvent'
 import { useRouter } from 'next/router'
 import { Range } from 'types/Financials'
 import { formatYear } from './FinancialTable.functions'
@@ -39,8 +40,10 @@ export function PaywallBodyCell({ range, showcount, fullcount }: PropsBodyCell) 
 	const countShown = range === 'annual' ? showcount - 1 : showcount
 	const countFull = range === 'annual' ? fullcount - 1 : fullcount
 	const router = useRouter()
+	const { event } = useEvent()
 
 	function goToTrialPage() {
+		event('Free_Trial_Click', { location: 'Financial_Table_Cell', type: range })
 		router.push('/pro/')
 	}
 
