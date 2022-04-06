@@ -1,4 +1,3 @@
-import { Menu } from '@headlessui/react'
 import dynamic from 'next/dynamic'
 
 const Restricted = dynamic(() => import('./Restricted'), {
@@ -11,9 +10,5 @@ interface ExportItemProps {
 }
 
 export const ExportItemRestricted = ({ title, type }: ExportItemProps) => {
-	return (
-		<Menu.Item>
-			<Restricted title={title} type={type} />
-		</Menu.Item>
-	)
+	return <Restricted title={title} type={type} />
 }

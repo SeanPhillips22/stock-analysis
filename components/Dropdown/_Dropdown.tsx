@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { cn } from 'functions/helpers/classNames'
 
@@ -29,11 +29,11 @@ export function Dropdown({
 	onClick
 }: Props) {
 	return (
-		<Menu as="div" className={cn('controls-menu', menuClasses)} id={id}>
-			<Menu.Button className={cn('controls-btn', active ? 'active' : '', btnClasses)} title={hoverTitle}>
+		<Popover className={cn('controls-menu', menuClasses)} id={id}>
+			<Popover.Button className={cn('controls-btn', active ? 'active' : '', btnClasses)} title={hoverTitle}>
 				{title}
 				<ChevronDownIcon className={cn('controls-icon', icnClasses)} aria-hidden="true" />
-			</Menu.Button>
+			</Popover.Button>
 
 			<Transition
 				as={Fragment}
@@ -45,8 +45,8 @@ export function Dropdown({
 				leaveTo="opacity-0 scale-95"
 				beforeEnter={onClick}
 			>
-				<Menu.Items className={cn('dropdown', classes ? classes : '')}>{children}</Menu.Items>
+				<Popover.Panel className={cn('dropdown', classes ? classes : '')}>{children}</Popover.Panel>
 			</Transition>
-		</Menu>
+		</Popover>
 	)
 }

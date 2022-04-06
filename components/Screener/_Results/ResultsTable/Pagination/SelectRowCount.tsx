@@ -5,7 +5,7 @@ import { cn } from 'functions/helpers/classNames'
 import { tabActive } from 'functions/helpers/tabActive'
 import { useRouter } from 'next/router'
 import { authState } from 'state/authState'
-import { Menu } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 
 const OPTIONS = [
 	{
@@ -64,11 +64,12 @@ export function SelectRowCount({ pageSize, setSelected }: Props) {
 			{OPTIONS.map(i => {
 				return (
 					/* One Dropdown Item */
-					<Menu.Item key={i.value}>
+					<Popover.Button as="div" key={i.value}>
 						<div
 							className={cn('dd', tabActive(i.value, pageSize || 0))}
 							title={hoverTitle(i.value, i.pro)}
 							onClick={() => handleClick(i.value, i.pro)}
+							tabIndex={0}
 						>
 							{/* Button Text */}
 							{i.title || i.value.toString() + ' Rows'}
@@ -79,7 +80,7 @@ export function SelectRowCount({ pageSize, setSelected }: Props) {
 							{/* Icon - if option is only for pro members */}
 							{i.pro && !isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 						</div>
-					</Menu.Item>
+					</Popover.Button>
 				)
 			})}
 		</Dropdown>

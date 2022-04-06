@@ -1,7 +1,7 @@
 import ExcellentExport from 'excellentexport'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { extractFinancialValues, extractTextFromHTML, removeNanValues } from './export.functions'
-import { Menu } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 import { useEvent } from 'hooks/useEvent'
 
 interface Props {
@@ -21,13 +21,13 @@ export default function Download({ title, type, data, tableId, fileName, bulkDat
 
 	let returnArray: any[] = []
 
-	//* Bulk Export
+	// Bulk Export
 	if (bulkData) {
 		returnArray = bulkData
 		name = `${path.two}-financials`
 	}
 
-	//* Array export
+	// Array export
 	else if (data) {
 		returnArray = [
 			{
@@ -38,7 +38,7 @@ export default function Download({ title, type, data, tableId, fileName, bulkDat
 		]
 	}
 
-	//* Table Export
+	// Table Export
 	else if (tableId) {
 		let isFinancial = tableId === 'financial-table'
 		returnArray = [
@@ -62,7 +62,7 @@ export default function Download({ title, type, data, tableId, fileName, bulkDat
 	}
 
 	return (
-		<Menu.Item>
+		<Popover.Button as="div">
 			<div
 				className="dd"
 				onClick={() => {
@@ -72,6 +72,6 @@ export default function Download({ title, type, data, tableId, fileName, bulkDat
 			>
 				{title}
 			</div>
-		</Menu.Item>
+		</Popover.Button>
 	)
 }

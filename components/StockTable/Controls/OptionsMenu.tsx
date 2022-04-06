@@ -7,6 +7,7 @@ import { screenerState } from '../../Screener/screener.state'
 import { useEvent } from 'hooks/useEvent'
 import { SplitTestAny } from 'components/SplitTest'
 import { useEffect, useState } from 'react'
+import { Popover } from '@headlessui/react'
 
 export function OptionsMenu() {
 	const [buttonTitle, setButtonTitle] = useState('Options')
@@ -60,31 +61,37 @@ export function OptionsMenu() {
 			classes="divide-y divide-gray-100 whitespace-nowrap"
 			onClick={() => event('Options_Menu', { type: buttonTitle })}
 		>
-			<div
-				className="dd"
-				title="Open list in stock screener"
-				id="tag-feat-options-open-in-screener"
-				onClick={() => {
-					event('Open_In_Screener')
-					addFiltersAndGoToScreener()
-				}}
-			>
-				Open in Screener
-			</div>
+			<Popover.Button as="div">
+				<div
+					className="dd"
+					title="Open list in stock screener"
+					id="tag-feat-options-open-in-screener"
+					onClick={() => {
+						event('Open_In_Screener')
+						addFiltersAndGoToScreener()
+					}}
+					tabIndex={0}
+				>
+					Open in Screener
+				</div>
+			</Popover.Button>
 			<div className="block py-0.5 md:hidden">
 				<ExportButtons tableId={tableId} />
 			</div>
-			<div
-				className="dd"
-				title="Reset all settings to their default values"
-				id="tag-feat-options-reset-table-defaults"
-				onClick={() => {
-					clearState()
-					event('Reset_Table_Defaults')
-				}}
-			>
-				Reset Table Defaults
-			</div>
+			<Popover.Button as="div">
+				<div
+					className="dd"
+					title="Reset all settings to their default values"
+					id="tag-feat-options-reset-table-defaults"
+					onClick={() => {
+						clearState()
+						event('Reset_Table_Defaults')
+					}}
+					tabIndex={0}
+				>
+					Reset Table Defaults
+				</div>
+			</Popover.Button>
 		</Dropdown>
 	)
 }

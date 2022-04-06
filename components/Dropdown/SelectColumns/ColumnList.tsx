@@ -27,8 +27,8 @@ export function ColumnList({ _active, options, search, toggle, fixedColumns = ['
 
 	// filter the data points based on the search term
 	if (search && search !== '') {
-		active = active.filter(i => i.name.toLowerCase().includes(search))
-		inactive = inactive.filter(i => i.name.toLowerCase().includes(search))
+		active = active.filter(i => i.name.toLowerCase().includes(search.toLowerCase()))
+		inactive = inactive.filter(i => i.name.toLowerCase().includes(search.toLowerCase()))
 	}
 
 	// memoize the active/inactive so that it only changes the order when the dropdown is opened

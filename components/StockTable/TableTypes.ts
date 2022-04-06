@@ -10,12 +10,10 @@ export type TableFixed = {
 
 	// The controls options to show
 	controls?: {
-		range?: boolean // Time range (1D/1W/etc)
 		results?: boolean // Number of results
 		filter?: boolean // Show a filter input
 		export?: boolean // Export button
 		columns?: boolean // Columns dropdown
-		moverType?: boolean // Switch between gainers and losers
 		options?: boolean // More options
 	}
 

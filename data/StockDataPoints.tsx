@@ -65,13 +65,13 @@ export const DataPoints: Props = {
 	},
 	chg: {
 		id: 'chg',
-		name: 'Price Change',
-		colName: 'Change ($)',
+		name: 'Price Change ($)',
+		colName: '$ Change',
 		format: 'format2dec'
 	},
 	change: {
 		id: 'change',
-		name: 'Price Change 1D',
+		name: 'Price Change 1D (%)',
 		colName: '% Change',
 		format: 'colorPercentage',
 		sort: numberAbsolute

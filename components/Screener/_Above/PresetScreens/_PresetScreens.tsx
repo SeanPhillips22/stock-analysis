@@ -1,11 +1,11 @@
 import { useModifyFilters } from '../../functions/useModifyFilters'
 import { useModifyColumns } from '../../functions/useModifyColumns'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
-import { Menu } from '@headlessui/react'
 import { cn } from 'functions/helpers/classNames'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
 import { FilterValue } from 'components/Screener/screener.types'
 import { screenerState } from 'components/Screener/screener.state'
+import { Popover } from '@headlessui/react'
 
 export function PresetScreens() {
 	const { endpoint, state, dispatch, presets, dataPoints } = useScreenerContext()
@@ -62,14 +62,15 @@ export function PresetScreens() {
 				classes="min-w-[150px] -right-2 xs:min-w-[160px] xs:right-0"
 			>
 				{presets.map(item => (
-					<Menu.Item key={item.name}>
+					<Popover.Button as="div" key={item.name}>
 						<div
 							className={cn('dd', state.activePreset === item.name ? 'active' : '')}
 							onClick={() => renderPresetFilters(item.name)}
+							tabIndex={0}
 						>
 							{item.name}
 						</div>
-					</Menu.Item>
+					</Popover.Button>
 				))}
 			</Dropdown>
 		</div>

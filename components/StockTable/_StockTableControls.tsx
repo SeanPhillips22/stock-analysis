@@ -3,11 +3,9 @@ import { FilterObject } from 'types/Filters'
 import { TableFilter } from './Controls/TableFilter'
 import { TableColumns } from './Controls/TableColumns'
 import { TableResults } from './Controls/TableResults'
-import { TableRange } from './Controls/TableRange'
 import { usePageContext } from 'components/Markets/PageContext'
 import { TableTimestamp } from './Controls/TableTimestamp'
 import { TableTitle } from './Controls/TableTitle'
-import { TableMoverType } from './Controls/TableMoverType'
 import { useTableContext } from './TableContext'
 import { ToggleVisible } from './Controls/ToggleVisible'
 import { cn } from 'functions/helpers/classNames'
@@ -34,10 +32,6 @@ export function StockTableControls({ filter }: Props) {
 
 			{/* Button group */}
 			<div className={cn('btn-group', dynamic.showOnMobile ? 'block' : 'hidem')}>
-				{/* MoverType Select */}
-				{fixed.controls?.moverType && <TableMoverType />}
-				{/* Time Range */}
-				{fixed.controls?.range && <TableRange />}
 				{/* Search Filter */}
 				{fixed.controls?.filter && <TableFilter filter={filter} />}
 				{/* Results Count */}

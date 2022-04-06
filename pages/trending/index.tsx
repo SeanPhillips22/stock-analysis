@@ -50,7 +50,8 @@ export default function Trending(props: Props) {
 											columns: true,
 											results: true
 										},
-										columnOrder: query.columns
+										columnOrder: query.columns,
+										fixedColumns: ['rank', 's', 'views']
 									},
 									dynamic: query
 								}}

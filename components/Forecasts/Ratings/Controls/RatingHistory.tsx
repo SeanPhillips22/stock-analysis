@@ -1,4 +1,4 @@
-import { Menu } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { forecastState } from 'components/Forecasts/forecast.state'
 import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
@@ -14,36 +14,44 @@ export function RatingHistory() {
 
 	function handleClick(range: string) {
 		if (isPro || range === '1 Year') setHistory(range)
-		else router.push('/pro/')
+		else {
+			router.push('/pro/')
+		}
 	}
 
 	return (
 		<Dropdown title={history}>
-			<Menu.Item>
-				<div className={cn('dd', history === '1 Year' ? 'active' : '')} onClick={() => handleClick('1 Year')}>
+			<Popover.Button as="div">
+				<div
+					className={cn('dd', history === '1 Year' ? 'active' : '')}
+					onClick={() => handleClick('1 Year')}
+					tabIndex={0}
+				>
 					1 Year
 				</div>
-			</Menu.Item>
-			<Menu.Item>
+			</Popover.Button>
+			<Popover.Button as="div">
 				<div
 					className={cn('dd', history === '2 Years' ? 'active' : '')}
 					onClick={() => handleClick('2 Years')}
 					title={isPro ? '' : 'Upgrade to Pro to see 2 years of data'}
+					tabIndex={0}
 				>
 					2 Years
 					{!isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 				</div>
-			</Menu.Item>
-			<Menu.Item>
+			</Popover.Button>
+			<Popover.Button as="div">
 				<div
 					className={cn('dd', history === '5 Years' ? 'active' : '')}
 					onClick={() => handleClick('5 Years')}
 					title={isPro ? '' : 'Upgrade to Pro to see 5+ years of data'}
+					tabIndex={0}
 				>
 					5 Years
 					{!isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 				</div>
-			</Menu.Item>
+			</Popover.Button>
 		</Dropdown>
 	)
 }

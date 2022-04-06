@@ -1,4 +1,4 @@
-import { Menu } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { forecastState } from 'components/Forecasts/forecast.state'
 import { cn } from 'functions/helpers/classNames'
@@ -9,16 +9,24 @@ export function RatingChartType() {
 
 	return (
 		<Dropdown title={type}>
-			<Menu.Item>
-				<div className={cn('dd', type === 'Bar Chart' ? 'active' : '')} onClick={() => setType('Bar Chart')}>
+			<Popover.Button as="div">
+				<div
+					className={cn('dd', type === 'Bar Chart' ? 'active' : '')}
+					onClick={() => setType('Bar Chart')}
+					tabIndex={0}
+				>
 					Bar Chart
 				</div>
-			</Menu.Item>
-			<Menu.Item>
-				<div className={cn('dd', type === 'Line Chart' ? 'active' : '')} onClick={() => setType('Line Chart')}>
+			</Popover.Button>
+			<Popover.Button as="div">
+				<div
+					className={cn('dd', type === 'Line Chart' ? 'active' : '')}
+					onClick={() => setType('Line Chart')}
+					tabIndex={0}
+				>
 					Line Chart
 				</div>
-			</Menu.Item>
+			</Popover.Button>
 		</Dropdown>
 	)
 }

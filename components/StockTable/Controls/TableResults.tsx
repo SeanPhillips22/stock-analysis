@@ -5,7 +5,7 @@ import { cn } from 'functions/helpers/classNames'
 import { useRouter } from 'next/router'
 import { authState } from 'state/authState'
 import { useTableContext } from '../TableContext'
-import { Menu } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 
 const OPTIONS = [
 	{
@@ -55,11 +55,12 @@ export function TableResults() {
 		<Dropdown title={title} hoverTitle="Change results count" classes="leftmost">
 			{OPTIONS.map(i => (
 				/* One Dropdown Item */
-				<Menu.Item key={i.value}>
+				<Popover.Button as="div" key={i.value}>
 					<div
 						className={cn('dd', i.value === count ? 'active' : 'inactive')}
 						title={hoverTitle(i.value, i.pro)}
 						onClick={() => handleClick(i.value, i.pro)}
+						tabIndex={0}
 					>
 						{/* Button Text */}
 						{i.value.toString() + ' Rows'}
@@ -70,7 +71,7 @@ export function TableResults() {
 						{/* Icon - if option is only for pro members */}
 						{i.pro && !isPro && <LockClosedIcon className="lock-icon" aria-hidden="true" />}
 					</div>
-				</Menu.Item>
+				</Popover.Button>
 			))}
 		</Dropdown>
 	)
