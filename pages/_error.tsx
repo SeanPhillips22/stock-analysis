@@ -5,14 +5,17 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { authState } from 'state/authState'
 
 function Error({ statusCode }: any) {
+	const isLoggedIn = authState(state => state.isLoggedIn)
+	const isPro = authState(state => state.isPro)
 	const router = useRouter()
 	const { event } = useEvent()
 
 	useEffect(() => {
-		event('Error', { statusCode })
-	}, [event, statusCode])
+		event('Error', { statusCode, isPro, isLoggedIn })
+	}, [event, isLoggedIn, isPro, statusCode])
 
 	return (
 		<UserLayout url={router.asPath}>
@@ -29,9 +32,10 @@ function Error({ statusCode }: any) {
 				or email us directly at support@stockanalysis.com.
 			</div>
 			<Button text="Back to home page" url="/" className="mt-8" />
-			<div className="mt-12 text-base leading-relaxed lg:text-base">
+			<div className="mt-12 text-base">
 				{statusCode ? `Server error. Status code: ${statusCode}` : 'Client error.'}
 			</div>
+			<div className="mt-2 text-base">{router.asPath ? `URL: ${router.asPath}` : ''}</div>
 		</UserLayout>
 	)
 }

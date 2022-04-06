@@ -12,6 +12,8 @@ type EventProps = {
 	location?: string // where in the layout the event is
 	title?: string
 	statusCode?: string | number
+	isPro?: boolean
+	isLoggedIn?: boolean
 }
 
 /**
