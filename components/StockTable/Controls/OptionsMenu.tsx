@@ -5,8 +5,11 @@ import { INITIAL_STOCK_SCREENER_STATE } from 'components/Screener/maps/InitialSt
 import { ExportButtons } from 'components/Controls/Export/ExportButtons'
 import { screenerState } from '../../Screener/screener.state'
 import { useEvent } from 'hooks/useEvent'
+import { SplitTestAny } from 'components/SplitTest'
+import { useEffect, useState } from 'react'
 
 export function OptionsMenu() {
+	const [buttonTitle, setButtonTitle] = useState('Options')
 	const setResultsMenu = screenerState(state => state.setResultsMenu)
 	const { tableId, fixed, clearState } = useTableContext()
 	const router = useRouter()
@@ -47,8 +50,16 @@ export function OptionsMenu() {
 		router.push('/screener/stock/')
 	}
 
+	useEffect(() => {
+		setButtonTitle(SplitTestAny('Options', 'More'))
+	}, [])
+
 	return (
-		<Dropdown title="Options" classes="divide-y divide-gray-100 whitespace-nowrap">
+		<Dropdown
+			title={buttonTitle}
+			classes="divide-y divide-gray-100 whitespace-nowrap"
+			onClick={() => event('Options_Menu', { type: buttonTitle })}
+		>
 			<div
 				className="dd"
 				title="Open list in stock screener"

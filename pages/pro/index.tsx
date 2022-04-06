@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { supabase } from 'functions/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
 import { FocusedLayout } from 'components/Layout/FocusedLayout'
+import { useEvent } from 'hooks/useEvent'
 
 declare global {
 	// eslint-disable-next-line no-unused-vars
@@ -14,6 +15,7 @@ declare global {
 
 export default function LandingPage() {
 	const router = useRouter()
+	const { event } = useEvent()
 
 	useEffect(() => {
 		const paddleJs = document.createElement('script')
@@ -25,7 +27,7 @@ export default function LandingPage() {
 			// eslint-disable-next-line new-cap
 			window.Paddle.Setup({ vendor: 128917 })
 		}
-	}, [])
+	}, [event])
 
 	async function checkoutComplete(data: any) {
 		if (data.user.email) {
@@ -47,6 +49,7 @@ export default function LandingPage() {
 				}
 			)
 
+			event('Conversion', { type: 'Pro - Monthly' })
 			router.push('/pro/confirmation/')
 		}
 	}
@@ -116,6 +119,7 @@ export default function LandingPage() {
 													product: 649892,
 													successCallback: checkoutComplete
 												})
+												event('Checkout', { type: 'Pro - Monthly' })
 											}}
 											id="start-trial"
 											className="block w-full cursor-pointer bg-blue-brand_light p-4 text-center text-2xl text-white hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
