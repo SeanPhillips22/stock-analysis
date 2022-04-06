@@ -1,6 +1,5 @@
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { getData } from './API'
-import { respondSSR } from './callBackEnd'
 
 /**
  * Fetch data from the select endpoint on the backend
@@ -35,11 +34,6 @@ export async function getSelect(config: TableDynamic, ssr?: boolean, extras?: st
 	// fetch the data from the back-end
 	let response = await getData(url)
 
-	// if SSR is true, return the data as page props
-	if (ssr) {
-		return respondSSR(response)
-	}
-
-	// if not, then return the data as is
+	// return the data
 	return response.data
 }

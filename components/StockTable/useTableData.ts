@@ -21,20 +21,27 @@ export function useTableData(tableId: string, dynamic: TableDynamic, _data: any[
 		page: page[tableId]
 	}
 
-	const { data, isFetching } = useQuery([tableId, queryObject], async () => await getSelect(queryObject, false), {
-		placeholderData: _data,
-		enabled: enabled || page[tableId] ? true : false,
-		refetchOnWindowFocus: false,
-		refetchOnMount: false,
-		staleTime: 60000,
-		notifyOnChangeProps: 'tracked',
-		keepPreviousData: true
-	})
+	const { data, isFetching, error } = useQuery(
+		[tableId, queryObject],
+		async () => await getSelect(queryObject, false),
+		{
+			placeholderData: _data,
+			enabled: enabled || page[tableId] ? true : false,
+			refetchOnWindowFocus: false,
+			refetchOnMount: false,
+			staleTime: 60000,
+			notifyOnChangeProps: 'tracked',
+			keepPreviousData: true,
+			retry: false
+		}
+	)
 
+	// whether the table is paginated and a page is being fetched
 	const fetching = isFetching && page[tableId] && page[tableId] !== 1 ? true : false
 
 	return {
 		data,
-		isFetching: fetching
+		isFetching: fetching,
+		error
 	}
 }
