@@ -3,7 +3,6 @@
  */
 export function SplitTestComponents(A: React.FC, B: React.FC) {
 	const rand = Math.random()
-	console.log(rand)
 
 	if (rand < 0.5) {
 		return <A />
@@ -14,7 +13,6 @@ export function SplitTestComponents(A: React.FC, B: React.FC) {
 
 export function SplitTestAny(A: any, B: any) {
 	const rand = Math.random()
-	console.log(rand)
 
 	if (rand < 0.5) {
 		return A
