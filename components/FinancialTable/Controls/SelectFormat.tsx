@@ -2,6 +2,7 @@ import { CheckIcon } from 'components/Icons/CheckIcon'
 import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { financialsState } from 'state/financialsState'
 import { useEvent } from 'hooks/useEvent'
+import { Popover } from '@headlessui/react'
 
 export function SelectFormat() {
 	const divider = financialsState(state => state.divider)
@@ -32,17 +33,20 @@ export function SelectFormat() {
 	return (
 		<Dropdown title={active ? active.title : 'Format'} hoverTitle="Change number units" active={divider !== 1000000}>
 			{DIVIDER_MAP.map(item => (
-				<div
-					key={item.value}
-					className={item.value === divider ? 'dd active' : 'dd'}
-					onClick={() => {
-						setDivider(item.value)
-						event('Financial_Controls', { type: 'Set_Divider', title: item.title })
-					}}
-				>
-					{item.title}
-					{item.value === divider && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
-				</div>
+				<Popover.Button as="div" key={item.value}>
+					<div
+						key={item.value}
+						className={item.value === divider ? 'dd active' : 'dd'}
+						onClick={() => {
+							setDivider(item.value)
+							event('Financial_Controls', { type: 'Set_Divider', title: item.title })
+						}}
+						tabIndex={0}
+					>
+						{item.title}
+						{item.value === divider && <CheckIcon className="h-5 w-5" aria-hidden="true" />}
+					</div>
+				</Popover.Button>
 			))}
 		</Dropdown>
 	)
