@@ -9,6 +9,9 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableData, TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
+// import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'react-sparklines'
+import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'components/Sparklines/Sparklines'
+import { testdata } from 'components/Sparklines/testdata'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -50,10 +53,43 @@ type Props = {
 }
 
 export default function PreMarket(props: Props) {
+	const test = testdata
+	const prevClose = 456
+
+	const redOrGreen = (value: number) => {
+		if (value > prevClose) return 'green'
+		return 'red'
+	}
+
+	const getNthItems = <T,>(arr: T[], nth: number): T[] => arr.filter((_, i) => i % nth === nth - 1)
+
+	const dataTest = getNthItems(test.values, 1)
+
+	const returnClose = dataTest.map(item => {
+		return item.close
+	})
 	return (
 		<PageContextProvider value={{ page, updated: props.res.tradingTimestamps }}>
 			<MarketsLayout SubNav={PremarketNav}>
 				<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">
+					<div className="w-36">
+						{' '}
+						<Sparklines previousClose={prevClose} data={returnClose}>
+							<SparklinesLine
+								color={redOrGreen(Number(dataTest[dataTest.length - 1].close))}
+								style={{
+									strokeWidth: '1.5',
+									fill: redOrGreen(Number(dataTest[dataTest.length - 1].close)),
+									fillOpacity: '.2'
+								}}
+							/>
+							<SparklinesReferenceLine
+								style={{ stroke: 'black', strokeOpacity: 1, strokeDasharray: '4, 5' }}
+								type={'custom'}
+								value={1}
+							/>
+						</Sparklines>
+					</div>
 					<TableContextProvider
 						value={{
 							title: 'Premarket Gainers',
