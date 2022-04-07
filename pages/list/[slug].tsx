@@ -8,6 +8,7 @@ import { TableDynamic, TableFixed } from 'components/StockTable/TableTypes'
 import { StockListLayout } from 'components/Layout/StockListLayout'
 import { SmallInfoBox } from 'components/InfoBoxes/SmallInfoBox'
 import { RelatedStockLists } from 'components/StockLists/RelatedStockLists'
+import { StockListStats } from 'components/StockLists/StockListStats'
 import { BottomDisclaimer } from 'components/StockLists/BottomDisclaimer'
 import { EtfDataPoints } from 'data/DataPointGroups/EtfDataPoints'
 import { getData } from 'functions/apis/API'
@@ -31,6 +32,9 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 					{/* Info Box */}
 					{page.pageDescription && <SmallInfoBox text={page.pageDescription} classes="mb-4 sm:mb-5" />}
 
+					{/* Stats Widget */}
+					{query.columns.includes('revenue') && <StockListStats data={data.data} />}
+
 					{/* Main Table */}
 					<TableContextProvider
 						value={{
@@ -47,28 +51,29 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 						<StockTable _data={data} />
 					</TableContextProvider>
 					{page.disclaimer && <BottomDisclaimer text={page.disclaimer} />}
+					{etfQuery || relatedLists ? (
+						<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
+							{/* If list is set to show ETFs */}
+							{etfQuery && (
+								<TableContextProvider
+									value={{
+										title: page.etfTitle || 'Related ETFs',
+										tableId: `${listId}-etf-v2`,
+										fixed: {
+											defaultSort: [{ id: 'aum', desc: true }],
+											columnOptions: EtfDataPoints
+										},
+										dynamic: etfQuery
+									}}
+								>
+									<StockTable _data={etfData} />
+								</TableContextProvider>
+							)}
 
-					<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
-						{/* If list is set to show ETFs */}
-						{etfQuery && (
-							<TableContextProvider
-								value={{
-									title: page.etfTitle || 'Related ETFs',
-									tableId: `${listId}-etf-v2`,
-									fixed: {
-										defaultSort: [{ id: 'aum', desc: true }],
-										columnOptions: EtfDataPoints
-									},
-									dynamic: etfQuery
-								}}
-							>
-								<StockTable _data={etfData} />
-							</TableContextProvider>
-						)}
-
-						{/* Related Lists */}
-						{relatedLists && <RelatedStockLists lists={relatedLists} />}
-					</div>
+							{/* Related Lists */}
+							{relatedLists && <RelatedStockLists lists={relatedLists} />}
+						</div>
+					) : null}
 				</StockListLayout>
 			</PageContextProvider>
 		</>
@@ -118,7 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		count: list.results_count ?? null,
 		sort: [{ id: main, desc: list.sort_direction !== 'asc' }],
 		sortDirection: list.sort_direction || 'desc',
-		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change'],
+		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change', 'revenue'],
 		filters: list.filters
 			? list.filters === 'null'
 				? null
