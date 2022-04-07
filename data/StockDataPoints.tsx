@@ -736,6 +736,11 @@ export const DataPoints: Props = {
 		colName: 'Rev Gr. Next 5Y',
 		format: 'formatPercentage'
 	},
+	tags: {
+		id: 'tags',
+		name: 'Tags',
+		only: 'screener'
+	},
 	/* IPOs
 	
 

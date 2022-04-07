@@ -34,12 +34,12 @@ export function useAuth() {
 				toast.success('You have successfully logged out.')
 			}
 			// set a cookie in order to use server-side rendered features
-			fetch('/api/auth/', {
-				method: 'POST',
-				headers: new Headers({ 'Content-Type': 'application/json' }),
-				credentials: 'same-origin',
-				body: JSON.stringify({ event, session })
-			})
+			// fetch('/api/auth/', {
+			// 	method: 'POST',
+			// 	headers: new Headers({ 'Content-Type': 'application/json' }),
+			// 	credentials: 'same-origin',
+			// 	body: JSON.stringify({ event, session })
+			// })
 		})
 
 		if (!checking) {
