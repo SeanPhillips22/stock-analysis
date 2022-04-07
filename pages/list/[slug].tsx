@@ -31,17 +31,16 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 				<StockListLayout key={page.path}>
 					{/* Info Box */}
 					{page.pageDescription && <SmallInfoBox text={page.pageDescription} classes="mb-4 sm:mb-5" />}
-					<StockListStats
-						stockCount={data.data.length}
-						totalMarketCap={data.data.reduce((a: number, b: any) => a + b.marketCap, 0)}
-						totalYTDChange={121}
-					/>
+
+					{/* Stats Widget */}
+					{query.columns.includes('revenue') && <StockListStats data={data.data} />}
+
 					{/* Main Table */}
 					<TableContextProvider
 						value={{
 							title: page.tableTitle,
 							description: page.pageDescription,
-							tableId: `${listId}-v2`,
+							tableId: `${listId}-v3`,
 							fixed: {
 								...fixed,
 								columnOrder: query.columns
@@ -52,9 +51,10 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 						<StockTable _data={data} />
 					</TableContextProvider>
 					{page.disclaimer && <BottomDisclaimer text={page.disclaimer} />}
-					<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
-						{/* If list is set to show ETFs */}
-						{etfQuery && (
+
+					{/* ETF Table */}
+					{etfQuery && (
+						<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
 							<TableContextProvider
 								value={{
 									title: page.etfTitle || 'Related ETFs',
@@ -68,11 +68,11 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 							>
 								<StockTable _data={etfData} />
 							</TableContextProvider>
-						)}
+						</div>
+					)}
 
-						{/* Related Lists */}
-						{relatedLists && <RelatedStockLists lists={relatedLists} />}
-					</div>
+					{/* Related Lists */}
+					{relatedLists && <RelatedStockLists lists={relatedLists} />}
 				</StockListLayout>
 			</PageContextProvider>
 		</>
@@ -122,7 +122,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		count: list.results_count ?? null,
 		sort: [{ id: main, desc: list.sort_direction !== 'asc' }],
 		sortDirection: list.sort_direction || 'desc',
-		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change'],
+		columns: list.columns || ['rank', 's', 'n', 'marketCap', 'price', 'change', 'revenue'],
 		filters: list.filters
 			? list.filters === 'null'
 				? null

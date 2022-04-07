@@ -1,87 +1,40 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { formatCellRaw } from 'functions/tables/formatTableCell'
-import { cn } from 'functions/helpers/classNames'
-import { ArrowSmUpIcon } from 'components/Icons/ArrowSmUp'
-import { ArrowSmDownIcon } from 'components/Icons/ArrowSmDown'
+import { memo } from 'react'
 
 type Props = {
-	stockCount: number
-	totalMarketCap: number
-	totalYTDChange: number
+	data: any
 }
 
-function getChangeType(val: number) {
-	return val > 0 ? 'increase' : val < 0 ? 'decrease' : 'nochange'
-}
-
-export function StockListStats({ stockCount, totalMarketCap, totalYTDChange }: Props) {
-	totalYTDChange = 11.25
-	const SP500 = -0.34
+function StockListStatsComponent({ data }: Props) {
+	const count = data.length
+	const marketCap = data.reduce((a: number, b: any) => a + b.marketCap, 0)
+	const revenue = data.reduce((a: number, b: any) => a + b.revenue, 0)
 
 	const stats = [
 		{
-			name: `Total Companies`,
-			stat: stockCount,
-
-			changeType: 'nochange'
+			name: 'Total Companies',
+			stat: count
 		},
 		{
-			name: `Total Market Cap`,
-			stat: formatCellRaw('abbreviate', totalMarketCap),
-			previousStat: 'YTD',
-			change: formatCellRaw('formatPercentage', totalYTDChange - SP500),
-			changeType: getChangeType(totalYTDChange - SP500)
+			name: 'Total Market Cap',
+			stat: formatCellRaw('abbreviate', marketCap)
 		},
 		{
-			name: `YTD Gain vs. S&P500`,
-			stat: formatCellRaw('formatPercentage', totalYTDChange),
-			previousStat: 'S&P500',
-			change: formatCellRaw('formatPercentage', totalYTDChange - SP500),
-			changeType: getChangeType(totalYTDChange - SP500)
+			name: 'Total Revenue',
+			stat: formatCellRaw('abbreviate', revenue)
 		}
 	]
 
 	return (
 		<div>
-			<dl className="mb-4 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg border bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
+			<dl className="mb-4 grid grid-cols-3 divide-x divide-gray-200 overflow-hidden rounded-lg border bg-white shadow">
 				{stats.map(item => (
-					<div key={item.name} className="px-4 py-5 sm:p-6">
-						<dt className="text-base font-normal text-gray-900">{item.name}</dt>
+					<div key={item.name} className="px-2 py-5 bp:px-4 sm:p-6">
+						<dt className="text-sm font-normal text-gray-900 xs:text-base">{item.name}</dt>
 						<dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-							<div className="flex items-baseline text-2xl font-semibold text-blue-700">
+							<div className="flex items-baseline font-semibold leading-8 text-blue-brand_sharp tiny:text-lg xs:text-xl bp:text-[1.4rem] sm:text-2xl">
 								{item.stat}
-								{item.previousStat && (
-									<div className="ml-2 text-sm font-medium text-gray-500">{item.previousStat}</div>
-								)}
 							</div>
-
-							{item.changeType !== 'nochange' && (
-								<div
-									className={cn(
-										item.changeType === 'increase'
-											? 'bg-green-100 text-green-800'
-											: 'bg-red-100 text-red-800',
-										'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0'
-									)}
-								>
-									{item.changeType === 'increase' ? (
-										<ArrowSmUpIcon
-											classes="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
-											aria-hidden="true"
-										/>
-									) : (
-										<ArrowSmDownIcon
-											classes="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-red-500"
-											aria-hidden="true"
-										/>
-									)}
-
-									<span className="sr-only">
-										{item.changeType === 'increase' ? 'Increased' : 'Decreased'} by
-									</span>
-									{item.change}
-								</div>
-							)}
 						</dd>
 					</div>
 				))}
@@ -89,3 +42,5 @@ export function StockListStats({ stockCount, totalMarketCap, totalYTDChange }: P
 		</div>
 	)
 }
+
+export const StockListStats = memo(StockListStatsComponent)
