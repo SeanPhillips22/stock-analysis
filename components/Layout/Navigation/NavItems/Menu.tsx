@@ -34,6 +34,7 @@ export function MenuNavItem({ item, path }: NavItemProps) {
 					<a
 						className={matchParentPath(path, item.href) ? 'nav-item current parent' : 'nav-item parent'}
 						title={item.name}
+						onClick={close}
 					>
 						<item.icon className="nav-icon" />
 						<span className="nav-label">{item.name}</span>
