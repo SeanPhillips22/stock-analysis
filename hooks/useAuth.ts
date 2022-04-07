@@ -2,6 +2,7 @@
 import { supabase } from 'functions/supabase'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import toast from 'react-hot-toast'
 import { authState } from 'state/authState'
 
 export function useAuth() {
@@ -25,18 +26,20 @@ export function useAuth() {
 				setUser(session?.user)
 				setIsLoggedIn(true)
 				checkPro(session?.user)
+				toast.success('You are now logged in.')
 			}
 			if (event === 'SIGNED_OUT') {
 				setUser(undefined)
 				setIsLoggedIn(false)
+				toast.success('You have successfully logged out.')
 			}
 			// set a cookie in order to use server-side rendered features
-			// fetch('/api/auth/', {
-			// 	method: 'POST',
-			// 	headers: new Headers({ 'Content-Type': 'application/json' }),
-			// 	credentials: 'same-origin',
-			// 	body: JSON.stringify({ event, session })
-			// })
+			fetch('/api/auth/', {
+				method: 'POST',
+				headers: new Headers({ 'Content-Type': 'application/json' }),
+				credentials: 'same-origin',
+				body: JSON.stringify({ event, session })
+			})
 		})
 
 		if (!checking) {
