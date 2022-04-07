@@ -40,7 +40,7 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 						value={{
 							title: page.tableTitle,
 							description: page.pageDescription,
-							tableId: `${listId}-v3`,
+							tableId: `${listId}-v2`,
 							fixed: {
 								...fixed,
 								columnOrder: query.columns
@@ -51,28 +51,29 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 						<StockTable _data={data} />
 					</TableContextProvider>
 					{page.disclaimer && <BottomDisclaimer text={page.disclaimer} />}
-
-					{/* ETF Table */}
-					{etfQuery && (
+					{etfQuery || relatedLists ? (
 						<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
-							<TableContextProvider
-								value={{
-									title: page.etfTitle || 'Related ETFs',
-									tableId: `${listId}-etf-v2`,
-									fixed: {
-										defaultSort: [{ id: 'aum', desc: true }],
-										columnOptions: EtfDataPoints
-									},
-									dynamic: etfQuery
-								}}
-							>
-								<StockTable _data={etfData} />
-							</TableContextProvider>
-						</div>
-					)}
+							{/* If list is set to show ETFs */}
+							{etfQuery && (
+								<TableContextProvider
+									value={{
+										title: page.etfTitle || 'Related ETFs',
+										tableId: `${listId}-etf-v2`,
+										fixed: {
+											defaultSort: [{ id: 'aum', desc: true }],
+											columnOptions: EtfDataPoints
+										},
+										dynamic: etfQuery
+									}}
+								>
+									<StockTable _data={etfData} />
+								</TableContextProvider>
+							)}
 
-					{/* Related Lists */}
-					{relatedLists && <RelatedStockLists lists={relatedLists} />}
+							{/* Related Lists */}
+							{relatedLists && <RelatedStockLists lists={relatedLists} />}
+						</div>
+					) : null}
 				</StockListLayout>
 			</PageContextProvider>
 		</>
