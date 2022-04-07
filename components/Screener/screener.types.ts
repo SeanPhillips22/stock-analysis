@@ -115,7 +115,8 @@ export type FilterObject = {
 export type FilterType =
 	| 'numeric'
 	| 'stringmatch'
-	| 'multiselect'
+	| 'multiselect' // Can select multiple values
+	| 'multiselectarray' // Can select multiple values, but each stock has an array of possible matches
 	| 'arraymatch' // Check if the stock's value is inside array of values
 	| 'date'
 	| 'dateYear'

@@ -49,7 +49,7 @@ export function Filter({ filter }: { filter: FilterProps }) {
 
 	if (filterType === 'numeric' || filterType === 'numericRange') {
 		Filter = NumericFilter
-	} else if (filterType === 'multiselect') {
+	} else if (filterType === 'multiselect' || filterType === 'multiselectarray') {
 		Filter = SelectFilter
 	} else {
 		Filter = StringFilter

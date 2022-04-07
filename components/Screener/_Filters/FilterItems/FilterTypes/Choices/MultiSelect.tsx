@@ -1,6 +1,7 @@
 // import { screenerState } from 'components/Screener/screener.state'
 import { FilterOption, FilterProps } from 'components/Screener/screener.types'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
+import { memo } from 'react'
 
 type Props = {
 	filter: FilterProps
@@ -10,9 +11,8 @@ type Props = {
 /**
  * A filter option with multiple choices as checkboxes. If there are over 5 options then a search bar is also shown at the top.
  */
-export function MultiSelect({ filter, option }: Props) {
+function MultiSelectComponent({ filter, option }: Props) {
 	const { state, dispatch } = useScreenerContext()
-	// const setOpenFilter = screenerState(state => state.setOpenFilter)
 	const { id, filterType, numberType } = filter
 	const { name, value } = option
 
@@ -45,6 +45,7 @@ export function MultiSelect({ filter, option }: Props) {
 	return (
 		<div className="flex items-center">
 			<input
+				key={Math.random()}
 				type="checkbox"
 				id={value}
 				defaultChecked={state.filters.find(filter => filter.id === id)?.array?.includes(value)}
@@ -57,3 +58,5 @@ export function MultiSelect({ filter, option }: Props) {
 		</div>
 	)
 }
+
+export const MultiSelect = memo(MultiSelectComponent)

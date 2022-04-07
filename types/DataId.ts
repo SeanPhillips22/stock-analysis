@@ -176,3 +176,4 @@ export type DataId =
 	| 'issuer' // ETF Geographic Region
 	| 'etfIndex' // Index tracked by the ETF
 	| 'rank' // The number of the table row
+	| 'tags' // Tags applied to the stock or ETF

@@ -4,6 +4,7 @@ import { ChevronDownIcon } from 'components/Icons/ChevronDownIcon'
 import { createLabelFromString } from 'components/Screener/functions/filterString/createLabelFromString'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
 import { cn } from 'functions/helpers/classNames'
+import { capitalize } from 'functions/helpers/capitalize'
 
 type Props = {
 	active: string | false
@@ -25,6 +26,8 @@ export function FilterButton({ active, id }: Props) {
 			return value
 		} else if (array && filterType === 'multiselect') {
 			return array.join(', ')
+		} else if (array && filterType === 'multiselectarray') {
+			return capitalize(array[0].replace('-', ' '))
 		}
 		return false
 	}

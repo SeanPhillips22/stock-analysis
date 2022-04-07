@@ -2888,5 +2888,16 @@ export const StockDataPoints: FilterProps[] = [
 		format: 'percentage',
 		tooltipTitle: 'Revenue Growth Next 5 Years',
 		tooltipText: 'Estimated compound annual growth rate (CAGR) for revenue over the next five fiscal years.'
+	},
+	{
+		name: 'Tag',
+		id: 'tags',
+		category: ['Company'],
+		filterType: 'multiselectarray',
+		format: 'array',
+		variable: true,
+		options: [],
+		tooltipText:
+			'A tag applied in order to categorize a company. A tag is more specific than industry or sector. Examples include "virtual reality" or "electric vehicles."'
 	}
 ]

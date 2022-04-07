@@ -23,7 +23,10 @@ export function SelectFilter({ filter, active }: Props) {
 
 	// Check if the filter should have a search bar
 	useEffect(() => {
-		if (filterType === 'stringmatch' || (filterType === 'multiselect' && options.length > 6)) {
+		if (
+			filterType === 'stringmatch' ||
+			((filterType === 'multiselect' || filterType === 'multiselectarray') && options.length > 6)
+		) {
 			setHasSearch(true)
 		}
 	}, [filterType, options.length])
@@ -81,7 +84,7 @@ export function SelectFilter({ filter, active }: Props) {
 					onChange={e => setSearch(e.target.value)}
 				/>
 			)}
-			<div className="thin-scroll max-h-[300px] min-w-[150px] max-w-[260px] space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain whitespace-nowrap p-2 text-sm xs:max-w-[300px] bp:max-w-none lg:max-h-[400px]">
+			<div className="thin-scroll max-h-[300px] min-w-[150px] max-w-[260px] space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain whitespace-nowrap p-2 text-sm xs:max-w-[300px] bp:max-w-none lg:max-h-[400px] lg:min-w-[250px]">
 				{options && options.map(option => <MultiSelect key={option.value} filter={filter} option={option} />)}
 			</div>
 		</div>

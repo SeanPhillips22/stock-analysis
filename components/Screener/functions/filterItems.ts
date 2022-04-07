@@ -38,6 +38,19 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 				}
 			}
 
+			// Multiselect array match
+			if (filter.filterType === 'multiselectarray') {
+				// check if any of the values in the array match
+				let count = filter.array ? filter.array.length : 0
+				for (let i = 0; i < count; i++) {
+					let value = filter.array ? filter.array[i] : ''
+					if (stock[filter.id]?.includes(value)) {
+						matched = true
+						break
+					}
+				}
+			}
+
 			// Array match
 			if (filter.filterType === 'arraymatch') {
 				if (stock[filter.id]?.includes(filter.value)) {
