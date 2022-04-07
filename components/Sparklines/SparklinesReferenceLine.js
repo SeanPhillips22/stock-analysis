@@ -14,7 +14,6 @@ export default class SparklinesReferenceLine extends React.Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const { prevCloseCoords, points, margin, style } = this.props
 
 		return (

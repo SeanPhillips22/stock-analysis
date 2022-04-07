@@ -11,7 +11,7 @@ import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
 // import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'react-sparklines'
 import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'components/Sparklines/Sparklines'
-import { testdata } from 'components/Sparklines/testdata'
+import { spy, qqq, ivm } from 'components/Sparklines/testdata'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -53,43 +53,57 @@ type Props = {
 }
 
 export default function PreMarket(props: Props) {
-	const test = testdata
-	const prevClose = 456
-
-	const redOrGreen = (value: number) => {
+	const redOrGreen = (value: number, prevClose: number) => {
 		if (value > prevClose) return 'green'
 		return 'red'
 	}
 
-	const getNthItems = <T,>(arr: T[], nth: number): T[] => arr.filter((_, i) => i % nth === nth - 1)
+	// const getNthItems = <T,>(arr: T[], nth: number): T[] => arr.filter((_, i) => i % nth === nth - 1) If we want to get every nth and shorten data.
 
-	const dataTest = getNthItems(test.values, 1)
+	const dataArray = [
+		{ data: spy, prevClose: 456 },
+		{ data: qqq, prevClose: 369 },
+		{ data: ivm, prevClose: 208.5 }
+	]
 
-	const returnClose = dataTest.map(item => {
-		return item.close
-	})
+	const returnCloseData = (list: any) => {
+		return list.map((item: any) => {
+			return item.close
+		})
+	}
+
 	return (
 		<PageContextProvider value={{ page, updated: props.res.tradingTimestamps }}>
 			<MarketsLayout SubNav={PremarketNav}>
 				<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">
-					<div className="w-36">
+					<dl className=" grid grid-cols-1  md:grid-cols-3 ">
 						{' '}
-						<Sparklines previousClose={prevClose} data={returnClose}>
-							<SparklinesLine
-								color={redOrGreen(Number(dataTest[dataTest.length - 1].close))}
-								style={{
-									strokeWidth: '1.5',
-									fill: redOrGreen(Number(dataTest[dataTest.length - 1].close)),
-									fillOpacity: '.2'
-								}}
-							/>
-							<SparklinesReferenceLine
-								style={{ stroke: 'black', strokeOpacity: 1, strokeDasharray: '4, 5' }}
-								type={'custom'}
-								value={1}
-							/>
-						</Sparklines>
-					</div>
+						{dataArray.map((object: any, i: number) => (
+							<div className="w-36" key={i}>
+								<Sparklines previousClose={object.prevClose} data={returnCloseData(object.data.values)}>
+									<SparklinesLine
+										color={redOrGreen(
+											Number(object.data.values[object.data.values.length - 1].close),
+											object.prevClose
+										)}
+										style={{
+											strokeWidth: '2',
+											fill: redOrGreen(
+												Number(object.data.values[object.data.values.length - 1].close),
+												object.prevClose
+											),
+											fillOpacity: '.2'
+										}}
+									/>
+									<SparklinesReferenceLine
+										style={{ stroke: 'black', strokeOpacity: 1, strokeWidth: '2', strokeDasharray: '4, 5' }}
+										type={'custom'}
+										value={1}
+									/>
+								</Sparklines>
+							</div>
+						))}
+					</dl>
 					<TableContextProvider
 						value={{
 							title: 'Premarket Gainers',
