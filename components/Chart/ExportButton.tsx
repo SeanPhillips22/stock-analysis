@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import { Popover, Transition } from '@headlessui/react'
 import { ExportItem } from 'components/Controls/Export/ExportItem'
 import { ExportItemRestricted } from 'components/Controls/Export/ExportItemRestricted'
 import { useAuthState } from 'hooks/useAuthState'
@@ -66,22 +66,20 @@ export function Export({ buttons, data, time }: Props) {
 	}, [data, setExpData, time])
 
 	return (
-		<Menu as="div" className="relative z-10 hidden text-left sm:inline-block">
-			<div>
-				<Menu.Button className="relative inline-flex items-center border-l border-gray-300 py-2 pl-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 bp:pr-2 bp:text-base md:border-r-0">
-					Export
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-6 w-8 text-gray-500"
-						fill="none"
-						viewBox="0 0 20 20"
-						stroke="currentColor"
-						style={{ maxWidth: '40px' }}
-					>
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 8l4 4 4-4" />
-					</svg>
-				</Menu.Button>
-			</div>
+		<Popover as="div" className="relative z-10 hidden text-left sm:inline-block">
+			<Popover.Button className="relative inline-flex items-center border-l border-gray-300 py-2 pl-4 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 bp:pr-2 bp:text-base md:border-r-0">
+				Export
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-6 w-8 text-gray-500"
+					fill="none"
+					viewBox="0 0 20 20"
+					stroke="currentColor"
+					style={{ maxWidth: '40px' }}
+				>
+					<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 8l4 4 4-4" />
+				</svg>
+			</Popover.Button>
 
 			<Transition
 				as={Fragment}
@@ -92,7 +90,7 @@ export function Export({ buttons, data, time }: Props) {
 				leaveFrom="opacity-100 scale-100"
 				leaveTo="opacity-0 scale-95"
 			>
-				<Menu.Items className="absolute right-0 mt-1 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5  focus:outline-none ">
+				<Popover.Panel className="absolute right-0 mt-1 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5  focus:outline-none ">
 					<div className="py-1">
 						{buttons &&
 							buttons.map((button, index) =>
@@ -103,8 +101,8 @@ export function Export({ buttons, data, time }: Props) {
 								)
 							)}
 					</div>
-				</Menu.Items>
+				</Popover.Panel>
 			</Transition>
-		</Menu>
+		</Popover>
 	)
 }
