@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { CloseCircleIcon } from 'components/Icons/CloseCircle'
 import { useEffect, useState } from 'react'
+import { useEvent } from 'hooks/useEvent'
 
 type Props = {
 	text: string
@@ -19,6 +20,7 @@ type Props = {
 export function InfoTutorial({ text, storageKey, docsLink, classes }: Props) {
 	const [show, setShow] = useLocalStorage(storageKey, true)
 	const [showState, setShowState] = useState(true)
+	const { event } = useEvent()
 
 	useEffect(() => {
 		setShowState(show)
@@ -52,7 +54,14 @@ export function InfoTutorial({ text, storageKey, docsLink, classes }: Props) {
 				>
 					<CloseCircleIcon classes="w-5 h-5 text-gray-600" />
 				</div>
-				<div className="ml-auto hidden cursor-pointer md:block" onClick={() => setShow(false)} title="Dismiss">
+				<div
+					className="ml-auto hidden cursor-pointer md:block"
+					onClick={() => {
+						setShow(false)
+						event('Dismiss_InfoTutorial')
+					}}
+					title="Dismiss"
+				>
 					<CloseIcon classes="w-5 h-5 text-gray-500 hover:text-red-500" />
 				</div>
 			</div>
