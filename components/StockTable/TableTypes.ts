@@ -60,6 +60,8 @@ export type TableDynamic = {
 	showOnMobile?: boolean // Whether to show the controls on mobile
 
 	page?: number // pagination can get appended to the object
+
+	dedupe?: boolean // whether to remove duplicate symbols from the table
 }
 
 // The stock index type (more specific is faster)

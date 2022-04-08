@@ -6,7 +6,7 @@ import { getData } from './API'
  */
 export async function getSelect(config: TableDynamic, ssr?: boolean, extras?: string[]) {
 	// destructure the props and create the URL
-	let { main, count, sortDirection, columns, index } = config
+	let { main, count, sortDirection, columns, index, page, dedupe } = config
 
 	// turn the columns array into a string
 	let cols = columns.join(',')
@@ -27,8 +27,13 @@ export async function getSelect(config: TableDynamic, ssr?: boolean, extras?: st
 	}
 
 	// If pagination is enabled, add the page number
-	if (config.page) {
-		url += `&page=${config.page}`
+	if (page) {
+		url += `&page=${page}`
+	}
+
+	// Remove duplicate symbols from the list
+	if (dedupe) {
+		url += '&dedupe=true'
 	}
 
 	// fetch the data from the back-end

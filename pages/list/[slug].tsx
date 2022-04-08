@@ -157,7 +157,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			? list.filters === 'null'
 				? null
 				: list.filters
-			: [`tags-includes-${list.tag.replace('-', '=')}`]
+			: [`tags-includes-${list.tag.replace('-', '=')}`],
+		dedupe: true
 	}
 
 	// Set the fixed config for ETFs
