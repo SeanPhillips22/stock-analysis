@@ -5,6 +5,7 @@ import { screenerState } from 'components/Screener/screener.state'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
 import { MultiSelect } from './Choices/MultiSelect'
 import { DataId } from 'types/DataId'
+import { SelectAll } from './Choices/SelectAll'
 
 type Props = {
 	filter: FilterProps
@@ -98,6 +99,7 @@ export function SelectFilter({ filter, active, open }: Props) {
 			<div className="thin-scroll max-h-[300px] min-w-[150px] max-w-[260px] space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain whitespace-nowrap p-2 text-sm xs:max-w-[300px] bp:max-w-none lg:max-h-[400px] lg:min-w-[250px]">
 				{options && options.map(option => <MultiSelect key={option.value} filter={filter} option={option} />)}
 			</div>
+			{!search && <SelectAll filter={filter} />}
 		</div>
 	)
 }
