@@ -56,8 +56,10 @@ export default function IposWithdrawn(props: Props) {
 										controls: {
 											filter: true,
 											export: true,
-											columns: true
+											columns: true,
+											options: true
 										},
+										hideOpenInScreener: true,
 										columnOptions: FutureIpoDataPoints,
 										excludeColumns: ['ipoDate'],
 										columnOrder: ['withdrawnDateFB', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],

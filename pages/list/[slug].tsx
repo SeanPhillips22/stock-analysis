@@ -20,12 +20,23 @@ type Props = {
 	page: PageConfig
 	fixed: TableFixed
 	query: TableDynamic
+	etfFixed?: TableFixed
 	etfQuery?: TableDynamic
 	etfData?: any
 	relatedLists?: { name: string; url: string }[]
 }
 
-export default function StockList({ listId, data, page, fixed, query, etfQuery, etfData, relatedLists }: Props) {
+export default function StockList({
+	listId,
+	data,
+	page,
+	fixed,
+	query,
+	etfFixed,
+	etfQuery,
+	etfData,
+	relatedLists
+}: Props) {
 	return (
 		<>
 			<PageContextProvider value={{ page, count: data.data.length }}>
@@ -61,15 +72,12 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 					{etfQuery || relatedLists ? (
 						<div className="mt-6 space-y-5 md:mt-8 md:space-y-6">
 							{/* If list is set to show ETFs */}
-							{etfQuery && (
+							{etfQuery && etfFixed && (
 								<TableContextProvider
 									value={{
 										title: page.etfTitle || 'Related ETFs',
 										tableId: `${listId}-etf-v2`,
-										fixed: {
-											defaultSort: [{ id: 'aum', desc: true }],
-											columnOptions: EtfDataPoints
-										},
+										fixed: etfFixed,
 										dynamic: etfQuery
 									}}
 								>
@@ -152,6 +160,32 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			: [`tags-includes-${list.tag.replace('-', '=')}`]
 	}
 
+	// Set the fixed config for ETFs
+	const etfFixed: TableFixed | null = list.etfs
+		? {
+				controls: {
+					filter: true,
+					export: true,
+					columns: true,
+					options: true
+				},
+				defaultSort: [{ id: 'aum', desc: true }],
+				columnOptions: EtfDataPoints,
+				fixedColumns: ['rank', 's'],
+				screener: {
+					type: 'etf',
+					filters: [
+						{
+							id: 'tags',
+							name: '',
+							array: [list.tag],
+							filterType: 'multiselectarray'
+						}
+					]
+				}
+		  }
+		: null
+
 	// Get the ETF query config
 	const etfQuery: TableDynamic | null = list.etfs
 		? {
@@ -184,6 +218,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			page,
 			fixed,
 			query,
+			etfFixed,
 			etfQuery,
 			etfData,
 			relatedLists

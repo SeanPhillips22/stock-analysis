@@ -54,7 +54,7 @@ export default function IpoScreenerPage() {
 					initial: INITIAL_IPO_SCREENER_STATE
 				}}
 			>
-				<Screener />
+				<Screener key="ipo-screener" />
 			</ScreenerContextProvider>
 		</ScreenerLayout>
 	)

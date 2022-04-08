@@ -23,7 +23,7 @@ export function mergeColumns(existing: SingleStock[], newColumns: SingleDataPoin
 		return combined
 	} catch (e) {
 		console.error(e)
-		toast.error('There was a error with one or more of the data columns.')
+		toast.error('There was an error with one or more of the data columns.')
 		return existing
 	}
 }

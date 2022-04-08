@@ -57,12 +57,24 @@ export default function IpoFilings(props: Props) {
 										controls: {
 											filter: true,
 											export: true,
-											columns: true
+											columns: true,
+											options: true
 										},
 										columnOptions: FutureIpoDataPoints,
 										excludeColumns: ['withdrawnDateFB', 'ipoDate'],
 										columnOrder: ['filingDateFB', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
-										fixedColumns: ['filingDateFB', 's']
+										fixedColumns: ['filingDateFB', 's'],
+										screener: {
+											type: 'ipo',
+											filters: [
+												{
+													id: 'ipoDate',
+													value: 'Unscheduled',
+													filterType: 'date'
+												}
+											],
+											sort: [{ id: 'filingDateFB', desc: false }]
+										}
 									},
 									dynamic: query
 								}}

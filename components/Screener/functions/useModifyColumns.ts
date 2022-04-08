@@ -29,7 +29,7 @@ export function useModifyColumns(endpoint: ScreenerEndpoints) {
 
 	// Fetch many data columns at a time
 	async function fetchManyColumns(columns: DataId[]) {
-		columns.forEach(async id => {
+		columns?.forEach(async id => {
 			if (!fetchedColumns.includes(id)) {
 				fetchColumn(id)
 			}

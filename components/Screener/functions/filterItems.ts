@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { SingleStock, FilterValue } from 'components/Screener/screener.types'
 import { numericMatch } from './filters/numericMatch'
 import { dateMatch } from './filters/dateMatch'
@@ -26,7 +27,7 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 
 			// String match
 			if (filter.filterType === 'stringmatch') {
-				if (stock[filter.id]?.toLowerCase() === filter.value.toLowerCase()) {
+				if (stock[filter.id]?.toLowerCase() === filter.value?.toLowerCase()) {
 					matched = true
 				}
 			}
@@ -53,24 +54,24 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 
 			// Array match
 			if (filter.filterType === 'arraymatch') {
-				if (stock[filter.id]?.includes(filter.value)) {
+				if (stock[filter.id]?.includes(filter.value!)) {
 					matched = true
 				}
 			}
 
 			// Numeric
 			else if (filter.filterType === 'numeric') {
-				matched = numericMatch(stock, filter.id, filter.value)
+				matched = numericMatch(stock, filter.id, filter.value!)
 			}
 
 			// Date
 			else if (filter.filterType === 'date') {
-				matched = dateMatch(stock, filter.id, filter.value)
+				matched = dateMatch(stock, filter.id, filter.value!)
 			}
 
 			// Numeric Range
 			else if (filter.filterType === 'numericRange') {
-				matched = numericRangeMatch(stock, filter.id, filter.value)
+				matched = numericRangeMatch(stock, filter.id, filter.value!)
 			}
 
 			return matched

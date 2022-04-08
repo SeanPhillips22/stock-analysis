@@ -99,8 +99,8 @@ export type VariableFilter = {
 
 export type FilterValue = {
 	id: DataId
-	name: string
-	value: string
+	name?: string
+	value?: string
 	array?: string[]
 	filterType: FilterType
 	numberType?: 'percentage'

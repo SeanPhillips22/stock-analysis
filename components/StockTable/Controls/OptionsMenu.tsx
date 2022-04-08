@@ -17,8 +17,11 @@ export function OptionsMenu() {
 	// Then it redirects the user to the stock screener
 	function addFiltersAndGoToScreener() {
 		if (typeof window !== 'undefined') {
+			const { type } = fixed.screener || {}
+
 			// Check if existing in localStorage, otherwise append filters to default screener settings
-			let screenerSettings: any = localStorage.getItem('stocks-screener')
+			let screenerId = type === 'stocks' ? 'stocks-screener' : type === 'ipo' ? 'ipo-screener' : 'etf-screener'
+			let screenerSettings: any = localStorage.getItem(screenerId)
 			if (screenerSettings) screenerSettings = JSON.parse(screenerSettings)
 			else screenerSettings = INITIAL_STOCK_SCREENER_STATE
 
@@ -44,28 +47,31 @@ export function OptionsMenu() {
 
 			// Save the new screener settings in localStorage
 			if (screenerSettings.filters) {
-				localStorage.setItem('stocks-screener', JSON.stringify(screenerSettings))
+				localStorage.setItem(screenerId, JSON.stringify(screenerSettings))
 			}
+
+			router.push(type === 'stocks' ? '/screener/stock/' : `/screener/${type}/`)
 		}
-		router.push('/screener/stock/')
 	}
 
 	return (
 		<ThreeDotMenu classes="divide-y divide-gray-100 whitespace-nowrap" onClick={() => event('More_Menu')}>
-			<Popover.Button as="div">
-				<div
-					className="dd"
-					title="Open list in stock screener"
-					id="tag-feat-options-open-in-screener"
-					onClick={() => {
-						event('Open_In_Screener')
-						addFiltersAndGoToScreener()
-					}}
-					tabIndex={0}
-				>
-					Open in Screener
-				</div>
-			</Popover.Button>
+			{!fixed.hideOpenInScreener && (
+				<Popover.Button as="div">
+					<div
+						className="dd"
+						title="Open list in stock screener"
+						id="tag-feat-options-open-in-screener"
+						onClick={() => {
+							event('Open_In_Screener')
+							addFiltersAndGoToScreener()
+						}}
+						tabIndex={0}
+					>
+						Open in Screener
+					</div>
+				</Popover.Button>
+			)}
 			<Popover.Button as="div">
 				<div
 					className="dd"

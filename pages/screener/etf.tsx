@@ -54,7 +54,7 @@ export default function ETFScreenerPage() {
 					initial: INITIAL_ETF_SCREENER_STATE
 				}}
 			>
-				<Screener />
+				<Screener key="etf-screener" />
 			</ScreenerContextProvider>
 		</ScreenerLayout>
 	)

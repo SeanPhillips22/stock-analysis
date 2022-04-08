@@ -1317,5 +1317,15 @@ export const EtfDataPoints: FilterProps[] = [
 		format: 'changePcColor',
 		tooltipTitle: '5-Year Price Change',
 		tooltipText: 'The percentage change in the stock price compared to 5 years ago.'
+	},
+	{
+		name: 'Tag',
+		id: 'tags',
+		category: ['Popular'],
+		filterType: 'multiselectarray',
+		format: 'array',
+		variable: true,
+		options: [],
+		tooltipText: 'A tag applied in order to categorize a fund. A single fund can have more than one tag.'
 	}
 ]

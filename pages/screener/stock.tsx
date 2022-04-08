@@ -54,7 +54,7 @@ export default function StockScreenerPage() {
 					initial: INITIAL_STOCK_SCREENER_STATE
 				}}
 			>
-				<Screener />
+				<Screener key="stocks-screener" />
 			</ScreenerContextProvider>
 		</ScreenerLayout>
 	)

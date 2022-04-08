@@ -17,6 +17,7 @@ export type TableFixed = {
 		options?: boolean // More options
 	}
 
+	hideOpenInScreener?: boolean // Hide the open in screener button
 	pagination?: boolean // Enable pagination
 	resultsCount?: number // The total number of available results
 	columnOptions?: DataId[] // The columns available to select

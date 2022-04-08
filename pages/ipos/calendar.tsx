@@ -72,12 +72,24 @@ export default function IpoCalendar(props: Props) {
 											controls: {
 												filter: true,
 												export: true,
-												columns: true
+												columns: true,
+												options: true
 											},
 											columnOptions: FutureIpoDataPoints,
 											excludeColumns: ['withdrawnDateFB'],
 											columnOrder: ['ipoDate', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
 											fixedColumns: ['ipoDate', 's'],
+											screener: {
+												type: 'ipo',
+												filters: [
+													{
+														id: 'ipoDate',
+														value: 'This Week',
+														filterType: 'date'
+													}
+												],
+												sort: [{ id: 'ipoDate', desc: false }]
+											},
 											fallback: {
 												title: 'This Week · 0 IPOs',
 												text: 'There are no upcoming IPOs remaining for this week.'
@@ -97,10 +109,22 @@ export default function IpoCalendar(props: Props) {
 											controls: {
 												filter: true,
 												export: true,
-												columns: true
+												columns: true,
+												options: true
 											},
 											columnOptions: FutureIpoDataPoints,
 											columnOrder: ['ipoDate', 's', 'n', 'exchange', 'ipoPriceRange', 'sharesOffered'],
+											screener: {
+												type: 'ipo',
+												filters: [
+													{
+														id: 'ipoDate',
+														value: 'Next Week',
+														filterType: 'date'
+													}
+												],
+												sort: [{ id: 'ipoDate', desc: false }]
+											},
 											fallback: {
 												title: 'Next Week · 0 IPOs',
 												text: 'There are no IPOs scheduled for next week.'
