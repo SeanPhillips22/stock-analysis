@@ -10,7 +10,7 @@ import { TableData, TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
 // import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'react-sparklines'
-import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'components/Sparklines/Sparklines'
+import { Sparklines, SparklinesFinancial, SparklinesReferenceLine } from 'components/Sparklines/Sparklines'
 import { spy, qqq, ivm } from 'components/Sparklines/testdata'
 
 // the page's config and settings
@@ -57,9 +57,6 @@ export default function PreMarket(props: Props) {
 		if (value > prevClose) return 'green'
 		return 'red'
 	}
-
-	// const getNthItems = <T,>(arr: T[], nth: number): T[] => arr.filter((_, i) => i % nth === nth - 1) If we want to get every nth and shorten data.
-
 	const dataArray = [
 		{ data: spy, prevClose: 456 },
 		{ data: qqq, prevClose: 369 },
@@ -76,12 +73,12 @@ export default function PreMarket(props: Props) {
 		<PageContextProvider value={{ page, updated: props.res.tradingTimestamps }}>
 			<MarketsLayout SubNav={PremarketNav}>
 				<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">
-					<dl className=" grid grid-cols-1  md:grid-cols-3 ">
+					<dl className=" grid grid-cols-1 md:grid-cols-3 ">
 						{' '}
 						{dataArray.map((object: any, i: number) => (
 							<div className="w-36" key={i}>
 								<Sparklines previousClose={object.prevClose} data={returnCloseData(object.data.values)}>
-									<SparklinesLine
+									<SparklinesFinancial
 										color={redOrGreen(
 											Number(object.data.values[object.data.values.length - 1].close),
 											object.prevClose

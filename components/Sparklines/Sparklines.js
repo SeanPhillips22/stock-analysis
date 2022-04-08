@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react'
 
 import SparklinesLine from './SparklinesLine'
 import SparklinesReferenceLine from './SparklinesReferenceLine'
+import SparklinesFinancial from './SparklinesFinancial'
+
 import dataToPoints from './dataProcessing/dataToPoints'
 
 class Sparklines extends PureComponent {
@@ -72,4 +74,4 @@ class Sparklines extends PureComponent {
 	}
 }
 
-export { Sparklines, SparklinesLine, SparklinesReferenceLine }
+export { Sparklines, SparklinesLine, SparklinesReferenceLine, SparklinesFinancial }
