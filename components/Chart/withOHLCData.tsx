@@ -295,6 +295,9 @@ export function withOHLCData() {
 				const { data } = this.state
 
 				if (typeof data == 'undefined') {
+					if (this.props.loading) {
+						return null
+					}
 					return <Unavailable message="Unable to load the data for this chart." />
 				}
 
