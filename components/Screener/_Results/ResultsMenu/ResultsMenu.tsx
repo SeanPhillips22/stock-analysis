@@ -35,7 +35,7 @@ export function ResultsMenu({
 					{`${count} Results`}
 				</h2>
 			</div>
-			<div className="flex flex-row justify-end space-x-2 py-2 md:space-x-2.5 lg:order-3 lg:py-0">
+			<div className="flex flex-row justify-end space-x-1 py-2 xs:space-x-2 md:space-x-2.5 lg:order-3 lg:py-0">
 				<div className="hidden max-w-[110px] md:block">
 					<Filter
 						useAsyncDebounce={useAsyncDebounce}
@@ -45,7 +45,7 @@ export function ResultsMenu({
 						filterText="Search..."
 					/>
 				</div>
-				<div className="hidden md:block">
+				<div>
 					<Export tableId={tableId} />
 				</div>
 				<div className="ml-auto md:ml-0">

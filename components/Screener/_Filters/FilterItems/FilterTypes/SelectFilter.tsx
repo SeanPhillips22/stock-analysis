@@ -1,22 +1,25 @@
 import { FilterOption, FilterProps, VariableFilter } from 'components/Screener/screener.types'
 import { getData } from 'functions/apis/API'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { screenerState } from 'components/Screener/screener.state'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
 import { MultiSelect } from './Choices/MultiSelect'
+import { DataId } from 'types/DataId'
 
 type Props = {
 	filter: FilterProps
 	active: string | false
+	open?: DataId // Which current filter is open
 }
 
-export function SelectFilter({ filter, active }: Props) {
+export function SelectFilter({ filter, active, open }: Props) {
 	const { endpoint } = useScreenerContext()
 	const variableFilters = screenerState(state => state.variableFilters)
 	const addVariableFilter = screenerState(state => state.addVariableFilter)
 	const [hasSearch, setHasSearch] = useState(false)
 	const [search, setSearch] = useState('')
 	const [options, setOptions] = useState<FilterOption[]>(filter.options)
+	const inputRef = useRef<any>()
 
 	const filterType = filter.filterType
 	const variable = filter.variable
@@ -73,6 +76,13 @@ export function SelectFilter({ filter, active }: Props) {
 		}
 	}, [active, filter.options, filterType, hasSearch])
 
+	// When the filter is opened, focus the search input
+	useEffect(() => {
+		if (hasSearch && open === filter.id) {
+			inputRef.current.focus()
+		}
+	}, [filter.id, hasSearch, open])
+
 	return (
 		<div className="py-1">
 			{hasSearch && (
@@ -82,6 +92,7 @@ export function SelectFilter({ filter, active }: Props) {
 					placeholder="Search..."
 					value={search}
 					onChange={e => setSearch(e.target.value)}
+					ref={inputRef}
 				/>
 			)}
 			<div className="thin-scroll max-h-[300px] min-w-[150px] max-w-[260px] space-y-2 overflow-y-auto overflow-x-hidden overscroll-contain whitespace-nowrap p-2 text-sm xs:max-w-[300px] bp:max-w-none lg:max-h-[400px] lg:min-w-[250px]">

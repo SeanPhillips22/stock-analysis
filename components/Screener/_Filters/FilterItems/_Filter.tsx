@@ -80,7 +80,7 @@ export function Filter({ filter }: { filter: FilterProps }) {
 				}`}
 				onKeyDown={e => e.key === 'Escape' && setOpenFilter('')}
 			>
-				<Filter filter={filter} active={active} />
+				<Filter filter={filter} active={active} open={openFilter ? openFilter : undefined} />
 			</div>
 		</div>
 	)

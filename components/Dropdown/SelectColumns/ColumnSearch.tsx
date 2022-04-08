@@ -9,6 +9,7 @@ export function ColumnSearch({ search, setSearch }: Props) {
 	return (
 		<div className="search-wrap">
 			<input
+				autoFocus
 				type="text"
 				placeholder="Search..."
 				value={search}

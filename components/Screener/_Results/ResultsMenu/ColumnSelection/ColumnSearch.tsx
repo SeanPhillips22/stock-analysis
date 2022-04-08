@@ -15,6 +15,7 @@ export function ColumnSearch({ search, setSearch }: Props) {
 	return (
 		<div className="relative flex items-center">
 			<input
+				autoFocus
 				type="text"
 				className="w-full border-0 border-b border-gray-200 focus:border-gray-200 focus:ring-0"
 				placeholder="Search..."
