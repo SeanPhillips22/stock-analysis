@@ -12,6 +12,7 @@ import { StockListStats } from 'components/StockLists/StockListStats'
 import { BottomDisclaimer } from 'components/StockLists/BottomDisclaimer'
 import { EtfDataPoints } from 'data/DataPointGroups/EtfDataPoints'
 import { getData } from 'functions/apis/API'
+import { translateFiltersForScreener } from 'components/StockLists/translateFiltersForScreener'
 
 type Props = {
 	listId: string
@@ -43,6 +44,12 @@ export default function StockList({ listId, data, page, fixed, query, etfQuery, 
 							tableId: `${listId}-v2`,
 							fixed: {
 								...fixed,
+								controls: {
+									filter: true,
+									export: true,
+									columns: true,
+									options: true
+								},
 								columnOrder: query.columns
 							},
 							dynamic: query
@@ -111,14 +118,28 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	const fixed = {
 		defaultSort: [{ id: main, desc: true }],
-		fixedColumns: ['rank', 's', main]
+		fixedColumns: ['rank', 's', main],
+		screener: {
+			type: 'stocks',
+			filters: translateFiltersForScreener(list),
+			sort: [{ id: main, desc: false }],
+			showResultsMenu: main !== 'marketCap'
+		}
+	}
+
+	if (['country', 'industry'].includes(fixed.screener.filters[0].id)) {
+		fixed.screener.filters[1] = {
+			id: main,
+			value: 'notzero',
+			filterType: 'numeric'
+		}
 	}
 
 	const relatedLists = list.related || null
 
 	// Get the main query config
 	const query: TableDynamic = {
-		index: 'allstocks',
+		index: list.index || 'allstocks',
 		main: main,
 		count: list.results_count ?? null,
 		sort: [{ id: main, desc: list.sort_direction !== 'asc' }],

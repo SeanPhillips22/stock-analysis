@@ -1,18 +1,15 @@
-import { Dropdown } from 'components/Dropdown/_Dropdown'
+import { ThreeDotMenu } from 'components/Dropdown/ThreeDotMenu'
 import { useRouter } from 'next/router'
 import { useTableContext } from '../TableContext'
 import { INITIAL_STOCK_SCREENER_STATE } from 'components/Screener/maps/InitialStates/initialStockScreenerState'
-import { ExportButtons } from 'components/Controls/Export/ExportButtons'
 import { screenerState } from '../../Screener/screener.state'
 import { useEvent } from 'hooks/useEvent'
-import { SplitTestAny } from 'components/SplitTest'
-import { useEffect, useState } from 'react'
 import { Popover } from '@headlessui/react'
 
 export function OptionsMenu() {
-	const [buttonTitle, setButtonTitle] = useState('Options')
+	const setFilterMenu = screenerState(state => state.setFilterMenu)
 	const setResultsMenu = screenerState(state => state.setResultsMenu)
-	const { tableId, fixed, clearState } = useTableContext()
+	const { fixed, clearState } = useTableContext()
 	const router = useRouter()
 	const { event } = useEvent()
 
@@ -36,9 +33,11 @@ export function OptionsMenu() {
 			let filteredColumns = fixed.screener?.filters?.map(i => i.id)
 			screenerSettings.columns.all.Filtered =
 				fixed.screener?.showColumns || screenerSettings.columns.filtered.concat(filteredColumns)
-			if (fixed.screener?.showResultsMenu) {
-				setResultsMenu('Filtered')
-			}
+
+			// Set the results and filter menus
+			setFilterMenu('Active')
+			if (fixed.screener?.showResultsMenu) setResultsMenu('Filtered')
+			else setResultsMenu('General')
 
 			// Set the default menu items
 			delete screenerSettings.activePreset
@@ -51,16 +50,8 @@ export function OptionsMenu() {
 		router.push('/screener/stock/')
 	}
 
-	useEffect(() => {
-		setButtonTitle(SplitTestAny('Options', 'More'))
-	}, [])
-
 	return (
-		<Dropdown
-			title={buttonTitle}
-			classes="divide-y divide-gray-100 whitespace-nowrap"
-			onClick={() => event('Options_Menu', { type: buttonTitle })}
-		>
+		<ThreeDotMenu classes="divide-y divide-gray-100 whitespace-nowrap" onClick={() => event('More_Menu')}>
 			<Popover.Button as="div">
 				<div
 					className="dd"
@@ -75,9 +66,6 @@ export function OptionsMenu() {
 					Open in Screener
 				</div>
 			</Popover.Button>
-			<div className="block py-0.5 md:hidden">
-				<ExportButtons tableId={tableId} />
-			</div>
 			<Popover.Button as="div">
 				<div
 					className="dd"
@@ -89,9 +77,9 @@ export function OptionsMenu() {
 					}}
 					tabIndex={0}
 				>
-					Reset Table Defaults
+					Reset Table Settings
 				</div>
 			</Popover.Button>
-		</Dropdown>
+		</ThreeDotMenu>
 	)
 }

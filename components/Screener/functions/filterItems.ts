@@ -26,7 +26,7 @@ export function filterItems(data: SingleStock[], filters: FilterValue[]) {
 
 			// String match
 			if (filter.filterType === 'stringmatch') {
-				if (stock[filter.id] === filter.value) {
+				if (stock[filter.id]?.toLowerCase() === filter.value.toLowerCase()) {
 					matched = true
 				}
 			}

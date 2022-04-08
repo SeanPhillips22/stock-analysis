@@ -86,7 +86,6 @@ function formatColumns(type: ScreenerTypes, dataPoints: FilterProps[]) {
 				case 'marketcap': {
 					header = formatHeader(column.columnName || column.name)
 					cell = (props: any) => formatCells('abbreviate', props, 'stocks', 'mr-2')
-
 					break
 				}
 

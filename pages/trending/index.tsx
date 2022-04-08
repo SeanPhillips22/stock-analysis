@@ -48,10 +48,24 @@ export default function Trending(props: Props) {
 										controls: {
 											export: true,
 											columns: true,
-											results: true
+											results: true,
+											options: true
 										},
 										columnOrder: query.columns,
-										fixedColumns: ['rank', 's', 'views']
+										fixedColumns: ['rank', 's', 'views'],
+										screener: {
+											type: 'stocks',
+											filters: [
+												{
+													id: 'views',
+													name: '',
+													value: 'notzero',
+													filterType: 'numeric'
+												}
+											],
+											sort: [{ id: 'views', desc: false }],
+											showResultsMenu: true
+										}
 									},
 									dynamic: query
 								}}

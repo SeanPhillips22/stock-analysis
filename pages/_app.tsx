@@ -18,10 +18,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					<Component {...pageProps} />
 				</QueryClientProvider>
 				<Toaster
-					position="top-center"
+					position="top-right"
 					toastOptions={{ duration: 5000 }}
 					containerStyle={{
-						top: 70
+						top: 67
 					}}
 				/>
 			</PlausibleProvider>

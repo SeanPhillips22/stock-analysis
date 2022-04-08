@@ -2890,6 +2890,23 @@ export const StockDataPoints: FilterProps[] = [
 		tooltipText: 'Estimated compound annual growth rate (CAGR) for revenue over the next five fiscal years.'
 	},
 	{
+		name: 'Views',
+		id: 'views',
+		searchMatches: 'pageviews-trending',
+		category: ['Other'],
+		filterType: 'numeric',
+		format: 'align',
+		options: [
+			{ name: 'Over 50', value: 'over-50' },
+			{ name: 'Over 10', value: 'over-10' },
+			{ name: 'Over 5', value: 'over-5' },
+			{ name: 'Not Zero', value: 'notzero' }
+		],
+		tooltipTitle: 'Pageviews',
+		tooltipText:
+			'The number of pageviews for the stock today, according to Google Analytics. This is used to estimate which stocks are trending.'
+	},
+	{
 		name: 'Tag',
 		id: 'tags',
 		category: ['Company'],
