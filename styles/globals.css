@@ -24,6 +24,7 @@
 @import './features/symbol-table/index';
 @import './features/text-page';
 @import './features/paywall';
+@import './features/minichart';
 
 @import 'tailwindcss/utilities';
 @import './utils/nprogress';

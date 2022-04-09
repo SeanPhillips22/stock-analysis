@@ -9,7 +9,6 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableData, TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
-import { MiniChart } from 'components/Sparklines/MiniChart'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -54,93 +53,86 @@ export default function PreMarket(props: Props) {
 	return (
 		<PageContextProvider value={{ page, updated: props.res.tradingTimestamps }}>
 			<MarketsLayout SubNav={PremarketNav}>
-				<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">
-					<div className="md:flex md:justify-start md:space-x-8">
-						<MiniChart symbol="SPY" type="etf" range="1D" />
-						<MiniChart symbol="QQQ" type="etf" range="1D" />
-						<MiniChart symbol="IWM" type="etf" range="1D" />
-					</div>
-					<TableContextProvider
-						value={{
-							title: 'Premarket Gainers',
-							tableId: 'premarket-index-gainers-v2',
-							fixed: {
-								defaultSort: queryGainers.sort,
-								controls: {
-									results: true,
-									export: true,
-									columns: true,
-									options: true
-								},
-								columnOptions: MoverDataPoints,
-								excludeColumns: ['price', 'volume'],
-								columnOrder: queryGainers.columns,
-								fixedColumns: ['rank', 's', 'premarketChangePercent'],
-								screener: {
-									type: 'stocks',
-									filters: [
-										{
-											id: 'premarketChangePercent',
-											name: '',
-											value: `over-0`,
-											filterType: 'numeric',
-											numberType: 'percentage'
-										},
-										{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
-										{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
-										{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' }
-									],
-									sort: [{ id: 'premarketChangePercent', desc: false }],
-									showColumns: ['s', 'n', 'premarketChangePercent', 'premarketPrice', 'marketCap'],
-									showResultsMenu: true
-								}
+				<TableContextProvider
+					value={{
+						title: 'Premarket Gainers',
+						tableId: 'premarket-index-gainers-v2',
+						fixed: {
+							defaultSort: queryGainers.sort,
+							controls: {
+								results: true,
+								export: true,
+								columns: true,
+								options: true
 							},
-							dynamic: queryGainers
-						}}
-					>
-						<StockTable _data={props.res.data} />
-					</TableContextProvider>
-					<TableContextProvider
-						value={{
-							title: 'Premarket Losers',
-							tableId: 'premarket-index-losers-v2',
-							fixed: {
-								defaultSort: queryLosers.sort,
-								controls: {
-									results: true,
-									export: true,
-									columns: true,
-									options: true
-								},
-								columnOptions: MoverDataPoints,
-								excludeColumns: ['price', 'volume'],
-								columnOrder: queryLosers.columns,
-								fixedColumns: ['rank', 's', 'premarketChangePercent'],
-								screener: {
-									type: 'stocks',
-									filters: [
-										{
-											id: 'premarketChangePercent',
-											name: '',
-											value: `under-0`,
-											filterType: 'numeric',
-											numberType: 'percentage'
-										},
-										{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
-										{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
-										{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' }
-									],
-									sort: [{ id: 'premarketChangePercent', desc: true }],
-									showColumns: ['s', 'n', 'premarketChangePercent', 'premarketPrice', 'marketCap'],
-									showResultsMenu: true
-								}
+							columnOptions: MoverDataPoints,
+							excludeColumns: ['price', 'volume'],
+							columnOrder: queryGainers.columns,
+							fixedColumns: ['rank', 's', 'premarketChangePercent'],
+							screener: {
+								type: 'stocks',
+								filters: [
+									{
+										id: 'premarketChangePercent',
+										name: '',
+										value: `over-0`,
+										filterType: 'numeric',
+										numberType: 'percentage'
+									},
+									{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
+									{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
+									{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' }
+								],
+								sort: [{ id: 'premarketChangePercent', desc: false }],
+								showColumns: ['s', 'n', 'premarketChangePercent', 'premarketPrice', 'marketCap'],
+								showResultsMenu: true
+							}
+						},
+						dynamic: queryGainers
+					}}
+				>
+					<StockTable _data={props.res.data} />
+				</TableContextProvider>
+				<TableContextProvider
+					value={{
+						title: 'Premarket Losers',
+						tableId: 'premarket-index-losers-v2',
+						fixed: {
+							defaultSort: queryLosers.sort,
+							controls: {
+								results: true,
+								export: true,
+								columns: true,
+								options: true
 							},
-							dynamic: queryLosers
-						}}
-					>
-						<StockTable _data={props.losers.data} />
-					</TableContextProvider>
-				</div>
+							columnOptions: MoverDataPoints,
+							excludeColumns: ['price', 'volume'],
+							columnOrder: queryLosers.columns,
+							fixedColumns: ['rank', 's', 'premarketChangePercent'],
+							screener: {
+								type: 'stocks',
+								filters: [
+									{
+										id: 'premarketChangePercent',
+										name: '',
+										value: `under-0`,
+										filterType: 'numeric',
+										numberType: 'percentage'
+									},
+									{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
+									{ id: 'close', name: '', value: `over-1`, filterType: 'numeric' },
+									{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' }
+								],
+								sort: [{ id: 'premarketChangePercent', desc: true }],
+								showColumns: ['s', 'n', 'premarketChangePercent', 'premarketPrice', 'marketCap'],
+								showResultsMenu: true
+							}
+						},
+						dynamic: queryLosers
+					}}
+				>
+					<StockTable _data={props.losers.data} />
+				</TableContextProvider>
 			</MarketsLayout>
 		</PageContextProvider>
 	)

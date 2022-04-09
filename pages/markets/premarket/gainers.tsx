@@ -10,7 +10,6 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
 import { InfoTutorial } from 'components/InfoTutorial/InfoTutorial'
-import { MiniChart } from 'components/Sparklines/MiniChart'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -47,7 +46,6 @@ export default function PreMarket({ data, tradingTimestamps, resultsCount }: Pro
 					storageKey="premarket-movers-infobox"
 					classes="mb-3"
 				/>
-				<MiniChart symbol="AAPL" type="stocks" range="1D" />
 				<TableContextProvider
 					value={{
 						title: 'Premarket Gainers',

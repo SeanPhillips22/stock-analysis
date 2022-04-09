@@ -1,0 +1,40 @@
+/* Mini Charts */
+/* Small charts inside a widget */
+
+@layer components {
+	.mcwidget {
+		@apply flex flex-row space-x-2 border p-1.5;
+	}
+
+	.mctitle {
+		@apply text-sm font-semibold leading-tight;
+	}
+
+	.mcupdown {
+		@apply flex;
+	}
+
+	.mcchange {
+		@apply text-sm font-semibold leading-tight;
+	}
+
+	.green .mcchange {
+		@apply text-green-700;
+	}
+
+	.red .mcchange {
+		@apply text-red-600;
+	}
+
+	.mcupicon {
+		@apply -ml-1 h-[18px] w-[18px] text-green-700;
+	}
+
+	.mcdownicon {
+		@apply -ml-1 h-[18px] w-[18px] text-red-600;
+	}
+
+	.mcchart {
+		@apply hidden lg:block lg:w-36;
+	}
+}
