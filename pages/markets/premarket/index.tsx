@@ -9,9 +9,7 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableData, TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { PremarketNav } from 'components/Markets/Navigation/PremarketNav'
-// import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'react-sparklines'
-import { Sparklines, SparklinesFinancial, SparklinesReferenceLine } from 'components/Sparklines/Sparklines'
-import { spy, qqq, ivm } from 'components/Sparklines/testdata'
+import { MiniChart } from 'components/Sparklines/MiniChart'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -53,54 +51,15 @@ type Props = {
 }
 
 export default function PreMarket(props: Props) {
-	const redOrGreen = (value: number, prevClose: number) => {
-		if (value > prevClose) return 'green'
-		return 'red'
-	}
-	const dataArray = [
-		{ data: spy, prevClose: 456 },
-		{ data: qqq, prevClose: 369 },
-		{ data: ivm, prevClose: 208.5 }
-	]
-
-	const returnCloseData = (list: any) => {
-		return list.map((item: any) => {
-			return item.close
-		})
-	}
-
 	return (
 		<PageContextProvider value={{ page, updated: props.res.tradingTimestamps }}>
 			<MarketsLayout SubNav={PremarketNav}>
 				<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">
-					<dl className=" grid grid-cols-1 md:grid-cols-3 ">
-						{' '}
-						{dataArray.map((object: any, i: number) => (
-							<div className="w-36" key={i}>
-								<Sparklines previousClose={object.prevClose} data={returnCloseData(object.data.values)}>
-									<SparklinesFinancial
-										color={redOrGreen(
-											Number(object.data.values[object.data.values.length - 1].close),
-											object.prevClose
-										)}
-										style={{
-											strokeWidth: '2',
-											fill: redOrGreen(
-												Number(object.data.values[object.data.values.length - 1].close),
-												object.prevClose
-											),
-											fillOpacity: '.2'
-										}}
-									/>
-									<SparklinesReferenceLine
-										style={{ stroke: 'black', strokeOpacity: 1, strokeWidth: '2', strokeDasharray: '4, 5' }}
-										type={'custom'}
-										value={1}
-									/>
-								</Sparklines>
-							</div>
-						))}
-					</dl>
+					<div className="md:flex md:justify-start md:space-x-8">
+						<MiniChart symbol="SPY" type="etf" range="1D" />
+						<MiniChart symbol="QQQ" type="etf" range="1D" />
+						<MiniChart symbol="IWM" type="etf" range="1D" />
+					</div>
 					<TableContextProvider
 						value={{
 							title: 'Premarket Gainers',
