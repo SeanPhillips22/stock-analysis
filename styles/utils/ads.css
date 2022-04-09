@@ -87,6 +87,11 @@
 		@apply text-center lg:h-[90px];
 	}
 
+	/* Adsense Footer Ad */
+	.ft1 {
+		@apply mx-auto -mt-4 mb-3 min-h-[310px] lg:px-0;
+	}
+
 	/* Dianomi Footer Ad */
 	.ftdia {
 		@apply mx-auto -mt-4 mb-3 min-h-[310px] lg:px-0;

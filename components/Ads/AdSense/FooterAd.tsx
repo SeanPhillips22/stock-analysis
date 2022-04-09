@@ -14,13 +14,13 @@ export default function FooterAd() {
 	}
 
 	if (isDev()) {
-		return <div className="adph ftdia"></div>
+		return <div className="adph ft1"></div>
 	}
 
 	return (
 		<aside className="ad-banner">
 			<ins
-				className="adsbygoogle"
+				className="adsbygoogle ft1"
 				style={{ display: 'block' }}
 				data-ad-format="autorelaxed"
 				data-ad-client="ca-pub-7702053427535735"
