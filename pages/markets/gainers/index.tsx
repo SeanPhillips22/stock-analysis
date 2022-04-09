@@ -9,7 +9,7 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { GainersNav } from 'components/Markets/Navigation/GainersNav'
-import { MiniChartWidget } from 'components/MiniChart/MiniChartWidget'
+import { StockIndexMiniCharts } from 'components/MiniChart/Sets/StockIndexMiniCharts'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -42,14 +42,9 @@ export default function GainersPage({ data, tradingTimestamps, resultsCount }: P
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={GainersNav}>
-				<div>
+				<div className="mb-4 lg:mb-5">
 					<div className="text-sm font-semibold text-gray-600">Stock Indexes</div>
-					<div className="flex justify-start space-x-1 md:space-x-2">
-						<MiniChartWidget title="S&P500" symbol="SPY" type="etf" range="1D" />
-						<MiniChartWidget title="Nasdaq 100" symbol="QQQ" type="etf" range="1D" />
-						<MiniChartWidget title="Dow Jones" symbol="DIA" type="etf" range="1D" />
-						<MiniChartWidget title="Russell 2000" symbol="IWM" type="etf" range="1D" />
-					</div>
+					<StockIndexMiniCharts range="1D" />
 				</div>
 				<TableContextProvider
 					value={{

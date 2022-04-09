@@ -4,7 +4,7 @@ import { useQuery } from 'react-query'
 type Props = {
 	symbol: string
 	type: 'stocks' | 'etf'
-	range: '1D' | '1M'
+	range: '1D' | '5D' | '1M' | 'YTD' | '1Y' | '3Y' | '5Y'
 }
 
 /**
@@ -25,7 +25,10 @@ async function getMiniChartData({ symbol, type, range }: Props) {
  * Fetch data for a sparkline mini chart
  */
 export function useMiniChart({ symbol, type, range = '1D' }: Props) {
-	const { data, isFetching } = useQuery([symbol, type, range], () => getMiniChartData({ symbol, type, range }))
+	const { data, isFetching } = useQuery([symbol, type, range], () => getMiniChartData({ symbol, type, range }), {
+		refetchOnWindowFocus: false,
+		retry: false
+	})
 
 	return { data, isFetching }
 }

@@ -17,7 +17,7 @@ export function MarketsLayout({ children, SubNav }: Props) {
 			<div className="contain">
 				<div className="hh1">Market Movers</div>
 				<MarketsNavigation path={page.path} SubNav={SubNav} />
-				<div className="flex flex-col space-y-4 xs:space-y-5 sm:space-y-7">{children}</div>
+				{children}
 			</div>
 		</Layout>
 	)

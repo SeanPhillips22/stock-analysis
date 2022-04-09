@@ -3,7 +3,7 @@
 
 @layer components {
 	.mcwidget {
-		@apply flex flex-row space-x-2 border p-1.5;
+		@apply flex flex-row space-x-2 rounded border border-gray-200 p-1.5 shadow-sm;
 	}
 
 	.mctitle {
@@ -11,7 +11,7 @@
 	}
 
 	.mcupdown {
-		@apply flex;
+		@apply flex min-w-[58px];
 	}
 
 	.mcchange {

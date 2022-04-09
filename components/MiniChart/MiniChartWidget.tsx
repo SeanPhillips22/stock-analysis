@@ -7,7 +7,7 @@ type Props = {
 	title: string
 	symbol: string
 	type: 'stocks' | 'etf'
-	range: '1D'
+	range: '1D' | '5D' | '1M' | 'YTD' | '1Y' | '3Y' | '5Y'
 }
 
 type MiniChartData = {
@@ -24,6 +24,7 @@ type QueryProps = {
 
 /**
  * Returns a sparkline chart for a given symbol
+ * TODO add a link to the chart
  */
 export function MiniChartWidget({ title, symbol, type, range }: Props) {
 	const { data, isFetching }: QueryProps = useMiniChart({ symbol, type, range })

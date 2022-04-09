@@ -13,7 +13,7 @@ type MiniChartData = {
 export function MiniChart({ previousClose, chart, color, isFetching }: MiniChartData) {
 	// Return a grey rectangle while loading
 	// With the same dimensions as the chart to prevent layout shift
-	if (isFetching) return <div className="h-[36px] w-36 bg-gray-100"></div>
+	if (isFetching) return <div className="h-[36px] bg-gray-100 lg:w-36"></div>
 
 	return (
 		<div className="mcchart">
