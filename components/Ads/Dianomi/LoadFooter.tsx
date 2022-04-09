@@ -1,5 +1,8 @@
 import dynamic from 'next/dynamic'
-const FooterAd = dynamic(() => import('components/Ads/Dianomi/FooterAd'), {
+// const FooterAd = dynamic(() => import('components/Ads/Dianomi/FooterAd'), {
+// 	ssr: false
+// })
+const FooterAd = dynamic(() => import('components/Ads/AdSense/FooterAd'), {
 	ssr: false
 })
 import { useLayoutContext } from 'components/Layout/LayoutContext'
