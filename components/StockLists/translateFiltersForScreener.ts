@@ -5,6 +5,9 @@ import { capitalize } from 'functions/helpers/capitalize'
  * in order to enable the "Open in Screener" functionality
  */
 export function translateFiltersForScreener(list: any) {
+	// string "null" in Airtable means no filter
+	if (list.filters === 'null') return []
+
 	if (list.filters) {
 		return list.filters.map((f: any) => {
 			// Split the filter string by the - symbol
