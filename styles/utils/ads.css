@@ -71,15 +71,15 @@
 	/* Text 1 */
 	/* Unit to place inside of text content */
 	.m1w {
-		@apply m-1 mt-7 mb-4 text-center;
+		@apply mt-7 mb-4 w-full text-center;
 	}
 
 	.m1 {
-		@apply mx-auto min-h-[200px] w-full text-center;
+		@apply mx-auto min-h-[200px];
 	}
 
 	/* Mobile/tablet only -- hide on 1024px and higher */
-	.mto {
+	.m1.mto {
 		@apply block lg:hidden;
 	}
 
