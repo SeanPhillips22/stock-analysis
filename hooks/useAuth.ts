@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { setCookie } from 'functions/auth/setCookie'
 import { supabase } from 'functions/supabase'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -19,6 +20,7 @@ export function useAuth() {
 	const router = useRouter()
 
 	useEffect(() => {
+		console.log('hello')
 		// subscribe to login and logout events
 		// auth state is stored in localstorage
 		const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
@@ -26,20 +28,15 @@ export function useAuth() {
 				setUser(session?.user)
 				setIsLoggedIn(true)
 				checkPro(session?.user)
+				setCookie(event, session)
 				toast.success('You are now logged in.')
 			}
 			if (event === 'SIGNED_OUT') {
 				setUser(undefined)
 				setIsLoggedIn(false)
+				setCookie(event, session)
 				toast.success('You have successfully logged out.')
 			}
-			// set a cookie in order to use server-side rendered features
-			fetch('/api/auth/', {
-				method: 'POST',
-				headers: new Headers({ 'Content-Type': 'application/json' }),
-				credentials: 'same-origin',
-				body: JSON.stringify({ event, session })
-			})
 		})
 
 		if (!checking) {

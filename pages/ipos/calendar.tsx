@@ -66,7 +66,7 @@ export default function IpoCalendar(props: Props) {
 								<TableContextProvider
 									value={{
 										tableId: 'ipo-calendar',
-										title: `This Week · ${props.response.data.length} IPOs`,
+										title: `This Week · ${props.response.data?.length || '0'} IPOs`,
 										fixed: {
 											defaultSort: queryWeek.sort,
 											controls: {
@@ -103,7 +103,7 @@ export default function IpoCalendar(props: Props) {
 								<TableContextProvider
 									value={{
 										tableId: 'ipo-calendar-later',
-										title: `Next Week · ${props.later.data.length} IPOs`,
+										title: `Next Week · ${props.later.data?.length || '0'} IPOs`,
 										fixed: {
 											defaultSort: queryLater.sort,
 											controls: {
