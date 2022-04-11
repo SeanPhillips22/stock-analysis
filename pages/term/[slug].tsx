@@ -8,11 +8,13 @@ import { ArticleLayout } from 'components/Layout/ArticleLayout'
 import { SEO } from 'components/SEO'
 import { CustomLink, External } from 'components/CustomLink'
 import { Mobile1Article } from 'components/Ads/AdSense/Mobile1Article'
+import { Text1Ad } from 'components/Ads/AdSense/Text1Ad'
 
 const components = {
 	a: CustomLink,
 	External,
-	Mobile1Article
+	Mobile1Article,
+	Text1Ad
 }
 
 interface Props {

@@ -68,6 +68,21 @@
 		@apply m-1 mt-7 mb-4 text-center;
 	}
 
+	/* Text 1 */
+	/* Unit to place inside of text content */
+	.m1w {
+		@apply m-1 mt-7 mb-4 text-center;
+	}
+
+	.m1 {
+		@apply mx-auto min-h-[200px] text-center;
+	}
+
+	/* Mobile/tablet only -- hide on 1024px and higher */
+	.mto {
+		@apply block lg:hidden;
+	}
+
 	/* Desktop 1 */
 	.d1 {
 		@apply mx-auto hidden lg:block lg:h-[250px] lg:w-[970px];
