@@ -41,6 +41,7 @@ export function PriceChart({ info, initial }: Props) {
 		// If it is not the initial 1D request but fails, show an error message
 		if (!isFetching && !initialFetch && (!data || !data.length)) {
 			setMessage(`No ${translateTime(chartTime)} chart data available`)
+			setSpinner(false)
 		}
 	}, [data, chartTime, info.state, isFetching, initialFetch])
 
@@ -82,13 +83,11 @@ export function PriceChart({ info, initial }: Props) {
 					<LoadingLight />
 				) : data?.length ? (
 					<DisplayChart data={data} time={chartTime} symbol={info.symbol} close={quote.cl} change={change} />
-				) : !isFetching ? (
+				) : !isFetching && !message ? (
 					<div className="h-full pt-1.5">
 						<Unavailable message="No data available" />
 					</div>
-				) : (
-					<div className="h-full w-full pt-1.5"></div>
-				)}
+				) : null}
 			</div>
 		</div>
 	)
