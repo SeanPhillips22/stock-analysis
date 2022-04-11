@@ -8,11 +8,13 @@ import { supabase } from 'functions/supabase'
 import { formatDateClean } from 'functions/datetime/formatDates'
 import { ReActivate } from 'components/Pro/MyAccount/Reactivate'
 import { Layout } from 'components/Layout/_Layout'
+import { useEvent } from 'hooks/useEvent'
 
 export default function MyAccount() {
 	const { isLoggedIn } = useAuthState()
 	const [userInfo, setUserInfo] = useState<any>()
 	const [loaded, setLoaded] = useState(false)
+	const { event } = useEvent()
 
 	useEffect(() => {
 		if (isLoggedIn) {
@@ -103,9 +105,11 @@ export default function MyAccount() {
 								)}
 								{isSubscribed && cancel_url && (
 									<div className="mt-3">
-										<a href={cancel_url} target="_blank" rel="nofollow noopener noreferrer" className="bll">
-											Cancel Subscription
-										</a>
+										<Link href="/pro/cancel/" prefetch={false}>
+											<a className="bll" onClick={() => event('Cancel', { step: 'My_Account_Page' })}>
+												Cancel Subscription
+											</a>
+										</Link>
 									</div>
 								)}
 								{loaded && !isSubscribed && <ReActivate email={email} status={status} />}

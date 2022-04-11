@@ -12,6 +12,7 @@ type EventProps = {
 	type?: string
 	location?: string // where in the layout the event is
 	title?: string
+	step?: string // if it's a multi-step process
 	statusCode?: string | number
 	isPro?: boolean
 	isLoggedIn?: boolean

@@ -3,8 +3,11 @@ import { SEO } from 'components/SEO'
 import { UserLayout } from 'components/Layout/UserLayout'
 import { GetServerSideProps } from 'next'
 import { Button } from 'components/Buttons/Button'
+import { useEvent } from 'hooks/useEvent'
 
 export default function CancelSubscription({ user }: any) {
+	const { event } = useEvent()
+
 	return (
 		<>
 			<SEO title="Cancel Subscription" canonical="/pro/cancel/" noindex={true} />
@@ -20,9 +23,12 @@ export default function CancelSubscription({ user }: any) {
 						If yes, click the button below to proceed.
 					</p>
 
-					<div>
-						<Button url={user.user_metadata.cancel_url} text="Cancel Subscription" className="mt-2" />
-					</div>
+					<Button
+						url={user.user_metadata.cancel_url}
+						text="Cancel Subscription"
+						className="mt-2"
+						onClick={() => event('Cancel', { step: 'Cancel_Page' })}
+					/>
 				</div>
 			</UserLayout>
 		</>
