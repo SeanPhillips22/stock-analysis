@@ -34,7 +34,6 @@ export function Text1Ad({ mobileOnly }: Props) {
 					className="adsbygoogle m-1"
 					data-ad-client="ca-pub-7702053427535735"
 					data-ad-slot="3871188988"
-					data-ad-format="auto"
 					data-full-width-responsive="true"
 				></ins>
 			</div>
