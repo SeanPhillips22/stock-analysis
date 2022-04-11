@@ -20,9 +20,8 @@ export function useAuth() {
 	const router = useRouter()
 
 	useEffect(() => {
-		console.log('hello')
 		// subscribe to login and logout events
-		// auth state is stored in localstorage
+		// auth state is stored in localstorage and cookies
 		const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
 			if (event === 'SIGNED_IN') {
 				setUser(session?.user)
