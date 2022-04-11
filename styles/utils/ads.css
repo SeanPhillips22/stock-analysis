@@ -71,7 +71,7 @@
 	/* Text 1 */
 	/* Unit to place inside of text content */
 	.text1-wrap {
-		@apply mt-7 mb-4 text-center;
+		@apply mt-8 mb-5 text-center;
 	}
 
 	.text1-wrap.mobile-tablet-only {
