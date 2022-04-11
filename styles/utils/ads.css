@@ -70,12 +70,20 @@
 
 	/* Text 1 */
 	/* Unit to place inside of text content */
-	.m1w {
-		@apply mt-7 mb-4 w-full text-center;
+	.text1-wrap {
+		@apply mt-7 mb-4 text-center;
 	}
 
-	.m1 {
-		@apply mx-auto min-h-[200px];
+	.text1-wrap.mobile-tablet-only {
+		@apply block text-center lg:hidden;
+	}
+
+	.text1 {
+		@apply mx-auto min-h-[90px];
+	}
+
+	.mobile-tablet-only .text1 {
+		@apply block h-[250px] w-full xs:w-[300px] bp:h-[280px] bp:w-[336px] md:h-[90px] md:w-[728px] lg:hidden;
 	}
 
 	/* Mobile/tablet only -- hide on 1024px and higher */
