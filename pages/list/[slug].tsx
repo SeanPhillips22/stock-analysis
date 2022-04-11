@@ -135,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		}
 	}
 
-	if (['country', 'industry'].includes(fixed.screener.filters[0].id)) {
+	if (['country', 'industry'].includes(fixed.screener.filters[0]?.id)) {
 		fixed.screener.filters[1] = {
 			id: main,
 			value: 'notzero',
