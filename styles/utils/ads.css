@@ -112,7 +112,7 @@
 
 	/* Dianomi Footer Ad */
 	.ftdia {
-		@apply mx-auto -mt-5 mb-3 min-h-[310px] lg:px-0;
+		@apply mx-auto -mt-4 mb-3 min-h-[310px] lg:-mt-5 lg:px-0;
 	}
 
 	/* Dianomi News Feed Ad */
