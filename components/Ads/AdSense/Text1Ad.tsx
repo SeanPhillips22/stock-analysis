@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { authState } from 'state/authState'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { noAds, isDev } from '../noAds'
 import { AdsenseScript } from './AdsenseScript'
 import { useLoadAdsense } from './useLoadAdsense'
-import { cn } from 'functions/helpers/classNames'
+// import { cn } from 'functions/helpers/classNames'
 
 type Props = {
 	mobileOnly?: boolean
@@ -20,17 +21,17 @@ export function Text1Ad({ mobileOnly }: Props) {
 
 	if (isDev()) {
 		return (
-			<div className={cn('ad-banner m1w', mobileOnly ? 'mto' : '')}>
-				<div className="adph m1"></div>
+			<div className="ad-banner m1aw">
+				<div className="adph m-1"></div>
 			</div>
 		)
 	}
 
 	return (
 		<>
-			<div className={cn('ad-banner m1w', mobileOnly ? 'mto' : '')}>
+			<div className="ad-banner m1aw">
 				<ins
-					className="adsbygoogle m1"
+					className="adsbygoogle m-1"
 					data-ad-client="ca-pub-7702053427535735"
 					data-ad-slot="3871188988"
 					data-ad-format="auto"
