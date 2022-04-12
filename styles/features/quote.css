@@ -9,6 +9,10 @@
 		@apply text-green-700;
 	}
 
+	.qg {
+		color: #15803c;
+	}
+
 	.qg::before {
 		content: '+';
 	}
@@ -17,8 +21,16 @@
 		@apply text-red-600;
 	}
 
+	.qr {
+		color: #dc2626;
+	}
+
 	.qgr {
 		@apply text-gray-800;
+	}
+
+	.qgr {
+		color: #1f2937;
 	}
 
 	/* Regular hours quote */
