@@ -40,6 +40,11 @@
 		@apply h-8 overflow-hidden md:h-9;
 	}
 
+	/* Fallback for logo color, was not working on some older Safari browsers */
+	.hd-logo-wrap svg {
+		fill: #3c74d4 !important;
+	}
+
 	.hd-search {
 		@apply ml-0.5 max-w-screen-xsm grow md:ml-2 xxl:ml-6 xxxl:ml-12;
 	}

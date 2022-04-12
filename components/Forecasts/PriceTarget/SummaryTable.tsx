@@ -7,7 +7,7 @@ import { formatTarget } from './target.functions'
 function getChange(target: number, current: number) {
 	if (!target) return ['n/a', 'text-gray-800']
 	let change = ((target - current) / current) * 100
-	let formatted = change.toFixed(2) + '%'
+	let formatted = change.toFixed(change > 1000 ? 1 : 2) + '%'
 	if (change > 0) formatted = '+' + formatted
 
 	// Get the color to show
@@ -25,7 +25,7 @@ export function SummaryTable() {
 	const [highChange, highColor] = getChange(high, info.quote.p)
 
 	return (
-		<div className="mt-2 mb-1 px-1.5 text-center md:mb-0 md:px-0 lg:mt-2">
+		<div className="hide-scroll mt-2 mb-1 overflow-x-auto px-1.5 text-center md:mb-0 md:px-0 lg:mt-2">
 			<table className="w-full text-right text-tiny text-gray-800 xs:text-sm sm:text-base">
 				<thead>
 					<tr className="border-b border-gray-200 font-normal">

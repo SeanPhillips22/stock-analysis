@@ -4,6 +4,7 @@ import { forecastState } from 'components/Forecasts/forecast.state'
 import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
 import { cn } from 'functions/helpers/classNames'
 import { useAuthState } from 'hooks/useAuthState'
+import { useEvent } from 'hooks/useEvent'
 import { useRouter } from 'next/router'
 
 export function RatingHistory() {
@@ -11,10 +12,12 @@ export function RatingHistory() {
 	const history = forecastState(state => state.history)
 	const setHistory = forecastState(state => state.setHistory)
 	const router = useRouter()
+	const { event } = useEvent()
 
 	function handleClick(range: string) {
 		if (isPro || range === '1 Year') setHistory(range)
 		else {
+			event('Free_Trial_Click', { location: 'Forecast_History' })
 			router.push('/pro/')
 		}
 	}
