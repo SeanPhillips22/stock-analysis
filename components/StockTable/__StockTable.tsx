@@ -5,6 +5,7 @@ import { StockTableBody } from './_StockTableBody'
 import { useTableContext } from './TableContext'
 import { transientState } from './transient.state'
 import { QueryError } from './QueryError'
+import { Fallback } from './Fallback'
 
 /**
  * A re-usable screener mechanism that can output a table of stocks with specific properties
@@ -41,11 +42,15 @@ export function StockTable({ _data }: { _data: any[] }) {
 		[fixed.pagination, _columns, dynamic.count, page, tableId]
 	)
 
-	// If there is an error, display an error alert with a debug message
-	// Also, reset the table state and ask the user to refresh
-	// Log a "softError" event for further debugging
-	if (!data?.length && query.error) {
-		return <QueryError error={query.error} dynamic={dynamic} clearState={clearState} />
+	// If no data, check for error or a fallback message
+	if (!data?.length) {
+		// If there is an error, display an error alert with a debug message
+		// Also, reset the table state and ask the user to refresh
+		// Log a "softError" event for further debugging
+		if (query.error) return <QueryError error={query.error} dynamic={dynamic} clearState={clearState} />
+
+		// If there's no data and a fallback is set
+		if (fixed.fallback) return <Fallback title={fixed.fallback.title} text={fixed.fallback.text} />
 	}
 
 	// pass the data and columns into react table
