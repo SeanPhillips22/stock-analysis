@@ -23,10 +23,12 @@ export function Ratings() {
 			}
 		}
 
+		setData(freeData)
+
 		if (isPro) {
 			getProData()
 		}
-	}, [isPro, info.symbol])
+	}, [isPro, info.symbol, freeData])
 
 	return (
 		<div className="rounded-sm border border-gray-200 p-3 lg:flex lg:gap-x-4 lg:divide-x">
@@ -45,7 +47,7 @@ export function Ratings() {
 						</div>
 					)}
 				</div>
-				<AnalystTrendsChart />
+				<AnalystTrendsChart data={data} />
 				<RatingsTable />
 			</div>
 		</div>

@@ -1,50 +1,41 @@
 import { supabase } from 'functions/supabase'
 import { SEO } from 'components/SEO'
 import { UserLayout } from 'components/Layout/UserLayout'
-import { GetServerSideProps } from 'next'
-import { Button } from 'components/Buttons/Button'
-import { useEvent } from 'hooks/useEvent'
+import { useEffect, useState } from 'react'
+import { useAuthState } from 'hooks/useAuthState'
+import { CancelSubscriptionBody } from 'components/Pro/CancelSubscription'
 
-export default function CancelSubscription({ user }: any) {
-	const { event } = useEvent()
+export default function CancelSubscription() {
+	const { isLoggedIn } = useAuthState()
+	const [userInfo, setUserInfo] = useState<any>()
+	const [loaded, setLoaded] = useState(false)
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			getUserInfo()
+		}
+	}, [isLoggedIn])
+
+	async function getUserInfo() {
+		const { data: profile } = await supabase
+			.from('userdata')
+			.select(
+				'email, status, plan, update_url, cancel_url, receipt_url, payment_method, currency, next_bill_date, next_payment_amount, unit_price, registered_date, cancelled_date, paused_date'
+			)
+
+		if (profile) {
+			setUserInfo(profile[0])
+		}
+
+		setLoaded(true)
+	}
 
 	return (
 		<>
 			<SEO title="Cancel Subscription" canonical="/pro/cancel/" noindex={true} />
 			<UserLayout url="/pro/cancel/">
-				<div className="space-y-5 bp:space-y-6">
-					<h1 className="mb-5 text-3xl font-bold text-gray-800 bp:text-4xl">Cancel subscription</h1>
-
-					<p className="text-lg leading-relaxed text-gray-900 sm:text-xl">
-						Are you sure you want to cancel the subscription?
-					</p>
-
-					<p className="text-lg leading-relaxed text-gray-900 sm:text-xl">
-						If yes, click the button below to proceed.
-					</p>
-
-					<Button
-						url={user.user_metadata.cancel_url}
-						text="Cancel Subscription"
-						className="mt-2"
-						onClick={() => event('Cancel', { step: 'Cancel_Page' })}
-					/>
-				</div>
+				<CancelSubscriptionBody isLoggedIn={isLoggedIn} loaded={loaded} cancelUrl={userInfo?.cancel_url} />
 			</UserLayout>
 		</>
 	)
-}
-
-export const getServerSideProps: GetServerSideProps = async context => {
-	const { user } = await supabase.auth.api.getUserByCookie(context.req)
-
-	if (!user) {
-		return { props: {}, redirect: { destination: '/login' } }
-	}
-
-	return {
-		props: {
-			user
-		}
-	}
 }
