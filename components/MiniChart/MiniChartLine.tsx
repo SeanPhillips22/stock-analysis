@@ -47,7 +47,7 @@ export function MiniChartLine({ data, points, height, margin, color, style, onMo
 			/>
 		)
 	})
-
+	//	@ts-ignore
 	return (
 		<g>
 			{tooltips}
