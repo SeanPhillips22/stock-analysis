@@ -5,12 +5,13 @@ import { GoogleTagManager } from 'components/App/GoogleTagManager'
 import { ProgressBar } from 'components/App/ProgressBar'
 import PlausibleProvider from 'next-plausible'
 import { Toaster } from 'react-hot-toast'
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary'
 
 const queryClient = new QueryClient()
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
-		<>
+		<ErrorBoundary>
 			<PlausibleProvider domain="stockanalysis.com" trackOutboundLinks={true}>
 				<GoogleTagManager />
 				<ProgressBar />
@@ -25,6 +26,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					}}
 				/>
 			</PlausibleProvider>
-		</>
+		</ErrorBoundary>
 	)
 }
