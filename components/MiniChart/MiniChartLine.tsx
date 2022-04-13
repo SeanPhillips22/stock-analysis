@@ -29,6 +29,7 @@ export function MiniChartLine({ data, points, height, margin, color, style, onMo
 	const fillStyle: CSSProperties = {
 		stroke: style.stroke || 'none',
 		strokeWidth: '0',
+		//	@ts-ignore
 		fillOpacity: style.fillOpacity || '.1',
 		fill: style.fill || color || 'none'
 	}
@@ -49,7 +50,6 @@ export function MiniChartLine({ data, points, height, margin, color, style, onMo
 	})
 
 	return (
-		//	@ts-ignore
 		<g>
 			{tooltips}
 			<polyline points={fillPoints.join(' ')} style={fillStyle} />
