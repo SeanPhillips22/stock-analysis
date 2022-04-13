@@ -5,6 +5,7 @@ import styles from './EstimatesTable.module.css'
 import { formatYear } from 'components/FinancialTable/FinancialTable.functions'
 import { Info } from 'types/Info'
 import { TableRowTitle } from './TableRow'
+import { useEffect } from 'react'
 
 type Props = {
 	range: 'Annual' | 'Quarterly'
@@ -22,7 +23,10 @@ export function EstimatesTable({ range }: Props) {
 	let tableNote = 'White columns are actual numbers, blue columns are estimates.'
 	tableNote = info.currency !== 'USD' ? 'Financials in ' + info.currency + '. ' + tableNote : tableNote
 
-	throw new Error('this is an error')
+	// eslint-disable-next-line react-hooks/rules-of-hooks
+	useEffect(() => {
+		throw new Error('this is an error')
+	}, [])
 
 	return (
 		<>
