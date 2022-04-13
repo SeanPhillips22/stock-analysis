@@ -1,4 +1,4 @@
-import React, { CSSProperties, FillOpacity } from 'react'
+import React, { CSSProperties } from 'react'
 import { intersect } from './functions/intersect'
 
 type MiniChartFinancialProps = {
@@ -25,9 +25,7 @@ export function MiniChartFinancial({ prevCloseCoords, points, color, style }: Mi
 		strokeLinecap: style.strokeLinecap || 'round',
 		fill: 'none'
 	}
-	let fillOpacity: FillOpacity
 
-	fillOpacity = style.fillOpacity || '.1'
 	//Split each portion that is differently colored into an array of its own.
 	let arrayOfLineSegments: any[] = [[]]
 	let colorArray: any[] = []
@@ -90,10 +88,11 @@ export function MiniChartFinancial({ prevCloseCoords, points, color, style }: Mi
 						<polyline points={p.join(' ')} style={{ stroke: colorArray[i], strokeWidth: 2.5, fill: 'none' }} />
 						<polyline
 							points={arrayOfLineSegments[i].concat(closePolyPoints).join(' ')}
+							//	@ts-ignore
 							style={{
 								stroke: colorArray[i],
 								strokeWidth: '0',
-								fillOpacity: fillOpacity,
+								fillOpacity: style.fillOpacity || '.1',
 								fill: colorArray[i] || color || 'none',
 								pointerEvents: 'none'
 							}}
