@@ -47,8 +47,9 @@ export function MiniChartLine({ data, points, height, margin, color, style, onMo
 			/>
 		)
 	})
-	//	@ts-ignore
+
 	return (
+		//	@ts-ignore
 		<g>
 			{tooltips}
 			<polyline points={fillPoints.join(' ')} style={fillStyle} />
