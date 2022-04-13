@@ -22,6 +22,8 @@ export function EstimatesTable({ range }: Props) {
 	let tableNote = 'White columns are actual numbers, blue columns are estimates.'
 	tableNote = info.currency !== 'USD' ? 'Financials in ' + info.currency + '. ' + tableNote : tableNote
 
+	throw new Error('this is an error')
+
 	return (
 		<>
 			<div className={styles.wrap}>

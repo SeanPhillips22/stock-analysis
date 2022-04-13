@@ -10,6 +10,7 @@ declare global {
 
 type EventProps = {
 	type?: string
+	details?: string
 	location?: string // where in the layout the event is
 	title?: string
 	step?: string // if it's a multi-step process
