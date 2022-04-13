@@ -1,6 +1,6 @@
 import { cn } from 'functions/helpers/classNames'
 import { UpDownIcons } from './Blocks/UpDownIcons'
-import { MiniChart } from './MiniChart'
+import { MiniChartWrapper } from './MiniChartWrapper'
 import { useMiniChart } from './useMiniChart'
 
 type Props = {
@@ -38,7 +38,7 @@ export function MiniChartWidget({ title, symbol, type, range }: Props) {
 					<div className="mcchange">{data?.percentChange}</div>
 				</div>
 			</div>
-			<MiniChart
+			<MiniChartWrapper
 				previousClose={data?.previousClose}
 				chart={data?.chart}
 				color={data?.color}

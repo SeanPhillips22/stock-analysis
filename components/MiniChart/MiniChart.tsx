@@ -1,37 +1,67 @@
-import { Sparklines, SparklinesFinancial, SparklinesReferenceLine } from 'components/Sparklines/Sparklines'
+import React from 'react'
 
-type MiniChartData = {
+import { MiniChartLine } from './MiniChartLine'
+import { MiniChartReferenceLine } from './MiniChartReferenceLine'
+import { MiniChartFinancial } from './MiniChartFinancial'
+import { dataToPoints } from './functions/dataToPoints'
+
+type propTypes = {
+	type: string
 	previousClose: number | null
-	chart: number[]
-	color: 'red' | 'green'
-	isFetching: boolean
+	data: number[]
+	width?: number
+	height?: number
+	margin: number
+	style: any
+	onMouseMove: any
 }
 
-/**
- * Returns a sparkline chart for a given symbol
- */
-export function MiniChart({ previousClose, chart, color, isFetching }: MiniChartData) {
-	// Return a grey rectangle while loading
-	// With the same dimensions as the chart to prevent layout shift
-	if (isFetching) return <div className="h-[36px] bg-gray-100 lg:w-36"></div>
+export function MiniChart({ type, previousClose, data, width, height, margin, style }: propTypes) {
+	if (data.length === 0) return null
+	if (previousClose === null) return null
+	const limit = 0
+
+	margin = margin !== undefined ? margin : 2
+	width = width !== undefined ? width : 240
+	height = height !== undefined ? height : 60
+
+	data.push(previousClose)
+	const points = dataToPoints({ data, limit, width, height, margin })
+
+	const prevCloseCoords: { x: number; y: number } | undefined = points.pop()
+
+	if (typeof prevCloseCoords === 'undefined') return null
+
+	data.pop()
+
+	const svgOpts = {
+		style: style,
+		viewBox: `0 0 ${width} ${height}`,
+		preserveAspectRatio: 'none'
+	}
 
 	return (
-		<div className="mcchart">
-			<Sparklines previousClose={previousClose} data={chart}>
-				<SparklinesFinancial
-					color={color}
-					style={{
-						strokeWidth: 2,
-						fill: color,
-						fillOpacity: 0.2
-					}}
+		<svg {...svgOpts}>
+			{type == 'line' ? (
+				<MiniChartLine
+					data={data}
+					points={points}
+					color={'green'}
+					style={style}
+					onMouseMove={null}
+					height={height}
+					margin={margin}
 				/>
-				<SparklinesReferenceLine
-					style={{ stroke: '#444', strokeOpacity: 1, strokeWidth: 2, strokeDasharray: '4, 5' }}
-					type="custom"
-					value={1}
-				/>
-			</Sparklines>
-		</div>
+			) : (
+				<MiniChartFinancial prevCloseCoords={prevCloseCoords} points={points} color={'green'} style={style} />
+			)}
+			<MiniChartReferenceLine
+				prevCloseCoords={prevCloseCoords}
+				points={points}
+				margin={margin}
+				style={{ stroke: '#444', strokeOpacity: 1, strokeWidth: 2, strokeDasharray: '4, 5' }}
+			/>
+			)
+		</svg>
 	)
 }
