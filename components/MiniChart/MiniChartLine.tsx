@@ -19,14 +19,14 @@ export function MiniChartLine({ data, points, height, margin, color, style, onMo
 
 	let fillPoints = linePoints.concat(closePolyPoints)
 
-	const lineStyle = {
+	const lineStyle: CSSProperties = {
 		stroke: color || style.stroke || 'none',
 		strokeWidth: style.strokeWidth || '1',
 		strokeLinejoin: style.strokeLinejoin || 'round',
 		strokeLinecap: style.strokeLinecap || 'round',
 		fill: 'none'
 	}
-	const fillStyle = {
+	const fillStyle: CSSProperties = {
 		stroke: style.stroke || 'none',
 		strokeWidth: '0',
 		fillOpacity: style.fillOpacity || '.1',
