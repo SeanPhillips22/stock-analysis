@@ -91,7 +91,7 @@ export function MiniChartFinancial({ prevCloseCoords, points, color, style }: Mi
 							style={{
 								stroke: colorArray[i],
 								strokeWidth: '0',
-								fillOpacity: style.fillOpacity || '.1',
+								fillOpacity: style.fillOpacity || '0.1',
 								fill: colorArray[i] || color || 'none',
 								pointerEvents: 'none'
 							}}
