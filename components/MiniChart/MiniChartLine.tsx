@@ -40,6 +40,7 @@ export function MiniChartLine({ data, points, height, margin, color, style, onMo
 				cx={p.x}
 				cy={p.y}
 				r={2}
+				//	@ts-ignore
 				style={fillStyle}
 				onMouseEnter={() => onMouseMove('enter', data[i], p)}
 				onClick={() => onMouseMove('click', data[i], p)}
