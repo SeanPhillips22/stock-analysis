@@ -88,10 +88,10 @@ export function MiniChartFinancial({ prevCloseCoords, points, color, style }: Mi
 						<polyline points={p.join(' ')} style={{ stroke: colorArray[i], strokeWidth: 2.5, fill: 'none' }} />
 						<polyline
 							points={arrayOfLineSegments[i].concat(closePolyPoints).join(' ')}
-							//	@ts-ignore
 							style={{
 								stroke: colorArray[i],
 								strokeWidth: '0',
+								//	@ts-ignore
 								fillOpacity: style.fillOpacity || '.1',
 								fill: colorArray[i] || color || 'none',
 								pointerEvents: 'none'
