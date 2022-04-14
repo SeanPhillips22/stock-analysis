@@ -1,5 +1,6 @@
 import { useEvent } from 'hooks/useEvent'
 import Link from 'next/link'
+import { FooterOptin } from './FooterOptin'
 
 const navigation = {
 	sections: [
@@ -93,47 +94,7 @@ export function Footer() {
 								</div>
 							</div>
 						</div>
-						<div className="mt-8 xl:mt-0">
-							<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-								Subscribe to the newsletter
-							</h4>
-							<p className="mt-4 text-base text-gray-300">The latest updates, straight to your inbox.</p>
-							<form
-								className="mt-4 sm:flex sm:max-w-md"
-								method="post"
-								acceptCharset="UTF-8"
-								action="https://www.aweber.com/scripts/addlead.pl"
-							>
-								<input type="hidden" name="meta_web_form_id" value="734113215" />
-								<input type="hidden" name="listname" value="awlist5254312" />
-								<input
-									type="hidden"
-									name="redirect"
-									value="https://stockanalysis.com/subscribe/thank-you/"
-									id="redirect_756a76620e2e180d07c2981f91a5fa1e"
-								/>
-								<input type="hidden" name="meta_adtracking" value="Footer" />
-								<label htmlFor="email-footer" className="sr-only">
-									Email address
-								</label>
-								<input
-									type="email"
-									name="email"
-									id="email-footer"
-									autoComplete="email"
-									className="w-full min-w-0 appearance-none rounded-md border border-transparent bg-white py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:border-white focus:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-									placeholder="Enter your email"
-								/>
-								<div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:shrink-0">
-									<input
-										name="submit"
-										type="submit"
-										className="flex w-full cursor-pointer items-center justify-center rounded-md border border-transparent bg-blue-brand_light py-2 px-4 text-base font-medium text-white transition duration-200 hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-blue-brand_sharp focus:ring-offset-2 focus:ring-offset-gray-800"
-										value="Subscribe"
-									/>
-								</div>
-							</form>
-						</div>
+						<FooterOptin />
 					</div>
 					<div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
 						<div className="flex space-x-6 md:order-2">

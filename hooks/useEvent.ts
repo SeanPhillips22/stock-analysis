@@ -12,6 +12,7 @@ type EventProps = {
 	type?: string
 	details?: string
 	location?: string // where in the layout the event is
+	status?: string
 	title?: string
 	step?: string // if it's a multi-step process
 	statusCode?: string | number
