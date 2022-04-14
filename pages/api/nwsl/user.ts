@@ -1,12 +1,28 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { NextApiRequest, NextApiResponse } from 'next'
+const postmark = require('postmark')
+
+const KEY = process.env.POSTMARK_SERVER_API_TOKEN || ''
 
 /**
  * Sync users between Supabase auth and Mailerlite.
  * When a user is added or modified in Supabase, it sends a POST request to this endpoint.
  */
 export default async function newsletter(req: NextApiRequest, res: NextApiResponse) {
-	const { email } = JSON.parse(req.body) || {}
+	const client = new postmark.Client(KEY)
+	const { email } = req.body || {}
+
+	const obj = {
+		From: 'support@stockanalysis.com',
+		ReplyTo: 'support@stockanalysis.com',
+		To: 'contact@stockanalysis.com',
+		Subject: 'Usersync webhook',
+		TextBody: JSON.stringify(req.body)
+	}
+
+	// Send debug email
+	await client.sendEmail(obj)
 
 	const options = {
 		method: 'POST',
