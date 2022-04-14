@@ -17,7 +17,7 @@ export default async function newsletter(req: NextApiRequest, res: NextApiRespon
 	const { record, old_record } = req.body || {}
 	if (!record) return res.status(401).json({ message: 'no_record_found' })
 
-	const { email, status, plan } = record
+	const { email, status, plan, id, name, country, currency, cancelled_date, registered_date } = record
 	const { old_status } = old_record || {}
 
 	const obj = {
@@ -46,7 +46,13 @@ export default async function newsletter(req: NextApiRequest, res: NextApiRespon
 			type: 'null',
 			fields: {
 				user_status: status,
-				user_plan: plan
+				user_plan: plan,
+				user_id: id,
+				user_name: name,
+				user_country: country,
+				user_currency: currency,
+				user_cancelled_date: cancelled_date,
+				user_registered_date: registered_date
 			}
 		})
 	}
