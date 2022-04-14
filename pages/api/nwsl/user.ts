@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { NextApiRequest, NextApiResponse } from 'next'
@@ -11,7 +12,13 @@ const KEY = process.env.POSTMARK_SERVER_API_TOKEN || ''
  */
 export default async function newsletter(req: NextApiRequest, res: NextApiResponse) {
 	const client = new postmark.Client(KEY)
-	const { email } = req.body || {}
+
+	// Get the params from the request
+	const { record, old_record } = req.body || {}
+	if (!record) return res.status(401).json({ message: 'no_record_found' })
+
+	const { email, status, plan } = record
+	const { old_status } = old_record || {}
 
 	const obj = {
 		From: 'support@stockanalysis.com',
@@ -32,7 +39,16 @@ export default async function newsletter(req: NextApiRequest, res: NextApiRespon
 			'Content-Type': 'application/json',
 			'X-MailerLite-ApiKey': process.env.MAILERLITE!
 		},
-		body: JSON.stringify({ email: email, resubscribe: false, autoresponders: true, type: 'null' })
+		body: JSON.stringify({
+			email,
+			resubscribe: true,
+			autoresponders: true,
+			type: 'null',
+			fields: {
+				user_status: status,
+				user_plan: plan
+			}
+		})
 	}
 
 	try {
