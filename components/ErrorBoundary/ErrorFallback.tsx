@@ -15,7 +15,7 @@ export function ErrorFallback(props: any) {
 	const { event } = useEvent()
 
 	useEffect(() => {
-		event('error', { type: props.props?.error?.message, details: props.props?.error?.stack })
+		event('Error', { type: props.props?.error?.message, details: props.props?.error?.stack })
 	}, [event, props.props?.error])
 
 	return (
