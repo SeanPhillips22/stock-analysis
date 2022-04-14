@@ -11,7 +11,7 @@ export function FooterOptin() {
 	// Submit the optin form
 	async function handleSubmit(e: any) {
 		e.preventDefault()
-		let response = await fetch('/api/newsletter/', {
+		let response = await fetch('/api/nwsl/post', {
 			body: JSON.stringify({ email }),
 			method: 'POST'
 		})

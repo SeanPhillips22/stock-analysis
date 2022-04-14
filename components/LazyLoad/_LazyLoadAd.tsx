@@ -1,4 +1,4 @@
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { noAds } from 'components/Ads/noAds'
 import { Observer } from 'components/LazyLoad/Observer'

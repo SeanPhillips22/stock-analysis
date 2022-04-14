@@ -1,8 +1,8 @@
-import { supabase } from 'functions/supabase'
+import { supabase } from 'auth/supabase/supabase'
 import { SEO } from 'components/SEO'
 import { UserLayout } from 'components/Layout/UserLayout'
 import { useEffect, useState } from 'react'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { CancelSubscriptionBody } from 'components/Pro/CancelSubscription'
 
 export default function CancelSubscription() {

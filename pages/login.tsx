@@ -1,4 +1,4 @@
-import { useAuth } from 'hooks/useAuth'
+import { useAuth } from 'auth/useAuth'
 import { SEO } from 'components/SEO'
 import { useEffect, useState } from 'react'
 import { LogIn } from 'components/Login/LogIn'

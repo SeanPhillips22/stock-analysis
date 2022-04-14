@@ -1,4 +1,4 @@
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { ArrowCTAIcon } from 'components/Icons/ArrowCTA'
 import Link from 'next/link'
 import { useEvent } from 'hooks/useEvent'

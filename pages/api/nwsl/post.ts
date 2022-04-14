@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+/**
+ * Add a new subscriber to the newsletter
+ */
 export default async function newsletter(req: NextApiRequest, res: NextApiResponse) {
 	const { email } = JSON.parse(req.body) || {}
 

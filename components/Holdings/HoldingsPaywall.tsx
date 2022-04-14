@@ -1,4 +1,4 @@
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { Button } from 'components/Buttons/Button'
 import { useEvent } from 'hooks/useEvent'
 

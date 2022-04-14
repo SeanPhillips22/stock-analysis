@@ -22,7 +22,7 @@ import { TooltipChart } from './TooltipChart'
 import { Unavailable } from 'components/Unavailable'
 import { getStockFinancialsFull } from 'functions/apis/callBackEnd'
 import { FinancialSource } from './FinancialSource'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 
 const HoverChart = dynamic(() => import('./HoverChart'), { ssr: false })
 

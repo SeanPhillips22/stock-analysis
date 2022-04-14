@@ -3,7 +3,7 @@ import { Dropdown } from 'components/Dropdown/_Dropdown'
 import { forecastState } from 'components/Forecasts/forecast.state'
 import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
 import { cn } from 'functions/helpers/classNames'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { useEvent } from 'hooks/useEvent'
 import { useRouter } from 'next/router'
 

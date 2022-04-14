@@ -1,6 +1,6 @@
 import { useSymbolContext } from 'components/Layout/SymbolContext'
 import { getPageDataFull } from 'functions/apis/callBackEnd'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { useEffect, useState } from 'react'
 import { ForecastData } from 'types/Forecast'
 import { AnalystTrendsChart } from './AnalystTrendsChart'

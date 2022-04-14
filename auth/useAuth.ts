@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { setCookie } from 'functions/auth/setCookie'
-import { supabase } from 'functions/supabase'
+import { setCookie } from './utils/setCookie'
+import { supabase } from './supabase/supabase'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { authState } from 'state/authState'
-import { useEvent } from './useEvent'
+import { useEvent } from '../hooks/useEvent'
 
 export function useAuth() {
 	const user = authState(state => state.user)

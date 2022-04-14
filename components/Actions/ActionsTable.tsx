@@ -2,7 +2,7 @@
 import { useTable, useGlobalFilter, useAsyncDebounce, Column, useFilters } from 'react-table'
 import { useState, useEffect, useMemo } from 'react'
 import styles from './ActionsTable.module.css'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { getActionsDataFull } from 'functions/apis/callBackEnd'
 import { actionsState } from 'state/actionsState'
 import { ActionsControls } from './ActionsControls'

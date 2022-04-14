@@ -1,7 +1,7 @@
 import { getData } from 'functions/apis/API'
 import { buildReturnArray } from './buildReturnArray'
 import { useQuery } from 'react-query'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null
 
 /**

@@ -1,5 +1,5 @@
 import { Button } from 'components/Buttons/Button'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { useEvent } from 'hooks/useEvent'
 
 interface Props {

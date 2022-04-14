@@ -2,8 +2,8 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { useState } from 'react'
 import { ScreenerTypes } from 'components/Screener/screener.types'
-import { supabase } from 'functions/supabase'
-import { useAuthState } from 'hooks/useAuthState'
+import { supabase } from 'auth/supabase/supabase'
+import { useAuthState } from 'auth/useAuthState'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
 
 // if there are no saved screens, return this initial state

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { supabase } from 'functions/supabase'
+import { supabase } from 'auth/supabase/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
-import { useAuth } from 'hooks/useAuth'
+import { useAuth } from 'auth/useAuth'
 import { useRouter } from 'next/router'
 
 type Props = {

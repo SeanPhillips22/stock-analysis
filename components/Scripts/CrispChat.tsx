@@ -1,5 +1,5 @@
 import Script from 'next/script'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 

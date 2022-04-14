@@ -1,7 +1,7 @@
 import { SEO } from 'components/SEO'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { supabase } from 'functions/supabase'
+import { supabase } from 'auth/supabase/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
 import { FocusedLayout } from 'components/Layout/FocusedLayout'
 import { useEvent } from 'hooks/useEvent'

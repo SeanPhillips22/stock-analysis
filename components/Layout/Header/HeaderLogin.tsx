@@ -1,6 +1,6 @@
 import { Button } from 'components/Buttons/Button'
 import { ButtonWhite } from 'components/Buttons/ButtonWhite'
-import { useAuth } from 'hooks/useAuth'
+import { useAuth } from 'auth/useAuth'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { useEvent } from 'hooks/useEvent'
 

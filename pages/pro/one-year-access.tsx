@@ -2,7 +2,7 @@ import { SEO } from 'components/SEO'
 import { UserLayout } from 'components/Layout/UserLayout'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { supabase } from 'functions/supabase'
+import { supabase } from 'auth/supabase/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
 
 export default function FreeTrial() {

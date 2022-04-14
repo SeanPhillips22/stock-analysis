@@ -1,7 +1,7 @@
 import { LockClosedIcon } from 'components/Icons/LockClosedIcon'
 import { ScreenerTypes } from 'components/Screener/screener.types'
 import { useScreenerContext } from 'components/Screener/ScreenerContext'
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useSavedScreens } from './useSavedScreens'

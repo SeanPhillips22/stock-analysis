@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { supabaseAdmin } from 'functions/supabaseAdmin'
+import { supabaseAdmin } from 'auth/supabase/supabaseAdmin'
 import { sleep } from 'functions/helpers/sleep'
-import { verifyWebhook } from 'functions/auth/verifyWebhook'
+import { verifyWebhook } from 'auth/utils/verifyWebhook'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	// Validate webhook signature to verify that it was sent from Paddle.

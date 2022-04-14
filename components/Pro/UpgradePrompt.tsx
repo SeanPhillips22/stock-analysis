@@ -1,4 +1,4 @@
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import Link from 'next/link'
 
 export function UpgradePrompt() {

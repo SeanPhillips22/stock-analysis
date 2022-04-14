@@ -1,4 +1,4 @@
-import { useAuthState } from 'hooks/useAuthState'
+import { useAuthState } from 'auth/useAuthState'
 import { getData } from 'functions/apis/API'
 import { ButtonMore } from './ButtonMore'
 import { NewsPaywall } from './NewsPaywall'
