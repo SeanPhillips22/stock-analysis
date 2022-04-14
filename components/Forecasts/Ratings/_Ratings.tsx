@@ -18,9 +18,7 @@ export function Ratings() {
 	useEffect(() => {
 		async function getProData() {
 			let res = await getPageDataFull('fc', info.symbol)
-			if (res) {
-				setData(res)
-			}
+			if (res) setData(res)
 		}
 
 		setData(freeData)

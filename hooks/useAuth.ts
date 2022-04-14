@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { authState } from 'state/authState'
+import { useEvent } from './useEvent'
 
 export function useAuth() {
 	const user = authState(state => state.user)
@@ -17,6 +18,7 @@ export function useAuth() {
 	const setChecked = authState(state => state.setChecked)
 	const checking = authState(state => state.checking)
 	const setChecking = authState(state => state.setChecking)
+	const { event: logEvent } = useEvent()
 	const router = useRouter()
 
 	useEffect(() => {
@@ -29,12 +31,14 @@ export function useAuth() {
 				checkPro(session?.user)
 				setCookie(event, session)
 				toast.success('You are now logged in.')
+				logEvent('Log_In')
 			}
 			if (event === 'SIGNED_OUT') {
 				setUser(undefined)
 				setIsLoggedIn(false)
 				setCookie(event, session)
 				toast.success('You have successfully logged out.')
+				logEvent('Log_Out')
 			}
 		})
 
