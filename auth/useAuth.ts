@@ -92,8 +92,10 @@ export function useAuth() {
 
 		// Update the user with the new info
 		let newUser = user
-		newUser.data = data
-		setUser(newUser)
+		if (data && data[0]) {
+			newUser.data = data[0]
+			setUser(newUser)
+		}
 	}
 
 	// If there is a login error, redirect to the login page and show an error message

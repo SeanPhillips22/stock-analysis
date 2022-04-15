@@ -1,4 +1,5 @@
 import { Button } from 'components/Buttons/Button'
+import { Spinner } from 'components/Loading/Spinner'
 import { useEvent } from 'hooks/useEvent'
 import { LoginPrompt } from './LoginPrompt'
 
@@ -13,7 +14,7 @@ export function CancelSubscriptionBody({ isLoggedIn, loaded, cancelUrl }: Props)
 
 	if (!isLoggedIn) return <LoginPrompt />
 
-	if (!loaded || !cancelUrl) return <div>Loading...</div>
+	if (!loaded || !cancelUrl) return <Spinner />
 
 	return (
 		<>
