@@ -3,13 +3,14 @@ import { ButtonWhite } from 'components/Buttons/ButtonWhite'
 import { useAuth } from 'auth/useAuth'
 import { useLayoutContext } from 'components/Layout/LayoutContext'
 import { useEvent } from 'hooks/useEvent'
+import { signOut } from 'auth/supabase/signOut'
 
 type Props = {
 	hideTrial?: boolean
 }
 
 export function HeaderLogin({ hideTrial }: Props) {
-	const { isLoggedIn, signOut } = useAuth()
+	const { isLoggedIn } = useAuth()
 	const { url } = useLayoutContext()
 	const { event } = useEvent()
 

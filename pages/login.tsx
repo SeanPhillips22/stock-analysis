@@ -6,9 +6,11 @@ import { LogOut } from 'components/Login/LogOut'
 import { Submitted } from 'components/Login/Submitted'
 import { UserLayout } from 'components/Layout/UserLayout'
 import { useRouter } from 'next/router'
+import { signIn } from 'auth/supabase/signIn'
+import { signOut } from 'auth/supabase/signOut'
 
 export default function Login() {
-	const { user, signIn, signOut } = useAuth()
+	const { user } = useAuth()
 	const [loading, setLoading] = useState(false)
 	const [submitted, setSubmitted] = useState('')
 	const [errorMsg, setErrorMsg] = useState('')
