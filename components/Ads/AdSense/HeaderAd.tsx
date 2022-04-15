@@ -4,14 +4,18 @@ import { noAds, isDev } from '../noAds'
 import { AdsenseScript } from './AdsenseScript'
 import { useLoadAdsense } from './useLoadAdsense'
 import { cn } from 'functions/helpers/classNames'
+import { UpgradePrompt } from 'components/Pro/UpgradePrompt'
 
 export function HeaderAd() {
 	const { path } = useLayoutContext()
+	const isLoggedIn = authState(state => state.isLoggedIn)
 	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
 
-	if (noAds(path) || isPro) {
-		return null
+	if (noAds(path) || isLoggedIn) {
+		if (isPro || !path.one) return null
+		// If logged in but not pro, show upgrade prompt
+		return <UpgradePrompt />
 	}
 
 	if (isDev()) {
