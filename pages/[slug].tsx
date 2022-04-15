@@ -9,12 +9,16 @@ import { SEO } from 'components/SEO'
 import { CustomLink, External } from 'components/CustomLink'
 import { Mobile1Article } from 'components/Ads/AdSense/Mobile1Article'
 import { Text1Ad } from 'components/Ads/AdSense/Text1Ad'
+import { Text2Ad } from 'components/Ads/AdSense/Text2Ad'
+import { Text3Ad } from 'components/Ads/AdSense/Text3Ad'
 
 const components = {
 	a: CustomLink,
 	External,
 	Mobile1Article,
-	Text1Ad
+	Text1Ad,
+	Text2Ad,
+	Text3Ad
 }
 
 interface Props {
