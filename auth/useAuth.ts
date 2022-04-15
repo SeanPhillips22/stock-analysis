@@ -50,6 +50,8 @@ export function useAuth() {
 		return () => authListener?.unsubscribe()
 	}, [])
 
+	// Get the user info from Supabase (fast)
+	// The user info is stored in localStorage so this is instant
 	async function checkUser() {
 		const userCheck = supabase.auth.user()
 
@@ -62,64 +64,36 @@ export function useAuth() {
 		setChecked(true)
 	}
 
+	// Check the users's subscription status (slow)
+	// The user's database row is queried to get the subscription status and
+	// other info, then added to the "user" object
+	// - enable access to Pro features
+	// - hide ads
 	async function checkPro(user: any) {
-		const auth = user.user_metadata // auth for the auth.users table
-
-		// Set the pro status based on auth metadata (fast)
-		if (['trialing', 'active', 'past_due'].includes(auth.status)) {
-			setIsPro(true)
-		}
-
-		if (auth.status === 'deleted' || auth.status === 'paused') {
-			let stopDate = auth.cancelled_date ?? auth.paused_date ?? null
-
-			if (stopDate) {
-				if (new Date() < new Date(stopDate)) {
-					setIsPro(true)
-				}
-			}
-		}
-
-		// Check if stored pro status is different from auth metadata (slow).
-		// If it's different, update the meta data so the changes are reflected
-		// on next refresh.
 		const { data } = await supabase.from('userdata').select()
 
 		if (data && data[0]) {
 			let userdata = data[0] // userdata for the public.userdata table
 
-			if (userdata.status !== auth.status) {
-				await supabase.auth.update({
-					data: { status: userdata.status }
-				})
+			if (['trialing', 'active', 'past_due'].includes(userdata.status)) {
+				setIsPro(true)
 			}
 
-			if (userdata.status === 'deleted' && auth.cancelled_date !== userdata.cancelled_date) {
-				await supabase.auth.update({
-					data: { cancelled_date: userdata.cancelled_date }
-				})
-			}
+			if (userdata.status === 'deleted' || userdata.status === 'paused') {
+				let stopDate = userdata.cancelled_date ?? userdata.paused_date ?? null
 
-			if (userdata.status === 'paused' && auth.paused_date !== userdata.paused_date) {
-				await supabase.auth.update({
-					data: { paused_date: userdata.paused_date }
-				})
+				if (stopDate) {
+					if (stopDate && new Date() < new Date(stopDate)) {
+						setIsPro(true)
+					}
+				}
 			}
 		}
-	}
 
-	/*
-		// @ts-ignore
-		create_user: false -- waiting for gotrue-js update
-	*/
-	async function signIn(email: string) {
-		const { error } = await supabase.auth.signIn({ email })
-		return { error }
-	}
-
-	async function signOut() {
-		await supabase.auth.signOut()
-		router.reload()
+		// Update the user with the new info
+		let newUser = user
+		newUser.data = data
+		setUser(newUser)
 	}
 
 	// If there is a login error, redirect to the login page and show an error message
@@ -131,8 +105,6 @@ export function useAuth() {
 
 	return {
 		user,
-		signIn,
-		signOut,
 		checked,
 		isLoggedIn,
 		isPro,

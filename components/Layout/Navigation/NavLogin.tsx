@@ -1,9 +1,10 @@
 import { Button } from 'components/Buttons/Button'
 import { ButtonWhite } from 'components/Buttons/ButtonWhite'
 import { useAuth } from 'auth/useAuth'
+import { signOut } from 'auth/supabase/signOut'
 
 export function NavLogin() {
-	const { isLoggedIn, signOut } = useAuth()
+	const { isLoggedIn } = useAuth()
 
 	if (isLoggedIn) {
 		return (
