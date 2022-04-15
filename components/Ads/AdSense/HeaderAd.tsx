@@ -12,7 +12,9 @@ export function HeaderAd() {
 	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
 
-	if (noAds(path) || isLoggedIn) {
+	if (noAds(path)) return null
+
+	if (isLoggedIn) {
 		if (isPro || !path.one) return null
 		// If logged in but not pro, show upgrade prompt
 		return <UpgradePrompt />

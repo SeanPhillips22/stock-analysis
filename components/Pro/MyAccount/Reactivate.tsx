@@ -3,6 +3,7 @@ import { supabase } from 'auth/supabase/supabase'
 import { formatDateToString } from 'functions/datetime/formatDateToString'
 import { useAuth } from 'auth/useAuth'
 import { useRouter } from 'next/router'
+import { useEvent } from 'hooks/useEvent'
 
 type Props = {
 	email: string
@@ -11,8 +12,10 @@ type Props = {
 
 export function ReActivate({ email, status }: Props) {
 	const { isPro, setIsPro } = useAuth()
+	const { event } = useEvent()
 	const router = useRouter()
 
+	// Append the Paddle script to the page
 	useEffect(() => {
 		const paddleJs = document.createElement('script')
 		paddleJs.src = 'https://cdn.paddle.com/paddle/paddle.js'
@@ -23,12 +26,20 @@ export function ReActivate({ email, status }: Props) {
 		}
 	}, [])
 
+	// The new status to set after successful checkout
+	// If previously active, set to active
+	// If no previous subscription, set to trialing
+	let newStatus = status && ['deleted', 'cancelled', 'paused'].includes(status) ? 'active' : 'trialing'
+
+	// This function is called after a successful checkout
+	// It updates the user's info in the database and re-enables
+	// pro access. Then it redirects to the confirmation page.
 	async function upgradeComplete(data: any) {
 		if (data.user.email && data.user.email === email) {
 			await supabase.auth.update({
 				data: {
 					email: data?.user?.email,
-					status: 'trialing',
+					status: newStatus,
 					plan: data?.product?.name,
 					currency: data?.checkout?.recurring_prices?.customer?.currency,
 					unit_price: data?.checkout?.recurring_prices?.customer?.unit,
@@ -40,6 +51,9 @@ export function ReActivate({ email, status }: Props) {
 			setIsPro(true)
 			router.push('/pro/confirmation/', undefined, { shallow: true })
 		} else {
+			// If user changes their email during checkout, then we need to create a new user
+			// so that the webhook data from Paddle gets saved and the user can then login
+			// with the new email
 			await supabase.auth.signUp(
 				{
 					email: data.user.email,
@@ -48,7 +62,7 @@ export function ReActivate({ email, status }: Props) {
 				{
 					data: {
 						email: data?.user?.email,
-						status: 'trialing',
+						status: newStatus,
 						plan: data?.product?.name,
 						currency: data?.checkout?.recurring_prices?.customer?.currency,
 						unit_price: data?.checkout?.recurring_prices?.customer?.unit,
@@ -70,6 +84,7 @@ export function ReActivate({ email, status }: Props) {
 				<div
 					className="bll cursor-pointer font-medium"
 					onClick={() => {
+						event('Reactivate', { type: 'No_Active_Subscription' })
 						window.Paddle.Checkout.open({
 							product: 649892,
 							email: email,
@@ -83,22 +98,20 @@ export function ReActivate({ email, status }: Props) {
 		)
 	}
 
-	if (status === 'deleted' && !isPro) {
+	if (['deleted', 'cancelled', 'paused'].includes(status) && !isPro) {
 		return (
-			<div>
-				<p>Your subscription has been cancelled.</p>
-				<div
-					className="bll cursor-pointer font-medium"
-					onClick={() => {
-						window.Paddle.Checkout.open({
-							product: 747289,
-							email: email,
-							successCallback: upgradeComplete
-						})
-					}}
-				>
-					Reactivate your Stock Analysis Pro subscription.
-				</div>
+			<div
+				className="bll cursor-pointer font-medium"
+				onClick={() => {
+					event('Reactivate', { type: 'Previously_Cancelled' })
+					window.Paddle.Checkout.open({
+						product: 747289,
+						email: email,
+						successCallback: upgradeComplete
+					})
+				}}
+			>
+				Reactivate your Stock Analysis Pro subscription.
 			</div>
 		)
 	}
