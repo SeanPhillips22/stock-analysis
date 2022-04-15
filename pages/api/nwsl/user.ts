@@ -71,9 +71,9 @@ export default async function newsletter(req: NextApiRequest, res: NextApiRespon
 		}
 
 		// ? New trial subscriber
-		// Old status was empty, new status is "trialing"
+		// New status is "trialing"
 		// Add to the "Pro_Users" group in Mailerlite
-		else if (!old_status && new_status === 'trialing') {
+		else if (new_status === 'trialing') {
 			await fetch('https://api.mailerlite.com/api/v2/groups/52350318645609747/subscribers', options)
 		}
 
