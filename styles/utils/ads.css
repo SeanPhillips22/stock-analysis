@@ -74,14 +74,14 @@
 		@apply mt-7 mb-5 text-center;
 	}
 
-	.text1-wrap.mobile-tablet-only {
+	.text-wrap.mobile-tablet-only {
 		@apply block text-center lg:hidden;
 	}
 
 	.text1,
 	.text2,
 	.text3 {
-		@apply mx-auto min-h-[90px];
+		@apply mx-auto min-h-[90px] min-w-[200px];
 	}
 
 	.mobile-tablet-only .text1 {
