@@ -81,7 +81,7 @@
 	.text1,
 	.text2,
 	.text3 {
-		@apply mx-auto min-h-[90px] min-w-[200px];
+		@apply mx-auto block min-h-[90px] w-full;
 	}
 
 	.mobile-tablet-only .text1 {
