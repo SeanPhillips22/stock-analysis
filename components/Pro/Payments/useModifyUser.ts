@@ -26,22 +26,20 @@ export function useModifyUser() {
 		console.log({ successUrl })
 		console.log({ email })
 		let oneYearLater = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-		let expiration = formatDateToString(oneYearLater)
+		let expiration = plan === 'Stock Analysis Pro - 1 Year Access' ? formatDateToString(oneYearLater) : null
 
 		// If the user checked out with the same email as they are logged in with
 		// Then we can just update their current details
 		if (data.user.email && data.user.email === email) {
 			console.log('updating user')
-			await supabase.auth.update({
-				data: {
-					email: data?.user?.email,
-					status: status,
-					plan: plan,
-					currency: data?.checkout?.recurring_prices?.customer?.currency,
-					unit_price: data?.checkout?.recurring_prices?.customer?.unit,
-					country: data?.user?.country,
-					cancelled_date: expiration // The date that the subscription should expire
-				}
+			await supabase.from('userdata').update({
+				email: data?.user?.email,
+				status: status,
+				plan: plan,
+				currency: data?.checkout?.recurring_prices?.customer?.currency,
+				unit_price: data?.checkout?.recurring_prices?.customer?.unit,
+				country: data?.user?.country,
+				cancelled_date: expiration // The date that the subscription should expire
 			})
 
 			setIsPro(true)
