@@ -1,16 +1,16 @@
 import { SEO } from 'components/SEO'
 import { UserLayout } from 'components/Layout/UserLayout'
 
-export default function ProConfirmationPage() {
+export default function ProConfirmationPage1Y() {
 	return (
 		<>
-			<SEO title="Confirmation" canonical="/pro/confirmation/" noindex={true} />
-			<UserLayout url="/pro/confirmation/">
+			<SEO title="Confirmation" canonical="/pro/confirmation1y/" noindex={true} />
+			<UserLayout url="/pro/confirmation1y/">
 				<div className="space-y-5 bp:space-y-6">
-					<h1 className="mb-5 text-3xl font-bold text-gray-800 bp:text-4xl">Free Trial Confirmed</h1>
+					<h1 className="mb-5 text-3xl font-bold text-gray-800 bp:text-4xl">Purchase Completed</h1>
 
 					<p className="text-lg leading-relaxed text-gray-900 sm:text-xl">
-						Congrats, your free trial subscription has been activated!
+						Congrats, your 1-year access has been activated!
 					</p>
 					<p className="text-lg leading-relaxed text-gray-900 sm:text-xl">
 						You are now logged in and can start using the site with unlimited access to all of our features.
