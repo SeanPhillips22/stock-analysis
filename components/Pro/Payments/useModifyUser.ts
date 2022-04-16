@@ -20,12 +20,18 @@ export function useModifyUser() {
 		successUrl = '/pro/confirmation/',
 		email?: string
 	) {
+		console.log({ data })
+		console.log({ status })
+		console.log({ plan })
+		console.log({ successUrl })
+		console.log({ email })
 		let oneYearLater = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
 		let expiration = formatDateToString(oneYearLater)
 
 		// If the user checked out with the same email as they are logged in with
 		// Then we can just update their current details
 		if (data.user.email && data.user.email === email) {
+			console.log('updating user')
 			await supabase.auth.update({
 				data: {
 					email: data?.user?.email,
@@ -41,6 +47,7 @@ export function useModifyUser() {
 			setIsPro(true)
 			router.push(successUrl, undefined, { shallow: true })
 		} else {
+			console.log('creating new user')
 			// If user uses a different email or changes it during checkout, then we need to create a
 			// new user so that the webhook data from Paddle gets saved and the user can then login
 			// with the new email
