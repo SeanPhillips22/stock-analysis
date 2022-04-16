@@ -32,15 +32,18 @@ export function useModifyUser() {
 		// Then we can just update their current details
 		if (data.user.email && data.user.email === email) {
 			console.log('updating user')
-			await supabase.from('userdata').update({
-				email: data?.user?.email,
-				status: status,
-				plan: plan,
-				currency: data?.checkout?.recurring_prices?.customer?.currency,
-				unit_price: data?.checkout?.recurring_prices?.customer?.unit,
-				country: data?.user?.country,
-				cancelled_date: expiration // The date that the subscription should expire
-			})
+			await supabase
+				.from('userdata')
+				.update({
+					email: data?.user?.email,
+					status: status,
+					plan: plan,
+					currency: data?.checkout?.recurring_prices?.customer?.currency,
+					unit_price: data?.checkout?.recurring_prices?.customer?.unit,
+					country: data?.user?.country,
+					cancelled_date: expiration // The date that the subscription should expire
+				})
+				.eq('email', data?.user?.email || email)
 
 			setIsPro(true)
 			router.push(successUrl, undefined, { shallow: true })
