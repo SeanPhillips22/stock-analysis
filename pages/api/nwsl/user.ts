@@ -29,7 +29,7 @@ export default async function newsletter(req: NextApiRequest, res: NextApiRespon
 		ReplyTo: 'support@stockanalysis.com',
 		To: 'kris@stockanalysis.com',
 		Subject: 'Usersync webhook',
-		TextBody: JSON.stringify(req.body)
+		TextBody: JSON.stringify(req.body, null, 4)
 	}
 
 	// ! Debug
