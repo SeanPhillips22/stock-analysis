@@ -1,12 +1,13 @@
 import { SEO } from 'components/SEO'
 import { UserLayout } from 'components/Layout/UserLayout'
-
 import { useModifyUser } from 'components/Pro/Payments/useModifyUser'
 import { usePaddleCheckout } from 'components/Pro/Payments/usePaddleCheckout'
 import { useAuthState } from 'auth/useAuthState'
+import { useEvent } from 'hooks/useEvent'
 
 export default function OneYearAccessPage() {
 	const { user } = useAuthState()
+	const { event } = useEvent()
 	const { modifyOrCreateUser } = useModifyUser()
 	usePaddleCheckout()
 
@@ -49,6 +50,7 @@ export default function OneYearAccessPage() {
 								successCallback: checkoutComplete,
 								email: user?.email
 							})
+							event('Checkout', { type: 'One_Year_Access' })
 						}}
 						id="start-trial"
 						className="block w-full cursor-pointer bg-blue-brand_light p-4 text-center text-2xl text-white hover:bg-blue-brand_sharp focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"

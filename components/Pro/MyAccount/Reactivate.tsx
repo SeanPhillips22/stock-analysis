@@ -84,12 +84,12 @@ export function ReActivate({ email, status }: Props) {
 				<div
 					className="bll cursor-pointer font-medium"
 					onClick={() => {
-						event('Reactivate', { type: 'No_Active_Subscription' })
 						window.Paddle.Checkout.open({
 							product: 649892,
 							email: email,
 							successCallback: upgradeComplete
 						})
+						event('Checkout', { type: 'Reactivate_No_Active_Subscription' })
 					}}
 				>
 					Start your free 30-day trial now.
@@ -103,12 +103,12 @@ export function ReActivate({ email, status }: Props) {
 			<div
 				className="bll cursor-pointer font-medium"
 				onClick={() => {
-					event('Reactivate', { type: 'Previously_Cancelled' })
 					window.Paddle.Checkout.open({
 						product: 747289,
 						email: email,
 						successCallback: upgradeComplete
 					})
+					event('Checkout', { type: 'Reactivate_Previously_Cancelled' })
 				}}
 			>
 				Reactivate your Stock Analysis Pro subscription.
