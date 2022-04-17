@@ -10,36 +10,47 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { GainersNav } from 'components/Markets/Navigation/GainersNav'
 import { DataId } from 'types/DataId'
+import { StockIndexMiniCharts } from 'components/MiniChart/Sets/StockIndexMiniCharts'
 
 const rangeMap: any = {
 	week: {
 		id: 'ch1w',
+		fetchId: '5D',
 		title: 'Week',
+		indexTitle: '1 Week',
 		metaTitle: 'In The Past Week'
 	},
 	month: {
 		id: 'ch1m',
+		fetchId: '1M',
 		title: 'Month',
+		indexTitle: '1 Month',
 		metaTitle: 'In The Past Month'
 	},
 	ytd: {
 		id: 'chYTD',
+		fetchId: 'YTD',
 		title: 'YTD',
 		metaTitle: 'Year-to-Date'
 	},
 	year: {
 		id: 'ch1y',
+		fetchId: '1Y',
 		title: '1 Year',
 		metaTitle: 'In The Past Year'
 	},
 	'3y': {
 		id: 'ch3y',
+		fetchId: '3Y',
 		title: '3 Year',
+		indexTitle: '3 Years',
 		metaTitle: 'In The Past 3 Years'
 	},
 	'5y': {
 		id: 'ch5y',
+		fetchId: '5Y',
 		title: '5 Year',
+		indexTitle: '5 Years',
 		metaTitle: 'In The Past 5 Years'
 	}
 }
@@ -53,7 +64,7 @@ type Props = {
 }
 
 export default function GainersPageRange({ data, query, rangePath, tradingTimestamps, resultsCount }: Props) {
-	const { id, title, metaTitle } = rangeMap[rangePath]
+	const { id, fetchId, title, indexTitle, metaTitle } = rangeMap[rangePath]
 
 	// the page's config and settings
 	const page: PageConfig = {
@@ -65,6 +76,10 @@ export default function GainersPageRange({ data, query, rangePath, tradingTimest
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={GainersNav} key={id}>
+				<div className="mb-4 lg:mb-5">
+					<div className="text-sm font-semibold text-gray-600">Stock Indexes - {indexTitle || title}</div>
+					<StockIndexMiniCharts range={fetchId} />
+				</div>
 				<TableContextProvider
 					value={{
 						title: `${title} Gainers`,

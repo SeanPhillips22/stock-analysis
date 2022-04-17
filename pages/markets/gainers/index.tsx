@@ -9,6 +9,7 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { GainersNav } from 'components/Markets/Navigation/GainersNav'
+import { StockIndexMiniCharts } from 'components/MiniChart/Sets/StockIndexMiniCharts'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -41,6 +42,10 @@ export default function GainersPage({ data, tradingTimestamps, resultsCount }: P
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={GainersNav}>
+				<div className="mb-4 lg:mb-5">
+					<div className="text-sm font-semibold text-gray-600">Stock Indexes - {tradingTimestamps.last}</div>
+					<StockIndexMiniCharts range="1D" />
+				</div>
 				<TableContextProvider
 					value={{
 						title: 'Gainers Today',
@@ -65,7 +70,13 @@ export default function GainersPage({ data, tradingTimestamps, resultsCount }: P
 								type: 'stocks',
 								filters: [
 									{ id: 'price', name: '', value: `over-1`, filterType: 'numeric' },
-									{ id: 'change', name: '', value: `over-0`, filterType: 'numeric', numberType: 'percentage' },
+									{
+										id: 'change',
+										name: '',
+										value: `over-0`,
+										filterType: 'numeric',
+										numberType: 'percentage'
+									},
 									{ id: 'volume', name: '', value: `over-10K`, filterType: 'numeric' },
 									{ id: 'marketCap', name: '', value: `over-1M`, filterType: 'numeric' }
 								],
