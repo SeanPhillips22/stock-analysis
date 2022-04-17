@@ -7,7 +7,7 @@
 	}
 
 	.mcwidget {
-		@apply flex flex-row items-center justify-between space-x-2 rounded border border-gray-200 p-1.5 shadow-sm lg:px-2;
+		@apply flex flex-row items-center justify-between space-x-2 rounded border border-gray-200 p-1.5 shadow-sm hover:bg-gray-50 lg:px-2;
 	}
 
 	.mctitle {
