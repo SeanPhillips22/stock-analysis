@@ -46,14 +46,14 @@ export function MiniChart({ type, previousClose, data, width, height, margin, st
 				<MiniChartLine
 					data={data}
 					points={points}
-					color={'green'}
+					color="green"
 					style={style}
 					onMouseMove={null}
 					height={height}
 					margin={margin}
 				/>
 			) : (
-				<MiniChartFinancial prevCloseCoords={prevCloseCoords} points={points} color={'green'} style={style} />
+				<MiniChartFinancial prevCloseCoords={prevCloseCoords} points={points} color="green" style={style} />
 			)}
 			<MiniChartReferenceLine
 				prevCloseCoords={prevCloseCoords}
@@ -61,7 +61,6 @@ export function MiniChart({ type, previousClose, data, width, height, margin, st
 				margin={margin}
 				style={{ stroke: '#444', strokeOpacity: 1, strokeWidth: 2, strokeDasharray: '4, 5' }}
 			/>
-			)
 		</svg>
 	)
 }

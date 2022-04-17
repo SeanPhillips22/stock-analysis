@@ -2,12 +2,16 @@
 /* Small charts inside a widget */
 
 @layer components {
+	.mcwidgets {
+		@apply grid grid-cols-2 grid-rows-2 gap-2 md:grid-cols-4 md:grid-rows-1 lg:gap-4;
+	}
+
 	.mcwidget {
-		@apply flex flex-row space-x-2 rounded border border-gray-200 p-1.5 shadow-sm;
+		@apply flex flex-row items-center justify-between space-x-2 rounded border border-gray-200 p-1.5 shadow-sm lg:px-2;
 	}
 
 	.mctitle {
-		@apply text-sm font-semibold leading-tight;
+		@apply whitespace-nowrap text-tiny font-semibold leading-tight bp:text-sm;
 	}
 
 	.mcupdown {
@@ -15,7 +19,7 @@
 	}
 
 	.mcchange {
-		@apply text-sm font-semibold leading-tight;
+		@apply text-tiny font-semibold leading-tight bp:text-sm;
 	}
 
 	.green .mcchange {
@@ -27,14 +31,22 @@
 	}
 
 	.mcupicon {
-		@apply -ml-1 h-[18px] w-[18px] text-green-700;
+		@apply -ml-1 h-4 w-4 text-green-700 bp:h-[18px] bp:w-[18px];
 	}
 
 	.mcdownicon {
-		@apply -ml-1 h-[18px] w-[18px] text-red-600;
+		@apply -ml-1 h-4 w-4 text-red-600 bp:h-[18px] bp:w-[18px];
+	}
+
+	.mcloadingicon {
+		@apply -ml-1 h-4 w-4 text-gray-600 bp:h-[18px] bp:w-[18px];
 	}
 
 	.mcchart {
-		@apply hidden lg:block lg:w-36;
+		@apply w-full lg:w-44;
+	}
+
+	.mcplaceholder {
+		@apply min-h-[20px] w-full bg-gray-100 lg:h-[44px] lg:w-44;
 	}
 }

@@ -43,7 +43,7 @@ export default function GainersPage({ data, tradingTimestamps, resultsCount }: P
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={GainersNav}>
 				<div className="mb-4 lg:mb-5">
-					<div className="text-sm font-semibold text-gray-600">Stock Indexes</div>
+					<div className="text-sm font-semibold text-gray-600">Stock Indexes - {tradingTimestamps.last}</div>
 					<StockIndexMiniCharts range="1D" />
 				</div>
 				<TableContextProvider

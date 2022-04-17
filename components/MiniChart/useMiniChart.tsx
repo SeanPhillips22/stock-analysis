@@ -1,10 +1,11 @@
 import { getData } from 'functions/apis/API'
 import { useQuery } from 'react-query'
+import { MiniChartRanges } from './MiniChart.types'
 
 type Props = {
 	symbol: string
 	type: 'stocks' | 'etf'
-	range: '1D' | '5D' | '1M' | 'YTD' | '1Y' | '3Y' | '5Y'
+	range: MiniChartRanges
 }
 
 /**
@@ -15,7 +16,7 @@ async function getMiniChartData({ symbol, type, range }: Props) {
 	if (!symbol || !type || !range) return
 
 	// Make the URL to fetch the data from the backend
-	let url = `minichart?s=${symbol}&t=${type}&r=${range}`
+	let url = `mc?s=${symbol}&t=${type}&r=${range}`
 
 	// TODO add try-catch
 	return await getData(url)

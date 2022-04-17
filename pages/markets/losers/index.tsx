@@ -9,6 +9,7 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { LosersNav } from 'components/Markets/Navigation/LosersNav'
+import { StockIndexMiniCharts } from 'components/MiniChart/Sets/StockIndexMiniCharts'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -41,6 +42,10 @@ export default function LosersPage({ data, tradingTimestamps, resultsCount }: Pr
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={LosersNav}>
+				<div className="mb-4 lg:mb-5">
+					<div className="text-sm font-semibold text-gray-600">Stock Indexes - {tradingTimestamps.last}</div>
+					<StockIndexMiniCharts range="1D" />
+				</div>
 				<TableContextProvider
 					value={{
 						title: 'Losers Today',

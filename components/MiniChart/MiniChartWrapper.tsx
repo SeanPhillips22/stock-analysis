@@ -1,9 +1,9 @@
 import { MiniChart } from 'components/MiniChart/MiniChart'
 
 type MiniChartData = {
-	previousClose: number | null
-	chart: number[]
-	color: 'red' | 'green'
+	previousClose?: number | null
+	chart?: number[]
+	color?: 'red' | 'green'
 	isFetching: boolean
 }
 
@@ -13,13 +13,13 @@ type MiniChartData = {
 export function MiniChartWrapper({ previousClose, chart, color, isFetching }: MiniChartData) {
 	// Return a grey rectangle while loading
 	// With the same dimensions as the chart to prevent layout shift
-	if (isFetching) return <div className="h-[36px] bg-gray-100 lg:w-36"></div>
+	if (isFetching || !previousClose || !chart) return <div className="mcplaceholder"></div>
 
 	return (
 		<div className="mcchart">
 			<MiniChart
 				previousClose={previousClose}
-				type={'financial'}
+				type="financial"
 				data={chart}
 				margin={2}
 				style={{
