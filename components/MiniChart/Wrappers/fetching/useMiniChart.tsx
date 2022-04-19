@@ -1,6 +1,6 @@
 import { getData } from 'functions/apis/API'
 import { useQuery } from 'react-query'
-import { MiniChartRanges } from './MiniChart.types'
+import { MiniChartRanges } from '../MiniChart.types'
 
 type Props = {
 	symbol: string
@@ -18,7 +18,6 @@ async function getMiniChartData({ symbol, type, range }: Props) {
 	// Make the URL to fetch the data from the backend
 	let url = `mc?s=${symbol}&t=${type}&r=${range}`
 
-	// TODO add try-catch
 	return await getData(url)
 }
 
@@ -26,10 +25,10 @@ async function getMiniChartData({ symbol, type, range }: Props) {
  * Fetch data for a sparkline mini chart
  */
 export function useMiniChart({ symbol, type, range = '1D' }: Props) {
-	const { data, isFetching } = useQuery([symbol, type, range], () => getMiniChartData({ symbol, type, range }), {
+	const { data } = useQuery([symbol, type, range], () => getMiniChartData({ symbol, type, range }), {
 		refetchOnWindowFocus: false,
 		retry: false
 	})
 
-	return { data, isFetching }
+	return { data }
 }

@@ -9,13 +9,12 @@ type Props = {
 	symbol: string
 	type: 'stocks' | 'etf'
 	data?: MiniChartObject
-	isFetching: boolean
 }
 
 /**
  * Returns a widget with a sparkline chart
  */
-export function MiniChartWidget({ title, symbol, type, data: bulkdata, isFetching }: Props) {
+export function MiniChartWidget({ title, symbol, type, data: bulkdata }: Props) {
 	const data = bulkdata ? bulkdata[symbol] : undefined
 
 	return (
@@ -33,7 +32,7 @@ export function MiniChartWidget({ title, symbol, type, data: bulkdata, isFetchin
 						previousClose={data?.previousClose}
 						chart={data?.chart}
 						color={data?.color}
-						isFetching={isFetching}
+						isFetching={!data?.chart}
 					/>
 				</div>
 			</a>

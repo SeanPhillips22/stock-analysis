@@ -10,7 +10,9 @@ import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { GainersNav } from 'components/Markets/Navigation/GainersNav'
 import { DataId } from 'types/DataId'
-import { StockIndexMiniCharts } from 'components/MiniChart/Sets/StockIndexMiniCharts'
+import { miniChartSymbols, BulkMiniChartWrapper } from 'components/Markets/Blocks/BulkMiniChartWrapper'
+import { fetchBulkMiniCharts } from 'components/MiniChart/Wrappers/fetching/fetchBulkMiniCharts'
+import { MiniChartData } from 'components/MiniChart/Wrappers/MiniChart.types'
 
 const rangeMap: any = {
 	week: {
@@ -56,14 +58,18 @@ const rangeMap: any = {
 }
 
 type Props = {
-	data: any[]
-	query: TableDynamic
-	rangePath: string
-	tradingTimestamps: TableTimestamp
-	resultsCount: number
+	data: {
+		data: any[]
+		query: TableDynamic
+		rangePath: string
+		tradingTimestamps: TableTimestamp
+		resultsCount: number
+	}
+	chartData: MiniChartData[]
 }
 
-export default function GainersPageRange({ data, query, rangePath, tradingTimestamps, resultsCount }: Props) {
+export default function GainersPageRange({ data, chartData }: Props) {
+	const { query, rangePath, tradingTimestamps, resultsCount } = data
 	const { id, fetchId, title, indexTitle, metaTitle } = rangeMap[rangePath]
 
 	// the page's config and settings
@@ -76,10 +82,7 @@ export default function GainersPageRange({ data, query, rangePath, tradingTimest
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={GainersNav} key={id}>
-				<div className="mb-4 lg:mb-5">
-					<div className="text-sm font-semibold text-gray-600">Stock Indexes - {indexTitle || title}</div>
-					<StockIndexMiniCharts range={fetchId} />
-				</div>
+				<BulkMiniChartWrapper range={fetchId} initialData={chartData} appendToTitle={indexTitle || title} />
 				<TableContextProvider
 					value={{
 						title: `${title} Gainers`,
@@ -114,7 +117,7 @@ export default function GainersPageRange({ data, query, rangePath, tradingTimest
 						dynamic: query
 					}}
 				>
-					<StockTable _data={data} />
+					<StockTable _data={data.data} />
 				</TableContextProvider>
 			</MarketsLayout>
 		</PageContextProvider>
@@ -122,8 +125,9 @@ export default function GainersPageRange({ data, query, rangePath, tradingTimest
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const rangePath = params?.range as DataId
-	const id = rangeMap[rangePath].id
+	let rangePath = params?.range as DataId
+	let id = rangeMap[rangePath].id
+	let fetchId = rangeMap[rangePath].fetchId
 	let extras = ['tradingTimestamps']
 
 	let query: TableDynamic = {
@@ -137,12 +141,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		page: 1
 	}
 
-	const data = await getSelect(query, false, extras)
+	let res = await Promise.all([
+		getSelect(query, false, extras),
+		fetchBulkMiniCharts({ symbols: miniChartSymbols, range: fetchId })
+	])
+
+	let data = res[0]
+	let chartData = res[1]
 	data.rangePath = rangePath
 	data.query = query
 
 	return {
-		props: data,
+		props: { data, chartData },
 		revalidate: 30 * 60
 	}
 }

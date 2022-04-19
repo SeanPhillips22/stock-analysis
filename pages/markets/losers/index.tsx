@@ -9,7 +9,9 @@ import { TableContextProvider } from 'components/StockTable/TableContext'
 import { TableDynamic } from 'components/StockTable/TableTypes'
 import { MoverDataPoints } from 'data/DataPointGroups/MoverDataPoints'
 import { LosersNav } from 'components/Markets/Navigation/LosersNav'
-import { StockIndexMiniCharts } from 'components/MiniChart/Sets/StockIndexMiniCharts'
+import { miniChartSymbols, BulkMiniChartWrapper } from 'components/Markets/Blocks/BulkMiniChartWrapper'
+import { fetchBulkMiniCharts } from 'components/MiniChart/Wrappers/fetching/fetchBulkMiniCharts'
+import { MiniChartData } from 'components/MiniChart/Wrappers/MiniChart.types'
 
 // the page's config and settings
 const page: PageConfig = {
@@ -33,19 +35,21 @@ const query: TableDynamic = {
 }
 
 type Props = {
-	data: any[]
-	tradingTimestamps: TableTimestamp
-	resultsCount: number
+	data: {
+		data: any[]
+		tradingTimestamps: TableTimestamp
+		resultsCount: number
+	}
+	chartData: MiniChartData[]
 }
 
-export default function LosersPage({ data, tradingTimestamps, resultsCount }: Props) {
+export default function LosersPage({ data, chartData }: Props) {
+	const { tradingTimestamps, resultsCount } = data
+
 	return (
 		<PageContextProvider value={{ page, updated: tradingTimestamps }}>
 			<MarketsLayout SubNav={LosersNav}>
-				<div className="mb-4 lg:mb-5">
-					<div className="text-sm font-semibold text-gray-600">Stock Indexes - {tradingTimestamps.last}</div>
-					<StockIndexMiniCharts range="1D" />
-				</div>
+				<BulkMiniChartWrapper range="1D" initialData={chartData} appendToTitle={data.tradingTimestamps.last} />
 				<TableContextProvider
 					value={{
 						title: 'Losers Today',
@@ -84,7 +88,7 @@ export default function LosersPage({ data, tradingTimestamps, resultsCount }: Pr
 						dynamic: query
 					}}
 				>
-					<StockTable _data={data} />
+					<StockTable _data={data.data} />
 				</TableContextProvider>
 			</MarketsLayout>
 		</PageContextProvider>
@@ -93,9 +97,17 @@ export default function LosersPage({ data, tradingTimestamps, resultsCount }: Pr
 
 export const getStaticProps: GetStaticProps = async () => {
 	let extras = ['tradingTimestamps']
-	const data = await getSelect(query, false, extras)
+
+	let res = await Promise.all([
+		getSelect(query, false, extras),
+		fetchBulkMiniCharts({ symbols: miniChartSymbols, range: '1D' })
+	])
+
+	let data = res[0]
+	let chartData = res[1]
+
 	return {
-		props: data,
+		props: { data, chartData },
 		revalidate: 2 * 60
 	}
 }
