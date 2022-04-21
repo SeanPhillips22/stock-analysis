@@ -2,17 +2,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { NextApiRequest, NextApiResponse } from 'next'
-const postmark = require('postmark') // ! Debug
-
-const KEY = process.env.POSTMARK_SERVER_API_TOKEN || '' // ! Debug
 
 /**
  * Sync users between Supabase auth and Mailerlite.
  * When a user is added or modified in Supabase, it sends a POST request to this endpoint.
  */
 export default async function newsletter(req: NextApiRequest, res: NextApiResponse) {
-	const client = new postmark.Client(KEY) // ! Debug
-
 	// Get the params from the request
 	// the "record" is the table data from Supabase
 	// the "old_record" is the table data before it was changed
@@ -22,19 +17,6 @@ export default async function newsletter(req: NextApiRequest, res: NextApiRespon
 	// Get the individual database fields from Supabase
 	const { email, status: new_status, plan, id, name, country, currency, cancelled_date, registered_date } = record
 	const { status: old_status } = old_record || {}
-
-	// ! Debug
-	const obj = {
-		From: 'support@stockanalysis.com',
-		ReplyTo: 'support@stockanalysis.com',
-		To: 'kris@stockanalysis.com',
-		Subject: 'Usersync webhook',
-		TextBody: JSON.stringify(req.body, null, 4)
-	}
-
-	// ! Debug
-	// Send debug email
-	await client.sendEmail(obj)
 
 	const options = {
 		method: 'POST',
