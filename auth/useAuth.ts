@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { setCookie } from './utils/setCookie'
 import { supabase } from './supabase/supabase'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -29,14 +28,12 @@ export function useAuth() {
 				setUser(session?.user)
 				setIsLoggedIn(true)
 				checkPro(session?.user)
-				setCookie(event, session)
 				toast.success('You are now logged in.')
 				logEvent('Log_In')
 			}
 			if (event === 'SIGNED_OUT') {
 				setUser(undefined)
 				setIsLoggedIn(false)
-				setCookie(event, session)
 				toast.success('You have successfully logged out.')
 				logEvent('Log_Out')
 			}

@@ -9,13 +9,14 @@ import { UpgradePrompt } from 'components/Pro/UpgradePrompt'
 export function HeaderAd() {
 	const { path } = useLayoutContext()
 	const isLoggedIn = authState(state => state.isLoggedIn)
+	const checked = authState(state => state.checked)
 	const isPro = authState(state => state.isPro)
 	useLoadAdsense()
 
 	if (noAds(path)) return null
 
 	if (isLoggedIn) {
-		if (isPro || !path.one) return null
+		if (!checked || isPro || !path.one) return null
 		// If logged in but not pro, show upgrade prompt
 		return <UpgradePrompt />
 	}
