@@ -64,16 +64,16 @@ export function Features({ list = ['pro', 'ipoCalendar', 'stockScreener', 'marke
 				if (isPro && FeaturesMap[feature].url === '/pro/') return null
 				return (
 					<div
-						className="group relative overflow-hidden rounded-lg border bg-white shadow"
+						className="group relative overflow-hidden rounded-lg border bg-white shadow hover:shadow-md"
 						key={FeaturesMap[feature].title}
 					>
 						<Link href={FeaturesMap[feature].url} prefetch={false}>
 							<a id={FeaturesMap[feature].tagId} onClick={() => logEvent(FeaturesMap[feature])}>
-								<div className="pointer-events-none px-4 py-5 sm:p-6">
-									<div className="hh3 pointer-events-none">{FeaturesMap[feature].title}</div>
-									<div className="pointer-events-none text-gray-800">{FeaturesMap[feature].description}</div>
+								<div className="px-4 py-5 sm:p-6">
+									<div className="hh3">{FeaturesMap[feature].title}</div>
+									<div className="text-gray-800">{FeaturesMap[feature].description}</div>
 									<span
-										className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-blue-400"
+										className="absolute top-6 right-6 text-gray-300 group-hover:text-blue-400"
 										aria-hidden="true"
 									>
 										<ArrowCTAIcon classes="h-6 w-6" />
