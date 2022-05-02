@@ -73,7 +73,7 @@ export default function Trending(props: Props) {
 								<StockTable _data={props.data} />
 							</TableContextProvider>
 							<div className="mt-1.5 text-sm text-gray-600">
-								Updated: {props.getTrendingTimestamp}. Stocks are sorted by pageviews according to Google
+								Updated: {props.getTrendingTimestamp}. Stocks are sorted by pageviews according to Plausible
 								Analytics.
 							</div>
 						</div>
