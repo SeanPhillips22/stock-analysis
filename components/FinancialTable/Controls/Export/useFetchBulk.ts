@@ -9,12 +9,12 @@ const PRO_KEY = process.env.NEXT_PUBLIC_PROKEY ?? null
  * so that they can be exported into a single file
  */
 export function useFetchBulk(symbol: string | null, fetchBulk: boolean) {
-	const { checked, isPro } = useAuthState()
+	const { isPro } = useAuthState()
 
 	async function fetchBulkFinancials() {
 		if (!symbol) return null
 
-		if (checked && isPro) {
+		if (isPro) {
 			let url = `financials-export?s=${symbol}&f=${PRO_KEY}`
 			let data = await getData(url)
 

@@ -42,6 +42,9 @@ export function FinancialsControls({ info, statement, range }: Props) {
 				onMouseEnter={() => {
 					setFetchBulk(true)
 				}}
+				onClick={() => {
+					setFetchBulk(true)
+				}}
 				onTouchStart={() => {
 					setFetchBulk(true)
 				}}
