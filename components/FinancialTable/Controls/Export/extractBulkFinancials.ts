@@ -121,7 +121,7 @@ const KEYS: any = {
  * @param data the financial data from the backend API
  * @returns
  */
-export function extractFinancials(data: any, statement: string, range: string) {
+export function extractFinancials(data: any, statement: string) {
 	let financials: any = []
 	const keys = Object.keys(data)
 	keys.forEach(key => {

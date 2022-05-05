@@ -1,10 +1,11 @@
 import { LeftNav } from './Navigation/LeftNav'
-import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
+// import { DisplayFooterAd } from 'components/Ads/Dianomi/DisplayFooterAd'
 import { Header } from 'components/Layout/Header/_Header'
 import { Footer } from 'components/Layout/Footer/_Footer'
 import { LayoutContextProvider } from './LayoutContext'
 import { splitUrl } from 'functions/helpers/splitUrl'
 import { HeaderAd } from 'components/Ads/AdSense/HeaderAd'
+import { FooterCTA } from './Footer/FooterCTA'
 
 type Props = {
 	children: React.ReactNode
@@ -25,9 +26,10 @@ export function Layout({ children, url, fullWidth }: Props) {
 							<main id="main" className="maincol">
 								{children}
 							</main>
-							<DisplayFooterAd />
+							{/* <DisplayFooterAd /> */}
 						</div>
 					</div>
+					<FooterCTA />
 					<Footer />
 				</div>
 			</LayoutContextProvider>

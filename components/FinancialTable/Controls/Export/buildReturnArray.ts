@@ -27,7 +27,7 @@ export function buildReturnArray(data: any) {
 				let statementObj = range[statement]
 				if (statementObj.count > 0) {
 					let d = statementObj.data
-					let arr = extractFinancials(d, statement, key)
+					let arr = extractFinancials(d, statement)
 					let name = `${CONVERT[statement]}-${CONVERT[key]}`
 					extracted.push({ name, from: { array: arr } })
 				}
