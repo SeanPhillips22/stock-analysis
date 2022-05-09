@@ -15,8 +15,9 @@ export function AnalystTrendsChart({ data }: { data: ForecastData }) {
 
 	useEffect(() => {
 		if (isPro) {
-			if (history === '1 Year') setMonths(recs.slice(recs.length - 13))
-			if (history === '2 Years') setMonths(recs.slice(recs.length - 25))
+			let count = recs.length
+			if (history === '1 Year' && count > 12) setMonths(recs.slice(count - 12))
+			if (history === '2 Years' && count > 24) setMonths(recs.slice(count - 24))
 			if (history === '5 Years') setMonths(recs)
 		} else {
 			setMonths(recs)
